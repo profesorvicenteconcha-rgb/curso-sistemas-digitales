@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 20: Isomorfismo - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 3: Fundamentos de Cómputo - Lección 20</small></p>
+        <h1>🗿 La Piedra Rosetta: El Idioma Universal</h1>
+    </header>
+
+    <section>
+        <p>Bienvenidos a la Unidad 3. Aquí descubriremos que la Electrónica, la Lógica y las Matemáticas son trillizas separadas al nacer. Existe un concepto llamado <strong>Isomorfismo</strong> (misma forma), que nos dice que sus reglas son idénticas.</p>
+
+        <h2>1. La Tabla de Traducción Universal</h2>
+        <p>Si te aprendes esta tabla, puedes traducir un problema filosófico a un circuito eléctrico.</p>
+
+        <table>
+            <tr>
+                <th>Concepto</th>               
+                <th>Lógica (\(p, q\))</th>
+                <th>Conjuntos (\(A, B\))</th>
+                <th>Circuitos (\(A, B\))</th>
+            </tr>
+            <tr>
+                <td><strong>"Y"</strong> (Intersección)</td>
+                <td>\(\land\) (Conjunción)</td>
+                <td>\(\cap\) (Intersección)</td>
+                <td>\(\cdot\) (AND)</td>
+            </tr>
+            <tr>
+                <td><strong>"O"</strong> (Unión)</td>
+                <td>\(\lor\) (Disyunción)</td>
+                <td>\(\cup\) (Unión)</td>
+                <td>\(+\) (OR)</td>
+            </tr>
+            <tr>
+                <td><strong>"NO"</strong> (Inverso)</td>
+                <td>\(\neg p\) (Negación)</td>
+                <td>\(A^c\) (Complemento)</td>
+                <td>\(\bar{A}\) (NOT)</td>
+            </tr>
+            <tr>
+                <td><strong>Todo / Verdad</strong></td>
+                <td>\(V\) (Verdadero)</td>
+                <td>\(U\) (Universo)</td>
+                <td>\(1\) (5V)</td>
+            </tr>
+            <tr>
+                <td><strong>Nada / Falso</strong></td>
+                <td>\(F\) (Falso)</td>
+                <td>\(\emptyset\) (Vacío)</td>
+                <td>\(0\) (GND)</td>
+            </tr>
+        </table>
+
+        <h2>2. Venn vs. Compuertas 🔴🔵</h2>
+        <p>¿Recuerdas los diagramas de bolas del colegio? Eran circuitos disfrazados. Vamos a analizar la geometría de la decisión:</p>
+
+        <div class="svg-container">
+            <!-- Imagen: Venn vs Gates (img/venn_vs_gates.png) -->
+            <img src="img/venn_vs_gates.png" alt="Comparación visual: Intersección de conjuntos es igual a una compuerta AND. Unión es igual a una OR." style="max-width:100%; height:auto;">
+        </div>
+
+        <div class="destacado">
+            <h3>🔹 La Intersección es "El Club Exclusivo" (AND)</h3>
+            <p>Mira la zona sombreada en la intersección ($A \cap B$). Es <strong>pequeña</strong>. Solo un pedacito en el centro.</p>
+            <ul>
+                <li><strong>En Conjuntos:</strong> Solo entran los elementos que son VIP en ambos lados.</li>
+                <li><strong>En Circuitos (AND):</strong> Es una compuerta <strong>restrictiva</strong>. Es difícil sacar un 1; necesitas que TODO sea perfecto (1 y 1). Si falla uno, te quedas fuera.</li>
+            </ul>
+        </div>
+
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #4caf50;">
+            <h3>🔸 La Unión es "La Fiesta de Todos" (OR)</h3>
+            <p>Mira la zona de la unión ($A \cup B$). Es <strong>grande</strong>. Abarca casi todo.</p>
+            <ul>
+                <li><strong>En Conjuntos:</strong> Entra cualquiera: los de A, los de B o los de ambos.</li>
+                <li><strong>En Circuitos (OR):</strong> Es una compuerta <strong>permisiva</strong>. Es fácil sacar un 1; con que cualquiera se active, la corriente pasa.</li>
+            </ul>
+        </div>
+
+        <h3>¿Y el Complemento? (El Mundo del Revés)</h3>
+        <p>En Venn, el complemento ($A^c$ o $A'$) es <strong>todo lo que está FUERA del círculo</strong> de A, pero dentro del cuadrado (el Universo).</p>
+        <p><strong>En Circuitos (NOT):</strong> Si el círculo es "Encendido" (1), todo el espacio vacío de afuera es "Apagado" (0). La compuerta NOT te lleva de adentro del círculo hacia afuera.</p>
+        <p>¿Recuerdas los diagramas de bolas del colegio? Eran circuitos disfrazados.</p>
+
+        <!-- CORRECCIÓN: Iframe de Falstad actualizado -->
+        <div class="svg-container" style="border: 2px solid #ccc; border-radius: 8px; overflow: hidden;">
+            <iframe 
+                width="100%" 
+                height="500" 
+                src="https://www.falstad.com/circuit/circuitjs.html" 
+                frameborder="0"
+                allowfullscreen>
+            </iframe>
+            <p style="padding: 10px; background: #f9f9f9;"><small><em>Haz clic en "Circuits" > "Logic Gates..." para ver ejemplos o dibuja el tuyo.</em></small></p>
+        </div>
+
+        <!-- NUEVA SECCIÓN STEAM: HISTORIA Y HUMANIDADES -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+            <h3>🎩 El Mago de la Información: Claude Shannon (La "A" de STEAM)</h3>
+            <p>Durante casi 100 años, el Álgebra de Boole fue solo una curiosidad filosófica para "analizar el pensamiento humano". Los ingenieros de teléfonos, por otro lado, conectaban cables a prueba y error.</p>
+            <p>En 1937, un estudiante de maestría de 21 años llamado <strong>Claude Shannon</strong> tuvo una idea creativa: <em>"¿Y si los interruptores telefónicos en realidad están haciendo álgebra de Boole?"</em>.</p>
+            <p><strong>El Momento Eureka:</strong> Shannon no descubrió la electrónica ni la lógica; descubrió el <strong>puente</strong> entre ambas. Su tesis es considerada la más importante del siglo XX porque fundó la Era Digital.</p>
+            <p><em>Dato Curioso:</em> Shannon no era un científico aburrido. Era malabarista, montaba monociclo en los pasillos de los laboratorios Bell e inventó máquinas inútiles solo por diversión. ¡La creatividad y el juego son parte de la ingeniería!</p>
+        </div>
+
+        <div class="destacado">
+            <h3>📝 Ejercicio: El Abogado Digital</h3>
+            <p>Un contrato dice: <em>"Se paga (S) si se firma (P) <strong>Y</strong> se entrega (Q), <strong>O</strong> si hay orden judicial (R)."</em></p>
+            <p><strong>Traducción:</strong></p>
+            <ul>
+                <li>Lógica: \(S \leftrightarrow (p \land q) \lor r\)</li>
+                <li>Conjuntos: \(S = (P \cap Q) \cup R\)</li>
+                <li><strong>Circuito: \(S = (P \cdot Q) + R\)</strong></li>
+            </ul>
+            <p>¡Acabas de convertir una ley en un plano eléctrico!</p>
+        </div>
+    </section>
+
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between;">
+            <a href="leccion19_laboratorio.html" class="btn-navegacion">← Anterior Unidad</a>
+            <a href="leccion21.html" class="btn-navegacion">Siguiente: El Detector de Mentiras →</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

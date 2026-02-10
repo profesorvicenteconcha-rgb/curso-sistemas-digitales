@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 18: NAND, NOR, XOR - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 2: Lógica Digital - Lección 18</small></p>
+        <h1>🚀 Fuerzas Especiales: NAND, NOR y XOR</h1>
+    </header>
+
+    <section>
+        <p>Ya conoces las básicas. Ahora conocerás a las "Universales" y a la "Detectiva". Estas compuertas son las favoritas de la industria.</p>
+
+        <h2>1. Las Universales: NAND y NOR</h2>
+        <p>Tienen una <strong>burbuja</strong> en la salida, que significa "Negación".</p>
+        
+        <div class="svg-container">
+            <!-- Imagen: NAND y NOR (img/nand_nor_simbolos.png) -->
+            <img src="img/nand_nor_simbolos.png" alt="Símbolos lógicos de NAND (And con burbuja) y NOR (Or con burbuja)" style="max-width:100%; height:auto;">
+        </div>
+
+        <h3>A. NAND (7400): No-Y</h3>
+        <p>Es una AND negada. Matemáticamente:</p>
+        <div class="formula">
+            $$X = \overline{A \cdot B}$$
+        </div>
+
+        <h3>B. NOR (7402): No-O</h3>
+        <p>Es una OR negada. Matemáticamente:</p>
+        <div class="formula">
+            $$X = \overline{A + B}$$
+        </div>
+
+        <h2>2. La Detectiva: XOR (7486) 🕵️</h2>
+        <p>La <strong>OR Exclusiva</strong> es estricta: "O uno, o el otro, <strong>pero NO ambos</strong>". Su símbolo matemático es \(\oplus\).</p>
+        
+        <div class="destacado">
+            <p><strong>El Secreto Matemático:</strong></p>
+            <p>$$X = A \oplus B$$</p>
+            <p>Si expandimos esto con lógica básica, descubrimos que la XOR está hecha de:</p>
+            <p>$$X = \bar{A}B + A\bar{B}$$</p>
+        </div>
+
+        <h2>3. Catálogo de Referencia</h2>
+        <table>
+            <tr><th>Nombre</th><th>Chip</th><th>Función</th></tr>
+            <tr><td><strong>NOT</strong></td><td>7404</td><td>Inversor</td></tr>
+            <tr><td><strong>AND</strong></td><td>7408</td><td>Multiplicación</td></tr>
+            <tr><td><strong>OR</strong></td><td>7432</td><td>Suma</td></tr>
+            <tr><td><strong>NAND</strong></td><td>7400</td><td>Universal</td></tr>
+            <tr><td><strong>NOR</strong></td><td>7402</td><td>Universal</td></tr>
+            <tr><td><strong>XOR</strong></td><td>7486</td><td>Suma/Resta</td></tr>
+        </table>
+    </section>
+
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between;">
+            <a href="leccion17.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion19_laboratorio.html" class="btn-navegacion" style="background-color: #ffc107; color: black;">Ir al Laboratorio 2 →</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

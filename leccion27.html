@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 27: Códigos de Bloque - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 4: Teoría de Códigos - Lección 27</small></p>
+        <h1>📦 Códigos de Bloque: Empaquetando Datos</h1>
+    </header>
+
+    <section>
+        <p>La paridad simple es débil. Si queremos comunicaciones robustas (como en el 4G o los satélites), necesitamos "armadura pesada". Aquí entran los <strong>Códigos de Bloque</strong>.</p>
+
+        <h2>1. El Concepto de "La Ñapa" (Redundancia)</h2>
+        <p>En Colombia, cuando compras algo y te dan un poquito más de regalo, le dicen "la ñapa". En ingeniería, a eso le llamamos <strong>Redundancia</strong>.</p>
+        <p>Para proteger la información, enviamos los datos originales MÁS unos bits extra calculados matemáticamente.</p>
+
+        <div class="svg-container">
+            <!-- Imagen: Estructura Código (img/estructura_codigo_bloque.png) -->
+            <img src="img/estructura_codigo_bloque.png" alt="Diagrama de un bloque de datos dividido en K (Información) y R (Redundancia), sumando N (Total)" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. El paquete completo: Datos + Protección.</em></small></p>
+        </div>
+
+        <div class="formula">
+            $$n = k + r$$
+        </div>
+        <ul>
+            <li><strong>\(k\) (Datos):</strong> Tu mensaje útil (ej: 4 bits).</li>
+            <li><strong>\(r\) (Redundancia):</strong> La "ñapa" de protección (ej: 3 bits).</li>
+            <li><strong>\(n\) (Código):</strong> El total que se envía (ej: 7 bits).</li>
+        </ul>
+        <p>Por ejemplo, el famoso <strong>Código Hamming (7, 4)</strong> envía 7 bits para proteger 4 datos.</p>
+
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
+            <h3>📱 Analogía: El Autocorrector de tu Celular</h3>
+            <p>¿Cómo sabe tu celular que quisiste escribir "HOLA" si escribiste "HILA"?</p>
+            <p>Porque "HILA" no existe en el diccionario, pero se parece mucho a "HOLA" (solo 1 letra de diferencia). A esto se le llama <strong>Distancia de Hamming</strong>.</p>
+            <p>Los códigos de bloque hacen lo mismo: crean un "diccionario" de palabras binarias válidas que están muy separadas entre sí. Si el ruido cambia un bit, el resultado no estará en el diccionario, y el sistema sabrá cuál era la palabra válida más cercana.</p>
+        </div>
+
+        <h2>2. ¿Qué es un Código "Lineal"? (El regreso de la XOR)</h2>
+        <p>Suena a matemáticas avanzadas, pero en hardware es simple: significa que los bits de protección (\(r\)) se calculan <strong>sumando (XOR)</strong> combinaciones de los bits de datos.</p>
+        
+        <div class="destacado">
+            <p><strong>Ejemplo de Linealidad:</strong></p>
+            <p>Imagina que el primer bit de protección \(p_1\) se calcula así:</p>
+            <p>$$p_1 = d_1 \oplus d_2 \oplus d_4$$</p>
+            <p>¡Solo necesitas compuertas XOR! No hay multiplicaciones raras ni integrales. Es pura lógica digital.</p>
+        </div>
+
+        <h2>3. El Codificador (La Caja Negra)</h2>
+        <p>Físicamente, un codificador es un circuito que toma tus \(k\) cables de datos y saca \(n\) cables hacia el transmisor.</p>
+
+        <div class="svg-container">
+            <!-- Imagen: Diagrama Codificador (img/diagrama_codificador.png) -->
+            <img src="img/diagrama_codificador.png" alt="Caja negra que recibe 4 cables de entrada y saca 7 cables de salida" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 2. Entran 4, salen 7. La magia ocurre adentro con compuertas XOR.</em></small></p>
+        </div>
+    </section>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="leccion26.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion28.html" class="btn-navegacion">Siguiente: Matriz Generadora (G) →</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

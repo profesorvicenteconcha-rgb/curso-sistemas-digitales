@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio Final: El Ingeniero Eficiente - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 2: Lógica Digital - Lección 19</small></p>
+        <h1>🏆 Laboratorio: El Ingeniero Eficiente</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>¡Llegó el momento de graduarte de la lógica digital! Hoy no solo construirás un circuito; demostrarás por qué un ingeniero que sabe matemáticas es mejor que uno que solo conecta cables. Vamos a comparar un diseño "bruto" con uno "inteligente" para ver el poder de la simplificación.</p>
+    </div>
+
+    <section>
+        <h2>El Reto: El Jurado de Votación por Mayoría</h2>
+        <p>Recordemos el problema: Tres jueces (A, B, C) votan. El sistema debe aprobar (LED ON) si hay <strong>mayoría</strong> (2 o 3 votos).</p>
+
+        <h3>1. Versión "Fuerza Bruta" (Análisis en Papel)</h3>
+        <p>Si sacamos la ecuación directamente de la tabla de verdad (Lección 15), obtenemos esto:</p>
+        <div class="formula">
+            $$P = \bar{A}BC + A\bar{B}C + AB\bar{C} + ABC$$
+        </div>
+        <p>Para construir esto, necesitarías:</p>
+        <ul>
+            <li>3 Chips <strong>7404 (NOT)</strong> para negar A, B y C.</li>
+            <li>1 Chip <strong>7411 (AND de 3 entradas)</strong> - ¡que no tenemos!</li>
+            <li>1 Chip <strong>7421 (OR de 4 entradas)</strong> - ¡tampoco lo tenemos!</li>
+        </ul>
+        <p><strong>Conclusión:</strong> El diseño es complejo, caro y requiere chips especiales. ¡No es eficiente!</p>
+
+        <h3>2. Versión "Ingeniero Eficiente" (¡La que construiremos!)</h3>
+        <p>Pero en la Lección 16, usamos un Mapa K y simplificamos la ecuación a esto:</p>
+        <div class="formula" style="background-color: #d4edda; border: 1px solid #28a745;">
+            $$P = (A \cdot B) + (A \cdot C) + (B \cdot C)$$
+        </div>
+        <p>¡Esta versión solo necesita compuertas AND y OR de 2 entradas, que SÍ tenemos en nuestro kit!</p>
+        
+        <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
+            <h3>🛒 Materiales para la Versión Eficiente</h3>
+            <ul>
+                <li>Protoboard y Fuente de 5V.</li>
+                <li><strong>Chips:</strong> 1x <strong>7408 (AND)</strong> y 1x <strong>7432 (OR)</strong>.</li>
+                <li><strong>Entradas:</strong> 3 Interruptores con sus <strong>resistencias Pull-Down (10kΩ)</strong>.</li>
+                <li><strong>Salida:</strong> 1 LED Verde y su <strong>resistencia de 330Ω</strong>.</li>
+            </ul>
+        </div>
+
+        <h3>3. Plano de Montaje Eficiente</h3>
+        <div class="svg-container">
+            <img src="img/diagrama_jurado.png" alt="Esquema lógico del Jurado de Votación simplificado" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. El mapa de conexiones. Sigue las líneas con el dedo antes de conectar.</em></small></p>
+        </div>
+
+        <h3>4. ¡Manos a la Obra!</h3>
+        <p>Sigue el diagrama y el checklist de seguridad para armar el circuito en tu protoboard.</p>
+        
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #0277bd;">
+            <h3>🏗️ Reto de Montaje 3D (Tinkercad)</h3>
+            <p>Antes de tocar la protoboard real, te retamos a armar esto en Tinkercad. Si logras que funcione ahí, ¡tu montaje real será un éxito!</p>
+            <p style="text-align: center;">
+                <a href="https://www.tinkercad.com/circuits" target="_blank" class="btn-navegacion" style="background-color: #0277bd;">Practicar en Tinkercad ↗</a>
+            </p>
+        </div>
+
+        <h3>5. La Prueba de Fuego</h3>
+        <p>Conecta la energía y verifica la tabla de verdad. ¿El LED se enciende solo cuando hay 2 o 3 interruptores activados?</p>
+        <p>Si es así... <strong>¡FELICIDADES!</strong> Has demostrado que las matemáticas te ahorran dinero y tiempo.</p>
+
+        <div class="dato-extra">
+            <h3>🧠 Reto Avanzado: ¿Todo con NAND?</h3>
+            <p>¿Recuerdas que dijimos que la NAND es universal? Si te sientes valiente, intenta construir este mismo circuito usando solo chips 7400 (NAND). ¡Es un rompecabezas lógico de nivel experto!</p>
+        </div>
+    </section>
+
+    <!-- Footer de Cierre de Unidad -->
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <a href="leccion18.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion20.html" class="btn-navegacion" style="background-color: var(--u3-color); transform: scale(1.1);">¡Iniciar Unidad 3! 🚀</a>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em;">🏠 Volver al Índice Principal</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

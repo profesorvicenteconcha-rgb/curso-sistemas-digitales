@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 8: AC, DC y Condensadores - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 1: Fundamentos Físicos - Lección 8</small></p>
+        <h1>⚡ AC, DC y el Condensador</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN ACTUALIZADA -->
+    <div class="intro-leccion">
+        <p>En la lección anterior aprendiste a usar la Protoboard. Ahora necesitamos darle vida (energía). Pero cuidado: la electricidad que sale de la pared es salvaje (AC) y tus chips digitales necesitan paz y estabilidad (DC). <strong>Hoy aprenderemos a domar la energía</strong>, a usar el cargador correctamente y conoceremos al componente encargado de "planchar" las arrugas de la corriente: el <strong>Condensador</strong>.</p>
+    </div>
+
+    <section>
+        <h2>1. Corriente Continua (DC) vs. Alterna (AC)</h2>
+        <div class="svg-container">
+            <!-- Imagen ya generada -->
+            <img src="img/ac_dc_comparacion.png" alt="Gráfica comparativa: DC línea recta, AC onda senoidal" style="max-width:65%; height:auto;">
+            <p><small><em>Fig 1. La DC es estable (5V). La AC oscila (+120V a -120V).</em></small></p>
+        </div>
+        <ul>
+            <li><strong>DC (Direct Current):</strong> Flujo constante en un solo sentido. Es lo que usan tus chips. (Pilas, USB).</li>
+            <li><strong>AC (Alternating Current):</strong> Flujo que vibra, va y viene. Es lo que sale de la pared. ¡Peligrosa para los dedos y los chips!</li>
+        </ul>
+
+        <div class="destacado">
+        <h3>🍎 Rincón del Docente: "La Danza de los Electrones"</h3>
+        
+        <p><strong>Objetivo pedagógico:</strong> Que los niños comprendan la diferencia entre AC y DC 
+        mediante movimiento corporal, SIN exponerlos a voltajes peligrosos.</p>
+        
+        <h4>🎭 Actividad 1: "Electrones en Marcha" (DC)</h4>
+        <p><strong>Materiales:</strong> Cinta adhesiva de colores, espacio en el aula.</p>
+        <p><strong>Preparación:</strong></p>
+        <ol>
+            <li>Marca una línea recta en el piso con cinta roja (positivo) y azul (negativo).</li>
+            <li>Los niños son "electrones" que deben caminar en fila india de + a -.</li>
+        </ol>
+        <p><strong>Dinámica:</strong> "Caminen siempre en la misma dirección, sin detenerse ni retroceder". 
+        Esto simula la corriente continua: flujo constante en un solo sentido.</p>
+        
+        <h4>⚡ Actividad 2: "Electrones Bailarines" (AC)</h4>
+        <p><strong>Preparación:</strong> Marca dos líneas paralelas en el piso (A y B).</p>
+        <p><strong>Dinámica:</strong> "Ahora los electrones bailan: un paso hacia A, un paso hacia B, 
+        un paso hacia A, un paso hacia B...". Los niños oscilan entre las dos líneas sin avanzar.</p>
+        <p><strong>Lección clave:</strong> "La AC no viaja, ¡solo vibra en su lugar! Por eso no sirve 
+        para nuestros chips, que necesitan electrones que realmente lleguen a su destino".</p>
+        
+        <div class="dato-extra">
+            <h4>⚠️ Regla de Oro de Seguridad para el Aula</h4>
+            <p><strong>NUNCA uses el enchufe de la pared para demostraciones en clase.</strong> 
+            La AC de 120V/220V puede matar a un niño en milisegundos. Todas las actividades 
+            con corriente deben usar pilas de 3V, 5V o 9V (baja tensión segura).</p>
+            <p>Para mostrar AC "de verdad", usa un osciloscopio virtual en la computadora o un 
+            video educativo pregrabado. La curiosidad no justifica el riesgo.</p>
+        </div>
+        </div>
+
+        <h2>2. El Puente Mágico: Tu Adaptador (Fuente de Poder)</h2>
+        <p>Aquí hay un secreto técnico: Lo que llamamos "Cargador" en realidad <strong>NO es un cargador</strong>.</p>
+        
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <h3>🤓 Precisión de Ingeniero</h3>
+            <p>La cajita que enchufas a la pared es una <strong>Fuente de Alimentación Regulada</strong> (Power Supply).</p>
+            <ul>
+                <li><strong>Su trabajo:</strong> Convertir 120V AC en 5V DC constantes y estables.</li>
+                <li><strong>El "Cargador" Real:</strong> Es un chip que está <em>dentro</em> de tu teléfono. Ese chip recibe los 5V de la fuente y gestiona con cuidado cómo llenar la batería.</li>
+            </ul>
+            <p><strong>¿Por qué nos sirve esto?</strong> Porque al ser una fuente de 5V estable, ¡es perfecta para alimentar nuestra protoboard y nuestros chips lógicos sin dañarlos!</p>
+        </div>
+
+        <p>Sin embargo, a veces la conversión de AC a DC no es 100% perfecta y queda un pequeño "temblor" o ruido en la línea.</p>
+        
+        <h2>3. El Condensador: El Tanque de Reserva 🛢️</h2>
+        <p>¿Cómo quitamos ese temblor para que la lógica no falle? Usamos un <strong>Condensador (Capacitor)</strong>.</p>
+        
+        <div class="destacado" style="border-left-color: #2196f3; background-color: #e3f2fd;">
+            <h3>💧 La Analogía del Agua</h3>
+            <p>Imagina que el cargador es una manguera que a veces echa chorros fuertes y a veces débiles. El condensador es un <strong>balde</strong> conectado a la manguera.</p>
+            <ul>
+                <li>Si sobra agua, el balde se llena (Carga).</li>
+                <li>Si falta agua, el balde completa lo que falta (Descarga).</li>
+            </ul>
+            <p><strong>Resultado:</strong> El flujo de agua hacia tus chips es suave y constante.</p>
+        </div>
+
+        <h3>Tipos de Condensadores</h3>
+        <div class="svg-container">
+            <!-- Imagen ya generada -->
+            <img src="img/tipos_condensadores.png" alt="Condensador Electrolítico y Cerámico" style="max-width:300px; height:auto;">
+            <p><small><em>Fig 2. Izquierda: Electrolítico (¡Cuidado con la polaridad!). Derecha: Cerámico.</em></small></p>
+        </div>
+        <ul>
+            <li><strong>Cerámicos (Lentejas):</strong> Pequeños, para ruidos rápidos. Sin polaridad.</li>
+            <li><strong>Electrolíticos (Barriles):</strong> Grandes, para mucha energía. <strong>¡Tienen Polaridad!</strong> La pata del lado de la franja blanca (-) es el Negativo. Si lo pones al revés... ¡Pum! 💥</li>
+        </ul>       
+
+        <h2 id="simbolo-condensador">4. El Símbolo del Condensador en los Esquemáticos</h2>
+
+        <div class="svg-container">
+            <!-- Si tienes una imagen del símbolo, agrégala aquí -->
+            <img src="img/simbolo_condensador.png" alt="Símbolos del condensador: no polarizado y polarizado" style="max-width: 400px; height: auto;">
+            <p><small><em>Fig 3. Símbolos del condensador: no polarizado (izquierda) y polarizado (derecha).</em></small></p>
+        </div>
+
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
+            <h3>📐 Decodificando los Símbolos del Condensador</h3>
+            
+            <p>Así como el LED tiene su "mapa" con triángulo y barra, el condensador tiene símbolos que nos cuentan su historia:</p>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+                <div style="flex: 1; min-width: 250px; background: white; padding: 15px; border-radius: 8px; border: 1px solid #e3f2fd;">
+                    <h4 style="color: #2196f3; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #2196f3; color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.9em;">A</span>
+                        Condensador NO Polarizado
+                    </h4>
+                    <div style="text-align: center; font-size: 2em; margin: 10px 0; font-family: 'Courier New', monospace;">
+                        —| |—
+                    </div>
+                    <ul style="margin-bottom: 0;">
+                        <li><strong>Dos líneas paralelas:</strong> Representan las dos placas conductoras</li>
+                        <li><strong>Espacio entre líneas:</strong> Simboliza el dieléctrico (material aislante)</li>
+                        <li><strong>Sin signos + o -:</strong> Se puede conectar en cualquier dirección</li>
+                        <li><strong>Ejemplos:</strong> Condensadores cerámicos, de poliéster, de mica</li>
+                    </ul>
+                </div>
+                
+                <div style="flex: 1; min-width: 250px; background: white; padding: 15px; border-radius: 8px; border: 1px solid #ffcdd2;">
+                    <h4 style="color: #d32f2f; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #d32f2f; color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.9em;">B</span>
+                        Condensador POLARIZADO
+                    </h4>
+                    <div style="text-align: center; font-size: 2em; margin: 10px 0; font-family: 'Courier New', monospace;">
+                        —| |+  o  —|( |—
+                    </div>
+                    <ul style="margin-bottom: 0;">
+                        <li><strong>Una línea curva o signo +:</strong> Indica el terminal NEGATIVO</li>
+                        <li><strong>Línea recta:</strong> Indica el terminal POSITIVO</li>
+                        <li><strong>¡OJO!:</strong> La polaridad DEBE respetarse</li>
+                        <li><strong>Ejemplos:</strong> Condensadores electrolíticos, de tantalio</li>
+                        <li><strong>Curva = negativo:</strong> "La curva es cóncava, como una C de Cátodo"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #4caf50;">
+                <h4 style="color: #2e7d32; margin-top: 0;">💡 Reglas Mnemotécnicas</h4>
+                <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px;">
+                        <div style="font-weight: bold; color: #d32f2f;">Para Polarizados:</div>
+                        <ul style="margin: 5px 0;">
+                            <li><strong>"Curva = Cátodo"</strong> (C de negativo)</li>
+                            <li><strong>"+ plano"</strong> (la línea recta es el positivo)</li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1; min-width: 200px;">
+                        <div style="font-weight: bold; color: #2196f3;">Para No Polarizados:</div>
+                        <ul style="margin: 5px 0;">
+                            <li><strong>"Paralelas = Perfectas"</strong> (para cualquier dirección)</li>
+                            <li><strong>"Iguales = Intercambiables"</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dato-extra" style="border-left: 5px solid #ff9800; background-color: #fff3e0;">
+            <h3>🔗 Conexión con la Analogía del Balde</h3>
+            
+            <p>Recuerda nuestra analogía del condensador como un <strong>balde de agua</strong>:</p>
+            
+            <div style="display: flex; align-items: start; gap: 15px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3em;">⚡</div>
+                        <div style="font-weight: bold; color: #2196f3;">En el Esquemático</div>
+                    </div>
+                    <ul>
+                        <li>Las <strong>dos placas</strong> son las paredes del balde</li>
+                        <li>El <strong>dieléctrico</strong> es el material del balde</li>
+                        <li>La <strong>capacidad (µF)</strong> es el tamaño del balde</li>
+                    </ul>
+                </div>
+                
+                <div style="flex: 1; min-width: 200px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3em;">💧</div>
+                        <div style="font-weight: bold; color: #2196f3;">En la Analogía</div>
+                    </div>
+                    <ul>
+                        <li><strong>Placas</strong> = Paredes del balde</li>
+                        <li><strong>Dieléctrico</strong> = Material impermeable</li>
+                        <li><strong>Capacidad</strong> = Litros que caben</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p style="margin-top: 15px; font-style: italic; text-align: center;">
+                <strong>Ahora, cuando veas "—| |—" en un diagrama, sabrás que es un condensador, 
+                y podrás "leer" su historia: dos placas separadas por un aislante, listas para almacenar energía.</strong>
+            </p>
+        </div>
+
+        <h3>📝 Ejercicio Práctico: Identifica el Condensador</h3>
+
+        <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 15px 0;">
+            <p><strong>Observa este fragmento de esquemático:</strong></p>
+            
+            <div style="font-family: 'Courier New', monospace; font-size: 1.2em; background: white; padding: 15px; border-radius: 6px; text-align: center; margin: 15px 0;">
+                5V —— [R] —— —| |—— —— LED —— GND<br>
+                <span style="color: #666; font-size: 0.9em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¿Qué componente es este?</span>
+            </div>
+            
+            <details style="margin-top: 15px;">
+                <summary style="font-weight: bold; color: var(--color-primario); cursor: pointer;">
+                    🔍 Haz clic para ver la respuesta
+                </summary>
+                <div style="background: #e8f5e9; padding: 15px; border-radius: 6px; margin-top: 10px;">
+                    <p><strong>¡Correcto! Es un condensador no polarizado.</strong></p>
+                    <ul>
+                        <li><strong>Símbolo:</strong> —| |— (dos líneas paralelas)</li>
+                        <li><strong>Tipo:</strong> No polarizado (sin signos + o -)</li>
+                        <li><strong>Función en este circuito:</strong> Filtrado de ruido en la alimentación del LED</li>
+                        <li><strong>Orientación:</strong> Cualquiera, pues no tiene polaridad</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+
+            <!-- PEGAR AQUÍ EL BLOQUE DE BIOLOGÍA -->
+            <div class="dato-extra" style="border-left: 4px solid #28a745; background-color: #f0fff4;">
+                <h3>🧬 Conexión Bio-Médica: El ECG</h3>
+                <p>¿Te interesa la medicina? El corazón humano funciona con pulsos eléctricos (DC) muy pequeños (milivoltios). Cuando un médico usa un Electrocardiógrafo (ECG), está midiendo voltaje.</p>
+                <p>El problema es que la red eléctrica de la pared (AC) genera tanto ruido que puede tapar la señal del corazón. Por eso, los equipos médicos usan <strong>filtros y condensadores</strong> avanzados para limpiar la señal, tal como estamos aprendiendo a limpiar la energía de nuestros chips.</p>
+            </div>
+            <!-- FIN DEL BLOQUE -->
+
+        <Div>
+            
+        <h2 id="reparto-corriente">⚡ Reparto de Corriente en Paralelo</h2>
+
+        <p>En un circuito en <strong>paralelo</strong>, el voltaje es igual en todas las ramas, pero la corriente se reparte. ¡Es como un río que se divide: el cauce más ancho (menos resistencia) recibe más agua!</p>
+
+        <div class="svg-container">
+        <img src="img\circuito-paralelo-corriente.png" alt="Circuito en paralelo con R₁=1kΩ y R₂=330Ω" style="max-width: 55%; height: auto; border-radius: 8px; margin: 20px 0;">
+        </div>
+
+        <div class="destacado">
+        <p><strong>¿Por qué el voltaje es igual en ambas ramas?</strong></p>
+        <p>Porque <strong>ambas resistencias están conectadas directamente a los mismos dos puntos</strong>: el positivo de la fuente (5V) y el negativo/GND (0V).</p>
+        <p>Imagina dos escaleras que bajan del mismo piso 5 al mismo sótano:</p>
+        <ul>
+            <li>Escalera A (R₁): 20 peldaños (más resistencia)</li>
+            <li>Escalera B (R₂): 7 peldaños (menos resistencia)</li>
+        </ul>
+        <p>¿Cuál es la diferencia de altura entre el piso 5 y el sótano?</p>
+        <p>¡<strong>Exactamente la misma para ambas escaleras!</strong> Lo único que cambia es cuánto te cuesta bajar (la corriente).</p>
+        </div>
+
+        <div class="formula">
+        $$I = \frac{V}{R} \quad ; \quad I_{total} = I_1 + I_2$$
+        </div>
+
+        <div class="destacado">
+        <p><strong>¿Cómo calcularlo? ¡Solo necesitas la Ley de Ohm!</strong></p>
+        <p>Como el voltaje es igual (5V) en ambas ramas:</p>
+        <p>• I₁ = 5V / 1000Ω = <strong>5 mA</strong> (rama de mayor resistencia)</p>
+        <p>• I₂ = 5V / 330Ω = <strong>15.15 mA</strong> (rama de menor resistencia)</p>
+        <p>• I<sub>total</sub> = 5 mA + 15.15 mA = <strong>20.15 mA</strong></p>
+        </div>
+
+        <blockquote>
+        <p><strong>💡 Regla de oro:</strong> La corriente se divide <em>inversamente</em> proporcional a las resistencias:<br>
+        • Más resistencia → menos corriente<br>
+        • Menos resistencia → más corriente</p>
+        </blockquote>
+
+        <table class="tabla-centrada">
+            <!-- contenido de la tabla -->
+            <tr><th>Caso</th><th>Corriente</th></tr>
+            <tr><td>R₁ = R₂</td><td>I₁ = I₂ (mitad cada uno)</td></tr>
+            <tr><td>R₂ = ½ R₁</td><td>I₂ ≈ 2 × I₁</td></tr>
+            <tr><td>R₂ = ⅓ R₁</td><td>I₂ ≈ 3 × I₁</td></tr>
+        </table>
+        </div>
+
+        <div class="dato-extra">
+        <p><strong>🌟 Resumen práctico:</strong><br>
+        • En <strong>serie</strong>: La corriente es igual, el voltaje se reparte.<br>
+        • En <strong>paralelo</strong>: El voltaje es igual, la corriente se reparte.<br>
+        ¡Memoriza esta regla y nunca te confundirás!</p>
+        </div>
+
+        <h2>5. Reglas de Supervivencia en DC</h2>
+        <p>Para que tus futuros circuitos (Unidades 2, 3 y 4) funcionen, debes respetar estas leyes sagradas:</p>
+
+        <h3>A. La Tiranía de la Polaridad</h3>
+        <p>En DC, Rojo es (+) y Negro es (-). Nunca los cruces. Un chip conectado al revés muere instantáneamente.</p>
+
+        <h3>B. El Secreto de la "Tierra Común" (Common Ground) 🌍</h3>
+        <p>Si usas dos fuentes de energía (ej: el USB para los chips y una pila de 9V para un motor), debes <strong>unir todos los cables Negativos (GND)</strong>.</p>
+        <p><em>¿Por qué?</em> Porque todos los componentes necesitan estar parados sobre el mismo "suelo" (0 Voltios) para entenderse. <strong>Memoriza esto:</strong> sin Tierra Común, los sensores fallan.</p>
+        <p>Cuando lleguemos a la <strong>Lección 13</strong> (Diseño de Alarmas) y a la <strong>Lección 22</strong> (Sistemas de Seguridad), verás que sin Tierra Común, tus sensores le mentirán a tu circuito.</p>
+
+        <h3>C. Preparando tu Fuente (El Cable USB)</h3>
+        <p>Si usas un cable USB cortado, verás 4 hilos internos. Aquí está el código de colores universal:</p>
+        
+        <div class="destacado" style="background-color: #fff; border: 1px solid #eee; border-left: 5px solid #555;">
+            <ul style="list-style: none; padding-left: 10px;">
+                <li>🔴 <strong>Rojo (+):</strong> ¡Este SÍ! Son tus 5 Voltios.</li>
+                <li>⚫ <strong>Negro (-):</strong> ¡Este SÍ! Es tu Tierra (GND).</li>
+                <li>⚪ <strong>Blanco (Datos -):</strong> ¡CÓRTALO! No lo necesitamos.</li>
+                <li>🟢 <strong>Verde (Datos +):</strong> ¡CÓRTALO! No lo necesitamos.</li>
+            </ul>
+        </div>
+
+        <p><strong>¿Qué hago con el Blanco y el Verde?</strong></p>
+        <p>Córtalos más cortos que los demás y, si puedes, ponles un poquito de cinta aislante. <strong>No los unas entre sí</strong> ni dejes que toquen el rojo o el negro. Son para transmitir datos, y nuestros circuitos de este curso no "hablan" USB.</p>
+
+        <ul>
+            <li>Pela un poquito la punta del Rojo y el Negro.</li>
+            <li style="margin-top: 10px; background-color: #e8f5e9; padding: 10px; border-radius: 5px; border-left: 4px solid #28a745;">
+                <strong>Tip Pro (La Conexión Perfecta):</strong><br>
+                Aquí es donde brillan tus <strong>Cables Caimán-Pin</strong>.
+                <br>Usa el lado del <strong>Caimán (Pinza)</strong> para morder el cable pelado del USB, y conecta el lado del <strong>Pin</strong> firmemente en el riel de la protoboard. ¡Es la forma más segura y profesional sin necesidad de soldar!
+            </li>
+        </ul>
+        
+        <div class="dato-extra">
+            <h3>🌍 Dato Global: ¿Qué pasa si viajo a Europa, Brasil o Asia?</h3>
+            <p>Si conectas tu fuente en un país con voltaje distinto (como los 230V de Europa o los 100V de Japón), <strong>¡no explota!</strong> (siempre que sea moderna).</p>
+            <p>Revisa la letra pequeña de tu adaptador. Casi seguro dice:</p>
+            <p style="text-align: center; font-family: monospace; font-weight: bold; background: #fff; padding: 5px; border-radius: 4px;">INPUT: 100-240V ~ 50/60Hz</p>
+            <p>Esto significa que es <strong>Universal</strong>:</p>
+            <ul>
+                <li><strong>100V - 127V:</strong> Funciona en Colombia, USA, Japón y ciudades de Brasil como São Paulo.</li>
+                <li><strong>220V - 240V:</strong> Funciona en Europa, China, Argentina y ciudades de Brasil como Brasilia.</li>
+            </ul>
+            <p><strong>Lo único que necesitas:</strong> Un adaptador de plástico simple (sin electrónica) porque la forma de los huecos de la pared (clavijas) cambia en cada país.</p>
+        </div>
+    </section>
+
+    <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
+            <h3>🤔 Duda Frecuente: "¿Y si mi cargador dice 2A o 3A?"</h3>
+            
+            <p><strong>Flashback a la Lección 1:</strong> ¿Recuerdas que los Amperios (A) miden la <em>cantidad</em> de electrones disponibles? Un LED consume poquitico (0.02 A), pero un cargador puede ofrecer mucho (2 A).</p>
+
+            <p>¡No te asustes! Muchos piensan que si el cargador tiene muchos Amperios, "empujará" demasiada corriente y quemará el circuito. <strong>Es un mito.</strong></p>
+            <ul>
+                <li><strong>El Voltaje se impone:</strong> El cargador OBLIGA al circuito a recibir 5V. (Por eso el voltaje sí debe ser exacto).</li>
+                <li><strong>La Corriente se pide:</strong> El circuito solo TOMA la corriente que necesita.</li>
+            </ul>
+            <p><strong>La Analogía del Buffet:</strong> Un cargador de 2A es como un restaurante con comida para 200 personas. Si tú entras solo (tu pequeño circuito LED), comes lo de una persona y ya. ¡El restaurante no te obliga a comerte la comida de los otros 199!</p>
+            <p>Pero... <strong>¿qué pasa si accidentalmente abres todas las puertas del restaurante?</strong> Entrarían 200 personas de golpe y sería un caos.</p>
+                <p><strong>Lo genial: </strong>  Este guardia es tan discreto que cuando solo entra 1 persona (tu LED normal), casi no lo notas. Pero cuando hay un problema, él toma el control y evita el desastre.</p>
+            <p><strong>Conclusión:</strong> Mientras sea de <strong>5V</strong>, sirve cualquier cargador de 0.5A, 1A, 2A o más. Entre más amperios tenga, más "sobrado" y frío trabajará.</p>
+            <p>En este curso, alimentaremos todo con 5 Voltios DC (USB). Es un voltaje seguro.</p>
+        </div>
+        
+        <h2 id="ejercicio-integrador">🔍 Tu primer circuito completo: ¿Por qué calculamos antes de conectar?</h2>
+        
+        <p>Veamos un circuito completo que combina todo lo aprendido.</p>
+        
+        <p>Antes de tocar un cable, los ingenieros calculan. ¿Por qué? Para evitar:</p>
+        <ul>
+            <li>🔥 Quemar componentes por exceso de corriente</li>
+            <li>💧 Dañar fuentes de alimentación por sobrecarga</li>
+            <li>⚡ Malgastar energía innecesariamente</li>
+        </ul>
+
+        <h4>El problema</h4>
+        <p>Tenemos un adaptador USB de 5V, 2A ¿Será suficiente para nuestro circuito?</p>
+
+        <div class="svg-container">
+        <img src="img\circuito-integrador.png" alt="Circuito con USB, resistencias, pulsador, LED y condensador" style="max-width: 70%; height: auto; border-radius: 8px; margin: 20px 0;">
+        </div>
+        
+        <h4>¿Cómo funciona el circuito?</h4>
+<p>El circuito tiene dos estados claramente definidos:</p>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 15px 0;">
+    <div style="flex: 1; min-width: 250px; background-color: #e8f5e9; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+        <h5 style="margin-top: 0; color: #2e7d32;">🟢 Estado 1: Reposo</h5>
+        <ul style="margin-bottom: 0;">
+            <li><strong>Pulsador:</strong> Abierto (sin presionar)</li>
+            <li><strong>LED:</strong> ENCENDIDO (2.33 mA)</li>
+            <li><strong>Ruta:</strong> 5V → R₁ → R₂ → LED → GND</li>
+            <li><strong>Capacitor:</strong> Cargado, estabilizando 5V</li>
+        </ul>
+    </div>
+    
+    <div style="flex: 1; min-width: 250px; background-color: #ffebee; padding: 15px; border-radius: 8px; border-left: 4px solid #c62828;">
+        <h5 style="margin-top: 0; color: #c62828;">🔴 Estado 2: Activado</h5>
+        <ul style="margin-bottom: 0;">
+            <li><strong>Pulsador:</strong> Cerrado (presionado)</li>
+            <li><strong>LED:</strong> APAGADO (0 mA)</li>
+            <li><strong>Ruta:</strong> 5V → R₁ → Pulsador → GND</li>
+            <li><strong>Capacitor:</strong> Provee estabilidad durante el cambio</li>
+        </ul>
+    </div>
+</div>
+
+<p><strong>💡 El capacitor de 100µF</strong> juega un rol crucial como <em>estabilizador de voltaje</em>:</p>
+<ul>
+    <li>Se carga instantáneamente a 5V cuando conectas el USB</li>
+    <li>Actúa como reserva de energía durante cambios de estado</li>
+    <li>Filtra ruido eléctrico que podría causar parpadeos en el LED</li>
+    <li>Protege los componentes de picos de corriente repentinos</li>
+</ul>
+
+<p style="font-style: italic; color: #666;">
+    En resumen: El capacitor asegura que tu circuito funcione de manera limpia, estable y predecible, 
+    independientemente de pequeñas imperfecciones en la fuente de alimentación.
+</p>
+
+        <h3>📊 Función de cada componente</h3>
+
+        <div>
+        <table class="tabla-centrada">
+            <!-- contenido de la tabla -->
+            <tr><th>Componente</th><th>Función</th></tr>
+            <tr><td>USB 5V</td><td>Fuente de energía regulada</td></tr>
+            <tr><td>Capacitor 100µF</td><td>Filtrado y estabilización de voltaje</td></tr>
+            <tr><td>R₁ (1kΩ)</td><td>Limita corriente, crea divisor de voltaje</td></tr>
+            <tr><td>Pulsador</td><td>Control on/off del LED (en paralelo con el LED)</td></tr>
+            <tr><td>R₂ (330Ω)</td><td>Limita corriente del LED</td></tr>
+            <tr><td>LED</td><td>Indicador visual</td></tr>
+            <tr><td>TIERRA común</td><td>Referencia y retorno de corriente</td></tr>
+        </table>
+        </div>
+
+        <h3>🔍 Operación detallada del circuito</h3>
+
+        <div class="destacado">
+        <p><strong>🟢 Sin presionar el pulsador (LED ENCENDIDO)</strong></p>
+        <pre style="font-family: monospace; white-space: pre; background: #f8f9fa; padding: 10px; border-radius: 4px;">
+        5V (+) ──[R₁=1kΩ]──┬──[Pulsador ABIERTO]
+                        │
+                        └──[R₂=330Ω]──[LED]── GND</pre>
+        <p><strong>Divisor de voltaje en acción:</strong></p>
+        <p>• El voltaje se reparte entre R₁ y R₂</p>
+        <p>• V_disponible = 5V - 1.9V (del LED) = 3.1V</p>
+        <p>• V_R₁ = 3.1V × (1000Ω/1330Ω) = 2.33V</p>
+        <p>• V_R₂ = 3.1V × (330Ω/1330Ω) = 0.77V</p>
+        <p><strong>Corriente calculada:</strong> I = 3.1V / 1330Ω = <strong>2.33 mA</strong> (corriente segura para el LED)</p>
+        <p><strong>Papel del capacitor:</strong> Almacena energía durante los picos y la suministra durante los valles, manteniendo el voltaje estable.</p>
+        </div>
+
+        <div class="destacado">
+        <p><strong>🔴 Presionando el pulsador (LED APAGADO)</strong></p>
+        <pre style="font-family: monospace; white-space: pre; background: #f8f9fa; padding: 10px; border-radius: 4px;">
+        5V (+) ──[R₁=1kΩ]──┬──[Pulsador CERRADO]── GND
+                        │
+                        └──[R₂=330Ω]──[LED]── GND</pre>
+        <p><strong>Divisor de corriente en acción:</strong></p>
+        <p>• El pulsador ofrece un camino de menor resistencia</p>
+        <p>• La corriente prefiere el camino del pulsador (casi 0Ω)</p>
+        <p>• Mínima corriente fluye por el LED</p>
+        <p><strong>Corriente calculada:</strong> I_total = 5V / 1000Ω = <strong>5 mA</strong> (fluye por R₁ y pulsador)</p>
+        <p><strong>Papel del capacitor:</strong> Continúa filtrando el voltaje, manteniendo estabilidad durante el cambio de estado.</p>
+        </div>
+
+        <h3 id="tabla-estados">📋 Estados del Circuito con Pulsador y LED</h3>
+        <p style="text-align: center; color: #666; margin-bottom: 20px;">
+            <em>Análisis completo de los dos estados de operación</em>
+        </p>
+
+        <div style="overflow-x: auto; margin: 20px 0;">
+            <table style="width: 100%; min-width: 700px; table-layout: fixed;">
+                <colgroup>
+                    <col style="width: 22%;">
+                    <col style="width: 45%;">
+                    <col style="width: 15%;">
+                    <col style="width: 18%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Estado</th>
+                        <th>Configuración del Circuito</th>
+                        <th>Corriente (I)</th>
+                        <th>Estado LED</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="vertical-align: middle;">
+                            <div style="font-weight: bold; color: var(--u1-color); font-size: 1.05em; margin-bottom: 5px;">Reposo</div>
+                            <div>
+                                <span style="background-color: #e8f5e9; color: #2e7d32; padding: 4px 10px; border-radius: 12px; font-size: 0.85em; font-weight: bold; display: inline-block; white-space: nowrap;">
+                                    Pulsador Abierto
+                                </span>
+                            </div>
+                        </td>
+                        <td style="font-family: 'Courier New', monospace; background-color: #f8f9fa; border-radius: 4px; vertical-align: middle;">
+                            <div style="margin-bottom: 5px;"><strong>Serie:</strong> R₁ + R₂ + LED</div>
+                            <div style="font-size: 0.85em; color: #666; letter-spacing: 0.3px; overflow-wrap: break-word;">
+                                5V ──[1kΩ]──[330Ω]──[LED]── GND
+                            </div>
+                        </td>
+                        <td style="font-weight: bold; color: #e74c3c; font-size: 1em; text-align: center; vertical-align: middle;">
+                            2.33 mA
+                        </td>
+                        <td style="text-align: center; vertical-align: middle;">
+                            <div style="font-weight: bold; color: #27ae60; font-size: 0.95em; display: inline-flex; align-items: center; gap: 5px;">
+                                <span style="font-size: 1.2em;">💡</span> ✅ ON
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle;">
+                            <div style="font-weight: bold; color: var(--u3-color); font-size: 1.05em; margin-bottom: 5px;">Presionado</div>
+                            <div>
+                                <span style="background-color: #ffebee; color: #c62828; padding: 4px 10px; border-radius: 12px; font-size: 0.85em; font-weight: bold; display: inline-block; white-space: nowrap;">
+                                    Pulsador Cerrado
+                                </span>
+                            </div>
+                        </td>
+                        <td style="font-family: 'Courier New', monospace; background-color: #f8f9fa; border-radius: 4px; vertical-align: middle;">
+                            <div style="margin-bottom: 5px;"><strong>R₁ en cortocircuito</strong></div>
+                            <div style="font-size: 0.85em; color: #666; letter-spacing: 0.3px; overflow-wrap: break-word;">
+                                5V ──[1kΩ]──[Pulsador≈0Ω]── GND
+                            </div>
+                        </td>
+                        <td style="font-weight: bold; color: #e74c3c; font-size: 1em; text-align: center; vertical-align: middle;">
+                            5.0 mA
+                        </td>
+                        <td style="text-align: center; vertical-align: middle;">
+                            <div style="font-weight: bold; color: #95a5a6; font-size: 0.95em; display: inline-flex; align-items: center; gap: 5px;">
+                                <span style="font-size: 1.2em;">⚫</span> ❌ OFF
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" style="text-align: center; font-size: 0.85em; color: #666; padding-top: 15px; border-top: 2px solid var(--color-borde);">
+                            <p style="margin: 5px 0; line-height: 1.4;">
+                                <strong>Fuente:</strong> Adaptador USB 5V, 2A<br>
+                                <strong>Componentes:</strong> R₁=1kΩ, R₂=330Ω, LED rojo, Pulsador, C=100µF
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div style="margin: 25px 0; padding: 20px; background-color: #e3f2fd; border-radius: 8px; border-left: 4px solid #2196f3;">
+            <h4 style="margin-top: 0; color: #1565c0; margin-bottom: 15px;">🔍 Interpretación de la tabla:</h4>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                <div style="flex: 1; min-width: 280px; max-width: 400px; background-color: white; padding: 15px; border-radius: 6px; border-left: 4px solid #28a745;">
+                    <h5 style="margin-top: 0; color: #2e7d32; display: flex; align-items: center; gap: 8px;">
+                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.85em; flex-shrink: 0;">1</span>
+                        Estado Reposo:
+                    </h5>
+                    <ul style="margin: 10px 0 0 0; padding-left: 20px; font-size: 0.9em;">
+                        <li><strong>Corriente:</strong> 2.33 mA (calculada con Ley de Ohm)</li>
+                        <li><strong>LED:</strong> ENCENDIDO con brillo normal</li>
+                        <li><strong>Ruta:</strong> flujo completo por ambas resistencias</li>
+                        <li><strong>Fórmula:</strong> I = 5V / (1kΩ + 330Ω + R<sub>LED</sub>)</li>
+                    </ul>
+                </div>
+                
+                <div style="flex: 1; min-width: 280px; max-width: 400px; background-color: white; padding: 15px; border-radius: 6px; border-left: 4px solid #fd7e14;">
+                    <h5 style="margin-top: 0; color: #d35400; display: flex; align-items: center; gap: 8px;">
+                        <span style="background-color: #fd7e14; color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.85em; flex-shrink: 0;">2</span>
+                        Estado Presionado:
+                    </h5>
+                    <ul style="margin: 10px 0 0 0; padding-left: 20px; font-size: 0.9em;">
+                        <li><strong>Corriente:</strong> 5.0 mA (por cortocircuito)</li>
+                        <li><strong>LED:</strong> APAGADO - sin voltaje</li>
+                        <li><strong>Ruta:</strong> cortocircuito por el pulsador</li>
+                        <li><strong>Fórmula:</strong> I = 5V / 1kΩ (solo R₁)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agregar coclusiones" -->
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
+            <h3>📊 Análisis de Consumo vs Capacidad</h3>
+            
+            <p>Nuestro circuito usa entre <strong>2.3 mA</strong> (LED encendido) y <strong>5 mA</strong> (pulsador presionado).</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e3f2fd; text-align: center;">
+                    <div style="font-size: 1.8em; margin-bottom: 5px;">⚡</div>
+                    <div style="font-weight: bold; color: #2196f3;">Consumo Máximo</div>
+                    <div style="font-size: 1.2em; font-weight: bold;">~5 mA</div>
+                </div>
+                
+                <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e3f2fd; text-align: center;">
+                    <div style="font-size: 1.8em; margin-bottom: 5px;">🔋</div>
+                    <div style="font-weight: bold; color: #4caf50;">Capacidad Disponible</div>
+                    <div style="font-size: 1.2em; font-weight: bold;">2000 mA</div>
+                </div>
+                
+                <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e3f2fd; text-align: center;">
+                    <div style="font-size: 1.8em; margin-bottom: 5px;">📈</div>
+                    <div style="font-weight: bold; color: #ff9800;">Uso de Capacidad</div>
+                    <div style="font-size: 1.2em; font-weight: bold;">0.25%</div>
+                    <div style="font-size: 0.9em; color: #666;">(5 mA de 2000 mA)</div>
+                </div>
+            </div>
+            
+            <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #4caf50;">
+                <h4 style="color: #2e7d32; margin-top: 0; margin-bottom: 10px;">🎯 Conclusiones</h4>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 10px;">
+                    <div style="background: #4caf50; color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: 10px; flex-shrink: 0;">✓</div>
+                    <div>
+                        <strong>Sobra el 99.75% de la capacidad</strong><br>
+                        <small style="color: #555;">Margen de seguridad excelente</small>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 10px;">
+                    <div style="background: #4caf50; color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: 10px; flex-shrink: 0;">✓</div>
+                    <div>
+                        <strong>El circuito es completamente seguro</strong><br>
+                        <small style="color: #555;">Operación muy por debajo de los límites</small>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start;">
+                    <div style="background: #2196f3; color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: 10px; flex-shrink: 0;">ℹ️</div>
+                    <div>
+                        <strong>Podrías conectar ~400 circuitos idénticos</strong><br>
+                        <small style="color: #555;">Simultáneamente con esta fuente de 2000 mA</small>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="margin-top: 15px; font-size: 0.9em; color: #666; text-align: center;">
+                <em>Cálculo: 2000 mA ÷ 5 mA = 400 circuitos | (5 mA × 400 = 2000 mA = capacidad total)</em>
+            </p>
+        </div>
+
+        <div class="dato-extra">
+            <p><strong>💡 La razón de los cálculos:</strong><br>
+            Sin calcular, podrías usar una resistencia de 10Ω en lugar de 330Ω. Resultado: el LED recibiría ~50 mA en lugar de 15 mA → se quema en segundos. 🔥<br><br>
+            Los cálculos son tu "seguro de vida" antes de conectar la batería.</p>
+        </div>
+
+        <!-- Sección de Preguntas de Consolidación -->
+        <h2>❓ Preguntas de Consolidación</h2>
+        <p>Responde estas preguntas para asegurarte de que dominas los conceptos técnicos <em>y</em> estás listo para enseñarlos en tu futura aula:</p>
+
+        <details class="u1">
+        <summary>1. Explica por qué la corriente alterna (AC) se usa para distribuir energía en las ciudades, pero la corriente continua (DC) es necesaria para los chips electrónicos.</summary>
+        <p><strong>Razón técnica:</strong> La AC permite cambiar voltajes fácilmente con transformadores. 
+        Para enviar energía a 100 km, subimos el voltaje a 500,000V (menos pérdidas por calor). 
+        Al llegar a tu casa, lo bajamos a 120V/220V con otro transformador.</p>
+        <p>Los chips necesitan DC porque su lógica interna depende de niveles de voltaje estables: 
+        0V = "apagado" (0 lógico), 5V = "encendido" (1 lógico). Si el voltaje oscila como en AC, 
+        el chip no puede distinguir entre 0 y 1.</p>
+        <p><strong>Para tu futura aula:</strong> Usa la analogía del "camión de mudanzas": 
+        "La AC es como un camión que sube y baja por una montaña para llegar lejos con poca gasolina. 
+        La DC es como un carrito de supermercado: lento pero estable para mover cosas pequeñas".</p>
+        </details>
+
+        <details class="u1">
+        <summary>2. Un estudiante te pregunta: "¿Por qué mi cargador de celular dice 5V 2A si mi teléfono solo necesita 0.5A? ¿No lo quemará?". ¿Cómo le respondes?</summary>
+        <p><strong>Respuesta técnica:</strong> El voltaje (5V) es IMPUESTO por el cargador. 
+        La corriente (amperios) es PEDIDA por el dispositivo. Tu teléfono solo "toma" los 0.5A 
+        que necesita, aunque el cargador pueda ofrecer 2A.</p>
+        <p><strong>Analogía del buffet:</strong> "El cargador es un restaurante con comida para 200 personas. 
+        Tu teléfono es un niño que solo come un plato. El restaurante no lo obliga a comer más; 
+        él decide cuánto tomar".</p>
+        <p><strong>Advertencia crítica:</strong> Esto solo aplica a fuentes reguladas (como cargadores USB). 
+        ¡Nunca conectes un LED directo a una batería sin resistencia! Allí sí hay peligro porque 
+        no hay regulación de corriente.</p>
+        </details>
+
+        <details class="u1">
+        <summary>3. Diseña una demostración segura para niños de 9 años que muestre el efecto de un condensador sin usar soldadura ni componentes peligrosos.</summary>
+        <p><strong>Materiales por pareja:</strong></p>
+        <ul>
+            <li>1 LED rojo</li>
+            <li>1 resistencia de 330Ω</li>
+            <li>1 condensador electrolítico de 1000µF (¡polaridad marcada con cinta roja en el +!)</li>
+            <li>1 pila CR2032 en soporte</li>
+            <li>Cables con caimán</li>
+        </ul>
+        
+        <p><strong>Procedimiento:</strong></p>
+        <ol>
+            <li>Conecta el circuito: Pila (+) → Condensador (+) → Condensador (-) → Resistencia → LED → Pila (-)</li>
+            <li>Los niños observan: al conectar, el LED se enciende SUAVEMENTE (no de golpe).</li>
+            <li>Desconecta la pila: el LED se apaga SUAVEMENTE (no de golpe).</li>
+        </ol>
+        
+        <p><strong>Lección:</strong> "El condensador es como un balde que se llena y vacía despacio. 
+        Suaviza los cambios bruscos de energía".</p>
+        
+        <p><strong>Seguridad:</strong> Usa solo pilas de 3V. Los condensadores de 1000µF a 3V son 
+        completamente seguros (no explotan). Nunca uses condensadores grandes (>10,000µF) 
+        ni voltajes altos (>12V) en el aula.</p>
+        </details>
+
+        <details class="u1">
+        <summary>4. Explica el concepto de "Tierra Común" (Common Ground) y por qué es crucial cuando usas dos fuentes de alimentación en un mismo circuito.</summary>
+        <p><strong>Explicación técnica:</strong> Todos los componentes necesitan compartir el mismo 
+        punto de referencia de 0 voltios para "entenderse". Si el sensor usa GND_A y el motor usa 
+        GND_B, ambos puntos pueden tener voltajes ligeramente diferentes, causando lecturas erróneas.</p>
+        
+        <p><strong>Metáfora para niños:</strong> "Imagina dos edificios: el Edificio A dice que el piso 
+        1 está a 0 metros sobre el mar. El Edificio B dice que su piso 1 está a 5 metros sobre el mar. 
+        Si no unes sus cimientos (tierra común), cuando el Edificio A dice 'sube al piso 3', 
+        el Edificio B no sabe si son 3 metros o 8 metros".</p>
+        
+        <p><strong>Regla de oro:</strong> Siempre une todos los cables negros (GND) entre sí, 
+        incluso si vienen de fuentes diferentes. Esto crea un "suelo común" para todo el circuito.</p>
+        </details>
+
+        <details class="u1">
+        <summary>5. Un niño conecta un condensador electrolítico al revés en un circuito de 5V. ¿Qué sucede? ¿Es peligroso? ¿Cómo lo previenes en el aula?</summary>
+        <p><strong>Lo que sucede:</strong> A 5V, un condensador electrolítico pequeño (<1000µF) 
+        probablemente no explotará, pero:</p>
+        <ul>
+            <li>Se calentará ligeramente</li>
+            <li>Su vida útil se reducirá drásticamente</li>
+            <li>Podría perder capacidad de filtrado</li>
+        </ul>
+        
+        <p><strong>¿Es peligroso?</strong> A 5V con condensadores pequeños: <strong>NO</strong>. 
+        Pero a 12V+ o con condensadores grandes (>10,000µF): <strong>SÍ</strong> (pueden explotar 
+        con fuerza suficiente para lanzar fragmentos de plástico).</p>
+        
+        <p><strong>Prevención en el aula:</strong></p>
+        <ol>
+            <li>Marca SIEMPRE el terminal positivo (+) con cinta roja antes de entregar el componente.</li>
+            <li>Enseña la regla mnemotécnica: "La franja blanca es el lado NEGATIVO (como una señal 
+                de 'no pasar')."</li>
+            <li>Usa solo condensadores de baja tensión (≤16V) y pequeño tamaño (<1000µF) en proyectos escolares.</li>
+        </ol>
+        </details>
+
+        <details class="u1">
+        <summary>6. Diseña una actividad de 10 minutos para que niños de 9 años descubran experimentalmente por qué NO se debe conectar un LED directo a una pila sin resistencia.</summary>
+        <p><strong>Actividad: "El Experimento del Humito Mágico (Simulado)"</strong></p>
+        <p><strong>Materiales por pareja:</strong> 1 LED, 1 pila CR2032, 1 resistencia de 330Ω, 
+        hoja con dibujos de circuitos.</p>
+        
+        <p><strong>Protocolo (SEGURO - sin dañar componentes):</strong></p>
+        <ol>
+            <li><strong>Paso 1 (3 min):</strong> "Conecten el circuito CORRECTO: Pila → Resistencia → LED → Pila. 
+                Observen el brillo suave y constante".</li>
+            <li><strong>Paso 2 (3 min):</strong> "Ahora simulen el circuito INCORRECTO: Muestren cómo 
+                conectarían el LED directo a la pila... ¡PERO NO LO HAGAN! En su hoja, dibujen lo que 
+                creen que pasaría".</li>
+            <li><strong>Paso 3 (4 min):</strong> Muestra un VIDEO PREGRABADO de un LED quemándose 
+                (busca "LED burnout slow motion" en YouTube). Explica: "Esto es lo que EVITAMOS 
+                con la resistencia. La resistencia es el guardaespaldas del LED".</li>
+        </ol>
+        
+        <p><strong>Objetivo pedagógico:</strong> Los niños aprenden la regla de seguridad SIN 
+        destruir componentes ni correr riesgos. La curiosidad se satisface con video profesional, 
+        no con experimentación peligrosa.</p>
+        
+        <p><strong>Regla de oro para el aula:</strong> "Nunca destruyas componentes para enseñar. 
+        Usa videos profesionales para mostrar fallos. La seguridad siempre primero".</p>
+        </details>
+
+        <!-- NARRATIVA: TRAILER ACTUALIZADO -->
+        <!-- NARRATIVA: TRAILER -->
+        <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+            <p>¡Ya dominas los cálculos! Sabes por qué el capacitor estabiliza, cómo se reparte el voltaje en serie y por qué la corriente elige el camino más fácil en paralelo.</p>
+            
+            <blockquote>
+                <p><em>Pero... ¿y si te dijera que este circuito que acabas de analizar esconde un superpoder?</em></p>
+            </blockquote>
+            
+            <p>En la próxima lección <strong>lo construirás con tus propias manos</strong> (en físico o en Tinkercad). Verás cómo:</p>
+            <ul>
+                <li>El LED se enciende cuando el pulsador está <em>abierto</em></li>
+                <li>El LED se apaga cuando el pulsador está <em>cerrado</em></li>
+                <li>Este comportamiento aparentemente simple es la base de <strong>toda la lógica digital</strong></li>
+            </ul>
+            <p>Ese pulsador que apaga tu LED cuando lo presionas... no es magia. Es el primer paso de un lenguaje secreto que los electrones usan para <em>pensar</em>. Un lenguaje de solo dos palabras:</p>
+            <ul>
+            <li><strong>0</strong> = Apagado, Falso, No</li>
+            <li><strong>1</strong> = Encendido, Verdadero, Sí</li>
+            </ul>
+            
+            <p style="font-style: italic; margin-top: 15px;">
+                ¿Listo para descubrir el "superpoder" escondido en tu primer circuito?
+            </p>
+        </div>
+
+        <footer>
+            <hr>
+            <p style="text-align: center;">
+                <a href="leccion7.html" class="btn-navegacion">← Anterior</a>
+                <a href="leccion9_laboratorio.html" class="btn-navegacion" style="background-color: #ffc107; color: black;">Ir al Laboratorio 1 →</a>
+            </p>
+        </footer>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 23: El Semisumador - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+
+    <style>
+        /* Corrección de contraste: Texto oscuro sobre fondos claros */
+        .col-suma { 
+            background-color: #e3f2fd; 
+            font-weight: bold; 
+            color: #000; /* Forzar color negro */
+        }
+        .col-carry { 
+            background-color: #fff3e0; 
+            font-weight: bold; 
+            color: #000; /* Forzar color negro */
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 3: Fundamentos de Cómputo - Lección 23</small></p>
+        <h1>➕ Enseñando a sumar al Silicio (I): El Semisumador</h1>
+    </header>
+
+    <section>
+        <p>Si le preguntas a una compuerta cuánto es \(1+1\), no sabe qué decir, porque el "2" no existe en su mundo. Hoy vamos a enseñarle a sumar usando binario.</p>
+
+        <h2>1. Jerarquía de Bits (LSB vs MSB)</h2>
+        <p>Antes de sumar, debes saber que no todos los bits valen lo mismo. En el número decimal <strong>52</strong>, el 5 vale más que el 2. En binario pasa igual:</p>
+        <div class="destacado">
+            <ul>
+                <li><strong>LSB (Least Significant Bit):</strong> El bit de la derecha. Vale menos.</li>
+                <li><strong>MSB (Most Significant Bit):</strong> El bit de la izquierda. Vale más.</li>
+            </ul>
+            <p><em>Regla de Oro:</em> Al conectar circuitos, ¡nunca confundas el LSB con el MSB o tu número saldrá al revés!</p>
+        </div>
+
+        <h2>2. La Suma Binaria y el Problema del "2"</h2>
+        <p>Sumar en binario es igual que en decimal, pero solo llegamos hasta 1.</p>
+        <div class="formula">
+            <p>$$0 + 0 = 0$$</p>
+            <p>$$0 + 1 = 1$$</p>
+            <p>$$1 + 0 = 1$$</p>
+            <p>$$1 + 1 = 10_2 \quad \text{(Cero y llevo 1)}$$</p>
+        </div>
+        <p>¡Fíjate en la última línea! El resultado tiene <strong>dos dígitos</strong>: la Suma (0) y el Acarreo (1).</p>
+
+        <!-- RINCÓN DOCENTE: BINARIO MANUAL -->
+        <div class="dato-extra" style="border-left: 4px solid #ffc107; background-color: #fff9db;">
+            <h3>🍎 Rincón del Docente: Superpoderes Binarios</h3>
+            <p>A los niños les encanta saber que pueden contar más allá de 10 con sus dedos. Enséñales a contar en <strong>Binario</strong>:</p>
+            <ul>
+                <li>Cada dedo es un bit (Dedo arriba = 1, Dedo abajo = 0).</li>
+                <li>Los dedos tienen valor: Pulgar=1, Índice=2, Medio=4, Anular=8, Meñique=16.</li>
+            </ul>
+            <p><strong>El resultado:</strong> Con una sola mano, en lugar de llegar a 5, ¡pueden contar hasta 31! (16+8+4+2+1). Es una forma divertida de introducir el concepto de <strong>Valor Posicional (LSB/MSB)</strong> sin usar pizarrón.</p>
+        </div>
+
+        <h2>3. Diseñando el Circuito</h2>
+        <p>Hagamos la tabla de verdad de esta suma. Necesitamos dos salidas: <strong>Suma</strong> ($S$) y <strong>Acarreo</strong> ($C$).</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Entrada A</th>
+                    <th>Entrada B</th>
+                    <th class="col-suma">Salida S (Suma)</th>
+                    <th class="col-carry">Salida C (Acarreo)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>0</td><td>0</td><td class="col-suma">0</td><td class="col-carry">0</td></tr>
+                <tr><td>0</td><td>1</td><td class="col-suma">1</td><td class="col-carry">0</td></tr>
+                <tr><td>1</td><td>0</td><td class="col-suma">1</td><td class="col-carry">0</td></tr>
+                <tr><td>1</td><td>1</td><td class="col-suma">0</td><td class="col-carry">1</td></tr>
+            </tbody>
+        </table>
+
+        <h3>¡La Lógica al Rescate!</h3>
+        <p>Mira las columnas de colores:</p>
+        <ul>
+            <li>La columna <strong>Suma</strong> es idéntica a una compuerta <strong>XOR</strong> ($0, 1, 1, 0$).</li>
+            <li>La columna <strong>Acarreo</strong> es idéntica a una compuerta <strong>AND</strong> ($0, 0, 0, 1$).</li>
+        </ul>
+
+        <div class="svg-container">
+            <!-- Imagen: Semisumador (img/semisumador.png) -->
+            <img src="img/semisumador.png" alt="Esquema de un Semisumador: Entradas A y B conectadas a una XOR (Suma) y una AND (Acarreo)" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. El Semisumador (Half Adder). Con dos chips, el silicio sabe sumar.</em></small></p>
+        </div>
+
+        <div class="dato-extra">
+            <h3>¿Por qué "Semi"? 🤔</h3>
+            <p>Este circuito es genial, pero es "amnésico". Suma A y B, pero no tiene una entrada para recibir el "1 que llevabas" de una suma anterior. ¡Solo sirve para la primera columna de la suma!</p>
+            <p>Para sumar números grandes, necesitamos conectar varios en cadena. Eso lo haremos en la Lección 25.</p>
+        </div>
+    </section>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="leccion22.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion24.html" class="btn-navegacion">Siguiente: Álgebra Formal →</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 1: ¿Qué es la corriente? - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX Configurado (¡IMPORTANTE!) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 1: Fundamentos Físicos - Lección 1</small></p>
+        <h1>🔌 ¡Pilas! ¿Qué es la corriente eléctrica?</h1>
+    </header>
+
+    <!-- 1. Introducción al circuito básico NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p><strong>Bienvenido al inicio de todo.</strong> Probablemente has usado electricidad toda tu vida, pero hoy dejará de ser magia para convertirse en una herramienta en tus manos. Vamos a entender qué es lo que realmente viaja por los cables.</p>
+    </div>
+
+    <!-- BLOQUE MOTIVACIONAL: ETIMOLOGÍA -->
+    <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin-top: 0;">
+        <h3>🤔 Antes de empezar: ¿Qué es ser Ingeniero?</h3>
+        <p>Mucha gente cree que la palabra <strong>"Ingeniero"</strong> viene de "Motor" (en inglés <em>Engine</em>). ¡Es un error común!</p>
+        <p>En realidad, viene del latín <em>Ingenium</em> (Ingenio). Por definición histórica, <strong>un Ingeniero es "el que tiene ingenio"</strong>.</p>
+        <p>No estás aquí para memorizar fórmulas mecánicamente. Estás aquí para entrenar tu <strong>creatividad</strong> y resolver problemas usando las herramientas que te daremos. La electrónica es el martillo; tu ingenio es la mano que lo mueve.</p>
+    </div>
+
+    <section>
+        <p>Ahora sí, entremos en materia. Imagínense un tubo lleno de balines. Si empujamos un balín nuevo por un lado, ¡zas!, casi al instante, otro balín sale disparado por el otro extremo. ¡Y eso que cada balín apenas se movió un poquito!</p>
+        
+        <div class="svg-container">
+            <img src="img/analogia_tubo.png" alt="Analogía del flujo de energía" style="max-width:70%; height:auto;">
+            <p><small><em>Fig 1. Así se "mueven" los electrones, ¡pura energía en cadena!</em></small></p>
+        </div>
+
+        <!-- ... después de la imagen del tubo ... -->
+
+        <p>La corriente eléctrica es algo parecido, pero en vez de balines, hablamos de <strong>electrones</strong> viajando por el cable.</p>
+
+        <!-- Insertar esta sección después de la analogía del tubo de balines -->
+
+    <!--  3. ¿Qué es la carga eléctrica? (La esencia de todo)  -->
+    <section>
+        <h3>💎 ¿Qué es la "Carga Eléctrica"? (La esencia de todo)</h3>
+        
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #4dabf7;">
+            <p><strong>Definición simple:</strong> La carga eléctrica es una <strong>propiedad fundamental</strong> de la materia, como la masa. Es lo que hace que los electrones y protones se atraigan o repelan.</p>
+        </div>
+
+        <p>Imagina que cada partícula tiene una "etiqueta" invisible que puede ser de dos tipos:</p>
+        
+        <div class="analogia-cargas">
+            <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+                <div style="text-align: center; padding: 15px; background-color: #ffebee; border-radius: 10px; width: 45%;">
+                    <div style="font-size: 2em;">➖</div>
+                    <h4>Carga NEGATIVA</h4>
+                    <p><strong>Electrones:</strong> Pequeños, livianos, pueden moverse libremente en los metales.</p>
+                </div>
+                <div style="text-align: center; padding: 15px; background-color: #e8f5e9; border-radius: 10px; width: 45%;">
+                    <div style="font-size: 2em;">➕</div>
+                    <h4>Carga POSITIVA</h4>
+                    <p><strong>Protones:</strong> Grandes, pesados, están fijos en el núcleo del átomo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FIN DEL BLOQUE -->
+        <!-- 4. La regla de oro: Cargas iguales se repelen, opuestas se atraen -->
+        <h4>🔬 La regla de oro:</h4>
+        <ul>
+            <li><strong>Cargas iguales se repelen</strong> (➖➖ o ➕➕ = ✖️)</li>
+            <li><strong>Cargas diferentes se atraen</strong> (➖➕ = ❤️)</li>
+        </ul>
+
+        <!-- 5. La Ley de Coulomb (en palabras simples) -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #4caf50;">
+            <h4>📏 La Ley de Coulomb (en palabras simples)</h4>
+            <p>Esa fuerza de atracción/repulsión no es magia, se llama Fuerza de Coulomb y sigue dos reglas simples:</p>
+            <ul>
+                <li><strong>Más carga = Más fuerza:</strong> Si duplicas la cantidad de electrones, la fuerza se duplica.</li>
+                <li><strong>Más distancia = Menos fuerza (¡y mucho menos!):</strong> Si duplicas la distancia, la fuerza se reduce a una cuarta parte.</li>
+            </ul>
+            <p>¡Por eso en los circuitos los cables deben estar aislados! Si los electrones se acercan demasiado, la fuerza es tan grande que pueden "saltar" y causar un cortocircuito.</p>
+        </div>
+        <!-- FIN DEL BLOQUE -->
+
+        <p>Esta atracción/repulsión es el <strong>"motor invisible"</strong> que impulsa a los electrones. Cuando la batería acumula muchos electrones (cargas negativas) en su polo negativo y deja "huecos" (cargas positivas) en el polo positivo, se crea un desequilibrio de cargas.</p>
+        <div class="destacado">
+        <p><strong>⚡ Este desequilibrio genera una "presión eléctrica" que empuja a los electrones a moverse. ¡Esta presión es lo que llamamos VOLTAGE (voltaje)!</strong></p>
+        <p>Y es esta presión la que crea el <strong>campo eléctrico</strong> —la "locomotora invisible" que transmite el empuje a todos los electrones del circuito casi al instante.</p>
+        </div>
+
+        <h4>📏 La unidad: el Culombio (C)</h4>
+        <p>Así como medimos la masa en kilogramos, medimos la carga en <strong>Culombios (C)</strong>. Pero ojo: un Culombio es una cantidad ENORME de carga.</p>
+        
+        <div class="destacado" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <p><strong>Dato sorprendente:</strong> Un solo electrón tiene apenas <strong>0.00000000000000000016 C</strong> (1.6 × 10⁻¹⁹ C).</p>
+        </div>
+
+        <div class="svg-container">
+            <img src="img/analogia_carga.png" alt="Analogía de cargas eléctricas" style="max-width:55%; height:auto;">
+            <p><small><em>Fig. 2. Las cargas opuestas se atraen como imanes, creando el "flujo" eléctrico.</em></small></p></div>
+
+        <h4>🔄 Conectando con lo que ya sabes:</h4>
+        
+            <div class="svg-container">
+                <img src="img/circuito_bateria_bombillo.png" alt="Batería, Cables y Bombillo" style="max-width:20%; height:auto;">
+                <p><small><em>Fig 3. Electrones salen del polo negativo de la batería, entregan luz en el bombillo y van al polo positivo para cerrar el circuito.</em></small></p>
+            </div>
+        <p>En tu circuito con la batería:</p>
+        <ol>
+            <li>La batería acumula electrones (carga negativa) en el polo negativo (-)</li>
+            <li>En el polo positivo (+) hay "huecos" que quieren electrones</li>
+            <li>Al conectar el cable, los electrones (cargas negativas) son empujados hacia los huecos (cargas positivas)</li>
+            <li>Este movimiento de CARGA es lo que llamamos CORRIENTE eléctrica</li>
+        </ol>
+    </section>
+
+    <!-- 6. 💡 DESAFÍO MIT: Descubre lo Invisible -->
+    <div class="desafio-mit" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border: 2px solid #2196f3; border-radius: 12px; padding: 25px; margin: 30px 0; text-align: center;">
+    <h3 style="color: #1565c0; margin-top: 0; display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <span style="background: #2196f3; color: white; width: 36px; height: 36px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold;">6</span>
+        🚀 DESAFÍO MIT: Descubre lo Invisible
+    </h3>
+    
+    <p style="font-size: 1.1em; margin: 15px 0; color: #0d47a1;">
+        <strong>Antes de seguir leyendo, intenta esto (solo 3 minutos):</strong>
+    </p>
+        <div class="svg-container">
+            <img src="img\cadena-cuentas.png" alt="Diagrama del campo eléctrico creado por una batería" style="max-width: 15%; height: auto; border-radius: 8px; margin: 20px 0;">            
+        </div>
+    
+    <div style="display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 20px auto; text-align: left;">
+        <div style="display: flex; align-items: flex-start; gap: 12px;">
+        <span style="background: #2196f3; color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9em; flex-shrink: 0;">1</span>
+        
+        <span>Toma un tubo de PVC y una cadena de cuentas (como las de pulseras)</span>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 12px;">
+        <span style="background: #2196f3; color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9em; flex-shrink: 0;">2</span>
+        <span>Introduce la cadena en el tubo (no importa que sea opaco)</span>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 12px;">
+        <span style="background: #2196f3; color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9em; flex-shrink: 0;">3</span>
+        <span>Tira suavemente de un extremo y <strong>cuenta cuántas cuentas salen en 5 segundos</strong></span>
+        </div>
+    </div>
+    
+    <div style="background: white; border-left: 4px solid #2196f3; padding: 15px; margin: 20px auto; max-width: 600px; border-radius: 0 8px 8px 0;">
+        <p style="margin: 0; font-style: italic; color: #1565c0;">
+        💡 <strong>Pregunta para ti:</strong> ¿Qué pasaría si tiraras más fuerte? ¿Y más suave? 
+        <em>La analogía del agua que sigue explicará exactamente lo que acabas de descubrir.</em>
+        </p>
+    </div>
+    
+    <p style="font-size: 0.95em; color: #546e7a; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        <em>Este método de "aprender haciendo primero" es usado en el MIT. 
+        Descubrir antes de leer crea conexiones más fuertes y hace que la teoría cobre sentido inmediato.</em>
+    </p>
+    </div>
+
+    <!-- 7. ⚡ El Campo Eléctrico: Tu Locomotora Invisible -->
+    <h2 id="campo-electrico">⚡ El Campo Eléctrico: Tu Locomotora Invisible</h2>
+
+    <p>Imagina que has construido un tren de vagones infinitos, donde cada vagón representa un electrón. Pero ¡no hay locomotora! ¿Cómo se mueve el tren?</p>
+
+    <div class="svg-container">
+        <img src="img\campo-electrico.png" alt="Diagrama del campo eléctrico creado por una batería" style="max-width: 70%; height: auto; border-radius: 8px; margin: 20px 0;">
+        <p><small><em>Fig 4. El campo eléctrico: La 'señal de empuje' que viaja a 300,000 km/s, ¡haciendo que los electrones se muevan al instante!</em></small></p>    
+    </div>
+
+    <div class="destacado">
+        <p><strong>La respuesta es el CAMPO ELÉCTRICO.</strong></p>
+        <p>La batería no solo almacena electrones, sino que crea un campo eléctrico que se propaga por TODO el circuito casi a la velocidad de la luz.</p>
+        <p>Este campo es como un "empuje invisible" que:</p>
+        <ul>
+            <li>Se propaga <strong>instantáneamente</strong> por todo el cable</li>
+            <li>Hace que <strong>todos los electrones</strong> se muevan al mismo tiempo</li>
+            <li>No es una "onda" que viaja, sino un <strong>estado del espacio</strong> que existe en cada punto del circuito</li>
+        </ul>
+    </div>
+
+    <h3>🔍 ¿Por qué es tan importante entender esto?</h3>
+
+    <div class="dato-extra">
+        <p><strong>1. Explica la "magia" del interruptor:</strong></p>
+        <p>Al cerrar el interruptor, el campo eléctrico se establece <strong>inmediatamente</strong> en todo el circuito. No hay que esperar a que los electrones de la batería "corran" hasta el LED. ¡El LED recibe su "empuje" al instante!</p>
+        
+        <p><strong>2. Explica por qué el LED se enciende tan rápido:</strong></p>
+        <p>La velocidad del campo eléctrico (~300,000 km/s) es <strong>1.000 millones de veces más rápida</strong> que la velocidad de deriva de los electrones (~0.1 mm/s).</p>
+        
+        <p><strong>3. Explica por qué el circuito debe ser cerrado:</strong></p>
+        <p>El campo eléctrico solo se establece cuando hay un camino completo. Si el circuito está abierto, el campo no puede formarse.</p>
+    </div>
+
+    <div class="pregunta-curiosidad">
+        <p><strong>💡 La analogía del resorte:</strong></p>
+        <p>Imagina un resorte largo conectado a una pared. Si empujas un extremo del resorte, el movimiento se transmite inmediatamente al otro extremo, aunque cada parte del resorte apenas se mueve un poco. El resorte es el "campo eléctrico" que transmite la fuerza.</p>
+        <p>En un circuito eléctrico, la batería "estira" el campo eléctrico, y el LED "siente" esa tensión al instante, ¡aunque los electrones individuales aún estén lejos!</p>
+    </div>
+
+    <!-- 8. 🌊 La Realidad Detrás de la Corriente: La Tubería Llena de Agua -->
+    <h2 id="tuberia-agua">🌊 La Realidad Detrás de la Corriente: La Tubería Llena de Agua</h2>
+
+    <p>Imagina una manguera larguísima que ya está completamente llena de agua de punta a punta. Tú estás en un extremo y un amigo en el otro, a 1 km de distancia.</p>
+
+    <div class="svg-container">
+    <img src="img\tuberia-agua.png" alt="Tubería llena de agua: una molécula se empuja y otra sale inmediatamente" style="max-width: 50%; height: auto; border-radius: 8px; margin: 20px 0;">
+        <p><small><em>Fig 5. ¡La manguera llena de agua! Al abrir el grifo, el agua sale inmediatamente, aunque cada molécula apenas se mueva.</em></small></p>
+    </div>
+
+    <div class="destacado">
+    <p><strong>La situación:</strong></p>
+    <p>• El agua dentro de la manguera está quieta (no fluye)</p>
+    <p>• La manguera está llena, molécula tras molécula, desde tu grifo hasta el final</p>
+    
+    <p><strong>Ahora abres el grifo:</strong></p>
+    <p>• ¿Cuánto tarda el agua en salir por el otro extremo? Casi inmediatamente</p>
+    <p>• ¿Por qué? Porque cuando empujas una molécula de agua en tu extremo, empuja a la siguiente, esa empuja a la siguiente, y así sucesivamente. La "señal de empuje" viaja por toda la manguera a la velocidad del sonido en el agua (muy rápido).</p>
+    <p>• Pero la molécula individual que tú empujaste apenas se movió unos centímetros.</p>
+    </div>
+
+    <h3>⚡ Aplicado a la Electricidad</h3>
+
+    <div class="svg-container">
+    <img src="img\repulsion-atraccion.png" alt="Diagrama de repulsión (protón-protón) y atracción (electrón-protón)" style="max-width: 45%; height: auto; border-radius: 8px; margin: 20px 0;">
+        <p><small><em>Fig 6.  ¡La regla de oro de la electricidad! Cargas iguales se repelen, opuestas se atraen. ¡Sin esto, no habría corriente!</em></small></p>
+    </div>
+
+    <table class="tabla-centrada">
+        <!-- contenido de la tabla -->
+        <tr><th>Elemento</th><th>Equivalente en la analogía</th></tr>
+        <tr><td>Electrones en el cable</td><td>Moléculas de agua en la manguera</td></tr>
+        <tr><td>Campo eléctrico</td><td>La "señal de empuje" que viaja</td></tr>
+        <tr><td>Batería</td><td>La presión que empuja</td></tr>
+        <tr><td>Interruptor</td><td>La válvula que abre/cierra el paso</td></tr>
+    </table>
+
+    <p><strong>Lo que sucede al cerrar el interruptor:</strong></p>
+    <ol>
+    <li>Los electrones YA están en el cable (como el agua en la manguera llena)</li>
+    <li>Al cerrar el interruptor, la batería crea un campo eléctrico que se propaga por TODO el cable casi a la velocidad de la luz (≈300,000 km/s)</li>
+    <li>Este campo hace que todos los electrones del circuito se muevan simultáneamente, casi al mismo tiempo</li>
+    <li>Los electrones que están justo al lado del LED son los que entran y lo hacen brillar</li>
+    <li>Los electrones de la batería ni siquiera han llegado al LED todavía, ¡pero el LED ya recibió "su dosis" de electrones!</li>
+    </ol>
+
+    <div class="dato-extra">
+    <p><strong>📊 Los Números (¡Impresionantes!)</strong></p>
+    
+    <table>
+        <tr><th>Concepto</th><th>Velocidad</th></tr>
+        <tr><td>Velocidad de deriva de un electrón (cuánto avanza individualmente)</td><td>~0.1 mm/segundo (¡muy lento!)</td></tr>
+        <tr><td>Velocidad de propagación del campo eléctrico</td><td>~200,000-300,000 km/s (casi luz)</td></tr>
+    </table>
+    
+    <p><strong>Ejemplo práctico:</strong> En un cable de 3 metros:</p>
+    <ul>
+        <li>Un electrón individual tarda ~8 horas en recorrerlo</li>
+        <li>PERO el LED se enciende en 0.00000001 segundos (10 nanosegundos)</li>
+    </ul>
+    </div>
+
+    <div class="pregunta-curiosidad">
+    <p><strong>🎯 Entonces, ¿Qué es REALMENTE la Corriente Eléctrica?</strong></p>
+    <p>La corriente NO es "electrones corriendo rápido como carros".</p>
+    <p>La corriente es el FLUJO de carga — es decir, la transferencia de energía a través del movimiento coordinado de muchísimos electrones, donde cada uno apenas se mueve, pero el efecto colectivo es inmediato.</p>
+    <p>Es como un tren de carga infinito:</p>
+    <ul>
+        <li>Cada vagón apenas se mueve un poco</li>
+        <li>Pero cuando la locomotora empuja al primero, el último vagón siente el empuje casi al instante</li>
+        <li>La "información" del empuje viaja mucho más rápido que los vagones individuales</li>
+    </ul>
+    </div>
+
+    <!--  9. ¿Qué es la "I"? (Intensidad)  -->
+    <h3>¿Qué es la "I"? (Intensidad)</h3>
+        <p>Imagina que te paras en la orilla de una carretera y cuentas cuántos carros pasan en un minuto. Si pasan poquitos, el tráfico es leve. Si pasan miles, ¡es un trancón intenso!</p>
+        
+        <p>En electrónica pasa lo mismo. Necesitamos medir <strong>qué tan intenso</strong> es el flujo de electrones. Por eso, a la Corriente la representamos con la letra <strong>I</strong> (de <strong>Intensidad</strong>).</p>
+        
+        <div class="formula">
+            <p>$$I = \frac{Q}{t}$$</p>
+            <p><small>Intensidad (I) = Cantidad de Carga (Q) / Tiempo (t)</small></p>
+        </div>
+
+        <h3>¿Cómo se mide? (Amperios y Miliamperios)</h3>
+        <p>La unidad de medida es el <strong>Amperio (A)</strong>. Pero un Amperio es una cantidad de electrones GIGANTE (como un río desbordado). Para circuitos pequeños como los que haremos, usamos una medida más pequeña: el <strong>miliamperio (mA)</strong>.</p>
+        
+        <div class="destacado">
+            <p><strong>Dato clave:</strong> 1 Amperio = 1,000 miliamperios.</p>
+            <p>Un LED típico solo necesita unos <strong>20 mA</strong> para brillar. Si le metes 1 Amperio entero, ¡lo explotas!</p>
+        </div>
+
+        <p>La fórmula<strong><em> I = Q/t</em></strong> es simplemente un contador. Mide cuánta "cantidad de electrones" (carga <em>Q</em>) cruza una línea de meta imaginaria en tu cable en un solo segundo (<em>t</em>).</p>
+        <p>Aunque en los LEDs usamos "miliamperios", no te dejes engañar: un solo Amperio es un tsunami de partículas. ¡Corresponde al paso de aproximadamente seis trillones de electrones \(6.24 \times 10^{18}\) por ese punto cada segundo!</p>
+
+        <!-- 10. ¿Hacia dónde viajan? (Realidad vs. Dibujo) -->
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
+            <h3>🔄 ¿Hacia dónde viajan? (Realidad vs. Dibujo)</h3>
+            <p>Aquí hay una curiosidad histórica importante:</p>
+            <p>Hace mucho tiempo, Benjamin Franklin creyó que la electricidad fluía del <strong>Positivo (+)</strong> al <strong>Negativo (-)</strong>. Por eso, en los <strong>planos y diagramas</strong>, siempre dibujamos una flecha saliendo del (+).</p>
+            <p>Siglos después, descubrimos que los electrones (que son físicos) viajan al revés: del (-) al (+). <strong>Pero en ingeniería, seguimos dibujando la flecha en los planos según la tradición antigua.</strong></p>
+            <p><em>(Ojo: Esa flecha es solo un dibujo en el papel para entendernos, ¡no es una pieza que tengas que comprar en la tienda!)</em></p>
+        </div>
+    </section>
+
+    <div class="dato-extra">
+        <p><strong>🔬 Faraday y lo Invisible</strong></p>
+        <p>Michael Faraday (1791-1867) nunca vio un campo eléctrico... ¡y nadie lo ha visto hasta hoy! Pero lo descubrió indirectamente, exactamente como tú con tu tubo de PVC opaco:</p>
+        <ul>
+            <li>Él no veía el campo → tú no ves las cuentas moverse dentro del tubo</li>
+            <li>Él observaba limaduras de hierro alinearse → tú cuentas las cuentas que salen</li>
+            <li>Él infería "líneas de fuerza" → tú infieres el movimiento interno </li>
+        </ul>
+        <p><em>"La ciencia no siempre necesita ojos: a veces basta con observar, contar y pensar."</em></p>
+    </div>
+    
+    <!-- 11. 🔋 ¿Por qué brilla el LED? (La Transformación) -->
+    <section>
+        <h2>🔋 ¿Por qué brilla el LED? (La Transformación)</h2>
+        <h3>Primero: ¿Qué es una Pila?</h3>
+        <p>Una <strong>pila</strong> (como la moneda CR2032 de tu kit) es básicamente una "lata de conservas" llena de energía química. Por dentro, tiene dos materiales químicos diferentes que están desesperados por reaccionar entre sí, pero están separados por una barrera interna.</p>
+        <p>Esta separación crea tensión: en el polo <strong>Negativo (-)</strong> se amontonan muchos electrones apretados, y en el polo <strong>Positivo (+)</strong> hay espacios vacíos esperándolos.</p>
+
+        <h3>El momento de la conexión</h3>
+        <p>Aquí ocurre la verdadera magia. Cuando conectas los cables, abres una puerta para que esos químicos por fin interactúen a distancia. La pila libera su energía química para <strong>empujar</strong> a los electrones desde el negativo hacia el positivo.</p>
+
+        <div class="svg-container">
+            <img src="img/circuito_basico_led.png" alt="Circuito básico: Pila, Cables y LED" style="max-width:50%; height:auto;">
+            <p><small><em>Fig 7. El viaje de la energía: Salen de la pila, entregan luz en el LED y continúan hasta el otro polo.</em></small></p>
+        </div>
+
+        <div class="destacado" style="border-left-color: #d9534f; background-color: #fbecec;">
+            <h3>👁️ ¡Ojo al detalle!</h3>
+            <p>Para que la electricidad fluya, debe haber un <strong>contacto firme</strong> con el metal. Si el cable solo está "cerca" pero no toca la pila, es un <strong>Circuito Abierto</strong> (como un puente levantado).</p>
+        </div>
+
+        <!-- 12. 💧 Primeros Principios: La Física del Agua (ahora con sentido) -->
+        <h3>💧 Primeros Principios: La Física del Agua</h3>
+        <p>Si la electricidad fuera agua, tu circuito funcionaría así:</p>
+        
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li style="margin-bottom: 10px;">
+                🏰 <strong>La Pila (Tanque Elevado):</strong> Imagina un tanque de agua en el techo. El agua tiene energía porque quiere bajar por gravedad. Esa altura o presión es el <strong>Voltaje</strong>.
+            </li>
+            <li style="margin-bottom: 10px;">
+                🚿 <strong>Los Cables (Tubería):</strong> Son los tubos por donde viaja el agua sin perderse.
+            </li>
+            <li style="margin-bottom: 10px;">
+                🌊 <strong>La Corriente (Flujo):</strong> Es la cantidad de agua que pasa por el tubo.
+            </li>
+            <li style="margin-bottom: 10px;">
+                ⚙️ <strong>El LED (El Molino):</strong> Imagina una pequeña rueda de molino en la tubería.
+                <br>Cuando el agua (corriente) pasa con fuerza (voltaje), empuja las aspas y hace girar el molino.
+                <br><strong>En el LED:</strong> Al pasar por él, los electrones hacen un esfuerzo y liberan esa energía sobrante... <strong>¡en forma de luz!</strong>
+            </li>
+        </ul>
+
+        <p>Si la pila se agota (el tanque se vacía), ya no hay presión (Voltaje). Sin presión, el agua no se mueve (Corriente cero) y el molino no gira (LED apagado).</p>
+        <p><em>¿Y si quisiéramos controlar cuánta agua llega al molino? ¿Qué pasaría si el tubo fuera más estrecho en algún punto? ¡Descubriremos la respuesta en la próxima lección!</em></p>
+    </section>
+
+    <!-- 13. 🎧 Podcast y actividades === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            Dos docentes analizan los conceptos de carga eléctrica, corriente y la analogía del agua para explicar la electricidad. Comparten estrategias para enseñar estos conceptos a estudiantes de secundaria.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <source src="audio/leccion1.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 14:45 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- === MI CUADERNO: Bitácora de Innovación === -->
+    <section class="cuaderno-section">
+        <div class="cuaderno-header">
+            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+            </svg>
+            <h3>📓 Mi Cuaderno: Bitácora de Innovación</h3>
+        </div>
+        
+        <p class="cuaderno-contexto">
+            Tu cuaderno es tu laboratorio pedagógico. Aquí transformas la información en conocimiento útil para tu futura práctica docente.
+        </p>
+        
+        <div class="cuaderno-actividades">
+            <h4>✏️ Actividades para esta lección:</h4>
+            
+            <div class="actividad">
+                <strong>1. Mi conexión personal</strong>
+                <p>Dibuja la analogía de la manguera y el pisón. Ahora piensa: ¿dónde has visto esta idea en tu vida cotidiana? (Ej: la presión del agua en la ducha, el tráfico en una calle estrecha).</p>
+            </div>
+            
+            <div class="actividad">
+                <strong>2. Esquema visual</strong>
+                <p>Crea un mapa conceptual con estos elementos: Electrón, Protón, Carga, Fuerza de Coulomb, Voltaje, Corriente (I), Pila, LED. Usa flechas y colores para mostrar las relaciones.</p>
+            </div>
+            
+            <div class="actividad">
+                <strong>3. Mi reflexión docente</strong>
+                <p>Responde: Si tuvieras que explicarle a niños de grado 4° qué es la corriente eléctrica, ¿qué analogía usarías además de la del agua? Dibuja tu idea.</p>
+            </div>
+            
+            <div class="actividad">
+                <strong>4. Mis preguntas</strong>
+                <p>Escribe al menos una duda que te quedó de esta lección. Ej: "¿Por qué los electrones no se 'acaban' si siempre están fluyendo?"</p>
+            </div>
+        </div>
+        
+        <div class="cuaderno-tip">
+            <strong>💡 Recuerda:</strong> No copies textualmente. Resume con tus palabras, dibuja, conecta con tu realidad. Tu cuaderno es para ti, no para el profesor.
+        </div>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>Ya entendemos que los electrones fluyen y tienen energía. Pero hay un problema: si conectas un LED directo a esa energía, probablemente <strong>explotará</strong>. Necesitamos una forma de controlar esa fuerza bruta. En la próxima lección, conocerás la ley fundamental que domina la electricidad.</p>
+    </div>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d;">← Volver al Inicio</a>
+            <a href="leccion2.html" class="btn-navegacion">Siguiente: Ley de Ohm →</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

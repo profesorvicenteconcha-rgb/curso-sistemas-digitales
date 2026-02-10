@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 11: El Multímetro - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 1: Fundamentos Físicos - Lección 11 (Final)</small></p>
+        <h1>📟 El Multímetro: Tu Súper Ojo Electrónico</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>En la lección anterior aprendiste a limpiar el ruido con resistencias. Ahora tus señales son estables. Pero... <strong>¿Cómo estás seguro?</strong> Los electrones son invisibles. ¿Cómo sabes si tu pila tiene 3V o si está muerta? ¿Cómo sabes si esa resistencia es de 10k o de 1k si se le borraron los colores? Hoy te daremos un superpoder: la visión eléctrica usando el <strong>Multímetro</strong>.</p>
+    </div>
+
+    <section>
+        <h2>1. Conociendo a tu nuevo mejor amigo</h2>
+        <p>El Multímetro (o Tester) combina tres herramientas en una: Voltímetro, Ohmiómetro y Probador de Continuidad.</p>
+
+        <div class="svg-container">
+            <img src="img/multimetro_partes.png" alt="Diagrama de un multímetro indicando pantalla, perilla y puertos" style="max-width:300px; height:auto;">
+            <p><small><em>Fig 1. La Perilla selecciona qué mides. Los Puertos conectan las puntas.</em></small></p>
+        </div>
+
+        <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
+            <h3>🔌 Los Puertos (¡No explotes nada!)</h3>
+            <ul>
+                <li><strong>COM (Negro):</strong> El puerto Común. Aquí SIEMPRE va la punta negra.</li>
+                <li><strong>VΩmA (Rojo):</strong> Para medir Voltaje, Resistencia y Corriente pequeña. <strong>Aquí va la roja el 99% del tiempo.</strong></li>
+                <li><strong>10A (Rojo):</strong> ¡PELIGRO! ⛔ Solo para corrientes gigantes. Si pones la punta aquí y mides una pila en paralelo... ¡Haces un corto directo! Evítalo por ahora.</li>
+            </ul>
+        </div>
+
+        <h2>2. Modo 1: Continuidad (El Pito Mágico) 🔊</h2>
+        <p>Pon la perilla en el símbolo de onda/sonido. Toca las puntas entre sí. ¿Suena un <em>piiiiii</em>? ¡Bien!</p>
+        <p><strong>Uso:</strong> Toca los dos extremos de un cable. Si suena, el cable está bueno. Si no suena, está roto por dentro.</p>
+
+        <h2>3. Modo 2: Midiendo Voltaje DC (V⎓)</h2>
+        <p>Pon la perilla en <strong>20V DC</strong>. Toca rojo con positivo y negro con negativo.</p>
+        <div class="svg-container">
+            <img src="img/midiendo_voltaje.png" alt="Multímetro midiendo una batería de 9V en paralelo" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 2. Medición en PARALELO. El circuito puede estar encendido.</em></small></p>
+        </div>
+
+        <h2>4. Modo 3: Midiendo Resistencia (Ω)</h2>
+        <p>Pon la perilla en <strong>20k</strong> (o el rango de tu resistencia). Toca cada pata con una punta.</p>
+        <div class="svg-container">
+            <img src="img/midiendo_resistencia.png" alt="Multímetro midiendo una resistencia suelta" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 3. Medición SIN ENERGÍA. La resistencia debe estar suelta.</em></small></p>
+        </div>
+        <div class="destacado" style="background-color: #ffebee; border-left-color: #f44336;">
+            <strong>¡REGLA DE ORO!</strong> NUNCA midas resistencia con el circuito encendido.
+        </div>
+
+        <!-- NUEVA SECCIÓN: TALLER PRÁCTICO DE DIODOS -->
+        <h2>5. Taller Práctico: Midiendo tu primer LED ($\rightarrow|$)</h2>
+        <p>Vamos a usar el multímetro para averiguar los secretos de un LED. <strong>Importante:</strong> Haz esto con el LED suelto, desconectado de cualquier batería.</p>
+
+        <div class="destacado" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+            <h3>👣 Paso a Paso: Modo Diodo</h3>
+            
+            <p><strong>Paso 1: La Perilla (La Escala)</strong><br>
+            Gira la perilla hasta encontrar el símbolo del Diodo: una flecha pequeña chocando contra una pared (<strong>$\rightarrow|$</strong>).
+            <br><em>Nota:</em> En muchos multímetros, este símbolo comparte lugar con el de "Continuidad" (el de la onda de sonido 🔊). Si es así, ponlo ahí; a veces hay que apretar un botón "Select" o "Func" para cambiar entre pito y diodo.</p>
+
+            <p><strong>Paso 2: Las Manos (Punta Roja vs. Negra)</strong><br>
+            Toma un LED suelto en tu mano:</p>
+            <ul>
+                <li>🔴 <strong>Punta ROJA:</strong> Toca la pata <strong>Larga</strong> (Ánodo).</li>
+                <li>⚫ <strong>Punta NEGRA:</strong> Toca la pata <strong>Corta</strong> (Cátodo).</li>
+            </ul>
+
+            <p><strong>Paso 3: ¿Qué pasa en la pantalla?</strong></p>
+            <ul>
+                <li><strong>Si lo hiciste bien:</strong> El LED se encenderá muy suavemente (¡míralo de cerca!) y en la pantalla aparecerá un número, por ejemplo <code>1.850</code> o <code>1850</code>.
+                    <br><small>👉 <em>Significado:</em> Ese es el voltaje real ($V_f$) que consume tu LED. ¡Úsalo en tus fórmulas!</small>
+                </li>
+                <li><strong>Si te sale "1" u "OL":</strong> Probablemente conectaste las puntas al revés (Roja en pata corta). Invierte las puntas y prueba de nuevo.</li>
+                <li><strong>Si sale "OL" en AMBOS sentidos:</strong> Malas noticias. El LED está quemado por dentro (abierto). Tíralo a la basura.</li>
+            </ul>
+        </div>
+
+        <h2>6. La Medición Avanzada: Corriente (Amperios)</h2>
+        <p>Esta medición es diferente. El Amperímetro tiene resistencia casi CERO (es un cable pelado).</p>
+        <div class="svg-container">
+            <img src="img/medicion_serie_paralelo.png" alt="Esquema comparativo: Voltímetro en paralelo vs Amperímetro en serie" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 4. Voltaje (Izquierda) es Paralelo. Corriente (Derecha) es Serie.</em></small></p>
+        </div>
+        <p><strong>Cómo se hace:</strong> Debes abrir el circuito e insertar el multímetro en el camino (SERIE), para que los electrones pasen <em>a través</em> de él.</p>
+
+        <h2>7. Secretos de Oficio (Lo que nadie te dice) 🤫</h2>
+        <h3>A. ¿Qué significa "OL" o "1 ."?</h3>
+        <p>Significa <strong>"Over Limit"</strong> (Fuera de Rango). La escala es muy pequeña para lo que mides. ¡Súbela!</p>
+        
+        <h3>B. El Truco de la "Tercera Mano"</h3>
+        <p>Usa tus cables <strong>Caimán-Pin</strong> para sujetar las puntas del multímetro a la protoboard. ¡Así tienes las manos libres!</p>
+
+        <h3>C. El Fusible</h3>
+        <p>Si mides corriente mal y suena un "¡Pof!", no murió tu multímetro; murió su fusible interno. Se cambia barato.</p>
+
+        <!-- SECCIÓN INSPIRADA EN EL VIDEO (INTEGRADA) -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin-top: 30px;">
+            <h3>🕵️‍♂️ Misión de Campo: 3 Experimentos Reales</h3>
+            
+            <h4>1. El Misterio de la Protoboard Partida</h4>
+            <p>Usa <strong>Continuidad</strong>. Toca el principio y el final de la línea roja de tu protoboard. ¿Suena? Si no, tu riel está partido a la mitad. ¡Pon un puente!</p>
+
+            <h4>2. La Verdad de la Resistencia</h4>
+            <p>Toma tu resistencia de 330Ω. Mídela en 2000Ω. ¿Te dio 330 exactos? Probablemente 325 o 334. ¡Es normal! (Tolerancia).</p>
+
+            <h4>3. ¿Quién se come el voltaje? (Kirchhoff)</h4>
+            <p>Arma el circuito (Pila + Resistencia + LED). Con el circuito <strong>ENCENDIDO</strong> y en <strong>20V DC</strong>:</p>
+            <ol>
+                <li>Mide las patas del LED. Anota (ej: 2.1V).</li>
+                <li>Mide las patas de la Resistencia. Anota (ej: 2.9V).</li>
+                <li>Súmalos: \(2.1 + 2.9 = 5V\). ¡La suma es igual a la fuente! La energía se reparte.</li>
+            </ol>
+        </div>
+
+        <!-- LABORATORIO STEAM INTEGRADO -->
+        <div class="destacado" style="background-color: #fcf4e4; border-left-color: #ffb300; margin-top: 30px;">
+            <h3>🧪 Desafío STEAM: ¡Fabrica Energía con Fruta!</h3>
+            
+            <p>Ahora que eres un experto midiendo, vamos a unir <strong>Ciencia e Historia</strong>. Usaremos el ácido de un limón como electrolito para mover electrones entre dos metales.</p>
+
+            <h4>1. Materiales</h4>
+            <ul>
+                <li>1 Limón jugoso.</li>
+                <li><strong>Positivo (+):</strong> Moneda de cobre.</li>
+                <li><strong>Negativo (-):</strong> Clavo galvanizado (Zinc).</li>
+            </ul>
+
+            <h4>2. La Medición (Ciencia y Matemáticas)</h4>
+            <ol>
+                <li>Clava los metales en el limón sin que se toquen.</li>
+                <li>Mide en <strong>20V DC</strong>: Deberías ver aprox. <strong>0.9 Voltios</strong>.</li>
+                <li>Mide en <strong>2000µA</strong>: Verás una corriente diminuta.</li>
+            </ol>
+            
+            <p><strong>Reto de Ingeniería:</strong> Para encender un LED (que necesita 3V), ¿cómo conectarías 4 limones? ¿Serie o Paralelo? <em>(Solución: Serie, para sumar voltaje).</em></p>
+
+            <!-- EL TOQUE "ARTS/HUMANITIES" (LA "A" DE STEAM) -->
+            <div style="margin-top: 20px; padding-top: 15px; border-top: 2px dashed #eec55d;">
+                <h4 style="margin-top: 0; color: #b7892b;">🏺 Conexión Arqueológica: La Batería de Bagdad</h4>
+                <p>En 1936, se hallaron cerca de Bagdad vasijas de arcilla de hace <strong>2.000 años</strong>. Tenían un tubo de cobre y una varilla de hierro adentro. Muchos historiadores creen que, usando jugo de uva o vinagre, fueron las primeras baterías de la humanidad, usadas quizás para galvanizar joyas (Arte).</p>
+                <p>Al hacer esto en tu cocina, ¡estás recreando una tecnología ancestral!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NARRATIVA: CIERRE DE UNIDAD -->
+    <div class="avance-leccion">
+        <h3>🎓 ¡Graduación de la Unidad 1!</h3>
+        <p>Tienes el control físico. Entiendes la energía, sabes conectar componentes y usar las herramientas para ver lo invisible. <strong>El mundo físico está dominado.</strong></p>
+        <p>Pero... un bombillo que prende y apaga no es "inteligente". ¿Cómo hacemos que un circuito tome decisiones? En la siguiente unidad, entraremos a la <strong>Matrix</strong>: El mundo de la Lógica Digital.</p>
+    </div>
+
+    <footer>
+        <hr>
+        <!-- Navegación de Fin de Unidad -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <a href="leccion10.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion12.html" class="btn-navegacion" style="background-color: var(--u2-color); transform: scale(1.1);">¡Iniciar Unidad 2! 🚀</a>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em;">🏠 Volver al Índice Principal</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

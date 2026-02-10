@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 17: Chips TTL 74xx - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX Configurado para $$ y \cdot -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 2: Lógica Digital - Lección 17</small></p>
+        <h1>👾 ¡Del Papel a la Realidad! Chips TTL 74xx</h1>
+    </header>
+
+    <section>
+        <p>¡Hola, ingenieros! Ya simplificaron su ecuación en la lección pasada. Para que sea más fácil de construir, la escribiremos separando bien cada pareja:</p>
+        
+        <!-- Fórmula Mejorada -->
+        <div class="formula">
+            $$P = (A \cdot B) + (A \cdot C) + (B \cdot C)$$
+        </div>
+
+        <p>Ahora, ¿cómo construimos eso? La respuesta está en unos componentes negros con patitas metálicas llamados <strong>Circuitos Integrados</strong> de la familia <strong>TTL (74xx)</strong>. Cariñosamente les decimos "chips".</p>
+
+        <h2>1. ¿Qué es un Chip? ¡Aprende a contar las patas!</h2>
+        <p>Es una pastilla de silicio con miles de transistores adentro. Físicamente, se ven como pequeños bloques rectangulares con dos filas de pines metálicos (por eso se llaman encapsulado <strong>DIP</strong>: <em>Dual In-line Package</em>).</p>
+        
+        <p>Para no conectarlos al revés, busca la <strong>Muesca</strong> (el huequito semicircular). Para usarlos y no quemarlos, lo primero es saber cuál es la pata número 1:</p>
+
+        <div class="svg-container">
+            <!-- Imagen: Pinout Chip (img/chip_pinout.png) -->
+            <img src="img/chip_pinout.png" alt="Ilustración de un chip DIP-14. Muestra la muesca a la izquierda y la numeración en U antihoraria del 1 al 14." style="max-width:80%; height:auto;">
+            <p><small><em>Fig 1. Pon la muesca a la izquierda. Abajo está el pin 1. Arriba el 14.</em></small></p>
+        </div>
+
+        <div class="destacado">
+            <strong>Regla de la "U":</strong> Empiezas abajo a la izquierda (1), avanzas a la derecha (7), subes (8) y regresas a la izquierda (14).
+        </div>
+
+        <h2>2. La Santísima Trinidad (Los que debes comprar)</h2>
+        <p>Aunque hay miles, estos tres son los reyes del curso:</p>
+        <ul>
+            <li><strong>7404 (NOT):</strong> El Inversor. Tiene 6 adentro.</li>
+            <li><strong>7408 (AND):</strong> La Multiplicadora. Tiene 4 adentro.</li>
+            <li><strong>7432 (OR):</strong> La Sumadora. Tiene 4 adentro.</li>
+        </ul>
+
+        <div class="svg-container">
+            <!-- Imagen: Interno 7408 (img/interno_7408.png) -->
+            <img src="img/interno_7408.png" alt="Diagrama esquemático interno del chip 7408 mostrando las 4 compuertas AND conectadas a los pines." style="max-width:100%; height:auto;">
+            <p><small><em>Fig 2. Rayos X al 7408. ¡Son 4 en 1!</em></small></p>
+        </div>
+
+        <!-- NUEVA SECCIÓN: TTL vs CMOS -->
+        <div class="dato-extra" style="background-color: #fff8e1; border-left-color: #ffc107;">
+            <h3>🤓 Curiosidad de Ingeniero: ¿TTL o CMOS?</h3>
+            <p>En el mercado verás dos grandes familias de chips: <strong>TTL</strong> (los nuestros) y <strong>CMOS</strong>. ¿Por qué elegimos TTL para aprender?</p>
+            
+            <table style="font-size: 0.9em; width: 100%;">
+                <tr style="background-color: #333; color: white;">
+                    <th>Característica</th>
+                    <th>TTL (Serie 74LS)</th>
+                    <th>CMOS (Serie 4000)</th>
+                </tr>
+                <tr>
+                    <td><strong>Tecnología</strong></td>
+                    <td>Transistores BJT (Viejita pero fuerte)</td>
+                    <td>MOSFET (Moderna y eficiente)</td>
+                </tr>
+                <tr>
+                    <td><strong>Resistencia</strong></td>
+                    <td>💪 <strong>Tanque de Guerra:</strong> Aguanta estática y maltrato.</td>
+                    <td>⚠️ <strong>Delicado:</strong> Si lo tocas con estática, muere.</td>
+                </tr>
+                <tr>
+                    <td><strong>Voltaje</strong></td>
+                    <td>Estricto 5V</td>
+                    <td>Flexible (3V a 15V)* Serie 4000</td>
+                </tr>
+                <tr>
+                    <td><strong>Pines al aire</strong></td>
+                    <td>Perdona errores (a veces).</td>
+                    <td>Se vuelve loco y se calienta.</td>
+                </tr>
+            </table>
+            
+            <p><strong>Veredicto:</strong> Para aprender, usamos TTL porque son más resistentes a los errores humanos. ¡Cuando seas un experto, usarás CMOS porque gastan menos batería!</p>
+        </div>
+
+        <h2>3. Alimentación: ¡Vida o Muerte! ⚡</h2>
+        <div class="destacado" style="background-color: #ffcccc; border-left-color: #d9534f;">
+            <h3>⚠️ ¡PELIGRO! LEER ANTES DE CONECTAR</h3>
+            <p>Los chips no funcionan con magia. Si no los conectas a la energía, no hacen nada (o se queman si lo haces mal).</p>
+            <ul>
+                <li><strong>Pin 14 (VCC):</strong> Conecta a <strong>+5V</strong> (Cable Rojo).</li>
+                <li><strong>Pin 7 (GND):</strong> Conecta a <strong>Tierra</strong> (Cable Azul).</li>
+            </ul>
+            <p>Haz esto PRIMERO, antes de poner cualquier otro cable.</p>
+        </div>
+    </section>
+
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between;">
+            <a href="leccion16.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion18.html" class="btn-navegacion">Siguiente: NAND, NOR y XOR →</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

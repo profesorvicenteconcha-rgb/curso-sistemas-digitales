@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 7: La Protoboard - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 1: Fundamentos Físicos - Lección 7</small></p>
+        <h1>🛠️ La Protoboard: Tu mesa de trabajo</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>En la lección anterior aprendiste a controlar el circuito con interruptores. Pero seguramente notaste que sujetar los cables con los dedos o con cinta adhesiva es una pesadilla: se sueltan y hacen falso contacto. <strong>Hoy subimos de nivel.</strong> Te presentaremos la herramienta que usan los profesionales para prototipar sin soldar: la Protoboard.</p>
+    </div>
+
+    <!-- MATERIALES NECESARIOS -->
+    <div class="destacado" style="background-color: #e8f5e9; border-left-color: #4caf50;">
+        <h3>📦 ¿Tienes todo lo necesario?</h3>
+        <p>Para esta lección necesitarás:</p>
+        <ul>
+            <li><strong>Protoboard</strong> (grande o mediana, 400-830 puntos)</li>
+            <li><strong>Cables Jumpers</strong> (rígidos, pre-cortados, colores rojo y negro o azul)</li>
+            <li><strong>Cables Dupont</strong> (macho-macho y macho-hembra)</li>
+            <li><strong>Cables Caimán-Pin</strong> (22 AWG)</li>
+            <li><strong>LEDs</strong> de varios colores</li>
+            <li><strong>Resistencias</strong> (220Ω o 330Ω)</li>
+            <li><strong>Cable USB</strong> viejo para cortar</li>
+            <li><strong>Cargador 5V</strong> (cualquier cargador de celular que ya no uses)</li>
+        </ul>
+        <p>Si tienes todo esto, ¡estás listo para comenzar!</p>
+    </div>
+
+    <section>
+        <p>La protoboard es como un LEGO para electrónicos. Nos permite conectar, probar y desconectar componentes en segundos.</p>
+
+        <div class="dato-extra">
+            <h4>📏 Tipos de Protoboards por Tamaño</h4>
+            <table class="tabla-centrada" style="width: 90%; margin: 15px auto;">
+                <tr>
+                <th>Tipo</th>
+                <th>Puntos</th>
+                <th>Uso Educativo</th>
+                </tr>
+                <tr>
+                <td>Mini</td>
+                <td>170</td>
+                <td>Proyectos simples (1 LED + resistencia)</td>
+                </tr>
+                <tr>
+                <td>Mediana</td>
+                <td>400-630</td>
+                <td><strong>Recomendado para el curso</strong> (circuitos con 2-4 LEDs)</td>
+                </tr>
+                <tr>
+                <td>Grande</td>
+                <td>830+</td>
+                <td>Proyectos complejos (Unidad 2 en adelante)</td>
+                </tr>
+            </table>
+            <p><strong>Elección pedagógica:</strong> Para niños de 9-10 años, la mediana (400-630 puntos) 
+            es ideal: suficiente espacio sin abrumar visualmente.</p>
+        </div>
+        
+        <h2>1. Rayos X: ¿Cómo funciona por dentro?</h2>
+        <p>Parece un montón de agujeros al azar, pero tienen un orden estricto. Por debajo del plástico hay láminas de metal que unen los puntos.</p>
+
+        <div class="svg-container">
+            <img src="img/protoboard_interna.png" alt="Diagrama de conexiones internas de la protoboard" style="max-width:75%; height:auto;">
+            <p><small><em>Fig 1. Rieles horizontales para energía (azul y rojo); columnas verticales para componentes. Observa las letras (a-j) y números (de 5 en 5).</em></small></p>
+        </div>
+
+        <ul>
+            <li><strong>Rieles de Alimentación (Bordes):</strong> Las líneas Roja (+) y Azul (-) están conectadas de forma <strong>HORIZONTAL</strong> a lo largo de toda la tabla (de izquierda a derecha). Aquí conectas tu cargador.</li>
+                <div class="destacado" style="background-color: #fff3e0; margin: 10px 0; padding: 10px;">
+                    <p><strong>⚠️ Límite de Corriente:</strong> Cada riel interno soporta máximo <strong>1-2 amperios</strong>. Si conectas motores o LEDs de alta potencia, distribuye la corriente usando varios puntos de conexión.</p>
+                </div>
+            
+            <li><strong>Zona de Componentes (Centro):</strong> Los agujeros están conectados en columnas <strong>VERTICALES</strong> de 5 huecos.
+                <br>Observa que cada columna tiene:
+                <ul>
+                    <li><strong>Letras:</strong> De la <strong>"a" a la "e"</strong> a un lado del canal central, y de la <strong>"f" a la "j"</strong> al otro lado.</li>
+                    <li><strong>Números:</strong> Junto a los rieles verás números que van <strong>de 5 en 5</strong> (5, 10, 15, 20...). Estos números identifican cada columna vertical.</li>
+                </ul>
+                <div class="dato-extra">
+                    <p><strong>💡 Cómo dar direcciones en la protoboard:</strong></p>
+                    <p>Para ubicar un agujero específico, usa: <strong>Letra + Número</strong></p>
+                    <p>Ejemplo: "Conecta la resistencia en <strong>c15</strong>" significa:</p>
+                    <ul>
+                        <li>Fila (letra) <strong>c</strong> (del lado superior del canal)</li>
+                        <li>Columna número <strong>15</strong></li>
+                    </ul>
+                    <p>Así puedes comunicarte claramente con otros al armar circuitos.</p>
+                </div>
+                <br><strong>Nota clave:</strong> Dentro de cada columna de 5 huecos (por ejemplo, columna 15, letras a-e), ¡hay conexión eléctrica! Si pones dos cables en el mismo número de columna (ambos en 15), se tocan. Es decir: en la columna 15, los agujeros a15, b15, c15, d15, e15 están conectados entre sí. Lo mismo para f15, g15, h15, i15, j15.</li>
+                
+            <li><strong>El Canal Central (La Zanja):</strong> Es el separador en el medio de la tabla. Divide los grupos de <strong>ARRIBA</strong> (filas a-e) de los grupos de <strong>ABAJO</strong>. (filas f-j)
+                <br>Los huecos de la columna 1 superior NO se tocan con los de la columna 1 inferior. Esto es vital para poner los chips en el medio sin cortocircuitar sus patas.</li>
+        </ul>
+
+        <div class="dato-extra">
+            <h4>💡 Pitch Estándar: El Secreto del 0.1"</h4>
+            <p>Todas las protoboards usan un estándar llamado <strong>pitch de 0.1 pulgadas (2.54 mm)</strong>. 
+            Esto significa que la distancia entre agujeros adyacentes es exactamente 2.54 mm.</p>
+            <p>Los componentes <strong>Through-Hole</strong> (con patas que atraviesan la placa) y los chips 
+            <strong>DIP</strong> (Dual In-line Package) están diseñados con este mismo espaciamiento. 
+            Por eso "encajan perfectamente" sin fuerza ni holgura.</p>
+            <p><strong>¿Por qué no SMD?</strong> Los componentes SMD (Surface Mount) se sueldan directo a la superficie 
+            y son microscópicos. Son ideales para producción industrial, pero <em>imposibles</em> de manipular 
+            con manos de niño. Por eso en educación usamos siempre through-hole: visible, táctil y seguro.</p>
+        </div>
+
+        <!-- RINCÓN DOCENTE: LA CIUDAD ELECTRÓNICA (VERSIÓN MEJORADA) -->
+        <div class="destacado">
+            <h3>🍎 Rincón del Docente: La Ciudad Electrónica en Acción</h3>
+            
+            <p><strong>Objetivo pedagógico:</strong> Que los niños comprendan la estructura interna de la protoboard 
+            mediante una representación física y juego de roles.</p>
+            
+            <h4>🎭 Actividad 1: "El Mapa del Tesoro de la Ciudad"</h4>
+            <p><strong>Materiales:</strong> Hoja grande de papel, marcadores de colores, fichas o monedas.</p>
+            <p><strong>Preparación:</strong></p>
+            <ol>
+                <li>Dibuja en el papel una "ciudad" con:
+                <ul>
+                    <li>Dos autopistas horizontales en los bordes (roja y azul).</li>
+                    <li>Calles verticales numeradas (5, 10, 15...).</li>
+                    <li>Un río en el centro que divide la ciudad en Norte y Sur.</li>
+                </ul>
+                </li>
+                <li>Entrega a cada niño 3 fichas: una roja (+), una azul (-) y una verde (componente).</li>
+            </ol>
+            <p><strong>Dinámica:</strong></p>
+            <ul>
+                <li>"Coloca tu ficha roja en la autopista roja de la columna 15".</li>
+                <li>"Coloca tu ficha verde en la calle 15, lado Norte (letra c)".</li>
+                <li>"¿Pueden comunicarse? ¡Sí! Porque están en la misma columna."</li>
+                <li>"Ahora mueve tu ficha verde al lado Sur (letra g) de la columna 15. ¿Pueden comunicarse?" → ¡No! Porque el río las separa.</li>
+            </ul>
+            
+            <h4>🔍 Actividad 2: "Detectives de Cortocircuitos"</h4>
+            <p><strong>Materiales:</strong> Protoboard real, cables, multímetro (opcional), tarjetas con escenarios.</p>
+            <p><strong>Procedimiento:</strong></p>
+            <ol>
+                <li>Prepara 3 circuitos en protoboards diferentes:
+                <ul>
+                    <li><strong>Circuito A:</strong> Correcto (LED con resistencia).</li>
+                    <li><strong>Circuito B:</strong> Cortocircuito oculto (cable rojo directo a azul).</li>
+                    <li><strong>Circuito C:</strong> Circuito abierto (componentes en columnas distintas).</li>
+                </ul>
+                </li>
+                <li>Los niños deben inspeccionar visualmente y predecir: "¿Enciende?", "¿Se quema?", "¿No pasa nada?"</li>
+                <li>Verifican sus predicciones conectando la fuente (con supervisión).</li>
+            </ol>
+            <p><strong>Lección clave:</strong> "Los ingenieros no adivinan: observan, predicen y verifican".</p>
+            
+            <div class="dato-extra">
+                <h4>💡 Consejo Pedagógico</h4>
+                <p>Nunca digas "esto es fácil". En su lugar di: "esto requiere atención al detalle". 
+                La protoboard enseña una habilidad fundamental: <strong>la paciencia técnica</strong>. 
+                Los niños que aprenden a verificar cada conexión antes de encender desarrollan 
+                una mentalidad de ingeniero que les servirá toda la vida.</p>
+            </div>
+            </div>
+
+        <h2>2. El Enemigo #1: El Cortocircuito 🔥</h2>
+        <p>Esto es lo más importante que leerás hoy. Un cortocircuito ocurre cuando la corriente encuentra un "atajo" fácil del positivo al negativo sin pasar por ninguna resistencia.</p>
+
+        <div class="destacado" style="background-color: #ffcccc; border-left-color: #d9534f;">
+            <h3>⚠️ ¡PELIGRO DE CORTO!</h3>
+            <p>Nunca conectes un cable directo del Riel Rojo (+) al Riel Azul (-) sin nada en medio.</p>
+            <p><strong>Consecuencias:</strong> El cable se quema, tu cargador se daña y la clase se acaba.</p>
+        </div>
+
+        <h2>3. Cómo conectar un Chip</h2>
+        <p>Cuando usemos chips (Unidad 2), siempre se colocan a caballo sobre el <strong>Canal Central</strong>. Así, las patas de un lado quedan separadas eléctricamente de las del otro.</p>
+
+        <div class="dato-extra">
+            <h3>Consejo de Orden</h3>
+            <p>Usa cables <strong>Rojos</strong> solo para positivo y <strong>Negros/Azules</strong> solo para negativo. El orden evita explosiones.</p>
+        </div>
+
+        <!-- NUEVA SECCIÓN: MECÁNICA DE CONEXIÓN -->
+        <h2>4. Secretos de Montaje (Lo que nadie te dice) 🤫</h2>
+        
+        <h3>A. ¿Cómo uno dos componentes? (Hacer un Nodo)</h3>
+        <p>En el papel dibujamos una línea que une la Resistencia \( (R_{1}) \) con el LED \( (LED_{1}) \). En la protoboard, esa "línea" es la <strong>Columna Vertical</strong>.</p>
+        
+        <div class="destacado" style="background-color: #fff8e1; border-left-color: #ff9800; margin: 25px 0;">
+        <h3>🔍 El Secreto del Nodo: De Líneas a Columnas</h3>
+        
+        <div class="svg-container" style="margin: 20px 0;">
+            <img src="img/diagrama_nodo.png" alt="Diagrama circuito R1, 5V, LED1, Tierra" 
+                style="max-width: 350px; height: auto;">
+            <p><small><em>Fig. 2: Diagrama esquemático - ¿Dónde va cada cosa?</em></small></p>
+        </div>
+
+        <div class="dato-extra">
+            <h4>🎯 Traducción a Protoboard:</h4>
+            <p>La línea que conecta \( (R_{1}) \) y \( (LED_{1}) \) en el diagrama se convierte en una columna compartida en la protoboard.</p>
+            <div style="display: inline-block; background: white; padding: 10px 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <strong>R₁ ──── LED₁</strong> (en diagrama)
+            </div>
+            <div style="display: inline-block; margin: 0 15px; color: #ff9800; font-size: 1.5em;">↓</div>
+            <div style="display: inline-block; background: white; padding: 10px 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <strong>Parte baja de la Columna 6</strong> (en protoboard)
+            </div>
+        </div>
+        <p>¡Ambos componentes se tocan eléctricamente porque comparten la misma columna vertical!</p>
+        
+        <div class="destacado" style="background-color: #fff8e1; border-left-color: #ffc107;">
+            <p><strong>Regla de Oro:</strong> Para que dos componentes se toquen eléctricamente, deben tener una pata en el <strong>MISMO NÚMERO</strong> de columna (ej: ambos en la columna 6).</p>
+            <p>Si uno está en la 6 y el otro en la 7, ¡es un circuito abierto! No se tocan.</p>
+        </div>
+        </div>
+
+        <h3>B. La Trampa del Riel Partido 💔</h3>
+        <p>¡Ojo! En muchas protoboards grandes, las líneas de energía (Roja y Azul) se cortan justo en la mitad de la tabla. A veces se ve porque la línea pintada se rompe.</p>
+        <p><strong>Solución:</strong> Si vas a usar toda la tabla, debes poner dos pequeños cables (puentes) en el centro para unir la mitad izquierda con la derecha. Si no lo haces, ¡la energía no llegará al otro lado!</p>
+        <h3>C. Los Cables Correctos para Cada Tarea</h3>
+        <p>No todos los cables son iguales. Usa el adecuado para cada trabajo:</p>
+        <ul>
+            <li><strong>Cables rígidos (pre-cortados de distintas longitudes):</strong> Ideales para conexiones cortas y ordenadas dentro de la protoboard.</li>
+            <li><strong>Cables Dupont macho-macho:</strong> Perfectos para conectar entre columnas distantes.</li>
+            <li><strong>Cables Dupont macho-hembra:</strong> Útiles para conectar sensores o módulos externos.</li>
+            <li><strong>Cables Caimán-Pin:</strong> Para conectar fuentes de alimentación o componentes grandes.</li>
+        </ul>
+
+        <h3>D. Técnica de Inserción Correcta</h3>
+        <ol>
+            <li><strong>Endereza las patas</strong> del componente con unos alicates o con los dedos.</li>
+            <li>Inserta <strong>perpendicularmente</strong> a la tabla (no inclinado).</li>
+            <li>Empuja firmemente hasta que el componente quede <strong>a 1-2 mm del plástico</strong>.</li>
+            <li>Si es un chip, inserta primero un extremo, alinea y luego el otro.</li>
+        </ol>
+
+        <h3>E. Preparando tu Fuente (El Cable USB)</h3>
+        <p>Si usas un cable USB cortado:</p>
+        <ul>
+            <li>Solo nos importan el cable <strong>Rojo (+)</strong> y el <strong>Negro (-)</strong>.</li>
+            <li>Corta e ignora los cables Blanco y Verde (son de datos).</li>
+            <li>Pela un poquito la punta del Rojo y el Negro.</li>
+            <li style="margin-top: 10px; background-color: #e8f5e9; padding: 10px; border-radius: 5px; border-left: 4px solid #28a745;">
+                <strong>Tip Pro (La Conexión Perfecta):</strong><br>
+                Aquí es donde brillan tus <strong>Cables Caimán-Pin</strong>.
+                <br>Usa el lado del <strong>Caimán (Pinza)</strong> para morder el cable pelado del USB, y conecta el lado del <strong>Pin</strong> firmemente en el riel de la protoboard. ¡Es la forma más segura y profesional sin necesidad de soldar!
+            </li>
+        </ul>
+
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #4caf50;">
+            <h3>🔧 Técnica de Taller: "La Prueba del Meneíto"</h3>
+            <p>A veces los resortes internos de la protoboard están flojos. Si tu circuito no prende, intenta esto:</p>
+            <ol>
+                <li>Deja el circuito encendido.</li>
+                <li>Mueve suavemente (menea) los cables y componentes uno por uno.</li>
+                <li>Si al mover uno el LED parpadea, <strong>¡ahí está la falla!</strong> Ese huequito está flojo o el cable está sucio. Cámbialo de lugar.</li>
+            </ol>
+        </div>
+        
+
+        <div class="destacado">
+            <h4>🔧 Mantenimiento de tu Protoboard</h4>
+            <p><strong>Durabilidad:</strong> Una protoboard de calidad dura 10,000-50,000 inserciones por agujero.</p>
+            <p><strong>Señales de reemplazo:</strong></p>
+            <ul>
+                <li>Los componentes se sueltan solos al mover la tabla</li>
+                <li>Debes forzar mucho para insertar una pata</li>
+                <li>El circuito funciona solo si "meneas" los cables (contacto intermitente)</li>
+            </ul>
+            <p><strong>Cuidado preventivo:</strong></p>
+            <ul>
+                <li>Nunca insertes patas dobladas o oxidadas</li>
+                <li>Retira los componentes tirando <em>recto hacia arriba</em>, no en ángulo</li>
+                <li>Limpia con aire comprimido (no soples con la boca: la humedad oxida los contactos)</li>
+            </ul>
+            <p><strong>Para tu futura aula:</strong> Asigna una protoboard por pareja de estudiantes. 
+            Etiquétala con su nombre y enséñales a cuidarla como herramienta profesional.</p>
+        </div>
+
+        <p style="margin: 0; font-style: italic;">
+                Todo circuito complejo comienza como un simple diagrama. 
+                Tu habilidad para traducir esas líneas a conexiones reales 
+                es lo que te convierte en ingeniero.
+            </p>
+            <p style="margin: 0;">
+                Ahora vas a desarrollar esa habilidad. Sigue los pasos para transformar el diagrama en un circuito funcional.
+            </p>
+
+        <!-- SECCIÓN TINKERCAD: GUÍA PASO A PASO -->
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3; margin-top: 40px;">
+            <h3>🚀 5. Taller Virtual: Tu Primer Circuito Controlado</h3>
+            <p>Antes de ir a Tinkercad, lee esta guía. Hemos preparado un sistema paso a paso con <strong>coordenadas exactas</strong> (como en la batalla naval) para que tu primer montaje sea perfecto.</p>
+            
+            <p style="font-size: 0.9em; color: #555;">👇 <em>Haz clic en cada barra para desplegar las instrucciones. ¡Ve en orden!</em></p>
+
+            <div class="acordeon-guia">
+                
+                <!-- PASO 1 -->
+                <details class="paso-tinkercad">
+                    <summary>
+                        <span class="numero-paso">1</span>
+                        <span class="titulo-paso">Crear el Proyecto</span>
+                        <span class="estado-paso">(Configuración)</span>
+                    </summary>
+                    <div class="contenido-paso">
+                        <p>Una vez que hayas ingresado a Tinkercad:</p>
+                        <ol>
+                            <li>En la <strong>esquina superior derecha</strong>, haz clic en tu imagen de perfil (o tus iniciales).</li>
+                            <li>En el menú desplegable, selecciona <strong>"+ Nuevo diseño"</strong> (o <em>+ New Design</em>) y luego elige <strong>"Circuito"</strong> (o Circuits).</li>
+                        </ol>
+                        <p>Arriba a la izquierda, cámbiale el nombre raro que pone por defecto (ej: <em>Glorious Fyyran</em>) a: <strong>"Lab 1 - Mi Primer LED"</strong>.</p>
+                        <p><strong><em>Cuidados con el nombre del proyecto:</em></strong> Usamos un <strong><em>guion "-"</em></strong> en lugar de <strong><em>dos puntos ":"</em></strong> para evitar problemas al guardar el archivo en tu computador después.</p>
+                    </div>
+                </details>
+
+                <!-- PASO 2 -->
+                <details class="paso-tinkercad">
+                    <summary>
+                        <span class="numero-paso">2</span>
+                        <span class="titulo-paso">Traer la Protoboard</span>
+                        <span class="estado-paso">(Mesa de trabajo)</span>
+                    </summary>
+                    <div class="contenido-paso">
+                        <p>En el panel derecho, busca <strong>"Placa de pruebas pequeña"</strong> (Breadboard small).</p>
+                        <p>Arrástrala al centro de la pantalla. Si pasas el mouse por los agujeros, verás que se iluminan en verde indicando cómo están conectados por dentro.</p>
+                    </div>
+                </details>
+
+                <!-- PASO 3 -->
+                <details class="paso-tinkercad">
+                    <summary>
+                        <span class="numero-paso">3</span>
+                        <span class="titulo-paso">Energía: El Cargador</span>
+                        <span class="estado-paso">(5 Voltios)</span>
+                    </summary>
+                    <div class="contenido-paso">
+                        Recuerda borrar la búsqueda anterior en la lupa (haz clic en el ícono de borrar: "X") antes de escribir los nuevos componentes que vayas a buscar.
+                        <ol>
+                            <li>Busca el componente <strong>"Suministro de Energía"</strong> (Power Supply) y arrástralo fuera de la tabla.</li>
+                            <li>Configúralo en: <strong>Voltaje: 5V</strong>.</li>
+                            <li><strong>Cable Rojo (+):</strong> Haz clic en el círculo rojo del suministro y lleva el cable hasta cualquier hueco de la línea <strong>Roja (+)</strong> de la protoboard.</li>
+                            <li><strong>Cable Negro (-):</strong> Haz clic en el círculo negro y lleva el cable a la línea <strong>Negra (-)</strong> (o Azul).</li>
+                        </ol>
+                        <div style="background-color: #fff3e0; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.9em;">
+                            <strong>🎨 Truco Pro (Atajos de Color):</strong><br>
+                            Selecciona un cable y presiona:
+                            <ul>
+                                <li>Tecla <strong>"1"</strong> para pintarlo de <strong>Negro</strong>.</li>
+                                <li>Tecla <strong>"2"</strong> para pintarlo de <strong>Rojo</strong>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- PASO 4 -->
+                <details class="paso-tinkercad">
+                    <summary>
+                        <span class="numero-paso">4</span>
+                        <span class="titulo-paso">La Resistencia Horizontal</span>
+                        <span class="estado-paso">(Rotación)</span>
+                    </summary>
+                    <div class="contenido-paso">
+                        <p>Llevaremos la energía a la fila B. Recuerda borrar la búsqueda en la lupa (X) para ver los componentes.</p>
+                        <ol>
+                            <li><strong>Puente Rojo:</strong> Conecta del <strong>Riel Rojo (+)</strong> a la coordenada <strong>b2</strong>.</li>
+                            <li>Saca una <strong>Resistencia</strong> (330 Ω).</li>
+                            <li><strong>Rotar ('R'):</strong> Selecciónala y presiona 'R' tres veces hasta que quede horizontal.</li>
+                            <li><strong>Colocación:</strong>
+                                <ul>
+                                    <li>Terminal 1: En <strong>b2</strong> (conectada al puente rojo).</li>
+                                    <li>Terminal 2: Caerá automáticamente en <strong>b6</strong>.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <p><em>Nota técnica: En Tinkercad, las resistencias ocupan 5 espacios. Si empieza en 2, termina en 6.</em></p>
+                    </div>
+                </details>
+
+                <!-- PASO 5 -->
+                <details class="paso-tinkercad">
+                    <summary>
+                        <span class="numero-paso">5</span>
+                        <span class="titulo-paso">El LED Reflejado</span>
+                        <span class="estado-paso">(Herramienta Espejo)</span>
+                    </summary>
+                    <div class="contenido-paso">
+                        <p>Por defecto, el LED tiene el positivo (pata torcida) a la derecha. Para seguir el flujo de lectura (izquierda a derecha), vamos a voltearlo.</p>
+                        <ol>
+                            <li>Saca un LED rojo.</li>
+                            <li><strong>Reflejar ('M'):</strong> Con el LED seleccionado, presiona la tecla <strong>'M'</strong> (Mirror) o el botón de los dos triángulos arriba a la derecha.
+                                <br>👉 <em>Ahora la pata torcida (Ánodo) está a la IZQUIERDA.</em>
+                            </li>
+                            <li><strong>Colocación:</strong>
+                                <ul>
+                                    <li><strong>Ánodo (Pata torcida):</strong> En <strong>e6</strong>. (Se conecta con el final de la resistencia).</li>
+                                    <li><strong>Cátodo (Pata recta):</strong> En <strong>e7</strong>.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </details>
+
+                <!-- PASO 6 -->
+                <details class="paso-tinkercad">
+                    <summary>
+                        <span class="numero-paso">6</span>
+                        <span class="titulo-paso">Cerrar el Circuito</span>
+                        <span class="estado-paso">(Retorno a Tierra)</span>
+                    </summary>
+                    <div class="contenido-paso">
+                        <p>Finalmente, conectamos el negativo para que la corriente pueda regresar a la fuente.</p>
+                        <ol>
+                            <li>Haz clic en la coordenada <strong>a7</strong> (en la misma columna donde está el Cátodo del LED).</li>
+                            <li>Lleva el cable hasta un hueco del <strong>Riel Negro (-)</strong>.</li>
+                            <li>Píntalo de <strong>Negro</strong> (tecla '1').</li>
+                        </ol>
+                    </div>
+                </details>
+
+                <!-- PASO 7 (CON IMAGEN DE RESULTADO) -->
+                <details class="paso-tinkercad">
+                        <p><strong>¡Hora de probar!</strong> Dale al botón del triángulo, <strong>"Start Simulation"</strong> o "Iniciar simulación".</p>
+                    <summary>
+                        <span class="numero-paso">7</span>
+                        <span class="titulo-paso">¡Simulación!</span>
+                        <span class="estado-paso">(Prueba de Fuego)</span>
+                    </summary>
+                    <div class="contenido-paso">
+                        
+                        <div style="text-align: center; margin: 20px 0;">
+                            <!-- Asegúrate de guardar tu captura con este nombre -->
+                            <img src="img/tinkercad_lab1_final.png" alt="Circuito final encendido en Tinkercad" style="max-width: 90%; border-radius: 8px; border: 2px solid #4caf50;">
+                            <p><small><em>Así debe verse tu éxito: El LED encendido y el multímetro marcando corriente.</em></small></p>
+                        </div>
+
+                        <p>Si tu LED no enciende, revisa:</p>
+                        <ul>
+                            <li>¿Rotaste la resistencia? (Debe llegar hasta la columna 6).</li>
+                            <li>¿Usaste la tecla 'M' para voltear el LED? (Pata torcida a la izquierda).</li>
+                            <li>¿El cable negro baja al riel negativo?</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- PASO 8 -->
+                <details class="paso-tinkercad">
+                    <summary>
+                        <span class="numero-paso">8</span>
+                        <span class="titulo-paso">Guardar y Compartir</span>
+                        <span class="estado-paso">(La Nube)</span>
+                    </summary>
+                    <div class="contenido-paso">
+                        <p><strong>¿Dónde está el botón de guardar?</strong> ¡No existe!</p>
+                        <ul>
+                            <li>☁️ <strong>Autoguardado:</strong> Tinkercad guarda cada cambio automáticamente en la nube. Si cierras la pestaña, no pierdes nada.</li>
+                            <li>🏠 <strong>Para Salir y Recuperar:</strong> Haz clic en el <strong>logo de colores de Tinkercad</strong> (esquina superior izquierda). Esto te llevará a tu <strong>Panel de Control (Dashboard)</strong>, donde verás tu circuito listo para abrirlo de nuevo cuando quieras.</li>
+                            <li>📸 <strong>Para Compartir (Foto):</strong> Si tu profesor te pide una imagen, no tomes foto a la pantalla. Haz clic en el botón <strong>"Enviar a" (Send To)</strong> arriba a la derecha y luego en el icono de descarga (flecha hacia abajo) para bajar una imagen .PNG perfecta de tu circuito.</li>
+                        </ul>
+                    </div>
+                </details>
+
+            <p style="text-align: center; margin-top: 25px;">
+                ¿Listo para el reto? Abre tu laboratorio ahora:
+                <br><br>
+                <a href="https://www.tinkercad.com/circuits" target="_blank" class="btn-navegacion" style="background-color: #0277bd; padding: 15px 30px; font-size: 1.1em;">🛠️ Abrir Tinkercad ↗</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== INICIO DE LA NUEVA SECCIÓN 6 ========== -->
+    <h2>6. Ampliación del Proyecto: Varios LEDs en Paralelo</h2>
+
+    <p>Ahora que has dominado el circuito básico, vamos a expandirlo. En la <strong>Lección 5</strong> aprendiste que los circuitos en paralelo permiten conectar múltiples componentes compartiendo los mismos nodos de alimentación. Vamos a añadir una segunda rama en paralelo con la que ya construiste, pero con dos variantes importantes: 1) <strong>invertiremos el orden de los componentes</strong>, y 2) <strong>usaremos un LED de otro color</strong> para observar su comportamiento.</p>
+
+    <!-- CITA HISTÓRICA -->
+    <div class="dato-extra" style="background-color: #f0f7ff; border-left: 4px solid #2196f3;">
+        <p><strong>"Breadboard": Del Pan a la Electrónica</strong></p>
+        <p>El nombre <em>protoboard</em> viene del inglés <em>"breadboard"</em> (tabla para cortar pan). En los primeros días de la radio (años 1920-1930), los aficionados literalmente clavaban componentes en tablas de madera de sus cocinas para experimentar. En los años 1970, con la revolución de los circuitos integrados, nació la versión moderna sin soldadura que usamos hoy. Esta herramienta democratizó la electrónica, permitiendo prototipar en minutos lo que antes tomaba horas de soldadura y desoldadura.</p>
+    </div>
+
+    <h3>Objetivo: Conexiones Simétricas en Paralelo</h3>
+    <p>Vamos a construir una segunda rama donde los <strong>cables de alimentación</strong> (rojo y negro) sean simétricos a los de la primera rama respecto a la columna 10, mientras que los componentes se disponen de manera diferente. Esto demuestra que en un circuito paralelo, cada rama es independiente y puede tener configuraciones distintas.</p>
+
+    <h4>La Línea que Conecta LED₂ con R₂</h4>
+    <div class="svg-container">
+        <!-- IMAGEN: Fig. 4 - La línea que conecta LED2 con R2 -->
+        <img src="img/linea_led2_r2.png" alt="La 'Línea' Eléctrica: Un Nodo Compartido - Diagrama de conexión entre LED2 y R2" style="max-width:45%; height:auto;">
+        <p><small><em>Fig. 4: La línea que conecta LED₂ con R₂. Esta línea representa un nodo eléctrico que en la protoboard se implementa compartiendo la misma columna vertical.</em></small></p>
+    </div>
+
+    <h3>Guía Paso a Paso: Añadiendo la Segunda Rama</h3>
+    <p>Partiendo del circuito original \( (R_1 \text{ en } b2-b6, \ LED_1 \text{ en } e6-e7) \), sigue estos pasos para añadir la rama paralela entre columnas 13-18:</p>
+    <ol>
+        <li><strong>Conectar la alimentación positiva:</strong><br>
+            Con un cable rígido <strong>rojo</strong>, conecta el <strong>Riel Rojo (+)</strong> al hueco <strong>a18</strong>. Esto lleva 5V a la columna 18.</li>
+        
+        <li><strong>Colocar el LED₂ (Amarillo):</strong><br>
+            Toma un <strong>LED amarillo</strong>. <u>No lo voltees con 'M'</u>.<br>
+            Inserta el <strong>cátodo (pata corta, -)</strong> en <strong>e17</strong>.<br>
+            Inserta el <strong>ánodo (pata larga, +)</strong> en <strong>e18</strong> (conectado a 5V a través de a18).</li>
+        
+        <li><strong>Colocar la Resistencia R₂:</strong><br>
+            Toma una <strong>resistencia de 330 Ω</strong> (por omisión, la unidad es kΩ) y colócala horizontalmente (presiona 'R' tres veces hasta que quede horizontal).<br>
+            Conecta su <strong>segunda terminal</strong> en <strong>b17</strong> (misma columna que el cátodo del LED₂).<br>
+            Su <strong>primera terminal</strong> quedará en <strong>b13</strong>.</li>
+        
+        <li><strong>Completar a tierra:</strong><br>
+            Con un cable rígido <strong>negro</strong>, conecta el hueco <strong>a13</strong> al <strong>Riel Negro (-)</strong>.</li>
+    </ol>
+
+    <div class="destacado" style="background-color: #e8f5e9; border-left-color: #4caf50;">
+        <h3>🔍 Verificación de Conexiones</h3>
+        <p>Al terminar, compara las posiciones de los cables de alimentación:</p>
+        <ul>
+            <li><strong>Cable Rojo (+):</strong> Rama 1 en columna 2, Rama 2 en columna 18 → Simétricos respecto a columna 10</li>
+            <li><strong>Cable Negro (-):</strong> Rama 1 en columna 7, Rama 2 en columna 13 → Simétricos respecto a columna 10</li>
+        </ul>
+    </div>
+
+    <h4>Montaje Completo en Tinkercad</h4>
+    <div class="svg-container">
+        <!-- IMAGEN: Fig. 5 - Montaje del circuito en paralelo implementado en Tinkercad -->
+        <img src="img/montaje_paralelo_tinkercad.png" alt="CIRCUITO PARALELO: SIMETRÍA PERFECTA - Cables rojo/negro reflejados en Columna 10"; style="max-width: 70%; border-radius: 8px; border: 2px solid #4caf50;">
+        <p><small><em>Fig. 5: Montaje del circuito en paralelo implementado en Tinkercad. Se observan las dos ramas independientes con sus respectivos componentes y la simetría de los cables de alimentación.</em></small></p>
+    </div>
+
+    <h3>🔬 Análisis con Ley de Ohm</h3>
+    <p>Ambas ramas están en paralelo porque comparten los mismos nodos de 5V y tierra. La corriente en cada rama sigue:</p>
+
+    <p style="text-align: center; font-size: 1.2em; margin: 20px 0;">
+        $$ I = \frac{V_{\text{Fuente}} - V_f}{R} $$
+    </p>
+
+    <p>Donde \( V_f \) es el <strong>voltaje de polarización</strong> del LED. LEDs de diferentes colores tienen \( V_f \) distintos, lo que afecta su brillo incluso con la misma resistencia.</p>
+
+    <h3>🎨 Tabla de Referencia: LEDs por Color</h3>
+    <p>Los valores exactos varían según el fabricante, pero esta tabla te da una guía práctica para tus proyectos. Los colores de fondo simulan la <em>luz emitida</em> por cada LED:</p>
+
+    <table class="tabla-centrada">
+    <tr>
+        <th>Color</th>
+        <th>V<sub>f</sub> Típico</th>
+        <th>Rango Común</th>
+        <th>Ejemplo de Cálculo con 5V y 330Ω</th>
+        <th>Corriente Aprox.</th>
+    </tr>
+    <tr>
+        <td style="background-color: #ff1a1a; color: white; font-weight: bold;">Rojo</td>
+        <td>~2.0 V</td>
+        <td>1.8 - 2.2 V</td>
+        <td>\( I = \frac{5.0 - 2.0}{330} \approx \frac{3.0}{330} \)</td>
+        <td>~9.1 mA</td>
+    </tr>
+    <tr>
+        <td style="background-color: #ff6600; color: white; font-weight: bold;">Naranja/Ámbar</td>
+        <td>~2.1 V</td>
+        <td>2.0 - 2.2 V</td>
+        <td>\( I = \frac{5.0 - 2.1}{330} \approx \frac{2.9}{330} \)</td>
+        <td>~8.8 mA</td>
+    </tr>
+    <tr>
+        <td style="background-color: #ffcc00; color: black; font-weight: bold;">Amarillo</td>
+        <td>~2.2 V</td>
+        <td>2.0 - 2.4 V</td>
+        <td>\( I = \frac{5.0 - 2.2}{330} \approx \frac{2.8}{330} \)</td>
+        <td>~8.5 mA</td>
+    </tr>
+    <tr>
+        <td style="background-color: #39ff14; color: black; font-weight: bold;">Verde</td>
+        <td>~2.4 V</td>
+        <td>2.2 - 3.0 V</td>
+        <td>\( I = \frac{5.0 - 2.4}{330} \approx \frac{2.6}{330} \)</td>
+        <td>~7.9 mA</td>
+    </tr>
+    <tr>
+        <td style="background-color: #0099ff; color: white; font-weight: bold;">Azul</td>
+        <td>~3.0 V</td>
+        <td>2.8 - 3.5 V</td>
+        <td>\( I = \frac{5.0 - 3.0}{330} \approx \frac{2.0}{330} \)</td>
+        <td>~6.1 mA</td>
+    </tr>
+    <tr>
+        <td style="background: linear-gradient(90deg, #8a8aff, #ffffff, #ff8a8a); color: black; font-weight: bold;">Blanco</td>
+        <td>~3.2 V</td>
+        <td>3.0 - 3.5 V</td>
+        <td>\( I = \frac{5.0 - 3.2}{330} \approx \frac{1.8}{330} \)</td>
+        <td>~5.5 mA</td>
+    </tr>
+    <tr>
+        <td style="background-color: #9400d3; color: white; font-weight: bold;">Violeta</td>
+        <td>~3.3 V</td>
+        <td>3.0 - 3.6 V</td>
+        <td>\( I = \frac{5.0 - 3.3}{330} \approx \frac{1.7}{330} \)</td>
+        <td>~5.2 mA</td>
+    </tr>
+    </table>
+
+    <div class="dato-extra">
+    <h4>💡 Nota Técnica sobre los Colores</h4>
+    <p>Los colores mostrados simulan la <em>luz emitida</em> por el LED, no el color del plástico exterior:</p>
+    <ul>
+        <li><strong>Rojo/Naranja/Amarillo:</strong> LEDs de "baja energía" (1.8-2.4V). Son los primeros que se inventaron (década de 1960).</li>
+        <li><strong>Verde:</strong> Puente entre bajos y altos voltajes. El verde brillante moderno requiere más voltaje que los verdes antiguos.</li>
+        <li><strong>Azul/Violeta/Blanco:</strong> LEDs de "alta energía" (3.0-3.6V). Requieren semiconductores más complejos (Nobel de Física 2014 por el LED azul).</li>
+        <li><strong>Violeta vs. Púrpura:</strong> El violeta es luz monocromática de alta frecuencia (~400nm). El "púrpura" que ves en pantallas es una mezcla de rojo+azul, no existe como LED simple.</li>
+    </ul>
+    <p><strong>Para tu futura aula:</strong> Muestra los 7 colores encendidos en fila. Pide a los niños que ordenen los LEDs del que más brilla al que menos brilla con la misma resistencia (330Ω). ¡Descubrirán que el rojo brilla más que el blanco porque recibe más corriente!</p>
+    </div>
+    
+    <h4>Evitar el "Cuello de Botella"</h4>
+    <div class="destacado" style="background-color: #fff3e0; border-left-color: #ff9800; margin: 20px 0;">
+        <p><strong>Concepto Crítico:</strong> En la Lección 5 aprendiste por qué es esencial usar una resistencia independiente para cada LED en configuraciones paralelas.</p>
+        
+        <div class="svg-container">
+            <!-- IMAGEN: Fig. 6 - Diseño que supera el problema de una sola resistencia -->
+            <img src="img/cuello_botella.png" alt="ERROR COMÚN vs. BUENA PRÁCTICA - Una resistencia única ↔ Resistencia por LED" style="max-width:65%; height:auto;">
+            <p><small><em>Fig. 6: Diseño que supera el problema de una sola resistencia (cuello de botella) para todos los LEDs. A la izquierda: riesgo de sobrecarga con resistencia única. A la derecha: solución correcta con resistencia independiente por LED.</em></small></p>
+        </div>
+        
+        <p><strong>Aplicación en este circuito:</strong> Hemos aplicado correctamente este principio. Cada LED (LED₁ rojo y LED₂ amarillo) tiene su propia resistencia (R₁ y R₂ de 330Ω), asegurando que cada rama funcione de manera independiente y segura. Consultando la tabla de \( V_f \), podemos estimar las corrientes: ≈ 9.1 mA para el rojo (2.0V) y ≈ 8.5 mA para el amarillo (2.2V). La corriente total que debe suministrar la fuente es la suma de ambas: \( I_{\text{total}} = I_1 + I_2 \approx 9.1 \, \text{mA} + 8.5 \, \text{mA} = 17.6 \, \text{mA} \). Esto demuestra que, incluso con la misma resistencia, las corrientes —y por tanto los brillos— pueden variar ligeramente debido a la diferencia en \( V_f \).</p>
+    </div>
+
+    <!-- REFLEXIÓN STEAM -->
+    <div class="dato-extra" style="background-color: #f3e5f5; border-left: 4px solid #9c27b0; margin-top: 25px;">
+        <h4>🎨 Reflexión STEAM: La Belleza de la Simetría</h4>
+        <p>El movimiento <strong>"Circuit Sculpture"</strong> transforma circuitos en obras de arte. En tu protoboard, has creado una simetría intencional en las conexiones de alimentación.</p>
+        <p><strong>Pregunta creativa:</strong> ¿Cómo podrías extender este principio de simetría para crear un patrón visual atractivo con 3 o 4 ramas? ¿Podrías organizar los LEDs formando una figura geométrica reconocible mientras mantienes el funcionamiento eléctrico correcto?</p>
+        <p>Documenta tus ideas en tu cuaderno de ingeniero-artista.</p>
+    </div>
+
+    <h3>📝 Preguntas para Consolidar el Aprendizaje</h3>
+
+    <ol> <li><strong>Independencia de ramas:</strong> Si desconectas la resistencia R₁, ¿por qué solo se apaga el LED₁ y el LED₂ sigue funcionando? Explica usando el concepto de ramas paralelas independientes.</li>
+        <li><strong>Brillo y voltaje de polarización:</strong> Usando la tabla de referencia, ¿por qué un LED azul (\( V_f \) ≈ 3.0V) brillaría menos que un LED rojo (\( V_f \) ≈ 2.0V) si ambos están en paralelo con resistencias de 330Ω y una fuente de 5V? Calcula ambas corrientes para justificar tu respuesta.</li>
+
+        <li><strong>Cálculo de corrientes:</strong> Para nuestro circuito con LED rojo (\( V_f \) = 2.0V) y LED amarillo (\( V_f \) = 2.2V):
+            <ul>
+                <li>a) Calcula la corriente en cada rama con R = 330Ω.</li>
+                <li>b) Calcula la corriente total que suministra la fuente.</li>
+                <li>c) Si añadieras un tercer LED verde (\( V_f \) ≈ 2.4V) en paralelo, ¿cuál sería la nueva corriente total?</li>
+            </ul>
+        </li>
+
+        <li><strong>Seguridad y diseño:</strong> Antes de conectar la fuente de 5V a un circuito en protoboard, menciona <strong>tres verificaciones</strong> que debes hacer para evitar cortocircuitos o daños a los componentes.</li>
+
+        <li><strong>Diseño estético (STEAM):</strong> Propón una disposición simétrica y visualmente atractiva para 4 LEDs de diferentes colores en paralelo. Incluye:
+            <ul>
+                <li>a) Un boceto de cómo los colocarías en la protoboard (usa coordenadas).</li>
+                <li>b) Una breve explicación de cómo tu diseño mantiene tanto la funcionalidad eléctrica como el valor estético.</li>
+            </ul>
+        </li>
+    </ol>
+
+    <p><em>Has dado un paso importante en diseño de circuitos: combinar funcionalidad eléctrica con organización visual. ¡Sigue experimentando!</em></p>
+    <!-- ========== FIN DE LA NUEVA SECCIÓN 6 ========== -->
+
+    <!-- NUEVA SECCIÓN: LIMITACIONES TÉCNICAS (CON ANALOGÍA) -->
+    <div class="dato-extra" style="background-color: #fff3e0; border-left-color: #ff9800;">
+        <h3>👻 El Fantasma de la Protoboard (Capacitancia Parásita)</h3>
+        <p>Aunque parece perfecta, la protoboard tiene un defecto físico: sus pistas de metal están tan juntas que actúan como pequeños <strong>condensadores "invisibles"</strong> entre ellas.</p>
+        
+        <!-- ANALOGÍA -->
+        <div style="background-color: #fff; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #795548; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            <h4 style="margin-top: 0; color: #5d4037;">🔍 Analogía para entenderlo:</h4>
+            <p>Imagina que las pistas de metal son <strong>tuberías de agua</strong> que van una al lado de la otra. Si una tubería tiene agua a mucha presión (señal eléctrica rápida), parte de esa presión puede "filtrarse" o hacer vibrar la tubería vecina aunque no estén conectadas, simplemente por estar tan cerca.</p>
+            <p>En electrónica, a esa "conexión fantasma" le llamamos <strong>Capacitancia Parásita</strong>. Roba un poco de energía y distorsiona las señales veloces.</p>
+        </div>
+        <!-- FIN ANALOGÍA -->
+
+        <p><strong>¿Qué significa esto para ti?</strong></p>
+        <ul>
+            <li><strong>Para este curso:</strong> No pasa nada. Usamos chips <strong>TTL (74xx)</strong> y velocidades bajas, así que el efecto es despreciable.</li>
+            <li><strong>Para el futuro:</strong> Si intentas armar circuitos de radio, Wi-Fi o procesadores ultra-rápidos en una protoboard, <strong>fallarán</strong>. Esos "fantasmas" se comerán la señal. Por eso los productos finales usan Placas de Circuito Impreso (PCB) verdes.</li>
+        </ul>
+    </div>
+
+    <!-- NUEVA SECCIÓN STEAM: ARTE -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+            <h3>🎨 El Arte del Cableado (La "A" de STEAM)</h3>
+            <p>La ingeniería no es solo que funcione; es que sea <strong>hermoso</strong>. Un circuito desordenado ("nido de pájaros") es feo y difícil de entender. Un circuito ordenado tiene <strong>simetría, ritmo y elegancia</strong>.</p>
+            <p>Existe una corriente artística llamada <strong>"Circuit Sculpture"</strong> (Escultura de Circuitos), donde los componentes se sueldan al aire formando figuras geométricas. En tu protoboard, intenta que tus cables formen ángulos de 90°, que los colores tengan sentido y que el conjunto sea agradable a la vista. <strong>Tu circuito es tu obra de arte.</strong></p>
+        </div>
+
+    <!-- Sección de Preguntas de Consolidación -->
+    <h2>❓ Preguntas de Consolidación</h2>
+    <p>Responde estas preguntas para asegurarte de que dominas los conceptos técnicos <em>y</em> estás listo para enseñarlos en tu futura aula:</p>
+
+    <details class="u1">
+    <summary>1. Explica con tus propias palabras por qué los agujeros de la misma columna vertical están conectados eléctricamente, pero los de la misma fila horizontal NO lo están (excepto en los rieles de alimentación).</summary>
+    <p><strong>Explicación técnica:</strong> Por debajo del plástico de la protoboard hay láminas metálicas en forma de "U" que unen verticalmente 5 agujeros consecutivos (a-e y f-j). Estas láminas están aisladas entre sí, por lo que no hay conexión horizontal dentro de la zona de componentes.</p>
+    <p>Los rieles de alimentación (bordes rojo/azul) son una excepción: allí las láminas corren horizontalmente a lo largo de toda la tabla para distribuir energía de forma eficiente.</p>
+    <p><strong>Metáfora para niños:</strong> "Imagina que cada columna es un edificio de 5 pisos. Los vecinos del mismo edificio (misma columna) pueden usar el ascensor para visitarse (hay conexión). Pero para ir al edificio de al lado (columna siguiente), necesitas salir a la calle y caminar (poner un cable puente)."</p>
+    <p><strong>Para tu futura aula:</strong> Usa la actividad del "Mapa del Tesoro" para que los niños experimenten físicamente esta diferencia antes de tocar una protoboard real.</p>
+    </details>
+
+    <details class="u1">
+    <summary>2. ¿Por qué es peligroso conectar un cable directamente del riel rojo (+) al riel azul (-) sin ningún componente en medio? ¿Qué sucede físicamente?</summary>
+    <p><strong>Explicación técnica:</strong> Esto crea un <strong>cortocircuito</strong>. La corriente encuentra un camino de resistencia casi cero entre los terminales de la fuente. Según la Ley de Ohm (I = V/R), si R ≈ 0, entonces I → ∞ (teóricamente infinita).</p>
+    <p>En la práctica:</p>
+    <ul>
+        <li>El cable se calienta rápidamente (P = I²×R, pero con I muy grande).</li>
+        <li>La fuente de alimentación puede entrar en protección (apagarse) o dañarse.</li>
+        <li>En casos extremos, el cable puede derretirse o prender fuego.</li>
+    </ul>
+    <p><strong>Regla de oro:</strong> Siempre debe haber al menos un componente con resistencia (resistencia, LED, motor) entre + y -.</p>
+    <p><strong>Para tu futura aula:</strong> Demuestra el peligro sin riesgo: muestra un video de un cortocircuito real (en YouTube hay muchos) y explica: "Esto es lo que evitamos con una simple regla: nunca conectar + directo a -".</p>
+    </details>
+
+    <details class="u1">
+    <summary>3. Diseña un circuito con dos LEDs en paralelo usando una protoboard. Describe paso a paso cómo los conectarías usando coordenadas (letra+número).</summary>
+    <p><strong>Componentes necesarios:</strong></p>
+    <ul>
+        <li>Fuente 5V (riel rojo = +, riel azul = -)</li>
+        <li>2 LEDs (rojo y verde)</li>
+        <li>2 resistencias de 330Ω</li>
+        <li>Cables de conexión</li>
+    </ul>
+    
+    <p><strong>Conexión paso a paso:</strong></p>
+    <ol>
+        <li><strong>Alimentación:</strong> Conectar +5V al riel rojo y GND al riel azul.</li>
+        <li><strong>Rama 1 (LED rojo):</strong>
+        <ul>
+            <li>Cable rojo del riel rojo a a10.</li>
+            <li>Resistencia de 330Ω entre a10 y e10.</li>
+            <li>Ánodo del LED rojo en f10, cátodo en f15.</li>
+            <li>Cable negro de a15 al riel azul.</li>
+        </ul>
+        </li>
+        <li><strong>Rama 2 (LED verde):</strong>
+        <ul>
+            <li>Cable rojo del riel rojo a a20.</li>
+            <li>Resistencia de 330Ω entre a20 y e20.</li>
+            <li>Ánodo del LED verde en f20, cátodo en f25.</li>
+            <li>Cable negro de a25 al riel azul.</li>
+        </ul>
+        </li>
+    </ol>
+    
+    <p><strong>Verificación:</strong> Ambas ramas comparten los mismos nodos (+5V y GND) pero tienen caminos independientes → configuración paralela correcta.</p>
+    <p><strong>Para tu futura aula:</strong> Pide a los niños que dibujen su circuito en una hoja cuadriculada antes de montarlo. Esto desarrolla la habilidad de planificar antes de actuar.</p>
+    </details>
+
+    <details class="u1">
+    <summary>4. Explica el concepto de "capacitancia parásita" en una protoboard y por qué no afecta los circuitos de este curso pero sí limita circuitos de alta frecuencia.</summary>
+    <p><strong>Explicación técnica:</strong> La capacitancia parásita es una propiedad no deseada que surge cuando dos conductores están muy cerca físicamente (como las pistas de metal dentro de la protoboard). Actúa como un pequeño condensador invisible entre puntos no conectados.</p>
+    <p><strong>¿Por qué no afecta este curso?</strong></p>
+    <ul>
+        <li>Trabajamos con señales lentas (LEDs, pulsadores) donde los cambios ocurren en milisegundos.</li>
+        <li>La capacitancia parásita es muy pequeña (picofaradios), por lo que su efecto en bajas frecuencias es despreciable.</li>
+    </ul>
+    <p><strong>¿Por qué sí afecta circuitos de alta frecuencia?</strong></p>
+    <ul>
+        <li>En señales rápidas (MHz/GHz), incluso una capacitancia minúscula puede "filtrar" o distorsionar la señal.</li>
+        <li>La energía se pierde en cargar/descargar estos "condensadores invisibles" en cada ciclo.</li>
+    </ul>
+    <p><strong>Conexión con Lección 8:</strong> En la próxima lección aprenderás cómo los condensadores reales se usan intencionalmente para filtrar señales. ¡La capacitancia parásita es como un condensador que nadie pidió!</p>
+    <p><strong>Para tu futura aula:</strong> Usa la analogía del "fantasma": "La protoboard tiene fantasmas invisibles que solo molestan cuando las señales corren muy rápido. Para nuestros proyectos lentos, los fantasmas duermen tranquilos".</p>
+    </details>
+
+    <details class="u1">
+    <summary>5. Un niño te pregunta: "¿Por qué no puedo usar una protoboard para armar un circuito de radio o Wi-Fi?". ¿Cómo le respondes explicando las limitaciones físicas de la protoboard?</summary>
+    <p><strong>Respuesta técnica:</strong> Las protoboards tienen tres limitaciones físicas para circuitos de alta frecuencia:</p>
+    <ol>
+        <li><strong>Capacitancia parásita:</strong> Las pistas cercanas actúan como condensadores no deseados que filtran señales rápidas.</li>
+        <li><strong>Inductancia parásita:</strong> Los cables largos y las conexiones crean bobinas invisibles que también distorsionan señales rápidas.</li>
+        <li><strong>Contactos mecánicos:</strong> Los resortes internos que sujetan los componentes no son perfectos; en altas frecuencias generan ruido y pérdida de señal.</li>
+    </ol>
+    
+    <p><strong>Metáfora para niños:</strong></p>
+    <p>"Imagina que la protoboard es un camino de tierra. Para caminar despacio (nuestros LEDs), es perfecto. Pero si quieres correr una carrera de Fórmula 1 (señales de radio), necesitas una pista de asfalto liso y perfecto (una placa de circuito impreso PCB). El camino de tierra tiene baches invisibles que harían volar el auto."</p>
+    
+    <p><strong>Conexión STEAM:</strong> Esta es una excelente oportunidad para hablar sobre <em>diseño de productos</em>: los ingenieros eligen la herramienta correcta para cada etapa. La protoboard es para prototipar (probar ideas), pero el PCB es para el producto final.</p>
+    
+    <p><strong>Para tu futura aula:</strong> Muestra imágenes comparativas: protoboard desordenada vs. PCB verde profesional. Pregunta: "¿Cuál crees que usaría un ingeniero para un teléfono celular? ¿Y para probar una idea nueva?"</p>
+    </details>
+
+    <details class="u1">
+    <summary>6. Diseña una actividad de 10 minutos para que niños de 9 años aprendan a identificar y evitar cortocircuitos en una protoboard, sin encender la fuente de alimentación.</summary>
+    <p><strong>Actividad: "Inspector de Seguridad"</strong></p>
+    <p><strong>Materiales por pareja:</strong> 1 protoboard con 3 circuitos pre-armados (1 correcto, 1 cortocircuito, 1 circuito abierto), hoja de inspección con checklist.</p>
+    
+    <p><strong>Protocolo:</strong></p>
+    <ol>
+        <li><strong>Paso 1 (3 min):</strong> "Sin tocar nada, observen cada circuito. Busquen cables que vayan directo del riel rojo al azul sin pasar por ningún componente".</li>
+        <li><strong>Paso 2 (4 min):</strong> "Completen su checklist:
+        <ul>
+            <li>¿Hay conexión directa + a -? → Cortocircuito</li>
+            <li>¿Todos los componentes están en la misma columna? → Correcto</li>
+            <li>¿Hay componentes en columnas distintas sin cable puente? → Circuito abierto</li>
+        </ul>
+        </li>
+        <li><strong>Paso 3 (3 min):</strong> "Compartan sus hallazgos con otra pareja. ¿Coinciden en sus diagnósticos?"</li>
+    </ol>
+    
+    <p><strong>Objetivo pedagógico:</strong> Desarrollar la habilidad de <strong>verificación visual</strong> antes de encender. Esta es una competencia crítica de seguridad en laboratorios reales.</p>
+    
+    <p><strong>Refuerzo docente:</strong> "Los mejores ingenieros no son los más rápidos en conectar, sino los más meticulosos en verificar. La paciencia salva componentes (y presupuestos)".</p>
+    </details>
+
+    <!-- === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            Dos docentes revelan los secretos de la protoboard: desde cómo explicar el "canal central" sin terminología técnica hasta estrategias para evitar cortocircuitos. Comparten actividades como la "Ciudad Electrónica" y desmienten mitos sobre la capacitancia parásita.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <source src="audio/leccion7.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 14:14 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- === TARJETA DE IDENTIDAD DEL PROMPT ÉTICO === -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        
+        <p class="prompt-contexto">
+            Como futuro docente, aprenderás a usar la IA Generativa para <strong>potenciar</strong> tu pensamiento, no para reemplazarlo. Esta tarjeta te guía para construir prompts éticos que te ayuden a resolver dudas específicas de cada lección.
+        </p>
+        
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            
+            <div class="paso">
+                <strong>1️⃣ "Comprendí que..."</strong>
+                <p>Resume CON TUS PALABRAS lo aprendido. Ej: "la protoboard tiene rieles horizontales para energía y columnas verticales de 5 huecos conectados, separadas por un canal central que evita cortocircuitos cuando se insertan chips."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>2️⃣ "y quiero saber..."</strong>
+                <p>Plantea una DUDA ESPECÍFICA o aplicación. Ej: "por qué algunos protoboards grandes tienen los rieles de energía partidos a la mitad y cómo puedo saber si el mío tiene esta característica antes de armar un circuito grande."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong>
+                <p>Define TU AUDIENCIA (edad/curso). Ej: "a estudiantes de grado 7° que nunca han visto una protoboard física."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>4️⃣ "Incluye un error común que debo evitar..."</strong>
+                <p>Pide retroalimentación crítica. Ej: "al explicar por qué no se debe conectar directamente el riel rojo (+) al riel azul (-) sin ningún componente en medio."</p>
+            </div>
+        </div>
+        
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo aplicado a esta lección:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que la protoboard tiene dos tipos de conexiones internas: los rieles horizontales en los bordes (rojo para + y azul para -) que distribuyen energía a lo largo de toda la tabla, y las columnas verticales de 5 huecos cada una (letras a-e y f-j) que están conectadas entre sí pero separadas por un canal central. También entendí que cuando dos componentes comparten la misma columna, están conectados eléctricamente, y que el cortocircuito ocurre cuando se conecta directamente + con - sin resistencia. Quiero saber: si tengo una protoboard grande de 830 puntos y quiero montar un circuito con 6 LEDs en paralelo distribuidos en toda la tabla, ¿cómo verifico si los rieles de energía están partidos a la mitad y qué hago para unirlos correctamente sin causar un cortocircuito? Explícame como si fuera a enseñárselo a mis futuros estudiantes de grado 8°, usando una analogía con una ciudad que tiene dos autopistas de energía que se cortan en el medio. Incluye un error común que los niños suelen cometer al insertar componentes en columnas distintas pensando que están conectados, y cómo detectar visualmente un cortocircuito antes de encender la fuente."
+            </blockquote>
+        </div>
+        
+        <div class="prompt-aviso">
+            <strong>⚠️ Ética Docente:</strong> La IA es tu <em>asistente de pensamiento</em>, no tu reemplazo. Nunca copies textualmente sus respuestas en evaluaciones. Usa sus ideas para <strong>inspirar tu propio razonamiento</strong>, tal como harás con tus futuros estudiantes cuando usen tecnología en el aula. Anota en tu cuaderno tanto la respuesta de la IA como tu reflexión crítica sobre ella.
+        </div>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>¡Ya dominas tu mesa de trabajo! Sabes montar circuitos como un profesional sin soldar una sola vez. Pero surge una pregunta crítica:</p>
+        <p><strong>¿De dónde viene realmente la energía que hace funcionar todo?</strong></p>
+        <p>La electricidad que sale del enchufe de tu casa y la que trae una pila <em>parecen</em> hacer lo mismo, pero son completamente diferentes:</p>
+        <ul>
+        <li><strong>AC (Corriente Alterna):</strong> Vibra 60 veces por segundo. Es salvaje, impredecible y... ¡peligrosa para tus chips!</li>
+        <li><strong>DC (Corriente Continua):</strong> Fluye suave y constante como un río tranquilo. Es lo que tus circuitos necesitan para vivir.</li>
+        </ul>
+        <p>En la próxima lección descubrirás:</p>
+        <ul>
+        <li>Por qué tu "cargador" en realidad es una <em>fuente de poder</em> que domestica la electricidad salvaje.</li>
+        <li>El componente secreto que "aplana" las arrugas de la corriente: el <strong>Condensador</strong>.</li>
+        <li>La regla sagrada de la <em>Tierra Común</em> que evitará que tus futuros proyectos fallen misteriosamente.</li>
+        </ul>
+        <p><em>¿Listo para domar la energía y convertirte en el dueño absoluto de tu circuito?</em></p>
+    </div>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="leccion6.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion8.html" class="btn-navegacion">Siguiente: AC vs DC →</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

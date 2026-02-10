@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 6: Interruptores - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 1: Fundamentos Físicos - Lección 6</small></p>
+        <h1>🔘 ¡Prende y Apaga! El Interruptor</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>En la lección pasada aprendiste a conectar componentes en serie o paralelo. Pero hay un problema: ¡El circuito siempre está encendido y gasta la pila! Para que un sistema sea útil, necesitas tener el <strong>control</strong>. Hoy aprenderemos a decir "Cuándo sí y cuándo no" usando el componente mecánico más importante: el Interruptor.</p>
+    </div>
+
+    <section>
+        <p>El interruptor es un puente levadizo para los electrones. Es el componente que nos permite interactuar con la máquina.</p>
+
+        <h2>1. Abierto vs. Cerrado (¡Cuidado con el idioma!)</h2>
+        <p>En electrónica, las palabras son engañosas y al revés de lo que piensas en una puerta normal:</p>
+        <ul>
+            <li><strong>Circuito Abierto (OFF):</strong> El puente está levantado. El camino está roto. No pasan electrones. (Como un grifo cerrado).</li>
+            <li><strong>Circuito Cerrado (ON):</strong> El puente está abajo. El camino está unido. Los electrones fluyen. (Como un grifo abierto).</li>
+        </ul>
+
+        <div class="svg-container">
+            <!-- Imagen ya generada previamente -->
+            <img src="img/interruptor_estados.png" 
+                alt="Comparación visual: Interruptor abierto (luz apagada) vs Interruptor cerrado (luz encendida)" 
+                style="max-width: 75%; height: auto; border-radius: 8px;">
+            <p><small><em>Fig 1. Abierto = Cortado. Cerrado = Conectado.</em></small></p>
+        </div>
+
+        <h2>2. Tipos de Interruptores en tu Kit</h2>
+
+        <h4>🔘 El Pulsador Momentáneo (Push Button)</h4>
+        <p>
+        <strong>¡Atención con el nombre!</strong> En muchos videos de internet escucharás 
+        "pulsador temporal", pero ese término es <em>técnicamente incorrecto</em>. 
+        El nombre correcto es <strong>pulsador momentáneo</strong>.
+        </p>
+
+        <p>
+        Funciona así: solo permite el paso de corriente <em>durante el momento exacto</em> 
+        en que mantienes el botón presionado. Al soltarlo, el circuito se abre 
+        automáticamente y la corriente se detiene.
+        </p>
+
+        <div class="dato-extra">
+            <h4>⚠️ Aclaración Terminológica</h4>
+            <p>La palabra <em>momentáneo</em> se refiere al instante preciso de presión, 
+            no a un tiempo programado. Un <em>temporizador</em> es un dispositivo completamente 
+            diferente que mantiene un estado durante segundos o minutos programados.</p>
+            <p><strong>Regla para tu futura aula:</strong> Si un niño dice "pulsador temporal", 
+            corrígelo suavemente: <em>"Casi lo tienes: es <strong>momentáneo</strong>, 
+            porque funciona solo en el momento que lo presionas"</em>.</p>
+        </div>
+
+        <p><strong>Tipos de contacto:</strong></p>
+        <ul>
+        <li><strong>Normalmente Abierto (NO):</strong> En reposo está abierto (apagado). 
+            Al presionar se cierra (enciende). Es el más común. 
+            <em>Ejemplos: timbre de puerta, teclas de computador, botón de reset.</em></li>
+        <li><strong>Normalmente Cerrado (NC):</strong> En reposo está cerrado (encendido). 
+            Al presionar se abre (apaga). 
+            <em>Ejemplos: botón de emergencia, alarma de puerta abierta.</em></li>
+        </ul>
+
+        <p><strong>Ventaja pedagógica:</strong> Los pulsadores NO son perfectos para 
+        enseñar causalidad a niños: "Cuando presiono → sucede algo. Cuando suelto → 
+        vuelve al estado inicial". Esta relación directa causa-efecto es ideal para 
+        primeras experiencias con electrónica.</p>
+
+        <h3>El Interruptor de Palanca (Toggle / Dip Switch)</h3>
+        <p>Mantiene su posición (encendido o apagado) hasta que lo vuelvas a tocar.
+        <br><em>Ejemplo: El interruptor de luz de tu cuarto.</em></p>
+
+        <div class="svg-container">
+            <img src="img/variedad_interruptores.png" alt="Colección de diferentes tipos de interruptores y pulsadores" style="max-width: 45%; height: auto; border-radius: 8px;">
+            <p><small><em>Fig 2. En el mundo real existen muchas formas: Botones, Palancas, Dimmers y Controladores. ¡Todos hacen lo mismo: abrir o cerrar el circuito!</em></small></p>
+    </div>        
+
+    <div class="destacado">
+            <h3>🍎 Rincón del Docente: "El Teatro de los Interruptores"</h3>
+            
+            <p><strong>Objetivo pedagógico:</strong> Que los niños comprendan la diferencia entre 
+            "Abierto = Apagado" y "Cerrado = Encendido" mediante una representación física.</p>
+            
+            <h4>🎭 Actividad 1: "El Puente Levadizo Humano"</h4>
+            <p><strong>Materiales:</strong> Cinta adhesiva de colores, espacio en el aula.</p>
+            <p><strong>Preparación:</strong></p>
+            <ol>
+                <li>Usa cinta roja para marcar un "río" en el piso del aula (una línea recta).</li>
+                <li>Un niño se para sobre la cinta roja y hace de "puente levadizo".</li>
+                <li>Los demás niños son "electrones" que quieren cruzar el río.</li>
+            </ol>
+            <p><strong>Dinámica:</strong></p>
+            <ul>
+                <li><strong>Puente ABAJO (Cerrado):</strong> El niño se agacha y forma un puente con su cuerpo. Los "electrones" pueden cruzar corriendo. ¡El circuito está ENCENDIDO!</li>
+                <li><strong>Puente ARRIBA (Abierto):</strong> El niño se para erguido. Los "electrones" no pueden pasar. ¡El circuito está APAGADO!</li>
+            </ul>
+            <p><strong>Pregunta guía:</strong> "¿Cuándo el puente está 'cerrado', los electrones pueden pasar o no?"</p>
+            
+            <h4>💡 Actividad 2: "El Juego del Timbre"</h4>
+            <p><strong>Materiales:</strong> Un pulsador real, una pila de 3V, un LED con resistencia.</p>
+            <p><strong>Procedimiento:</strong></p>
+            <ol>
+                <li>Conecta el circuito completo excepto el pulsador.</li>
+                <li>Los niños deben tocar con sus dedos los dos terminales del pulsador para "cerrar" el circuito.</li>
+                <li>Observan que el LED solo enciende MIENTRAS mantienen los dedos juntos.</li>
+            </ol>
+            <p><strong>Lección:</strong> "El pulsador es como un interruptor que solo funciona mientras lo presionas. Es perfecto para timbres o teclas de computador."</p>
+            
+            <div class="dato-extra">
+                <h4>💡 Consejo Pedagógico</h4>
+                <p>Después de las actividades, haz que los niños dibujen en su cuaderno:</p>
+                <ul>
+                <li>Un puente levadizo con "ABIERTO = APAGADO" y "CERRADO = ENCENDIDO"</li>
+                <li>Un pulsador con la leyenda "Solo funciona mientras lo presionas"</li>
+                </ul>
+                <p>Esto refuerza la conexión entre la experiencia física y el concepto abstracto.</p>
+            </div>
+        </div>
+
+        <h2>3. Símbolos Esenciales (El idioma de los planos)</h2>
+        <p>Cuando dibujamos diagramas, usamos abreviaturas técnicas. Aquí están los dos más importantes:</p>
+
+        <div class="svg-container">
+        <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- SPST -->
+            <text x="100" y="30" font-size="14" fill="#000" text-anchor="middle" font-weight="bold">SPST (Un polo, un tiro)</text>
+            <line x1="50" y1="60" x2="80" y2="60" stroke="#000" stroke-width="2"/>
+            <circle cx="80" cy="60" r="5" fill="white" stroke="#000" stroke-width="2"/>
+            <line x1="120" y1="60" x2="150" y2="60" stroke="#000" stroke-width="2"/>
+            <circle cx="120" cy="60" r="5" fill="white" stroke="#000" stroke-width="2"/>
+            <text x="100" y="85" font-size="12" fill="#000" text-anchor="middle">Abierto = Apagado</text>
+            <line x1="50" y1="110" x2="80" y2="110" stroke="#000" stroke-width="2"/>
+            <circle cx="80" cy="110" r="5" fill="white" stroke="#000" stroke-width="2"/>
+            <circle cx="120" cy="110" r="5" fill="white" stroke="#000" stroke-width="2"/>
+            <line x1="80" y1="110" x2="120" y2="110" stroke="#000" stroke-width="2"/>
+            <line x1="125" y1="110" x2="150" y2="110" stroke="#000" stroke-width="2"/>
+            <text x="100" y="135" font-size="12" fill="#000" text-anchor="middle">Cerrado = Encendido</text>
+            
+            <!-- SPDT -->
+            <text x="350" y="30" font-size="14" fill="#000" text-anchor="middle" font-weight="bold">SPDT (Un polo, doble tiro)</text>
+            <line x1="300" y1="60" x2="330" y2="60" stroke="#000" stroke-width="2"/>
+            <circle cx="330" cy="60" r="5" fill="white" stroke="#000" stroke-width="2"/>
+            <line x1="370" y1="40" x2="400" y2="40" stroke="#000" stroke-width="2"/>
+            <circle cx="370" cy="40" r="5" fill="white" stroke="#000" stroke-width="2"/>
+            <line x1="370" y1="80" x2="400" y2="80" stroke="#000" stroke-width="2"/>
+            <circle cx="370" cy="80" r="5" fill="white" stroke="#000" stroke-width="2"/>
+            <line x1="330" y1="60" x2="370" y2="40" stroke="#000" stroke-width="2" stroke-dasharray="5,3"/>
+            <text x="350" y="105" font-size="12" fill="#000" text-anchor="middle">Conecta centro con izquierda O derecha</text>
+            
+            <line x1="300" y1="140" x2="330" y2="140" stroke="#000" stroke-width="2"/>
+            <circle cx="330" cy="140" r="5" fill="white" stroke="#000" stroke-width="2"/>
+            <line x1="370" y1="120" x2="400" y2="120" stroke="#000" stroke-width="2"/>
+            <circle cx="370" cy="120" r="5" fill="white" stroke="#000" stroke-width="2"/>
+            <line x1="370" y1="160" x2="400" y2="160" stroke="#000" stroke-width="2"/>
+            <circle cx="370" cy="160" r="5" fill="white" stroke="#000" stroke-width="2"/>
+            <line x1="330" y1="140" x2="370" y2="160" stroke="#000" stroke-width="2"/>
+            <text x="350" y="185" font-size="12" fill="#000" text-anchor="middle">Posición alternativa</text>
+        </svg>
+        <p><em>Figura: Símbolos de interruptores SPST (un polo, un tiro) y SPDT (un polo, doble tiro).</em></p>
+        </div>
+
+        <p><strong>SPST (Single Pole, Single Throw):</strong> El interruptor básico. Tiene dos terminales y solo dos estados: Abierto o Cerrado. Es como un grifo de agua: o está abierto (pasa corriente) o cerrado (no pasa).</p>
+
+        <p><strong>SPDT (Single Pole, Double Throw):</strong> Tiene tres terminales. El terminal central se conecta con uno de los dos laterales, pero nunca con ambos al mismo tiempo. Es como un cambio de vías de tren: puedes elegir entre dos caminos diferentes.</p>
+
+        <p><strong>Aplicación práctica:</strong> El SPDT es perfecto para circuitos donde necesitas elegir entre dos opciones, como cambiar entre dos LEDs de colores diferentes o seleccionar entre dos fuentes de alimentación.</p>
+
+        <h3>3. Símbolos Esenciales (El idioma de los planos)</h3>
+        <p>Cuando dibujamos diagramas, usamos abreviaturas técnicas. Existen dos estándares internacionales para representar interruptores:</p>
+
+        <div class="svg-container">
+        <img src="img\simbolos_pulsadores.png" alt="Símbolos de pulsadores NO y NC: Estándar americano vs. europeo">
+        <p><em>Figura: Símbolos de pulsadores NO (Normalmente Abierto) y NC (Normalmente Cerrado) en estándar americano y europeo. El curso utilizará exclusivamente el estándar europeo (norma IEC 60617/UNE-EN 60617).</em></p>
+        </div>
+
+        <p><strong>Estándar Europeo (Recomendado para este curso):</strong></p>
+        <ul>
+        <li><strong>Normalmente Abierto (NO):</strong> Dos contactos separados por una línea diagonal o recta (simulando un interruptor abierto) con un accionador en forma de botón superior. Permanece abierto hasta ser presionado, cerrando el circuito.</li>
+        <li><strong>Normalmente Cerrado (NC):</strong> Dos contactos conectados por una línea, con un accionador en forma de botón superior. Permanece cerrado hasta ser presionado, abriendo el circuito.</li>
+        </ul>
+
+        <p><strong>Estándar Americano:</strong></p>
+        <ul>
+        <li>Usa un símbolo con un resorte representado visualmente.</li>
+        <li>NO: Muestra un resorte que se comprime al presionar.</li>
+        <li>NC: Muestra un resorte que se extiende al presionar.</li>
+        </ul>
+
+        <p><strong>¿Por qué preferimos el estándar europeo?</strong></p>
+        <p>El estándar europeo (norma IEC 60617/UNE-EN 60617) es el más utilizado a nivel internacional en documentos técnicos, software de diseño (KiCad, Altium, etc.) y en la mayoría de los países del mundo. Es la norma que encontrarás en la mayoría de los manuales técnicos profesionales.</p>
+
+        <div class="dato-extra">
+        <h4>💡 Dato Técnico para Futuros Docentes</h4>
+        <p>Los símbolos NO/NC se refieren al estado del interruptor <em>en reposo</em> (sin presionar):</p>
+        <ul>
+            <li><strong>NO (Normalmente Abierto):</strong> En reposo está abierto (apagado). Al presionar se cierra (enciende).</li>
+            <li><strong>NC (Normalmente Cerrado):</strong> En reposo está cerrado (encendido). Al presionar se abre (apaga).</li>
+        </ul>
+        <p>En la lección 5 aprendimos que en los circuitos en paralelo, los pulsadores NO son ideales para controlar LEDs, ya que al soltarlos el circuito se abre y el LED se apaga. Para proyectos que requieren "apagado permanente", se usan pulsadores NC.</p>
+        </div>
+
+        <div class="dato-extra">
+            <h4>⚠️ Advertencia de Seguridad para Futuros Docentes</h4>
+            <p>Los interruptores son componentes aparentemente simples, pero pueden ser peligrosos si se usan incorrectamente:</p>
+            <ul>
+                <li><strong>Nunca uses interruptores domésticos (110V/220V) en proyectos escolares.</strong> Siempre trabaja con fuentes de baja tensión (3V, 5V, 9V).</li>
+                <li><strong>Verifica la corriente máxima</strong> que puede manejar tu interruptor. Si superas ese límite, el interruptor puede quemarse o soldarse.</li>
+                <li><strong>Enseña a tus alumnos a siempre apagar el circuito</strong> antes de hacer modificaciones. Esto evita cortocircuitos accidentales.</li>
+            </ul>
+            <p><strong>Regla de oro en el aula:</strong> "Si no estás seguro, pregunta antes de conectar". La curiosidad es buena, pero la seguridad es mejor.</p>
+        </div>
+        
+        <div class="pregunta-curiosidad">
+            <h3>🧠 Reto de Lógica Mecánica</h3>
+            <p>Imagina que vives en una casa de dos pisos. Quieres que la luz de la escalera se pueda:</p>
+<ul>
+  <li>Prender desde el primer piso al subir.</li>
+  <li>Apagar desde el segundo piso al llegar arriba.</li>
+  <li>Prender desde el segundo piso al bajar.</li>
+  <li>Apagar desde el primer piso al llegar abajo.</li>
+</ul>
+<p><strong>El desafío:</strong> Con un interruptor SPST común (el básico de encender/apagar), esto es imposible. Necesitas un interruptor especial que pueda <em>cambiar el camino de la corriente</em> entre dos opciones diferentes.</p>
+<p><strong>¿Cuál es la solución?</strong> Dos interruptores SPDT (de tres terminales) conectados de una forma ingeniosa. Cada vez que cambias <em>cualquier</em> de los dos interruptores, el estado de la luz se invierte (enciende si estaba apagada, apaga si estaba encendida).</p>
+<p><strong>Para tu futura aula:</strong> Este es un excelente ejemplo para mostrar que la ingeniería resuelve problemas cotidianos. ¡La próxima vez que uses un interruptor de escalera en tu casa, sabrás el ingenio que hay detrás!</p>
+        </div>
+    </section>
+
+    <!-- Sección de Preguntas de Consolidación -->
+    <h2>❓ Preguntas de Consolidación</h2>
+    <p>Responde estas preguntas para asegurarte de que dominas los conceptos técnicos <em>y</em> estás listo para enseñarlos en tu futura aula:</p>
+
+    <details class="u1">
+    <summary>1. Explica por qué en electrónica "Circuito Cerrado" significa "Encendido" y "Circuito Abierto" significa "Apagado", cuando en el lenguaje cotidiano parece lo contrario.</summary>
+    <p><strong>Explicación técnica:</strong> En electrónica, "cerrado" se refiere al camino de la corriente, no al interruptor. Cuando el interruptor está cerrado, el camino eléctrico está completo (cerrado) y la corriente puede fluir. Cuando el interruptor está abierto, el camino está roto (abierto) y la corriente no puede fluir.</p>
+    
+    <p><strong>Metáfora del puente levadizo:</strong></p>
+    <ul>
+        <li><strong>Puente ABAJO (Cerrado):</strong> El camino está completo. Los electrones pueden cruzar. ¡Circuito ENCENDIDO!</li>
+        <li><strong>Puente ARRIBA (Abierto):</strong> El camino está roto. Los electrones no pueden pasar. ¡Circuito APAGADO!</li>
+    </ul>
+    
+    <p><strong>Para tu futura aula:</strong> Usa la actividad del "Puente Levadizo Humano" para que los niños experimenten físicamente esta diferencia antes de verla en un diagrama.</p>
+    </details>
+
+    <details class="u1">
+    <summary>2. ¿Cuál es la diferencia práctica entre un Pulsador (Push Button) y un Interruptor de Palanca (Toggle Switch)? Da un ejemplo de cuándo usarías cada uno.</summary>
+    <p><strong>Pulsador (Push Button):</strong></p>
+    <ul>
+        <li><strong>Funcionamiento:</strong> Solo conecta mientras lo mantienes presionado. Es "Normalmente Abierto" (NO).</li>
+        <li><strong>Ejemplos de uso:</strong> Timbre de puerta, teclas de computador, botón de reset, disparador de cámara.</li>
+        <li><strong>Ventaja:</strong> Seguridad: si sueltas el botón, el circuito se apaga automáticamente.</li>
+    </ul>
+    
+    <p><strong>Interruptor de Palanca (Toggle Switch):</strong></p>
+    <ul>
+        <li><strong>Funcionamiento:</strong> Mantiene su posición (encendido o apagado) hasta que lo vuelves a tocar.</li>
+        <li><strong>Ejemplos de uso:</strong> Interruptor de luz de cuarto, encendido de electrodomésticos, selector de modo en dispositivos.</li>
+        <li><strong>Ventaja:</strong> Conveniencia: no necesitas mantenerlo presionado para que funcione.</li>
+    </ul>
+    
+    <p><strong>Regla de diseño:</strong> Usa pulsadores para acciones momentáneas (timbres, disparos) y palancas para estados persistentes (encendido/apagado).</p>
+    </details>
+
+    <details class="u1">
+    <summary>3. Diseña un circuito simple con un LED que se encienda al presionar un pulsador y se apague al soltarlo. Describe los componentes necesarios y cómo los conectarías.</summary>
+    <p><strong>Componentes necesarios:</strong></p>
+    <ul>
+        <li>Fuente de alimentación: 5V (cargador USB)</li>
+        <li>LED rojo (2V, 20mA)</li>
+        <li>Resistencia: 330Ω (protección del LED)</li>
+        <li>Pulsador (Push Button) normalmente abierto</li>
+        <li>Cables de conexión</li>
+    </ul>
+    
+    <p><strong>Conexión paso a paso:</strong></p>
+    <ol>
+        <li>Conecta el positivo de la fuente (5V) a una terminal del pulsador.</li>
+        <li>Conecta la otra terminal del pulsador a la resistencia (330Ω).</li>
+        <li>Conecta el otro extremo de la resistencia al ánodo del LED (pata larga).</li>
+        <li>Conecta el cátodo del LED (pata corta) al negativo de la fuente (GND).</li>
+    </ol>
+    
+    <p><strong>Funcionamiento:</strong> Cuando presionas el pulsador, cierras el circuito y el LED enciende. Al soltarlo, el circuito se abre y el LED se apaga.</p>
+    
+    <p><strong>Diagrama esquemático:</strong></p>
+    <p class="formula">5V → [Pulsador] → [330Ω] → [LED] → GND</p>
+    </details>
+
+    <details class="u1">
+    <summary>4. Explica el concepto de "Interruptor Normalmente Abierto (NO)" vs "Normalmente Cerrado (NC)". ¿Por qué la mayoría de los pulsadores son NO?</summary>
+    <p><strong>Normalmente Abierto (NO - Normally Open):</strong></p>
+    <ul>
+        <li>En reposo (sin presionar), el circuito está ABIERTO (apagado).</li>
+        <li>Al presionar, el circuito se CIERRA (enciende).</li>
+        <li><strong>Ejemplo:</strong> Pulsador de timbre, tecla de computador.</li>
+    </ul>
+    
+    <p><strong>Normalmente Cerrado (NC - Normally Closed):</strong></p>
+    <ul>
+        <li>En reposo (sin presionar), el circuito está CERRADO (encendido).</li>
+        <li>Al presionar, el circuito se ABRE (apaga).</li>
+        <li><strong>Ejemplo:</strong> Botón de emergencia, alarma de puerta.</li>
+    </ul>
+    
+    <p><strong>¿Por qué la mayoría de pulsadores son NO?</strong></p>
+    <ul>
+        <li><strong>Seguridad:</strong> Si el pulsador falla o se rompe, el circuito permanece abierto (apagado), lo cual es más seguro en la mayoría de aplicaciones.</li>
+        <li><strong>Eficiencia energética:</strong> El circuito solo consume energía cuando se presiona el botón, no en reposo.</li>
+        <li><strong>Estándar industrial:</strong> La mayoría de dispositivos de entrada (teclados, controles) usan NO por convención.</li>
+    </ul>
+    
+    <p><strong>Excepción importante:</strong> Los botones de emergencia son NC porque si el cable se corta o el botón falla, el circuito se abre y activa la alarma (falla segura).</p>
+    </details>
+
+    <details class="u1">
+    <summary>5. Resuelve el "Reto de Lógica Mecánica": ¿Qué tipo de interruptores necesitas para controlar una luz de escalera desde dos pisos diferentes?</summary>
+    <p><strong>Solución:</strong> Necesitas dos interruptores SPDT (Single Pole, Double Throw) configurados en un circuito especial de "tres vías".</p>
+    
+    <p><strong>Explicación del circuito:</strong></p>
+    <ol>
+        <li>El primer interruptor (SPDT) conecta la fase (positivo) con uno de dos cables (llamémoslos A y B).</li>
+        <li>El segundo interruptor (SPDT) conecta el otro extremo de los cables A y B con la lámpara.</li>
+        <li>La lámpara se conecta al neutro (negativo).</li>
+    </ol>
+    
+    <p><strong>Funcionamiento:</strong></p>
+    <ul>
+        <li>Si ambos interruptores están en la misma posición (ambos conectan A o ambos conectan B), el circuito está cerrado y la lámpara enciende.</li>
+        <li>Si los interruptores están en posiciones opuestas (uno conecta A y el otro conecta B), el circuito está abierto y la lámpara se apaga.</li>
+        <li>Cada vez que cambias un interruptor, inviertes el estado de la lámpara (enciende/apaga).</li>
+    </ul>
+    
+    <p><strong>Conexión futura:</strong> En la Lección 9 descubrirás que este comportamiento tiene un nombre en lógica digital. ¡Pero por ahora, basta con entender cómo funciona en el mundo físico!</p>
+    
+    <p><strong>Para tu futura aula:</strong> Puedes simular esto con dos niños que hacen de interruptores SPDT y deciden si el "electrón" pasa o no según sus posiciones.</p>
+    </details>
+
+    <details class="u1">
+    <summary>6. Un niño te pregunta: "¿Por qué no puedo usar un interruptor de luz normal para controlar un motor grande?". ¿Cómo le respondes explicando los conceptos de corriente y capacidad de interruptores?</summary>
+    <p><strong>Respuesta técnica:</strong> Los interruptores tienen una capacidad máxima de corriente que pueden manejar de forma segura. Un interruptor de luz doméstico típico está diseñado para manejar 10-15 amperios, mientras que un motor grande puede consumir 20, 50 o incluso 100 amperios.</p>
+    
+    <p><strong>¿Qué pasa si usas un interruptor pequeño para un motor grande?</strong></p>
+    <ul>
+        <li><strong>Chispas peligrosas:</strong> Al abrir el circuito con alta corriente, se generan arcos eléctricos que pueden quemar el interruptor.</li>
+        <li><strong>Soldadura de contactos:</strong> Los contactos del interruptor pueden soldarse por el calor, quedando permanentemente cerrados.</li>
+        <li><strong>Incendio:</strong> El interruptor puede sobrecalentarse y causar un incendio.</li>
+    </ul>
+    
+    <p><strong>Solución correcta:</strong> Para motores grandes, se usan <strong>relés</strong> o <strong>contactores</strong>. Estos son interruptores electromagnéticos que usan una pequeña corriente para controlar una corriente grande de forma segura.</p>
+    
+    <p><strong>Metáfora para niños:</strong></p>
+    <p>"Imagina que el interruptor es una puerta. Una puerta normal (interruptor de luz) puede manejar a unas pocas personas pasando (corriente pequeña). Pero si intentas hacer pasar un desfile completo de 1000 personas (motor grande), la puerta se romperá. Necesitas una puerta gigante especial (relé) para eso."</p>
+    
+    <p><strong>Conexión STEAM:</strong> Esta es una excelente oportunidad para hablar sobre <em>ingeniería de sistemas</em> y por qué los ingenieros siempre eligen componentes con capacidad superior a la necesaria (factor de seguridad).</p>
+    </details>
+
+    <!-- === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            Dos docentes exploran el fascinante mundo de los interruptores: desde la confusa terminología de "abierto/cerrado" hasta el ingenioso circuito de escalera con dos SPDT. Comparten estrategias lúdicas como el "Teatro de los Interruptores" y desmienten mitos sobre seguridad eléctrica.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <source src="audio/leccion6.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 15:33 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- === TARJETA DE IDENTIDAD DEL PROMPT ÉTICO === -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        
+        <p class="prompt-contexto">
+            Como futuro docente, aprenderás a usar la IA Generativa para <strong>potenciar</strong> tu pensamiento, no para reemplazarlo. Esta tarjeta te guía para construir prompts éticos que te ayuden a resolver dudas específicas de cada lección.
+        </p>
+        
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            
+            <div class="paso">
+                <strong>1️⃣ "Comprendí que..."</strong>
+                <p>Resume CON TUS PALABRAS lo aprendido. Ej: "en electrónica 'circuito cerrado' significa encendido porque el camino está completo, mientras que 'circuito abierto' significa apagado porque el camino está roto."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>2️⃣ "y quiero saber..."</strong>
+                <p>Plantea una DUDA ESPECÍFICA o aplicación. Ej: "por qué los interruptores SPDT son necesarios para el circuito de escalera y no se puede hacer con dos SPST normales."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong>
+                <p>Define TU AUDIENCIA (edad/curso). Ej: "a estudiantes de grado 8° que nunca han visto un interruptor de tres terminales."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>4️⃣ "Incluye un error común que debo evitar..."</strong>
+                <p>Pide retroalimentación crítica. Ej: "al explicar por qué un interruptor de luz normal no sirve para controlar un motor grande."</p>
+            </div>
+        </div>
+        
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo aplicado a esta lección:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que en electrónica 'circuito cerrado' significa que el camino está completo y la corriente fluye (encendido), mientras que 'circuito abierto' significa que el camino está roto y no pasa corriente (apagado). También entendí que hay dos tipos principales de interruptores: el pulsador momentáneo (que solo funciona mientras lo presionas, como un timbre) y el interruptor de palanca (que mantiene su posición, como la luz del cuarto). Además, aprendí que los interruptores SPDT tienen tres terminales y permiten elegir entre dos caminos diferentes. Quiero saber: si tengo que diseñar un circuito para controlar una lámpara desde tres lugares diferentes (por ejemplo, entrada, mitad y final de un pasillo largo), ¿qué tipo de interruptores necesito y cómo los conectaría? Explícame como si fuera a enseñárselo a mis futuros estudiantes de grado 9°, usando una analogía con trenes y cambios de vía. Incluye un error común que los niños suelen cometer al intentar diseñar circuitos con múltiples interruptores, especialmente confundiendo cuándo usar SPST vs SPDT."
+            </blockquote>
+        </div>
+        
+        <div class="prompt-aviso">
+            <strong>⚠️ Ética Docente:</strong> La IA es tu <em>asistente de pensamiento</em>, no tu reemplazo. Nunca copies textualmente sus respuestas en evaluaciones. Usa sus ideas para <strong>inspirar tu propio razonamiento</strong>, tal como harás con tus futuros estudiantes cuando usen tecnología en el aula. Anota en tu cuaderno tanto la respuesta de la IA como tu reflexión crítica sobre ella.
+        </div>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>¡Ya tienes el control! Sabes prender y apagar circuitos como un verdadero ingeniero. Pero hay un problema práctico que seguramente ya notaste:</p>
+        <p><strong>Mantener los cables unidos con los dedos o cinta adhesiva es una pesadilla.</strong> Se sueltan, hacen falso contacto y tu circuito funciona... hasta que decides moverlo un centímetro. 😅</p>
+        <p>En la próxima lección conocerás tu <strong>mesa de trabajo definitiva</strong>: la <strong>Protoboard</strong>. Esta herramienta revolucionará tu forma de prototipar:</p>
+        <ul>
+        <li>Aprenderás cómo funciona por dentro (¡tiene un orden secreto!).</li>
+        <li>Descubrirás cómo evitar el enemigo #1: el <strong>cortocircuito</strong>.</li>
+        <li>Montarás tu primer circuito profesional sin necesidad de soldar.</li>
+        <li>Aprenderás el arte del cableado ordenado (¡la "A" de STEAM!).</li>
+        </ul>
+        <p><em>¿Listo para pasar de "mantener con cinta" a "conectar como profesional"?</em></p>
+    </div>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="leccion5.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion7.html" class="btn-navegacion">Siguiente: La Protoboard →</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

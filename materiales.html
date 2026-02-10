@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Materiales - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        /* Estilos específicos para la Lista de Compras */
+        .checklist {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+        
+        .checklist li {
+            background: #fff;
+            border: 1px solid var(--color-borde);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            transition: background 0.2s;
+        }
+
+        .checklist li:hover {
+            background-color: #fcfcfc;
+            border-color: var(--color-primario);
+        }
+
+        /* Checkbox grande */
+        .checklist input[type="checkbox"] {
+            transform: scale(1.5);
+            margin-right: 20px;
+            margin-top: 5px; /* Alinear con el título */
+            cursor: pointer;
+        }
+
+        .item-content { flex-grow: 1; }
+
+        .item-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #333;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .cantidad {
+            background-color: var(--color-primario);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-right: 8px;
+            vertical-align: text-bottom;
+        }
+
+        .nota-compra {
+            font-size: 0.9em;
+            color: #666;
+            display: block;
+        }
+
+        .categoria-titulo {
+            margin-top: 40px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--color-borde);
+            color: var(--color-secundario);
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Preparación del Curso</small></p>
+        <h1>🛍️ Tu Kit de Laboratorio: Lista de Compras</h1>
+    </header>
+
+    <section>
+        <p>¡Ingeniero precavido vale por dos! Para completar este curso sin pausas ni carreras de última hora, necesitas reunir estos materiales. No te preocupes, son componentes estándar, económicos y fáciles de conseguir en cualquier tienda de electrónica.</p>
+        
+        <div class="destacado" style="border-left-color: #28a745; background-color: #d4edda;">
+            <h3>💡 Consejo de Ahorro</h3>
+            <p>Muchos de estos elementos (como el cargador USB o cables viejos) seguro ya los tienes en casa. ¡Recicla antes de comprar!</p>
+        </div>
+
+        <h2 class="categoria-titulo">1. Herramientas y Energía (Lo Básico)</h2>
+        <ul class="checklist">
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">1</span> Protoboard (Grande o Mediana)</span>
+                    <span class="nota-compra">Preferiblemente de 830 puntos. ¡Será tu mesa de trabajo para todo el curso!</span>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">1</span> Multímetro Digital</span>
+                    <span class="nota-compra">El más sencillo sirve. Asegúrate de que mida Voltaje DC (V-), Resistencia (Ω) y Continuidad (Pito).</span>
+                </div>
+            </li>
+            
+            <!-- ALIMENTACIÓN USB -->
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">1</span> Cargador de Celular (5V)</span>
+                    <span class="nota-compra">Cualquier "cubito" USB viejo. Verifica que la etiqueta diga "Output: 5V".</span>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">1</span> Cable USB viejo (para cortar)</span>
+                    <span class="nota-compra">Lo cortaremos para sacar los cables Rojo (+) y Negro (-) que alimentarán la protoboard.</span>
+                </div>
+            </li>
+
+            <!-- ALIMENTACIÓN BATERÍA (UNIDAD 1) -->
+            <li style="border-left: 5px solid var(--u1-color);">
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">1</span> Pila CR2032 (3V)</span>
+                    <span class="nota-compra">La "pila de moneda". Esencial para las primeras lecciones.</span>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">1</span> Portapila para CR2032 (Coin Cell Holder)</span>
+                    <span class="nota-compra">Soporte con pines para conectar la pila firmemente a la protoboard.</span>
+                </div>
+            </li>
+
+            <!-- CABLES -->
+            <li style="border-left: 5px solid var(--color-secundario);">
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">1 Caja</span> Kit de Cables Rígidos (Pre-cortados)</span>
+                    <span class="nota-compra">Cajita de cables de colores de distintas longitudes (puentes). Vital para mantener el orden en circuitos complejos.</span>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">1 Paq.</span> Cables Jumpers (Macho-Macho) y (Macho-Hembra)</span>
+                    <span class="nota-compra">Cables flexibles con puntas. Útiles para conexiones largas o rápidas.</span>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">1 Set</span> Cables Caimán a Pin (Macho/Hembra)</span>
+                    <span class="nota-compra">22 AWG. Tienen una pinza de cocodrilo en un extremo y un pin para protoboard en el otro. ¡Vitales para conectar componentes externos rápidamente!</span>
+                </div>
+            </li>
+        </ul>
+
+        <h2 class="categoria-titulo">2. Componentes Pasivos (Resistencias y LEDs)</h2>
+        <ul class="checklist">
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">10</span> LEDs (Varios Colores)</span>
+                    <span class="nota-compra">Rojo, Verde, Amarillo. ¡Compra varios por si alguno se quema aprendiendo!</span>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">10</span> Resistencias de 330 Ω (Ohmios)</span>
+                    <span class="nota-compra">Colores: Naranja - Naranja - Marrón. (Para proteger los LEDs).</span>
+                </div>
+            </li>            
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">10</span> Resistencias de 10 kΩ (Kilo-ohmios)</span>
+                    <span class="nota-compra">Colores: Marrón - Negro - Naranja. (Para Pull-Up/Pull-Down).</span>
+                </div>
+            </li>
+            <li style="border-left: 4px solid #28a745; background-color: #f0fff4;">
+                <input type="checkbox">
+                <div class="item-content">
+                    <span class="item-title">Opcional: Resistencias de 1/2 Watt</span>
+                    <span class="nota-compra">Para las de 330Ω y 10kΩ. Son más grandes y resistentes que las estándar de 1/4W. Ideales para aprender sin quemar dedos.</span>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">2</span> Condensadores Electrolíticos (10 µF o 100 µF)</span>
+                    <span class="nota-compra">De 16 Voltios o más. Recuerda: ¡La franja indica el negativo!</span>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">6</span> Pulsadores (Push Buttons)</span>
+                    <span class="nota-compra">Interruptores pequeños de 4 patas para insertar en la protoboard. Son los que usarás para "dar clics" en tus circuitos.</span>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">1</span> Dip Switch de 8 Posiciones</span>
+                    <span class="nota-compra">O en su defecto, 8 interruptores de botón pequeños (push-buttons) para protoboard.</span>
+                </div>
+            </li>
+        </ul>
+
+        <h2 class="categoria-titulo">3. Chips Lógicos (Familia TTL 74xx)</h2>
+        <p>Estos son los cerebros. Pídelos como "Circuitos Integrados 74LS..." o "74HC..." Busca referencias que tengan las letras LS en el medio (ej: 74LS08). Son las más resistentes para aprender. ¡Cuidado con las cantidades!</p>
+        <ul class="checklist">
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">1</span> 7404 (NOT)</span>
+                    <span class="nota-compra">Inversor Hexagonal.</span>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">1</span> 7408 (AND)</span>
+                    <span class="nota-compra">Cuádruple compuerta AND de 2 entradas.</span>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">1</span> 7432 (OR)</span>
+                    <span class="nota-compra">Cuádruple compuerta OR de 2 entradas.</span>
+                </div>
+            </li>
+            <li style="border-left: 5px solid #ffc107;">
+                <input type="checkbox"> 
+                <div class="item-content">
+                    <span class="item-title"><span class="cantidad">3</span> 7486 (XOR) - ¡IMPORTANTE!</span>
+                    <span class="nota-compra">Necesitas <strong>3 unidades</strong> para el proyecto final (Hamming). No compres solo una o te quedarás varado al final.</span>
+                </div>
+            </li>
+        </ul>
+
+        <div class="dato-extra">
+            <h3>📍 ¿Dónde conseguir esto en Colombia?</h3>
+            <p>Puedes buscar en:</p>
+            <ul>
+                <li>Tiendas de componentes electrónicos en el centro de tu ciudad (Ej: La Carrera 9na en Bogotá, El Centro en Medellín/Cali).</li>
+                <li>Tiendas en línea como MercadoLibre o tiendas especializadas locales.</li>
+                <li>Papelerías grandes (a veces tienen kits básicos escolares, aunque los chips son más de tienda técnica).</li>
+            </ul>
+        </div>
+
+        <p style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="btn-navegacion">← Volver al Inicio</a>
+            <a href="leccion1.html" class="btn-navegacion" style="background-color: var(--u1-color);">Comenzar Lección 1 →</a>
+        </p>
+    </section>
+</div>
+
+</body>
+</html>

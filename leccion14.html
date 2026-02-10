@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 14: De Morgan - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX Configurado -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 2: Lógica Digital - Lección 14</small></p>
+        <h1>🪄 Los Trucos del Mago: De Morgan</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>En la lección anterior dibujamos el mapa completo de la verdad. Pero a veces, ese mapa nos sugiere un circuito gigante y costoso. ¿Es obligatorio construirlo así? <strong>No.</strong> Un buen ingeniero es "tacaño" con los recursos. Hoy aprenderemos los <strong>Trucos de Magia Matemática</strong> para aplastar ecuaciones monstruosas y convertirlas en soluciones elegantes, pequeñas y baratas.</p>
+    </div>
+
+    <section>
+        <p>A veces terminas con una ecuación gigante. ¿Compras 20 chips? ¡No! Usas el álgebra para simplificar. Es como jugar Tetris con la lógica.</p>
+
+        <h2>1. Reglas de "Sentido Común"</h2>
+        
+        <h3>Idempotencia</h3>
+        <p>Si dices lo mismo dos veces, es como decirlo una sola vez.</p>
+        <div class="formula">
+            <p>$$A + A = A$$</p>
+            <p>$$A \cdot A = A$$</p>
+        </div>
+
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+            <h3>🧠 Conexión con Conjuntos</h3>
+            <p>¿Recuerdas la teoría de conjuntos de la escuela? La unión y la intersección también son operaciones <strong>idempotentes</strong>.</p>
+            <p>Esto significa que al unir un conjunto consigo mismo, el resultado es el mismo conjunto original:</p>
+            <p>$$A \cup A = A$$</p>
+            <p>Y de manera análoga, al interceptarlo consigo mismo, se obtiene nuevamente el mismo conjunto:</p>
+            <p>$$A \cap A = A$$</p>
+            <p>¡La lógica digital sigue las mismas reglas!</p>
+        </div>
+
+        <h3>Otras reglas vitales</h3>
+        <div class="formula">
+            <p>$$\bar{\bar{A}} = A$$ <small>(Doble Negación: "No es verdad que no fui yo" = Fui yo)</small></p>
+            <p>$$A \cdot \bar{A} = 0$$ <small>(Contradicción: No puedes ser y no ser a la vez)</small></p>
+        </div>
+
+        <div class="dato-extra">
+            <p><strong>👀 Ojo al dato (Adelanto Matemático):</strong> Aquí asumimos por lógica que solo hay un contrario (\(\bar{A}\)). Pero, ¿podría haber dos? En la <strong>Lección 24</strong> (Unidad 3) usaremos esta propiedad de la contradicción para demostrar matemáticamente que el complemento es ÚNICO en todo el universo lógico.</p>
+        </div>
+
+        <h2>2. Las Leyes de De Morgan 🎩</h2>
+        <p>Permiten cambiar compuertas AND por OR. Vital cuando no tienes el chip que necesitas.</p>
+        
+        <div class="destacado">
+            <p><strong>La Regla de Oro:</strong> "Rompe la barra y cambia el signo".</p>
+        </div>
+
+        <h3>Ley 1: Rompiendo la NAND</h3>
+        <p>Negar una multiplicación es sumar las negaciones.</p>
+        <div class="formula">
+            $$\overline{A \cdot B} = \bar{A} + \bar{B}$$
+        </div>
+
+        <h3>Ley 2: Rompiendo la NOR</h3>
+        <p>Negar una suma es multiplicar las negaciones.</p>
+        <div class="formula">
+            $$\overline{A + B} = \bar{A} \cdot \bar{B}$$
+        </div>
+
+        <div class="svg-container">
+            <img src="img/leyes_morgan.png" alt="Esquema visual: Una compuerta NAND es equivalente a una OR con entradas negadas" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. De Morgan nos permite transformar compuertas.</em></small></p>
+        </div>
+
+        <h2>3. El Truco Visual: "Burbujas Deslizantes" 🫧</h2>
+        <p>Los ingenieros no siempre escribimos fórmulas; usamos este truco visual en los planos:</p>
+        
+        <div class="destacado" style="background-color: #f0f4c3; border-left-color: #d4e157;">
+            <p><strong>La Regla del Cambio:</strong></p>
+            <p>Puedes mover las burbujas (negaciones) de la salida a las entradas (o viceversa), PERO debes pagar un precio: <strong>La compuerta cambia de forma.</strong></p>
+            <ul>
+                <li>Si era <strong>AND</strong>, se vuelve <strong>OR</strong>.</li>
+                <li>Si era <strong>OR</strong>, se vuelve <strong>AND</strong>.</li>
+            </ul>
+        </div>
+        
+        <p><em>Ejemplo:</em> Una NAND (AND con burbuja en salida) es visualmente igual a una "OR con burbujas en las entradas".</p>
+
+        <div class="dato-extra">
+            <h3>🕵️‍♂️ ¡No me creas, compruébalo!</h3>
+            <p>Usa lo que aprendiste en la Lección 13. Haz una Tabla de Verdad rápida en tu cuaderno para estas dos ecuaciones y verás que dan los mismos resultados:</p>
+            <ol>
+                <li>\(X = \overline{A \cdot B}\) (NAND)</li>
+                <li>\(Y = \bar{A} + \bar{B}\) (Negar y Sumar)</li>
+            </ol>
+        </div>
+
+        <h2>4. Ejemplo de Ahorro Real 💰</h2>
+        <p>Mira esta ecuación monstruosa:</p>
+        <div class="formula">
+            $$S = \overline{A \cdot B} + \bar{A}$$
+        </div>
+        <p>Aplicamos De Morgan a la primera parte (\(\overline{A \cdot B} \rightarrow \bar{A} + \bar{B}\)):</p>
+        <div class="formula">
+            $$S = \bar{A} + \bar{B} + \bar{A}$$
+        </div>
+        <p>Como tenemos dos veces \(\bar{A}\), usamos la regla de <strong>Idempotencia</strong> (\(\bar{A} + \bar{A} = \bar{A}\)):</p>
+        <div class="formula">
+            $$S = \bar{A} + \bar{B}$$
+        </div>
+        <p>¡Listo! Pasamos de una operación compleja a una simple suma. ¡Acabas de ahorrarte tiempo y dinero en el montaje!</p>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>¡Ya tienes las "tijeras matemáticas" para recortar cualquier ecuación! Pero... hay un detalle. Hasta ahora, yo te he dado las ecuaciones. En el mundo real, los problemas vienen como listas de requisitos (Tablas). <strong>¿Cómo conviertes una Tabla de Verdad en una Ecuación?</strong> En la próxima clase, aprenderemos a hacer <strong>Ingeniería Inversa</strong> para extraer la fórmula mágica directamente desde los datos.</p>
+    </div>
+
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between;">
+            <a href="leccion13.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion15.html" class="btn-navegacion">Siguiente: Funciones (Minterms) →</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

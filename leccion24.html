@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 24: Álgebra Formal - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX Configurado (Incluye el arreglo para paréntesis) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+
+    <style>
+        .paso-demo {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-left: 4px solid var(--color-secundario);
+            background-color: #fff;
+            border-radius: 0 5px 5px 0;
+        }
+        .razon { font-style: italic; color: #666; float: right; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 3: Fundamentos de Cómputo - Lección 24</small></p>
+        <h1>📜 La Constitución del Universo: Álgebra Formal</h1>
+    </header>
+
+    <section>
+        <p>¡Hola, ingenieros matemáticos! Hoy dejamos el destornillador y nos ponemos la toga. Vamos a definir las "Leyes Fundamentales" que hacen que todo funcione. Un <strong>Álgebra de Boole</strong> es una estructura matemática \((B, +, \cdot, ', 0, 1)\) que cumple 5 axiomas sagrados.</p>
+
+        <div class="svg-container">
+            <!-- Imagen: Los 5 Axiomas (img/axiomas_boole.png) -->
+            <img src="img/axiomas_boole.png" alt="Infografía resumiendo los 5 axiomas: Conmutativa, Asociativa, Distributiva, Identidad y Complemento" style="max-width:100%; height:auto;">
+        </div>
+
+        <h2>1. Los 5 Axiomas Fundamentales</h2>
+        
+        <h3>A1. Conmutatividad (El orden no importa)</h3>
+        <div class="formula">
+            $$a + b = b + a$$
+            $$a \cdot b = b \cdot a$$
+        </div>
+
+        <h3>A2. Asociatividad (Agrupar da igual)</h3>
+        <div class="formula">
+            $$(a + b) + c = a + (b + c)$$
+            $$(a \cdot b) \cdot c = a \cdot (b \cdot c)$$
+        </div>
+
+        <h3>A3. Distributividad (¡Ojo a la segunda!)</h3>
+        <div class="formula">
+            $$a \cdot (b + c) = (a \cdot b) + (a \cdot c)$$
+            $$a + (b \cdot c) = (a + b) \cdot (a + c)$$
+        </div>
+
+        <h3>A4. Identidad (Neutros)</h3>
+        <div class="formula">
+            $$a + 0 = a$$
+            $$a \cdot 1 = a$$
+        </div>
+
+        <h3>A5. Complemento (Opuestos)</h3>
+        <div class="formula">
+            $$a + a' = 1$$
+            $$a \cdot a' = 0$$
+        </div>
+
+        <hr>
+
+        <div class="dato-extra" style="background-color: #fff3cd; border-left-color: #ffc107;">
+            <h3>🤔 ¿Por qué es vital demostrar esto?</h3>
+            <p>Podrías pensar: <em>"Es obvio que el opuesto de blanco es negro, ¿para qué demostrarlo?"</em>.</p>
+            <p>Pero en ingeniería, la "obviedad" no es suficiente. Necesitamos <strong>Certeza</strong>.</p>
+            <ul>
+                <li><strong>Determinismo:</strong> Si el complemento no fuera único, un inversor (chip 7404) podría darte una salida hoy y otra distinta mañana ante la misma entrada. ¡Las computadoras serían imposibles!</li>
+                <li><strong>Sin Ambigüedad:</strong> Esta prueba garantiza que en nuestro universo digital, un estado tiene una y solo una negación. No hay "terceras opciones" ni comportamientos fantasmas.</li>
+            </ul>
+            <p>¡Vamos a probar matemáticamente que nuestro universo digital es sólido como una roca!</p>
+        </div>
+        
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #4caf50; margin-top: 20px;">
+            <h3>🔌 Conexión con la Realidad: El Pull-Up/Down</h3>
+            <p>¿Recuerdas las resistencias <strong>Pull-Up y Pull-Down</strong> de la Lección 10? ¡Aquí está su razón de ser!</p>
+            <p>En las matemáticas, un número es 0 o 1. Pero en el mundo real, un cable suelto puede estar "en el limbo" (flotando).</p>
+            <p><strong>La resistencia es el "policía" que obliga a la física a obedecer a la matemática:</strong> asegura que si no hay un 1, <em>obligatoriamente</em> haya un 0 (Unicidad). Sin ella, ¡nuestros teoremas no funcionarían en la protoboard!</p>
+        </div>
+
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
+            <h3>💰 ¿Por qué nos importan los Axiomas? (Dinero)</h3>
+            <p>Mira la <strong>Ley Distributiva</strong>:</p>
+            <p>$$A \cdot (B + C) = (A \cdot B) + (A \cdot C)$$</p>
+            <p>Matemáticamente son iguales, pero físicamente <strong>NO</strong>:</p>
+            <ul>
+                <li><strong>Izquierda:</strong> Usas 1 compuerta OR y 1 compuerta AND. (Total: 2 chips).</li>
+                <li><strong>Derecha:</strong> Usas 2 compuertas AND y 1 compuerta OR. (Total: 3 chips).</li>
+            </ul>
+            <p><strong>Conclusión:</strong> Saber aplicar los axiomas te permite elegir la versión más barata y eficiente de tu circuito.</p>
+        </div>
+
+        <h2>2. Demostración: La Unicidad del Complemento 🕵️‍♂️</h2>
+        <p>¿Puede un número tener dos opuestos diferentes? Vamos a probar matemáticamente que <strong>NO</strong>.</p>
+        
+        <div class="destacado">
+            <p><strong>Teorema:</strong> Si \(a + x = 1\) y \(a \cdot x = 0\), entonces obligatoriamente \(x = a'\).</p>
+        </div>
+
+        <p><em>Prueba paso a paso:</em></p>
+
+        <div class="paso-demo">
+            $$x = x \cdot 1$$ 
+            <span class="razon">(Por Identidad)</span>
+        </div>
+        <div class="paso-demo">
+            $$x = x \cdot (a + a')$$ 
+            <span class="razon">(Sustituimos 1 por Complemento)</span>
+        </div>
+        <div class="paso-demo">
+            $$x = (x \cdot a) + (x \cdot a')$$ 
+            <span class="razon">(Por Distributividad)</span>
+        </div>
+        <div class="paso-demo">
+            $$x = 0 + (x \cdot a')$$ 
+            <span class="razon">(Sabemos que \(a \cdot x = 0\). Por Hipótesis inicial)</span>
+        </div>
+        <div class="paso-demo">
+            $$x = (a \cdot a') + (x \cdot a')$$ 
+            <span class="razon">(Sustituimos 0 por Complemento)</span>
+        </div>
+        <div class="paso-demo">
+            $$x = (a + x) \cdot a'$$ 
+            <span class="razon">(Factor Común / Distributiva)</span>
+        </div>
+        <div class="paso-demo">
+            $$x = 1 \cdot a'$$ 
+            <span class="razon">(Por Hipótesis inicial sabemos que \(a + x = 1\))</span>
+        </div>
+        <div class="paso-demo">
+            $$x = a'$$ 
+            <span class="razon"><strong>(Q.E.D. ¡Demostrado!)</strong></span>
+        </div>
+
+    </section>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="leccion23.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion25_sumador_completo.html" class="btn-navegacion">Siguiente: Full Adder (Sumador Completo) →</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

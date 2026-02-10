@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caja de Herramientas - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        /* Estilos exclusivos para la cuadrícula de herramientas */
+        .toolbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+
+        .tool-card {
+            border: 1px solid var(--color-borde);
+            border-radius: 12px;
+            padding: 25px;
+            background: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%; /* Para que todas tengan la misma altura */
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--color-primario);
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .tool-icon {
+            font-size: 2.5em;
+            margin-right: 15px;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tool-title {
+            margin: 0;
+            color: var(--color-primario);
+            font-size: 1.2em;
+            line-height: 1.2;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #0d47a1;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            align-self: flex-start;
+        }
+
+        .tool-desc {
+            color: #555;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            flex-grow: 1; /* Empuja el botón hacia abajo */
+        }
+
+        .tool-btn {
+            display: block;
+            text-align: center;
+            background-color: var(--color-secundario);
+            color: white;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .tool-btn:hover {
+            background-color: #e67e00;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Colores por categoría */
+        .cat-simulacion .tool-icon { color: #28a745; }
+        .cat-matematicas .tool-icon { color: #d63384; }
+        .cat-codigos .tool-icon { color: #6f42c1; }
+        .cat-componentes .tool-icon { color: #fd7e14; }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Recursos Profesionales</small></p>
+        <h1>🧰 La Caja de Herramientas del Ingeniero</h1>
+    </header>
+
+    <section>
+        <p>Un buen ingeniero no memoriza todo, pero sabe dónde buscar. Estas son las herramientas estándar de la industria que usamos en el curso y que te servirán en tu vida profesional.</p>
+
+        <!-- NUEVA SECCIÓN: IA GENERATIVA -->
+        <h2>🤖 Tu Copiloto de Inteligencia Artificial</h2>
+        <div class="toolbox-grid">
+            <div class="tool-card" style="border-top: 5px solid #7460ee;">
+                <div class="tool-header">
+                    <span class="tool-icon">🧠</span>
+                    <h3 class="tool-title">ChatGPT / Gemini / Claude</h3>
+                </div>
+                <span class="tag">Razonamiento y Apoyo</span>
+                <p class="tool-desc">
+                    <strong>Consejo de uso:</strong> No uses la IA para que "haga tu tarea" (eso es como pedirle a otro que vaya al gimnasio por ti). Úsala para <strong>interrogar</strong> tus dudas.
+                    <br><br>
+                    <em>Prompt inteligente:</em> "Actúa como un profesor de electrónica. Estoy confundido entre Pull-Up y Pull-Down. Explícame la diferencia con una analogía simple y luego hazme una pregunta para verificar si entendí."
+                </p>
+                <a href="https://gemini.google.com/" target="_blank" class="tool-btn">Abrir Gemini →</a>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 1: SIMULACIÓN -->
+        <h2>💻 Simulación y Circuitos</h2>
+        <div class="toolbox-grid">
+            
+            <div class="tool-card cat-simulacion">
+                <div class="tool-header">
+                    <span class="tool-icon">⚡</span>
+                    <h3 class="tool-title">Falstad Circuit Simulator</h3>
+                </div>
+                <span class="tag">Simulación en Vivo</span>
+                <p class="tool-desc">El simulador que usamos en las lecciones. Permite ver el flujo de corriente y los estados lógicos (Verde/Rojo) en tiempo real. Ideal para probar antes de armar.</p>
+                <a href="https://www.falstad.com/circuit/" target="_blank" class="tool-btn">Abrir Falstad →</a>
+            </div>
+
+            <div class="tool-card cat-simulacion">
+                <div class="tool-header">
+                    <span class="tool-icon">📐</span>
+                    <h3 class="tool-title">Tinkercad Circuits</h3>
+                </div>
+                <span class="tag">Montaje 3D</span>
+                <p class="tool-desc">Si te cuesta visualizar cómo conectar la protoboard, usa este. Es un simulador 3D muy amigable donde puedes colocar chips y cables como en la vida real.</p>
+                <a href="https://www.tinkercad.com/circuits" target="_blank" class="tool-btn">Ir a Tinkercad →</a>
+            </div>
+
+        </div>
+
+        <!-- SECCIÓN 2: MATEMÁTICAS Y LÓGICA -->
+        <h2>🧠 Matemáticas y Lógica (Unidades 2 y 3)</h2>
+        <div class="toolbox-grid">
+            
+            <div class="tool-card cat-matematicas">
+                <div class="tool-header">
+                    <span class="tool-icon">🐺</span>
+                    <h3 class="tool-title">Wolfram Alpha</h3>
+                </div>
+                <span class="tag">IA Matemática</span>
+                <p class="tool-desc">El motor de conocimiento más potente. Úsalo para generar Tablas de Verdad, simplificar ecuaciones booleanas o multiplicar matrices.</p>
+                <a href="https://www.wolframalpha.com/" target="_blank" class="tool-btn">Ir a WolframAlpha →</a>
+            </div>
+
+            <div class="tool-card cat-matematicas">
+                <div class="tool-header">
+                    <span class="tool-icon">🗺️</span>
+                    <h3 class="tool-title">Karnaugh Map Solver</h3>
+                </div>
+                <span class="tag">Simplificación</span>
+                <p class="tool-desc">¿Tu Mapa K se complicó? Esta herramienta resuelve mapas de 3 y 4 variables paso a paso, mostrándote los grupos óptimos.</p>
+                <a href="http://www.32x8.com/index.html" target="_blank" class="tool-btn">Resolver Mapa K →</a>
+            </div>
+
+        </div>
+
+        <!-- SECCIÓN 3: CÓDIGOS Y HAMMING -->
+        <h2>🔐 Teoría de Códigos (Unidad 4)</h2>
+        <div class="toolbox-grid">
+            
+            <div class="tool-card cat-codigos">
+                <div class="tool-header">
+                    <span class="tool-icon">🧬</span>
+                    <h3 class="tool-title">dCode: Hamming Tool</h3>
+                </div>
+                <span class="tag">Corrección de Errores</span>
+                <p class="tool-desc">Herramienta especializada para el Código Hamming (7,4). Calcula los bits de paridad, detecta errores y corrige mensajes corruptos automáticamente.</p>
+                <a href="https://www.dcode.fr/hamming-error-correction" target="_blank" class="tool-btn">Calculadora Hamming →</a>
+            </div>
+
+            <div class="tool-card cat-codigos">
+                <div class="tool-header">
+                    <span class="tool-icon">🧮</span>
+                    <h3 class="tool-title">Matrices Binarias (Wolfram)</h3>
+                </div>
+                <span class="tag">Aritmética Mod 2</span>
+                <p class="tool-desc">Enlace directo configurado para multiplicar matrices usando aritmética binaria (1+1=0), necesario para calcular G y H.</p>
+                <a href="https://www.wolframalpha.com/input?i=%28%7B1%2C0%2C1%2C1%7D+.+%7B%7B1%2C0%2C0%2C0%2C1%2C1%2C0%7D%2C%7B0%2C1%2C0%2C0%2C1%2C0%2C1%7D%2C%7B0%2C0%2C1%2C0%2C0%2C1%2C1%7D%2C%7B0%2C0%2C0%2C1%2C1%2C1%2C1%7D%7D%29+mod+2" target="_blank" class="tool-btn">Matriz Mod 2 →</a>
+            </div>
+
+        </div>
+
+        <!-- SECCIÓN 4: COMPONENTES -->
+        <h2>🔌 Componentes y Referencias</h2>
+        <div class="toolbox-grid">
+            
+            <div class="tool-card cat-componentes">
+                <div class="tool-header">
+                    <span class="tool-icon">🌈</span>
+                    <h3 class="tool-title">Calculadora de Resistencias</h3>
+                </div>
+                <span class="tag">DigiKey</span>
+                <p class="tool-desc">La forma más rápida de leer una resistencia si olvidaste el código de colores. Seleccionas los colores y te da el valor exacto.</p>
+                <a href="https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-resistor-color-code" target="_blank" class="tool-btn">Calcular Resistencia →</a>
+            </div>
+
+            <div class="tool-card cat-componentes">
+                <div class="tool-header">
+                    <span class="tool-icon">📱</span>
+                    <h3 class="tool-title">ElectroDroid/Electrodoc (App)</h3>
+                </div>
+                <span class="tag">Android / iOS</span>
+                <p class="tool-desc">Recomendación personal: Descarga esta app en tu celular. Electrodoc es una navaja suiza con pinouts de chips, puertos USB y calculadoras offline.</p>
+                <a href="https://electrodroid.it/" target="_blank" class="tool-btn">Sitio Oficial →</a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="index.html" class="btn-navegacion">🏠 Volver al Inicio del Curso</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

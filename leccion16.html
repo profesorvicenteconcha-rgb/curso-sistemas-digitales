@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 16: Mapas de Karnaugh - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX Configurado -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 2: Lógica Digital - Lección 16</small></p>
+        <h1>🧩 El Tetris Lógico: Mapas de Karnaugh</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>En la lección anterior terminamos con una ecuación gigante para nuestro jurado. ¿Tenemos que construirla así? ¡No! Los ingenieros odian el desperdicio. Hoy usaremos una herramienta gráfica llamada <strong>Mapa K</strong> para jugar con los unos y ceros, agruparlos y reducir esa ecuación monstruosa a algo pequeño y elegante.</p>
+    </div>
+
+    <section>
+        <h2>1. El Tablero de Juego</h2>
+        <p>El Mapa K es una tabla donde organizamos las combinaciones posibles. Es como jugar "Batalla Naval": cada casilla tiene una coordenada única.</p>
+        
+        <div class="destacado">
+            <p><strong>El Código Gray:</strong> Fíjate que el orden de las columnas es <strong>00, 01, 11, 10</strong>.</p>
+            <p><em>¿Por qué no 10, 11?</em> Porque la regla exige que, al pasar de una celda a la vecina, <strong>SOLO cambie un bit</strong>. Esto es lo que permite la simplificación mágica.</p>
+        </div>
+
+        <h3>¿Cómo leer una casilla?</h3>
+        <p>Cada celda representa una combinación de \(A, B, C\). Mira este ejemplo:</p>
+
+        <div class="svg-container">
+            <!-- Imagen Nueva: Mapa con Coordenadas -->
+            <img src="img/mapa_k_coordenadas.png" alt="Mapa K mostrando la coordenada (0,1,1) en la intersección de A=0 y BC=11" style="max-width:80%; height:auto;">
+            <p><small><em>Fig 1. La celda (0, 1, 1). Fila A=0, Columna BC=11.</em></small></p>
+        </div>
+
+        <p>Si en tu Tabla de Verdad tienes una fila donde \(A=0, B=1, C=1\) y la salida es <strong>1</strong>, entonces pones ese 1 en <strong>esta casilla exacta</strong>: Fila <strong>0</strong>, Columna <strong>11</strong>.</p>
+
+        <h2>2. Las Reglas del Juego (Agrupando)</h2>
+        <p>Tu misión es encerrar los <strong>1s</strong> en "globos" o grupos. Reglas:</p>
+        <ul>
+            <li><strong>Potencias de 2:</strong> Grupos de 1, 2, 4, 8... (¡Nunca grupos de 3!).</li>
+            <li><strong>Rectángulos:</strong> Solo líneas rectas o bloques cuadrados.</li>
+            <li><strong>Solapamiento:</strong> Un 1 puede pertenecer a varios grupos (¡esto ayuda!).</li>
+            <li><strong>Pac-Man:</strong> El mapa es redondo. El borde izquierdo toca el derecho.</li>
+        </ul>
+
+        <h2>3. Simplificando al Jurado 🗳️</h2>
+        
+        <h3>Paso 1: Ubicando los "Unos"</h3>
+        <p>Primero, trasladamos los datos de nuestra Tabla de Verdad al Mapa. Recuerda: El circuito se activa (1) si hay <strong>Mayoría</strong> (2 o 3 jueces votan sí).</p>
+
+        <div class="svg-container">
+            <!-- Imagen: Mapa con solo unos (img/mapa_k_unos.png) -->
+            <img src="img/mapa_k_unos.png" alt="Mapa de Karnaugh con los unos ubicados en las coordenadas correctas" style="max-width:80%; height:auto;">
+            <p><small><em>Fig 2. Así se ve el mapa antes de agrupar. Verifiquemos la lógica:</em></small></p>
+        </div>
+
+        <ul style="font-size: 0.95em;">
+            <li><strong>Fila 0, Columna 11:</strong> A=0, pero B=1 y C=1. ¡Hay mayoría! &rarr; Ponemos un <strong>1</strong>.</li>
+            <li><strong>Fila 1, Columna 01:</strong> A=1 y C=1. ¡Hay mayoría! &rarr; Ponemos un <strong>1</strong>.</li>
+            <li><strong>Fila 1, Columna 11:</strong> A, B y C son 1. ¡Unanimidad! &rarr; Ponemos un <strong>1</strong>.</li>
+            <li><strong>Fila 1, Columna 10:</strong> A=1 y B=1. ¡Hay mayoría! &rarr; Ponemos un <strong>1</strong>.</li>
+        </ul>
+
+        <div class="dato-extra" style="background-color: #fff3cd; border-left-color: #ffc107; margin-top: 20px;">
+            <h3>👀 ¿Y qué pasa con los espacios vacíos?</h3>
+            <p>En el esquema tradicional estricto, <strong>todas las celdas vacías se rellenan con un 0</strong>. Esos ceros representan los casos donde la propuesta NO se aprueba (minoría de votos).</p>
+            <p><em>Nota de Diseño:</em> A menudo, los ingenieros dejamos esas casillas en blanco simplemente para tener "limpieza visual" y ver mejor los grupos de unos. Pero recuerda: ¡Espacio vacío significa 0 lógico!</p>
+        </div>
+
+        <h3>Paso 2: La Cacería de Grupos (Agrupando)</h3>
+        <p>Ahora que tenemos los unos, sacamos los marcadores de colores. Buscamos parejas (grupos de 2) para simplificar.</p>
+
+        <div class="svg-container">
+            <!-- Imagen: Mapa Resuelto (img/mapa_k_resuelto.png) -->
+            <img src="img/mapa_k_resuelto.png" alt="Mapa de Karnaugh resuelto con 3 agrupaciones de colores" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 3. ¡Encontramos 3 parejas! (Roja, Azul, Verde).</em></small></p>
+        </div>
+
+        <p><strong>Analicemos nuestros grupos:</strong></p>
+        <ul>
+            <li><strong>Grupo Rojo (Horizontal - AB):</strong> 
+                <br>Celdas (1, 11) y (1, 10).
+                <br>A siempre es 1. B siempre es 1. 
+                <br>Pero C vale 1 a la izquierda y 0 a la derecha. ¡C cambia! &rarr; <strong>Queda AB</strong>.
+            </li>
+            <li><strong>Grupo Verde (Vertical - BC):</strong> 
+                <br>Celdas (0, 11) y (1, 11).
+                <br>B siempre es 1. C siempre es 1. 
+                <br>Pero A vale 0 arriba y 1 abajo. ¡A cambia! &rarr; <strong>Queda BC</strong>.
+            </li>
+            <li><strong>Grupo Azul (Adyacente - AC):</strong> 
+                <br>Celdas (1, 01) y (1, 11).
+                <br>A siempre es 1. C siempre es 1.
+                <br>Pero B vale 0 a la izquierda y 1 a la derecha. ¡B cambia! &rarr; <strong>Queda AC</strong>.
+            </li>
+        </ul>
+
+        <div class="formula">
+            $$P_{final} = AB + AC + BC$$
+        </div>
+        <p>¡Pasamos de 4 términos de 3 letras a una ecuación simple! Mucho más fácil de conectar.</p>
+        
+        <!-- NUEVA SECCIÓN: 4 VARIABLES Y BORDES -->
+        <h2>4. Nivel Experto: 4 Variables y el Mundo Redondo</h2>
+        
+        <h3>A. El Tablero de 4 Variables (A, B, C, D)</h3>
+        <p>¿Qué pasa si tienes 4 sensores? El mapa crece a 16 casillas (\(4 \times 4\)).</p>
+        <p>Las reglas son las mismas: filas AB y columnas CD, siempre usando el orden <strong>00, 01, 11, 10</strong>.</p>
+        
+        <div class="svg-container">
+            <!-- Imagen Nueva: Mapa 4 Variables -->
+            <img src="img/mapa_k_4vars.png" alt="Estructura de un Mapa K de 4 variables (4x4)" style="max-width:50%; height:auto;">
+        </div>
+
+        <h3>B. El Efecto "Pac-Man": El Mundo es Redondo 🌎</h3>
+        <p>Aquí es donde la mayoría falla por pensar en plano. Matemáticamente, el mapa no tiene bordes sueltos.</p>
+        
+        <p><strong>Visualízalo así:</strong> Imagina que tomas los bordes izquierdo y derecho de la hoja y los curvas hasta encontrarse. Al juntarse, <strong>se fusionan</strong> y el mapa se convierte en un <strong>anillo continuo</strong> (un cilindro sin fin).</p>
+
+        <div class="svg-container">
+            <!-- Imagen: mapa_k_pacman.png -->
+            <img src="img/mapa_k_pacman.png" alt="Ilustración 3D de un mapa de Karnaugh curvado como un cilindro" style="max-width:300px; height:auto;">
+            <p><small><em>Fig 3. Al enrollar el mapa, la última columna se convierte en vecina de la primera.</em></small></p>
+        </div>
+
+        <div class="destacado" style="border-left-color: #9c27b0; background-color: #f3e5f5;">
+            <p><strong>El Superpoder Oculto:</strong></p>
+            <p>Gracias a esta fusión, la columna de la extrema <strong>Izquierda</strong> es vecina inmediata de la columna de la extrema <strong>Derecha</strong>.</p>
+            <p><strong>Consecuencia:</strong> Puedes crear grupos que "salgan" por la derecha y "entren" por la izquierda para atrapar los unos de las esquinas. ¡No los dejes solos!</p>
+        </div>
+
+        <!-- SECCIÓN NUEVA: DON'T CARE -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <h3>👻 El Comodín: Condiciones "No Importa" (X)</h3>
+            <p>A veces, hay combinaciones que sabemos que son físicamente imposibles (ej: un ascensor en el piso 1 y 2 al mismo tiempo). En el mapa, marcamos esas celdas con una <strong>X</strong>.</p>
+            <p><strong>El Truco:</strong> Puedes usar las X como si fueran <strong>1</strong> si te ayudan a agrandar un grupo, o como <strong>0</strong> si no te sirven. ¡Son comodines!</p>
+        </div>
+
+        <div class="dato-extra">
+            <h3>🛠️ Herramienta de Verificación</h3>
+            <p>¿Quieres comprobar si agrupaste bien? Usa este solucionador paso a paso:</p>
+            <p style="text-align: center;">
+                <a href="http://www.32x8.com/index.html" target="_blank" class="btn-navegacion" style="background-color: #ff7e00;">Solucionador de Mapas K ↗</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>Ya tenemos el plano perfecto: \(P = AB + AC + BC\). Ahora hay que construirlo. Pero... ¿dónde compramos una "Multiplicación"? ¿Dónde venden una "Suma"? En la próxima lección, conocerás a las estrellas del show: los <strong>Chips TTL 74xx</strong>, las cajitas negras donde vive la lógica.</p>
+    </div>
+
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between;">
+            <a href="leccion15.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion17.html" class="btn-navegacion">Siguiente: Chips TTL 74xx →</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

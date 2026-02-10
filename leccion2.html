@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 2: Ley de Ohm - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX Configurado (Soporte para $ y \ ) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 1: Fundamentos Físicos - Lección 2</small></p>
+        <h1>⚡ La Ley de Ohm: Controlando el Flujo</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>En la lección anterior aprendimos que la <strong>Corriente</strong> es un flujo de energía poderoso y que la <strong>Pila</strong> lo empuja. Pero hay un problema: esa energía es "bruta". Si conectamos un componente delicado (como un LED) directo a la pila, la corriente pasará sin control y lo destruirá. <strong>Hoy aprenderemos a domar esa fuerza.</strong></p>
+    </div>
+
+    <section>
+        <h2>1. La Resistencia: El Freno de Mano</h2>
+        <p>Imagina que estás regando el jardín con una manguera y sale demasiada agua. ¿Qué haces? Pisas la manguera un poco. Al estrechar el camino, pasa menos agua.</p>
+       
+        <p>En electrónica, ese "pisón" es la <strong>Resistencia <em></em>(\(R\))</em></strong>. 
+            Es un componente hecho de carbón que se opone al paso de los electrones. 
+            Su trabajo es limitar la corriente para que nada se queme.
+        </p>
+        <p>
+            La resistencia se mide en <strong>ohmios</strong>, y usamos la letra griega 
+            Omega (<strong>\(\Omega\)</strong>) para abreviar esa unidad — igual que usamos <em>"m"</em> 
+            para metros o <em>"kg"</em> para kilogramos. Por ejemplo: una resistencia de <em>220\(\Omega\)</em> significa 
+            "220 ohmios de oposición al paso de la corriente".
+
+        <!-- RINCÓN DOCENTE: DINÁMICA PRIMARIA -->
+        <div class="dato-extra" style="border-left: 4px solid #ffc107; background-color: #fff9db;">
+            <h3>🍎 Rincón del Docente: Explicando Ohm a niños (8-10 años)</h3>
+            <p>Olvídate de las fórmulas por un momento. Para que los niños entiendan la <strong>Resistencia</strong>, usa sus propios cuerpos en una actividad de patio:</p>
+            
+            <p><strong>El Juego: "El Pasillo de Obstáculos"</strong></p>
+            <ul>
+                <li><strong>El Voltaje (La Energía):</strong> Es la campana del recreo. ¡Todos quieren salir corriendo con mucha fuerza!</li>
+                <li><strong>La Corriente (El Flujo):</strong> Es la cantidad de niños que logran cruzar la puerta por segundo.</li>
+                <li><strong>La Resistencia (El Obstáculo):</strong>
+                    <ul>
+                        <li><em>Escenario 1 (Poca Resistencia):</em> Abre la puerta totalmente. Los niños salen corriendo rápido (Mucha Corriente).</li>
+                        <li><em>Escenario 2 (Mucha Resistencia):</em> Pon dos sillas en la puerta estorbando el paso, o diles que deben salir gateando. Los niños salen muy despacio (Poca Corriente).</li>
+                    </ul>
+                </li>
+            </ul>
+            <p><strong>Lección para el niño:</strong> "La Resistencia es qué tan difícil es pasar. Si el camino es difícil (Resistencia alta), corremos despacio (Corriente baja)."</p>
+        </div>
+
+        <h2>2. La Fórmula Sagrada: Ley de Ohm</h2>
+        <p>Existe una relación matemática perfecta entre la Presión (\(V\)), el Flujo (\(I\)) y el Freno (\(R\)). Esta es la ley más importante de la electrónica:</p>
+
+        <!-- NUEVO BLOQUE HISTÓRICO -->
+        <div class="dato-extra" style="background-color: #e3f2fd; border-left-color: #1565c0; margin-bottom: 20px; font-size: 0.9em;">
+            <strong>📖 Dato Curioso: ¿Por qué "I" y no "C"?</strong>
+            <p>Seguramente te preguntas: <em>"¿Si se llama Corriente, por qué no usamos la C?"</em>.</p>
+            <p>La razón es histórica. Viene del francés <em>"Intensité du courant"</em> (Intensidad de Corriente), frase usada por el físico <strong>André-Marie Ampère</strong> en 1820. Además, ¡la letra <strong>C</strong> ya estaba ocupada por la unidad de Carga (Culombios)!</p>
+        </div>
+        <!-- FIN DEL BLOQUE -->
+
+        <div class="formula">
+            $$V = I \times R$$
+        </div>
+
+        <h3>El Triángulo de Poder</h3>
+        <p>Para no memorizar despejes, usamos este triángulo visual. Tapa con el dedo la letra que quieres averiguar y verás la fórmula:</p>
+        
+        <div class="svg-container">
+            <!-- Imagen ya generada: triangulo_ohm.png -->
+            <img src="img/triangulo_ohm.png" alt="Triángulo de la Ley de Ohm: V arriba, I y R abajo" style="max-width:250px; height:auto;">
+            <p><small><em>Fig 1. V está arriba (como un rey). I y R están abajo.</em></small></p>
+        </div>
+
+        <ul>
+            <li>¿Quieres Voltaje? \(\rightarrow V = I \cdot R\)</li>
+            <li>¿Quieres Corriente? \(\rightarrow I = \frac{V}{R}\)</li>
+            <li>¿Quieres Resistencia? \(\rightarrow R = \frac{V}{I}\)</li>
+        </ul>
+
+        <h3>El Voltaje se gasta en el camino</h3>
+        <p>Imagina que la pila es un repartidor que sale con <strong>5 Pizzas (5V)</strong>.
+        <br>Al pasar por el LED, el LED le cobra <strong>2 Pizzas</strong> "de peaje" para dejarlo pasar (y convertirlas en luz).
+        <br>¿Cuántas pizzas le quedan al repartidor? <strong>3 Pizzas</strong>.</p>
+        <p>Esas 3 pizzas restantes (3V) deben ser recibidas por la Resistencia para que el repartidor llegue vacío (0V) al final del recorrido (Tierra).</p>
+
+        <h2>3. Caso Real: Calculando la protección de tu LED</h2>
+        <p>Vamos a usar la ley para salvar la vida de tu LED. Datos:</p>
+        <ul>
+            <li><strong>Fuente:</strong> Cargador USB (\(5V\)).</li>
+            <li><strong>Consumo del LED:</strong> Un LED rojo estándar se "come" unos \(2V\) para encender y necesita unos \(0.02A\) (20mA) de corriente.</li>
+        </ul>
+
+        <p>La resistencia debe encargarse del voltaje que sobra:</p>
+        <div class="formula">
+            <p>$$V_{resistencia} = 5V - 2V = 3V$$</p>
+            <p>$$R = \frac{V}{I} = \frac{3V}{0.02A} = 150 \Omega$$</p>
+        </div>
+        <p><strong>Resultado:</strong> Necesitas una resistencia de <strong>150 Ohmios</strong>. Como a veces no venden ese valor exacto, usamos el valor comercial superior más cercano: <strong>220 \(\Omega\)</strong> o <strong>330 \(\Omega\)</strong>.</p>
+
+        <!-- Insertar después de la sección "Caso Real: Calculando la protección de tu LED" -->
+        <h3>⚡ ¿Qué es un Watt? La "Velocidad del Gasto"</h3>
+        <p>Imagina que tienes dos grifos idénticos abiertos al máximo:</p>
+        <ul>
+        <li><strong>Grifo A:</strong> Llena un balde de 10 litros en 1 minuto.</li>
+        <li><strong>Grifo B:</strong> Llena el mismo balde en 30 segundos.</li>
+        </ul>
+        <p>Ambos usan la misma cantidad de agua (10 litros), pero el Grifo B <em>trabaja el doble de rápido</em>. Esa "rapidez del trabajo" es la <strong>Potencia</strong>.</p>
+
+        <div class="destacado">
+        <h4>🍎 Rincón del Docente: El Juego de las Canicas</h4>
+        <p><strong>Materiales:</strong> 20 canicas, 2 niños, cronómetro.</p>
+        <p><strong>Actividad:</strong></p>
+        <ul>
+            <li>Niño 1: Lleva 10 canicas de un lado a otro en 10 segundos.</li>
+            <li>Niño 2: Lleva las mismas 10 canicas en 5 segundos.</li>
+        </ul>
+        <p><strong>Pregunta clave:</strong> "¿Quién se cansó más? ¿Por qué?" → El que hizo el <em>mismo trabajo en menos tiempo</em> gastó más energía por segundo. ¡Eso es potencia!</p>
+        </div>
+
+        <p>En electricidad, el <strong>Watt (W)</strong> mide exactamente eso: <em>cuánta energía eléctrica se transforma en otra cosa (luz, calor, movimiento) cada segundo</em>.</p>
+        <p>Volviendo a nuestro repartidor de pizzas:</p>
+        <ul>
+        <li><strong>Voltaje:</strong> Las pizzas que carga (energía disponible).</li>
+        <li><strong>Corriente:</strong> Cuántos repartidores pasan por segundo (flujo).</li>
+        <li><strong>Watt:</strong> ¡Las pizzas que se <em>entregan por segundo</em>! (Velocidad de transformación).</li>
+        </ul>
+        <p>Por eso: <strong>Potencia = Voltaje × Corriente</strong> → Cuanta más presión (V) y más flujo (I), más rápido se transforma la energía (W).</p>
+
+       
+
+            <!-- Explicación del símbolo de la pila (cierre del ciclo de la lección 1) -->
+            <h3>🔋 El Símbolo de la Pila en los Esquemáticos</h3>
+            <p>
+            En la lección anterior conocimos la pila CR2032 de tu kit. Ahora es momento 
+            de aprender a dibujarla en un esquema eléctrico. La pila se representa con 
+            <strong>dos líneas paralelas</strong>:
+            </p>
+            <ul>
+            <li><strong>Línea larga (+):</strong> El polo positivo, donde sale la energía (5V en nuestro caso).</li>
+            <li><strong>Línea corta (–):</strong> El polo negativo, donde regresa la energía (también llamado <em>Tierra</em> o <em>GND</em>).</li>
+            </ul>
+            <p>
+            El voltaje se indica siempre al lado del símbolo de la pila. En nuestro caso, 
+            usamos una fuente de <strong>5V</strong> (los cables rojo y negro de un viejo cargador telefónico) para alimentar el circuito.
+            </p>
+            <!-- Explicación del símbolo de tierra -->
+            <p>
+            Al final del circuito, la corriente debe regresar a su punto de partida para completar el camino. 
+            Este punto de retorno a <strong>0 voltios</strong> se llama <em>Tierra</em> (o <em>GND</em>, de Ground) 
+            y se representa con un símbolo específico: <strong>tres líneas horizontales decrecientes</strong>.
+            </p>
+
+            <p>
+            Aunque su nombre sugiere "tierra" como el suelo físico, en electrónica <em>no significa conexión a la 
+            tierra real</em> (a menos que sea un sistema de seguridad). Es simplemente el <strong>punto de 
+            referencia 0V</strong> del circuito, como el nivel del mar es el punto de referencia 0 para las 
+            alturas. Todas las tensiones en el circuito se miden respecto a este punto.
+            </p>
+            
+            <!-- Explicación del símbolo del LED (breve y funcional) -->
+            <h3>💡 El Símbolo del LED</h3>
+            <p>
+            El LED (Diodo Emisor de Luz) se representa en los esquemáticos con un símbolo muy particular:
+            </p>
+            <ul>
+            <li><strong>Triángulo + barra:</strong> Indica que es un diodo (componente de un solo sentido).</li>
+            <li><strong>Flechas hacia afuera:</strong> Representan la luz que emite el componente.</li>
+            </ul>
+            <p>
+            Este símbolo nos adelanta algo importante: <em>el LED tiene dirección</em>. 
+            A diferencia de la resistencia que funciona en cualquier sentido, el LED solo 
+            permite el paso de corriente en una dirección específica. 
+            <strong>¡Exploraremos esto en profundidad en la próxima lección!</strong>
+            </p>
+
+            <!-- Circuito completo con explicación -->
+            <h3>🔌 El Circuito Completo: De la Teoría a la Práctica</h3>
+            <p>
+            Ahora que conocemos los símbolos básicos, veamos cómo se ve el circuito 
+            completo para proteger nuestro LED:
+            </p>
+
+            <div class="svg-container">
+            <img src="img\figura_circuito_completo.png" alt="Circuito completo con pila (5V), resistencia (220 Ω), LED y tierra (GND)" style="max-width:60%; height:auto;";>
+            <p></small><em>Figura 2: Circuito completo con pila (5V), resistencia (220 Ω), LED y tierra (GND). 
+            Arriba: Estilo americano de resistencia (zigzag). Abajo: Estilo europeo (rectángulo) - 
+            <strong>Recomendado para este curso</strong>.</em></small></p>
+            </div>
+
+            <p>
+            Este esquema muestra exactamente cómo debes conectar los componentes en tu 
+            kit para que funcione correctamente:
+            </p>
+            <ul>
+            <li><strong>5V (+):</strong> El polo positivo de tu pila o fuente de alimentación.</li>
+            <li><strong>R<sub>1</sub> = 220Ω:</strong> La resistencia que calculamos para proteger el LED.</li>
+            <li><strong>LED<sub>1</sub>:</strong> El diodo emisor de luz que queremos encender.</li>
+            <li><strong>Tierra (0V):</strong> El punto de retorno a 0 voltios, donde termina el circuito.</li>
+            </ul>
+            <p>
+            Observa también la <strong>dirección de la corriente</strong> (de + a –), 
+            que siempre fluye del polo positivo al negativo.
+            </p>
+
+            <div class="dato-extra">
+            <h4>📖 Dato Curioso: Normativas Internacionales</h4>
+            <p>Existen dos convenciones para dibujar resistencias en esquemáticos:</p>
+            <ul>
+                <li><strong>Estilo americano:</strong> Usado principalmente en EE.UU. y Canadá (zigzag).</li>
+                <li><strong>Estilo europeo:</strong> Adoptado por la norma IEC (Comisión Electrotécnica 
+                    Internacional) y utilizado en la mayoría de los países del mundo (rectángulo).</li>
+            </ul>
+            <p><strong>Nuestro curso utilizará exclusivamente la representación europea</strong> 
+            porque es el estándar internacional en documentos técnicos y software de diseño 
+            profesional (KiCad, Altium, etc.).</p>
+            <p>⚠️ ¡No confundas! El símbolo <strong>Ω</strong> es solo la <em>unidad de medida</em>, 
+            no el dibujo del componente en los esquemáticos.</p>
+            </div>
+        </p>
+
+        <div class="destacado">
+        <h4>🍎 Rincón del Docente: Leyendo el Mapa del Tesoro</h4>
+        <p><strong>Actividad:</strong> Imprime o dibuja este esquema en grande. Pide a los niños que:</p>
+        <ol>
+            <li><strong>Coloreen el camino:</strong> Con un marcador verde, tracen por dónde viajan los electrones (de + a –).</li>
+            <li><strong>Etiqueten cada pieza:</strong> Peguen mini-post-its con el nombre de cada símbolo.</li>
+            <li><strong>Predigan:</strong> "Si quitamos la resistencia, ¿qué pasa con el LED?" → Lo discuten antes de probar.</li>
+        </ol>
+        <p><strong>Lección clave:</strong> "Un esquema es como un mapa del tesoro: te dice dónde poner cada pieza para que funcione."</p>
+        </div>
+
+        <!-- SECCIÓN NUEVA: CÁLCULO DE POTENCIA -->
+        <h2>4. El Factor Olvidado: La Potencia ($P$)</h2>
+        <p>Muchos principiantes calculan los Ohmios y se olvidan de lo más importante: <strong>El Calor</strong>. La resistencia frena la corriente convirtiendo la energía sobrante en temperatura. Si la resistencia es muy pequeña para la energía que maneja, se quemará.</p>
+
+        <div class="destacado" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <h3>📐 Ingeniería Real: Dimensionamiento</h3>
+            <p>No basta con elegir el valor (Ohmios), debes elegir el <strong>tamaño físico (Vatios)</strong>.</p>
+            
+            <p><strong>Las Fórmulas de la Potencia:</strong></p>
+            <div class="formula">
+                <p>$$P = V_{resistencia} \times I$$</p>
+                <p>O si prefieres: $$P = I^2 \times R$$</p>
+            </div>
+
+            <h4>Ejemplo Práctico:</h4>
+            <p>Volvamos a nuestro LED. La resistencia se queda con <strong>3 Voltios</strong> y pasan <strong>0.02 Amperios</strong>.</p>
+            <p>$$P = 3V \times 0.02A = 0.06 \text{ Watts}$$</p>
+
+            <p><strong>¿Qué resistencia compro?</strong></p>
+            <p>Las resistencias estándar de tu kit son de <strong>1/4 de Vatio (0.25 W)</strong>.</p>
+            <ul>
+                <li><strong>Tu cálculo (0.06 W)</strong> es MENOR que el límite <strong>(0.25 W)</strong>. <span style="color:green; font-weight:bold;">✅ ¡ES SEGURA!</span></li>
+            </ul>
+            <p><em>Pero... si el cálculo te diera 0.6 Watts, la de tu kit se quemaría al instante. Tendrías que comprar una resistencia "gorda" de 1 Vatio.</em></p>
+        </div>
+
+        <div class="dato-extra">
+            <h3>📏 Tamaños Comerciales</h3>
+            <p>A simple vista, puedes saber cuánto aguanta una resistencia:</p>
+            <ul>
+                <li><strong>1/4 Watt:</strong> Delgadita (La común).</li>
+                <li><strong>1/2 Watt:</strong> Un poco más gruesa.</li>
+                <li><strong>1 Watt a 5 Watts:</strong> Grandes, suelen ser de cerámica blanca rectangular para disipar mucho calor.</li>
+            </ul>
+        </div>
+
+        <div class="dato-extra">
+            <h4>📖 Dato Curioso: James Watt no inventó el Watt</h4>
+            <p>El nombre viene de James Watt (1736-1819), ingeniero escocés que mejoró la máquina de vapor. 
+            ¡Pero él nunca usó la unidad! Se creó en 1882, 63 años después de su muerte, 
+            para honrar su contribución a la ingeniería de potencia.</p>
+            </div>
+    </section>
+
+    <!-- Sección de Preguntas de Consolidación -->
+    <h2>❓ Preguntas de Consolidación</h2>
+    <p>Responde estas preguntas para asegurarte de que entendiste los conceptos clave de esta lección:</p>
+
+    <details class="u1">
+    <summary>1. ¿Qué es la resistencia y cuál es su función principal en un circuito?</summary>
+    <p>La resistencia es un componente hecho de carbón que se opone al paso de los electrones. Su función principal es limitar la corriente para que los componentes delicados (como LEDs) no se quemen. Se mide en ohmios (Ω).</p>
+    </details>
+
+    <details class="u1">
+    <summary>2. Escribe la fórmula de la Ley de Ohm y explica qué significa cada variable.</summary>
+    <p>La fórmula es: <span class="formula">V = I × R</span></p>
+    <ul>
+        <li><strong>V:</strong> Voltaje (presión eléctrica), medido en voltios (V).</li>
+        <li><strong>I:</strong> Corriente (flujo de electrones), medido en amperios (A).</li>
+        <li><strong>R:</strong> Resistencia (oposición al paso), medida en ohmios (Ω).</li>
+    </ul>
+    </details>
+
+    <details class="u1">
+    <summary>3. Si tienes una pila de 9V y quieres conectar un LED que consume 2V y 20mA, ¿qué resistencia necesitas?</summary>
+    <p>Primero calculamos el voltaje que debe manejar la resistencia:</p>
+    <p>V<sub>resistencia</sub> = 9V - 2V = 7V</p>
+    <p>Luego aplicamos la Ley de Ohm:</p>
+    <p>R = V / I = 7V / 0.02A = 350 Ω</p>
+    <p>Como 350 Ω no es un valor comercial común, usaríamos la resistencia más cercana superior: <strong>390 Ω</strong> o <strong>470 Ω</strong>.</p>
+    </details>
+
+    <details class="u1">
+    <summary>4. ¿Por qué es importante calcular la potencia de una resistencia y no solo su valor en ohmios?</summary>
+    <p>Porque la resistencia convierte la energía sobrante en calor. Si la potencia que debe disipar es mayor que la capacidad de la resistencia, esta se quemará. Por ejemplo, una resistencia estándar de 1/4 W (0.25 W) no puede manejar 0.6 W de potencia. Es necesario elegir una resistencia con capacidad de potencia adecuada para el circuito.</p>
+    </details>
+
+    <details class="u1">
+    <summary>5. Explica con tus propias palabras la metáfora del "repartidor de pizzas" para entender cómo se distribuye el voltaje.</summary>
+    <p>La pila es como un repartidor que sale con pizzas (voltaje). Si tiene 5 pizzas (5V) y al pasar por el LED este le cobra 2 pizzas "de peaje" para encenderse, le quedan 3 pizzas al repartidor. Esas 3 pizzas restantes deben ser recibidas por la resistencia para que el repartidor llegue vacío (0V) al final del recorrido (tierra). Así entendemos que el voltaje se "gasta" en el camino por cada componente.</p>
+    </details>
+
+    <details class="u1">
+    <summary>6. ¿Cuál es la diferencia entre el símbolo Ω y el dibujo de una resistencia en un esquemático?</summary>
+    <p>El símbolo <strong>Ω</strong> (Omega) es la <em>unidad de medida</em> de la resistencia, igual que "m" es para metros. El dibujo de una resistencia en un esquemático es un <em>rectángulo</em> (estilo europeo, que usamos en este curso) o un <em>zigzag</em> (estilo americano). El símbolo Ω nunca aparece dibujado en los esquemáticos, solo se usa para indicar el valor numérico (ej: 220 Ω).</p>
+    </details>
+
+    <!-- === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            Dos personas analizan los conceptos de esta lección y comparten estrategias para enseñar la Ley de Ohm en el aula. ¡Perfecto para tu formación!
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <source src="audio/leccion2.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 14:26 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- === IA GENERATIVA: Profundiza con Inteligencia Responsable === -->
+    <section class="ia-generativa">
+        <div class="ia-header">
+            <svg class="ia-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🧠 Tu Asistente de Aprendizaje con IA</h3>
+        </div>
+        
+        <p class="ia-contexto">
+            Como futuro docente, aprenderás a usar la Inteligencia Artificial Generativa no para <em>reemplazar</em> tu pensamiento, sino para <strong>potenciarlo</strong>. 
+            Antes de avanzar, usa tu cuaderno para escribir lo que comprendiste y luego consulta a la IA para resolver dudas específicas.
+        </p>
+        
+        <div class="ia-ejemplo">
+            <h4>✏️ Ejemplo de prompt ético para esta lección:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que la Ley de Ohm (V = I × R) me permite calcular la resistencia necesaria para proteger un LED, 
+                y que debo considerar también la potencia disipada (P = V × I) para evitar que se queme la resistencia. 
+                Quiero saber: si diseño un circuito con 3 LEDs en serie alimentados por una pila de 9V, 
+                ¿cómo calculo la resistencia única que protege a todos? ¿Y cómo verifico que una resistencia de 1/4W 
+                sea suficiente para este diseño? Por favor, explícame paso a paso como si fuera a enseñárselo a mis futuros estudiantes de grado 5°."
+            </blockquote>
+        </div>
+        
+        <div class="ia-instrucciones">
+            <h4>✅ Tu turno: Construye tu propio prompt</h4>
+            <ol>
+                <li>Abre tu cuaderno y escribe: <strong>"Comprendí que..."</strong> (resume con tus palabras)</li>
+                <li>Agrega: <strong>"y quiero saber..."</strong> (plantea una duda específica o aplicación práctica)</li>
+                <li>Incluye siempre: <strong>"Explícame como si fuera a enseñárselo a..."</strong> (define tu audiencia)</li>
+                <li>Copia tu prompt completo y consúltalo en tu IA generativa favorita</li>
+                <li>¡Importante! Anota en tu cuaderno tanto la respuesta de la IA <em>como tu reflexión crítica</em> sobre ella</li>
+            </ol>
+        </div>
+        
+        <div class="ia-aviso">
+            <strong>⚠️ Ética Docente:</strong> La IA es tu asistente de pensamiento, no tu reemplazo. 
+            Nunca copies textualmente sus respuestas en evaluaciones. Usa sus ideas para <em>inspirar tu propio razonamiento</em>, 
+            tal como harás con tus futuros estudiantes cuando usen tecnología en el aula.
+        </div>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>¡Misión cumplida! Ya sabes calcular el "freno" (Resistencia). Pero ahora miras tu LED y notas algo extraño: <strong>una pata es más larga que la otra</strong>. ¿Es un error de fábrica? No. </p>
+        <p>A diferencia de la resistencia, que funciona en cualquier dirección, el LED es una <strong>calle de un solo sentido</strong>. Tiene <strong>Polaridad</strong>. Si lo conectas al revés, la puerta se cierra y no pasa nada. En la próxima lección, aprenderás a leer este mapa secreto para conectarlo siempre bien a la primera.</p>
+    </div>
+
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between;">
+            <a href="leccion1.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion3.html" class="btn-navegacion">Siguiente: El Misterio del LED →</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

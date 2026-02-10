@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 3: El LED - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <!-- KaTeX para fórmulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 1: Fundamentos Físicos - Lección 3</small></p>
+        <h1>✨ El Misterio del LED: Luz y Polaridad</h1>
+    </header>
+
+    <div class="intro-leccion">
+        <p>En la clase pasada aprendiste a calcular el "freno" (la resistencia). Ahora enfoquémonos en el LED. A diferencia de un bombillo viejo, este componente es exigente: tiene un "lado correcto". Si te equivocas, simplemente no funcionará.</p>
+    </div>
+
+    <section>
+        <p>LED significa <strong>Diodo Emisor de Luz</strong>. La palabra clave es "Diodo": significa que es una vía de un solo sentido. La corriente solo pasa si entra por la puerta correcta.</p>
+
+        <h2>2. El Símbolo del LED en los Esquemáticos</h2>
+        <p>
+        Ahora que sabemos qué es un LED, es momento de aprender a reconocerlo en los planos eléctricos. 
+        El símbolo del LED es una especie de "mapa" que nos cuenta su historia:
+        </p>
+
+        <div class="svg-container">
+            <img src="img/explicacion_partes_led.png" alt="Diagrama de un LED mostrando Ánodo y Cátodo" style="max-width:22%x; height:auto;">
+            <p><small><em>Fig. 1: Símbolo del LED con sus partes explicadas.</em></small></p>
+        </div>
+
+        <p>
+        Cada parte del símbolo tiene un significado preciso:
+        </p>
+
+        <div class="destacado">
+        <h3>🔍 Decodificando el Símbolo del LED</h3>
+        <ul>
+            <li><strong>Triángulo:</strong> Indica la <em>dirección permitida</em> de la corriente. 
+                La corriente solo puede fluir en la dirección que apunta el triángulo (de ánodo a cátodo).</li>
+            <li><strong>Barra vertical:</strong> Representa el <em>cátodo</em> (el lado negativo). 
+                Es como una "pared" que bloquea el paso de la corriente en sentido contrario.</li>
+            <li><strong>Flechas hacia afuera:</strong> Muestran que este componente <em>emite luz</em>. 
+                Son las "señales de salida" que nos dicen: "¡Aquí sale energía en forma de luz!".</li>
+        </ul>
+        </div>
+
+        <p>
+        Observa algo importante: <strong>el triángulo siempre apunta hacia la barra</strong>. 
+        Esto nos dice que la corriente entra por el triángulo (ánodo) y sale por la barra (cátodo). 
+        Si intentamos conectarlo al revés, el triángulo "choca" contra la barra y la corriente no pasa.
+        </p>
+
+        <div class="dato-extra">
+        <h4>📖 Dato Curioso: ¿Por qué un triángulo?</h4>
+        <p>El triángulo representa una "flecha de dirección" simplificada. En los primeros 
+        diagramas electrónicos, los ingenieros usaban flechas completas para mostrar la dirección 
+        del flujo. Con el tiempo, se simplificó a un triángulo para ahorrar espacio en los planos. 
+        Hoy en día, ese triángulo es universal: donde lo veas, sabrás que ese componente tiene 
+        una dirección específica de funcionamiento.</p>
+        </div>
+        
+        <h2>1. Anatomía: Identifica sus patas</h2>
+        <p>El LED es un diodo (vía de un solo sentido). Toma un LED nuevo y míralo bien, tiene dos terminales:</p>
+
+        <div class="svg-container">
+            <img src="img/partes_led_es.png" alt="Diagrama de un LED mostrando Ánodo y Cátodo" style="max-width:300px; height:auto;">
+            <p><small><em>Fig 2. Pata larga (+) y Pata corta/Muesca (-).</em></small></p>
+        </div>
+
+        <ul>
+            <li><strong>Ánodo (+):</strong> Pata LARGA. Va al Positivo.</li>
+            <li><strong>Cátodo (-):</strong> Pata CORTA. Va al Negativo.</li>
+        </ul>
+
+        <div class="destacado">
+            <h3>🕵️ Truco del Experto: ¿Y si cortaron las patas?</h3>
+            <p>Si usas un LED reciclado y las patas son iguales, mira el borde de plástico de la bombilla:</p>
+            <ul>
+                <li>El cuerpo es redondo, PERO en su base tiene un <strong>lado plano (Muesca)</strong>.</li>
+                <li>Ese lado plano siempre indica el <strong>Negativo (Cátodo)</strong>.</li>
+            </ul>
+        </div>
+
+        <div class="destacado">
+            <h3>🍎 Rincón del Docente: Enseñando Polaridad a Niños (9-10 años)</h3>
+            
+            <p><strong>Objetivo:</strong> Que el niño comprenda que el LED tiene "dirección" y aprenda 
+            a identificar sus terminales sin memorizar términos técnicos.</p>
+            
+            <h4>🔍 Actividad: "La Llave y la Cerradura Secreta"</h4>
+            <p><strong>Materiales por pareja:</strong> 2 LEDs, 1 pila CR2032 en su soporte, 
+            1 resistencia de 330 Ω, hoja de registro con dibujos.</p>
+            
+            <p><strong>Paso 1 — El Misterio:</strong> Entrega los materiales y di: 
+            <em>"Tienen 2 minutos para encender el LED. ¡Pero hay una regla secreta que deben descubrir!"</em></p>
+            
+            <p><strong>Paso 2 — La Investigación:</strong> Los niños probarán conectar el LED de las dos formas. 
+            Cuando descubran que solo funciona en una dirección, pregúntales: 
+            <em>"¿Qué cambió? ¿Cómo supieron cuál era la forma correcta?"</em></p>
+            
+            <p><strong>Paso 3 — El Descubrimiento Guiado:</strong> Pídeles que observen con lupa:</p>
+            <ul>
+                <li>¿Cuál pata es más larga? (Señalan con dedo)</li>
+                <li>¿Ves la muesca en el borde del plástico? (Tocan con uña)</li>
+                <li>¿Qué pasa si giras el LED 180°? (Lo giran y observan)</li>
+            </ul>
+            
+            <p><strong>Paso 4 — La Metáfora:</strong> Explica: 
+            <em>"El LED es como una llave: solo entra en la cerradura de una forma. 
+            La pata larga es la 'cabeza de la llave' (+) y la pata corta es la 'punta' (–). 
+            Si la giras al revés... ¡no abre!"</em></p>
+            
+            <p><strong>Hoja de Registro:</strong> Los niños dibujan el LED en su cuaderno con dos flechas:
+            <br>→ Flecha verde: "Así sí enciende" (pata larga al +)
+            <br>→ Flecha roja: "Así no enciende" (pata corta al +)</p>
+            
+            <div class="dato-extra">
+                <h4>💡 Consejo Pedagógico</h4>
+                <p>No corrijas sus intentos fallidos. En su lugar di: 
+                <em>"¡Excelente error! Cada intento te acerca más a descubrir la regla secreta"</em>. 
+                Esto normaliza el error como parte del proceso científico y construye resiliencia.</p>
+            </div>
+            </div>
+
+        <h2>2. El Circuito Mínimo Viable (CMV)</h2>
+        <p>Para prender un LED de forma segura, necesitas formar un equipo de tres:</p>
+        <ol>
+            <li>Fuente de Energía, por ejemplo, una pila o un cargador de teléfono celular de 5V.</li>
+            <li>Resistencia de Protección, p. ej., 330\(\Omega\).</li>
+            <li>El LED (En la dirección correcta).</li>
+        </ol>
+        
+        <div class="svg-container">
+            <!-- NUEVA IMAGEN AQUÍ -->
+            <img src="img/circuito_basico_completo.png" alt="Circuito correcto: Batería, LED y Resistencia en serie" style="max-width:400px; height:auto;">
+            <p><small><em>Fig 3. La forma correcta: Batería + LED + Resistencia.</em></small></p>
+        </div>
+
+        <p>Si te fijas en la imagen, la resistencia actúa como un "peaje" que controla el paso de los electrones antes (o después) de entrar al LED.</p>
+
+        <h3>¿Y si quito la resistencia?</h3>
+        <p>Si te sientes valiente y conectas el LED directo a la pila, ocurre el desastre:</p>
+
+        <div class="svg-container">
+            <img src="img/led_quemado.png" alt="LED quemado" style="max-width:200px; height:auto;">
+            <p><small><em>Fig 4. El triste final de un LED sin protección.</em></small></p>
+        </div>
+
+        <div class="destacado" style="background-color: #ffebee; border-left-color: #c62828;">
+            <h3>💀 El "Humito Mágico"</h3>
+            <p>
+            Si te sientes valiente y conectas el LED directo a la pila, ocurre el desastre: 
+            el LED se quema en cuestión de segundos, liberando lo que los ingenieros llaman 
+            cariñosamente el <strong>"humo mágico"</strong>.
+            </p>
+
+            <div class="dato-extra">
+            <h4>📖 Dato Curioso: La "Ley del Humo Mágico"</h4>
+            <p>En la comunidad de ingenieros existe una broma clásica que dice:</p>
+            <blockquote style="font-style: italic; margin: 15px 0; padding: 10px; border-left: 3px solid #2196F3;">
+                "Todos los componentes electrónicos funcionan con humo. Cuando el humo escapa, 
+                dejan de funcionar."
+            </blockquote>
+            <p>Es una forma humorística de recordar que <strong>una vez que un componente se quema, 
+            no hay vuelta atrás</strong>. Por eso los ingenieros siempre hacen la "prueba de humo" 
+            (smoke test) al encender un circuito nuevo: si no sale humo, ¡todo está bien!</p>
+            </div>
+
+            <p>
+            Moraleja: La resistencia es el <strong>guardaespaldas</strong> de tu LED. 
+            ¡Nunca lo conectes sin ella!
+            </p>
+        </div>
+
+        <div class="dato-extra">
+            <h4>📖 Dato para Futuros Docentes</h4>
+            <p>Algunos estudiantes preguntarán: "¿Y si uso una pilita de 3V, puedo quitar la resistencia?". 
+            La respuesta correcta es:</p>
+            <blockquote style="font-style: italic; margin: 15px 0; padding: 10px; border-left: 3px solid #2196F3;">
+                "La resistencia no es opcional. Es como el cinturón de seguridad: 
+                a veces el viaje es corto y sin baches, pero <strong>nunca</strong> sabes cuándo 
+                aparecerá un bache inesperado. Siempre protégelos."
+            </blockquote>
+            <p>Esta metáfora enseña <strong>prevención</strong> en lugar de excepciones peligrosas.</p>
+
+            <p><strong>⚠️ Regla de Oro para Futuros Docentes:</strong> 
+                Nunca enseñes a tus alumnos que "a veces se puede quitar la resistencia". 
+                La protección es <em>siempre</em> obligatoria, sin excepciones. 
+                Así como no enseñamos a cruzar la calle sin mirar, no enseñamos a conectar 
+                LEDs sin su guardaespaldas.</p>
+        </div>
+        
+        
+        <!-- NUEVA SECCIÓN TINKERCAD (Versión Tutorial Directo) -->
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3; margin: 30px 0;">
+            <h3>💻 ¡Pruébalo YA sin quemar nada!</h3>
+            <p>Hemos preparado un entorno virtual donde el circuito ya está casi listo para ti. Usaremos <strong>Tinkercad</strong>.</p>
+            
+            <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 250px;">
+                    <img src="img/tinkercad_cmv.png" alt="Circuito en Tinkercad con Pila CR2032, Resistencia y LED" style="width: 100%; border-radius: 8px; border: 1px solid #ccc;">
+                </div>
+                <div style="flex: 1; min-width: 250px;">
+                    <strong>Tu Misión Ahora Mismo:</strong>
+                    <ol>
+                        <li>Haz clic en el botón de abajo <strong>"Ir al Tutorial Interactivo"</strong>.</li>
+                        <li>Si es tu primera vez, elige <strong>"Registrarse" (o Sign Up, en la versión en inglés) > "Crear una cuenta personal" > "Google"</strong>.</li>
+                        <li>Verás el circuito de la imagen ya montado en tu pantalla.</li>
+                        <li>Haz clic en el botón verde <strong>"Iniciar simulación"</strong> (arriba a la derecha). ¡El LED se encenderá!</li>
+                        <li><strong>El Experimento:</strong> Detén la simulación, haz clic en la resistencia y bórrala (Supr). Une los cables directo. Vuelve a iniciar. 💥</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 15px;">
+                <!-- Enlace directo al tutorial "Start Simulating" -->
+                <a href="https://www.tinkercad.com/learn/overview/OT2JZ1PL20FZRMO" target="_blank" class="btn-navegacion" style="background-color: #0277bd;">Ir al Tutorial Interactivo ↗</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Sección de Preguntas de Consolidación -->
+    <h2>❓ Preguntas de Consolidación</h2>
+    <p>Responde estas preguntas para asegurarte de que dominas los conceptos técnicos <em>y</em> estás listo para enseñarlos en tu futura aula:</p>
+
+    <details class="u1">
+    <summary>1. ¿Por qué un LED es un "diodo" y qué implica esto para su funcionamiento?</summary>
+    <p>LED significa <strong>Diodo Emisor de Luz</strong>. La palabra "diodo" proviene del griego <em>di-</em> (dos) y <em>-odo</em> (camino), pero paradójicamente significa que tiene <strong>un solo camino permitido</strong> para la corriente.</p>
+    <p>Implicaciones prácticas:</p>
+    <ul>
+        <li>La corriente solo fluye de <strong>ánodo (+) a cátodo (–)</strong>.</li>
+        <li>Si se conecta al revés, la corriente <em>no pasa</em> (el LED permanece apagado, pero no se daña).</li>
+        <li>Esta propiedad es fundamental en electrónica digital: permite crear "puertas lógicas" que controlan el flujo de señales.</li>
+    </ul>
+    <p><strong>Para tu futura aula:</strong> Explica a niños: "El LED es como una puerta giratoria de un solo sentido: solo deja pasar si entras por el lado correcto".</p>
+    </details>
+
+    <details class="u1">
+    <summary>2. Describe tres formas de identificar el cátodo (–) de un LED, incluso si las patas están cortadas.</summary>
+    <p>Tres métodos infalibles:</p>
+    <ol>
+        <li><strong>Pata corta:</strong> En LEDs nuevos, la pata más corta siempre es el cátodo (–).</li>
+        <li><strong>Muesca plana:</strong> En el borde redondo del cuerpo plástico, hay un lado ligeramente aplanado. Ese lado indica el cátodo.</li>
+        <li><strong>Interior del LED:</strong> Mirando desde arriba, la pata interna más grande (como un pequeño reflector en forma de copa) corresponde al cátodo.</li>
+    </ol>
+    <p><strong>Dato técnico:</strong> Esta redundancia en las señales de polaridad existe porque los fabricantes saben que los técnicos a menudo recortan las patas al montar circuitos.</p>
+    <p><strong>Para tu futura aula:</strong> Convierte la identificación en un "juego de detectives": "¡Busquen las 3 pistas que revelan el lado negativo!"</p>
+    </details>
+
+    <details class="u1">
+    <summary>3. ¿Por qué es incorrecto decir "el LED se quemó porque lo conecté al revés"?</summary>
+    <p>Es un error común pero técnicamente <strong>falso</strong>. Conectar un LED al revés <em>no lo quema</em>; simplemente <strong>no conduce corriente</strong> y permanece apagado.</p>
+    <p>¿Cuándo SÍ se quema un LED?</p>
+    <ul>
+        <li>Cuando se conecta <strong>sin resistencia</strong> a una fuente de voltaje mayor que su voltaje nominal (ej: LED rojo de 2V conectado directo a 5V).</li>
+        <li>Cuando la corriente excede su límite (típicamente 20-30mA para LEDs estándar).</li>
+    </ul>
+    <p><strong>Base física:</strong> Los diodos tienen un "voltaje de ruptura inversa" muy alto (típicamente >50V). Las pilas de 3V o 5V no alcanzan ese umbral, por lo que no dañan el LED al conectarlo al revés.</p>
+    <p><strong>Para tu futura aula:</strong> Corrige el mito con una demostración: "Conectemos el LED al revés... ¿ves? No se quema, solo no enciende. El verdadero peligro es quitar la resistencia".</p>
+    </details>
+
+    <details class="u1">
+    <summary>4. Explica el concepto de "Circuito Mínimo Viable" (CMV) para un LED y por qué cada componente es indispensable.</summary>
+    <p>El CMV para un LED requiere <strong>exactamente tres componentes</strong>:</p>
+    <table>
+        <tr>
+        <th>Componente</th>
+        <th>Función</th>
+        <th>¿Qué pasa si falta?</th>
+        </tr>
+        <tr>
+        <td><strong>Fuente (pila/batería)</strong></td>
+        <td>Provee la energía (voltaje) para mover los electrones</td>
+        <td>No hay movimiento → LED apagado</td>
+        </tr>
+        <tr>
+        <td><strong>Resistencia</strong></td>
+        <td>Limita la corriente a un valor seguro (ej: 20mA)</td>
+        <td>Corriente excesiva → LED se quema ("humito mágico")</td>
+        </tr>
+        <tr>
+        <td><strong>LED</strong></td>
+        <td>Convierte energía eléctrica en luz (fotones)</td>
+        <td>No hay conversión → solo calor en la resistencia</td>
+        </tr>
+    </table>
+    <p><strong>Principio STEAM:</strong> Este triángulo (fuente-resistencia-carga) es la base de <em>casi todos</em> los circuitos electrónicos, desde un timbre hasta un teléfono inteligente.</p>
+    <p><strong>Para tu futura aula:</strong> Usa la analogía del "equipo de tres": "La pila es el motorista, la resistencia es el guardia de seguridad, y el LED es el artista que hace el espectáculo de luces".</p>
+    </details>
+
+    <details class="u1">
+    <summary>5. Un niño te pregunta: "¿Por qué la resistencia puede ir antes o después del LED y funciona igual?". ¿Cómo le respondes?</summary>
+    <p><strong>Respuesta técnica:</strong> En un circuito en serie (como el CMV del LED), <strong>la corriente es la misma en todos los puntos</strong>. Por la Ley de Kirchhoff de corrientes, los electrones no se "acumulan" ni se "pierden" en el camino. Por lo tanto:</p>
+    <ul>
+        <li>Si la resistencia está <em>antes</em> del LED: limita la corriente <em>antes</em> de que llegue al LED.</li>
+        <li>Si la resistencia está <em>después</em> del LED: limita la corriente <em>después</em>, pero como la corriente es la misma en todo el lazo, el efecto es idéntico.</li>
+    </ul>
+    <p><strong>Metáfora para niños:</strong> "Imagina una fila india de niños pasando por un pasillo estrecho. Da igual si el pasillo estrecho está al inicio o al final de la fila: ¡todos caminan al mismo ritmo lento!".</p>
+    <p><strong>Conexión STEAM:</strong> Este principio es fundamental en análisis de circuitos y prepara el terreno para entender redes eléctricas complejas.</p>
+    </details>
+
+    <details class="u1">
+    <summary>6. Diseña una actividad de 5 minutos para que niños de 9 años descubran por sí mismos la polaridad del LED, sin que les digas la regla de antemano.</summary>
+    <p><strong>Actividad: "El Experimento de las Dos Conexiones"</strong></p>
+    <p><strong>Materiales por pareja:</strong> 1 LED, 1 pila CR2032 con soporte, 1 resistencia de 330Ω, hoja con dos dibujos de circuitos vacíos.</p>
+    <p><strong>Protocolo:</strong></p>
+    <ol>
+        <li><strong>Paso 1 (2 min):</strong> "Conecten el circuito como quieran. Si no enciende, prueben de otra forma. Tienen 60 segundos para cada intento".</li>
+        <li><strong>Paso 2 (2 min):</strong> "Cuando logren encenderlo, dibujen en su hoja cómo lo conectaron. Luego giren <em>solo el LED</em> 180° y dibujen lo que pasa".</li>
+        <li><strong>Paso 3 (1 min):</strong> "En grupo: ¿qué descubrieron? ¿Siempre funciona igual sin importar cómo lo conecten?"</li>
+    </ol>
+    <p><strong>Objetivo pedagógico:</strong> Los niños construyen el conocimiento mediante el método científico (hipótesis → experimento → observación → conclusión), no por memorización.</p>
+    <p><strong>Refuerzo docente:</strong> Nunca digas "la pata larga va al +". En su lugar pregunta: "¿Qué tienen en común todos los circuitos que SÍ encendieron?". Guía con preguntas, no con respuestas.</p>
+    </details>
+
+    <!-- === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            Dos docentes exploran el fascinante mundo de los LEDs: desde su estructura interna hasta estrategias para enseñar polaridad a niños. Comparten experiencias reales en el aula y desmienten mitos comunes sobre estos componentes.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <source src="audio/leccion3.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 14:34 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- === TARJETA DE IDENTIDAD DEL PROMPT ÉTICO === -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        
+        <p class="prompt-contexto">
+            Como futuro docente, aprenderás a usar la IA Generativa para <strong>potenciar</strong> tu pensamiento, no para reemplazarlo. Esta tarjeta te guía para construir prompts éticos que te ayuden a resolver dudas específicas de cada lección.
+        </p>
+        
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            
+            <div class="paso">
+                <strong>1️⃣ "Comprendí que..."</strong>
+                <p>Resume CON TUS PALABRAS lo aprendido. Ej: "el LED es un diodo que solo permite el paso de corriente en un sentido, y que tiene dos terminales: ánodo (+) y cátodo (–)."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>2️⃣ "y quiero saber..."</strong>
+                <p>Plantea una DUDA ESPECÍFICA o aplicación. Ej: "por qué algunos LEDs de colores diferentes tienen voltajes nominales distintos, y cómo afecta esto al cálculo de la resistencia."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong>
+                <p>Define TU AUDIENCIA (edad/curso). Ej: "a estudiantes de grado 6° que nunca han visto un circuito electrónico."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>4️⃣ "Incluye un error común que debo evitar..."</strong>
+                <p>Pide retroalimentación crítica. Ej: "al explicar por qué un LED no se quema al conectarlo al revés, pero sí sin resistencia."</p>
+            </div>
+        </div>
+        
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo aplicado a esta lección:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que el LED es un diodo que solo permite el paso de corriente en un sentido (de ánodo a cátodo), y que tiene dos formas de identificar sus terminales: la pata larga es el ánodo (+) y la corta es el cátodo (–), además del borde plano que indica el negativo. También entendí que la resistencia es indispensable para protegerlo del exceso de corriente. Quiero saber: si tengo un LED azul que requiere 3.2V y 20mA, y lo alimento con una pila de 9V, ¿cómo calculo la resistencia adecuada? Explícame como si fuera a enseñárselo a mis futuros estudiantes de grado 7°, usando una analogía con algo cotidiano. Incluye un error común que los niños suelen cometer al identificar el cátodo de un LED usado."
+            </blockquote>
+        </div>
+        
+        <div class="prompt-aviso">
+            <strong>⚠️ Ética Docente:</strong> La IA es tu <em>asistente de pensamiento</em>, no tu reemplazo. Nunca copies textualmente sus respuestas en evaluaciones. Usa sus ideas para <strong>inspirar tu propio razonamiento</strong>, tal como harás con tus futuros estudiantes cuando usen tecnología en el aula. Anota en tu cuaderno tanto la respuesta de la IA como tu reflexión crítica sobre ella.
+        </div>
+    </section>
+
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>Ya sabes que necesitas una resistencia. Pero al abrir tu kit, ves un montón de resistencias de colores y no sabes cuál es cuál. En la próxima lección aprenderás a leer ese código secreto.</p>
+    </div>
+
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between;">
+            <a href="leccion2.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion4.html" class="btn-navegacion">Siguiente: Código de Colores →</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

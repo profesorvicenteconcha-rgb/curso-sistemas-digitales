@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio Final: Hamming - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 4: Teoría de Códigos - Lección 30 (Final del Curso)</small></p>
+        <h1>🏆 Laboratorio Final: El Proyecto Hamming (Magia Digital)</h1>
+    </header>
+
+    <section>
+        <p>¡Ingenieros, bienvenidos al reto final! Vamos a construir un circuito que parece magia: un sistema capaz de detectar errores por sí mismo. Implementaremos físicamente la <strong>Matriz de Control \(H\)</strong>.</p>
+
+        <h2>1. El Reto: "Adivina" qué interruptor cambié</h2>
+        <p>Vamos a construir un decodificador que lee 7 interruptores y nos muestra en 3 LEDs la posición exacta de cualquier error que introduzcas a propósito (ruido manual).</p>
+
+        <div class="destacado">
+            <h3>📝 Las Ecuaciones del Síndrome</h3>
+            <p>Necesitamos 3 circuitos de paridad independientes (3 filas de la matriz H):</p>
+            <ul>
+                <li><strong>LED 1 (\(s_1\)):</strong> XOR de bits 1, 3, 5, 7.</li>
+                <li><strong>LED 2 (\(s_2\)):</strong> XOR de bits 2, 3, 6, 7.</li>
+                <li><strong>LED 3 (\(s_3\)):</strong> XOR de bits 4, 5, 6, 7.</li>
+            </ul>
+        </div>
+
+        <h2>2. Materiales y Estrategia</h2>
+        <ul>
+            <li><strong>Cerebro:</strong> 3 Chips <strong>7486</strong> (Cuádruple XOR).</li>
+            <li><strong>Entrada:</strong> 7 Interruptores (Dip Switch) + 7 Resistencias Pull-Down (10kΩ).</li>
+            <li><strong>Salida:</strong> 3 LEDs + 3 Resistencias (330Ω).</li>
+        </ul>
+
+        <h3>Cómo conectar 4 entradas a XORs</h3>
+        <p>Como el chip 7486 solo suma de a dos, usaremos la técnica de "Cascada" (Árbol XOR):</p>
+        <div class="svg-container">
+            <!-- Imagen: Cascada XOR (img/xor_cascada.png) -->
+            <img src="img/xor_cascada.png" alt="Esquema conectando 4 entradas usando 3 compuertas XOR en forma de árbol para obtener una sola salida" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. Para sumar 4 bits, necesitas 3 compuertas.</em></small></p>
+        </div>
+
+        <h2>3. Simulación Interactiva (¡Pruébalo aquí!)</h2>
+        <p>Antes de gastar cables, juega con esta simulación. Cambia los interruptores de la izquierda para generar un código, y luego cambia uno solo para ver cómo los LEDs de la derecha te indican el error.</p>
+        
+        <div class="svg-container" style="border: 2px solid #ccc; border-radius: 8px; overflow: hidden; margin: 20px 0;">
+            <!-- Iframe de Falstad (Enlace genérico limpio por ahora) -->
+            <iframe 
+                width="100%" 
+                height="500" 
+                src="https://www.falstad.com/circuit/circuitjs.html" 
+                frameborder="0">
+            </iframe>
+            <p style="padding: 10px; background:#f9f9f9;"><small><em>Simulación potenciada por Falstad. (Dibuja aquí tu circuito de 3 árboles XOR).</em></small></p>
+        </div>
+
+        <h2>4. Pasos para el Montaje Físico</h2>
+        <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
+            ⚠️ <strong>¡No olvides VCC y GND en los 3 chips!</strong>
+        </div>
+        <ol>
+            <li><strong>Entradas:</strong> Coloca el Dip Switch y sus resistencias Pull-Down. Verifica con el multímetro que tienes 0V y 5V al moverlos.</li>
+            <li><strong>Árbol 1 (LED \(s_1\)):</strong>
+                <ul>
+                    <li>Usa el Chip #1. Conecta las entradas 1 y 3 a la primera XOR.</li>
+                    <li>Conecta las entradas 5 y 7 a la segunda XOR.</li>
+                    <li>Toma los resultados de ambas y mételos a la tercera XOR.</li>
+                    <li>La salida final va al <strong>LED 1</strong>.</li>
+                </ul>
+            </li>
+            <li><strong>Repite para LED 2 y 3:</strong> Sigue las ecuaciones con paciencia. ¡Usa cables de colores distintos para cada árbol!</li>
+        </ol>
+
+        <div class="destacado" style="border-left: 4px solid #6f42c1; background-color: #f3e5f5;">
+            <h3>🧬 El ADN: El Código Original</h3>
+            <p>Lo que hizo Richard Hamming en los años 50, la naturaleza lo inventó hace millones de años.</p>
+            <p>Cuando tus células se dividen, copian millones de letras de ADN (A, C, T, G). A veces ocurren errores (mutaciones por radiación o azar). Tus células tienen enzimas que actúan como una <strong>Matriz de Control Biológica</strong>: recorren la cadena, detectan el error (el síndrome) y cortan el pedazo malo para repararlo.</p>
+            <p>Al entender Hamming, estás entendiendo la lógica que te mantiene vivo frente al caos y la entropía.</p>
+        </div>
+
+        <div class="dato-extra">
+            <h3>🎉 ¡Graduación!</h3>
+            <p>Si lograste que funcione, has completado el <strong>Curso de Fundamentos de Sistemas Digitales</strong>. Has recorrido el camino desde entender qué es un electrón hasta construir sistemas tolerantes a fallos.</p>
+            <p>Ya tienes las bases para explorar microcontroladores (Arduino), diseño de procesadores (FPGA) o telecomunicaciones avanzadas. ¡El mundo digital es tuyo!</p>
+            <p><strong>¿Dónde se usa esto hoy?</strong> Tu computador tiene algo llamado <strong>Memoria ECC</strong> (Error Correction Code) que usa una versión avanzada de Hamming para corregir errores causados por interferencia o incluso ¡rayos cósmicos! También es la razón por la que un <strong>Código QR</strong> funciona aunque esté sucio o roto.</p>
+
+            <div class="destacado" style="border-left-color: #000; background-color: #f4f4f4; margin-top: 40px;">
+                <h3>⚖️ La Responsabilidad del Ingeniero</h3>
+                <p>Hoy has construido un sistema que corrige errores. Puede parecer un simple juego de luces, pero la filosofía detrás de esto salva vidas.</p>
+                
+                <div style="background: #fff; padding: 15px; border-radius: 5px; margin: 15px 0; border: 1px solid #ddd;">
+                    <strong>🌑 Caso Histórico: El Challenger (1986)</strong>
+                    <p>El transbordador espacial explotó 73 segundos después del despegue, cobrando la vida de 7 astronautas. La causa no fue un arma ni un meteorito. Fue una simple <strong>junta de goma (O-ring)</strong> que se congeló y falló.</p>
+                    <p>Un componente diminuto falló, y el sistema colapsó. Fue una lección dolorosa sobre la fragilidad de la tecnología.</p>
+                </div>
+
+                <p><strong>Tu Misión:</strong> La Teoría de Códigos (Hamming) nos enseña a agregar <strong>Redundancia</strong> (bits extra). No lo hacemos por desperdiciar recursos; lo hacemos para que, cuando ese "pequeño bit" falle por el ruido, el sistema sea capaz de notarlo, corregirlo automáticamente y seguir funcionando.</p>
+                <p>Tu trabajo como ingeniero no es solo hacer cosas que funcionen cuando todo va bien, sino diseñar sistemas que <strong>sobrevivan cuando algo sale mal</strong>.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <hr>
+        <div style="text-align: center; padding: 40px 0;">
+            <h1>🎓 ¡Felicidades Ingeniero!</h1>
+            <p>Has completado las 4 Unidades.</p>
+            <a href="index.html" class="btn-navegacion" style="background-color: var(--color-primario); font-size: 1.2em; padding: 15px 30px;">🏠 Volver al Inicio del Curso</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

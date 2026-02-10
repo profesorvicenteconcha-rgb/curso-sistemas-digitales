@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 15: Funciones (SOP) - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX Configurado -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+    
+    <style>
+        .tabla-verdad {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            text-align: center;
+            background: white;
+        }
+        .tabla-verdad th { 
+            background-color: var(--color-primario); 
+            color: white; 
+            padding: 10px; 
+        }
+        .tabla-verdad td { 
+            border: 1px solid #ddd; 
+            padding: 8px; 
+        }
+        
+        /* CORRECCIÓN VISUAL: */
+        /* 1. Quitamos el color alterno gris para limpiar la vista */
+        /* .tabla-verdad tr:nth-child(even) {background-color: #f8f9fa;} */
+
+        /* 2. Definimos fuerte el color de los Minterms (Salida 1) */
+        .minterm-row { 
+            background-color: #d4edda !important; /* Verde claro */
+            font-weight: bold; 
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 2: Lógica Digital - Lección 15</small></p>
+        <h1>📝 De la Tabla a la Ecuación: Minterms</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>En la lección pasada aprendimos a simplificar ecuaciones existentes. Pero en el mundo real, tu jefe no te da una ecuación; te da una lista de requisitos ("Quiero que la máquina haga esto si pasa aquello"). <strong>¿Cómo conviertes una lista de deseos (Tabla de Verdad) en una fórmula matemática?</strong> Hoy aprenderemos a hacer ingeniería inversa usando el método de los <strong>Minterms</strong>.</p>
+    </div>
+
+    <section>
+        <h2>1. El Método "Suma de Productos" (SOP)</h2>
+        <p>Es una receta infalible para diseñar cualquier cosa. La regla es: <strong>"Solo nos importan los UNOS"</strong>.</p>
+
+        <div class="svg-container">
+            <img src="img/metodo_sop.png" alt="Infografía del proceso SOP: Identificar 1s, escribir términos, sumarlos" style="max-width:80%; height:auto;">
+            <p><small><em>Fig 1. La receta para crear ecuaciones: Identifica, Traduce y Suma.</em></small></p>
+        </div>
+
+        <div class="destacado">
+            <h3>Los 3 Pasos de la Receta:</h3>
+            <ol>
+                <li><strong>Mira la Salida:</strong> Busca en la tabla solo las filas donde la salida (el resultado) sea <strong>1</strong>. (Ignora los ceros).</li>
+                <li><strong>Traduce a Minterm (Producto):</strong>
+                    <ul>
+                        <li>Si la entrada es <strong>0</strong> \(\rightarrow\) Escribe la letra negada (\(\bar{A}\)).</li>
+                        <li>Si la entrada es <strong>1</strong> \(\rightarrow\) Escribe la letra normal (\(A\)).</li>
+                        <li>Multiplícalas todas (AND).</li>
+                    </ul>
+                </li>
+                <li><strong>Súmalos (OR):</strong> Une todos los términos con un más (\(+\)).</li>
+            </ol>
+        </div>
+
+        <h2>2. Ejemplo Real: El Jurado de Votación ⚖️</h2>
+        <p>Vamos a diseñar un circuito para un jurado de 3 jueces (A, B, C). La propuesta se aprueba (\(P=1\)) si hay <strong>mayoría simple</strong> (2 o 3 votos a favor).</p>
+
+        <!-- TABLA CORREGIDA VISUALMENTE -->
+        <table class="tabla-verdad">
+            <thead>
+                <tr>
+                    <th>A</th><th>B</th><th>C</th>
+                    <th>Salida (P)</th>
+                    <th>Minterm (Traducción)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>-</td></tr>
+                <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>-</td></tr>
+                <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>-</td></tr>
+                
+                <!-- FILAS RESALTADAS (Los 1s) -->
+                <tr class="minterm-row"><td>0</td><td>1</td><td>1</td><td>1</td><td>\(\bar{A} \cdot B \cdot C\)</td></tr>
+                
+                <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>-</td></tr>
+                
+                <tr class="minterm-row"><td>1</td><td>0</td><td>1</td><td>1</td><td>\(A \cdot \bar{B} \cdot C\)</td></tr>
+                <tr class="minterm-row"><td>1</td><td>1</td><td>0</td><td>1</td><td>\(A \cdot B \cdot \bar{C}\)</td></tr>
+                <tr class="minterm-row"><td>1</td><td>1</td><td>1</td><td>1</td><td>\(A \cdot B \cdot C\)</td></tr>
+            </tbody>
+        </table>
+
+        <h3>El Resultado Final</h3>
+        <p>Observa que hemos resaltado en <strong>verde</strong> las filas donde la salida es <strong>1</strong>. Para obtener la ecuación final, simplemente sumamos estos cuatro términos:</p>
+        <div class="formula">
+            $$P = \bar{A}BC + A\bar{B}C + AB\bar{C} + ABC$$
+        </div>
+        <p>¡Listo! Esta ecuación describe perfectamente la "Mayoría". Si la construyes, funcionará.</p>
+
+        <!-- NUEVA SECCIÓN: NOTACIÓN SIGMA -->
+        <h2>3. El Atajo de los Ingenieros: Notación Sigma (\(\Sigma\))</h2>
+        <p>Escribir letras es tedioso. Los ingenieros preferimos usar los <strong>números de fila</strong>.</p>
+        <p>Si conviertes el código binario de las entradas a decimal, sabes qué número de fila es:</p>
+        
+        <ul style="font-family: monospace; list-style: none; background: #f8f9fa; padding: 15px; border-radius: 8px;">
+            <li>011 (Binario) = <strong>3</strong> (Decimal)</li>
+            <li>101 (Binario) = <strong>5</strong> (Decimal)</li>
+            <li>110 (Binario) = <strong>6</strong> (Decimal)</li>
+            <li>111 (Binario) = <strong>7</strong> (Decimal)</li>
+        </ul>
+
+        <p>Entonces, en lugar de la ecuación larga, \( P = \bar{A}BC + A\bar{B}C + AB\bar{C} + ABC \), escribimos esto:</p>
+        
+        <div class="formula">
+            $$P(A,B,C) = \sum m(3, 5, 6, 7)$$
+        </div>
+        
+        <p><strong>Traducción Precisa:</strong> "La salida se enciende (1) cuando el <strong>valor binario de las entradas</strong> es 3, 5, 6 o 7".</p>
+        <p><em>(Ejemplo: Si entran 1-0-1, eso es un 5 en binario. Como el 5 está en la lista \(\Sigma\), la salida será 1).</em></p>
+        
+        <div class="dato-extra" style="border-left-color: #f44336; background-color: #ffebee;">
+            <h3>🤔 El Problema del Ingeniero</h3>
+            <p>Mira la ecuación: \( P = \bar{A}BC + A\bar{B}C + AB\bar{C} + ABC \). Es <strong>gigante</strong>. Necesitarías muchos chips y cables para armarla. ¿No habrá una forma de decir lo mismo con menos palabras?</p>
+        </div>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>Acabamos de crear una ecuación que funciona, pero es "fuerza bruta". Es cara y difícil de armar. ¿Recuerdas que te prometí trucos de magia? En la siguiente lección, usaremos una herramienta gráfica llamada <strong>Mapas de Karnaugh</strong> para jugar "Tetris" con esos unos y reducir esa ecuación gigante a algo diminuto y elegante.</p>
+    </div>
+
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between;">
+            <a href="leccion14.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion16.html" class="btn-navegacion">Siguiente: Mapas de Karnaugh →</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

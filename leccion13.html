@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 13: Tablas de Verdad - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX Configurado -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+    
+    <style>
+        /* Estilos específicos para las tablas de esta lección */
+        .tabla-verdad {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            text-align: center;
+            background: white;
+        }
+        .tabla-verdad th {
+            background-color: var(--color-primario);
+            color: white;
+            padding: 10px;
+        }
+        .tabla-verdad td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .tabla-verdad tr:nth-child(even) {background-color: #f8f9fa;}
+        .salida-activa {
+            background-color: #d4edda; /* Verde claro para resaltar el 1 */
+            font-weight: bold;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 2: Lógica Digital - Lección 13</small></p>
+        <h1>🗺️ El Mapa del Tesoro Lógico: Tablas de Verdad</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>En la lección anterior aprendimos el idioma de las máquinas (0 y 1) y sus operaciones básicas. Pero las ecuaciones matemáticas a veces son difíciles de visualizar. Como ingenieros, necesitamos estar seguros de qué hará nuestro circuito en <strong>cada una</strong> de las situaciones posibles. Hoy aprenderemos a dibujar el mapa que elimina todas las dudas: la Tabla de Verdad.</p>
+    </div>
+
+    <section>
+        <h2>1. ¿Cómo se construye una Tabla de Verdad?</h2>
+        <p>Es una lista donde escribimos todas las combinaciones posibles de ceros y unos para las entradas.</p>
+        
+        <div class="formula">
+            <p>Filas necesarias = \(2^n\)</p>
+            <p><small>(Donde \(n\) es el número de variables o sensores)</small></p>
+        </div>
+        <ul>
+            <li>1 Variable: \(2^1 = 2\) filas.</li>
+            <li>2 Variables: \(2^2 = 4\) filas.</li>
+            <li>3 Variables: \(2^3 = 8\) filas.</li>
+        </ul>
+
+        <!-- TÉCNICA DE LLENADO (MEJORA AGREGADA) -->
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
+            <h3>🛠️ Técnica Pro: Cómo llenar la tabla sin equivocarse</h3>
+            <p>El error #1 es repetir combinaciones o saltarse alguna. Para evitarlo, usamos el <strong>Orden Binario</strong>. Sigue este patrón para las columnas de la izquierda (Entradas):</p>
+            
+            <ul>
+                <li><strong>Columna Derecha (B):</strong> Alterna de 1 en 1 (0, 1, 0, 1...).</li>
+                <li><strong>Columna Izquierda (A):</strong> Alterna de 2 en 2 (0, 0, 1, 1...).</li>
+            </ul>
+
+            <p><strong>¿Por qué así?</strong> Porque en realidad estás contando en binario (0, 1, 2, 3):</p>
+            <table style="width: auto; margin: 0 auto; font-family: monospace;">
+                <tr><td style="border:none;">0 0</td><td style="border:none;">=</td><td style="border:none;">0</td></tr>
+                <tr><td style="border:none;">0 1</td><td style="border:none;">=</td><td style="border:none;">1</td></tr>
+                <tr><td style="border:none;">1 0</td><td style="border:none;">=</td><td style="border:none;">2</td></tr>
+                <tr><td style="border:none;">1 1</td><td style="border:none;">=</td><td style="border:none;">3</td></tr>
+            </table>
+            <p>¡Mantén siempre este orden y tus diseños futuros saldrán automáticos!</p>
+        </div>
+
+        <h2>2. Las Tres Grandes: Símbolos y Tablas</h2>
+        <p>Vamos a asociar nuestras operaciones con sus <strong>Símbolos Lógicos</strong> (los dibujos para los planos) y sus tablas.</p>
+
+        <div class="svg-container">
+            <img src="img/compuertas_basicas.png" alt="Infografía mostrando símbolos y tablas de verdad para NOT, AND, y OR" style="max-width:60%; height:auto;">
+            <p><small><em>Fig 1. Símbolos estándar y sus tablas.</em></small></p>
+        </div>
+
+        <h3>A. La Compuerta NOT (Inversor)</h3>
+        <p>Ecuación: \(X = \bar{A}\). Su función es llevar la contraria: lo que entra, sale al revés.</p>
+
+        <div class="dato-extra" style="padding: 10px; border-left: 4px solid #2196f3; background-color: #e3f2fd; font-size: 0.9em; margin-bottom: 15px;">
+            <strong>💧 Analogía del Agua: La Manguera Pisada</strong>
+            <p>Imagina una manguera de jardín por la que fluye agua libremente.</p>
+            <ul>
+                <li><strong>Si la pisas con el pie (Entrada 1):</strong> Bloqueas el paso y el agua deja de salir (Salida 0).</li>
+                <li><strong>Si quitas el pie (Entrada 0):</strong> El agua vuelve a fluir (Salida 1).</li>
+            </ul>
+            <p>¡Es un mecanismo de interrupción!</p>
+        </div>
+
+        <table class="tabla-verdad">
+            <tr><th>Entrada A (Pie)</th><th>Salida X (Agua)</th></tr>
+            <tr><td>0 (Levantado)</td><td class="salida-activa">1 (Fluye)</td></tr>
+            <tr><td>1 (Pisado)</td><td>0 (Bloqueado)</td></tr>
+        </table>
+
+        <h3>B. La Compuerta AND (Multiplicación)</h3>
+        <p>Ecuación: \(X = A \cdot B\). Solo es 1 si <strong>todas</strong> las entradas son 1.</p>
+
+        <div class="dato-extra" style="padding: 10px; border-left: 4px solid #4caf50; background-color: #e8f5e9; font-size: 0.9em; margin-bottom: 15px;">
+            <strong>🔐 El Poder del Cero (El Eslabón Débil)</strong>
+            <p>La AND funciona como una multiplicación. Piensa en el <strong>0</strong> como un elemento destructivo:</p>
+            <ul>
+                <li>No importa cuántos "1" tengas (\(1 \cdot 1 \cdot 1 \cdot 1\))...</li>
+                <li>Si aparece <strong>un solo "0"</strong> en la multiplicación, ¡el resultado total muere y se vuelve 0!</li>
+            </ul>
+            <p><strong>Analogía:</strong> Es como una cadena de metal. Si un solo eslabón se rompe (0), la cadena entera falla y se cae, sin importar qué tan fuertes sean los otros eslabones.</p>
+        </div>
+
+        <table class="tabla-verdad">
+            <tr><th>A</th><th>B</th><th>Salida X</th></tr>
+            <tr><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>0</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>1</td><td>1</td><td class="salida-activa">1</td></tr>
+        </table>
+
+        <h3>C. La Compuerta OR (Suma)</h3>
+        <p>Ecuación: \(X = A + B\). Es 1 si <strong>alguna</strong> (o ambas) es 1.</p>
+        
+        <div class="dato-extra" style="padding: 10px; border-left: 4px solid #ff9800; background-color: #fff3e0; font-size: 0.9em; margin-bottom: 15px;">
+            <strong>🤔 ¿Por qué \(1 + 1 = 1\)?</strong>
+            <p>En matemáticas normales, \(1+1=2\). Pero en lógica digital, el <strong>1</strong> no es una cantidad, es un <strong>estado</strong> (Encendido/Lleno).</p>
+            <p>Imagínalo así: Si tienes un vaso lleno de agua (1) y le echas otro vaso lleno de agua (1), el resultado es... un reguero de agua, pero el vaso sigue estando simplemente <strong>Lleno (1)</strong>. No puedes estar "doblemente encendido".</p>
+        </div>
+
+        <table class="tabla-verdad">
+            <tr><th>A</th><th>B</th><th>Salida X</th></tr>
+            <tr><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td class="salida-activa">1</td></tr>
+            <tr><td>1</td><td>0</td><td class="salida-activa">1</td></tr>
+            <tr><td>1</td><td>1</td><td class="salida-activa">1</td></tr>
+        </table>
+
+        <h2>3. Del Problema a la Tabla: El Sistema de Alarma 🚨</h2>
+        <p>Imagina una alarma ($A$) que suena si detecta Movimiento ($M$) <strong>O</strong> si se abre la Ventana ($V$).</p>
+        <p>Operación: <strong>OR</strong> (\(A = M + V\)).</p>
+        
+        <table class="tabla-verdad">
+            <tr><th>M</th><th>V</th><th>Alarma (A)</th><th>¿Qué pasa?</th></tr>
+            <tr><td>0</td><td>0</td><td>0</td><td>Silencio total.</td></tr>
+            <tr><td>0</td><td>1</td><td class="salida-activa">1</td><td>¡Ventana abierta! 🔔</td></tr>
+            <tr><td>1</td><td>0</td><td class="salida-activa">1</td><td>¡Movimiento! 🔔</td></tr>
+            <tr><td>1</td><td>1</td><td class="salida-activa">1</td><td>¡Intruso total! 🔔</td></tr>
+        </table>
+
+        <!-- RINCÓN DOCENTE -->
+        <div class="dato-extra" style="border-left: 4px solid #ffc107; background-color: #fff9db;">
+            <h3>🍎 Rincón del Docente: Gamificación</h3>
+            <p>Si eres profesor, puedes usar las Tablas de Verdad para crear reglas de juego justas en el aula:</p>
+            <p><em>"Ganarás el premio si: (Haces la tarea) <strong>AND</strong> (Ayudas a un compañero)."</em></p>
+            <p>Enseñar a los niños a visualizar estas reglas en una tabla (1=Sí, 0=No) desarrolla su <strong>Pensamiento Computacional</strong> y les ayuda a entender que las consecuencias son resultados lógicos de sus acciones.</p>
+        </div>
+
+        <!-- HERRAMIENTA EXTERNA MEJORADA -->
+        <div class="dato-extra">
+            <h3>🐺 Truco Pro: Verificación con IA</h3>
+            <p>¿Hiciste una tabla gigante y quieres saber si está bien? Pregúntale a <strong>Wolfram Alpha</strong>.</p>
+            
+            <p style="text-align: center;">
+                <a href="https://www.wolframalpha.com/input?i=truth+table+%28A+and+B%29+or+C" target="_blank" class="btn-navegacion" style="background-color: #ff7e00;">Ver en Wolfram Alpha ↗</a>
+            </p>
+
+            <!-- DICCIONARIO PREVENTIVO -->
+            <div style="background-color: white; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #ff9800; font-size: 0.95em;">
+                <p><strong>⚠️ Advertencia de Traducción:</strong> WolframAlpha "habla" en idioma Matemático, no Ingenieril. No te asustes si ves símbolos raros:</p>
+                <ul style="list-style-type: none; padding-left: 0;">
+                    <li>✅ <strong>1 / 0</strong> se muestran como <strong>T / F</strong> (True/False).</li>
+                    <li>✅ <strong>AND (\(\cdot\))</strong> se muestra como <strong>\(\land\)</strong>.</li>
+                    <li>✅ <strong>OR (\(+\))</strong> se muestra como <strong>\(\lor\)</strong>.</li>
+                    <li>✅ <strong>NOT (\(\bar{A}\))</strong> se muestra como <strong>\(\neg\)</strong> o <strong>\(\sim\)</strong>.</li>
+                </ul>
+                <p><small><em>(¿Por qué usan símbolos distintos para lo mismo? ¡Es un misterio que resolveremos en la <strong>Lección 20: La Piedra Rosetta</strong> de la Unidad 3!)</em></small></p>
+            </div>
+        </div>
+
+        <div class="dato-extra">
+            <h3>🧠 Reto de Lógica: La Caja Fuerte</h3>
+            <p>Imagina que para abrir una caja ($Open$) necesitas: Tener la llave ($K=1$) <strong>Y</strong> saber la contraseña ($P=1$).</p>
+            <p>Dibuja la tabla de verdad en tu cuaderno. ¿En cuántos casos logras abrir la caja? (Respuesta: Solo 1 de 4).</p>
+        </div>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>¡Perfecto! Ya no tienes que adivinar; con la tabla sabes exactamente qué hace el circuito. Pero... ¿qué pasa si la tabla nos dice que necesitamos una ecuación gigante con muchos chips? ¿Es obligatorio armarla así? <strong>No.</strong> En la próxima lección, aprenderemos los <strong>Trucos de Magia Matemática</strong> (Propiedades y Leyes de De Morgan) para convertir circuitos monstruosos en soluciones elegantes y baratas.</p>
+    </div>
+
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between;">
+            <a href="leccion12.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion14.html" class="btn-navegacion">Siguiente: Propiedades y De Morgan →</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

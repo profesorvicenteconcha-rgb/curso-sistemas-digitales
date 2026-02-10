@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 22: Cuantificadores - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX Configurado -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false}
+            ]
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 3: Fundamentos de Cómputo - Lección 22</small></p>
+        <h1>🔍 Todos o Ninguno: Cuantificadores y el Bus</h1>
+    </header>
+
+    <section>
+        <p>En matemáticas, se habla de conjuntos infinitos ("Para todo número..."). En electrónica, nuestro universo es finito: son los cables. A un grupo de cables que viajan juntos le llamamos <strong>Bus de Datos</strong>.</p>
+
+        <div class="svg-container">
+            <!-- Imagen: Bus de Datos (img/bus_datos.png) -->
+            <img src="img/bus_datos.png" alt="Ilustración de un bus de 8 cables paralelos (bits) etiquetados D0 a D7" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. Nuestro universo finito: 8 cables (bits) llevando información.</em></small></p>
+        </div>
+
+        <h2>1. El Cuantificador Universal ($\forall$): "Todos"</h2>
+        <p><strong>Lógica:</strong> "Para todo cable $x$, la señal es 1".</p>
+        <p><strong>Circuito:</strong> Una compuerta <strong>AND gigante</strong> (de muchas entradas).</p>
+        <p>Solo da salida <strong>1 (Verdadero)</strong> si TODAS las entradas están encendidas. Si falla una, todo cae.</p>
+
+        <div class="formula">
+            $$\forall x \equiv \text{AND de múltiples entradas}$$
+        </div>
+
+        <div class="svg-container">
+            <!-- Imagen: AND Gigante (img/and_gigante.png) -->
+            <img src="img/and_gigante.png" alt="Símbolo de compuerta AND con 8 entradas entrando por la izquierda" style="max-width:300px; height:auto;">
+            <p><small><em>Fig 2. ¿Están todos los sistemas listos? La AND responde.</em></small></p>
+        </div>
+        <p><strong>Uso Real (Seguridad):</strong> Una máquina industrial no arranca a menos que: (Puerta Cerrada) <strong>Y</strong> (Voltaje Correcto) <strong>Y</strong> (Operario Presente) <strong>Y</strong> (Frenos Libres).</p>
+
+        <h2>2. El Cuantificador Existencial ($\exists$): "Al menos uno"</h2>
+        <p><strong>Lógica:</strong> "Existe algún cable $x$ que está encendido".</p>
+        <p><strong>Circuito:</strong> Una compuerta <strong>OR gigante</strong>.</p>
+        <p>Da salida <strong>1 (Verdadero)</strong> si AL MENOS UNA entrada está encendida.</p>
+
+        <div class="formula">
+            $$\exists x \equiv \text{OR de múltiples entradas}$$
+        </div>
+
+        <div class="svg-container">
+            <!-- Imagen: OR Gigante (img/or_gigante.png) -->
+            <img src="img/or_gigante.png" alt="Símbolo de compuerta OR con 8 entradas entrando por la izquierda" style="max-width:300px; height:auto;">
+            <p><small><em>Fig 3. ¿Hay algún problema? La OR detecta cualquier falla.</em></small></p>
+        </div>
+        <p><strong>Uso Real (Alarmas):</strong> La sirena suena si: (Ventana Rota) <strong>O</strong> (Puerta Forzada) <strong>O</strong> (Humo Detectado). Basta con uno.</p>
+
+        <!-- RECORDATORIO DE TIERRA COMÚN -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <h3>🌍 Flashback a la Lección 8: ¡Tierra Común!</h3>
+            <p>Imagina que estos sensores vienen de distintas partes de una fábrica y tienen sus propias fuentes de energía.</p>
+            <p><strong>Regla de Oro:</strong> Para que esta compuerta AND gigante funcione, <strong>todos los negativos (GND)</strong> de los sensores deben estar unidos al GND de tu circuito. Si no hay "suelo común", la compuerta no entenderá las señales.</p>
+        </div>
+        
+        <div class="dato-extra">
+            <h3>🧠 Filosofía Digital (De Morgan)</h3>
+            <p>Si usas una <strong>NAND</strong> (AND negada) de muchas entradas, estás diciendo:</p>
+            <p><em>"No es cierto que todos sean 1"</em>.</p>
+            <p>Lo cual es lógicamente igual a decir: <em>"Existe al menos uno que es 0"</em>.</p>
+            <p>¡Es un circuito detector de cables rotos!</p>
+        </div>
+    </section>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="leccion21.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion23.html" class="btn-navegacion">Siguiente: El Semisumador →</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

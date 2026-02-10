@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 21: El Detector de Mentiras - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX Configurado para usar $ -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false}
+            ]
+        });">
+    </script>
+
+    <style>
+        .tabla-verdad th { background-color: var(--color-primario); color: white; }
+        .fila-mentira { background-color: #ffebee; color: #c62828; font-weight: bold; } /* Rojo suave */
+        .fila-verdad { background-color: #e8f5e9; color: #2e7d32; } /* Verde suave */
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 3: Fundamentos de Cómputo - Lección 21</small></p>
+        <h1>🤥 El Detector de Mentiras: Implicación y Circuitos</h1>
+    </header>
+
+    <section>
+        <p>En ingeniería y leyes, las frases del tipo <em>"Si haces esto, entonces pasa aquello"</em> son sagradas. Hoy vamos a construir un circuito capaz de juzgar si una promesa se cumplió o se rompió.</p>
+
+        <h2>1. Verdades y Mentiras Eternas</h2>
+        <p>Antes de la promesa, veamos los extremos:</p>
+        <ul>
+            <li><strong>Tautología (Siempre Verdad):</strong> Un circuito que NUNCA se apaga ($1$).
+                <div class="formula">$$A + \bar{A} = 1$$</div>
+                <p><small>Ejemplo: "O llueve ($A$) o no llueve ($\bar{A}$)". No hay otra opción.</small></p>
+            </li>
+            <li><strong>Contradicción (Siempre Falso):</strong> Un circuito que NUNCA se prende ($0$).
+                <div class="formula">$$A \cdot \bar{A} = 0$$</div>
+                <p><small>Ejemplo: "Llueve y no llueve al mismo tiempo". ¡Imposible!</small></p>
+            </li>
+        </ul>
+        <!-- NUEVO: Nota de enlace a la Lección 24 -->
+        <div class="dato-extra" style="padding: 10px; margin-top: 10px; background-color: #e3f2fd; border-left-color: #2196f3;">
+            <p style="margin: 0;"><small><strong>🔗 Conexión Matemática:</strong> Estas dos definiciones (que la suma da 1 y el producto da 0) son los pilares del álgebra. En la <strong>Lección 24</strong> volveremos aquí para probar formalmente la "Unicidad del Complemento".</small></p>
+        </div>
+
+        <div class="svg-container">
+            <!-- Imagen: Tautología vs Contradicción -->
+            <img src="img/tautologia_contradiccion.png" alt="Izquierda: Circuito paralelo (siempre conecta). Derecha: Circuito serie con inverso (siempre abierto)." style="max-width:100%; height:auto;">
+        </div>
+
+        <h2>2. La Implicación ($p \rightarrow q$): La Promesa</h2>
+        <p>No existe un chip "Implicador", pero podemos construirlo. Usemos el ejemplo de la <strong>Promesa del Político</strong>:</p>
+        <div class="destacado">
+            <p><strong>"Si gano las elecciones ($A$), entonces bajaré los impuestos ($B$)."</strong></p>
+        </div>
+
+        <p>¿Cuándo miente el político? Analicemos la tabla:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>¿Ganó? ($A$)</th>
+                    <th>¿Bajó Impuestos? ($B$)</th>
+                    <th>Juicio ($A \rightarrow B$)</th>
+                    <th>Análisis</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="fila-verdad"><td>1 (Sí)</td><td>1 (Sí)</td><td>1 (Verdad)</td><td>Cumplió.</td></tr>
+                <tr class="fila-mentira"><td>1 (Sí)</td><td>0 (No)</td><td>0 (Falso)</td><td><strong>¡MINTIÓ!</strong> (Ganó y no cumplió)</td></tr>
+                <tr class="fila-verdad"><td>0 (No)</td><td>1 (Sí)</td><td>1 (Verdad)</td><td>No ganó. (No estaba obligado).</td></tr>
+                <tr class="fila-verdad"><td>0 (No)</td><td>0 (No)</td><td>1 (Verdad)</td><td>No ganó. (No rompió promesa).</td></tr>
+            </tbody>
+        </table>
+
+        <h3>El Circuito de la Promesa</h3>
+        <p>La única forma de que la promesa sea FALSA es si $A=1$ y $B=0$. Por lo tanto, la ecuación que describe esto es:</p>
+        <div class="formula">
+            $$A \rightarrow B \equiv \bar{A} + B$$
+        </div>
+        <p><strong>Traducción:</strong> "Para cumplir, O bien NO gano ($\bar{A}$), O bien bajo los impuestos ($B$)".</p>
+
+        <div class="svg-container">
+            <!-- Imagen: Circuito Implicación -->
+            <img src="img/circuito_implicacion.png" alt="Esquema lógico: Compuerta NOT en la entrada A, conectada a una OR con la entrada B." style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. Este circuito te dice si un contrato se cumplió.</em></small></p>
+        </div>
+
+        <div class="destacado" style="border-left-color: #6f42c1; background-color: #f3e5f5;">
+            <h3>🕵️ El Truco del Detective (La Contrarrecíproca)</h3>
+            <p>En lógica, decir <em>"Si A, entonces B"</em> es exactamente lo mismo que decir <em>"Si NO pasa B, entonces NO pasó A"</em>.</p>
+            <p>$$A \rightarrow B \equiv \bar{B} \rightarrow \bar{A}$$</p>
+            <p><strong>Uso en Reparaciones:</strong>
+            <br>Regla: "Si hay corriente ($A$), el LED prende ($B$)".
+            <br>Diagnóstico: Llegas y ves que el LED NO prende ($\bar{B}$).
+            <br>Conclusión: ¡Seguro NO hay corriente ($\bar{A}$)! No necesitas medir para saberlo.</p>
+        </div>
+    </section>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="leccion20.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion22.html" class="btn-navegacion">Siguiente: Todos o Ninguno (Cuantificadores) →</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

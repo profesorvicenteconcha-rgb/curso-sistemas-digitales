@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 25: Laboratorio - Sumador Completo - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX Configurado (Soporte completo para $ y parentesis) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+            ]
+        });">
+    </script>
+    
+    <style>
+        /* Estilos específicos para la tabla de verdad del sumador */
+        .tabla-verdad th { background-color: var(--color-primario); color: white; }
+        .col-suma { background-color: #e3f2fd; font-weight: bold; color: black; }
+        .col-cout { background-color: #ffebee; font-weight: bold; color: black; }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 3: Fundamentos de Cómputo - Lección 25 (Final)</small></p>
+        <h1>🏆 Laboratorio: Construyendo la Calculadora de 1 Bit</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>En la lección anterior definimos las leyes matemáticas de nuestro universo. Hoy, vamos a usarlas para construir la pieza más importante de cualquier procesador: un circuito que <strong>sabe sumar</strong>. Demostraremos que la clave de la ingeniería no es hacerlo "a la fuerza", sino hacerlo con inteligencia (Abstracción).</p>
+    </div>
+
+    <section>
+        <h2>1. El Reto: Sumar 3 Bits (A, B y Cin)</h2>
+        <p>El Semisumador solo sumaba A y B. Ahora necesitamos sumar también el <strong>Acarreo de Entrada (\(C_{in}\))</strong> que viene de la operación anterior. El resultado máximo es \(1+1+1=3\) (binario 11).</p>
+
+        <table class="tabla-verdad" style="width: 100%; border-collapse: collapse; text-align: center;">
+            <thead>
+                <tr>
+                    <th>Cin</th><th>A</th><th>B</th>
+                    <th class="col-suma">Suma (S)</th>
+                    <th class="col-cout">Cout (Salida)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>0</td><td>0</td><td>0</td><td class="col-suma">0</td><td class="col-cout">0</td></tr>
+                <tr><td>0</td><td>0</td><td>1</td><td class="col-suma">1</td><td class="col-cout">0</td></tr>
+                <tr><td>0</td><td>1</td><td>0</td><td class="col-suma">1</td><td class="col-cout">0</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td><td class="col-suma">0</td><td class="col-cout">1</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td><td class="col-suma">1</td><td class="col-cout">0</td></tr>
+                <tr><td>1</td><td>0</td><td>1</td><td class="col-suma">0</td><td class="col-cout">1</td></tr>
+                <tr><td>1</td><td>1</td><td>0</td><td class="col-suma">0</td><td class="col-cout">1</td></tr>
+                <tr><td>1</td><td>1</td><td>1</td><td class="col-suma">1</td><td class="col-cout">1</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Misión 1: La Vía Difícil (Análisis en Papel)</h3>
+        <p>Si intentamos sacar la ecuación directamente de la tabla (usando lo que aprendimos en la Unidad 2), obtenemos esto:</p>
+        
+        <div class="destacado" style="background-color: #ffebee; border-left-color: #c62828;">
+            <h4>🔍 ¿Ves el monstruo?</h4>
+            <div class="formula">
+                $$C_{out} = \bar{A}BC_{in} + A\bar{B}C_{in} + AB\bar{C}_{in} + ABC_{in}$$
+            </div>
+            <p><strong>El Problema:</strong> Para construir esto, necesitarías chips especiales (AND de 3 entradas, OR de 4 entradas) y docenas de cables. ¡Es un espagueti inmanejable!</p>
+        </div>
+
+        <h3>Misión 2: La Vía del Ingeniero (Abstracción)</h3>
+        <p>Un ingeniero no reinventa la rueda. Ya tenemos un bloque que sabe sumar dos cosas: el <strong>Semisumador</strong>.</p>
+        <p><strong>La Idea Genial:</strong> Usamos un Semisumador para sumar \(A+B\), y luego usamos OTRO Semisumador para sumarle el resultado a \(C_{in}\). Si cualquiera de los dos genera acarreo, activamos la salida.</p>
+        
+        <div class="formula" style="background-color: #d4edda; border: 1px solid #28a745;">
+            1 Sumador Completo = 2 Semisumadores + 1 Compuerta OR
+        </div>
+
+        <div class="svg-container">
+            <img src="img/full_adder_bloques.png" alt="Esquema mostrando cómo dos bloques de Semisumadores y una OR crean un Sumador Completo" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. Modularidad: Construimos algo complejo conectando cajas simples.</em></small></p>
+        </div>
+        
+        <h2>2. Planificación (Checklist Pre-Vuelo) 🛫</h2>
+        <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
+            <h3>🛒 Materiales Necesarios</h3>
+            <ul>
+                <li>Protoboard y Fuente de 5V.</li>
+                <li><strong>Chips:</strong> 2x <strong>7486 (XOR)</strong>, 1x <strong>7408 (AND)</strong>, 1x <strong>7432 (OR)</strong>.</li>
+                <li><strong>Entradas:</strong> 3 Interruptores (A, B, Cin) con resistencias Pull-Down (10kΩ).</li>
+                <li><strong>Salidas:</strong> 2 LEDs (Suma y Cout) con resistencias de 330Ω.</li>
+            </ul>
+        </div>
+
+        <div class="destacado" style="background-color: #ffebee; border-left-color: #c62828;">
+            <h3>⚠️ ¡Alerta de Datasheet!</h3>
+            <p>El mapa de pines del chip <strong>7486 (XOR)</strong> a veces es diferente al de las AND/OR. ¡No asumas nada! Busca el "Pinout" en Google o en tu app ElectroDroid antes de conectar.</p>
+        </div>
+
+        <h3>Estrategia de Cableado (Anti-Espagueti)</h3>
+        <ol>
+            <li><strong>Zona de Chips:</strong> Coloca los 3 chips en fila dejando espacio entre ellos.</li>
+            <li><strong>Alimentación Primero:</strong> Conecta VCC (14) y GND (7) en TODOS.</li>
+            <li><strong>Código de Color:</strong>
+                <ul>
+                    <li>Verde: Entradas desde los interruptores.</li>
+                    <li>Amarillo: Conexiones internas entre chips.</li>
+                    <li>Naranja: Salidas hacia los LEDs.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2>3. Simulación y Práctica Virtual</h2>
+        <p>Antes de conectar en físico, entiende el flujo.</p>
+
+        <div class="svg-container" style="border: 2px solid #ccc; border-radius: 8px; overflow: hidden;">
+            <!-- Iframe de Falstad -->
+            <iframe 
+                width="100%" 
+                height="450" 
+                src="https://www.falstad.com/circuit/circuitjs.html?startCircuit=fulladder" 
+                frameborder="0">
+            </iframe>
+            <p style="padding: 10px; background:#f9f9f9;"><small><em>Simulación: Haz clic en las entradas (H/L) y observa los LEDs.</em></small></p>
+        </div>
+
+        <div class="dato-extra">
+            <h3>🧩 ¿Te animas a armarlo en 3D?</h3>
+            <p>Este es el circuito más complejo hasta ahora. Si quieres practicar la colocación de cables, usa <strong>Tinkercad</strong> primero.</p>
+            <a href="https://www.tinkercad.com/circuits" target="_blank" style="font-weight: bold;">Ir a Tinkercad →</a>
+        </div>
+
+        <h2>4. ¡Manos a la Obra! (Montaje Físico)</h2>
+        <p>Con el plan listo, arma el circuito. Verifica cada conexión dos veces.</p>
+        <p><strong>Prueba Final (Tabla de Verdad):</strong></p>
+        <ul>
+            <li>\(1+0+0 \rightarrow\) Prende Suma (1).</li>
+            <li>\(1+1+0 \rightarrow\) Prende Cout (2).</li>
+            <li>\(1+1+1 \rightarrow\) Prende AMBOS (3).</li>
+        </ul>
+
+        <!-- BLOQUE DE BIOLOGÍA -->
+        <div class="dato-extra" style="border-left: 4px solid #007bff; background-color: #e3f2fd; margin-top: 30px;">
+            <h3>🧠 Neuronas vs. Transistores</h3>
+            <p>Lo que acabas de construir (sumar señales para sacar un resultado) es muy parecido a cómo funciona tu cerebro. Una <strong>neurona biológica</strong> recibe señales de muchas vecinas. Si la "suma" de esos estímulos supera un umbral, la neurona se "enciende". ¡Estás replicando la vida con silicio!</p>
+        </div>
+
+        <!-- SECCIÓN PROBLEMAS DEL MUNDO REAL -->
+        <div class="destacado" style="background-color: #fff8e1; border-left-color: #ff9800; margin-top: 40px;">
+            <h3>🌎 Problemas del Mundo Real</h3>
+            
+            <h4>A. El Efecto Dominó (Retardo) 🐢</h4>
+            <p>Si conectamos 64 de estos sumadores en fila, el último tiene que esperar a que el primero termine. Esto toma tiempo (nanosegundos). Por eso las computadoras tienen una velocidad máxima.</p>
+
+            <h3>B. Desbordamiento (Overflow) y el Efecto 2000 🌊</h3>
+        <p>Imagina un odómetro de carro viejo que llega a 99,999. Si avanzas un kilómetro más, no muestra 100,000, sino que <strong>se reinicia a 00,000</strong>. En electrónica, a esto le llamamos <strong>Overflow</strong>.</p>
+        
+        <p>Si tu calculadora de 4 bits (cuyo máximo es 15) intenta sumar \(15 + 1\), el resultado real es 16 (<code>10000</code>), pero el sistema solo tiene espacio para 4 dígitos. El "1" se cae y el sistema lee <strong>0</strong>.</p>
+
+        <div class="dato-extra" style="background-color: #fff3cd; border-left-color: #ffc107;">
+            <h4>🦖 Historia: El Pánico del Y2K</h4>
+            <p>En los años 60, la memoria costaba una fortuna. Para ahorrar espacio, los ingenieros decidieron guardar los años usando solo <strong>2 dígitos</strong> (ej: "98" en vez de 1998).</p>
+            <p>El sistema funcionó bien hasta que el reloj pasó de <strong>99</strong> a <strong>00</strong>. Las computadoras interpretaron el "00" no como el año 2000, sino como <strong>1900</strong>. ¡Los bancos empezaron a calcular intereses negativos y fechas de nacimiento erróneas!</p>
+            <p><em>(<strong>Alerta de Futuro:</strong> El próximo gran desbordamiento ocurrirá el <strong>19 de enero de 2038</strong> en los sistemas de 32 bits. ¡Ustedes serán los ingenieros encargados de salvar el mundo esa vez!)</em></p>
+        </div>
+        </div>
+    </section>
+
+    <!-- CIERRE DE UNIDAD -->
+    <div class="avance-leccion">
+        <h3>🎓 ¡Graduación de la Unidad 3!</h3>
+        <p>Tienes el control total de la lógica y la aritmética. Entiendes cómo piensa, calcula y hasta cómo falla una máquina.</p>
+        <p>Pero en el mundo real, los datos viajan y se corrompen por el ruido. ¿Cómo garantizamos que la información llegue intacta? En la última unidad, nos convertiremos en <strong>Guardianes de la Información</strong>.</p>
+    </div>
+
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <a href="leccion24.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion26.html" class="btn-navegacion" style="background-color: var(--u4-color); transform: scale(1.1);">¡Iniciar Unidad 4! 🚀</a>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em;">🏠 Volver al Índice Principal</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

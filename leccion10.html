@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 10: Pull-Up y Pull-Down - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX Configurado (¡IMPORTANTE!) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 1: Fundamentos Físicos - Lección 10</small></p>
+        <h1>⬆️⬇️ ¡Ni al aire ni pegado! Pull-Up y Pull-Down</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>En el laboratorio anterior, cuando presionabas el botón, enviabas un 1 (5V) claro y fuerte. Pero... <strong>¿qué enviabas cuando soltabas el botón?</strong></p>
+        <p>Podrías pensar que enviabas un 0, pero en realidad dejabas el cable "al aire", desconectado de todo. En electrónica digital, <strong>un cable suelto no es un cero; es una incógnita</strong> (una antena). Hoy aprenderemos a usar una resistencia para "anclar" esa señal y eliminar la incertidumbre para siempre.</p>
+    </div>
+
+    <section>
+        <h2>1. El Problema: El Estado "Flotante"</h2>
+        <p>Cuando un interruptor está abierto, el cable de salida no está conectado a 5V, pero tampoco está conectado a Tierra (0V). Está <strong>"Flotando"</strong> al aire.</p>
+        
+        <p>En ese estado, el cable no tiene ni 0V ni 5V. Técnicamente se dice que está en <strong>Alta Impedancia (Hi-Z)</strong>. Es como si el cable estuviera cortado: la resistencia es tan alta (aire) que no pasa corriente, pero sí capta ruido electromagnético como una antena (capta ondas de radio, la estática de tu ropa o el ruido de la red eléctrica). ¡El chip se vuelve loco!</p>
+        <div class="svg-container">
+            <!-- Imagen: Cable Flotante (img/estado_flotante.png) -->
+            <img src="img/estado_flotante.png" alt="Ilustración de un cable desconectado captando ondas de ruido como una antena" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. Un cable suelto es una antena de ruido.</em></small></p>
+        </div>
+
+        <h2>2. La Solución: Resistencia Pull-Down (Jalar a Tierra)</h2>
+        <p>Es la configuración que usaremos en casi todo el curso. Conectamos una resistencia de <strong>10k&Omega;</strong> entre la entrada y el Negativo (GND).</p>
+
+        <div class="svg-container">
+            <!-- Imagen: Pull Down (img/esquema_pull_down.png) -->
+            <img src="img/esquema_pull_down.png" alt="Esquema Pull-Down: Resistencia a tierra, Botón a positivo" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 2. Pull-Down: El "piso" seguro.</em></small></p>
+        </div>
+
+        <ul>
+            <li><strong>Botón Suelto (Abierto):</strong> La resistencia conecta suavemente la entrada a Tierra (0V). El ruido se drena por ahí. <strong>Lectura: 0 Solido.</strong></li>
+            <li><strong>Botón Presionado (Cerrado):</strong> Entran los 5V directos (camino fácil). La corriente prefiere ir a la entrada del chip que pasar por la resistencia difícil de 10k. <strong>Lectura: 1 Solido.</strong></li>
+        </ul>
+
+       <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <h3>🤓 Pregunta de Ingeniero: ¿Por qué 10kΩ?</h3>
+            <p>En la Lección 2 calculamos 330Ω para el LED. ¿Por qué aquí usamos una tan grande (10,000Ω)?</p>
+            <p><strong>Respuesta: Ahorro de Energía.</strong></p>
+            
+            <div style="background-color: #fff; padding: 15px; border-radius: 8px; margin: 15px 0; border: 1px solid #ddd;">
+                <h4 style="margin-top: 0;">⚡ Flashback: Ley de Ohm (\(I = V / R\))</h4>
+                <p>Cuando presionas el botón, conectas 5V directo a Tierra a través de la resistencia. Veamos cuánta corriente se "desperdicia" en ese momento:</p>
+                <ul>
+                    <li><strong>Con 10kΩ:</strong>
+                        <div class="formula" style="background: none; text-align: left; padding-left: 10px;">
+                        \(I = \frac{5V}{10,000\Omega} = 0.0005A = 0.5 \text{mA}\)
+                        </div>
+                        <p>(Corriente de desperdicio muy pequeña. ¡Eficiente!)</p>
+                    </li>
+                    <li style="margin-top: 10px;"><strong>Con 1kΩ:</strong>
+                        <div class="formula" style="background: none; text-align: left; padding-left: 10px;">
+                        \(I = \frac{5V}{1,000\Omega} = 0.005A = 5 \text{mA}\)
+                        </div>
+                        <p>(¡Diez veces más corriente desperdiciada! La pila dura menos).</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <p><strong>Conclusión:</strong> 10kΩ es el equilibrio perfecto. Es suficientemente bajo para anclar la señal a 0V, pero suficientemente alto para no gastar batería cuando presionas el botón.</p>
+        </div>
+
+        <h2>3. La Otra Cara: Resistencia Pull-Up (Jalar a Techo)</h2>
+        <p>Aquí la resistencia va a 5V. La lógica se invierte (Lógica Negativa):</p>
+        <ul>
+            <li><strong>Botón Suelto:</strong> La resistencia mantiene la señal en 5V. <strong>Lectura: 1.</strong></li>
+            <li><strong>Botón Presionado:</strong> El botón conecta a Tierra. <strong>Lectura: 0.</strong></li>
+        </ul>
+
+        <!-- NUEVO: CONVENCIÓN DEL CURSO -->
+        <h3>Lógica Positiva vs. Negativa</h3>
+        <p>Esto define cómo "piensas" tu circuito:</p>
+        <ul>
+            <li><strong>Lógica Positiva (Pull-Down):</strong> Presionar = 1 (Encendido). Soltar = 0 (Apagado). <em>¡Es lo más intuitivo y lo que usaremos en este curso!</em></li>
+            <li><strong>Lógica Negativa (Pull-Up):</strong> Presionar = 0. Soltar = 1. <em>Se usa mucho en la industria por ser más robusta contra el ruido, pero puede confundirte al principio.</em></li>
+        </ul>
+        
+        <h3>Resumen Definitivo (Guárdalo)</h3>
+        <table style="text-align: center;">
+            <thead>
+                <tr>
+                    <th>Configuración</th>
+                    <th>Botón Suelto (Abierto)</th>
+                    <th>Botón Presionado (Cerrado)</th>
+                    <th>Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Sin Resistencia</strong></td>
+                    <td style="background-color: #ffebee; color: #c62828;">👻 Ruido (Indeterminado)</td>
+                    <td style="background-color: #d4edda;">1 (5V)</td>
+                    <td>¡Nunca!</td>
+                </tr>
+                <tr>
+                    <td><strong>Pull-Down</strong></td>
+                    <td style="background-color: #d4edda;">0 (0V)</td>
+                    <td style="background-color: #d4edda;">1 (5V)</td>
+                    <td><strong>Estándar del Curso</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Pull-Up</strong></td>
+                    <td style="background-color: #d4edda;">1 (5V)</td>
+                    <td style="background-color: #d4edda;">0 (0V)</td>
+                    <td>Industria / Lógica Inversa</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #0277bd;">
+            <h3>🔬 Experimento Virtual: Cazadores de Curvas</h3>
+            <p>En Tinkercad, los interruptores son perfectos, pero podemos ver cómo el Condensador hace su trabajo de "amortiguador". ¡Vamos a usar un <strong>Osciloscopio</strong>!</p>
+            
+            <p><strong>Pasos en Tinkercad:</strong></p>
+            <ol>
+                <li>Arma tu circuito con un Pulsador y una Resistencia <strong>Pull-Down</strong> (10kΩ).</li>
+                <li>Busca en el menú de componentes: <strong>"Osciloscopio"</strong>.</li>
+                <li>Conecta el cable <strong>Negativo</strong> del osciloscopio a Tierra.</li>
+                <li>Conecta el cable <strong>Positivo</strong> del osciloscopio al mismo punto donde mides la salida del botón.</li>
+                <li><strong>Prueba 1 (Sin condensador):</strong> Inicia la simulación. Presiona el botón. Verás que la línea sube de golpe (cuadrada). ¡Cambio brusco!</li>
+                <li><strong>Prueba 2 (Con condensador):</strong> Pon un Condensador (10µF) en paralelo con la resistencia (pata larga a señal, corta a tierra).</li>
+                <li>Presiona el botón. <strong>¡Mira la pantalla!</strong> La línea ya no sube de golpe, hace una <strong>curva suave</strong> (como una aleta de tiburón).</li>
+            </ol>
+            <p><em>Conclusión: Esa curva suave es la que se "come" los rebotes rápidos y evita errores.</em></p>
+            
+            <p style="text-align: center;">
+                <a href="https://www.tinkercad.com/circuits" target="_blank" class="btn-navegacion" style="background-color: #0277bd;">Probar en Tinkercad ↗</a>
+            </p>
+        </div>
+
+        <!-- CONEXIÓN FILOSÓFICA / MATEMÁTICA -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+            <h3>🔮 Una mirada al futuro (Spoiler Matemático)</h3>
+            <p>Quizás te preguntes: <em>"¿Por qué es tan grave que el cable flote un poquito?"</em>.</p>
+            <p>La razón es profunda: En el mundo de las matemáticas (que veremos en la Unidad 3), <strong>el "Tal vez" no existe</strong>. Solo existen el VERDADERO y el FALSO.</p>
+            <p>En la <strong>Lección 24</strong> demostraremos matemáticamente que el opuesto de 1 <strong>tiene</strong> que ser 0 (Teorema de la Unicidad del Complemento). ¡Esta resistencia es la herramienta física que obliga al circuito a cumplir esa ley sagrada!</p>
+        </div>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>¡Señales limpias y estables! Ya no hay ruido. Pero, ¿cómo estamos seguros de que realmente hay 5 voltios ahí? ¿Cómo sabemos si esa resistencia es de 10k o de 1k si se le borraron los colores? Necesitamos ojos biónicos. En la próxima lección (y final de la unidad), aprenderás a usar tu mejor amigo: <strong>El Multímetro</strong>.</p>
+    </div>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="leccion9_laboratorio.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion11.html" class="btn-navegacion">Siguiente: El Multímetro →</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

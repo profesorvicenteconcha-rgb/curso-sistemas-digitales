@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 5: Serie y Paralelo - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+    
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 1: Fundamentos Físicos - Lección 5</small></p>
+        <h1>🔗 ¡Uniendo fuerzas! Serie y Paralelo</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>En la lección anterior aprendiste a leer los colores de las resistencias. Ahora tienes el LED y su protección listos. Pero, imagina que quieres conectar <strong>dos LEDs</strong>. Tienes dos opciones: ponerlos en fila india o ponerlos uno al lado del otro. Esta decisión cambia cómo fluye la energía y es la base de todo diseño electrónico.</p>
+    </div>
+
+    <section>
+        <h2>1. Circuitos en Serie (La fila india)</h2>
+        <p>La corriente solo tiene <strong>un camino único</strong>. Sale de la pila, pasa por el primer componente, luego por el segundo y regresa.</p>
+        
+        <div class="svg-container">
+            <!-- Imagen ajustada al 50% como solicitaste -->
+            <img src="img/circuito_serie.png" 
+                 alt="Circuito en Serie con LEDs" 
+                 style="max-width: 50%; height: auto; border-radius: 8px;">
+            <p><small><em>Fig 1. En serie, la corriente es la misma para todos.</em></small></p>
+        </div>
+
+        <div class="formula">
+            $$R_{total} = R_1 + R_2 + \dots$$
+        </div>
+        <p><strong>El Voltaje se reparte:</strong> Si tienes 5V y dos LEDs iguales, a cada uno le tocan solo 2.5V. ¡Brillan menos!</p>
+
+        <!-- NOTA DE ADELANTO: SERIE VS PARALELO -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin-top: 20px;">
+            <h3>💡 Ventaja de la Serie: "Un Guardián para Todos"</h3>
+            <p>Aquí tienes una gran ventaja: Como la corriente es una sola fila india, <strong>una sola resistencia</strong> al principio (o al final) es capaz de controlar a todos los LEDs de la fila.</p>
+            <p><strong>¿Por qué funciona aquí?</strong><br>
+            Porque la corriente no tiene escapatoria. La misma intensidad que frena la resistencia es la misma que pasa por el LED 1 y el LED 2. En Serie, la física juega a tu favor:</p>
+            <ul>
+                <li><strong>Una sola resistencia basta:</strong> Como la corriente solo tiene un camino, es la misma para todos. Una sola resistencia controla a toda la fila perfectamente.</li>
+                <li><strong>Puedes mezclar colores:</strong> Puedes poner un LED Rojo y uno Azul en la misma fila serie. Como la corriente está obligada a pasar por ambos, ambos encenderán (siempre que tengas suficiente voltaje).</li>
+            </ul>
+
+            <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px; border: 1px dashed #1976d2;">
+                <strong>🧮 La Única Regla en Serie: Sumar Voltajes</strong>
+                <p>El único requisito es que tu pila tenga fuerza suficiente para vencer a todos los LEDs juntos.</p>
+                <p>$$V_{fuente} > V_{led1} + V_{led2} + \dots$$</p>
+                <p><em>Ejemplo:</em> Con una pila de 5V, puedes encender dos LEDs Rojos (2V+2V=4V ✅), pero NO puedes encender dos Azules (3V+3V=6V ❌).</p>
+            </div>
+            </p>
+            <p><em>👀 <strong>Ojo al dato:</strong> ¡No te acostumbres! Cuando pasemos a <strong>Paralelo</strong> en la siguiente sección, verás que esta regla de "una sola resistencia" se vuelve peligrosa.</em></p>
+        </div>
+
+        <h2 id="divisor-voltaje">⚡ El Divisor de Voltaje: Tu "Regla de Reparto" en Serie</h2>
+        <p>En paises como México, Colombia, Chile, Centroamérica se le conoce como <em>divisor de voltaje</em>, mientras que en España, Argentina, Uruguay, Perú se suele decirle <em>divisor de tensión</em>. 
+        "Voltaje" y "tensión" son sinónimos en electricidad; la diferencia es solo regional.</p>
+
+        <p>Cuando conectas resistencias en <strong>serie</strong>, el voltaje no se distribuye al azar: cada resistencia "toma" una porción proporcional a su tamaño. ¡Es como repartir un pastel: el más grande se lleva más rebanada!</p>
+
+        <div class="destacado">
+            <p><strong>🔍 ¿Cómo funciona? (Sin fórmulas complicadas)</strong></p>
+            <p>Imagina este circuito simple:</p>
+            <div class="svg-container">
+                <img src="img/diagrama-divisor-voltaje.png" alt="Diagrama del divisor de voltaje" style="width: 60%; height: auto; border-radius: 8px; border: 1px solid #eee;">
+            </div>
+            <p>- <strong>R₁ es el doble de grande que R₂</strong> → se queda con el doble de voltaje</p>
+            <p>- Total = 3 partes (2kΩ + 1kΩ)</p>
+            <p>- R₁ toma 2/3 del pastel → <strong>3.33V</strong></p>
+            <p>- R₂ toma 1/3 del pastel → <strong>1.67V</strong></p>
+            <p>- <strong>V<sub>out</sub> = 1.67V</strong> (el voltaje sobre R₂)</p>
+        </div>
+
+        <div class="formula">
+            $$V_{out} = V_{in} \times \frac{R_2}{R_1 + R_2}$$
+        </div>
+
+        <blockquote>
+            <p><strong>💡 Regla de oro:</strong> El voltaje sobre una resistencia es proporcional a su tamaño respecto al total.</p>
+        </blockquote>
+
+        <table class="tabla-centrada">
+            <!-- contenido de la tabla -->
+            <tr>
+                <th>Caso</th>
+                <th>Resultado práctico</th>
+            </tr>
+            <tr>
+                <td>R₁ = R₂ (iguales)</td>
+                <td>V<sub>out</sub> = mitad del voltaje</td>
+            </tr>
+            <tr>
+                <td>R₂ es el doble de R₁</td>
+                <td>V<sub>out</sub> = 2/3 del voltaje</td>
+            </tr>
+            <tr>
+                <td>R₁ es el doble de R₂</td>
+                <td>V<sub>out</sub> = 1/3 del voltaje</td>
+            </tr>
+        </table>
+
+        <div class="dato-extra">
+            <p><strong>🌟 Aplicación real: Adaptar 5V → 3.3V</strong></p>
+            <p>Necesitas alimentar un sensor de 3.3V con tu Arduino de 5V:</p>
+            <img src="img\adaptador 5V a 3-3V.png" alt="Adaptador de 5V a 3.3V con divisor de voltaje" style="max-width:45%; height:auto;";>
+            <p>Cálculo rápido: 5V × (2kΩ / 3kΩ) = <strong>3.33V</strong> → ¡Perfecto!</p>
+        </div>
+
+        <div class="pregunta-curiosidad">
+            <p><strong>⚠️ ¡Ojo al dato! Dos advertencias clave</strong></p>
+            <p><strong>1. Solo para señales pequeñas:</strong><br>
+            El divisor funciona bien para sensores o entradas de microcontroladores, <strong>pero NO para motores o cargas grandes</strong>. Si conectas algo que pide mucha corriente, el voltaje "se cae".</p>
+            <p><strong>2. Siempre gasta energía:</strong><br>
+            Aunque no uses V<sub>out</sub>, la corriente sigue fluyendo por las resistencias. Para proyectos con batería, usa valores altos (10kΩ+) y minimiza el desperdicio.</p>
+        </div>
+
+        <div class="destacado">
+        <p><strong>🎯 Autoevaluación rápida</strong></p>
+        <p>Si puedes responder estas tres preguntas sin ayuda, ¡has dominado el divisor de voltaje!</p>
+        <ul>
+            <li>¿En qué tipo de circuito funciona el divisor de voltaje? → <em>Serie</em></li>
+            <li>¿Qué determina cuánto voltaje "toma" cada resistencia? → <em>Su tamaño proporcional al total</em></li>
+            <li>¿Para qué SÍ sirve y para qué NO sirve? → <em>SÍ: sensores, entradas de micro. NO: motores, cargas grandes</em></li>
+        </ul>
+        </div>
+
+        <h2>2. Circuitos en Paralelo (La autopista)</h2>
+        <p>La corriente se divide en <strong>múltiples caminos</strong>. Cada LED tiene su propio cable directo a la pila.</p>
+
+        <div class="svg-container">
+            <!-- Imagen ajustada al 50% como solicitaste -->
+            <img src="img/circuito_paralelo.png" 
+                 alt="Circuito en Paralelo con LEDs" 
+                 style="max-width: 50%; height: auto; border-radius: 8px;">
+            <p><small><em>Fig 2. En paralelo, el voltaje es el mismo para todos.</em></small></p>
+        </div>
+
+        <div class="formula">
+            $$\frac{1}{R_{total}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots$$
+        </div>
+        <p><strong>El Voltaje es igual:</strong> Ambos reciben 5V completos. ¡Brillan al máximo!</p>   
+        
+        <!-- INICIO DEL BLOQUE NUEVO -->
+        <div class="destacado" style="background-color: #ffebee; border-left-color: #d9534f;">
+            <h3>⚠️ ¡La Regla de Oro del Paralelo!</h3>
+            <p>Es muy tentador usar una sola resistencia para varios LEDs en paralelo, pero <strong>es una mala práctica</strong>.</p>
+            
+            <p><strong>1. Si son de Diferente Color:</strong><br>
+            El LED Rojo pide ~2V y el Azul ~3V. La electricidad es perezosa: se irá toda por el camino fácil (el Rojo) y el Azul no encenderá. Además, ¡el Rojo recibirá demasiada corriente y podría quemarse!</p>
+            
+            <p><strong>2. Si son del Mismo Color:</strong><br>
+            Aunque sean "gemelos", ningún LED es idéntico a otro. Si comparten resistencia, uno de ellos "robará" más corriente que el otro, se calentará más y morirá primero (Efecto Dominó).</p>
+            
+            <p style="text-align: center; font-weight: bold; margin-top: 10px;">
+                ✅ La Solución: <br>
+                En paralelo, dale a CADA LED su propia resistencia independiente ("Rama").
+            </p>
+        </div>
+        <!-- FIN DEL BLOQUE NUEVO -->
+
+        <h3>3. Comparación Definitiva</h3>
+        <p>Aquí tienes el resumen maestro para que nunca dudes cuál elegir:</p>
+
+        <table class="tabla-centrada">
+        <tr>
+            <th>Característica</th>
+            <th>Circuito en Serie ➡️➡️</th>
+            <th>Circuito en Paralelo ⬆️⬇️</th>
+        </tr>
+        <tr>
+            <td><strong>Camino de la corriente</strong></td>
+            <td>Un solo camino (Fila india)</td>
+            <td>Múltiples caminos (Carriles)</td>
+        </tr>
+        <tr>
+            <td><strong>Intensidad (I)</strong></td>
+            <td>Igual en todos los componentes</td>
+            <td>Se divide entre las ramas</td>
+        </tr>
+        <tr>
+            <td><strong>Voltaje (V)</strong></td>
+            <td>Se divide entre los componentes</td>
+            <td>Igual en todos (El de la fuente)</td>
+        </tr>
+        <tr>
+            <td><strong>Resistencia Total</strong></td>
+            <td>R<sub>total</sub> = R₁ + R₂ + ...</td>
+            <td>1/R<sub>total</sub> = 1/R₁ + 1/R₂ + ...</td>
+        </tr>
+        <tr>
+            <td><strong>Fallo de un componente</strong></td>
+            <td style="background-color: #ffebee;">Todo el circuito se apaga 💀</td>
+            <td style="background-color: #e8f5e9;">Los demás siguen funcionando 👍</td>
+        </tr>
+        <tr>
+            <td><strong>Brillo de los LEDs</strong></td>
+            <td style="background-color: #fff3e0;">Menor brillo (voltaje dividido)</td>
+            <td style="background-color: #e8f5e9;">Máximo brillo (voltaje completo)</td>
+        </tr>
+        <tr>
+            <td><strong>Uso común</strong></td>
+            <td>Guirnaldas navideñas antiguas</td>
+            <td>Instalaciones domésticas</td>
+        </tr>
+        <tr>
+            <td><strong>Resistencias</strong></td>
+            <td style="background-color: #e3f2fd;">Una sola para todos ✅</td>
+            <td style="background-color: #fff3e0;">Una por LED ⚠️ Obligatorio</td>
+        </tr>
+    </table>
+        
+    <!-- NUEVA SECCIÓN TÉCNICA PROFUNDA -->
+    <section>
+        <h2>4. Análisis de Caso: Varios LEDs con UNA sola Resistencia</h2>
+        <div class="svg-container">
+            <!-- Imagen Nueva: Topología Riesgosa -->
+            <img src="img/paralelo_resistencia_compartida.png" alt="Diagrama de circuito: Una sola resistencia alimentando a 5 LEDs en paralelo" style="max-width: 60%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
+            <p><small><em>Fig 3. El diseño polémico: Una sola resistencia (cuello de botella) para todos los LEDs.</em></small></p>
+        </div>
+
+        <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
+            <h3>🔥 El Problema de la Potencia ($P$)</h3>
+            <p>Aquí es donde muchos fallan. Al pasar tanta corriente ($0.1A$) por una sola resistencia, el calor se dispara.</p>
+            <div class="formula" style="margin: 10px 0;">
+                $$V_{resistencia} = 5V (\text{fuente}) - 2V (\text{LEDs}) = \mathbf{3V}$$
+                $$P = 3V \times 0.1A = \mathbf{0.3 \text{ Watts}}$$
+            </div>
+            <p><strong>El Peligro:</strong> Una resistencia común de tu kit es de <strong>0.25 Watts</strong> (1/4 Watt). ¡Se quemaría inmediatamente! Necesitarías comprar una resistencia especial de <strong>1/2 Watt</strong> o <strong>1 Watt</strong>.</p>
+        </div>
+
+        <!-- SOLUCIÓN RECOMENDADA -->
+        <div class="destacado" style="background-color: #d4edda; border-left-color: #28a745;">
+            <h3>✅ La Solución Profesional: "Divide y Vencerás"</h3>
+            <p>Para evitar todos estos problemas, la regla de oro en ingeniería es: <strong>Dale a cada LED su propia resistencia independiente.</strong></p>
+            <ul>
+                <li><strong>Adiós al calor:</strong> Cada resistencia maneja poca corriente, así que puedes usar las baratas de 1/4 Watt sin miedo.</li>
+                <li><strong>Adiós al efecto dominó:</strong> Si un LED falla, los demás siguen brillando felices.</li>
+                <li><strong>Libertad de Colores:</strong> Como cada rama es independiente, puedes calcular una resistencia de 330&Omega; para un LED rojo y una de 100&Omega; para un azul en el mismo circuito. ¡Cada uno tendrá su brillo perfecto!</li>
+            </ul>
+        </div>
+
+        <div class="destacado" style="background-color: #ffebee; border-left-color: #d9534f;">
+            <h3>☠️ El Riesgo Mortal: "Efecto Dominó"</h3>
+            <p>Este es el mayor riesgo de diseño. Imagina que uno de los 5 LEDs se funde o se desconecta.</p>
+            <ol>
+                <li>La resistencia estaba dejando pasar <strong>100mA</strong> (calculados para 5 bocas).</li>
+                <li>Ahora solo quedan 4 LEDs, pero la resistencia sigue dejando pasar casi la misma corriente.</li>
+                <li>Esos 100mA se reparten entre 4: Tocaría a <strong>25mA</strong> por LED. (Sobrecarga leve).</li>
+                <li>Uno de ellos no aguanta y se quema. Quedan 3.</li>
+                <li>Ahora los 100mA se reparten entre 3: <strong>33mA</strong> por LED. (Sobrecarga crítica).</li>
+                <li>¡Pum! Se queman uno tras otro en cadena en fracción de segundos.</li>
+            </ol>
+        </div>
+
+        <h3>📋 Resumen de la Libreta de Ingeniería</h3>
+        <p>Si decides usar este diseño, debes vigilar estos parámetros:</p>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 10px;">Parámetro</th>
+                <th style="padding: 10px;">Acción Crítica</th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ccc; padding: 10px;"><strong>Voltaje ($V_f$)</strong></td>
+                <td style="border: 1px solid #ccc; padding: 10px;">¡Nunca mezcles colores! Todos deben ser idénticos (ej: todos Rojos).</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ccc; padding: 10px;"><strong>Corriente ($I_{total}$)</strong></td>
+                <td style="border: 1px solid #ccc; padding: 10px;">Suma la de todos los LEDs ($n \times 20mA$).</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ccc; padding: 10px;"><strong>Potencia ($W$)</strong></td>
+                <td style="border: 1px solid #ccc; padding: 10px;">Calcula los Vatios ($W$). Probablemente necesites una resistencia grande (Cerámica).</td>
+            </tr>
+        </table>
+    </section>
+    <div class="dato-extra">
+        <h4>⚠️ Advertencia Crítica para Futuros Docentes</h4>
+        <p>El diseño de "una sola resistencia para varios LEDs en paralelo" es <strong>extremadamente peligroso</strong> en contextos educativos. Si un estudiante lo implementa:</p>
+        <ul>
+            <li>Los LEDs pueden quemarse en cadena (Efecto Dominó).</li>
+            <li>La resistencia puede sobrecalentarse y causar quemaduras.</li>
+            <li>La fuente de alimentación puede dañarse por corriente excesiva.</li>
+        </ul>
+        <p><strong>Regla de oro en el aula:</strong> Enseña SIEMPRE la configuración segura (una resistencia por LED en paralelo). Nunca muestres el diseño peligroso como "alternativa aceptable".</p>
+        <p>Recuerda: Tus futuros alumnos confiarán en tus enseñanzas. Sé responsable con lo que transmites.</p>
+    </div>
+
+    <!-- CONEXIÓN DOCENTE / PEDAGOGÍA -->
+    <div class="destacado">
+        <h3>🍎 Rincón del Docente: El "Circuito Humano"</h3>
+        
+        <p><strong>Objetivo pedagógico:</strong> Que los niños comprendan la diferencia entre 
+        Serie y Paralelo mediante su propio cuerpo, sin usar terminología técnica.</p>
+        
+        <h4>👥 Actividad 1: "La Cadena de Secretos" (Serie)</h4>
+        <p><strong>Materiales:</strong> Ninguno (solo niños).</p>
+        <p><strong>Procedimiento:</strong></p>
+        <ol>
+            <li>Forma un círculo con los niños tomados de las manos.</li>
+            <li>El primer niño recibe un "apretón secreto" y lo pasa al siguiente.</li>
+            <li>Si un niño suelta la mano, el apretón se detiene.</li>
+        </ol>
+        <p><strong>Pregunta guía:</strong> "¿Qué pasa si alguien se suelta? ¿El secreto llega al final?"</p>
+        <p><strong>Lección:</strong> "En serie, todos dependemos del otro. Si uno falla, todos fallamos."</p>
+        
+        <h4>🛣️ Actividad 2: "Las Carreras Paralelas" (Paralelo)</h4>
+        <p><strong>Materiales:</strong> Conos o marcadores para delimitar carriles.</p>
+        <p><strong>Procedimiento:</strong></p>
+        <ol>
+            <li>Divide a los niños en 3-4 grupos (carriles).</li>
+            <li>Cada grupo corre por su carril hacia la meta.</li>
+            <li>Si un niño tropieza en un carril, los demás siguen corriendo.</li>
+        </ol>
+        <p><strong>Pregunta guía:</strong> "¿Qué pasa si alguien se cae? ¿Los demás pueden seguir?"</p>
+        <p><strong>Lección:</strong> "En paralelo, cada uno tiene su propio camino. Si uno falla, los demás siguen funcionando."</p>
+        
+        <div class="dato-extra">
+            <h4>💡 Consejo Pedagógico</h4>
+            <p>Después de las actividades, haz que los niños dibujen en su cuaderno:</p>
+            <ul>
+            <li>Un círculo con niños tomados de la mano (Serie)</li>
+            <li>Varios carriles con niños corriendo (Paralelo)</li>
+            </ul>
+            <p>Esto refuerza la conexión entre la experiencia física y el concepto abstracto.</p>
+        </div>
+    </div>
+
+        <div class="dato-extra">
+            <h3>🔋 Tip de Ingeniero: ¿Baterías en Serie o Paralelo?</h3>
+            <p style="margin-bottom: 20px;">Analicemos el ejemplo de 3 baterías de <strong>12V</strong> y <strong>250Ah</strong> cada una:</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                
+                <!-- OPCIÓN A: SERIE -->
+                <div style="background: #fff; padding: 20px; border-radius: 8px; border-top: 5px solid var(--color-primario); box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h4 style="margin-top: 0; color: var(--color-primario);">1. Conexión en Serie (Más Fuerza)</h4>
+                    
+                    <!-- Imagen Grande -->
+                    <img src="img/pilas_seire.png" alt="3 Baterías en serie" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee;">
+                    
+                    <p>Unimos el positivo de una con el negativo de la siguiente.</p>
+                    
+                    <div style="background-color: #f1f3f5; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                        <strong>🧮 El Cálculo:</strong>
+                        <ul style="margin-bottom: 0; padding-left: 20px;">
+                            <li><strong>Voltaje (Se suma):</strong><br> \(12V + 12V + 12V = \mathbf{36V}\)</li>
+                            <li><strong>Capacidad (Igual):</strong><br> \(\mathbf{250Ah}\) (Dura lo mismo)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- OPCIÓN B: PARALELO -->
+                <div style="background: #fff; padding: 20px; border-radius: 8px; border-top: 5px solid var(--color-secundario); box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h4 style="margin-top: 0; color: var(--color-secundario);">2. Conexión en Paralelo (Más Tiempo)</h4>
+                    
+                    <!-- Imagen Grande -->
+                    <img src="img/pilas_paralelo.png" alt="3 Baterías en paralelo" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee;">
+                    
+                    <p>Unimos todos los positivos juntos y todos los negativos juntos.</p>
+                    
+                    <div style="background-color: #fff3e0; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                        <strong>🧮 El Cálculo:</strong>
+                        <ul style="margin-bottom: 0; padding-left: 20px;">
+                            <li><strong>Voltaje (Igual):</strong><br> \(\mathbf{12V}\) (La fuerza no cambia)</li>
+                            <li><strong>Capacidad (Se suma):</strong><br> \(250 + 250 + 250 = \mathbf{750Ah}\)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Preguntas de Consolidación -->
+    <h2>❓ Preguntas de Consolidación</h2>
+    <p>Responde estas preguntas para asegurarte de que dominas los conceptos técnicos <em>y</em> estás listo para enseñarlos en tu futura aula:</p>
+
+    <details class="u1">
+    <summary>1. Explica con tus propias palabras la diferencia entre circuitos en Serie y en Paralelo, usando la metáfora de "fila india" vs "carriles".</summary>
+    <p><strong>Circuito en Serie (Fila India):</strong> Todos los componentes están conectados uno detrás del otro, formando una sola línea. La corriente no tiene escapatoria: pasa por el primero, luego por el segundo, y así sucesivamente. Es como una fila de niños tomados de la mano: si uno se suelta, todos se separan.</p>
+    <p><strong>Circuito en Paralelo (Carriles):</strong> Cada componente tiene su propio camino directo a la fuente. La corriente se divide y cada rama funciona de forma independiente. Es como varios carriles en una autopista: si un carril se cierra por mantenimiento, los demás siguen funcionando.</p>
+    <p><strong>Para tu futura aula:</strong> Usa la actividad del "Circuito Humano" para que los niños experimenten físicamente ambas configuraciones antes de verlas en un diagrama.</p>
+    </details>
+
+    <details class="u1">
+    <summary>2. ¿Por qué en Serie una sola resistencia puede proteger varios LEDs, pero en Paralelo cada LED necesita su propia resistencia?</summary>
+    <p><strong>En Serie:</strong> La corriente es la misma en todos los puntos del circuito (Ley de Kirchhoff). Si la resistencia limita la corriente a 20mA al inicio, esos mismos 20mA pasarán por el LED 1, luego por el LED 2, y así sucesivamente. No hay forma de que la corriente "se escape" o aumente.</p>
+    <p><strong>En Paralelo:</strong> La corriente se divide entre las ramas. Si tienes 5 LEDs en paralelo y una sola resistencia de 100Ω, cada LED podría "robar" más corriente que los demás debido a pequeñas diferencias de fabricación. El LED que roba más corriente se calienta, roba aún más, y finalmente se quema (Efecto Dominó).</p>
+    <p><strong>Regla de oro:</strong> En paralelo, <em>cada LED debe tener su propia resistencia</em> para garantizar que cada uno reciba exactamente la corriente que necesita.</p>
+    </details>
+
+    <details class="u1">
+    <summary>3. Tienes una fuente de 9V y quieres conectar tres LEDs Rojos (2V cada uno) en Serie. ¿Funcionará? ¿Necesitas resistencia?</summary>
+    <p><strong>Verificación de voltaje:</strong></p>
+    <p>V<sub>total LEDs</sub> = 2V + 2V + 2V = 6V</p>
+    <p>V<sub>fuente</sub> = 9V</p>
+    <p>Como 9V > 6V, <strong>¡SÍ funcionará!</strong> Pero...</p>
+    
+    <p><strong>¿Necesitas resistencia?</strong> ¡Absolutamente!</p>
+    <p>El voltaje sobrante es: 9V - 6V = 3V</p>
+    <p>Si cada LED necesita 20mA, la resistencia debe ser:</p>
+    <p class="formula">R = V / I = 3V / 0.02A = 150 Ω</p>
+    
+    <p><strong>Error común:</strong> Algunos piensan que "como los LEDs consumen voltaje, no necesito resistencia". Esto es falso: la resistencia controla la <em>corriente</em>, no solo el voltaje.</p>
+    </details>
+
+    <details class="u1">
+    <summary>4. Diseña un circuito con 2 LEDs Rojos (2V, 20mA) usando una fuente de 5V. Muestra ambas opciones (Serie y Paralelo) con sus resistencias calculadas.</summary>
+    <p><strong>Opción 1: Serie</strong></p>
+    <p>V<sub>LEDs</sub> = 2V + 2V = 4V</p>
+    <p>V<sub>sobrante</sub> = 5V - 4V = 1V</p>
+    <p>R = 1V / 0.02A = 50 Ω (usa 56 Ω comercial)</p>
+    <p><em>Ventaja:</em> Una sola resistencia. <em>Desventaja:</em> Brillo reducido (cada LED recibe menos voltaje).</p>
+    
+    <p><strong>Opción 2: Paralelo</strong></p>
+    <p>Cada LED necesita: V<sub>sobrante</sub> = 5V - 2V = 3V</p>
+    <p>R por LED = 3V / 0.02A = 150 Ω (usa 150 Ω o 220 Ω)</p>
+    <p><em>Ventaja:</em> Máximo brillo. <em>Desventaja:</em> Necesitas dos resistencias.</p>
+    
+    <p><strong>Recomendación:</strong> Para proyectos educativos, elige <strong>Paralelo</strong>. Aunque uses más componentes, cada LED brilla al máximo y si uno falla, el otro sigue funcionando.</p>
+    </details>
+
+    <details class="u1">
+    <summary>5. Explica el concepto de "Divisor de Voltaje" y da un ejemplo práctico de cuándo usarlo en un proyecto con Arduino.</summary>
+    <p><strong>Concepto:</strong> Un divisor de voltaje es un circuito en Serie con dos resistencias que "reparte" el voltaje de la fuente proporcionalmente a sus valores.</p>
+    
+    <p><strong>Fórmula:</strong></p>
+    <p class="formula">V<sub>out</sub> = V<sub>in</sub> × (R₂ / (R₁ + R₂))</p>
+    
+    <p><strong>Ejemplo práctico con Arduino:</strong></p>
+    <p>Tu sensor de temperatura funciona a 3.3V, pero tu Arduino entrega 5V en sus pines. Si conectas el sensor directo a 5V, podría dañarse.</p>
+    <p><strong>Solución:</strong> Usa un divisor de voltaje:</p>
+    <ul>
+        <li>R₁ = 1kΩ</li>
+        <li>R₂ = 2kΩ</li>
+        <li>V<sub>out</sub> = 5V × (2kΩ / 3kΩ) = 3.33V ✅</li>
+    </ul>
+    
+    <p><strong>Advertencia:</strong> Los divisores de voltaje solo sirven para señales de <em>baja corriente</em> (sensores, entradas digitales). No uses divisores para alimentar motores o LEDs de alta potencia.</p>
+    </details>
+
+    <details class="u1">
+    <summary>6. Un niño te pregunta: "¿Por qué las luces de mi casa no se apagan todas cuando se quema una bombilla?". ¿Cómo le respondes usando los conceptos de Serie y Paralelo?</summary>
+    <p><strong>Respuesta técnica:</strong> Las instalaciones eléctricas domésticas están conectadas en <strong>Paralelo</strong>. Cada bombilla (o enchufe) tiene su propio camino independiente hacia la fuente de energía.</p>
+    
+    <p><strong>Metáfora para niños:</strong></p>
+    <p>"Imagina que tu casa es una gran autopista con muchos carriles. Cada bombilla es un carril. Si un carril se cierra por construcción (bombilla quemada), los demás carriles siguen funcionando perfectamente. Eso es Paralelo."</p>
+    
+    <p>"Ahora imagina las luces navideñas antiguas: estaban conectadas en Serie, como una fila de niños tomados de la mano. Si uno se suelta (bombilla quemada), toda la fila se separa y todas las luces se apagan."</p>
+    
+    <p><strong>Conexión STEAM:</strong> Esta es una excelente oportunidad para hablar sobre <em>ingeniería de sistemas</em>: los ingenieros diseñan las casas en Paralelo precisamente para evitar que un fallo pequeño afecte todo el sistema.</p>
+    </details>
+
+    <!-- === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            Dos docentes exploran las diferencias entre serie y paralelo con ejemplos cotidianos, analizan el peligroso "efecto dominó" en diseños mal hechos, y comparten estrategias para enseñar el divisor de voltaje sin fórmulas complejas.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <source src="audio/leccion5.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 13:52 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- === TARJETA DE IDENTIDAD DEL PROMPT ÉTICO === -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        
+        <p class="prompt-contexto">
+            Como futuro docente, aprenderás a usar la IA Generativa para <strong>potenciar</strong> tu pensamiento, no para reemplazarlo. Esta tarjeta te guía para construir prompts éticos que te ayuden a resolver dudas específicas de cada lección.
+        </p>
+        
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            
+            <div class="paso">
+                <strong>1️⃣ "Comprendí que..."</strong>
+                <p>Resume CON TUS PALABRAS lo aprendido. Ej: "en serie la corriente es igual para todos los componentes pero el voltaje se reparte, mientras que en paralelo el voltaje es igual pero la corriente se divide entre ramas."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>2️⃣ "y quiero saber..."</strong>
+                <p>Plantea una DUDA ESPECÍFICA o aplicación. Ej: "por qué en paralelo cada LED necesita su propia resistencia y no se puede compartir una sola como en serie, especialmente cuando los LEDs son del mismo color."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong>
+                <p>Define TU AUDIENCIA (edad/curso). Ej: "a estudiantes de grado 8° que nunca han armado un circuito con más de un LED."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>4️⃣ "Incluye un error común que debo evitar..."</strong>
+                <p>Pide retroalimentación crítica. Ej: "al explicar por qué no se debe usar una sola resistencia para varios LEDs en paralelo, incluso si son del mismo color."</p>
+            </div>
+        </div>
+        
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo aplicado a esta lección:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que en circuitos en serie la corriente es igual para todos los componentes y el voltaje se reparte entre ellos, mientras que en paralelo el voltaje es igual para todas las ramas pero la corriente se divide. También entendí que en serie una sola resistencia puede proteger varios LEDs porque la corriente no tiene escapatoria, pero en paralelo cada LED necesita su propia resistencia para evitar el 'efecto dominó' donde uno se quema y arrastra a los demás. Quiero saber: si tengo una fuente de 9V y quiero conectar 4 LEDs rojos (2V cada uno), ¿cuál configuración es más eficiente energéticamente (serie o paralelo) y por qué? Explícame como si fuera a enseñárselo a mis futuros estudiantes de grado 9°, usando una analogía con el agua que fluye por tuberías. Incluye un error común que los niños suelen cometer al diseñar circuitos con múltiples LEDs, especialmente confundiendo cuándo se puede compartir una resistencia y cuándo no."
+            </blockquote>
+        </div>
+        
+        <div class="prompt-aviso">
+            <strong>⚠️ Ética Docente:</strong> La IA es tu <em>asistente de pensamiento</em>, no tu reemplazo. Nunca copies textualmente sus respuestas en evaluaciones. Usa sus ideas para <strong>inspirar tu propio razonamiento</strong>, tal como harás con tus futuros estudiantes cuando usen tecnología en el aula. Anota en tu cuaderno tanto la respuesta de la IA como tu reflexión crítica sobre ella.
+        </div>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>¡Ya dominas el arte de conectar componentes y repartir voltajes como un ingeniero! Pero hay un problema práctico:</p>
+        <p><strong>Un circuito que siempre está encendido es como una lámpara que nunca se apaga:</strong> gasta energía, se calienta y... ¡no te deja dormir! 😴</p>
+        <p>En la próxima lección descubrirás el control definitivo: los <strong>Interruptores</strong>. Aprenderás:</p>
+        <ul>
+        <li>Por qué "Abierto" significa "Apagado" y "Cerrado" significa "Encendido" (¡al revés de lo que piensas!).</li>
+        <li>La diferencia entre un <em>Pulsador</em> (como un timbre) y un <em>Interruptor de Palanca</em> (como la luz de tu cuarto).</li>
+        <li>Cómo elegir el interruptor correcto para tu proyecto.</li>
+        </ul>
+        <p><em>¿Listo para pasar de "conectar" a "controlar"?</em></p>
+    </div>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="leccion4.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion6.html" class="btn-navegacion">Siguiente: Interruptores →</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 12: Álgebra de Boole - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX Configurado -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 2: Lógica Digital - Lección 12</small></p>
+        <h1>🧠 Las Matemáticas de la Decisión</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>¡Bienvenido a la Unidad 2! En la unidad pasada dominaste la electricidad física: cables, resistencias y energía. Ahora vamos a dar un salto evolutivo. Vamos a dejar de ver la electricidad como "fuerza" y empezaremos a verla como <strong>Información</strong>. Hoy aprenderemos el idioma que hablan las computadoras: el Álgebra de Boole.</p>
+    </div>
+
+    <section>
+        <h2>El Mapa del Tesoro: ¿Dónde estamos?</h2>
+        <p>Antes de entrar en las matemáticas, mira el panorama completo. Todo sistema digital (desde una alarma hasta tu celular) sigue este esquema:</p>
+
+        <div class="svg-container">
+            <!-- Imagen Nueva: Sistema de Control -->
+            <img src="img/sistema_control_bloques.png" alt="Diagrama de Bloques: Entrada (Sensores/Interruptores) -> Proceso (Circuitos Digitales) -> Salida (LEDs/Motores)" style="max-width:80%; height:auto;">
+            <p><small><em>Fig 0. Nosotros estamos en el bloque verde: "PROCESO".</em></small></p>
+        </div>
+        
+        <ul>
+            <li><strong>Entrada (Sensores):</strong> Los ojos del sistema. Interruptores, termómetros, micrófonos. (Lo que vimos en la Unidad 1).</li>
+            <li><strong>Proceso (Cerebro):</strong> Quien toma las decisiones. Compuertas Lógicas y Chips. (¡Lo que veremos en esta Unidad 2!).</li>
+            <li><strong>Salida (Actuadores):</strong> Los músculos. LEDs, Motores, Pantallas.</li>
+        </ul>
+        <hr>
+
+    <section>
+        <h2>1. El Mundo Analógico vs. El Mundo Digital</h2>
+        <p>Vivimos en un mundo analógico (luz, temperatura, sonido), pero nuestras máquinas son digitales. ¿Cuál es la diferencia?</p>
+
+        <div class="svg-container">
+            <!-- Imagen Nueva: Analogico vs Digital -->
+            <img src="img/analogico_vs_digital.png" alt="Gráfica comparativa: Señal Analógica (Curva suave continua) vs Señal Digital (Cuadrada, escalonada)" style="max-width:65%; height:auto;">
+            <p><small><em>Fig 1. Analógico es como una rampa (infinitos valores). Digital es como una escalera (pasos fijos).</em></small></p>
+        </div>
+
+        <div class="destacado" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+            <h3>🎻 La Analogía del Violín y el Piano</h3>
+            <ul>
+                <li><strong>Analógico (Violín):</strong> Puedes deslizar el dedo por la cuerda y hacer miles de sonidos intermedios entre una nota y otra. Es continuo y suave.</li>
+                <li><strong>Digital (Piano):</strong> Tocas una tecla o la siguiente. No hay sonido "en el medio" de dos teclas. Es discreto y exacto.</li>
+            </ul>
+        </div>
+
+        <h3>¿Por qué preferimos Digital?</h3>
+        <p>Convertimos el mundo a digital porque es <strong>inmune al ruido</strong>. Si una señal de 5V baja un poquito a 4.8V por interferencia, en un sistema analógico el sonido cambiaría (estática). En digital, sigue siendo interpretado como un "1". ¡Es más robusto!</p>
+
+        <h2>2. El "Bit": Definiendo los límites</h2>
+        <p>Para lograr esa robustez, definimos reglas estrictas de voltaje. En nuestra tecnología (TTL):</p>
+
+        <div class="svg-container">
+            <!-- Imagen: Niveles Lógicos (img/niveles_logicos_ttl.png) -->
+            <img src="img/niveles_logicos_ttl.png" alt="Gráfica de niveles de voltaje TTL. 0V-0.8V es Cero Lógico. 2V-5V es Uno Lógico. El medio es zona prohibida." style="max-width:55%; height:auto;">
+            <p><small><em>Fig 2. La "Zona Prohibida" (0.8V a 2V). Si el voltaje cae ahí, el chip se confunde.</em></small></p>
+        </div>
+
+        <ul>
+            <li><strong>1 Lógico (HIGH):</strong> Voltaje entre 2V y 5V. (Verdadero).</li>
+            <li><strong>0 Lógico (LOW):</strong> Voltaje entre 0V y 0.8V. (Falso).</li>
+        </ul>
+
+        <!-- FLASHBACK A LECCIÓN 10 -->
+        <div class="dato-extra" style="background-color: #fff3cd; border-left-color: #ffc107;">
+            <h3>🔗 Conexión: ¿Por qué fallaban los interruptores?</h3>
+            <p>En la <strong>Lección 10</strong> vimos que un cable suelto (flotante) capta ruido. Ese ruido suele tener un voltaje de entre <strong>1V y 1.5V</strong>.</p>
+            <p>Si miras la gráfica de arriba, verás que ese voltaje cae justo en la <strong>ZONA PROHIBIDA</strong> (Zona Gris). Por eso el chip se volvía loco: el voltaje no era ni 0 ni 1 suficientemente fuerte.</p>
+            <p><strong>La solución:</strong> La resistencia Pull-Down obliga al voltaje a bajar a <strong>0V</strong> (Zona Segura), sacándolo del peligro.</p>
+        </div>
+
+        <h2>3. Las Operaciones Básicas (Traducción)</h2>
+        <p>Ahora que tenemos 0s y 1s, ¿cómo operamos con ellos? George Boole inventó una matemática para esto:</p>
+
+        <h3>A. Suma Lógica (OR) \(+\)</h3>
+        <p>Equivale al circuito en <strong>Paralelo</strong>. La corriente pasa si se cierra un camino <strong>O</strong> el otro.</p>
+        
+        <div class="destacado" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <p><strong>El Misterio del \(1 + 1 = 1\)</strong></p>
+            <p>En álgebra normal, \(1+1=2\). Pero en Boole, sumamos <strong>Verdades</strong>.</p>
+            <p><strong>Ejemplo:</strong> Para entrar a un concierto necesitas: Boleto comprado (\(A\)) <strong>O</strong> Estar en la lista de invitados (\(B\)).</p>
+            <ul>
+                <li>Si tienes boleto (\(1\)) \(\rightarrow\) Entras (\(1\)).</li>
+                <li>Si estás en lista (\(1\)) \(\rightarrow\) Entras (\(1\)).</li>
+                <li>Si tienes boleto (\(1\)), a esto, <strong>agrégale</strong> que estás en lista (\(1\)) \(\rightarrow\) <strong>¡Igual entras (\(1\))!</strong> No entras "doble", el resultado sigue siendo el mismo estado: "Adentro".</li>
+            </ul>
+        </div>
+        
+        <h3>B. Producto Lógico (AND) \(\cdot\)</h3>
+        <p>Equivale al circuito en <strong>Serie</strong>. La corriente solo pasa si todos los puentes están bajados.</p>
+
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <p><strong>El "Portero Estricto" (Todo o Nada)</strong></p>
+            <p>La compuerta AND es la más exigente de todas. Para que la salida sea <strong>1</strong>, necesita que <strong>TODAS</strong> las entradas sean <strong>1</strong> al mismo tiempo.</p>
+            <p><strong>Ejemplo:</strong> Para entrar a tu correo necesitas: Usuario Correcto (\(A\)) <strong>AND</strong> Contraseña Correcta (\(B\)).</p>
+            <ul>
+                <li>Usuario bien, Contraseña mal \(\rightarrow\) <strong>Error (\(0\))</strong>.</li>
+                <li>Usuario mal, Contraseña bien \(\rightarrow\) <strong>Error (\(0\))</strong>.</li>
+                <li>Solo si <strong>ambos</strong> están bien \(\rightarrow\) <strong>Entras (\(1\))</strong>.</li>
+            </ul>
+            <p>Matemáticamente es una multiplicación: basta con que haya un solo cero para que todo el resultado sea cero (\(1 \cdot 0 \cdot 1 \cdot 1 = 0\)).</p>
+        </div>
+
+        <h3>C. Inversión (NOT) \(\bar{A}\)</h3>
+        <p>Es la operación del <strong>Complemento</strong>. Su única función es llevar la contraria.</p>
+
+        <div class="destacado" style="background-color: #fce4ec; border-left-color: #e91e63;">
+            <p><strong>El "Adolescente Rebelde" de las Matemáticas</strong></p>
+            <p>La compuerta NOT nunca está de acuerdo con la entrada. Siempre invierte la realidad:</p>
+            <ul>
+                <li>Si la entrada es <strong>Verdad</strong> (\(1\)) \(\rightarrow\) La salida es <strong>Mentira</strong> (\(0\)).</li>
+                <li>Si la entrada es <strong>Falso</strong> (\(0\)) \(\rightarrow\) La salida es <strong>Verdad</strong> (\(1\)).</li>
+            </ul>
+            <p>Matemáticamente, se escribe poniendo una "gorra" o barra encima de la letra (\(\bar{A}\)). Si \(A\) es la luz, \(\bar{A}\) es la oscuridad.</p>
+        </div>
+
+        <div class="destacado">
+            <h3>🌍 Aplicación Real</h3>
+            <p>Si tu condición para ir de fiesta es: <strong>"Tener dinero (A) Y Tener tiempo (B)"</strong>, la ecuación es:</p>
+            <p>$$Fiesta = A \cdot B$$</p>
+            <p>Si solo tienes dinero (\(A=1\)) pero no tiempo (\(B=0\)), el resultado es \(1 \cdot 0 = 0\). ¡No hay fiesta!</p>
+        </div>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>Tenemos las ecuaciones básicas ($A \cdot B$, $A + B$). Pero, ¿cómo estamos seguros de qué hace nuestro circuito en <strong>cada</strong> situación posible? ¿Qué pasa si A es 0 y B es 1? Para no adivinar, necesitamos un mapa completo. En la siguiente lección, aprenderemos a crear <strong>Tablas de Verdad</strong>.</p>
+    </div>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="leccion11.html" class="btn-navegacion">← Anterior Unidad</a>
+            <a href="leccion13.html" class="btn-navegacion">Siguiente: Tablas de Verdad →</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

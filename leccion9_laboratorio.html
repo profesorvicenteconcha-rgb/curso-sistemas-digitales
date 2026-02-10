@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio 1: Lógica con Interruptores - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        .tabla-lab {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .tabla-lab th {
+            background-color: var(--color-secundario);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #e67e22;
+        }
+        .tabla-lab td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            color: #555;
+        }
+        .input-lab {
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-weight: bold;
+            color: var(--color-primario);
+            font-size: 1.1em;
+        }
+        .caso-uso {
+            background-color: #fff;
+            border-left: 4px solid #2e7d32;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.95em;
+            color: #444;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .texto-puente {
+            font-size: 1.1em;
+            color: #333;
+            margin: 30px 0 20px 0;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 1: Fundamentos Físicos - Lección 9</small></p>
+        <h1>🧪 Laboratorio: Tu Primera Lógica Binaria</h1>
+    </header>
+
+    <!-- 1. GANCHO NARRATIVO -->
+    <div class="intro-leccion">
+        <p>¡Llegó la hora de la verdad! Hasta hoy, hemos hablado de <strong>Electricidad</strong> (energía). Hoy, daremos el salto hacia la <strong>Información</strong>. Usaremos la protoboard para descubrir que, dependiendo de cómo conectemos los cables, el circuito puede tomar "decisiones". <strong>Estás a punto de construir las neuronas básicas de un computador.</strong></p>
+    </div>
+
+    <section>
+        <h2>1. Preparación Inteligente</h2>
+        <p>Antes de conectar cables a lo loco, un buen ingeniero conoce sus herramientas y planea su espacio. Revisa tu mesa, asegúrate de tener tu protoboard, fuente de 5V, un LED, una resistencia de 330Ω y tus interruptores.</p>
+
+        <!-- INTEGRACIÓN FLUIDA: TIPOS DE INTERRUPTORES -->
+        <p class="texto-puente">Toma tus interruptores. Es posible que tengas dos tipos diferentes en tu mano. Es importante que sepas cuál usar para "hablarle" a tu circuito:</p>
+
+        <div class="dato-extra" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-top:0;">
+            <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                <div style="flex: 1;">
+                    <p>El <strong>Pulsador</strong> es fugaz (como un timbre: "¡Ahora!"). El <strong>DIP Switch</strong> (Dual In-line Package Switch) es estable (como un interruptor de luz: "Estado").</p>
+                    <p><em>Para este laboratorio, usa el que prefieras. Si usas el DIP, la palanca 1 será "A" y la 2 será "B".</em></p>
+                </div>
+                <div style="flex: 0 0 250px;">
+                    <img src="img/pulsador_vs_dip.png" alt="Comparativa Pulsador vs DIP" style="width: 100%; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- NUEVO BLOQUE: ANATOMÍA DEL PULSADOR -->
+        <div class="destacado" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <h3>👁️ Ojo Clínico: El Secreto de las 4 Patas</h3>
+            <p>Mira tu pulsador cuadrado. Tiene 4 patas ("pines" o "terminales"), pero <strong>internamente solo son 2 cables</strong>.</p>
+            
+            <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 1;">
+                    <ul>
+                        <li><strong>El Puente Interno:</strong> Las patas  de la parte lateral izquierda (1 y 2) están <strong>unidas por dentro</strong> lo mismo las del costado derecho (3 y 4).</li>
+                        <li><strong>El Interruptor:</strong> La magia ocurre al presionar: se conecta el lado Izquierdo con el Derecho.</li>
+                    </ul>
+                    <p><strong>Error Clásico:</strong> Si conectas tus cables a las patas 1 y 2, el circuito estará siempre cerrado (LED siempre prendido). Lo más seguro es conectar los cables en diagonal (por ejemplo, pata superior izquierda con inferior derecha), ya que esa combinación garantiza que el circuito solo se cierre al presionar el botón, independientemente de si el fabricante numeró las patas de forma horizontal o vertical.</p>
+                </div>
+                <div style="flex: 0 0 150px; text-align: center;">
+                    <!-- Imagen sugerida: anatomia_pulsador.png -->
+                    <img src="img/anatomia_pulsador.png" alt="Diagrama interno del pulsador mostrando la conexión en H" style="width: 100%; border-radius: 8px;">
+                </div>
+            </div>
+            <p>En el pulsador de 4 patas mostrado en la imagen, las terminales se identifican convencionalmente de la siguiente forma: la pata 1 (o terminal 1b), la pata 2 (o terminal 2b), la pata 3 (terminal 1a) y la pata 4 (terminal 2a).</p>
+            <p>Esta nomenclatura ayuda a conectar correctamente los circuitos, considerando que las patas opuestas suelen estar unidas internamente en su estado normal.</p>
+        </div>
+
+
+
+        <!-- (Explicación COMPLETA, no dentro del acordeón) -->
+         <!-- NUEVA SECCIÓN DE CALENTAMIENTO (CORREGIDA) -->
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3; margin-top: 30px;">
+            <h3>🏋️‍♂️ Misión de Calentamiento: Domina el Pulsador</h3>
+            <p>Antes de entrar a la lógica compleja, vamos a encender un <strong>LED Verde</strong> usando un pulsador de 4 patas. Veremos cómo el botón actúa como un puente.</p>
+
+            <div class="acordeon-guia">
+                <!-- PASO 1: Tierra y Resistencia -->
+                <details class="paso-tinkercad">
+                    <summary>
+                        <span class="numero-paso">1</span>
+                        <span class="titulo-paso">El Camino de Regreso</span>
+                        <span class="estado-paso">(Resistencia y Tierra)</span>
+                    </summary>
+                    <div class="contenido-paso">
+                        <p>Vamos a preparar el terreno desde el final (Tierra) hacia atrás.</p>
+                        <ol>
+                            <li><strong>Cable Negro:</strong> Conecta un cable negro desde el segundo hueco del <strong>Riel Azul (-)</strong> a la coordenada <strong>f2</strong>.</li>
+                            <li><strong>Resistencia (330 Ω):</strong> Colócala horizontalmente.
+                                <ul>
+                                    <li>Terminal 1 en <strong>i2</strong> (en la misma columna del cable negro).</li>
+                                    <li>Terminal 2 en <strong>i6</strong>.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </details>
+
+                <!-- PASO 2: El LED Verde -->
+                <details class="paso-tinkercad">
+                    <summary>
+                        <span class="numero-paso">2</span>
+                        <span class="titulo-paso">El LED Verde</span>
+                        <span class="estado-paso">(Ánodo y Cátodo)</span>
+                    </summary>
+                    <div class="contenido-paso">
+                        <p>Saca un LED y píntalo de color <strong>Verde</strong>. No lo reflejes ('M'), úsalo normal.</p>
+                        <ul>
+                            <li><strong>Cátodo (Pata recta/corta):</strong> En <strong>j6</strong>. (Se conecta con la resistencia en la columna 6).</li>
+                            <li><strong>Ánodo (Pata torcida/larga):</strong> En <strong>j7</strong>. (Aquí esperará la energía).</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- PASO 3: El Pulsador (Ajustado) -->
+                <details class="paso-tinkercad">
+                    <summary>
+                        <span class="numero-paso">3</span>
+                        <span class="titulo-paso">El Botón de 4 Patas</span>
+                        <span class="estado-paso">(El Puente)</span>
+                    </summary>
+                    <div class="contenido-paso">
+                        <p>Coloca el pulsador sobre el canal central (la zanja) para que sus patas queden separadas arriba y abajo.</p>
+                        <ul>
+                            <li><strong>Posición:</strong> Haz que las patas de la <strong>izquierda</strong> caigan en la columna <strong>7</strong> y las de la <strong>derecha</strong> en la columna <strong>9</strong>.
+                                <br><em>(Coordenadas: F7/E7 a la izquierda, F9/E9 a la derecha).</em>
+                            </li>
+                        </ul>
+                        <div style="background-color: #fff3cd; padding: 10px; border-radius: 5px; font-size: 0.9em; border-left: 3px solid #ffc107;">
+                            <strong>🧐 ¿Por qué así? (Aclaración Teórica)</strong><br>
+                            El texto anterior advertía sobre la necesidad de evitar conectar patas del mismo lado (arriba/abajo en la misma columna). Pero aquí estamos conectando <strong>Izquierda con Derecha</strong>. <br>
+                            El botón funciona como un puente levadizo sobre el canal central. Al presionar, la energía cruza de la columna 7 a la 9. ¡Es una conexión válida!
+                        </div>
+                    </div>
+                </details>
+
+                <!-- PASO 4: Energía -->
+                <details class="paso-tinkercad">
+                    <summary>
+                        <span class="numero-paso">4</span>
+                        <span class="titulo-paso">¡Energía!</span>
+                        <span class="estado-paso">(Cerrar el Circuito)</span>
+                    </summary>
+                    <div class="contenido-paso">
+                        <p>Alimentemos la entrada del puente.</p>
+                        <ol>
+                            <li><strong>Cable Rojo:</strong> Conecta en la misma columna desde el <strong>Riel Rojo (+)</strong> con la coordenada <strong>a9</strong> (la misma columna donde está la pata derecha del botón).</li>
+                        </ol>
+                        <p><strong>Resultado:</strong> Inicia la simulación. Por convención, la corriente viajaría: <br>
+                        <code>Riel(+)</code> &rarr; <code>a9</code> &rarr; <code>[BOTÓN]</code> &rarr; <code>f7</code> &rarr; <code>LED(Ánodo)</code> &rarr; <code>LED(Cátodo)</code> &rarr; <code>Resistencia</code> &rarr; <code>i2</code> &rarr; <code>f2</code> &rarr; <code>Tierra</code>.</p>
+                        
+                        <div style="text-align: center; margin-top: 15px;">
+                            <img src="img/pulsador_de_4_patas.png" alt="Circuito correcto con pulsador puenteando el canal central" style="max-width: 70%; border-radius: 8px; border: 2px solid #4caf50;">
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </div>
+        <!-- (Explicación COMPLETA, no dentro del acordeón) -->
+
+
+
+
+
+        <!-- INTEGRACIÓN FLUIDA: UX (CORREGIDA Y COMPLETA) -->
+        <p class="texto-puente">Ya tienes los componentes, pero ¿dónde los pones? Un circuito no solo debe funcionar eléctricamente; debe ser fácil de usar para las personas. Aquí entra el <strong>Diseño de Experiencia de Usuario (UX)</strong>.</p>
+
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin-top:0;">
+            <h3>🎨 El Rincón del Diseñador: ¿Qué es UX?</h3>
+            <p><strong>UX (User Experience)</strong> no es una persona; es la disciplina que estudia cómo se siente un humano al interactuar con tu máquina. Un buen ingeniero electrónico debe pensar en tres pilares:</p>
+            
+            <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                <div style="flex: 1;">
+                    <ul>
+                        <li><strong>1. Ergonomía (Espacio):</strong> Si pones los botones muy pegados, el usuario presionará ambos por error ("Dedo gordo"). ¡Dales aire!</li>
+                        <li><strong>2. Semiótica (Significado):</strong> Los colores hablan. Para una "Alarma Nuclear", ¿usarías un LED verde (seguro) o uno rojo (peligro)? Elige con intención.</li>
+                        <li><strong>3. Feedback (Respuesta):</strong> El usuario necesita saber que la máquina lo escuchó. El "clic" táctil del botón confirma la acción; la luz del LED confirma el resultado.</li>
+                    </ul>
+                </div>
+                <div style="flex: 0 0 250px; text-align: center;">
+                    <img src="img/ux_hardware.png" alt="Comparativa: Botones desordenados vs Botones organizados y etiquetados" style="width: 100%; border-radius: 8px;">
+                </div>
+            </div>
+            
+            <p style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
+                <strong>Tu Reto de Diseño:</strong> No conectes los cables como una maraña. Imita un producto real (como un celular o un control de videojuegos): organiza los <strong>botones abajo</strong> (zona de control) y el <strong>LED arriba</strong> (zona de visualización). ¡El orden evita errores!
+            </p>
+        </div>
+
+        <div class="destacado">
+            <h3>🧠 Tu Idioma de Hoy: Binario</h3>
+            <p>Para llenar los reportes, olvida el español. Usaremos el lenguaje de las máquinas:</p>
+            <ul>
+                <li><strong>0</strong> = Botón suelto / LED Apagado / Falso.</li>
+                <li><strong>1</strong> = Botón presionado / LED Encendido / Verdadero.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <!-- MISION 1 -->
+        <h2>Misión 1: La Lógica Estricta</h2>
+        <p class="texto-puente">Vamos a empezar construyendo un sistema que sea muy exigente. Queremos que la acción ocurra SOLO si todas las condiciones se cumplen, como en un sistema de alta seguridad.</p>
+        
+        <div class="caso-uso">
+            <strong>El Problema:</strong> Para lanzar un cohete, se necesita que el Comandante (A) <strong>Y</strong> el General (B) giren sus llaves al mismo tiempo. Si solo uno lo hace, no debe pasar nada.
+        </div>
+        
+        <p><strong>El Montaje:</strong> Conecta los dos pulsadores en "fila india" (Serie) antes de llegar al LED. La corriente debe atravesar el puente A y luego el puente B.</p>
+        
+        <div class="svg-container">
+            <img src="img/lab_serie_fisico.png" alt="Montaje Serie" style="max-width:100%; height:auto; border-radius:8px;">
+        </div>
+
+        <h3>📝 Tu Reporte (Lógica AND)</h3>
+        <table class="tabla-lab">
+            <tr><th>Botón A</th><th>Botón B</th><th>¿LED (Salida)?</th></tr>
+            <tr><td>0</td><td>0</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
+            <tr><td>0</td><td>1</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
+            <tr><td>1</td><td>0</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
+            <tr><td>1</td><td>1</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
+        </table>
+
+        <!-- TRANSICIÓN NARRATIVA MEJORADA -->
+        <div class="transicion-narrativa">
+            <p>El sistema anterior (Nuclear) es muy seguro, pero muy lento y rígido. ¿Qué pasa si necesitamos algo más flexible y rápido? Imagina una <strong>emergencia médica</strong> en un hospital: debe sonar una alarma si la <strong>Enfermera (A) O el Médico (B)</strong> (o ambos) presionan el botón de pánico. En situaciones críticas, necesitamos que <em>cualquiera</em> pueda activar la alerta. Cambiemos la topología para lograr esta lógica más ágil.</p>
+        </div>
+
+        <!-- MISION 2 ACTUALIZADA (EVITANDO CONFLICTO CON LECCIÓN 15) -->
+        <h2>Misión 2: El Botón de Pánico (Paralelo)</h2>
+        <div class="caso-uso">
+            <strong>El Problema:</strong> En una sala de urgencias, la sirena (LED) debe sonar inmediatamente si la Enfermera (A) detecta un paro cardíaco <strong>O</strong> si el Médico (B) lo detecta. No pueden esperar a ponerse de acuerdo; basta con que uno de los dos actúe para que la alarma suene.
+        </div>
+        
+        <p><strong>El Montaje:</strong> Desconecta la serie. Ahora conecta los pulsadores en caminos separados (Paralelo): ambos van de 5V al mismo punto del LED (ánodo/resistencia).</p>
+        
+        <div class="svg-container">
+            <img src="img/lab_paralelo_fisico.png" alt="Montaje Paralelo" style="max-width:100%; height:auto; border-radius:8px;">
+        </div>
+
+        <h3>📝 Tu Reporte (Lógica OR)</h3>
+        <table class="tabla-lab">
+            <tr><th>Enfermera (A)</th><th>Médico (B)</th><th>¿Alarma (LED)?</th></tr>
+            <tr><td>0 (No oprime)</td><td>0 (No oprime)</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
+            <tr><td>0 (No oprime)</td><td>1 (¡Auxilio!)</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
+            <tr><td>1 (¡Auxilio!)</td><td>0 (No oprime)</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
+            <tr><td>1 (¡Auxilio!)</td><td>1 (¡Auxilio!)</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
+        </table>
+
+        <!-- TRANSICIÓN NARRATIVA -->
+        <div class="transicion-narrativa">
+            <p>Hasta ahora, nuestros circuitos son "obedientes": si presionas (1), el LED prende (1). Pero el mundo es complejo. A veces necesitamos frenar, detener o llevar la contraria. <strong>¿Cómo logramos que una acción positiva genere un resultado negativo?</strong></p>
+        </div>
+
+        <!-- GUÍA TINKERCAD MISIÓN 1 -->
+        <details style="margin-top: 20px; background-color: #e3f2fd; border: 1px solid #2196f3;">
+            <summary style="background-color: #bbdefb; color: #0d47a1;">
+                <strong>💻 ¿No tienes materiales? Guía paso a paso en Tinkercad</strong>
+            </summary>
+            <div class="unidad-contenido" style="padding: 15px;">
+                <p>Sigue estos pasos exactos para simular la "Lógica Estricta":</p>
+                
+                <h4>1. Configuración Inicial</h4>
+                <ol>
+                    <li>Ve a <strong>Tinkercad.com</strong> e inicia sesión.</li>
+                    <li>Crea un nuevo circuito (+ Crear > Circuito).</li>
+                    <li>Arrastra los componentes:
+                        <ul>
+                            <li><strong>Placa de pruebas pequeña</strong>.</li>
+                            <li><strong>Suministro de energía:</strong> Configúralo a 5V.</li>
+                            <li><strong>2 Pulsadores:</strong> Ubícalos en el canal central. Llámalos "A" (Izquierda) y "B" (Derecha).</li>
+                            <li><strong>1 LED:</strong> Color verde. Llámalo "1".</li>
+                            <li><strong>1 Resistencia:</strong> Llámala "1", cambia valor a <strong>330 Ω</strong> (Ohmios) y gírala (Tecla R).</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h4>2. Conexión (El Camino de la Energía)</h4>
+                <p>Usa cables de colores (Negro, Rojo, Amarillo) para seguir la ruta:</p>
+                <ol>
+                    <li><strong>Energía:</strong> Conecta la fuente a los rieles (+) y (-) de la placa.</li>
+                    <li><strong>Paso 1 (Entrada):</strong> Cable <strong>Rojo</strong> del riel (+) a una pata del <strong>Pulsador B</strong> (Derecha).</li>
+                    <li><strong>Paso 2 (Puente):</strong> Cable <strong>Amarillo</strong> de la otra pata del Pulsador B a la <strong>Resistencia</strong>.</li>
+                    <li><strong>Paso 3 (Puente):</strong> Conecta la Resistencia al <strong>Ánodo</strong> (pata doblada) del LED.</li>
+                    <li><strong>Paso 4 (Retorno):</strong> Cable <strong>Amarillo</strong> del Cátodo (pata recta) del LED a una pata del <strong>Pulsador A</strong> (Izquierda).</li>
+                    <li><strong>Paso 5 (Tierra):</strong> Cable <strong>Negro</strong> de la otra pata del Pulsador A al riel negativo (-).</li>
+                </ol>
+                <p><em>Nota: ¡Todos están en fila india! La corriente debe pasar por B, luego el LED, luego A.</em></p>
+
+                <h4>3. Cómo Simular (El Truco del Shift)</h4>
+                <ol>
+                    <li>Clic en <strong>"Iniciar simulación"</strong>.</li>
+                    <li>Si presionas un solo botón, no pasa nada.</li>
+                    <li><strong>Para presionar dos a la vez:</strong>
+                        <ul>
+                            <li>Mantén presionada la tecla <strong>Shift</strong> (Mayús) en tu teclado.</li>
+                            <li>Haz clic en el Pulsador A (se quedará hundido).</li>
+                            <li>Haz clic normal en el Pulsador B.</li>
+                        </ul>
+                    </li>
+                    <li>¡El LED debe encender!</li>
+                </ol>
+            </div>
+        </details>
+
+        <!-- MISION 3: EL SABOTEADOR -->
+        <h2>Misión 3: El Saboteador (Lógica NOT)</h2>
+        
+        <div class="caso-uso">
+            <strong>🎭 El Escenario:</strong> Imagina que el LED es el alumbrado público de una calle. Normalmente, está encendido (1) para que los carros circulen. Pero instalas un <strong>Saboteador</strong> (el pulsador) que, cuando actúa (1), roba la electricidad y deja la calle a oscuras (0).
+        </div>
+
+        <h3>🔧 El Montaje (El Truco del Saboteador)</h3>
+        <ol>
+            <li>Conecta el LED a la fuente (con su resistencia) para que esté <strong>siempre encendido</strong>. (Esto es tu calle iluminada).</li>
+            <li>Ahora, coloca el pulsador en <strong>paralelo con las patas del LED</strong>, como un puente que cruza por encima de él.</li>
+        </ol>
+        <p><em>Visual: El botón está "tendido" sobre el LED, listo para desviar la corriente.</em></p>
+
+        <div class="destacado" style="background-color: #fff3cd; border-left-color: #ff9800;">
+            <h3>⚡ La Física de la Pereza (Ley del Mínimo Esfuerzo)</h3>
+            <ul>
+                <li><strong>Botón Suelto (0):</strong> La corriente no tiene alternativa. Debe pasar por el LED. <br><strong>&rarr; LED ENCENDIDO (1).</strong></li>
+                <li><strong>Botón Presionado (1):</strong> Creas un atajo sin resistencia. La corriente, como agua buscando el camino fácil, toma ese atajo y evita por completo al LED. <br><strong>&rarr; LED APAGADO (0).</strong></li>
+            </ul>
+        </div>
+
+        <h3>📈 Tu Reporte (Inversión)</h3>
+        <table class="tabla-lab">
+            <tr><th>Acción del Saboteador (Entrada)</th><th>Estado de la Calle (Salida)</th></tr>
+            <tr><td>0 (Inactivo / Suelto)</td><td><input type="text" class="input-lab" value="1" readonly style="background:#eee;"> (Iluminada)</td></tr>
+            <tr><td>1 (Activo / Presionado)</td><td><input type="text" class="input-lab" placeholder="?"> (A oscuras)</td></tr>
+        </table>
+
+        <p><strong>El Patrón Universal (NOT):</strong> Lo que entra, sale al revés. Entra verdad &rarr; Sale mentira.</p>
+
+        <!-- CONCLUSIÓN INTEGRADA -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin-top: 40px;">
+            <h3>🌍 Conclusión: Los Átomos de la Lógica</h3>
+            <p>Mira tus tres tablas de resultados. No son solo "luces que prenden". Has descubierto tres patrones universales de decisión:</p>
+            <ul>
+                <li><strong>AND (Serie / Misión 1):</strong> El patrón del <strong>acuerdo estricto</strong>. Como un contrato que requiere dos firmas.</li>
+                <li><strong>OR (Paralelo / Misión 2):</strong> El patrón de la <strong>opción flexible</strong>. Como una emergencia donde basta una alerta.</li>
+                <li><strong>NOT (Inversor / Misión 3):</strong> El patrón del <strong>sabotaje o negación</strong>. Un mecanismo que hace lo opuesto.</li>
+            </ul>
+            <p>Estos tres patrones son los <strong>átomos de la lógica digital</strong>. Con ellos se construye toda la inteligencia de los computadores, desde una calculadora hasta la Inteligencia Artificial. ¡Has construido las neuronas básicas con tus propias manos!</p>
+        </div>
+
+        <!-- SECCIÓN DE SIMULACIÓN -->
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3; margin-top: 20px;">
+            <h3>💻 ¿No tienes el kit hoy?</h3>
+            <p>No te atrases. Haz estas mismas misiones en el simulador:</p>
+            <p style="text-align: center;">
+                <a href="https://www.tinkercad.com/circuits" target="_blank" class="btn-navegacion" style="background-color: #0277bd;">Abrir Tinkercad ↗</a>
+            </p>
+        </div>
+
+        <!-- EL CLIFFHANGER (NARRATIVO) -->
+        <div class="destacado" style="background-color: #fbecec; border-left-color: #c62828; margin-top: 30px;">
+            <h3>👻 Un misterio final...</h3>
+            <p>¡Todo funciona! Pero... acércate a tu circuito. No presiones el botón, solo pasa el dedo cerca o mueve la mesa.</p>
+            <p>¿Viste que el LED a veces parpadea? <strong>El Diagnóstico:</strong> Cuando el interruptor está abierto, el cable queda "al aire". ¡Se convierte en una antena que capta ruido!</p>
+        </div>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>Ese "fantasma" del ruido eléctrico que acabamos de ver es el enemigo de la computación. Para que nuestros circuitos sean confiables, necesitamos eliminarlo. En la próxima lección, aprenderemos el secreto de los ingenieros: las resistencias <strong>Pull-Up y Pull-Down</strong> para anclar nuestras señales a tierra.</p>
+    </div>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="leccion8.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion10.html" class="btn-navegacion">Siguiente: Pull-Up y Pull-Down →</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

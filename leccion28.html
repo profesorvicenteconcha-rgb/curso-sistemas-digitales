@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 28: Matriz Generadora - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <style>
+        .matriz-container {
+            overflow-x: auto;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 4: Teoría de Códigos - Lección 28</small></p>
+        <h1>🧾 La Receta del Código: Matriz Generadora (\(G\))</h1>
+    </header>
+
+    <section>
+        <p>Decidimos proteger los datos con bits extra ("La Ñapa"). Pero, ¿qué bits sumamos con cuáles? Necesitamos un plano exacto. En matemáticas, ese plano se llama <strong>Matriz Generadora</strong>.</p>
+
+        <h2>1. ¿Qué es la Matriz \(G\)?</h2>
+        <p>No te asustes. Piensa en ella como un <strong>tablero de conexiones</strong>. Aquí está la matriz del famoso código Hamming (7,4):</p>
+
+        <div class="matriz-container formula">
+            $$
+            G = \left(
+            \begin{array}{cccc|ccc}
+            1 & 0 & 0 & 0 & 1 & 1 & 0 \\
+            0 & 1 & 0 & 0 & 1 & 0 & 1 \\
+            0 & 0 & 1 & 0 & 0 & 1 & 1 \\
+            0 & 0 & 0 & 1 & 1 & 1 & 1
+            \end{array}
+            \right)
+            $$
+        </div>
+
+        <div class="svg-container">
+            <!-- Imagen: Matriz Explicada (img/matriz_generadora_explicada.png) -->
+            <img src="img/matriz_generadora_explicada.png" alt="Matriz G dividida en dos: Izquierda (Identidad) y Derecha (Paridad)" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. Izquierda: Copia los datos. Derecha: Crea la protección.</em></small></p>
+        </div>
+
+        <h2>2. Traducción: De la Matriz al Cable 🔌</h2>
+        <p>Leer la matriz es muy fácil si sabes el secreto:</p>
+        <ul>
+            <li>Las <strong>Filas</strong> son tus datos de entrada (\(d_1, d_2, d_3, d_4\)).</li>
+            <li>Las <strong>Columnas de la derecha</strong> son tus bits de paridad (\(p_1, p_2, p_3\)).</li>
+            <li>Si ves un <strong>1</strong>, significa: "¡Conecta este cable a la compuerta XOR!".</li>
+        </ul>
+
+        <h3>La Receta de las Columnas de Paridad:</h3>
+        <p>Miremos solo la parte derecha de la matriz:</p>
+        <ul>
+            <li><strong>Columna \(p_1\) (1, 1, 0, 1):</strong> Suma con XOR los datos \(d_1, d_2, d_4\).</li>
+            <li><strong>Columna \(p_2\) (1, 0, 1, 1):</strong> Suma con XOR los datos \(d_1, d_3, d_4\).</li>
+            <li><strong>Columna \(p_3\) (0, 1, 1, 1):</strong> Suma con XOR los datos \(d_2, d_3, d_4\).</li>
+        </ul>
+
+        <div class="svg-container">
+            <!-- Imagen: Circuito Hamming (img/circuito_hamming_encoder.png) -->
+            <img src="img/circuito_hamming_encoder.png" alt="Esquema eléctrico del codificador Hamming creado a partir de la matriz" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 2. ¡Mira! La matriz era en realidad un diagrama de compuertas XOR.</em></small></p>
+        </div>
+
+        <div class="dato-extra">
+            <h3>🧮 Herramienta: Verificación Matemática</h3>
+            <p>Si multiplicas tu mensaje por la matriz, obtienes el código. Pero ojo: <strong>1+1=0</strong> aquí.</p>
+            <p>Usa este enlace pre-configurado en <strong>Wolfram Alpha</strong> para ver cómo se hace la magia:</p>
+            
+            <a href="https://www.wolframalpha.com/input?i=%28%7B1%2C0%2C1%2C1%7D+.+%7B%7B1%2C0%2C0%2C0%2C1%2C1%2C0%7D%2C%7B0%2C1%2C0%2C0%2C1%2C0%2C1%7D%2C%7B0%2C0%2C1%2C0%2C0%2C1%2C1%7D%2C%7B0%2C0%2C0%2C1%2C1%2C1%2C1%7D%7D%29+mod+2" 
+               target="_blank" 
+               class="btn-navegacion" 
+               style="background-color: #ff7e00; display: block; margin: 15px auto; max-width: 300px; text-align: center;">
+               Ver en Wolfram Alpha 🐺
+            </a>
+            <p><small><em>(Prueba cambiando los números del primer vector {1,0,1,1} por los tuyos).</em></small></p>
+        </div>
+    </section>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">
+            <a href="leccion27.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion29.html" class="btn-navegacion">Siguiente: Matriz de Control (H) →</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

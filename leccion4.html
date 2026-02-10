@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 4: Resistencias - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <!-- KaTeX Configurado -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 1: Fundamentos Físicos - Lección 4</small></p>
+        <h1>🎨 Descifra el Secreto: Código de Colores</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion">
+        <p>El LED está listo para conectarse, pero nos falta encontrar a su guardaespaldas: la resistencia de 330 Ohmios. El problema es que en tu kit todas se ven iguales. <strong>Hoy entrenarás tu ojo</strong> para descifrar el valor de cualquier resistencia solo viendo sus colores, como si leyeras un código de barras.</p>
+    </div>
+
+    <!-- 👇 NUEVA SECCIÓN AQUÍ 👇 -->
+    <div class="destacado">
+    <h3>📦 ¿Tienes todo lo necesario?</h3>
+    <p>Para esta lección necesitarás:</p>
+    <ul>
+        <li>Cables Caimán (22 AWG)</li>
+        <li>LEDs de varios colores</li>
+        <li>Resistencias (220Ω o 330Ω)</li>
+        <li>Cable USB viejo para cortar</li>
+        <li>Cargador 5V (cualquier cargador de celular en desuso)</li>
+    </ul>
+    <p>Si tienes todo esto, ¡estás listo para comenzar!</p>
+    </div>
+
+    <section>
+        <p>Las resistencias son tan pequeñas que es imposible imprimirles números encima. Por eso, los ingenieros inventaron un sistema de bandas de colores.</p>
+
+        <h2>1. Cómo leer una resistencia de 4 bandas</h2>
+        <p>Primero, toma la resistencia y busca la banda <strong>Dorada o Plateada</strong>. Esa es la tolerancia (margen de error) y siempre va a la <strong>DERECHA</strong>. Empezamos a leer desde la izquierda.</p>
+
+        <div class="svg-container">
+            <!-- Imagen ya generada: resistencia_ejemplo.png -->
+            <img src="img/resistencia_ejemplo.png" alt="Ilustración de una resistencia explicando sus bandas" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. El orden importa: Dígito, Dígito, Multiplicador.</em></small></p>
+        </div>
+
+        <ul>
+            <li><strong>Banda 1 (1er Dígito):</strong> El primer número del valor.</li>
+            <li><strong>Banda 2 (2do Dígito):</strong> El segundo número.</li>
+            <li><strong>Banda 3 (Multiplicador):</strong> La cantidad de ceros que agregas al final.</li>
+            <li><strong>Banda 4 (Tolerancia):</strong> Qué tan preciso es el valor (Marrón = 1%; Dorado = 5%).</li>
+        </ul>
+
+        <h3>Ejemplo Clásico: La Resistencia del LED</h3>
+        <p>Busca en tu kit una que tenga los colores: <strong>Naranja - Naranja - Marrón - Dorado</strong>.</p>
+        <ul>
+        <li><strong>Naranja</strong> = 3 (primer dígito)</li>
+        <li><strong>Naranja</strong> = 3 (segundo dígito)</li>
+        <li><strong>Marrón</strong> = ×10 (multiplicador: agrega un cero)</li>
+        <li><strong>Dorado</strong> = ±5% (tolerancia)</li>
+        </ul>
+        <p class="formula">33 × 10 = 330 Ω ± 5%</p>
+        <p>¡Bingo! Esa es la resistencia perfecta para proteger tu LED rojo o verde.</p>
+        <p><strong>¿Qué significa ±5%?</strong> El valor real puede estar entre 313.5Ω y 346.5Ω. ¡Es normal!</p>
+
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
+            <h3>🛠️ Herramienta Profesional: Calculadora</h3>
+            <p>Al principio cuesta memorizar los colores. En la industria, usamos apps para verificar y no cometer errores costosos.</p>
+            <p style="text-align: center;">
+                <a href="https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-resistor-color-code" target="_blank" class="btn-navegacion">Abrir Calculadora DigiKey ↗</a>
+            </p>
+        </div>
+
+        <h2>2. Tabla de Referencia Rápida</h2>
+        <p>Usa esta tabla mientras memorizas los valores:</p>
+        
+        <div>
+            <table class="tabla-centrada">
+                <!-- contenido de la tabla -->
+                <table class="tabla-centrada">
+                <tr>
+                    <th>Color</th><th>Valor</th><th>Color</th><th>Valor</th>
+                </tr>
+                <tr>
+                    <td style="background-color: #000; color: white;">Negro</td><td>0</td>
+                    <td style="background-color: #8B4513; color: white;">Café/Marrón</td><td>1</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #FF0000; color: white;">Rojo</td><td>2</td>
+                    <td style="background-color: #FFA500;">Naranja</td><td>3</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #FFFF00;">Amarillo</td><td>4</td>
+                    <td style="background-color: #00FF00;">Verde</td><td>5</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0000FF; color: white;">Azul</td><td>6</td>
+                    <td style="background-color: #800080; color: white;">Violeta</td><td>7</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #808080; color: white;">Gris</td><td>8</td>
+                    <td style="background-color: #FFFFFF; color: black; border: 1px solid #ccc;">Blanco</td><td>9</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #FFD700;">Dorado</td><td>±5%</td>
+                    <td style="background-color: #C0C0C0;">Plateado</td><td>±10%</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- RINCÓN DOCENTE: LECCIÓN 4 -->
+        <div class="dato-extra" style="border-left: 4px solid #ffc107; background-color: #fff9db; margin-top: 30px;">
+            <h3>🍎 Rincón del Docente: "Misión Secreta: Decodificadores"</h3>
+            <p>Memorizar la tabla es difícil. ¡Mejor jueguen a los espías!</p>
+            <ul>
+                <li><strong>La Misión:</strong> Dile al estudiante que los ingenieros esconden mensajes en las resistencias y él debe descifrarlos.</li>
+                <li><strong>El Reto Inverso:</strong> En lugar de darle la resistencia, dale el número.
+                    <br><em>"Necesito una resistencia de 1, 0, y 2 ceros (1000). ¡Búscala en la caja!"</em>. El niño tendrá que pensar: "1 es Café, 0 es Negro, 2 es Rojo" y buscar la pieza física.</li>
+                <li><strong>Gana Puntos:</strong> Cada resistencia encontrada correctamente vale puntos para "subir de rango" a Ingeniero Jefe.</li>
+            </ul>
+            <p><em>Esto entrena la asociación visual-numérica mucho más rápido que leer la tabla.</em></p>
+        </div>
+
+    <div class="dato-extra" style="background-color: #fff8e1; border-left-color: #ffc107;">
+            <h3>🧐 Realidad vs. Teoría: La Banda Dorada</h3>
+            <p>Cuando midas tus resistencias con el multímetro (en la Lección 11), te llevarás una sorpresa: una resistencia de <strong>330&Omega;</strong> podría marcar <strong>325&Omega;</strong> o <strong>338&Omega;</strong>.</p>
+            <p><strong>¿Está dañada? ¡NO!</strong></p>
+            <p>Nada en el mundo físico es perfecto. La banda <strong>Dorada</strong> significa que el fabricante te garantiza que el valor real está en un rango del <strong>5%</strong> (hacia arriba o hacia abajo). ¡Es normal y tu circuito funcionará igual!</p>
+        </div>
+
+    <!-- === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            Dos docentes desentrañan el código secreto de las resistencias: desde la historia de por qué se eligieron colores hasta estrategias lúdicas para que niños memoricen la tabla. Comparten trucos de taller y desmienten mitos sobre la tolerancia.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <source src="audio/leccion4.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 12:50 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- === TARJETA DE IDENTIDAD DEL PROMPT ÉTICO === -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        
+        <p class="prompt-contexto">
+            Como futuro docente, aprenderás a usar la IA Generativa para <strong>potenciar</strong> tu pensamiento, no para reemplazarlo. Esta tarjeta te guía para construir prompts éticos que te ayuden a resolver dudas específicas de cada lección.
+        </p>
+        
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            
+            <div class="paso">
+                <strong>1️⃣ "Comprendí que..."</strong>
+                <p>Resume CON TUS PALABRAS lo aprendido. Ej: "las resistencias usan un código de colores con 4 bandas: dos dígitos, un multiplicador y una tolerancia, donde la banda dorada indica ±5% de margen de error."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>2️⃣ "y quiero saber..."</strong>
+                <p>Plantea una DUDA ESPECÍFICA o aplicación. Ej: "por qué los colores se eligieron en ese orden específico y no alfabético, y si existe alguna mnemotecnia para memorizarlos más fácil."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong>
+                <p>Define TU AUDIENCIA (edad/curso). Ej: "a estudiantes de grado 7° que nunca han visto una resistencia física."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>4️⃣ "Incluye un error común que debo evitar..."</strong>
+                <p>Pide retroalimentación crítica. Ej: "al explicar por qué la tolerancia no significa que la resistencia esté dañada si no marca exactamente su valor nominal."</p>
+            </div>
+        </div>
+        
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo aplicado a esta lección:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que las resistencias usan un código de 4 bandas de colores para indicar su valor: las dos primeras bandas son los dígitos (Naranja=3, Naranja=3), la tercera es el multiplicador (Marrón=×10, es decir, agregar un cero), y la cuarta es la tolerancia (Dorado=±5%). Por eso una resistencia Naranja-Naranja-Marrón-Dorado vale 330Ω ±5%. Quiero saber: si tengo una resistencia con colores Rojo-Amarillo-Rojo-Plateado, ¿cuál es su valor exacto y en qué rango podría estar realmente? Explícame como si fuera a enseñárselo a mis futuros estudiantes de grado 8°, usando una analogía con algo cotidiano como un código de barras o una contraseña secreta. Incluye un error común que los niños suelen cometer al leer las resistencias, especialmente confundiendo cuál banda es la primera y cuál es la de tolerancia."
+            </blockquote>
+        </div>
+        
+        <div class="prompt-aviso">
+            <strong>⚠️ Ética Docente:</strong> La IA es tu <em>asistente de pensamiento</em>, no tu reemplazo. Nunca copies textualmente sus respuestas en evaluaciones. Usa sus ideas para <strong>inspirar tu propio razonamiento</strong>, tal como harás con tus futuros estudiantes cuando usen tecnología en el aula. Anota en tu cuaderno tanto la respuesta de la IA como tu reflexión crítica sobre ella.
+        </div>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>Ya sabes "leer" el lenguaje secreto de las resistencias. Esas rayitas de colores ya no son un misterio para ti. Pero surge una pregunta práctica:</p>
+        <p><strong>¿Qué pasa si necesitas un valor que no existe en tu kit?</strong></p>
+        <p>Imagina que tu proyecto requiere una resistencia de 150 Ω, pero en tu caja solo tienes de 100 Ω y 220 Ω. ¿Tienes que salir corriendo a comprar una nueva? ¡Para nada!</p>
+        <p>En la próxima lección descubrirás dos técnicas poderosas de los ingenieros: cómo combinar resistencias en <strong>Serie</strong> y en <strong>Paralelo</strong> para crear cualquier valor que necesites. ¡Aprenderás a "fabricar" una resistencia de 150 Ω usando solo las que tienes a mano!</p>
+        <p>Además, resolverás el gran dilema: ¿cuándo poner los LEDs en fila india y cuándo en carriles paralelos? Descubrirás por qué una sola resistencia puede proteger varios LEDs en serie, pero en paralelo cada uno necesita su propia guardaespaldas.</p>
+        <p><em>¿Listo para pasar de "identificar" a "combinar como un ingeniero"?</em></p>
+    </div>
+
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between;">
+            <a href="leccion3.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion5.html" class="btn-navegacion">Siguiente: Serie y Paralelo →</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

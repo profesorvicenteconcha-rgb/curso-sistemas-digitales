@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simbología y Convenciones - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        .tabla-simbolos {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        .tabla-simbolos th {
+            background-color: var(--color-primario);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        .tabla-simbolos td {
+            border-bottom: 1px solid #eee;
+            padding: 15px;
+            vertical-align: middle;
+        }
+        .tabla-simbolos tr:hover {
+            background-color: #f1f3f5;
+        }
+        .simbolo-img {
+            max-width: 60px; /* Tamaño controlado */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .col-simbolo { width: 15%; text-align: center; }
+        .col-nombre { width: 25%; font-weight: bold; color: var(--color-primario); }
+        .col-desc { width: 60%; font-size: 0.95em; color: #444; }
+
+        /* Botón de impresión */
+        .btn-print {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .btn-print:hover { background-color: #5a6268; }
+
+        /* Ocultar elementos al imprimir */
+        @media print {
+            .btn-navegacion, .btn-print, header p { display: none; }
+            .contenedor { box-shadow: none; border: none; width: 100%; margin: 0; padding: 0; }
+            body { background: white; }
+            a { text-decoration: none; color: black; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <p><small>Recursos de Referencia</small></p>
+                <h1>📐 Simbología y Convenciones</h1>
+            </div>
+            <button onclick="window.print()" class="btn-print">🖨️ Imprimir Ficha</button>
+        </div>
+    </header>
+
+    <section>
+        <p>Guía definitiva de lectura de planos para Ingeniería Digital. Ten esta hoja a mano en tus laboratorios.</p>
+
+        <h2>1. Conexiones (La Regla del Punto)</h2>
+        <div class="svg-container" style="border: 1px solid #eee; padding: 10px; border-radius: 8px;">
+            <img src="img/convencion_nodos.png" alt="Cruce con punto = Conexión. Cruce sin punto = Salto." style="max-width:300px;">
+            <p><small><strong>Izquierda:</strong> Nodo (Conectado). <strong>Derecha:</strong> Salto (No conectado).</small></p>
+        </div>
+
+        <h2>2. Componentes Pasivos y Energía</h2>
+        <table class="tabla-simbolos">
+            <thead>
+                <tr>
+                    <th class="col-simbolo">Símbolo</th>
+                    <th class="col-nombre">Nombre</th>
+                    <th class="col-desc">Función y Notas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="img/sim_resistencia.png" alt="Resistencia" class="simbolo-img"></td>
+                    <td class="col-nombre">Resistencia</td>
+                    <td class="col-desc">Se opone a la corriente. <strong>ANSI:</strong> Zigzag (el que usamos). <strong>IEC:</strong> Rectángulo.</td>
+                </tr>
+                <tr>
+                    <td><img src="img/sim_condensador.png" alt="Condensador" class="simbolo-img"></td> <!-- NUEVO -->
+                    <td class="col-nombre">Condensador</td>
+                    <td class="col-desc">Almacena energía. Dos líneas paralelas. Si una es curva o tiene un (+), es polarizado (Electrolítico).</td>
+                </tr>
+                <tr>
+                    <td><img src="img/sim_vcc.png" alt="VCC 5V" class="simbolo-img"></td> <!-- NUEVO -->
+                    <td class="col-nombre">VCC (+5V)</td>
+                    <td class="col-desc">Fuente de alimentación positiva. Generalmente una flecha hacia arriba o una barra.</td>
+                </tr>
+                <tr>
+                    <td><img src="img/sim_tierra.png" alt="Tierra GND" class="simbolo-img"></td>
+                    <td class="col-nombre">Tierra (GND)</td>
+                    <td class="col-desc">Referencia de 0 Voltios. El negativo común de todo el circuito.</td>
+                </tr>
+                <tr>
+                    <td><img src="img/sim_led.png" alt="LED" class="simbolo-img"></td>
+                    <td class="col-nombre">LED</td>
+                    <td class="col-desc">Diodo Emisor de Luz. El triángulo apunta al Cátodo (-) y la barra lo detiene.</td>
+                </tr>
+                <tr>
+                    <td><img src="img/sim_switch.png" alt="Pulsador" class="simbolo-img"></td>
+                    <td class="col-nombre">Pulsador (NO)</td>
+                    <td class="col-desc">Normalmente Abierto. Solo conecta mientras presionas. (Dibujado abierto).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Lógica Digital (Familia 74xx)</h2>
+        <table class="tabla-simbolos">
+            <thead>
+                <tr>
+                    <th class="col-simbolo">Símbolo</th>
+                    <th class="col-nombre">Compuerta</th>
+                    <th class="col-desc">Lógica</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="img/sim_not.png" alt="NOT" class="simbolo-img"></td>
+                    <td class="col-nombre">NOT (7404)</td>
+                    <td class="col-desc"><strong>Inversor.</strong> Triángulo con burbuja. (1 &rarr; 0).</td>
+                </tr>
+                <tr>
+                    <td><img src="img/sim_and.png" alt="AND" class="simbolo-img"></td>
+                    <td class="col-nombre">AND (7408)</td>
+                    <td class="col-desc"><strong>Multiplicación.</strong> Forma de "D". Todo en 1 para salir 1.</td>
+                </tr>
+                <tr>
+                    <td><img src="img/sim_nand.png" alt="NAND" class="simbolo-img"></td> <!-- NUEVO -->
+                    <td class="col-nombre">NAND (7400)</td>
+                    <td class="col-desc"><strong>No-Y.</strong> Una AND con burbuja al final. Universal.</td>
+                </tr>
+                <tr>
+                    <td><img src="img/sim_or.png" alt="OR" class="simbolo-img"></td>
+                    <td class="col-nombre">OR (7432)</td>
+                    <td class="col-desc"><strong>Suma.</strong> Forma curva. Basta uno en 1 para salir 1.</td>
+                </tr>
+                <tr>
+                    <td><img src="img/sim_nor.png" alt="NOR" class="simbolo-img"></td> <!-- NUEVO -->
+                    <td class="col-nombre">NOR (7402)</td>
+                    <td class="col-desc"><strong>No-O.</strong> Una OR con burbuja al final. Universal.</td>
+                </tr>
+                <tr>
+                    <td><img src="img/sim_xor.png" alt="XOR" class="simbolo-img"></td>
+                    <td class="col-nombre">XOR (7486)</td>
+                    <td class="col-desc"><strong>Exclusiva.</strong> Doble línea curva. Salida 1 si son diferentes.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="dato-extra">
+            <h3>⚠️ La Burbuja Mágica</h3>
+            <p>En los diagramas digitales, siempre que veas un pequeño círculo (o burbuja) en una pata, significa <strong>INVERSIÓN (NOT)</strong>. Si la burbuja está a la salida, la salida se niega. Si está a la entrada, la entrada se niega antes de entrar.</p>
+        </div>
+
+        <p style="text-align: center; margin-top: 30px;">
+            <a href="index.html" class="btn-navegacion">← Volver al Índice</a>
+        </p>
+    </section>
+</div>
+
+</body>
+</html>
