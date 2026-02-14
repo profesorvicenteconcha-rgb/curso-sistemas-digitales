@@ -51,12 +51,33 @@
             Es un componente hecho de carbón que se opone al paso de los electrones. 
             Su trabajo es limitar la corriente para que nada se queme.
         </p>
+        
+        <div class="svg-container">
+            <img src="img\simbolo-resistencias.png" alt="Símbolos de una resistencia: en forma de zigzag y como un rectángulo" style="max-width:60%; height:auto;";>
+            <p></small><em>Figura 1: Símbolos de una resistencia: en forma de zigzag y como un rectángulo.símbolo de una pila (5V), con dos barras paralelas.</em></small></p>
+        </div>
+
         <p>
             La resistencia se mide en <strong>ohmios</strong>, y usamos la letra griega 
             Omega (<strong>\(\Omega\)</strong>) para abreviar esa unidad — igual que usamos <em>"m"</em> 
             para metros o <em>"kg"</em> para kilogramos. Por ejemplo: una resistencia de <em>220\(\Omega\)</em> significa 
             "220 ohmios de oposición al paso de la corriente".
+        </p>        
 
+        <div class="dato-extra">
+            <h4>📖 Dato Curioso: Normativas Internacionales</h4>
+            <p>Existen dos convenciones para dibujar resistencias en esquemáticos:</p>
+            <ul>
+                <li><strong>Estilo americano:</strong> Usado principalmente en EE.UU. y Canadá (zigzag).</li>
+                <li><strong>Estilo europeo:</strong> Adoptado por la norma IEC (Comisión Electrotécnica 
+                    Internacional) y utilizado en la mayoría de los países del mundo (rectángulo).</li>
+            </ul>
+            <p><strong>Nuestro curso utilizará exclusivamente la representación europea</strong> 
+            porque es el estándar internacional en documentos técnicos y software de diseño 
+            profesional (KiCad, Altium, etc.).</p>
+            <p>⚠️ ¡No confundas! El símbolo <strong>Ω</strong> es solo la <em>unidad de medida</em>, 
+            no el dibujo del componente en los esquemáticos.</p>
+        </div>
         <!-- RINCÓN DOCENTE: DINÁMICA PRIMARIA -->
         <div class="dato-extra" style="border-left: 4px solid #ffc107; background-color: #fff9db;">
             <h3>🍎 Rincón del Docente: Explicando Ohm a niños (8-10 años)</h3>
@@ -97,7 +118,7 @@
         <div class="svg-container">
             <!-- Imagen ya generada: triangulo_ohm.png -->
             <img src="img/triangulo_ohm.png" alt="Triángulo de la Ley de Ohm: V arriba, I y R abajo" style="max-width:250px; height:auto;">
-            <p><small><em>Fig 1. V está arriba (como un rey). I y R están abajo.</em></small></p>
+            <p><small><em>Fig. 2. V está arriba (como un rey). I y R están abajo.</em></small></p>
         </div>
 
         <ul>
@@ -111,6 +132,67 @@
         <br>Al pasar por el LED, el LED le cobra <strong>2 Pizzas</strong> "de peaje" para dejarlo pasar (y convertirlas en luz).
         <br>¿Cuántas pizzas le quedan al repartidor? <strong>3 Pizzas</strong>.</p>
         <p>Esas 3 pizzas restantes (3V) deben ser recibidas por la Resistencia para que el repartidor llegue vacío (0V) al final del recorrido (Tierra).</p>
+
+        <div class="dato-extra" style="background: linear-gradient(135deg, #fff3e0, #ffe0b2); border-left: 4px solid #ff9800; padding: 25px; margin: 30px 0; border-radius: 0 8px 8px 0;">
+        <h3 style="color: #e65100; margin-top: 0;">📄 El Datasheet: Tu Manual de Supervivencia</h3>
+        
+        <p style="margin: 15px 0; line-height: 1.6;">
+            <strong>¿Qué es un datasheet?</strong> Es el <strong>certificado de nacimiento</strong> de cada componente electrónico. 
+            Contiene toda la información que el fabricante conoce sobre ese componente: 
+            voltajes máximos, corrientes permitidas, temperaturas de operación, dimensiones físicas, 
+            y mucho más. Es como el manual de instrucciones que viene con un electrodoméstico, 
+            pero para ingenieros.
+        </p>
+        
+        <div style="background: white; border-radius: 8px; padding: 15px; margin: 20px 0;">
+            <p style="margin: 0; font-style: italic; color: #5d4037;">
+            💡 <strong>Ejemplo práctico:</strong> Si quieres calcular la resistencia para un LED, 
+            no puedes adivinar cuánto voltaje necesita. Debes buscar en el datasheet del LED 
+            el valor de <code>V<sub>f</sub></code> (voltaje directo). Para un LED rojo típico, 
+            <code>V<sub>f</sub> = 1.9V</code>. Para un LED azul, <code>V<sub>f</sub> = 3.3V</code>. 
+            ¡Sin el datasheet, estarías diseñando a ciegas!
+            </p>
+        </div>
+        
+        <h4 style="color: #e65100; margin: 20px 0 10px 0;">🔍 ¿Cómo encontrar un datasheet?</h4>
+        <ol style="margin: 10px 0; line-height: 1.6;">
+            <li>Identifica el <strong>número de parte</strong> del componente (ej: "LED rojo 5mm", "Resistor 10kΩ 1/4W")</li>
+            <li>Busca en Google: <code>[número de parte] datasheet PDF</code></li>
+            <li>Descarga el PDF del sitio del fabricante (ej: Vishay, Fairchild, Texas Instruments)</li>
+        </ol>
+        
+        <div style="background: white; border-radius: 8px; padding: 15px; margin: 20px 0; border: 1px dashed #ff9800;">
+            <p style="margin: 0; font-weight: bold; color: #e65100;">
+            🎯 <strong>Sección clave para ti:</strong> Busca siempre la tabla 
+            <code>Absolute Maximum Ratings</code> (Valores Máximos Absolutos). 
+            Allí encontrarás los límites que NUNCA debes exceder, o el componente se destruirá.
+            </p>
+        </div>
+        
+        <h4 style="color: #e65100; margin: 20px 0 10px 0;">💡 ¿Por qué es crucial en esta lección?</h4>
+        <p style="margin: 10px 0; line-height: 1.6;">
+            La Ley de Ohm te da la fórmula, pero <strong>el datasheet te da los números reales</strong>. 
+            Sin consultar el datasheet:
+        </p>
+        <ul style="margin: 10px 0; line-height: 1.6;">
+            <li>Podrías quemar un LED por exceso de corriente</li>
+            <li>Podrías elegir una resistencia con potencia insuficiente</li>
+            <li>Podrías diseñar un circuito que funcione en teoría pero falle en la práctica</li>
+        </ul>
+        
+        <div style="text-align: center; margin: 25px 0; padding: 15px; background: #ffecb3; border-radius: 8px;">
+            <p style="margin: 0; font-size: 1.1em; font-weight: bold; color: #5d4037;">
+            🛠️ <strong>Regla de oro del ingeniero:</strong><br>
+            <em>"Nunca diseñes sin consultar el datasheet"</em>
+            </p>
+        </div>
+        
+        <p style="margin: 15px 0 0 0; font-size: 0.95em; color: #795548; line-height: 1.5;">
+            <strong>📚 Para tu futura aula:</strong> Enseña a tus estudiantes a buscar datasheets 
+            desde el primer día. Es la diferencia entre memorizar fórmulas y <strong>pensar como ingeniero</strong>. 
+            Un ingeniero no adivina: consulta, verifica y diseña con datos reales.
+        </p>
+        </div>
 
         <h2>3. Caso Real: Calculando la protección de tu LED</h2>
         <p>Vamos a usar la ley para salvar la vida de tu LED. Datos:</p>
@@ -160,13 +242,17 @@
             <!-- Explicación del símbolo de la pila (cierre del ciclo de la lección 1) -->
             <h3>🔋 El Símbolo de la Pila en los Esquemáticos</h3>
             <p>
-            En la lección anterior conocimos la pila CR2032 de tu kit. Ahora es momento 
-            de aprender a dibujarla en un esquema eléctrico. La pila se representa con 
-            <strong>dos líneas paralelas</strong>:
+                En la lección anterior conocimos la pila CR2032 de tu kit. Ahora es momento 
+                de aprender a dibujarla en un esquema eléctrico. La pila se representa con 
+                <strong>dos líneas paralelas</strong>:
             </p>
+            <div class="svg-container">
+                <img src="img\simbolo-pila.png" alt="Símbolo de una pila (5V), con dos barras paralelas." style="max-width:60%; height:auto;";>
+                <p></small><em>Fig. 3. Símbolo de una pila (5V), con dos barras paralelas.</em></small></p>
+            </div>
             <ul>
-            <li><strong>Línea larga (+):</strong> El polo positivo, donde sale la energía (5V en nuestro caso).</li>
-            <li><strong>Línea corta (–):</strong> El polo negativo, donde regresa la energía (también llamado <em>Tierra</em> o <em>GND</em>).</li>
+                <li><strong>Línea larga (+):</strong> El polo positivo, donde sale la energía (5V en nuestro caso).</li>
+                <li><strong>Línea corta (–):</strong> El polo negativo, donde regresa la energía (también llamado <em>Tierra</em> o <em>GND</em>).</li>
             </ul>
             <p>
             El voltaje se indica siempre al lado del símbolo de la pila. En nuestro caso, 
@@ -178,6 +264,10 @@
             Este punto de retorno a <strong>0 voltios</strong> se llama <em>Tierra</em> (o <em>GND</em>, de Ground) 
             y se representa con un símbolo específico: <strong>tres líneas horizontales decrecientes</strong>.
             </p>
+            <div class="svg-container">
+                <img src="img\simbolo-tierra.png" alt="Símbolo de tierra (gnd), tres líneas paralelas decrecientes." style="maxhorizontales  y decrecientes." style="max-width:60%; height:auto;";>
+                <p></small><em>Fig. 4. Símbolo de tierra (gnd), con tres líneas horizontales paralelas que van decreciendo.</small></p>
+            </div>
 
             <p>
             Aunque su nombre sugiere "tierra" como el suelo físico, en electrónica <em>no significa conexión a la 
@@ -211,7 +301,7 @@
 
             <div class="svg-container">
             <img src="img\figura_circuito_completo.png" alt="Circuito completo con pila (5V), resistencia (220 Ω), LED y tierra (GND)" style="max-width:60%; height:auto;";>
-            <p></small><em>Figura 2: Circuito completo con pila (5V), resistencia (220 Ω), LED y tierra (GND). 
+            <p></small><em>Fig. 5. Circuito completo con pila (5V), resistencia (220 Ω), LED y tierra (GND). 
             Arriba: Estilo americano de resistencia (zigzag). Abajo: Estilo europeo (rectángulo) - 
             <strong>Recomendado para este curso</strong>.</em></small></p>
             </div>
@@ -230,21 +320,6 @@
             Observa también la <strong>dirección de la corriente</strong> (de + a –), 
             que siempre fluye del polo positivo al negativo.
             </p>
-
-            <div class="dato-extra">
-            <h4>📖 Dato Curioso: Normativas Internacionales</h4>
-            <p>Existen dos convenciones para dibujar resistencias en esquemáticos:</p>
-            <ul>
-                <li><strong>Estilo americano:</strong> Usado principalmente en EE.UU. y Canadá (zigzag).</li>
-                <li><strong>Estilo europeo:</strong> Adoptado por la norma IEC (Comisión Electrotécnica 
-                    Internacional) y utilizado en la mayoría de los países del mundo (rectángulo).</li>
-            </ul>
-            <p><strong>Nuestro curso utilizará exclusivamente la representación europea</strong> 
-            porque es el estándar internacional en documentos técnicos y software de diseño 
-            profesional (KiCad, Altium, etc.).</p>
-            <p>⚠️ ¡No confundas! El símbolo <strong>Ω</strong> es solo la <em>unidad de medida</em>, 
-            no el dibujo del componente en los esquemáticos.</p>
-            </div>
         </p>
 
         <div class="destacado">

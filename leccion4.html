@@ -64,6 +64,58 @@
             <li><strong>Banda 4 (Tolerancia):</strong> Qué tan preciso es el valor (Marrón = 1%; Dorado = 5%).</li>
         </ul>
 
+        <!-- === 🔧 SERIES ESTÁNDAR E12/E24: ¿Por qué no existen todas las resistencias? === -->
+        <div class="destacado">
+            <h4>🔧 Series Estándar E12/E24: La sabiduría de los valores redondeados</h4>
+            
+            <p>Imagina que necesitas una resistencia de exactamente <strong>9,847 Ω</strong>. Fabricar resistencias con valores tan precisos y únicos sería imposible y carísimo —como fabricar zapatos a medida para cada persona del planeta.</p>
+            
+            <p>En su lugar, la industria acordó fabricar resistencias solo en <strong>valores redondeados y predefinidos</strong> que cubren todo el rango útil con suficiente precisión. Estas son las <em>series estándar</em>:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Serie</th>
+                        <th>Valores por década<br>(ej: 10Ω → 100Ω)</th>
+                        <th>Precisión típica</th>
+                        <th>Para qué sirve</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>E12</strong></td>
+                        <td>12 valores:<br>10, 12, 15, 18, 22, 27,<br>33, 39, 47, 56, 68, 82</td>
+                        <td>±10%</td>
+                        <td>La mayoría de circuitos comunes<br>(LEDs, botones, Pull-Up)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>E24</strong></td>
+                        <td>24 valores:<br>Incluye los de E12 +<br>11, 13, 16, 20, 24, 30...</td>
+                        <td>±5%</td>
+                        <td>Circuitos que necesitan<br>más precisión (sensores)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p><strong>💡 Analogía del taller mecánico:</strong></p>
+            <ul>
+                <li><strong>E12</strong> = Un juego básico de llaves con 12 tamaños (8mm, 10mm, 11mm, 13mm...)</li>
+                <li><strong>E24</strong> = Un juego profesional con 24 tamaños (más opciones intermedias)</li>
+            </ul>
+            
+            <p>¿Por qué no fabricar llaves de 8.0mm, 8.1mm, 8.2mm...? Porque sería innecesario: una llave de 8mm sirve para tuercas de 7.9mm a 8.1mm gracias a su tolerancia. ¡Lo mismo ocurre con las resistencias!</p>
+            
+            <div class="docente-destacado">
+                <strong>🎯 Para tus futuros estudiantes:</strong>
+                <p>Cuando un niño pregunte "¿por qué no hay una resistencia de 9,847 Ω?", responde:</p>
+                <blockquote>
+                    <em>"Porque la ingeniería no busca la perfección matemática, sino la solución práctica que funciona bien, está disponible en cualquier tienda y no cuesta una fortuna. Las series E12/E24 son como el alfabeto: con solo 26 letras podemos escribir cualquier palabra. Con solo 12 o 24 valores por década, podemos construir cualquier circuito."</em>
+                </blockquote>
+            </div>
+            
+            <p><strong>🔗 Conexión con el código de colores:</strong> Las bandas de colores que acabas de aprender representan <em>exactamente estos valores estándar</em>. Cuando ves una resistencia café-negro-naranja (10kΩ), estás viendo el valor E12 más usado en Pull-Up/Pull-Down. ¡El código de colores es el lenguaje universal de estas series estándar!</p>
+        </div>
+
         <h3>Ejemplo Clásico: La Resistencia del LED</h3>
         <p>Busca en tu kit una que tenga los colores: <strong>Naranja - Naranja - Marrón - Dorado</strong>.</p>
         <ul>

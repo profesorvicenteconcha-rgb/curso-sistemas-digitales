@@ -29,7 +29,7 @@
     <!-- NARRATIVA: INTRODUCCIÓN -->
     <div class="intro-leccion">
         <p>En la lección anterior aprendiste a limpiar el ruido con resistencias. Ahora tus señales son estables. Pero... <strong>¿Cómo estás seguro?</strong> Los electrones son invisibles. ¿Cómo sabes si tu pila tiene 3V o si está muerta? ¿Cómo sabes si esa resistencia es de 10k o de 1k si se le borraron los colores? Hoy te daremos un superpoder: la visión eléctrica usando el <strong>Multímetro</strong>.</p>
-    </div>
+        </div>
 
     <section>
         <h2>1. Conociendo a tu nuevo mejor amigo</h2>
@@ -134,6 +134,148 @@
                 <li>Súmalos: \(2.1 + 2.9 = 5V\). ¡La suma es igual a la fuente! La energía se reparte.</li>
             </ol>
         </div>
+    
+    <div class="dato-extra" style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-left: 4px solid #4caf50; padding: 25px; margin: 30px 0; border-radius: 0 8px 8px 0;">
+        <h3 style="color: #2e7d32; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            🔋 <span>¿Recuerdas la "lata de conservas"?</span>
+        </h3>
+        
+        <p style="margin: 15px 0; line-height: 1.6;">
+            En la <strong>Lección 1</strong> te dijimos que una pila CR2032 es como una 
+            "lata de conservas llena de energía química". Era una analogía simple para 
+            empezar. Ahora, en esta lección, abriremos esa lata y veremos <strong>qué hay 
+            realmente adentro</strong>.
+        </p>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 25px 0;">
+            <div style="flex: 1; min-width: 280px; background: white; padding: 15px; border-radius: 8px; border: 1px solid #a5d6a7;">
+            <p style="margin: 0; font-weight: bold; color: #2e7d32;">🥫 Lección 1: La analogía</p>
+            <p style="margin: 10px 0 0 0; font-size: 0.95em;">
+                "Una pila es una lata de conservas llena de energía química. 
+                Al conectar un circuito, 'abres la lata' y la energía fluye."
+            </p>
+            </div>
+            
+            <div style="flex: 1; min-width: 280px; background: white; padding: 15px; border-radius: 8px; border: 1px solid #a5d6a7;">
+            <p style="margin: 0; font-weight: bold; color: #2e7d32;">🔬 Lección 11: La realidad</p>
+            <p style="margin: 10px 0 0 0; font-size: 0.95em;">
+                Dentro de esa "lata" hay una <strong>reacción redox</strong>: 
+                el ánodo (Zn) se oxida liberando electrones, 
+                el cátodo (MnO₂) se reduce aceptándolos. 
+                ¡Esa es la "energía química" que mencionamos!
+            </p>
+            </div>
+        </div>
+        
+        <div style="background: #f1f8e9; border-radius: 8px; padding: 20px; margin: 20px 0; border: 1px dashed #81c784;">
+            <p style="margin: 0; font-style: italic; color: #1b5e20; line-height: 1.6;">
+            💡 <strong>La evolución del aprendizaje:</strong><br>
+            Las analogías no son "mentiras piadosas". Son <strong>peldaños</strong>. 
+            Primero aprendes que la pila es una "lata de conservas" (Lección 1). 
+            Luego descubres que dentro hay una <strong>reacción química específica</strong> 
+            que libera electrones (Lección 11). 
+            Finalmente entenderás cómo diseñar baterías con diferentes químicas 
+            para distintas aplicaciones (cursos avanzados).<br><br>
+            <strong>Cada peldaño es verdadero en su nivel.</strong> 
+            La "lata de conservas" sigue siendo válida: 
+            ¡una pila SÍ es un recipiente que almacena energía química lista para usar!
+            </p>
+        </div>
+
+        <div class="dato-extra" style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-left: 4px solid #4caf50; padding: 25px; margin: 30px 0; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #2e7d32; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                🔋 <span>De la "lata de conservas" a la precisión técnica</span>
+            </h3>
+            
+            <p style="margin: 15px 0; line-height: 1.6;">
+                En la <strong>Lección 1</strong> te dijimos que una pila CR2032 es como una 
+                "lata de conservas llena de energía química". Esa analogía sigue siendo válida: 
+                una pila <em>no recargable</em> es efectivamente un recipiente sellado con una 
+                reacción química de un solo uso. Pero ahora que entendemos su química, 
+                podemos hacer una distinción crucial:
+            </p>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 25px 0;">
+                <div style="flex: 1; min-width: 280px; background: white; padding: 15px; border-radius: 8px; border: 1px solid #a5d6a7;">
+                <p style="margin: 0; font-weight: bold; color: #2e7d32;">🥫 Lata de un solo uso</p>
+                <p style="margin: 10px 0 0 0; font-size: 0.95em;">
+                    Pila no recargable (CR2032, AA alcalina)<br>
+                    → Reacción química irreversible<br>
+                    → "Abres la lata" y la energía fluye hasta agotarse<br>
+                    → <strong>No se puede recargar</strong> (intentarlo es peligroso)
+                </p>
+                </div>
+                
+                <div style="flex: 1; min-width: 280px; background: white; padding: 15px; border-radius: 8px; border: 1px solid #a5d6a7;">
+                <p style="margin: 0; font-weight: bold; color: #2e7d32;">🔄 Lata reutilizable</p>
+                <p style="margin: 10px 0 0 0; font-size: 0.95em;">
+                    Batería recargable (Li-ion, NiMH)<br>
+                    → Reacción química reversible<br>
+                    → Necesita un <strong>cargador real</strong> (no solo una fuente)<br>
+                    → El cargador gestiona la química durante la carga
+                </p>
+                </div>
+            </div>
+            
+            <div style="background: #f1f8e9; border-radius: 8px; padding: 20px; margin: 20px 0; border: 1px dashed #81c784;">
+                <p style="margin: 0; font-style: italic; color: #1b5e20; line-height: 1.6;">
+                ⚠️ <strong>Confusión peligrosa:</strong><br>
+                El "cargador de celular" que usaste en lecciones anteriores 
+                <strong>no es un cargador</strong>, es una <em>fuente regulada de 5V</em>. 
+                Cuando alimentabas tus circuitos con él, usabas una <strong>fuente</strong>, 
+                no un cargador baterías. Un cargador real gestiona la química de la batería; 
+                una fuente solo entrega voltaje constante.
+                </p>
+            </div>
+            
+            <h4 style="color: #2e7d32; margin: 25px 0 12px 0;">🔋 ¿Por qué las baterías recargables necesitan un cargador real?</h4>
+            <p style="margin: 0 0 15px 0; line-height: 1.6;">
+                Una fuente de 5V <em>no sabe</em> si la batería está al 20% o al 100%. 
+                Si conectas una batería Li-ion directamente a una fuente de 5V:
+            </p>
+            <ul style="margin: 0 0 15px 20px; line-height: 1.6;">
+                <li>❌ La fuente seguirá empujando corriente incluso al 100%</li>
+                <li>❌ La batería se sobrecargará, se calentará y podría incendiarse</li>
+                <li>✅ Un <strong>cargador real</strong> monitorea voltaje/corriente y detiene la carga al 100%</li>
+            </ul>
+            
+            <div style="text-align: center; margin: 25px 0; padding: 15px; background: #c8e6c9; border-radius: 8px;">
+                <p style="margin: 0; font-size: 1.1em; font-weight: bold; color: #1b5e20;">
+                🧠 <strong>Pensamiento de ingeniero:</strong><br>
+                <em>"Las palabras precisas evitan errores peligrosos"</em>
+                </p>
+            </div>
+            
+            <p style="margin: 15px 0 0 0; font-size: 0.95em; color: #33691e; line-height: 1.5; font-style: italic;">
+                ✨ <strong>Conexión completa:</strong> La "lata de conservas" de la Lección 1 era una analogía 
+                válida para pilas no recargables. Ahora entendemos que las baterías recargables 
+                son "latas reutilizables" que requieren un gestor químico (cargador) para 
+                rellenarlas con seguridad. Y que el dispositivo que llamamos "cargador de celular" 
+                es en realidad una fuente regulada que alimenta el <em>cargador integrado en el teléfono</em>.
+            </p>
+        </div>
+        
+        <h4 style="color: #2e7d32; margin: 25px 0 12px 0;">🔄 ¿Y las baterías recargables?</h4>
+        <p style="margin: 0 0 15px 0; line-height: 1.6;">
+            Si una pila no recargable es una "lata de conservas de un solo uso" 
+            (una vez abierta, no se puede volver a sellar), entonces una batería 
+            recargable es como un <strong>termo reutilizable</strong>:
+        </p>
+        <ul style="margin: 0 0 15px 20px; line-height: 1.6;">
+            <li>🔋 <strong>Descarga:</strong> La energía química se convierte en eléctrica (como servir café del termo)</li>
+            <li>⚡ <strong>Carga:</strong> La energía eléctrica se reconvierte en química (como volver a llenar el termo)</li>
+            <li>🔄 <strong>Ciclos:</strong> Cada carga/descarga desgasta un poco el "termo" (pérdida de capacidad con el tiempo)</li>
+        </ul>
+        
+        <div style="text-align: center; margin: 25px 0; padding: 15px; background: #c8e6c9; border-radius: 8px;">
+            <p style="margin: 0; font-size: 1.1em; font-weight: bold; color: #1b5e20;">
+            🌱 <strong>El viaje del aprendizaje:</strong><br>
+            <em>"Primero simplificamos para entender. Luego complejizamos para dominar."</em>
+            </p>
+        </div>
+    </div>
+
+    
 
         <!-- LABORATORIO STEAM INTEGRADO -->
         <div class="destacado" style="background-color: #fcf4e4; border-left-color: #ffb300; margin-top: 30px;">
@@ -165,6 +307,105 @@
             </div>
         </div>
     </section>
+
+    <!-- 13. 🎧 Podcast y actividades === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            Dos docentes analizan el multímetro como "el estetoscopio del electricista" con el que podemos medir voltaje, corriente y resistencia; analizan las baterías como "latas de energía enlatada". Comparten estrategias para enseñar la diferencia entre pilas primarias y recargables, la importancia de la polaridad en circuitos digitales, y cómo evitar el error #1 al conectar fuentes de poder.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <source src="audio/leccion11.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 16:12 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+    
+    <section class="cuaderno-section">
+    <div class="cuaderno-header">
+        <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+        </svg>
+        <h3>📓 Mi Cuaderno: Bitácora de Innovación</h3>
+    </div>
+    
+    <p class="cuaderno-contexto">
+        Tu cuaderno es tu laboratorio pedagógico. Aquí transformas la información en conocimiento útil para tu futura práctica docente.
+    </p>
+    
+    <div class="cuaderno-actividades">
+        <h4>✏️ Actividades para esta lección:</h4>
+        
+        <div class="actividad">
+            <p><strong>1. Mi primer diagnóstico con multímetro</strong></p>
+            <p>Toma tres objetos de tu casa (un cable, una resistencia, una pila usada) y mide cada uno con tu multímetro. Anota:</p>
+            <ul>
+                <li>¿Qué esperabas encontrar?</li>
+                <li>¿Qué encontraste realmente?</li>
+                <li>¿Hubo alguna sorpresa?</li>
+            </ul>
+        </div>
+        
+        <div class="actividad">
+            <p><strong>2. Esquema de conexión visual</strong></p>
+            <p>Dibuja un diagrama paso a paso de cómo conectarías el multímetro para medir:</p>
+            <ul>
+                <li>Voltaje de una pila (en paralelo)</li>
+                <li>Resistencia de un componente (sin energía)</li>
+                <li>Continuidad de un cable (modo pito)</li>
+            </ul>
+            <p>Usa colores diferentes para las puntas roja y negra.</p>
+        </div>
+        
+        <div class="actividad">
+            <p><strong>3. Mi reflexión docente: Enseñando a medir</strong></p>
+            <p>Responde: Si tuvieras que explicarle a niños de grado 5° cómo usar un multímetro sin que lo dañen, ¿qué 3 reglas de oro les enseñarías? Escribe una analogía simple para cada regla (ej: "La punta roja es como el dedo índice: siempre apunta hacia lo positivo").</p>
+        </div>
+        
+        <div class="actividad">
+            <p><strong>4. Experimento STEAM: Batería de frutas</strong></p>
+            <p>Si tienes acceso a un limón, una moneda de cobre y un clavo:</p>
+            <ul>
+                <li>Dibuja tu montaje antes de hacerlo</li>
+                <li>Anota el voltaje que mides</li>
+                <li>Calcula cuántos limones necesitarías para encender un LED rojo (2V)</li>
+                <li>Reflexiona: ¿Por qué crees que los antiguos babilonios usaban vasijas con metales y líquidos?</li>
+            </ul>
+        </div>
+        
+        <div class="actividad">
+            <p><strong>5. Mis preguntas técnicas</strong></p>
+            <p>Escribe al menos dos dudas que te quedaron de esta lección. Ejemplos:</p>
+            <ul>
+                <li>"¿Por qué el multímetro tiene un puerto especial para corrientes grandes (10A)?"</li>
+                <li>"¿Qué pasa si mido resistencia con el circuito encendido por accidente?"</li>
+                <li>"¿Cómo sé qué escala elegir cuando no conozco el valor aproximado?"</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="dato-extra">
+        <p><strong>💡 Recuerda:</strong> No copies textualmente. Resume con tus palabras, dibuja, conecta con tu realidad. Tu cuaderno es para ti, no para el profesor. Es donde transformas información en comprensión y preparas tus futuras clases con autenticidad.</p>
+    </div>
+    
+    <div class="meta-aprendizaje">
+        <p><strong>🎯 Meta de aprendizaje:</strong><br>
+        <em>"Al finalizar esta lección, podré usar el multímetro para diagnosticar circuitos y explicar a mis futuros estudiantes cómo 'ver lo invisible'."</em></p>
+    </div>
+</section>
 
     <!-- NARRATIVA: CIERRE DE UNIDAD -->
     <div class="avance-leccion">

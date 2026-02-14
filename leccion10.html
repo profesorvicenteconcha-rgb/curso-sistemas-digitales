@@ -33,6 +33,163 @@
         <p>Podrías pensar que enviabas un 0, pero en realidad dejabas el cable "al aire", desconectado de todo. En electrónica digital, <strong>un cable suelto no es un cero; es una incógnita</strong> (una antena). Hoy aprenderemos a usar una resistencia para "anclar" esa señal y eliminar la incertidumbre para siempre.</p>
     </div>
 
+    <!-- === 🔌 SÍMBOLOS DE VOLTAJE Y TIERRA: Guía Visual Rápida === -->
+    <div class="simbolos-voltage">
+        <h3>🔌 Símbolos de Voltaje y Tierra: Guía Visual Rápida</h3>
+        
+        <p>Antes de adentrarnos en Pull-Up y Pull-Down, aclaremos una confusión muy común: <strong>¿qué significan los símbolos en los esquemas?</strong> Muchos estudiantes piensan que el triángulo representa Vcc, pero esto es un mito. Aquí está la verdad:</p>
+        
+        <div class="tabla-simbolos">
+            <h4>📊 Tabla Comparativa de Símbolos Estándar</h4>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Símbolo</th>
+                        <th>Nombre</th>
+                        <th>Representa</th>
+                        <th>Uso Común</th>
+                        <th>¡Cuidado!</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Vcc</strong> o <strong>+5V</strong></td>
+                        <td>Voltaje Positivo</td>
+                        <td>Fuente de alimentación</td>
+                        <td>Arduino, circuitos digitales</td>
+                        <td>No tiene símbolo único; se identifica por su <strong>etiqueta</strong></td>
+                    </tr>
+                    <tr>
+                        <td>⏚</td>
+                        <td>Tierra (GND)</td>
+                        <td>Referencia 0V</td>
+                        <td>Todos los circuitos</td>
+                        <td>Es donde "termina" la corriente, no donde "empieza"</td>
+                    </tr>
+                    <tr>
+                        <td>▼</td>
+                        <td>Tierra de Señal</td>
+                        <td>Conexión a GND</td>
+                        <td>Esquemas europeos</td>
+                        <td>¡Apunta abajo pero es 0V, no voltaje negativo!</td>
+                    </tr>
+                    <tr>
+                        <td>▲</td>
+                        <td>Tierra/Chasis (antiguo)</td>
+                        <td>Conexión a chasis</td>
+                        <td>Esquemas antiguos</td>
+                        <td><strong>NO es Vcc</strong> - Es una confusión histórica común</td>
+                    </tr>
+                    <tr>
+                        <td>┬ o ↑</td>
+                        <td>Power Rail</td>
+                        <td>Conexión a Vcc</td>
+                        <td>Esquemas modernos</td>
+                        <td>Flecha hacia arriba = fuente de energía</td>
+                    </tr>
+                    <tr>
+                        <td>┴ o ↓</td>
+                        <td>Ground Rail</td>
+                        <td>Conexión a GND</td>
+                        <td>Esquemas modernos</td>
+                        <td>Flecha hacia abajo = retorno a tierra</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="mito-verdad">
+            <h4>❌ Mito vs ✅ Verdad</h4>
+            
+            <div class="mito">
+                <strong>❌ Mito:</strong> "El triángulo ▲ representa Vcc (voltaje positivo)"
+            </div>
+            
+            <div class="verdad">
+                <strong>✅ Verdad:</strong> "El triángulo ▼ representa TIERRA (0V). Vcc se identifica por su <strong>etiqueta</strong> ('Vcc', '+5V', 'Vdd'), no por un símbolo mágico."
+            </div>
+        </div>
+        
+        <div class="analogia-agua">
+            <h4>💧 Analogía del Agua</h4>
+            <p>Imagina el circuito como un sistema de agua:</p>
+            <ul>
+                <li><strong>Vcc (+5V)</strong> = Tanque de agua elevado (presión alta)</li>
+                <li><strong>GND (⏚)</strong> = Nivel del mar (presión cero)</li>
+                <li><strong>Corriente</strong> = Agua que fluye del tanque al mar</li>
+                <li><strong>Los símbolos de tierra (▼, ⏚)</strong> apuntan hacia abajo porque es donde "termina" el flujo, como el agua que llega al mar</li>
+            </ul>
+        </div>
+        
+        <div class="consejo-docente">
+            <strong>💡 Consejo para Futuros Docentes:</strong>
+            <p>Cuando expliques estos símbolos, usa esta regla de oro:</p>
+            <blockquote>
+                <strong>"Si no ves la etiqueta 'Vcc', 'Vdd' o '+5V', no asumas que hay voltaje positivo. Si ves ⏚ o ▼, es TIERRA (0V), no voltaje alto."</strong>
+            </blockquote>
+            <p>Y haz esta pregunta a tus estudiantes:</p>
+            <p><em>"¿Por qué los símbolos de tierra apuntan hacia abajo? Porque la corriente 'cae' del voltaje alto al bajo, como el agua que cae de una montaña al mar."</em></p>
+        </div>
+        
+        <div class="importante-leccion10">
+            <strong>🎯 Importante para esta lección:</strong>
+            <p>En Pull-Up y Pull-Down, entenderás por qué necesitamos conectar entradas a Vcc <strong>o</strong> a GND para evitar el "fantasma del ruido eléctrico". Esta guía de símbolos te ayudará a leer los esquemas correctamente y no confundir las conexiones.</p>
+        </div>
+    </div>
+
+    <!-- === 🌊 ¿QUÉ ES UN "ESTADO FLOTANTE"? La entrada que no sabe qué ser === -->
+    <div class="estado-flotante">
+        <h3>🌊 ¿Qué es un "estado flotante"? La entrada que no sabe qué ser</h3>
+        
+        <p>Imagina un interruptor de luz que no está ni conectado a la pared ni a ningún cable. ¿Está encendido o apagado? <strong>No es ninguna de las dos cosas</strong> — está en el limbo.</p>
+        
+        <div class="analogia-flotante">
+            <h4>🚤 Analogía del Bote en el Mar</h4>
+            <p>Una entrada digital SIN Pull-Up/Pull-Down es como un bote sin ancla en medio del océano:</p>
+            <ul>
+                <li><strong>Sin ancla (sin resistencia):</strong> Cualquier ola pequeña (ruido eléctrico) lo mueve de un lado a otro → el bote "flota" sin rumbo</li>
+                <li><strong>Con ancla a tierra (Pull-Down):</strong> El bote siempre regresa a puerto (0 lógico)</li>
+                <li><strong>Con ancla al muelle (Pull-Up):</strong> El bote siempre regresa al muelle (1 lógico)</li>
+            </ul>
+            <p><strong>El "flotar" no es 0 ni 1 — es indeterminado.</strong> Y en electrónica digital, "indeterminado" es peor que "equivocado".</p>
+        </div>
+        
+        <div class="fisica-flotante">
+            <h4>🔬 ¿Qué pasa físicamente en el pin?</h4>
+            <p>Las entradas digitales modernas tienen <strong>impedancia muy alta</strong> (millones de ohmios). Esto significa:</p>
+            <ul>
+                <li>Consumen <em>casi cero corriente</em> cuando leen una señal</li>
+                <li>Pero también actúan como <strong>antenas diminutas</strong> que captan cualquier interferencia cercana</li>
+                <li>El ruido del ambiente (WiFi, celulares, luces fluorescentes) induce pequeños voltajes en el cable "al aire"</li>
+                <li>Estos voltajes aleatorios hacen que el pin lea 0... luego 1... luego 0... ¡sin que nadie toque nada!</li>
+            </ul>
+        </div>
+        
+        <div class="error-comun">
+            <strong>⚠️ Error Clásico de Principiantes:</strong>
+            <p>"Si no conecto nada al pin, asumo que es 0 por defecto".</p>
+            <p><strong>¡Falso!</strong> Un pin desconectado NO es 0. Es <em>flotante</em>. Solo un Pull-Down (o conexión directa a GND) garantiza 0 lógico.</p>
+        </div>
+        
+        <div class="consejo-docente">
+            <strong>💡 Consejo para Futuros Docentes:</strong>
+            <p>Cuando un estudiante pregunte "¿por qué no puedo dejar el pin sin conectar?", usa esta demostración:</p>
+            <ol>
+                <li>Conecta un LED a una salida digital</li>
+                <li>Deja la entrada SIN Pull-Up/Pull-Down</li>
+                <li>Pasa tu mano cerca del cable (¡sin tocarlo!)</li>
+                <li>El LED parpadeará aleatoriamente por la capacitancia de tu cuerpo</li>
+            </ol>
+            <p>Esta experiencia sensorial hace tangible lo abstracto: <em>"¡Mi mano controla el LED sin tocarlo! ¿Cómo es posible?"</em> → Ahí nace la curiosidad genuina por entender el estado flotante.</p>
+        </div>
+        
+        <div class="conexion-lecciones">
+            <strong>🔗 Conexión con Lección 8:</strong>
+            <p>Recuerda el "fantasma del ruido eléctrico" que mencionamos al final del Laboratorio 1. Ahora entiendes su causa física: <strong>cables sin anclar actúan como antenas</strong>. El Pull-Up/Pull-Down es la "ancla" que elimina ese fantasma.</p>
+        </div>
+    </div>
+
     <section>
         <h2>1. El Problema: El Estado "Flotante"</h2>
         <p>Cuando un interruptor está abierto, el cable de salida no está conectado a 5V, pero tampoco está conectado a Tierra (0V). Está <strong>"Flotando"</strong> al aire.</p>
@@ -40,8 +197,8 @@
         <p>En ese estado, el cable no tiene ni 0V ni 5V. Técnicamente se dice que está en <strong>Alta Impedancia (Hi-Z)</strong>. Es como si el cable estuviera cortado: la resistencia es tan alta (aire) que no pasa corriente, pero sí capta ruido electromagnético como una antena (capta ondas de radio, la estática de tu ropa o el ruido de la red eléctrica). ¡El chip se vuelve loco!</p>
         <div class="svg-container">
             <!-- Imagen: Cable Flotante (img/estado_flotante.png) -->
-            <img src="img/estado_flotante.png" alt="Ilustración de un cable desconectado captando ondas de ruido como una antena" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 1. Un cable suelto es una antena de ruido.</em></small></p>
+            <img src="img/antena.png" alt="Ilustración de un cable desconectado captando ondas de ruido como una antena" style="max-width:30%; height:auto;">
+            <p><small><em>Fig. 1. Un cable suelto es como una antena que capta ruido.</em></small></p>
         </div>
 
         <h2>2. La Solución: Resistencia Pull-Down (Jalar a Tierra)</h2>
@@ -49,8 +206,8 @@
 
         <div class="svg-container">
             <!-- Imagen: Pull Down (img/esquema_pull_down.png) -->
-            <img src="img/esquema_pull_down.png" alt="Esquema Pull-Down: Resistencia a tierra, Botón a positivo" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 2. Pull-Down: El "piso" seguro.</em></small></p>
+            <img src="img/esquema_pull_down.png" alt="Esquema Pull-Down: Resistencia a tierra, Botón a positivo" style="max-width:40%; height:auto;">
+            <p><small><em>Fig. 2. Pull-Down: El "piso" seguro.</em></small></p>
         </div>
 
         <ul>
@@ -86,11 +243,17 @@
         </div>
 
         <h2>3. La Otra Cara: Resistencia Pull-Up (Jalar a Techo)</h2>
+        
         <p>Aquí la resistencia va a 5V. La lógica se invierte (Lógica Negativa):</p>
         <ul>
             <li><strong>Botón Suelto:</strong> La resistencia mantiene la señal en 5V. <strong>Lectura: 1.</strong></li>
             <li><strong>Botón Presionado:</strong> El botón conecta a Tierra. <strong>Lectura: 0.</strong></li>
         </ul>
+        <div class="svg-container">
+            <!-- Imagen: Pull Up (img/esquema_pull_up.png) -->
+            <img src="img/esquema_pull_up.png" alt="Esquema Pull-Down: Resistencia a positivo, Botón a tierra" style="max-width:100%; height:auto;">
+            <p><small><em>Fig. 3. Pull-Down: El "techo" seguro.</em></small></p>
+        </div>
 
         <!-- NUEVO: CONVENCIÓN DEL CURSO -->
         <h3>Lógica Positiva vs. Negativa</h3>
@@ -99,6 +262,90 @@
             <li><strong>Lógica Positiva (Pull-Down):</strong> Presionar = 1 (Encendido). Soltar = 0 (Apagado). <em>¡Es lo más intuitivo y lo que usaremos en este curso!</em></li>
             <li><strong>Lógica Negativa (Pull-Up):</strong> Presionar = 0. Soltar = 1. <em>Se usa mucho en la industria por ser más robusta contra el ruido, pero puede confundirte al principio.</em></li>
         </ul>
+
+        <!-- === 🔌 APLICACIONES COTIDIANAS: Pull-Up y Pull-Down en tu vida diaria === -->
+        <div class="estado-flotante">
+            <h3>🔌 Aplicaciones Cotidianas: Lo que ves sin saberlo</h3>
+            
+            <p>Los Pull-Up y Pull-Down están en todos lados, pero son invisibles porque viven dentro de los dispositivos. Aquí están los ejemplos que reconocerás:</p>
+            
+            <div class="analogia-flotante">
+                <h4>🟢 Pull-Up: Cuando la seguridad exige "fallar activado"</h4>
+                <ul>
+                    <li><strong>Botón de emergencia en ascensores:</strong> Mientras no se presiona, el circuito lee 1 lógico ("todo bien"). Al presionarlo, se conecta a GND y lee 0 ("¡PELIGRO!"). Si el cable se rompe, el sistema asume "botón presionado" y detiene el ascensor. <em>Mejor detenerse sin razón que no detenerse en peligro.</em></li>
+                    <li><strong>Cinturón de seguridad:</strong> Sin abrochar = 1 lógico ("¡alarma!"). Abrochado = 0 lógico ("seguro"). Si el cable se rompe en un accidente, el sistema activa la alarma como si estuvieras desabrochado. <em>Mejor una falsa alarma que asumir que estás seguro cuando no lo estás.</em></li>
+                </ul>
+            </div>
+            
+            <div class="fisica-flotante">
+                <h4>🔵 Pull-Down: Cuando es seguro "fallar apagado"</h4>
+                <ul>
+                    <li><strong>Botón de encendido del microondas:</strong> Reposo = 0 lógico ("apagado"). Al presionar = 1 lógico ("enciende"). Si el cable se rompe, el microondas permanece apagado. <em>No es peligroso que falle "apagado" en lugar de "encendido".</em></li>
+                    <li><strong>Teclado de lavadora:</strong> Reposo = 0 lógico ("ninguna tecla"). Presionada = 1 lógico ("tecla seleccionada"). Si un cable se rompe, esa tecla simplemente deja de funcionar. <em>No activa ciclos de lavado peligrosos por error.</em></li>
+                </ul>
+            </div>
+            
+            <div class="consejo-docente">
+                <strong>💡 Consejo para Futuros Docentes:</strong>
+                <p>Enseña esta regla de oro a tus estudiantes:</p>
+                <blockquote>
+                    <strong>"Pull-Up = falla segura (activa protección al romperse).<br>
+                    Pull-Down = falla inerte (queda apagado al romperse)."</strong>
+                </blockquote>
+                <p>Luego pregúntales: <em>"¿Qué tipo usarías para el botón de emergencia de tu aula?"</em> La respuesta correcta (Pull-Up) les hará entender que <strong>la electrónica no es solo técnica: es ética de diseño</strong>.</p>
+            </div>
+            
+            <div class="conexion-lecciones">
+                <strong>🔗 Conexión con tu vida:</strong>
+                <p>La próxima vez que presiones un botón rojo de emergencia, recuerda: detrás hay un resistor de 10kΩ trabajando en silencio para proteger vidas. Eso es ingeniería con propósito humano.</p>
+            </div>
+        </div>
+
+        <!-- === 🎨 EL RINCÓN DEL DISEÑADOR: UX en Circuitos Digitales === -->
+        <div class="estado-flotante">
+            <h3>🎨 El Rincón del Diseñador: ¿Qué es UX en electrónica?</h3>
+            
+            <p>UX (Experiencia de Usuario) no es solo para apps o páginas web. En electrónica, <strong>UX es la certeza de que un botón responde siempre igual</strong>. Y eso comienza con un Pull-Up o Pull-Down bien diseñado.</p>
+            
+            <div class="analogia-flotante">
+                <h4>⌨️ El Sonido del Teclado: Un Legado de Feedback</h4>
+                <p>¿Por qué los teclados hacen "clic" al presionar una tecla? Es un <strong>feedback heredado de las máquinas de escribir mecánicas</strong>: ese sonido confirmaba que la tecla había golpeado con suficiente fuerza como para que se vea la letra o el número impreso en el papel. Hoy, aunque no hay papel, mantenemos el sonido porque:</p>
+                <ul>
+                    <li><strong>Semiótica:</strong> El "clic" es un <em>símbolo auditivo</em> que significa "acción registrada"</li>
+                    <li><strong>Ergonomía:</strong> Confirma al usuario que no necesita presionar más fuerte</li>
+                    <li><strong>Confianza:</strong> Elimina la duda: "¿Se registró mi tecleo o debo repetirlo?"</li>
+                </ul>
+                <p>En circuitos digitales, el Pull-Up/Pull-Down cumple la misma función: <strong>garantiza un estado definido (0 o 1) para que el sistema responda de forma predecible</strong>. Sin él, el botón sería como un teclado sin "clic": nunca sabrías si tu acción se registró.</p>
+            </div>
+            
+            <div class="fisica-flotante">
+                <h4>🔧 UX Física en tus Circuitos</h4>
+                <p>Cuando diseñes interfaces con botones, recuerda estos principios:</p>
+                <ul>
+                    <li><strong>Posición de los botones:</strong> No es casualidad que "Encendido" esté arriba/derecha y "Apagado" abajo/izquierda. Es convención ergonómica global.</li>
+                    <li><strong>Colores con significado:</strong> Rojo = peligro/detención, Verde = seguro/avance. Es semiótica universal (no arbitraria).</li>
+                    <li><strong>Feedback inmediato:</strong> Un LED que enciende al presionar un botón es el "clic" visual del circuito. Sin Pull-Up/Pull-Down, ese LED parpadearía aleatoriamente → frustración del usuario.</li>
+                    <li><strong>Consistencia:</strong> Si un botón en tu protoboard responde al primer toque, todos deben hacerlo. La inconsistencia destruye la confianza.</li>
+                </ul>
+            </div>
+            
+            <div class="consejo-docente">
+                <strong>💡 Consejo para Futuros Docentes:</strong>
+                <p>Cuando tus estudiantes pregunten "¿por qué debo usar Pull-Up si el botón funciona igual sin él?", haz esta demostración:</p>
+                <ol>
+                    <li>Monta un circuito SIN Pull-Up</li>
+                    <li>Pide que presionen el botón 10 veces</li>
+                    <li>El LED responderá 7 veces sí, 3 veces no (aleatorio)</li>
+                    <li>Luego agrega el Pull-Up y repite: 10 de 10 veces funciona</li>
+                </ol>
+                <p>Pregunta: <em>"¿Cuál circuito te daría confianza si fuera el botón de emergencia de un ascensor?"</em> Así conectarán la teoría (Pull-Up) con la experiencia humana (confianza, seguridad, previsibilidad).</p>
+            </div>
+            
+            <div class="conexion-lecciones">
+                <strong>🔗 Conexión con Lección 9:</strong>
+                <p>En el Laboratorio 1 aprendiste a organizar botones en "zona de control" y LEDs en "zona de visualización". Eso es UX básica. Ahora entiendes su fundamento físico: <strong>sin Pull-Up/Pull-Down, ni el mejor diseño visual salvaría una interfaz impredecible</strong>. La UX nace en el esquema eléctrico, no solo en la disposición física.</p>
+            </div>
+        </div>
         
         <h3>Resumen Definitivo (Guárdalo)</h3>
         <table style="text-align: center;">
@@ -152,6 +399,220 @@
                 <a href="https://www.tinkercad.com/circuits" target="_blank" class="btn-navegacion" style="background-color: #0277bd;">Probar en Tinkercad ↗</a>
             </p>
         </div>
+
+        <!-- Sección de Preguntas de Consolidación -->
+        <section class="seccion-preguntas">
+            <h2>❓ Preguntas de Consolidación</h2>
+            <p>Responde estas preguntas para asegurarte de que dominas los conceptos técnicos y estás listo para enseñarlos en tu futura aula:</p>
+            
+            <details class="u1">
+                <summary>1. Explica con tus propias palabras qué es un "estado flotante" y por qué es problemático en circuitos digitales, usando la analogía del "bote sin ancla".</summary>
+                <p><strong>Explicación técnica:</strong> Un estado flotante ocurre cuando una entrada digital no está conectada ni a Vcc (+5V) ni a GND (0V), quedando "al aire". En esta condición, la impedancia de entrada del pin es extremadamente alta (millones de ohmios), lo que lo convierte en una antena diminuta que capta interferencias electromagnéticas del ambiente (WiFi, celulares, luces fluorescentes). Estas interferencias inducen pequeños voltajes aleatorios que hacen que el pin lea 0... luego 1... luego 0 sin que nadie toque el circuito.</p>
+                
+                <p><strong>Metáfora para niños:</strong> Imagina un bote en medio del océano sin ancla. Cualquier ola pequeña (ruido eléctrico) lo mueve de un lado a otro sin rumbo fijo. Eso es un estado flotante: el pin no sabe si es 0 o 1 porque nada lo 'ancla' a un valor definido. El Pull-Up es como una ancla que lo mantiene en el muelle (1 lógico); el Pull-Down es como una ancla que lo mantiene en el puerto (0 lógico).</p>
+                
+                <p><strong>Para tu futura aula:</strong> Haz esta demostración: Monta un circuito SIN Pull-Up, deja la entrada flotando y pide a los estudiantes que pasen la mano cerca del cable (¡sin tocarlo!). El LED parpadeará aleatoriamente por la capacitancia del cuerpo humano. Esta experiencia sensorial hace tangible lo abstracto: <em>"¡Mi mano controla el LED sin tocarlo! ¿Cómo es posible?"</em> → Ahí nace la curiosidad genuina por entender el estado flotante.</p>
+            </details>
+            
+            <details class="u2">
+                <summary>2. ¿Cuál es la diferencia práctica entre una resistencia Pull-Up y una Pull-Down? Da un ejemplo de cuándo usarías cada una en un sistema de seguridad escolar.</summary>
+                <p><strong>Explicación técnica:</strong></p>
+                <ul>
+                    <li><strong>Pull-Up:</strong> Conecta la entrada a Vcc (+5V) a través de una resistencia. El estado por defecto es 1 lógico. Al presionar el botón (conectado a GND), la entrada se lleva a 0 lógico.</li>
+                    <li><strong>Pull-Down:</strong> Conecta la entrada a GND (0V) a través de una resistencia. El estado por defecto es 0 lógico. Al presionar el botón (conectado a Vcc), la entrada se lleva a 1 lógico.</li>
+                </ul>
+                
+                <p><strong>Ejemplo de seguridad escolar:</strong></p>
+                <ul>
+                    <li><strong>Pull-Up para botón de emergencia:</strong> En una alarma de evacuación, el botón de emergencia debe estar conectado a GND con Pull-Up. Si el cable se rompe (circuito abierto), el sistema interpreta esto como "botón presionado" (1 lógico) y activa la alarma. Esto es <strong>fail-safe</strong> (falla segura): la falla del sistema activa la protección.</li>
+                    <li><strong>Pull-Down para sensor de puerta:</strong> En una alarma de intrusión, el sensor NC (Normalmente Cerrado) en la puerta debe usar Pull-Down. Si la puerta se abre (circuito abierto), el sistema lee 1 lógico y activa la alarma. Si el cable se corta, también se activa la alarma (fail-safe).</li>
+                </ul>
+                
+                <p><strong>Para tu futura aula:</strong> Enseña esta regla de oro: <em>"Usa Pull-Up cuando la seguridad exige que la falla active la protección (botones de emergencia). Usa Pull-Down cuando la seguridad exige que la falla desactive el sistema (interruptores de mantenimiento)."</em></p>
+            </details>
+            
+            <details class="u3">
+                <summary>3. ¿Por qué el valor típico de las resistencias Pull-Up/Pull-Down es 10kΩ y no 1kΩ o 100kΩ? Explica el equilibrio entre "fuerza" y "consumo".</summary>
+                <p><strong>Explicación técnica:</strong> El valor de 10kΩ representa un equilibrio óptimo entre tres factores:</p>
+                <ol>
+                    <li><strong>Suficientemente fuerte para dominar el ruido:</strong> Una resistencia de 100kΩ sería demasiado débil; el ruido ambiental podría superarla y hacer fluctuar el estado lógico.</li>
+                    <li><strong>Suficientemente débil para que el botón la venza:</strong> Una resistencia de 1kΩ sería demasiado fuerte; al presionar el botón, la corriente sería excesiva (5mA vs 0.5mA con 10kΩ), desperdiciando energía y generando calor innecesario.</li>
+                    <li><strong>Bajo consumo en estado estático:</strong> Con 10kΩ y 5V, la corriente en reposo es I = V/R = 5V/10kΩ = 0.5mA. Con 1kΩ sería 5mA (10 veces más), agotando baterías rápidamente en dispositivos portátiles.</li>
+                </ol>
+                
+                <p><strong>Cálculo práctico:</strong> Para un botón con Pull-Up de 10kΩ:</p>
+                <ul>
+                    <li>Reposo (botón abierto): I = 5V/10kΩ = 0.5mA → consumo mínimo</li>
+                    <li>Presionado (botón cerrado): I = 5V/10kΩ = 0.5mA → el botón "vence" fácilmente la resistencia</li>
+                </ul>
+                
+                <p><strong>Para tu futura aula:</strong> Pide a los estudiantes que calculen el consumo anual de energía con diferentes valores:
+                <ul>
+                    <li>1kΩ: 5mA × 24h × 365días = 43.8 Ah/año → batería agotada en días</li>
+                    <li>10kΩ: 0.5mA × 24h × 365días = 4.38 Ah/año → batería dura meses</li>
+                    <li>100kΩ: 0.05mA × 24h × 365días = 0.438 Ah/año → pero ¡el ruido activa falsas alarmas!</li>
+                </ul></p>
+            </details>
+            
+            <details class="u4">
+                <summary>4. Relaciona el concepto de Pull-Up/Pull-Down con los principios de UX (Experiencia de Usuario). ¿Por qué un botón sin Pull-Up sería como un teclado sin "clic" y cómo esto afecta la confianza del usuario en el sistema?</summary>
+                <p><strong>Explicación técnica:</strong> El Pull-Up/Pull-Down garantiza un <strong>estado definido y predecible</strong> en todo momento. Sin él, el botón responde de forma aleatoria (a veces sí, a veces no), destruyendo la confianza del usuario. Esto es equivalente a un teclado sin feedback auditivo/táctil: nunca sabrías si tu tecleo se registró, generando ansiedad y obligándote a teclear más fuerte o repetir acciones innecesariamente.</p>
+                
+                <p><strong>Conexión UX profunda:</strong></p>
+                <table>
+                    <tr>
+                        <th>Elemento</th>
+                        <th>Pull-Up/Pull-Down</th>
+                        <th>Teclado con "clic"</th>
+                        <th>Valor Humano</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Feedback</strong></td>
+                        <td>Estado lógico definido (0 o 1)</td>
+                        <td>Sonido/tacto al presionar</td>
+                        <td>Confirmación sin ambigüedad</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Previsibilidad</strong></td>
+                        <td>Respuesta consistente en cada pulsación</td>
+                        <td>Cada tecleo produce el mismo feedback</td>
+                        <td>Confianza en el sistema</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ergonomía</strong></td>
+                        <td>Botón que responde al primer toque</td>
+                        <td>No necesitas mirar para confirmar</td>
+                        <td>Reducción de carga cognitiva</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Semiótica</strong></td>
+                        <td>1 = activado, 0 = inactivo (claro)</td>
+                        <td>"Clic" = acción completada (universal)</td>
+                        <td>Lenguaje no verbal compartido</td>
+                    </tr>
+                </table>
+                
+                <p><strong>Metáfora para niños:</strong> "Imagina que tu interruptor de luz a veces enciende y a veces no, aunque lo presiones igual. ¿Te sentirías seguro? ¡No! Necesitas saber que cada vez que tocas el interruptor, la luz responde. El Pull-Up es como el 'clic' del interruptor: te dice 'misión cumplida' sin que tengas que dudar."</p>
+                
+                <p><strong>Para tu futura aula:</strong> Diseña esta actividad de 5 minutos:
+                <ol>
+                    <li>Monta dos circuitos idénticos: uno con Pull-Up y otro sin él.</li>
+                    <li>Pide a dos estudiantes que presionen cada botón 10 veces contando en voz alta.</li>
+                    <li>El circuito sin Pull-Up fallará aleatoriamente (ej: 7 aciertos, 3 fallos).</li>
+                    <li>Pregunta: <em>"¿Cuál circuito usarías para el botón de emergencia del ascensor de tu escuela?"</em></li>
+                    <li>Guía la reflexión: <em>"La electrónica no sirve solo para hacer cosas funcionar. Sirve para hacer que las personas se sientan seguras y confiadas."</em></li>
+                </ol>
+                <p><strong>Lección pedagógica clave:</strong> El diseño de circuitos no es solo técnica; es <strong>ética</strong>. Un Pull-Up mal elegido no solo causa errores técnicos: destruye la confianza humana en la tecnología. Como futuros docentes, deben enseñar que cada resistor tiene una responsabilidad social: garantizar que la tecnología responda de forma predecible a quien la usa.</p></p>
+            </details>
+            
+            <details class="u1">
+                <summary>5. Un niño te pregunta: "¿Por qué no puedo dejar el pin sin conectar si quiero que sea 0 por defecto?". ¿Cómo le respondes explicando la diferencia entre "desconectado" y "conectado a GND"?</summary>
+                <p><strong>Respuesta técnica:</strong> Un pin desconectado NO es 0 lógico. Es un estado flotante indeterminado que puede leer 0, 1 o fluctuar entre ambos debido al ruido ambiental. Solo una conexión física a GND (directa o mediante Pull-Down) garantiza 0 lógico estable. La confusión surge porque en lógica matemática "ausencia de señal = 0", pero en electrónica física "ausencia de conexión = caos eléctrico".</p>
+                
+                <p><strong>Metáfora para niños:</strong> "Imagina que el pin es un termómetro. Si lo dejas en el aire (desconectado), marca temperaturas aleatorias según las corrientes de aire de la habitación (ruido eléctrico). Pero si lo metes en un vaso de agua helada (GND), siempre marca 0°C (0 lógico). ¡El frío no aparece solo porque no haya fuego cerca! Necesitas el agua helada para garantizar el 0."</p>
+                
+                <p><strong>Conexión STEAM:</strong> Esta es una excelente oportunidad para hablar sobre la diferencia entre modelos abstractos (lógica binaria) y realidad física (señales eléctricas). Los ingenieros deben "traducir" entre ambos mundos: el 0 matemático requiere un 0 físico (GND), no solo "ausencia de 1".</p>
+            </details>
+            
+            <details class="u2">
+                <summary>6. Diseña una actividad de 7 minutos para que niños de 10 años descubran por sí mismos el problema del estado flotante, sin que les digas la solución de antemano.</summary>
+                <p><strong>Actividad: "El Detector de Fantasmas Eléctricos"</strong></p>
+                <p><strong>Materiales por pareja:</strong> 1 fuente de 5V, 1 LED con resistencia de 330Ω, 1 pulsador NO, 1 resistencia de 10kΩ, cables, hoja de registro con dos columnas ("Predicción" y "Resultado").</p>
+                
+                <p><strong>Protocolo:</strong></p>
+                <ol>
+                    <li><strong>Paso 1 (2 min) - El circuito misterioso:</strong> Los niños arman un circuito con el pulsador conectado SOLO a la entrada del LED (sin Pull-Up ni Pull-Down). No les expliques el problema; solo di: <em>"Monten este circuito y observen qué hace el LED cuando no tocan el botón"</em>.</li>
+                    <li><strong>Paso 2 (3 min) - La investigación:</strong> Los niños completan su hoja de registro:
+                        <ul>
+                            <li><em>Predicción:</em> "Creo que el LED estará ______ cuando no toco el botón"</li>
+                            <li><em>Observación:</em> "Cuando no toco el botón, el LED ______"</li>
+                            <li><em>Descubrimiento:</em> "Cuando paso mi mano cerca (sin tocar), el LED ______"</li>
+                        </ul>
+                    </li>
+                    <li><strong>Paso 3 (2 min) - La revelación guiada:</strong> Pregunta al grupo: <em>"¿Por qué el LED parpadea solo? ¿Quién está presionando el botón invisible?"</em> Guía con preguntas hasta que descubran que el cable "al aire" actúa como antena. Luego introduce el Pull-Up como "la ancla que calma al fantasma".</li>
+                </ol>
+                
+                <p><strong>Objetivo pedagógico:</strong> Los niños construyen el conocimiento mediante el método científico (observación → hipótesis → experimento → conclusión), no por memorización. La sorpresa del fenómeno ("¡el LED se mueve solo!") genera curiosidad genuina que facilita el aprendizaje profundo.</p>
+                
+                <p><strong>Refuerzo docente:</strong> Nunca digas "esto es un estado flotante". En su lugar pregunta: <em>"¿Qué tienen en común todos los circuitos que SÍ funcionan establemente?"</em> Guía con preguntas, no con respuestas. La comprensión nace de la observación, no de la definición.</p>
+            </details>
+        </section>
+
+        <!-- === PODCAST: Conversación entre Expertos === -->
+        <section class="podcast-section">
+            <div class="podcast-header">
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                </svg>
+                <h3>🎧 Podcast: Conversación entre Expertos</h3>
+            </div>
+            
+            <p class="podcast-descripcion">
+                Dos docentes exploran el fascinante mundo de las resistencias Pull-Up y Pull-Down: desde por qué 10kΩ es el valor mágico hasta cómo explicar el "estado flotante" sin tecnicismos. Comparten estrategias para enseñar el Pull-Up interno de Arduino y desmienten mitos sobre el consumo de energía.
+            </p>
+            
+            <div class="podcast-player">
+                <audio controls preload="metadata">
+                    <source src="audio/leccion10.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+            </div>
+            
+            <p class="podcast-meta">
+                <span class="duracion">⏱️ 14:35 min</span>
+                <span class="formato">🔊 MP3</span>
+            </p>
+        </section>
+
+    <!-- === TARJETA DE IDENTIDAD DEL PROMPT ÉTICO === -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        
+        <p class="prompt-contexto">
+            Como futuro docente, aprenderás a usar la IA Generativa para <strong>potenciar</strong> tu pensamiento, no para reemplazarlo. Esta tarjeta te guía para construir prompts éticos que te ayuden a resolver dudas específicas de cada lección.
+        </p>
+        
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            
+            <div class="paso">
+                <strong>1️⃣ "Comprendí que..."</strong>
+                <p>Resume CON TUS PALABRAS lo aprendido. Ej: "el estado flotante ocurre cuando una entrada digital no está conectada a Vcc ni a GND, y actúa como antena captando ruido eléctrico que hace que lea valores aleatorios."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>2️⃣ "y quiero saber..."</strong>
+                <p>Plantea una DUDA ESPECÍFICA o aplicación. Ej: "por qué el valor típico de las resistencias Pull-Up/Pull-Down es 10kΩ y no 1kΩ o 100kΩ, y cómo explicar esto a estudiantes sin usar fórmulas complejas."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong>
+                <p>Define TU AUDIENCIA (edad/curso). Ej: "a estudiantes de grado 8° que nunca han trabajado con microcontroladores ni entendido el concepto de 'impedancia'."</p>
+            </div>
+            
+            <div class="paso">
+                <strong>4️⃣ "Incluye un error común que debo evitar..."</strong>
+                <p>Pide retroalimentación crítica. Ej: "al explicar por qué no se puede usar una resistencia de 1Ω como Pull-Up pensando que 'más fuerte es mejor'."</p>
+            </div>
+        </div>
+        
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo aplicado a esta lección:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que el estado flotante ocurre cuando una entrada digital no está conectada ni a Vcc ni a GND, y que actúa como una antena diminuta que captura ruido eléctrico del ambiente (WiFi, celulares, luces), haciendo que el pin lea 0 y 1 aleatoriamente. También entendí que las resistencias Pull-Up y Pull-Down 'anclan' la entrada a un estado definido: Pull-Up la mantiene en 1 lógico por defecto (y el botón la lleva a 0 al presionar), mientras que Pull-Down la mantiene en 0 lógico por defecto (y el botón la lleva a 1 al presionar). Además, aprendí que el valor típico es 10kΩ porque es un equilibrio: suficientemente débil para que el botón pueda 'vencerla' fácilmente, pero suficientemente fuerte para dominar el ruido eléctrico. Quiero saber: si diseño un circuito de alarma para una escuela donde el botón de emergencia debe activarse al ABRIR una puerta (usando un interruptor NC), ¿debo usar Pull-Up o Pull-Down para garantizar que el sistema falle de forma segura (es decir, que si el cable se rompe, la alarma se active)? Explícame como si fuera a enseñárselo a mis futuros estudiantes de grado 9°, usando una analogía con una puerta que tiene un resorte que la mantiene cerrada por defecto. Incluye un error común que los niños suelen cometer al diseñar circuitos de seguridad, especialmente confundiendo cuándo usar Pull-Up vs Pull-Down en aplicaciones críticas donde la falla debe ser segura."
+            </blockquote>
+        </div>
+        
+        <div class="prompt-aviso">
+            <strong>⚠️ Ética Docente:</strong> La IA es tu <em>asistente de pensamiento</em>, no tu reemplazo. Nunca copies textualmente sus respuestas en evaluaciones. Usa sus ideas para <strong>inspirar tu propio razonamiento</strong>, tal como harás con tus futuros estudiantes cuando usen tecnología en el aula. Anota en tu cuaderno tanto la respuesta de la IA como tu reflexión crítica sobre ella.
+        </div>
+    </section>
+    
 
         <!-- CONEXIÓN FILOSÓFICA / MATEMÁTICA -->
         <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0;">

@@ -836,3 +836,321 @@ footer { margin-top: 50px; text-align: center; color: #777; font-size: 0.9em; pa
         transition: transform 0.2s;
     }
 }
+
+/* === LECCIÓN 10: Símbolos de Voltaje y Tierra === */
+    .simbolos-voltage {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        margin: 30px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border-left: 4px solid #673ab7;
+    }
+
+    .simbolos-voltage h3 {
+        color: #4527a0;
+        margin-top: 0;
+        font-size: 1.4em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .simbolos-voltage p {
+        color: #5e35b1;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+
+    .tabla-simbolos table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    .tabla-simbolos th {
+        background: #673ab7;
+        color: white;
+        padding: 12px 10px;
+        text-align: left;
+        font-weight: 600;
+    }
+
+    .tabla-simbolos td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #e0e0e0;
+        color: #37474f;
+    }
+
+    .tabla-simbolos tr:nth-child(even) {
+        background: #f5f5f5;
+    }
+
+    .tabla-simbolos strong {
+        font-weight: 700;
+        color: #4527a0;
+    }
+
+    .mito-verdad {
+        background: #fff8e1;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        border-left: 4px solid #ffc107;
+    }
+
+    .mito-verdad h4 {
+        color: #e65100;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 1.15em;
+    }
+
+    .mito {
+        background: #ffebee;
+        border-left: 3px solid #f44336;
+        padding: 12px 15px;
+        margin-bottom: 12px;
+        border-radius: 0 6px 6px 0;
+    }
+
+    .mito strong {
+        color: #c62828;
+    }
+
+    .verdad {
+        background: #e8f5e9;
+        border-left: 3px solid #4caf50;
+        padding: 12px 15px;
+        border-radius: 0 6px 6px 0;
+    }
+
+    .verdad strong {
+        color: #2e7d32;
+    }
+
+    .analogia-agua {
+        background: #e3f2fd;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        border-left: 4px solid #2196f3;
+    }
+
+    .analogia-agua h4 {
+        color: #0d47a1;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 1.15em;
+    }
+
+    .analogia-agua ul {
+        padding-left: 25px;
+        margin: 15px 0;
+        color: #1565c0;
+    }
+
+    .analogia-agua li {
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+
+    .consejo-docente {
+        background: #e8f5e9;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        border-left: 4px solid #4caf50;
+        font-style: italic;
+    }
+
+    .consejo-docente strong {
+        color: #2e7d32;
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    .consejo-docente blockquote {
+        background: white;
+        border-left: 3px solid #4caf50;
+        padding: 12px 15px;
+        margin: 15px 0;
+        border-radius: 0 6px 6px 0;
+        font-style: normal;
+        font-weight: 600;
+        color: #1b5e20;
+    }
+
+    .importante-leccion10 {
+        background: #f3e5f5;
+        border-radius: 10px;
+        padding: 18px;
+        margin: 25px 0;
+        border-left: 4px solid #9c27b0;
+        font-weight: 500;
+    }
+
+    .importante-leccion10 strong {
+        color: #4a148c;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    /* === LECCIÓN 10: Estado Flotante === */
+    .estado-flotante {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        margin: 30px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border-left: 4px solid #3f51b5;
+    }
+
+    .estado-flotante h3 {
+        color: #1a237e;
+        margin-top: 0;
+        font-size: 1.4em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .estado-flotante p {
+        color: #303f9f;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+
+    .analogia-flotante {
+        background: #e8f5e9;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        border-left: 4px solid #4caf50;
+    }
+
+    .analogia-flotante h4 {
+        color: #1b5e20;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 1.15em;
+    }
+
+    .analogia-flotante ul {
+        padding-left: 25px;
+        margin: 15px 0;
+        color: #2e7d32;
+    }
+
+    .analogia-flotante li {
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+
+    .fisica-flotante {
+        background: #e3f2fd;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        border-left: 4px solid #2196f3;
+    }
+
+    .fisica-flotante h4 {
+        color: #0d47a1;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 1.15em;
+    }
+
+    .fisica-flotante ul {
+        padding-left: 25px;
+        margin: 15px 0;
+        color: #1565c0;
+    }
+
+    .fisica-flotante li {
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+
+    .error-comun {
+        background: #ffebee;
+        border-left: 4px solid #f44336;
+        padding: 15px;
+        margin: 25px 0;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .error-comun strong {
+        color: #c62828;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .conexion-lecciones {
+        background: #f3e5f5;
+        border-radius: 10px;
+        padding: 18px;
+        margin: 25px 0;
+        border-left: 4px solid #9c27b0;
+        font-weight: 500;
+    }
+
+    .conexion-lecciones strong {
+        color: #4a148c;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+        .simbolos-voltage,
+        .estado-flotante {
+            padding: 18px;
+        }
+        
+        .simbolos-voltage h3,
+        .estado-flotante h3 {
+            font-size: 1.25em;
+        }
+        
+        .tabla-simbolos table {
+            font-size: 0.85em;
+        }
+        
+        .tabla-simbolos th,
+        .tabla-simbolos td {
+            padding: 8px 6px;
+        }
+    }
+
+    /* === CORRECCIÓN DEFINITIVA: Saltos de línea no deseados en texto en negrita === */
+.importante-leccion10 p,
+.conexion-lecciones p {
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: normal;
+}
+
+.importante-leccion10 p strong,
+.conexion-lecciones p strong {
+    display: inline;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+}
+
+.importante-leccion10 p strong + *,
+.conexion-lecciones p strong + * {
+    display: inline;
+    white-space: nowrap;
+}
+
+.importante-leccion10 p::after,
+.conexion-lecciones p::after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}

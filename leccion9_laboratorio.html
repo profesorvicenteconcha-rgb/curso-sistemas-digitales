@@ -6,418 +6,886 @@
     <title>Laboratorio 1: Lógica con Interruptores - Fundamentos de Sistemas Digitales</title>
     <link rel="stylesheet" href="estilos.css">
     <style>
-        .tabla-lab {
+        /* Estilos adicionales específicos para el laboratorio */
+        .mision-lab {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid var(--color-primario);
+            position: relative;
+            overflow: hidden;
+        }
+        .mision-lab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--color-primario);
+        }
+        .mision-titulo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--color-borde);
+        }
+        .mision-icono {
+            width: 40px;
+            height: 40px;
+            background: var(--color-primario);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .fase-lab {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #6c757d;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .fase-titulo {
+            color: #495057;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        .tabla-verdad {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            background: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-size: 0.95em;
         }
-        .tabla-lab th {
-            background-color: var(--color-secundario);
-            color: white;
-            padding: 12px;
-            text-align: center;
-            border: 1px solid #e67e22;
-        }
-        .tabla-lab td {
-            border: 1px solid #ddd;
+        .tabla-verdad th, .tabla-verdad td {
+            border: 1px solid var(--color-borde);
             padding: 10px;
             text-align: center;
-            color: #555;
         }
-        .input-lab {
-            width: 60px;
-            padding: 5px;
-            text-align: center;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        .tabla-verdad th {
+            background-color: var(--color-primario);
+            color: white;
+            font-weight: 600;
+        }
+        .tabla-verdad tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        .tabla-verdad .salida-1 {
+            background-color: #d4edda;
             font-weight: bold;
-            color: var(--color-primario);
-            font-size: 1.1em;
+            color: #155724;
         }
-        .caso-uso {
-            background-color: #fff;
-            border-left: 4px solid #2e7d32;
+        .tabla-verdad .salida-0 {
+            background-color: #f8d7da;
+            font-weight: bold;
+            color: #721c24;
+        }
+        .conexion-diagrama {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid var(--color-borde);
+        }
+        .conexion-diagrama img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .conexion-diagrama .leyenda {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+        .metodo-cientifico {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+            justify-content: center;
+        }
+        .paso-metodo {
+            flex: 1;
+            min-width: 120px;
+            background: white;
+            border-radius: 8px;
             padding: 15px;
-            margin: 15px 0;
-            font-size: 0.95em;
-            color: #444;
-            border-radius: 0 5px 5px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 2px solid #dee2e6;
+            transition: all 0.3s;
         }
-        .texto-puente {
-            font-size: 1.1em;
-            color: #333;
-            margin: 30px 0 20px 0;
-            line-height: 1.6;
+        .paso-metodo:hover {
+            border-color: var(--color-primario);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .paso-metodo strong {
+            display: block;
+            color: var(--color-primario);
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        .paso-activo {
+            border-color: var(--color-primario);
+            background: #e3f2fd;
+            font-weight: bold;
+        }
+        .conclusion-cientifica {
+            background: #d1ecf1;
+            border-left: 5px solid #0c5460;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .conclusion-cientifica h4 {
+            color: #0c5460;
+            margin-top: 0;
+        }
+        .reflexion-final {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe0b2 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 35px 0;
+            border: 2px solid #ffc107;
+        }
+        .reflexion-final h3 {
+            color: #856404;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .arte-steam {
+        background: linear-gradient(135deg, #fef0f5 0%, #fce4ec 100%);
+        border-left: 4px solid #e91e63;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        }
+        .arte-steam .fase-titulo {
+            color: #e91e63 !important;
+        }
+        .galeria-steamp {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .metaphor-card {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 600px) {
+            .arte-steam {
+                padding: 15px;
+            }
+            .metaphor-card {
+                min-width: 100%;
+            }
+        }
+        @media (max-width: 600px) {
+            .mision-lab {
+                padding: 18px;
+                margin: 15px 0;
+            }
+            .mision-icono {
+                width: 36px;
+                height: 36px;
+                font-size: 1em;
+            }
+            .tabla-verdad {
+                font-size: 0.85em;
+                display: block;
+                overflow-x: auto;
+            }
+            .tabla-verdad th, .tabla-verdad td {
+                padding: 8px;
+            }
+            .metodo-cientifico {
+                flex-direction: column;
+            }
+            .paso-metodo {
+                min-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="contenedor">
+        
+        <!-- === HERO SECTION === -->
+        <section class="hero">
+            <h1>🧪 Laboratorio 1: Tu Primera Lógica Binaria</h1>
+            <h2>Descubre los átomos de la lógica digital mediante el método científico</h2>
+            <a href="#mision-1" class="btn-navegacion">Comenzar Laboratorio</a>
+        </section>
 
-<div class="contenedor">
-    <header>
-        <p><small>Unidad 1: Fundamentos Físicos - Lección 9</small></p>
-        <h1>🧪 Laboratorio: Tu Primera Lógica Binaria</h1>
-    </header>
+        <!-- === INTRODUCCIÓN === -->
+        <section class="intro-leccion">
+            <p><strong>¡Llegó la hora de la verdad!</strong> Hasta hoy, hemos hablado de Electricidad (energía). Hoy, daremos el salto hacia la <strong>Información</strong>. Usaremos la protoboard para descubrir que, dependiendo de cómo conectemos los cables, el circuito puede tomar "decisiones". Estás a punto de construir las neuronas básicas de un computador.</p>
+            <p>Este no es un taller de montaje: es un <strong>laboratorio de descubrimiento</strong>. Seguiremos el mismo método que usan los científicos: <strong>observar → inferir → formalizar</strong>.</p>
+        </section>
 
-    <!-- 1. GANCHO NARRATIVO -->
-    <div class="intro-leccion">
-        <p>¡Llegó la hora de la verdad! Hasta hoy, hemos hablado de <strong>Electricidad</strong> (energía). Hoy, daremos el salto hacia la <strong>Información</strong>. Usaremos la protoboard para descubrir que, dependiendo de cómo conectemos los cables, el circuito puede tomar "decisiones". <strong>Estás a punto de construir las neuronas básicas de un computador.</strong></p>
-    </div>
+        <!-- === CONEXIÓN CON LECCIÓN 8 === -->
+        <section class="destacado">
+            <h3>🔗 Conexión con la Lección 8: El Puente Conceptual</h3>
+            <p>¿Recuerdas el circuito inversor en la Lección 8? Donde pusiste un interruptor en paralelo con un LED siempre encendido, y al presionarlo el LED se apagaba...</p>
+            <p><strong>Ese circuito ya era lógica NOT sin nombre.</strong> Hoy no solo lo repetiremos: <strong>descubrirás el patrón lógico escondido</strong> en ese comportamiento. Serás tú quien nombre la operación NOT a partir de tus observaciones, no yo quien te la entregue.</p>
+            <p>Como dice Faraday: <em>"La ciencia no siempre necesita ojos: a veces basta con observar, contar y pensar."</em></p>
+        </section>
 
-    <section>
-        <h2>1. Preparación Inteligente</h2>
-        <p>Antes de conectar cables a lo loco, un buen ingeniero conoce sus herramientas y planea su espacio. Revisa tu mesa, asegúrate de tener tu protoboard, fuente de 5V, un LED, una resistencia de 330Ω y tus interruptores.</p>
-
-        <!-- INTEGRACIÓN FLUIDA: TIPOS DE INTERRUPTORES -->
-        <p class="texto-puente">Toma tus interruptores. Es posible que tengas dos tipos diferentes en tu mano. Es importante que sepas cuál usar para "hablarle" a tu circuito:</p>
-
-        <div class="dato-extra" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-top:0;">
-            <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-                <div style="flex: 1;">
-                    <p>El <strong>Pulsador</strong> es fugaz (como un timbre: "¡Ahora!"). El <strong>DIP Switch</strong> (Dual In-line Package Switch) es estable (como un interruptor de luz: "Estado").</p>
-                    <p><em>Para este laboratorio, usa el que prefieras. Si usas el DIP, la palanca 1 será "A" y la 2 será "B".</em></p>
-                </div>
-                <div style="flex: 0 0 250px;">
-                    <img src="img/pulsador_vs_dip.png" alt="Comparativa Pulsador vs DIP" style="width: 100%; border-radius: 8px;">
-                </div>
-            </div>
-        </div>
-
-        <!-- NUEVO BLOQUE: ANATOMÍA DEL PULSADOR -->
-        <div class="destacado" style="background-color: #fff3e0; border-left-color: #ff9800;">
-            <h3>👁️ Ojo Clínico: El Secreto de las 4 Patas</h3>
-            <p>Mira tu pulsador cuadrado. Tiene 4 patas ("pines" o "terminales"), pero <strong>internamente solo son 2 cables</strong>.</p>
+        <!-- === EL MÉTODO CIENTÍFICO EXPLÍCITO === -->
+        <section>
+            <h2>🔬 El Método Científico en Acción</h2>
+            <p>Antes de comenzar, recordemos el proceso que seguirás en cada misión:</p>
             
-            <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
-                <div style="flex: 1;">
-                    <ul>
-                        <li><strong>El Puente Interno:</strong> Las patas  de la parte lateral izquierda (1 y 2) están <strong>unidas por dentro</strong> lo mismo las del costado derecho (3 y 4).</li>
-                        <li><strong>El Interruptor:</strong> La magia ocurre al presionar: se conecta el lado Izquierdo con el Derecho.</li>
-                    </ul>
-                    <p><strong>Error Clásico:</strong> Si conectas tus cables a las patas 1 y 2, el circuito estará siempre cerrado (LED siempre prendido). Lo más seguro es conectar los cables en diagonal (por ejemplo, pata superior izquierda con inferior derecha), ya que esa combinación garantiza que el circuito solo se cierre al presionar el botón, independientemente de si el fabricante numeró las patas de forma horizontal o vertical.</p>
+            <div class="metodo-cientifico">
+                <div class="paso-metodo paso-activo">
+                    <strong>1. Predicción</strong>
+                    <small>¿Qué crees que pasará?</small>
                 </div>
-                <div style="flex: 0 0 150px; text-align: center;">
-                    <!-- Imagen sugerida: anatomia_pulsador.png -->
-                    <img src="img/anatomia_pulsador.png" alt="Diagrama interno del pulsador mostrando la conexión en H" style="width: 100%; border-radius: 8px;">
+                <div class="paso-metodo">
+                    <strong>2. Experimento</strong>
+                    <small>Monta y prueba</small>
                 </div>
-            </div>
-            <p>En el pulsador de 4 patas mostrado en la imagen, las terminales se identifican convencionalmente de la siguiente forma: la pata 1 (o terminal 1b), la pata 2 (o terminal 2b), la pata 3 (terminal 1a) y la pata 4 (terminal 2a).</p>
-            <p>Esta nomenclatura ayuda a conectar correctamente los circuitos, considerando que las patas opuestas suelen estar unidas internamente en su estado normal.</p>
-        </div>
-
-
-
-        <!-- (Explicación COMPLETA, no dentro del acordeón) -->
-         <!-- NUEVA SECCIÓN DE CALENTAMIENTO (CORREGIDA) -->
-        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3; margin-top: 30px;">
-            <h3>🏋️‍♂️ Misión de Calentamiento: Domina el Pulsador</h3>
-            <p>Antes de entrar a la lógica compleja, vamos a encender un <strong>LED Verde</strong> usando un pulsador de 4 patas. Veremos cómo el botón actúa como un puente.</p>
-
-            <div class="acordeon-guia">
-                <!-- PASO 1: Tierra y Resistencia -->
-                <details class="paso-tinkercad">
-                    <summary>
-                        <span class="numero-paso">1</span>
-                        <span class="titulo-paso">El Camino de Regreso</span>
-                        <span class="estado-paso">(Resistencia y Tierra)</span>
-                    </summary>
-                    <div class="contenido-paso">
-                        <p>Vamos a preparar el terreno desde el final (Tierra) hacia atrás.</p>
-                        <ol>
-                            <li><strong>Cable Negro:</strong> Conecta un cable negro desde el segundo hueco del <strong>Riel Azul (-)</strong> a la coordenada <strong>f2</strong>.</li>
-                            <li><strong>Resistencia (330 Ω):</strong> Colócala horizontalmente.
-                                <ul>
-                                    <li>Terminal 1 en <strong>i2</strong> (en la misma columna del cable negro).</li>
-                                    <li>Terminal 2 en <strong>i6</strong>.</li>
-                                </ul>
-                            </li>
-                        </ol>
-                    </div>
-                </details>
-
-                <!-- PASO 2: El LED Verde -->
-                <details class="paso-tinkercad">
-                    <summary>
-                        <span class="numero-paso">2</span>
-                        <span class="titulo-paso">El LED Verde</span>
-                        <span class="estado-paso">(Ánodo y Cátodo)</span>
-                    </summary>
-                    <div class="contenido-paso">
-                        <p>Saca un LED y píntalo de color <strong>Verde</strong>. No lo reflejes ('M'), úsalo normal.</p>
-                        <ul>
-                            <li><strong>Cátodo (Pata recta/corta):</strong> En <strong>j6</strong>. (Se conecta con la resistencia en la columna 6).</li>
-                            <li><strong>Ánodo (Pata torcida/larga):</strong> En <strong>j7</strong>. (Aquí esperará la energía).</li>
-                        </ul>
-                    </div>
-                </details>
-
-                <!-- PASO 3: El Pulsador (Ajustado) -->
-                <details class="paso-tinkercad">
-                    <summary>
-                        <span class="numero-paso">3</span>
-                        <span class="titulo-paso">El Botón de 4 Patas</span>
-                        <span class="estado-paso">(El Puente)</span>
-                    </summary>
-                    <div class="contenido-paso">
-                        <p>Coloca el pulsador sobre el canal central (la zanja) para que sus patas queden separadas arriba y abajo.</p>
-                        <ul>
-                            <li><strong>Posición:</strong> Haz que las patas de la <strong>izquierda</strong> caigan en la columna <strong>7</strong> y las de la <strong>derecha</strong> en la columna <strong>9</strong>.
-                                <br><em>(Coordenadas: F7/E7 a la izquierda, F9/E9 a la derecha).</em>
-                            </li>
-                        </ul>
-                        <div style="background-color: #fff3cd; padding: 10px; border-radius: 5px; font-size: 0.9em; border-left: 3px solid #ffc107;">
-                            <strong>🧐 ¿Por qué así? (Aclaración Teórica)</strong><br>
-                            El texto anterior advertía sobre la necesidad de evitar conectar patas del mismo lado (arriba/abajo en la misma columna). Pero aquí estamos conectando <strong>Izquierda con Derecha</strong>. <br>
-                            El botón funciona como un puente levadizo sobre el canal central. Al presionar, la energía cruza de la columna 7 a la 9. ¡Es una conexión válida!
-                        </div>
-                    </div>
-                </details>
-
-                <!-- PASO 4: Energía -->
-                <details class="paso-tinkercad">
-                    <summary>
-                        <span class="numero-paso">4</span>
-                        <span class="titulo-paso">¡Energía!</span>
-                        <span class="estado-paso">(Cerrar el Circuito)</span>
-                    </summary>
-                    <div class="contenido-paso">
-                        <p>Alimentemos la entrada del puente.</p>
-                        <ol>
-                            <li><strong>Cable Rojo:</strong> Conecta en la misma columna desde el <strong>Riel Rojo (+)</strong> con la coordenada <strong>a9</strong> (la misma columna donde está la pata derecha del botón).</li>
-                        </ol>
-                        <p><strong>Resultado:</strong> Inicia la simulación. Por convención, la corriente viajaría: <br>
-                        <code>Riel(+)</code> &rarr; <code>a9</code> &rarr; <code>[BOTÓN]</code> &rarr; <code>f7</code> &rarr; <code>LED(Ánodo)</code> &rarr; <code>LED(Cátodo)</code> &rarr; <code>Resistencia</code> &rarr; <code>i2</code> &rarr; <code>f2</code> &rarr; <code>Tierra</code>.</p>
-                        
-                        <div style="text-align: center; margin-top: 15px;">
-                            <img src="img/pulsador_de_4_patas.png" alt="Circuito correcto con pulsador puenteando el canal central" style="max-width: 70%; border-radius: 8px; border: 2px solid #4caf50;">
-                        </div>
-                    </div>
-                </details>
-            </div>
-        </div>
-        <!-- (Explicación COMPLETA, no dentro del acordeón) -->
-
-
-
-
-
-        <!-- INTEGRACIÓN FLUIDA: UX (CORREGIDA Y COMPLETA) -->
-        <p class="texto-puente">Ya tienes los componentes, pero ¿dónde los pones? Un circuito no solo debe funcionar eléctricamente; debe ser fácil de usar para las personas. Aquí entra el <strong>Diseño de Experiencia de Usuario (UX)</strong>.</p>
-
-        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin-top:0;">
-            <h3>🎨 El Rincón del Diseñador: ¿Qué es UX?</h3>
-            <p><strong>UX (User Experience)</strong> no es una persona; es la disciplina que estudia cómo se siente un humano al interactuar con tu máquina. Un buen ingeniero electrónico debe pensar en tres pilares:</p>
-            
-            <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-                <div style="flex: 1;">
-                    <ul>
-                        <li><strong>1. Ergonomía (Espacio):</strong> Si pones los botones muy pegados, el usuario presionará ambos por error ("Dedo gordo"). ¡Dales aire!</li>
-                        <li><strong>2. Semiótica (Significado):</strong> Los colores hablan. Para una "Alarma Nuclear", ¿usarías un LED verde (seguro) o uno rojo (peligro)? Elige con intención.</li>
-                        <li><strong>3. Feedback (Respuesta):</strong> El usuario necesita saber que la máquina lo escuchó. El "clic" táctil del botón confirma la acción; la luz del LED confirma el resultado.</li>
-                    </ul>
+                <div class="paso-metodo">
+                    <strong>3. Observación</strong>
+                    <small>Registra datos</small>
                 </div>
-                <div style="flex: 0 0 250px; text-align: center;">
-                    <img src="img/ux_hardware.png" alt="Comparativa: Botones desordenados vs Botones organizados y etiquetados" style="width: 100%; border-radius: 8px;">
+                <div class="paso-metodo">
+                    <strong>4. Análisis</strong>
+                    <small>Busca patrones</small>
+                </div>
+                <div class="paso-metodo">
+                    <strong>5. Conclusión</strong>
+                    <small>Formula la regla</small>
                 </div>
             </div>
-            
-            <p style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
-                <strong>Tu Reto de Diseño:</strong> No conectes los cables como una maraña. Imita un producto real (como un celular o un control de videojuegos): organiza los <strong>botones abajo</strong> (zona de control) y el <strong>LED arriba</strong> (zona de visualización). ¡El orden evita errores!
-            </p>
-        </div>
+        </section>
 
-        <div class="destacado">
-            <h3>🧠 Tu Idioma de Hoy: Binario</h3>
-            <p>Para llenar los reportes, olvida el español. Usaremos el lenguaje de las máquinas:</p>
-            <ul>
-                <li><strong>0</strong> = Botón suelto / LED Apagado / Falso.</li>
-                <li><strong>1</strong> = Botón presionado / LED Encendido / Verdadero.</li>
-            </ul>
-        </div>
+        <!-- === MISIÓN 1: NOT (INVERSIÓN) === -->
+        <section id="mision-1" class="mision-lab">
+            <div class="mision-titulo">
+                <div class="mision-icono">1</div>
+                <h2>Misión 1: Descubriendo la Inversión (NOT)</h2>
+            </div>
 
-        <hr>
+            <div class="fase-lab">
+                <h3 class="fase-titulo">🎯 Predicción (Antes de montar)</h3>
+                <p>Si pongo un interruptor en paralelo con un LED siempre encendido, ¿qué pasará al presionarlo?</p>
+                <ul>
+                    <li>☐ Se apagará</li>
+                    <li>☐ Parpadeará</li>
+                    <li>☐ Nada cambiará</li>
+                </ul>
+                <p><strong>Mi justificación:</strong> _________________________</p>
+                <p><em>💡 Piensa: En la Lección 8 aprendiste que la corriente siempre busca el camino más fácil. ¿Qué pasa cuando creas un atajo sin resistencia?</em></p>
+            </div>
 
-        <!-- MISION 1 -->
-        <h2>Misión 1: La Lógica Estricta</h2>
-        <p class="texto-puente">Vamos a empezar construyendo un sistema que sea muy exigente. Queremos que la acción ocurra SOLO si todas las condiciones se cumplen, como en un sistema de alta seguridad.</p>
-        
-        <div class="caso-uso">
-            <strong>El Problema:</strong> Para lanzar un cohete, se necesita que el Comandante (A) <strong>Y</strong> el General (B) giren sus llaves al mismo tiempo. Si solo uno lo hace, no debe pasar nada.
-        </div>
-        
-        <p><strong>El Montaje:</strong> Conecta los dos pulsadores en "fila india" (Serie) antes de llegar al LED. La corriente debe atravesar el puente A y luego el puente B.</p>
-        
-        <div class="svg-container">
-            <img src="img/lab_serie_fisico.png" alt="Montaje Serie" style="max-width:100%; height:auto; border-radius:8px;">
-        </div>
+            <div class="fase-lab arte-steam">
+                <h3 class="fase-titulo" style="color: #e91e63; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.4em;">🎨</span>
+                    Mi Esquema Visual (STEAM)
+                </h3>
+                <p><strong>Antes de montar el circuito físico:</strong> En tu cuaderno, dibuja cómo crees que se conectan los componentes para lograr este comportamiento.</p>
+                <ul>
+                    <li>Usa colores: rojo para 5V, negro para GND, verde para el LED</li>
+                    <li>Dibuja flechas que muestren el camino que crees que tomará la corriente</li>
+                    <li>No importa si está "bien" o "mal": lo importante es externalizar tu hipótesis</li>
+                </ul>
+                <div style="background: #fce4ec; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #e91e63;">
+                    <p style="margin: 0; font-style: italic; color: #880e4f;">
+                        💡 <strong>Reflexión docente:</strong> Cuando seas maestro/a, tus estudiantes no tendrán protoboards en casa. Pero sí tendrán lápiz y papel. Enseñarles a "dibujar circuitos" es darles una herramienta de pensamiento que podrán usar siempre.
+                    </p>
+                </div>
+                <p><strong>Mi dibujo inicial:</strong> _________________________ (toma una foto a tu cuaderno y guárdala)</p>
+            </div>
 
-        <h3>📝 Tu Reporte (Lógica AND)</h3>
-        <table class="tabla-lab">
-            <tr><th>Botón A</th><th>Botón B</th><th>¿LED (Salida)?</th></tr>
-            <tr><td>0</td><td>0</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
-            <tr><td>0</td><td>1</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
-            <tr><td>1</td><td>0</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
-            <tr><td>1</td><td>1</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
-        </table>
-
-        <!-- TRANSICIÓN NARRATIVA MEJORADA -->
-        <div class="transicion-narrativa">
-            <p>El sistema anterior (Nuclear) es muy seguro, pero muy lento y rígido. ¿Qué pasa si necesitamos algo más flexible y rápido? Imagina una <strong>emergencia médica</strong> en un hospital: debe sonar una alarma si la <strong>Enfermera (A) O el Médico (B)</strong> (o ambos) presionan el botón de pánico. En situaciones críticas, necesitamos que <em>cualquiera</em> pueda activar la alerta. Cambiemos la topología para lograr esta lógica más ágil.</p>
-        </div>
-
-        <!-- MISION 2 ACTUALIZADA (EVITANDO CONFLICTO CON LECCIÓN 15) -->
-        <h2>Misión 2: El Botón de Pánico (Paralelo)</h2>
-        <div class="caso-uso">
-            <strong>El Problema:</strong> En una sala de urgencias, la sirena (LED) debe sonar inmediatamente si la Enfermera (A) detecta un paro cardíaco <strong>O</strong> si el Médico (B) lo detecta. No pueden esperar a ponerse de acuerdo; basta con que uno de los dos actúe para que la alarma suene.
-        </div>
-        
-        <p><strong>El Montaje:</strong> Desconecta la serie. Ahora conecta los pulsadores en caminos separados (Paralelo): ambos van de 5V al mismo punto del LED (ánodo/resistencia).</p>
-        
-        <div class="svg-container">
-            <img src="img/lab_paralelo_fisico.png" alt="Montaje Paralelo" style="max-width:100%; height:auto; border-radius:8px;">
-        </div>
-
-        <h3>📝 Tu Reporte (Lógica OR)</h3>
-        <table class="tabla-lab">
-            <tr><th>Enfermera (A)</th><th>Médico (B)</th><th>¿Alarma (LED)?</th></tr>
-            <tr><td>0 (No oprime)</td><td>0 (No oprime)</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
-            <tr><td>0 (No oprime)</td><td>1 (¡Auxilio!)</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
-            <tr><td>1 (¡Auxilio!)</td><td>0 (No oprime)</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
-            <tr><td>1 (¡Auxilio!)</td><td>1 (¡Auxilio!)</td><td><input type="text" class="input-lab" placeholder="?"></td></tr>
-        </table>
-
-        <!-- TRANSICIÓN NARRATIVA -->
-        <div class="transicion-narrativa">
-            <p>Hasta ahora, nuestros circuitos son "obedientes": si presionas (1), el LED prende (1). Pero el mundo es complejo. A veces necesitamos frenar, detener o llevar la contraria. <strong>¿Cómo logramos que una acción positiva genere un resultado negativo?</strong></p>
-        </div>
-
-        <!-- GUÍA TINKERCAD MISIÓN 1 -->
-        <details style="margin-top: 20px; background-color: #e3f2fd; border: 1px solid #2196f3;">
-            <summary style="background-color: #bbdefb; color: #0d47a1;">
-                <strong>💻 ¿No tienes materiales? Guía paso a paso en Tinkercad</strong>
-            </summary>
-            <div class="unidad-contenido" style="padding: 15px;">
-                <p>Sigue estos pasos exactos para simular la "Lógica Estricta":</p>
+            <div class="fase-lab">
+                <h3 class="fase-titulo">🔬 Experimento</h3>
+                <p><strong>Materiales:</strong> Protoboard, LED rojo, resistencia de 330Ω, pulsador, cables jumpers, fuente 5V.</p>
+                <p><strong>Montaje:</strong> Conecta el LED con su resistencia directo a 5V (siempre encendido). Luego coloca el pulsador en paralelo con el LED.</p>
                 
-                <h4>1. Configuración Inicial</h4>
-                <ol>
-                    <li>Ve a <strong>Tinkercad.com</strong> e inicia sesión.</li>
-                    <li>Crea un nuevo circuito (+ Crear > Circuito).</li>
-                    <li>Arrastra los componentes:
-                        <ul>
-                            <li><strong>Placa de pruebas pequeña</strong>.</li>
-                            <li><strong>Suministro de energía:</strong> Configúralo a 5V.</li>
-                            <li><strong>2 Pulsadores:</strong> Ubícalos en el canal central. Llámalos "A" (Izquierda) y "B" (Derecha).</li>
-                            <li><strong>1 LED:</strong> Color verde. Llámalo "1".</li>
-                            <li><strong>1 Resistencia:</strong> Llámala "1", cambia valor a <strong>330 Ω</strong> (Ohmios) y gírala (Tecla R).</li>
-                        </ul>
-                    </li>
-                </ol>
-
-                <h4>2. Conexión (El Camino de la Energía)</h4>
-                <p>Usa cables de colores (Negro, Rojo, Amarillo) para seguir la ruta:</p>
-                <ol>
-                    <li><strong>Energía:</strong> Conecta la fuente a los rieles (+) y (-) de la placa.</li>
-                    <li><strong>Paso 1 (Entrada):</strong> Cable <strong>Rojo</strong> del riel (+) a una pata del <strong>Pulsador B</strong> (Derecha).</li>
-                    <li><strong>Paso 2 (Puente):</strong> Cable <strong>Amarillo</strong> de la otra pata del Pulsador B a la <strong>Resistencia</strong>.</li>
-                    <li><strong>Paso 3 (Puente):</strong> Conecta la Resistencia al <strong>Ánodo</strong> (pata doblada) del LED.</li>
-                    <li><strong>Paso 4 (Retorno):</strong> Cable <strong>Amarillo</strong> del Cátodo (pata recta) del LED a una pata del <strong>Pulsador A</strong> (Izquierda).</li>
-                    <li><strong>Paso 5 (Tierra):</strong> Cable <strong>Negro</strong> de la otra pata del Pulsador A al riel negativo (-).</li>
-                </ol>
-                <p><em>Nota: ¡Todos están en fila india! La corriente debe pasar por B, luego el LED, luego A.</em></p>
-
-                <h4>3. Cómo Simular (El Truco del Shift)</h4>
-                <ol>
-                    <li>Clic en <strong>"Iniciar simulación"</strong>.</li>
-                    <li>Si presionas un solo botón, no pasa nada.</li>
-                    <li><strong>Para presionar dos a la vez:</strong>
-                        <ul>
-                            <li>Mantén presionada la tecla <strong>Shift</strong> (Mayús) en tu teclado.</li>
-                            <li>Haz clic en el Pulsador A (se quedará hundido).</li>
-                            <li>Haz clic normal en el Pulsador B.</li>
-                        </ul>
-                    </li>
-                    <li>¡El LED debe encender!</li>
-                </ol>
+                <div class="conexion-diagrama">
+                    <h4>Circuito NOT (Inversor)</h4>
+                    <img src="img\circuito-not-inversor.png" alt="Diagrama del circuito NOT (Inversor)" style="max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0;">
+                    <p class="leyenda">El pulsador en paralelo con el LED crea un "atajo" para la corriente</p>
+                </div>
             </div>
-        </details>
 
-        <!-- MISION 3: EL SABOTEADOR -->
-        <h2>Misión 3: El Saboteador (Lógica NOT)</h2>
-        
-        <div class="caso-uso">
-            <strong>🎭 El Escenario:</strong> Imagina que el LED es el alumbrado público de una calle. Normalmente, está encendido (1) para que los carros circulen. Pero instalas un <strong>Saboteador</strong> (el pulsador) que, cuando actúa (1), roba la electricidad y deja la calle a oscuras (0).
-        </div>
+            <div class="fase-lab">
+                <h3 class="fase-titulo">👀 Observación Cualitativa</h3>
+                <ul>
+                    <li>¿El LED está estable o parpadea sin presionar? ______</li>
+                    <li>¿Qué pasa si acercas el dedo SIN tocar? ______</li>
+                    <li>¿El LED se apaga de golpe o gradualmente al presionar? ______</li>
+                </ul>
+            </div>
 
-        <h3>🔧 El Montaje (El Truco del Saboteador)</h3>
-        <ol>
-            <li>Conecta el LED a la fuente (con su resistencia) para que esté <strong>siempre encendido</strong>. (Esto es tu calle iluminada).</li>
-            <li>Ahora, coloca el pulsador en <strong>paralelo con las patas del LED</strong>, como un puente que cruza por encima de él.</li>
-        </ol>
-        <p><em>Visual: El botón está "tendido" sobre el LED, listo para desviar la corriente.</em></p>
+            <div class="fase-lab arte-steam">
+                <h3 class="fase-titulo" style="color: #e91e63; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.4em;">👀</span>
+                    Arte de la Observación (STEAM)
+                </h3>
+                <p><strong>Ahora que montaste el circuito:</strong> Dibuja lo que realmente observaste. Compara con tu dibujo inicial.</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 15px 0;">
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; text-align: center;">
+                        <strong>Mi hipótesis (antes)</strong><br>
+                        <span style="font-size: 3em; margin: 10px 0; display: block;">✏️</span>
+                        ¿Coincidió con la realidad?
+                    </div>
+                    <div style="background: #d4edda; padding: 15px; border-radius: 8px; text-align: center;">
+                        <strong>Mi observación (después)</strong><br>
+                        <span style="font-size: 3em; margin: 10px 0; display: block;">🔍</span>
+                        ¿Qué aprendí del error?
+                    </div>
+                </div>
+                <p><strong>Mi reflexión artística:</strong> "Al dibujar mi hipótesis, me di cuenta de que pensaba que ________. Al observar el circuito real, descubrí que ________."</p>
+                <div style="background: #fff3e0; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #ff9800;">
+                    <p style="margin: 0; font-style: italic; color: #e65100;">
+                        🌍 <strong>Conexión cultural:</strong> En las comunidades indígenas colombianas (como los Kogi o los Emberá), el conocimiento se transmite mediante dibujos en la tierra, tejidos y pinturas corporales. Tú estás haciendo lo mismo: usando el arte para hacer visible tu pensamiento científico.
+                    </p>
+                </div>
+            </div>
 
-        <div class="destacado" style="background-color: #fff3cd; border-left-color: #ff9800;">
-            <h3>⚡ La Física de la Pereza (Ley del Mínimo Esfuerzo)</h3>
-            <ul>
-                <li><strong>Botón Suelto (0):</strong> La corriente no tiene alternativa. Debe pasar por el LED. <br><strong>&rarr; LED ENCENDIDO (1).</strong></li>
-                <li><strong>Botón Presionado (1):</strong> Creas un atajo sin resistencia. La corriente, como agua buscando el camino fácil, toma ese atajo y evita por completo al LED. <br><strong>&rarr; LED APAGADO (0).</strong></li>
-            </ul>
-        </div>
+            <div class="fase-lab">
+                <h3 class="fase-titulo">📊 Registro Cuantitativo</h3>
+                <p>Llena la tabla de verdad + anota observaciones extra:</p>
+                
+                <table class="tabla-verdad">
+                    <thead>
+                        <tr>
+                            <th>Entrada<br>(Pulsador)</th>
+                            <th>Salida<br>(LED)</th>
+                            <th>Observación Extra</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0 (Suelto)</td>
+                            <td class="salida-1">1 (Encendido)</td>
+                            <td>Ej: "LED estable"</td>
+                        </tr>
+                        <tr>
+                            <td>1 (Presionado)</td>
+                            <td class="salida-0">0 (Apagado)</td>
+                            <td>Ej: "Se apaga al instante"</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-        <h3>📈 Tu Reporte (Inversión)</h3>
-        <table class="tabla-lab">
-            <tr><th>Acción del Saboteador (Entrada)</th><th>Estado de la Calle (Salida)</th></tr>
-            <tr><td>0 (Inactivo / Suelto)</td><td><input type="text" class="input-lab" value="1" readonly style="background:#eee;"> (Iluminada)</td></tr>
-            <tr><td>1 (Activo / Presionado)</td><td><input type="text" class="input-lab" placeholder="?"> (A oscuras)</td></tr>
-        </table>
+            <div class="fase-lab">
+                <h3 class="fase-titulo">🔍 Análisis (Descubrimiento)</h3>
+                <p><strong>Busca el patrón en tus datos:</strong></p>
+                <ul>
+                    <li>¿En cuántas filas el LED cambió de estado? ______</li>
+                    <li>¿Qué tienen en común esas filas? ___________________</li>
+                    <li><strong>Describe con tus palabras la regla que descubriste:</strong></li>
+                    <p>"El LED ______ cuando el pulsador ______"</p>
+                </ul>
+            </div>
 
-        <p><strong>El Patrón Universal (NOT):</strong> Lo que entra, sale al revés. Entra verdad &rarr; Sale mentira.</p>
+            <div class="conclusion-cientifica">
+                <h4>🎓 Conclusión Científica</h4>
+                <p><strong>Basado en mis datos, propongo que esta operación se llama ______ porque _________________________________________________</strong></p>
+                <p><em>💡 Formalización: Esta operación se llama <strong>NOT</strong> (negación). Es una operación <strong>unaria</strong> (actúa sobre una sola entrada) que invierte el estado: 0→1, 1→0.</em></p>
+            </div>
+        </section>
 
-        <!-- CONCLUSIÓN INTEGRADA -->
-        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin-top: 40px;">
-            <h3>🌍 Conclusión: Los Átomos de la Lógica</h3>
+        <!-- === MISIÓN 2: ACUERDO Estricto (AND) === -->
+        <section id="mision-2" class="mision-lab">
+            <div class="mision-titulo">
+                <div class="mision-icono">2</div>
+                <h2>Misión 2: El Acuerdo Estricto (AND)</h2>
+            </div>
+
+            <div class="fase-lab">
+                <h3 class="fase-titulo">🎯 Predicción</h3>
+                <p>Si conecto dos pulsadores en serie antes del LED, ¿bastará presionar solo uno para encenderlo?</p>
+                <ul>
+                    <li>☐ Sí, con uno basta</li>
+                    <li>☐ No, necesito ambos</li>
+                    <li>☐ No sé</li>
+                </ul>
+                <p><strong>Mi justificación:</strong> _________________________</p>
+            </div>
+
+            <div class="fase-lab arte-steam">
+                <h3 class="fase-titulo" style="color: #e91e63; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.4em;">🎨</span>
+                    Mi Esquema Visual (STEAM)
+                </h3>
+                <p><strong>Antes de montar el circuito físico:</strong> En tu cuaderno, dibuja cómo crees que se conectan los componentes para lograr este comportamiento.</p>
+                <ul>
+                    <li>Usa colores: rojo para 5V, negro para GND, verde para el LED</li>
+                    <li>Dibuja flechas que muestren el camino que crees que tomará la corriente</li>
+                    <li>No importa si está "bien" o "mal": lo importante es externalizar tu hipótesis</li>
+                </ul>
+                <div style="background: #fce4ec; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #e91e63;">
+                    <p style="margin: 0; font-style: italic; color: #880e4f;">
+                        💡 <strong>Reflexión docente:</strong> Cuando seas maestro/a, tus estudiantes no tendrán protoboards en casa. Pero sí tendrán lápiz y papel. Enseñarles a "dibujar circuitos" es darles una herramienta de pensamiento que podrán usar siempre.
+                    </p>
+                </div>
+                <p><strong>Mi dibujo inicial:</strong> _________________________ (toma una foto a tu cuaderno y guárdala)</p>
+            </div>
+
+            <div class="fase-lab arte-steam">
+                <h3 class="fase-titulo" style="color: #e91e63; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.4em;">🎨</span>
+                    Mi Esquema Visual (STEAM)
+                </h3>
+                <p><strong>Antes de montar el circuito físico:</strong> En tu cuaderno, dibuja cómo crees que se conectan los componentes para lograr este comportamiento.</p>
+                <ul>
+                    <li>Usa colores: rojo para 5V, negro para GND, verde para el LED</li>
+                    <li>Dibuja flechas que muestren el camino que crees que tomará la corriente</li>
+                    <li>No importa si está "bien" o "mal": lo importante es externalizar tu hipótesis</li>
+                </ul>
+                <div style="background: #fce4ec; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #e91e63;">
+                    <p style="margin: 0; font-style: italic; color: #880e4f;">
+                        💡 <strong>Reflexión docente:</strong> Cuando seas maestro/a, tus estudiantes no tendrán protoboards en casa. Pero sí tendrán lápiz y papel. Enseñarles a "dibujar circuitos" es darles una herramienta de pensamiento que podrán usar siempre.
+                    </p>
+                </div>
+                <p><strong>Mi dibujo inicial:</strong> _________________________ (toma una foto a tu cuaderno y guárdala)</p>
+            </div>
+
+            <div class="fase-lab">
+                <h3 class="fase-titulo">🔬 Experimento</h3>
+                <p><strong>Montaje:</strong> Conecta dos pulsadores en serie, luego la resistencia y el LED.</p>
+                
+                <div class="conexion-diagrama">
+                    <h4>Circuito AND (Serie)</h4>
+                    <img src="img\circuito-and-serie.png" alt="Diagrama del circuito AND en serie" style="max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0;">
+                    <p class="leyenda">Ambos pulsadores deben cerrarse para completar el circuito</p>
+                </div>
+            </div>
+
+            <div class="fase-lab arte-steam">
+                <h3 class="fase-titulo" style="color: #e91e63; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.4em;">👀</span>
+                    Arte de la Observación (STEAM)
+                </h3>
+                <p><strong>Ahora que montaste el circuito:</strong> Dibuja lo que realmente observaste. Compara con tu dibujo inicial.</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 15px 0;">
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; text-align: center;">
+                        <strong>Mi hipótesis (antes)</strong><br>
+                        <span style="font-size: 3em; margin: 10px 0; display: block;">✏️</span>
+                        ¿Coincidió con la realidad?
+                    </div>
+                    <div style="background: #d4edda; padding: 15px; border-radius: 8px; text-align: center;">
+                        <strong>Mi observación (después)</strong><br>
+                        <span style="font-size: 3em; margin: 10px 0; display: block;">🔍</span>
+                        ¿Qué aprendí del error?
+                    </div>
+                </div>
+                <p><strong>Mi reflexión artística:</strong> "Al dibujar mi hipótesis, me di cuenta de que pensaba que ________. Al observar el circuito real, descubrí que ________."</p>
+                <div style="background: #fff3e0; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #ff9800;">
+                    <p style="margin: 0; font-style: italic; color: #e65100;">
+                        🌍 <strong>Conexión cultural:</strong> En las comunidades indígenas colombianas (como los Kogi o los Emberá), el conocimiento se transmite mediante dibujos en la tierra, tejidos y pinturas corporales. Tú estás haciendo lo mismo: usando el arte para hacer visible tu pensamiento científico.
+                    </p>
+                </div>
+            </div>
+
+            <div class="fase-lab">
+                <h3 class="fase-titulo">📊 Registro Cuantitativo</h3>
+                
+                <table class="tabla-verdad">
+                    <thead>
+                        <tr>
+                            <th>Entrada A</th>
+                            <th>Entrada B</th>
+                            <th>Salida<br>(LED)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0 (Suelto)</td>
+                            <td>0 (Suelto)</td>
+                            <td class="salida-0">0</td>
+                        </tr>
+                        <tr>
+                            <td>0 (Suelto)</td>
+                            <td>1 (Pres.)</td>
+                            <td class="salida-0">0</td>
+                        </tr>
+                        <tr>
+                            <td>1 (Pres.)</td>
+                            <td>0 (Suelto)</td>
+                            <td class="salida-0">0</td>
+                        </tr>
+                        <tr>
+                            <td>1 (Pres.)</td>
+                            <td>1 (Pres.)</td>
+                            <td class="salida-1">1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="fase-lab">
+                <h3 class="fase-titulo">🔍 Análisis</h3>
+                <ul>
+                    <li>¿En cuántas combinaciones el LED encendió? ______</li>
+                    <li>¿Qué tienen en común esas combinaciones? ___________________</li>
+                    <li><strong>Escribe la regla con tus palabras:</strong></li>
+                    <p>"El LED enciende SOLO cuando _________________________________"</p>
+                </ul>
+            </div>
+
+            <div class="conclusion-cientifica">
+                <h4>🎓 Conclusión Científica</h4>
+                <p><strong>Esta operación se llama AND porque requiere que AMBAS condiciones sean verdaderas (1) para que la salida sea verdadera (1).</strong></p>
+                <p><em>💡 Conexión: ¿Cómo se relaciona esto con el divisor de voltaje de la Lección 5? En serie, todos los componentes dependen del otro.</em></p>
+            </div>
+        </section>
+
+        <!-- === MISIÓN 3: OPCIÓN FLEXIBLE (OR) === -->
+        <section id="mision-3" class="mision-lab">
+            <div class="mision-titulo">
+                <div class="mision-icono">3</div>
+                <h2>Misión 3: La Opción Flexible (OR)</h2>
+            </div>
+
+            <div class="fase-lab">
+                <h3 class="fase-titulo">🎯 Predicción</h3>
+                <p>Si conecto dos pulsadores en paralelo antes del LED, ¿qué pasará si presiono ambos al mismo tiempo?</p>
+                <ul>
+                    <li>☐ El LED brillará más fuerte</li>
+                    <li>☐ El LED se apagará</li>
+                    <li>☐ El LED encenderá igual que con uno solo</li>
+                </ul>
+                <p><strong>Mi justificación:</strong> _________________________</p>
+            </div>
+
+            <div class="fase-lab">
+                <h3 class="fase-titulo">🔬 Experimento</h3>
+                <p><strong>Montaje:</strong> Conecta dos pulsadores en paralelo, luego la resistencia y el LED.</p>
+                
+                <div class="conexion-diagrama">
+                    <h4>Circuito OR (Paralelo)</h4>
+                    <img src="img\circuito-or-paralelo.png" alt="Diagrama del circuito OR en paralelo" style="max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0;">
+                    <p class="leyenda">Cualquier pulsador cerrado completa el circuito</p>
+                </div>
+            </div>
+
+            <div class="fase-lab arte-steam">
+                <h3 class="fase-titulo" style="color: #e91e63; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.4em;">👀</span>
+                    Arte de la Observación (STEAM)
+                </h3>
+                <p><strong>Ahora que montaste el circuito:</strong> Dibuja lo que realmente observaste. Compara con tu dibujo inicial.</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 15px 0;">
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; text-align: center;">
+                        <strong>Mi hipótesis (antes)</strong><br>
+                        <span style="font-size: 3em; margin: 10px 0; display: block;">✏️</span>
+                        ¿Coincidió con la realidad?
+                    </div>
+                    <div style="background: #d4edda; padding: 15px; border-radius: 8px; text-align: center;">
+                        <strong>Mi observación (después)</strong><br>
+                        <span style="font-size: 3em; margin: 10px 0; display: block;">🔍</span>
+                        ¿Qué aprendí del error?
+                    </div>
+                </div>
+                <p><strong>Mi reflexión artística:</strong> "Al dibujar mi hipótesis, me di cuenta de que pensaba que ________. Al observar el circuito real, descubrí que ________."</p>
+                <div style="background: #fff3e0; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #ff9800;">
+                    <p style="margin: 0; font-style: italic; color: #e65100;">
+                        🌍 <strong>Conexión cultural:</strong> En las comunidades indígenas colombianas (como los Kogi o los Emberá), el conocimiento se transmite mediante dibujos en la tierra, tejidos y pinturas corporales. Tú estás haciendo lo mismo: usando el arte para hacer visible tu pensamiento científico.
+                    </p>
+                </div>
+            </div>
+
+            <div class="fase-lab">
+                <h3 class="fase-titulo">📊 Registro Cuantitativo</h3>
+                
+                <table class="tabla-verdad">
+                    <thead>
+                        <tr>
+                            <th>Entrada A</th>
+                            <th>Entrada B</th>
+                            <th>Salida<br>(LED)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0 (Suelto)</td>
+                            <td>0 (Suelto)</td>
+                            <td class="salida-0">0</td>
+                        </tr>
+                        <tr>
+                            <td>0 (Suelto)</td>
+                            <td>1 (Pres.)</td>
+                            <td class="salida-1">1</td>
+                        </tr>
+                        <tr>
+                            <td>1 (Pres.)</td>
+                            <td>0 (Suelto)</td>
+                            <td class="salida-1">1</td>
+                        </tr>
+                        <tr>
+                            <td>1 (Pres.)</td>
+                            <td>1 (Pres.)</td>
+                            <td class="salida-1">1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="fase-lab">
+                <h3 class="fase-titulo">🔍 Análisis</h3>
+                <ul>
+                    <li>¿En cuántas combinaciones el LED encendió? ______</li>
+                    <li>¿Qué tienen en común las combinaciones donde NO encendió? ______________</li>
+                    <li><strong>Escribe la regla con tus palabras:</strong></li>
+                    <p>"El LED enciende cuando _________________________________"</p>
+                </ul>
+            </div>
+
+            <div class="conclusion-cientifica">
+                <h4>🎓 Conclusión Científica</h4>
+                <p><strong>Esta operación se llama OR porque basta que CUALQUIERA de las condiciones sea verdadera (1) para que la salida sea verdadera (1).</strong></p>
+                <p><em>💡 Conexión: ¿Cómo se relaciona esto con el reparto de corriente en paralelo de la Lección 8? En paralelo, cada rama es independiente.</em></p>
+            </div>
+        </section>
+
+        <!-- === COMPARATIVA Y CONCLUSIÓN === -->
+        <section class="destacado">
+            <h3>🌍 Los Átomos de la Lógica Digital</h3>
             <p>Mira tus tres tablas de resultados. No son solo "luces que prenden". Has descubierto tres patrones universales de decisión:</p>
+            
+            <table class="tabla-verdad" style="width: 100%; margin-top: 15px;">
+                <thead>
+                    <tr>
+                        <th>Operación</th>
+                        <th>Topología</th>
+                        <th>Regla Descubierta</th>
+                        <th>Entradas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>NOT</strong></td>
+                        <td>Paralelo (saboteador)</td>
+                        <td>"Lo opuesto a la entrada"</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AND</strong></td>
+                        <td>Serie</td>
+                        <td>"Ambas deben ser 1"</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OR</strong></td>
+                        <td>Paralelo</td>
+                        <td>"Basta con una 1"</td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p><strong>¡Estos tres patrones son los átomos de la lógica digital!</strong> Con ellos se construye toda la inteligencia de los computadores, desde una calculadora hasta la Inteligencia Artificial. ¡Has construido las neuronas básicas con tus propias manos!</p>
+        </section>
+
+        <!-- === AQUÍ VA EL FRAGMENTO 3: Galería STEAM === -->
+        <section class="destacado" style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%); border: 2px solid #e91e63; border-radius: 12px; padding: 25px; margin: 40px 0;">
+            <h3 style="color: #e91e63; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.8em;">🖼️</span>
+                Galería STEAM: Tu Lógica en Imágenes
+            </h3>
+            <p>La lógica digital no es solo números y tablas. Es un lenguaje visual que puedes expresar con creatividad:</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0;">
+                <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 3px 8px rgba(0,0,0,0.1);">
+                    <div style="font-size: 2.5em; margin-bottom: 10px;">🔄</div>
+                    <strong>NOT como danza</strong>
+                    <p style="font-size: 0.9em; color: #666;">Dibuja dos siluetas: una con brazos arriba (1) y otra con brazos abajo (0). Muestra cómo una se transforma en la otra.</p>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 3px 8px rgba(0,0,0,0.1);">
+                    <div style="font-size: 2.5em; margin-bottom: 10px;">🤝</div>
+                    <strong>AND como acuerdo</strong>
+                    <p style="font-size: 0.9em; color: #666;">Dibuja dos personas dándose la mano (serie). Si una suelta, el acuerdo se rompe.</p>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 3px 8px rgba(0,0,0,0.1);">
+                    <div style="font-size: 2.5em; margin-bottom: 10px;">🌈</div>
+                    <strong>OR como opciones</strong>
+                    <p style="font-size: 0.9em; color: #666;">Dibuja un camino que se divide en dos rutas (paralelo). Basta tomar una para llegar al destino.</p>
+                </div>
+            </div>
+            
+            <div style="background: #ffecb3; border-radius: 10px; padding: 20px; margin: 20px 0;">
+                <h4 style="color: #ffa000; margin-top: 0;">✏️ Tu Reto Artístico</h4>
+                <p>En tu cuaderno, crea <strong>una metáfora visual única</strong> para cada operación lógica:</p>
+                <ul style="padding-left: 20px;">
+                    <li><strong>NOT:</strong> ¿Qué en tu vida cotidiana "invierte" un estado? (Ej: un interruptor de luz)</li>
+                    <li><strong>AND:</strong> ¿Qué requiere que DOS cosas sucedan juntas? (Ej: abrir una puerta con dos llaves)</li>
+                    <li><strong>OR:</strong> ¿Qué te da opciones alternativas? (Ej: llegar a clase caminando O en bus)</li>
+                </ul>
+                <p><strong>Importante:</strong> No copies ejemplos de internet. Tu metáfora debe surgir de tu propia experiencia como joven colombiano/a.</p>
+            </div>
+            
+            <div style="background: #e8f5e9; border-radius: 10px; padding: 15px; margin-top: 15px; border-left: 4px solid #4caf50;">
+                <p style="margin: 0; font-style: italic;">
+                    📌 <strong>Para tu práctica docente futura:</strong> Cuando enseñes lógica a niños de primaria, no les des las metáforas. Pídeles que las creen ellos mismos. El arte no es decoración: es pensamiento hecho visible.
+                </p>
+            </div>
+        </section>
+
+        <!-- === REFLEXIÓN METACOGNITIVA === -->
+        <section class="reflexion-final">
+            <h3>🧠 Mi Proceso de Descubrimiento</h3>
+            <ol>
+                <li><strong>¿Qué predicción fue incorrecta?</strong> ¿Por qué crees que te equivocaste?</li>
+                <li><strong>¿Qué observación te sorprendió más?</strong> ¿Por qué?</li>
+                <li><strong>Si tuvieras que explicarle a un compañero</strong> cómo descubrir la lógica AND SIN decirle la regla, ¿qué experimento le harías hacer?</li>
+                <li><strong>¿Cómo se conecta esto con lo que aprendiste</strong> en las Lecciones 5 (serie/paralelo) y 8 (camino fácil)?</li>
+            </ol>
+        </section>
+
+        <!-- === SIMULACIÓN EN TINKERCAD === -->
+        <section class="dato-extra">
+            <h3>💻 ¿No tienes materiales físicos?</h3>
+            <p>Puedes realizar estas mismas misiones en el simulador Tinkercad. Hemos preparado circuitos pre-armados para cada operación lógica:</p>
             <ul>
-                <li><strong>AND (Serie / Misión 1):</strong> El patrón del <strong>acuerdo estricto</strong>. Como un contrato que requiere dos firmas.</li>
-                <li><strong>OR (Paralelo / Misión 2):</strong> El patrón de la <strong>opción flexible</strong>. Como una emergencia donde basta una alerta.</li>
-                <li><strong>NOT (Inversor / Misión 3):</strong> El patrón del <strong>sabotaje o negación</strong>. Un mecanismo que hace lo opuesto.</li>
+                <li><strong>NOT:</strong> Busca "Lab9_NOT_Inversor"</li>
+                <li><strong>AND:</strong> Busca "Lab9_AND_Serie"</li>
+                <li><strong>OR:</strong> Busca "Lab9_OR_Paralelo"</li>
             </ul>
-            <p>Estos tres patrones son los <strong>átomos de la lógica digital</strong>. Con ellos se construye toda la inteligencia de los computadores, desde una calculadora hasta la Inteligencia Artificial. ¡Has construido las neuronas básicas con tus propias manos!</p>
-        </div>
+            <p><a href="https://www.tinkercad.com/circuits" class="btn-acceso" target="_blank">Abrir Tinkercad ↗</a></p>
+        </section>
 
-        <!-- SECCIÓN DE SIMULACIÓN -->
-        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3; margin-top: 20px;">
-            <h3>💻 ¿No tienes el kit hoy?</h3>
-            <p>No te atrases. Haz estas mismas misiones en el simulador:</p>
-            <p style="text-align: center;">
-                <a href="https://www.tinkercad.com/circuits" target="_blank" class="btn-navegacion" style="background-color: #0277bd;">Abrir Tinkercad ↗</a>
-            </p>
-        </div>
+        <!-- === CONEXIÓN CON UNIDADES FUTURAS === -->
+        <section class="avance-leccion">
+            <h3>🔮 Una mirada al futuro</h3>
+            <p>Quizás te preguntes: "¿Por qué es tan grave que el cable flote un poquito?".</p>
+            <p>La razón es profunda: En el mundo de las matemáticas (que veremos en la <strong>Unidad 3</strong>), el "Tal vez" no existe. Solo existen el <strong>VERDADERO</strong> y el <strong>FALSO</strong>.</p>
+            <p>En la Lección 24 demostraremos matemáticamente que el opuesto de 1 tiene que ser 0 (<strong>Teorema de la Unicidad del Complemento</strong>). ¡Esta resistencia pull-down es la herramienta física que obliga al circuito a cumplir esa ley sagrada!</p>
+        </section>
 
-        <!-- EL CLIFFHANGER (NARRATIVO) -->
-        <div class="destacado" style="background-color: #fbecec; border-left-color: #c62828; margin-top: 30px;">
-            <h3>👻 Un misterio final...</h3>
-            <p>¡Todo funciona! Pero... acércate a tu circuito. No presiones el botón, solo pasa el dedo cerca o mueve la mesa.</p>
-            <p>¿Viste que el LED a veces parpadea? <strong>El Diagnóstico:</strong> Cuando el interruptor está abierto, el cable queda "al aire". ¡Se convierte en una antena que capta ruido!</p>
-        </div>
+        <!-- === PODCAST === -->
+        <section class="podcast-section">
+            <div class="podcast-header">
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                </svg>
+                <h3>🎧 Podcast: Conversación entre Expertos</h3>
+            </div>
+            <p class="podcast-descripcion">Dos docentes exploran la transición de la electricidad analógica a la lógica digital, analizan por qué el orden NOT→AND→OR es pedagógicamente superior, y comparten estrategias para transformar talleres en laboratorios auténticos de descubrimiento científico.</p>
+            <div class="podcast-player">
+                <audio controls>
+                    <source src="podcast_leccion9.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+            </div>
+            <div class="podcast-meta">
+                <span>⏱️ 16:45 min</span>
+                <span>🔊 MP3</span>
+            </div>
+        </section>
 
-    <!-- NARRATIVA: TRAILER -->
-    <div class="avance-leccion">
-        <h3>🚀 Próximamente...</h3>
-        <p>Ese "fantasma" del ruido eléctrico que acabamos de ver es el enemigo de la computación. Para que nuestros circuitos sean confiables, necesitamos eliminarlo. En la próxima lección, aprenderemos el secreto de los ingenieros: las resistencias <strong>Pull-Up y Pull-Down</strong> para anclar nuestras señales a tierra.</p>
-    </div>
+        <!-- === CUADERNO DE BITÁCORA === -->
+        <section class="cuaderno-section">
+            <div class="cuaderno-header">
+                <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="#2e7d32">
+                    <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+                    <path d="M14 17H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                </svg>
+                <h3>📓 Mi Cuaderno: Bitácora de Innovación</h3>
+            </div>
+            <p class="cuaderno-contexto">Tu cuaderno es tu laboratorio pedagógico. Aquí transformas la información en conocimiento útil para tu futura práctica docente.</p>
+            
+            <div class="cuaderno-actividades">
+                <h4>✏️ Actividades para esta lección:</h4>
+                
+                <div class="actividad">
+                    <strong>1. Mi conexión personal</strong>
+                    <p>¿En qué situaciones cotidianas has visto aplicada la lógica AND, OR o NOT? (Ej: "La alarma suena SI hay movimiento Y es de noche"). Anota al menos 3 ejemplos.</p>
+                </div>
+                
+                <div class="actividad">
+                    <strong>2. Esquema visual</strong>
+                    <p>En tu cuaderno, dibuja los tres circuitos (NOT, AND, OR) y escribe al lado la regla que descubriste con tus propias palabras. Usa colores para diferenciar entradas y salidas.</p>
+                </div>
+                
+                <div class="actividad">
+                    <strong>3. Mi reflexión docente</strong>
+                    <p>Si tuvieras que enseñar estas operaciones lógicas a niños de grado 5°, ¿qué analogías usarías? Diseña una actividad breve (5 minutos) para que descubran una de estas operaciones sin decirles la regla de antemano.</p>
+                </div>
+                
+                <div class="actividad">
+                    <strong>4. Mis preguntas</strong>
+                    <p>Escribe al menos una duda que te quedó de este laboratorio. Ej: "¿Por qué en electrónica digital siempre usamos 0V y 5V, y no otros valores?"</p>
+                </div>
+            </div>
+            
+            <div class="cuaderno-tip">
+                <strong>💡 Recuerda:</strong> No copies textualmente. Resume con tus palabras, dibuja, conecta con tu realidad. Tu cuaderno es para ti, no para el profesor.
+            </div>
+        </section>
 
-    <footer>
-        <hr>
-        <p style="text-align: center;">
-            <a href="leccion8.html" class="btn-navegacion">← Anterior</a>
+        <!-- === IA GENERATIVA === -->
+        <section class="ia-generativa">
+            <div class="ia-header">
+                <svg class="ia-icon" viewBox="0 0 24 24" fill="#1976d2">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                </svg>
+                <h3>🧠 Tu Asistente de Aprendizaje con IA</h3>
+            </div>
+            <p class="ia-contexto">Como futuro docente, aprenderás a usar la Inteligencia Artificial Generativa no para reemplazar tu pensamiento, sino para potenciarlo.</p>
+            
+            <div class="ia-ejemplo">
+                <h4>✏️ Ejemplo de prompt ético para esta lección:</h4>
+                <div class="prompt-ejemplo">
+                    "Comprendí que las operaciones lógicas NOT, AND y OR se pueden implementar con interruptores físicos, y que NOT es una operación unaria (1 entrada) mientras que AND y OR son binarias (2 entradas). También entendí que el orden de complejidad debe ser NOT → AND → OR para respetar la carga cognitiva del estudiante. Quiero saber: si diseño una actividad para niños de grado 6° donde deben descubrir estas tres operaciones lógicas usando solo materiales cotidianos (sin protoboard), ¿qué materiales y secuencia recomiendas? Explícame como si fuera a enseñárselo a mis futuros estudiantes, usando analogías con juegos de mesa o deportes. Incluye un error común que los niños suelen cometer al intentar construir circuitos lógicos con interruptores, especialmente confundiendo cuándo usar serie vs paralelo."
+                </div>
+            </div>
+            
+            <div class="ia-instrucciones">
+                <h4>✅ Tu turno: Construye tu propio prompt</h4>
+                <ol>
+                    <li><strong>"Comprendí que..."</strong> (resume con tus palabras lo aprendido)</li>
+                    <li><strong>"y quiero saber..."</strong> (plantea una duda específica o aplicación práctica)</li>
+                    <li><strong>"Explícame como si fuera a enseñárselo a..."</strong> (define tu audiencia)</li>
+                    <li><strong>Copia tu prompt completo</strong> y consúltalo en tu IA generativa favorita</li>
+                </ol>
+                <p><strong>¡Importante!</strong> Anota en tu cuaderno tanto la respuesta de la IA como tu reflexión crítica sobre ella.</p>
+            </div>
+            
+            <div class="ia-aviso">
+                <strong>⚠️ Ética Docente:</strong> La IA es tu asistente de pensamiento, no tu reemplazo. Nunca copies textualmente sus respuestas en evaluaciones. Usa sus ideas para inspirar tu propio razonamiento, tal como harás con tus futuros estudiantes cuando usen tecnología en el aula.
+            </div>
+        </section>
+
+        <!-- === NAVEGACIÓN === -->
+        <div style="display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--color-borde);">
+            <a href="leccion8.html" class="btn-navegacion" style="background-color: #6c757d;">← Anterior: AC, DC y Condensadores</a>
             <a href="leccion10.html" class="btn-navegacion">Siguiente: Pull-Up y Pull-Down →</a>
-        </p>
-    </footer>
-</div>
+        </div>
 
+        <!-- === FOOTER === -->
+        <footer>
+            <p><strong>Fundamentos de Sistemas Digitales</strong><br>Diseñado para formar a la próxima generación de docentes en Colombia.<br>© 2026 - Material Educativo Abierto</p>
+        </footer>
+    </div>
 </body>
 </html>

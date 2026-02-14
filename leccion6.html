@@ -33,8 +33,8 @@
             <!-- Imagen ya generada previamente -->
             <img src="img/interruptor_estados.png" 
                 alt="Comparación visual: Interruptor abierto (luz apagada) vs Interruptor cerrado (luz encendida)" 
-                style="max-width: 75%; height: auto; border-radius: 8px;">
-            <p><small><em>Fig 1. Abierto = Cortado. Cerrado = Conectado.</em></small></p>
+                style="max-width: 65%; height: auto; border-radius: 8px;">
+            <p><small><em>Fig. 1. Abierto = Cortado. Cerrado = Conectado.</em></small></p>
         </div>
 
         <h2>2. Tipos de Interruptores en tu Kit</h2>
@@ -83,8 +83,97 @@
 
         <div class="svg-container">
             <img src="img/variedad_interruptores.png" alt="Colección de diferentes tipos de interruptores y pulsadores" style="max-width: 45%; height: auto; border-radius: 8px;">
-            <p><small><em>Fig 2. En el mundo real existen muchas formas: Botones, Palancas, Dimmers y Controladores. ¡Todos hacen lo mismo: abrir o cerrar el circuito!</em></small></p>
-    </div>        
+            <p><small><em>Fig. 2. En el mundo real existen muchas formas: Botones, Palancas, Dimmers y Controladores. ¡Todos hacen lo mismo: abrir o cerrar el circuito!</em></small></p>
+    </div>
+
+    <!-- === 🔍 EL SECRETO DE LAS 4 PATAS: PULSADORES EN DETALLE === -->
+<section class="seccion-pulsador">
+    <h3>🔍 El Secreto de las 4 Patas: ¿Por qué tu pulsador no funciona?</h3>
+    
+    <div class="pulsador-visual">
+        <div class="pulsador-imagen">
+            <img src="img/anatomia_pulsador.png" alt="Anatomía interna de un pulsador de 4 patas" style="max-width: 35%; height: auto; border-radius: 8px;">
+            <div class="leyenda">Fig. 3. Anatomía interna de un pulsador cuadrado de 4 patas</div>
+        </div>
+        
+        <p>Mira tu pulsador cuadrado. Tiene 4 patas ("pines" o "terminales"), pero internamente solo son 2 cables conectados:</p>
+        
+        <ul>
+            <li><strong>El Puente Interno:</strong> Las patas del lado izquierdo (1 y 2) están unidas por dentro. Lo mismo ocurre con las del lado derecho (3 y 4).</li>
+            <li><strong>El Interruptor:</strong> Al presionar, se conecta el lado Izquierdo con el Derecho, cerrando el circuito.</li>
+        </ul>
+    </div>
+    
+    <div class="error-comun">
+        <strong>⚠️ Error Clásico:</strong> Si conectas tus cables a las patas 1 y 2 (mismo lado), el circuito estará <em>siempre cerrado</em> (LED siempre prendido), ¡incluso sin presionar el botón!
+    </div>
+    
+    <div class="pulsador-vs-dip">
+        <div class="pulsador-vs-dip-imagen">
+            <img src="img/pulsador_vs_dip.png" alt="Comparación entre pulsador y DIP switch" style="max-width: 40%; height: auto; border-radius: 8px;">
+            <div class="leyenda">Fig. 4. Comparación entre Pulsador (momentáneo) y DIP Switch (fijo)</div>
+        </div>
+        
+        <p><strong>¿Cuál usar?</strong> Para esta práctica, necesitas:</p>
+        
+        <ul>
+            <li><strong>Pulsador (Momentáneo):</strong> Para acciones temporales (como un timbre o botón de reset). Solo permite el paso de corriente mientras lo mantienes presionado.</li>
+            <li><strong>DIP Switch (Fijo):</strong> Para estados persistentes (como un interruptor de luz). Mantiene su posición hasta que lo vuelvas a tocar.</li>
+        </ul>
+    </div>
+    
+    <div class="pulsador-4-patas">
+        <div class="pulsador-4-patas-imagen">
+            <img src="img/pulsador_de_4_patas.png" alt="Conexión de pulsador de 4 patas en protoboard" style="max-width: 85%; height: auto; border-radius: 8px;">
+            <div class="leyenda">Fig. 5. Conexión correcta de un pulsador de 4 patas en protoboard</div>
+        </div>
+        
+        <p><strong>✅ Regla de Oro:</strong> Conecta siempre en diagonal (ej: pata superior izquierda con inferior derecha). Así garantizas que el circuito solo se cierre al presionar el botón.</p>
+        
+        <p><strong>🔍 Verificación visual:</strong> Al presionar el pulsador, el medidor debe mostrar cambio en voltaje y corriente. Si no hay cambio, revisa que las patas estén conectadas en lados opuestos del canal central.</p>
+    </div>
+
+    <!-- **************************** -->
+    <div class="observacion-activa">
+        <h4>🎯 Tu Primer Descubrimiento: Observa y Analiza</h4>
+        
+        <p>Antes de tocar un solo cable, ¡detente y analiza la imagen 5: "Conexión correcta de un pulsador de 4 patas en protoboard". No te limites a mirarla, ¡explórala como un detective electrónico!</p>
+        
+        <ol>
+            <li><strong>Identifica los elementos clave</strong>
+                <p>¿Qué patas del pulsador están conectadas a qué columnas? ¿Cómo se distribuyen las conexiones respecto al canal central? ¿Qué componentes están conectados a cada lado del pulsador?</p>
+            </li>
+            <li><strong>Descubre el patrón</strong>
+                <p>Observa cómo las patas están organizadas en dos grupos: izquierda y derecha. Nota que las patas del mismo lado (izquierda o derecha) están unidas internamente. Identifica por qué la conexión se realiza en diagonal (p. ej., izquierda superior a derecha inferior).</p>
+            </li>
+            <li><strong>Interpreta el comportamiento</strong>
+                <p>¿Qué sucede cuando presionas el pulsador? ¿Cómo cambia el flujo de corriente entre los estados "presionado" y "liberado"? ¿Por qué el LED se enciende solo cuando el pulsador está presionado?</p>
+            </li>
+            <li><strong>Analiza los errores comunes</strong>
+                <p>¿Qué pasaría si conectaras las patas 1 y 2 (mismo lado izquierdo)? ¿Qué ocurriría si unieras las patas 3 y 4 (mismo lado derecho)? ¿Cómo detectarías visualmente un error en esta conexión?</p>
+            </li>
+        </ol>
+        
+        <p><strong>💡 Tu Descubrimiento Personal</strong></p>
+        <p>Al observar la imagen, ¿notaste que:</p>
+        <ul>
+            <li>El pulsador actúa como un puente que se cierra al presionar</li>
+            <li>Las conexiones en diagonal garantizan que el circuito solo se cierre al presionar</li>
+            <li>El canal central de la protoboard es el límite físico que separa las dos partes del circuito</li>
+        </ul>
+    </div>
+    
+    <div class="consejo-docente">
+        <strong>💡 Consejo para Futuros Docentes:</strong> 
+        <p>Este es el momento ideal para enseñar a los estudiantes a identificar el error visualmente antes de encender el circuito. Pídeles que:</p>
+        <ul>
+            <li>Verifiquen que las patas del pulsador estén en lados opuestos del canal central</li>
+            <li>Comprueben que el LED esté en la dirección correcta (pata larga al +)</li>
+            <li>Confirmen que la resistencia esté presente (¡nunca conectes un LED directo a 5V!)</li>
+        </ul>
+        <p>Esto evita el "efecto de magia negra" donde los estudiantes piensan que el circuito funciona por casualidad en lugar de comprender los principios.</p>
+    </div>
+</section>
 
     <div class="destacado">
             <h3>🍎 Rincón del Docente: "El Teatro de los Interruptores"</h3>
@@ -234,6 +323,32 @@
 <p><strong>¿Cuál es la solución?</strong> Dos interruptores SPDT (de tres terminales) conectados de una forma ingeniosa. Cada vez que cambias <em>cualquier</em> de los dos interruptores, el estado de la luz se invierte (enciende si estaba apagada, apaga si estaba encendida).</p>
 <p><strong>Para tu futura aula:</strong> Este es un excelente ejemplo para mostrar que la ingeniería resuelve problemas cotidianos. ¡La próxima vez que uses un interruptor de escalera en tu casa, sabrás el ingenio que hay detrás!</p>
         </div>
+    </section>
+
+    <!-- === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            Dos docentes exploran el fascinante mundo de la energía: desde la diferencia entre la electricidad "salvaje" de la pared (AC) y la "domesticada" de los cargadores (DC), hasta el rol del condensador como "tanque de reserva" que filtra el ruido. Comparten estrategias para explicar la Tierra Común y desmienten mitos sobre los amperios.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <source src="audio/leccion8.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 18 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
     </section>
 
     <!-- Sección de Preguntas de Consolidación -->
