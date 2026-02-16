@@ -84,6 +84,15 @@
             <li><strong>0 Lógico (LOW):</strong> Voltaje entre 0V y 0.8V. (Falso).</li>
         </ul>
 
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
+            <h3>🛡️ El Margen de Ruido: ¿Por qué la diferencia entre "Garantizado" e "Interpretado"?</h3>
+            <p>Observa un detalle muy importante: una salida TTL <strong>garantiza</strong> enviar un "0" entre 0V y 0.4V, pero la entrada <strong>interpreta</strong> como "0" cualquier voltaje hasta 0.8V. ¡Esa diferencia de 0.4V es nuestro escudo contra el ruido!</p>
+            
+            <p><strong>Ejemplo práctico:</strong> Imagina que un chip envía un "0" perfecto y estable a 0.3V. Por el camino, el cable pasa cerca de un motor y capta interferencia que sube la señal a 0.6V. En un mundo ideal, ese cambio alteraría el resultado, pero gracias al margen de ruido, el chip receptor sigue viendo 0.6V como un "0" válido (porque está por debajo de 0.8V). El sistema funciona correctamente a pesar del ruido.</p>
+            
+            <p>Es como tener una tolerancia: permitimos que la señal se ensucie un poco sin que pierda su significado. Entre más grande sea este margen, más robusto será nuestro circuito contra interferencias externas.</p>
+        </div>
+
         <!-- FLASHBACK A LECCIÓN 10 -->
         <div class="dato-extra" style="background-color: #fff3cd; border-left-color: #ffc107;">
             <h3>🔗 Conexión: ¿Por qué fallaban los interruptores?</h3>

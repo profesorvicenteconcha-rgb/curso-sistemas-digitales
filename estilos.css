@@ -1154,3 +1154,8 @@ footer { margin-top: 50px; text-align: center; color: #777; font-size: 0.9em; pa
     height: 0;
     overflow: hidden;
 }
+
+strong {
+    display: inline;
+    white-space: nowrap;
+}

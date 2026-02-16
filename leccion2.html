@@ -62,22 +62,23 @@
             Omega (<strong>\(\Omega\)</strong>) para abreviar esa unidad — igual que usamos <em>"m"</em> 
             para metros o <em>"kg"</em> para kilogramos. Por ejemplo: una resistencia de <em>220\(\Omega\)</em> significa 
             "220 ohmios de oposición al paso de la corriente".
-        </p>        
 
-        <div class="dato-extra">
-            <h4>📖 Dato Curioso: Normativas Internacionales</h4>
-            <p>Existen dos convenciones para dibujar resistencias en esquemáticos:</p>
-            <ul>
-                <li><strong>Estilo americano:</strong> Usado principalmente en EE.UU. y Canadá (zigzag).</li>
-                <li><strong>Estilo europeo:</strong> Adoptado por la norma IEC (Comisión Electrotécnica 
-                    Internacional) y utilizado en la mayoría de los países del mundo (rectángulo).</li>
-            </ul>
-            <p><strong>Nuestro curso utilizará exclusivamente la representación europea</strong> 
-            porque es el estándar internacional en documentos técnicos y software de diseño 
-            profesional (KiCad, Altium, etc.).</p>
-            <p>⚠️ ¡No confundas! El símbolo <strong>Ω</strong> es solo la <em>unidad de medida</em>, 
-            no el dibujo del componente en los esquemáticos.</p>
-        </div>
+        
+
+            <div class="dato-extra">
+                <h4>📖 Dato Curioso: Normativas Internacionales</h4>
+                <p>Existen dos convenciones para dibujar resistencias en esquemáticos:</p>
+                <ul>
+                    <li><strong>Estilo americano:</strong> Usado principalmente en EE.UU. y Canadá (zigzag).</li>
+                    <li><strong>Estilo europeo:</strong> Adoptado por la norma IEC (Comisión Electrotécnica 
+                        Internacional) y utilizado en la mayoría de los países del mundo (rectángulo).</li>
+                </ul>
+                <p><strong>Nuestro curso utilizará exclusivamente la representación europea</strong> 
+                porque es el estándar internacional en documentos técnicos y software de diseño 
+                profesional (KiCad, Altium, etc.).</p>
+                <p>⚠️ ¡No confundas! El símbolo <strong>Ω</strong> es solo la <em>unidad de medida</em>, 
+                no el dibujo del componente en los esquemáticos.</p>
+            </div>
         <!-- RINCÓN DOCENTE: DINÁMICA PRIMARIA -->
         <div class="dato-extra" style="border-left: 4px solid #ffc107; background-color: #fff9db;">
             <h3>🍎 Rincón del Docente: Explicando Ohm a niños (8-10 años)</h3>
@@ -258,6 +259,36 @@
             El voltaje se indica siempre al lado del símbolo de la pila. En nuestro caso, 
             usamos una fuente de <strong>5V</strong> (los cables rojo y negro de un viejo cargador telefónico) para alimentar el circuito.
             </p>
+            
+            <div class="destacado">
+            <h4>🔋 Símbolo de la Batería vs Pila: La Diferencia que Cuenta</h4>
+            
+            <p>Observa este símbolo estándar en esquemas eléctricos:</p>
+            
+            <div class="imagen-simbolo" style="text-align: center; margin: 15px 0;">
+                <img src="img/simbolo-bateria.png" alt="Símbolo de batería en esquemas eléctricos" style="max-width: 150px; height: auto;">
+                <p class="leyenda-simbolo">Fig 3. Símbolo de batería en esquemas eléctricos</p>
+            </div>
+            
+            <p>Este símbolo representa una <span style="font-weight: bold;">batería</span> (varias pilas conectadas), no una sola pila. ¿Por qué? Porque:</p>
+            
+            <ul>
+                <li><span style="font-weight: bold;">Una pila</span> (un solo elemento) se representa con <em>un solo par de líneas</em> (larga = +, corta = -)</li>
+                <li><span style="font-weight: bold;">Una batería</span> (varios elementos conectados) se representa con <em>múltiples pares de líneas</em></li>
+            </ul>
+            
+            <p><span style="font-weight: bold;">¿Por qué la confusión?</span> Coloquialmente usamos "batería" para referirnos a lo que técnicamente es una pila (como una pila AA). Pero en términos técnicos:</p>
+            
+            <div class="consejo-docente">
+                <span style="font-weight: bold;">💡 Regla de oro para futuros docentes:</span>
+                <p>"Si ves <em>un solo par de líneas</em> en un esquema, es una <span style="font-weight: bold;">pila</span> (un solo elemento). Si ves <em>múltiples pares de líneas</em>, es una <span style="font-weight: bold;">batería</span> (varios elementos conectados)."</p>
+                
+                <p>Esta distinción es clave para entender por qué una batería de 9V tiene 6 pilas internas (6 × 1.5V = 9V) y por qué el símbolo muestra <em>6 pares de líneas</em> en esquemas profesionales.</p>
+            </div>
+            
+            <p><span style="font-weight: bold;">¿Y por qué la línea más larga es el positivo?</span> Por convención histórica: la línea más larga representa el polo positivo (+), la más corta el negativo (-). ¡Este es el único símbolo eléctrico que usa longitud para indicar polaridad!</p>
+        </div>
+
             <!-- Explicación del símbolo de tierra -->
             <p>
             Al final del circuito, la corriente debe regresar a su punto de partida para completar el camino. 
