@@ -34,7 +34,7 @@
             <img src="img/interruptor_estados.png" 
                 alt="Comparación visual: Interruptor abierto (luz apagada) vs Interruptor cerrado (luz encendida)" 
                 style="max-width: 65%; height: auto; border-radius: 8px;">
-            <p><small><em>Fig. 1. Abierto = Cortado. Cerrado = Conectado.</em></small></p>
+            <p><small><em>Fig. 1: Abierto = Cortado. Cerrado = Conectado.</em></small></p>
         </div>
 
         <h2>2. Tipos de Interruptores en tu Kit</h2>
@@ -83,97 +83,96 @@
 
         <div class="svg-container">
             <img src="img/variedad_interruptores.png" alt="Colección de diferentes tipos de interruptores y pulsadores" style="max-width: 45%; height: auto; border-radius: 8px;">
-            <p><small><em>Fig. 2. En el mundo real existen muchas formas: Botones, Palancas, Dimmers y Controladores. ¡Todos hacen lo mismo: abrir o cerrar el circuito!</em></small></p>
-    </div>
+            <p><small><em>Fig. 2: En el mundo real existen muchas formas: Botones, Palancas, Dimmers y Controladores. ¡Todos hacen lo mismo: abrir o cerrar el circuito!</em></small></p>
+        </div>
 
     <!-- === 🔍 EL SECRETO DE LAS 4 PATAS: PULSADORES EN DETALLE === -->
-<section class="seccion-pulsador">
-    <h3>🔍 El Secreto de las 4 Patas: ¿Por qué tu pulsador no funciona?</h3>
-    
-    <div class="pulsador-visual">
-        <div class="pulsador-imagen">
-            <img src="img/anatomia_pulsador.png" alt="Anatomía interna de un pulsador de 4 patas" style="max-width: 35%; height: auto; border-radius: 8px;">
-            <div class="leyenda">Fig. 3. Anatomía interna de un pulsador cuadrado de 4 patas</div>
+    <section class="seccion-pulsador">
+        <h3>🔍 El Secreto de las 4 Patas: ¿Por qué tu pulsador no funciona?</h3>
+        
+        <div class="pulsador-visual">
+            <div class="svg-container">
+                <img src="img/anatomia_pulsador.png" alt="Colección de diferentes tipos de interruptores y pulsadores" style="max-width: 40%; height: auto; border-radius: 8px;">
+                <p><small><em>Fig. 3: Anatomía interna de un pulsador cuadrado de 4 patas</em></small></p>
+            </div>
+            <p>Mira tu pulsador cuadrado. Tiene 4 patas ("pines" o "terminales"), pero internamente solo son 2 cables conectados:</p>
+            
+            <ul>
+                <li><strong>El Puente Interno:</strong> Las patas del lado izquierdo (1 y 2) están unidas por dentro. Lo mismo ocurre con las del lado derecho (3 y 4).</li>
+                <li><strong>El Interruptor:</strong> Al presionar, se conecta el lado Izquierdo con el Derecho, cerrando el circuito.</li>
+            </ul>
         </div>
         
-        <p>Mira tu pulsador cuadrado. Tiene 4 patas ("pines" o "terminales"), pero internamente solo son 2 cables conectados:</p>
-        
-        <ul>
-            <li><strong>El Puente Interno:</strong> Las patas del lado izquierdo (1 y 2) están unidas por dentro. Lo mismo ocurre con las del lado derecho (3 y 4).</li>
-            <li><strong>El Interruptor:</strong> Al presionar, se conecta el lado Izquierdo con el Derecho, cerrando el circuito.</li>
-        </ul>
-    </div>
-    
-    <div class="error-comun">
-        <strong>⚠️ Error Clásico:</strong> Si conectas tus cables a las patas 1 y 2 (mismo lado), el circuito estará <em>siempre cerrado</em> (LED siempre prendido), ¡incluso sin presionar el botón!
-    </div>
-    
-    <div class="pulsador-vs-dip">
-        <div class="pulsador-vs-dip-imagen">
-            <img src="img/pulsador_vs_dip.png" alt="Comparación entre pulsador y DIP switch" style="max-width: 40%; height: auto; border-radius: 8px;">
-            <div class="leyenda">Fig. 4. Comparación entre Pulsador (momentáneo) y DIP Switch (fijo)</div>
+        <div class="error-comun">
+            <strong>⚠️ Error Clásico:</strong> Si conectas tus cables a las patas 1 y 2 (mismo lado), el circuito estará <em>siempre cerrado</em> (LED siempre prendido), ¡incluso sin presionar el botón!
         </div>
         
-        <p><strong>¿Cuál usar?</strong> Para esta práctica, necesitas:</p>
-        
-        <ul>
-            <li><strong>Pulsador (Momentáneo):</strong> Para acciones temporales (como un timbre o botón de reset). Solo permite el paso de corriente mientras lo mantienes presionado.</li>
-            <li><strong>DIP Switch (Fijo):</strong> Para estados persistentes (como un interruptor de luz). Mantiene su posición hasta que lo vuelvas a tocar.</li>
-        </ul>
-    </div>
-    
-    <div class="pulsador-4-patas">
-        <div class="pulsador-4-patas-imagen">
-            <img src="img/pulsador_de_4_patas.png" alt="Conexión de pulsador de 4 patas en protoboard" style="max-width: 85%; height: auto; border-radius: 8px;">
-            <div class="leyenda">Fig. 5. Conexión correcta de un pulsador de 4 patas en protoboard</div>
+        <div class="pulsador-vs-dip">
+            <div class="svg-container">
+                <img src="img/pulsador_vs_dip.png" alt="Colección de diferentes tipos de interruptores y pulsadores" style="max-width: 40%; height: auto; border-radius: 8px;">
+                <p><small><em>Fig. 4: Comparación entre Pulsador (momentáneo) y DIP Switch (fijo)</em></small></p>
+            </div>
+            
+            <p><strong>¿Cuál usar?</strong> Para esta práctica, necesitas:</p>
+            
+            <ul>
+                <li><strong>Pulsador (Momentáneo):</strong> Para acciones temporales (como un timbre o botón de reset). Solo permite el paso de corriente mientras lo mantienes presionado.</li>
+                <li><strong>DIP Switch (Fijo):</strong> Para estados persistentes (como un interruptor de luz). Mantiene su posición hasta que lo vuelvas a tocar.</li>
+            </ul>
         </div>
         
-        <p><strong>✅ Regla de Oro:</strong> Conecta siempre en diagonal (ej: pata superior izquierda con inferior derecha). Así garantizas que el circuito solo se cierre al presionar el botón.</p>
-        
-        <p><strong>🔍 Verificación visual:</strong> Al presionar el pulsador, el medidor debe mostrar cambio en voltaje y corriente. Si no hay cambio, revisa que las patas estén conectadas en lados opuestos del canal central.</p>
-    </div>
+        <div class="pulsador-4-patas">
+            <div class="svg-container">
+                <img src="img/pulsador_de_4_patas.png" alt="Colección de diferentes tipos de interruptores y pulsadores" style="max-width: 90%; height: auto; border-radius: 8px;">
+                <p><small><em>Fig. 5: Conexión correcta de un pulsador de 4 patas en protoboard</em></small></p>
+            </div>
+            
+            <p><strong>✅ Regla de Oro:</strong> Conecta siempre en diagonal (ej: pata superior izquierda con inferior derecha). Así garantizas que el circuito solo se cierre al presionar el botón.</p>
+            
+            <p><strong>🔍 Verificación visual:</strong> Al presionar el pulsador, el medidor debe mostrar cambio en voltaje y corriente. Si no hay cambio, revisa que las patas estén conectadas en lados opuestos del canal central.</p>
+        </div>
 
-    <!-- **************************** -->
-    <div class="observacion-activa">
-        <h4>🎯 Tu Primer Descubrimiento: Observa y Analiza</h4>
+        <!-- **************************** -->
+        <div class="observacion-activa">
+            <h4>🎯 Tu Primer Descubrimiento: Observa y Analiza</h4>
+            
+            <p>Antes de tocar un solo cable, ¡detente y analiza la imagen 5: "Conexión correcta de un pulsador de 4 patas en protoboard". No te limites a mirarla, ¡explórala como un detective electrónico!</p>
+            
+            <ol>
+                <li><strong>Identifica los elementos clave</strong>
+                    <p>¿Qué patas del pulsador están conectadas a qué columnas? ¿Cómo se distribuyen las conexiones respecto al canal central? ¿Qué componentes están conectados a cada lado del pulsador?</p>
+                </li>
+                <li><strong>Descubre el patrón</strong>
+                    <p>Observa cómo las patas están organizadas en dos grupos: izquierda y derecha. Nota que las patas del mismo lado (izquierda o derecha) están unidas internamente. Identifica por qué la conexión se realiza en diagonal (p. ej., izquierda superior a derecha inferior).</p>
+                </li>
+                <li><strong>Interpreta el comportamiento</strong>
+                    <p>¿Qué sucede cuando presionas el pulsador? ¿Cómo cambia el flujo de corriente entre los estados "presionado" y "liberado"? ¿Por qué el LED se enciende solo cuando el pulsador está presionado?</p>
+                </li>
+                <li><strong>Analiza los errores comunes</strong>
+                    <p>¿Qué pasaría si conectaras las patas 1 y 2 (mismo lado izquierdo)? ¿Qué ocurriría si unieras las patas 3 y 4 (mismo lado derecho)? ¿Cómo detectarías visualmente un error en esta conexión?</p>
+                </li>
+            </ol>
+            
+            <p><strong>💡 Tu Descubrimiento Personal</strong></p>
+            <p>Al observar la imagen, ¿notaste que:</p>
+            <ul>
+                <li>El pulsador actúa como un puente que se cierra al presionar</li>
+                <li>Las conexiones en diagonal garantizan que el circuito solo se cierre al presionar</li>
+                <li>El canal central de la protoboard es el límite físico que separa las dos partes del circuito</li>
+            </ul>
+        </div>
         
-        <p>Antes de tocar un solo cable, ¡detente y analiza la imagen 5: "Conexión correcta de un pulsador de 4 patas en protoboard". No te limites a mirarla, ¡explórala como un detective electrónico!</p>
-        
-        <ol>
-            <li><strong>Identifica los elementos clave</strong>
-                <p>¿Qué patas del pulsador están conectadas a qué columnas? ¿Cómo se distribuyen las conexiones respecto al canal central? ¿Qué componentes están conectados a cada lado del pulsador?</p>
-            </li>
-            <li><strong>Descubre el patrón</strong>
-                <p>Observa cómo las patas están organizadas en dos grupos: izquierda y derecha. Nota que las patas del mismo lado (izquierda o derecha) están unidas internamente. Identifica por qué la conexión se realiza en diagonal (p. ej., izquierda superior a derecha inferior).</p>
-            </li>
-            <li><strong>Interpreta el comportamiento</strong>
-                <p>¿Qué sucede cuando presionas el pulsador? ¿Cómo cambia el flujo de corriente entre los estados "presionado" y "liberado"? ¿Por qué el LED se enciende solo cuando el pulsador está presionado?</p>
-            </li>
-            <li><strong>Analiza los errores comunes</strong>
-                <p>¿Qué pasaría si conectaras las patas 1 y 2 (mismo lado izquierdo)? ¿Qué ocurriría si unieras las patas 3 y 4 (mismo lado derecho)? ¿Cómo detectarías visualmente un error en esta conexión?</p>
-            </li>
-        </ol>
-        
-        <p><strong>💡 Tu Descubrimiento Personal</strong></p>
-        <p>Al observar la imagen, ¿notaste que:</p>
-        <ul>
-            <li>El pulsador actúa como un puente que se cierra al presionar</li>
-            <li>Las conexiones en diagonal garantizan que el circuito solo se cierre al presionar</li>
-            <li>El canal central de la protoboard es el límite físico que separa las dos partes del circuito</li>
-        </ul>
-    </div>
-    
-    <div class="consejo-docente">
-        <strong>💡 Consejo para Futuros Docentes:</strong> 
-        <p>Este es el momento ideal para enseñar a los estudiantes a identificar el error visualmente antes de encender el circuito. Pídeles que:</p>
-        <ul>
-            <li>Verifiquen que las patas del pulsador estén en lados opuestos del canal central</li>
-            <li>Comprueben que el LED esté en la dirección correcta (pata larga al +)</li>
-            <li>Confirmen que la resistencia esté presente (¡nunca conectes un LED directo a 5V!)</li>
-        </ul>
-        <p>Esto evita el "efecto de magia negra" donde los estudiantes piensan que el circuito funciona por casualidad en lugar de comprender los principios.</p>
-    </div>
-</section>
+        <div class="consejo-docente">
+            <strong>💡 Consejo para Futuros Docentes:</strong> 
+            <p>Este es el momento ideal para enseñar a los estudiantes a identificar el error visualmente antes de encender el circuito. Pídeles que:</p>
+            <ul>
+                <li>Verifiquen que las patas del pulsador estén en lados opuestos del canal central</li>
+                <li>Comprueben que el LED esté en la dirección correcta (pata larga al +)</li>
+                <li>Confirmen que la resistencia esté presente (¡nunca conectes un LED directo a 5V!)</li>
+            </ul>
+            <p>Esto evita el "efecto de magia negra" donde los estudiantes piensan que el circuito funciona por casualidad en lugar de comprender los principios.</p>
+        </div>
+    </section>
 
     <div class="destacado">
             <h3>🍎 Rincón del Docente: "El Teatro de los Interruptores"</h3>
@@ -256,7 +255,7 @@
             <line x1="330" y1="140" x2="370" y2="160" stroke="#000" stroke-width="2"/>
             <text x="350" y="185" font-size="12" fill="#000" text-anchor="middle">Posición alternativa</text>
         </svg>
-        <p><em>Figura: Símbolos de interruptores SPST (un polo, un tiro) y SPDT (un polo, doble tiro).</em></p>
+        <p><small><em>Fig. 6: Símbolos de interruptores SPST (un polo, un tiro) y SPDT (un polo, doble tiro).</em></small></p>
         </div>
 
         <p><strong>SPST (Single Pole, Single Throw):</strong> El interruptor básico. Tiene dos terminales y solo dos estados: Abierto o Cerrado. Es como un grifo de agua: o está abierto (pasa corriente) o cerrado (no pasa).</p>
@@ -265,12 +264,12 @@
 
         <p><strong>Aplicación práctica:</strong> El SPDT es perfecto para circuitos donde necesitas elegir entre dos opciones, como cambiar entre dos LEDs de colores diferentes o seleccionar entre dos fuentes de alimentación.</p>
 
-        <h3>3. Símbolos Esenciales (El idioma de los planos)</h3>
-        <p>Cuando dibujamos diagramas, usamos abreviaturas técnicas. Existen dos estándares internacionales para representar interruptores:</p>
+        <h4>Estándares internacionales para representar interruptores</h4>
+        <p>Existen dos estándares internacionales para representar interruptores:</p>
 
         <div class="svg-container">
-        <img src="img\simbolos_pulsadores.png" alt="Símbolos de pulsadores NO y NC: Estándar americano vs. europeo">
-        <p><em>Figura: Símbolos de pulsadores NO (Normalmente Abierto) y NC (Normalmente Cerrado) en estándar americano y europeo. El curso utilizará exclusivamente el estándar europeo (norma IEC 60617/UNE-EN 60617).</em></p>
+        <img src="img/simbolos_pulsadores.png" alt="Símbolos de pulsadores NO y NC: Estándar americano vs. europeo">
+        <p><small><em>Fig. 6: Símbolos de pulsadores NO (Normalmente Abierto) y NC (Normalmente Cerrado) en estándar americano y europeo. El curso utilizará exclusivamente el estándar europeo (norma IEC 60617/UNE-EN 60617).</em></small></p>
         </div>
 
         <p><strong>Estándar Europeo (Recomendado para este curso):</strong></p>
@@ -335,22 +334,22 @@
         </div>
         
         <p class="podcast-descripcion">
-            Dos docentes exploran el fascinante mundo de la energía: desde la diferencia entre la electricidad "salvaje" de la pared (AC) y la "domesticada" de los cargadores (DC), hasta el rol del condensador como "tanque de reserva" que filtra el ruido. Comparten estrategias para explicar la Tierra Común y desmienten mitos sobre los amperios.
+            Dos docentes exploran los interruptores como los "controladores de tráfico" en sistemas digitales. Analizan cómo estos componentes simples permiten que los electrones sigan caminos definidos mediante analogías del flujo de agua y puentes humanos. Comparten estrategias para enseñar la diferencia crítica entre circuitos abiertos (donde la energía no fluye) y cerrados (que permiten el paso de corriente), explican los usos prácticos de interruptores básicos, pulsadores y conmutadores de tres terminales, y revelan cómo estos principios se aplican en situaciones cotidianas como el control de luces en escaleras. 
         </p>
         
         <div class="podcast-player">
             <audio controls preload="metadata">
-                <source src="audio/leccion8.mp3" type="audio/mpeg">
+                <source src="audio/leccion6.mp3" type="audio/mpeg">
                 Tu navegador no soporta el elemento de audio.
             </audio>
         </div>
         
         <p class="podcast-meta">
-            <span class="duracion">⏱️ 18 min</span>
+            <span class="duracion">⏱️ 15:33 min</span>
             <span class="formato">🔊 MP3</span>
         </p>
     </section>
-
+    
     <!-- Sección de Preguntas de Consolidación -->
     <h2>❓ Preguntas de Consolidación</h2>
     <p>Responde estas preguntas para asegurarte de que dominas los conceptos técnicos <em>y</em> estás listo para enseñarlos en tu futura aula:</p>
@@ -478,33 +477,7 @@
     <p>"Imagina que el interruptor es una puerta. Una puerta normal (interruptor de luz) puede manejar a unas pocas personas pasando (corriente pequeña). Pero si intentas hacer pasar un desfile completo de 1000 personas (motor grande), la puerta se romperá. Necesitas una puerta gigante especial (relé) para eso."</p>
     
     <p><strong>Conexión STEAM:</strong> Esta es una excelente oportunidad para hablar sobre <em>ingeniería de sistemas</em> y por qué los ingenieros siempre eligen componentes con capacidad superior a la necesaria (factor de seguridad).</p>
-    </details>
-
-    <!-- === PODCAST: Conversación entre Expertos === -->
-    <section class="podcast-section">
-        <div class="podcast-header">
-            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
-            </svg>
-            <h3>🎧 Podcast: Conversación entre Expertos</h3>
-        </div>
-        
-        <p class="podcast-descripcion">
-            Dos docentes exploran el fascinante mundo de los interruptores: desde la confusa terminología de "abierto/cerrado" hasta el ingenioso circuito de escalera con dos SPDT. Comparten estrategias lúdicas como el "Teatro de los Interruptores" y desmienten mitos sobre seguridad eléctrica.
-        </p>
-        
-        <div class="podcast-player">
-            <audio controls preload="metadata">
-                <source src="audio/leccion6.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
-            </audio>
-        </div>
-        
-        <p class="podcast-meta">
-            <span class="duracion">⏱️ 15:33 min</span>
-            <span class="formato">🔊 MP3</span>
-        </p>
-    </section>
+    </details>    
 
     <!-- === TARJETA DE IDENTIDAD DEL PROMPT ÉTICO === -->
     <section class="prompt-section">

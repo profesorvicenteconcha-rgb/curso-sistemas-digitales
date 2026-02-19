@@ -29,7 +29,7 @@
     <!-- NARRATIVA: INTRODUCCIÓN -->
     <div class="intro-leccion">
         <p>En la lección anterior aprendiste a limpiar el ruido con resistencias. Ahora tus señales son estables. Pero... <strong>¿Cómo estás seguro?</strong> Los electrones son invisibles. ¿Cómo sabes si tu pila tiene 3V o si está muerta? ¿Cómo sabes si esa resistencia es de 10k o de 1k si se le borraron los colores? Hoy te daremos un superpoder: la visión eléctrica usando el <strong>Multímetro</strong>.</p>
-        </div>
+    </div>
 
     <section>
         <h2>1. Conociendo a tu nuevo mejor amigo</h2>
@@ -37,7 +37,7 @@
 
         <div class="svg-container">
             <img src="img/multimetro_partes.png" alt="Diagrama de un multímetro indicando pantalla, perilla y puertos" style="max-width:300px; height:auto;">
-            <p><small><em>Fig 1. La Perilla selecciona qué mides. Los Puertos conectan las puntas.</em></small></p>
+            <p><small><em>Fig. 1: La Perilla selecciona qué mides. Los Puertos conectan las puntas.</em></small></p>
         </div>
 
         <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
@@ -48,30 +48,198 @@
                 <li><strong>10A (Rojo):</strong> ¡PELIGRO! ⛔ Solo para corrientes gigantes. Si pones la punta aquí y mides una pila en paralelo... ¡Haces un corto directo! Evítalo por ahora.</li>
             </ul>
         </div>
+        
+        <!-- ============================================= -->
+        <!-- NUEVO BLOQUE: Símbolos del Multímetro         -->
+        <!-- ============================================= -->
+        <div class="dato-extra" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-left: 4px solid #1976d2; padding: 25px; margin: 30px 0; border-radius: 0 8px 8px 0;">
+            <h3 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                🌍 <span>Símbolos del Multímetro: El Alfabeto que debes conocer</span>
+            </h3>
+            
+            <p style="margin: 15px 0; line-height: 1.6;">
+                Así como el LED tiene su símbolo universal (triángulo y barra), el multímetro también tiene su propio "alfabeto" que varía según el país. Esto explica por qué algunos multímetros marcan <strong>V=</strong> y otros <strong>V⎓</strong>, y por qué en esta lección usamos <strong>V=</strong> y <strong>A=</strong>:
+            </p>
+            
+            <div style="overflow-x: auto; margin: 20px 0;">
+                <table style="width: 100%; border-collapse: collapse; background: white; border: 1px solid #b0bec5; border-radius: 8px; overflow: hidden;">
+                    <tr style="background-color: #1976d2; color: white;">
+                        <th style="padding: 12px;">⚡ Función</th>
+                        <th style="padding: 12px;">🇪🇺 Europa (IEC)</th>
+                        <th style="padding: 12px;">🇺🇸 América (ANSI)</th>
+                        <th style="padding: 12px;">📱 Este curso</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #cfd8dc;">
+                        <td style="padding: 12px; font-weight: bold;">Voltaje DC</td>
+                        <td style="padding: 12px; font-size: 1.2em; font-family: monospace;">V⎓</td>
+                        <td style="padding: 12px; font-family: monospace;">DCV o V⎓</td>
+                        <td style="padding: 12px; font-weight: bold; color: #1976d2;">V=</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #cfd8dc; background-color: #f5f5f5;">
+                        <td style="padding: 12px; font-weight: bold;">Voltaje AC</td>
+                        <td style="padding: 12px; font-size: 1.2em; font-family: monospace;">V~</td>
+                        <td style="padding: 12px; font-family: monospace;">ACV o V~</td>
+                        <td style="padding: 12px;">V~</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #cfd8dc;">
+                        <td style="padding: 12px; font-weight: bold;">Corriente DC</td>
+                        <td style="padding: 12px; font-size: 1.2em; font-family: monospace;">A⎓</td>
+                        <td style="padding: 12px; font-family: monospace;">DCA o A⎓</td>
+                        <td style="padding: 12px; font-weight: bold; color: #1976d2;">A=</td>
+                    </tr>
+                    <tr style="background-color: #f5f5f5;">
+                        <td style="padding: 12px; font-weight: bold;">Corriente AC</td>
+                        <td style="padding: 12px; font-size: 1.2em; font-family: monospace;">A~</td>
+                        <td style="padding: 12px; font-family: monospace;">ACA o A~</td>
+                        <td style="padding: 12px;">A~</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div style="background-color: #e8f4fd; border-radius: 8px; padding: 15px; margin: 15px 0; border: 1px dashed #90caf9;">
+                <p style="margin: 0; font-size: 1em; line-height: 1.6;">
+                    🧠 <strong>Regla mnemotécnica:</strong><br>
+                    La línea <strong>recta (⎓)</strong> simboliza corriente continua: electrones fluyendo siempre en la misma dirección, como un río. 
+                    La línea <strong>ondulada (~)</strong> representa corriente alterna: electrones yendo y viniendo como las olas del mar.
+                </p>
+            </div>
+            
+            <p style="margin: 15px 0 0 0; font-size: 0.95em; font-style: italic; color: #37474f;">
+                💡 <strong>¿Por qué V= y A= en esta lección?</strong> Es una simplificación visual que encontrarás en muchos multímetros modernos. 
+                Cuando veas <strong>V⎓</strong> o <strong>DCV</strong> en un equipo profesional, sabrás que significan exactamente lo mismo.
+            </p>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff3e0; border-radius: 8px; border-left: 4px solid #ff9800;">
+                <p style="margin: 0; font-weight: 500; color: #e65100;">
+                    🎯 <strong>Para tu futura aula:</strong><br>
+                    Cuando un estudiante pregunte "Profe, ¿por qué mi multímetro tiene V⎓ y el tuyo tiene V=?", 
+                    puedes responder: "Es como el español de España y el de América: las palabras cambian, 
+                    pero significan lo mismo. V⎓ y V= son dos formas de decir 'mido voltaje en corriente continua'."
+                </p>
+            </div>
+        </div>
+        <!-- ============================================= -->
+        <!-- FIN DEL NUEVO BLOQUE                          -->
+        <!-- ============================================= -->
 
         <h2>2. Modo 1: Continuidad (El Pito Mágico) 🔊</h2>
         <p>Pon la perilla en el símbolo de onda/sonido. Toca las puntas entre sí. ¿Suena un <em>piiiiii</em>? ¡Bien!</p>
         <p><strong>Uso:</strong> Toca los dos extremos de un cable. Si suena, el cable está bueno. Si no suena, está roto por dentro.</p>
 
-        <h2>3. Modo 2: Midiendo Voltaje DC (V⎓)</h2>
+        <!-- === 3. Modo 2: Midiendo Resistencia (Ω) === -->
+        <h2>3. Modo 2: Midiendo Resistencia (Ω)</h2>
+        <p>Pon la perilla en 20k (o el rango de tu resistencia). Toca cada pata con una punta. <strong>¡Importante!</strong> Para medir resistencia, el componente debe estar <em>desconectado del circuito</em> (sin energía) para evitar mediciones erróneas o dañar el multímetro.</p>
+
+        <div class="destacado">
+            <h4>⚡ Cómo medir resistencia correctamente</h4>
+            
+            <p><strong>Paso 1: Desconectar el circuito</strong><br>
+            Asegúrate de que la resistencia esté completamente desconectada del circuito. ¡No midas resistencia con el circuito encendido!</p>
+            
+            <p><strong>Paso 2: Seleccionar el rango</strong><br>
+            Gira la perilla al símbolo de Ω (ohmios). Si no conoces el valor aproximado, empieza con el rango más alto (200kΩ) y baja progresivamente.</p>
+            
+            <p><strong>Paso 3: Conectar las puntas</strong><br>
+            Toca cada pata de la resistencia con una punta del multímetro (no importa cuál pata con cuál punta).</p>
+            
+            <p><strong>⚠️ ¡REGLA DE ORO!</strong><br>
+            "Nunca midas resistencia con el circuito encendido. Si lo haces, el multímetro mostrará valores incorrectos y podrías dañar el instrumento."</p>
+            
+            <p><strong>¿Por qué es tan peligroso?</strong><br>
+            El multímetro en modo ohmímetro inyecta una pequeña corriente propia para medir la resistencia. Si el circuito está encendido, esta corriente se mezcla con la del circuito, causando lecturas erróneas y potencial daño al multímetro.</p>
+        </div>
+
+        <div class="imagen-simbolo" style="text-align: center; margin: 15px 0;">
+            <img src="img/medicion-resistencia.png" alt="Medición de resistencia con multímetro" style="max-width: 100%; height: auto;">
+            <p class="leyenda-simbolo">Fig. 3: Medición de RESISTENCIA. La resistencia debe estar desconectada del circuito (SIN ENERGÍA).</p>
+        </div>
+
+        <p><strong>¿Por qué la resistencia debe estar suelta?</strong> Porque el multímetro mide la resistencia inyectando una pequeña corriente propia. Si el circuito está encendido, la corriente del circuito interferirá con la medición, dando resultados incorrectos. En el peor de los casos, podría dañar el multímetro.</p>
+
+        <h2>4. Modo 3: Midiendo Voltaje DC (V⎓)</h2>
         <p>Pon la perilla en <strong>20V DC</strong>. Toca rojo con positivo y negro con negativo.</p>
         <div class="svg-container">
-            <img src="img/midiendo_voltaje.png" alt="Multímetro midiendo una batería de 9V en paralelo" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 2. Medición en PARALELO. El circuito puede estar encendido.</em></small></p>
+            <img src="img/midiendo_voltaje.png" alt="Multímetro midiendo una batería de 9V en paralelo" style="max-width:80%; height:auto;">
+            <p><small><em>Fig. 2: Medición en PARALELO. El circuito puede estar encendido.</em></small></p>
         </div>
 
-        <h2>4. Modo 3: Midiendo Resistencia (Ω)</h2>
-        <p>Pon la perilla en <strong>20k</strong> (o el rango de tu resistencia). Toca cada pata con una punta.</p>
-        <div class="svg-container">
-            <img src="img/midiendo_resistencia.png" alt="Multímetro midiendo una resistencia suelta" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 3. Medición SIN ENERGÍA. La resistencia debe estar suelta.</em></small></p>
+        <div class="actividad">
+            <p><strong>⚡ Medición de VOLTAJE (V=) - Modo Voltímetro</strong></p>
+            <p><strong>Posición de la perilla:</strong> Gira hasta V= (voltaje DC) y selecciona el rango 20V (para fuentes de 5V o 9V).</p>
+            <p><strong>Conexión:</strong> En PARALELO con el componente (el circuito puede estar encendido).</p>
+            <p><strong>¿Por qué en paralelo?</strong> Porque el voltaje es una <em>diferencia de potencial</em> entre dos puntos. Al medir en paralelo, comparas esos puntos sin interrumpir el flujo de corriente.</p>
+            <p><strong>Puntas:</strong> Roja al positivo (+), Negra al negativo (-) del componente.</p>
+            <p><em>💡 Regla de oro: Si el multímetro muestra un valor negativo, invierte las puntas (estás midiendo al revés).</em></p>
         </div>
-        <div class="destacado" style="background-color: #ffebee; border-left-color: #f44336;">
-            <strong>¡REGLA DE ORO!</strong> NUNCA midas resistencia con el circuito encendido.
+
+        <!-- === 5. Modo 4: Midiendo Corriente (A) === -->
+        <h2>5. Modo 4: Midiendo Corriente (A)</h2>
+        <p>Pon la perilla en el rango adecuado para la corriente que esperas medir (200mA o 10A). <strong>¡Importante!</strong> Para medir corriente, el multímetro debe estar <em>en SERIE</em> con el circuito, no en paralelo.</p>
+
+        <div class="destacado">
+            <h4>⚡ Cómo medir corriente correctamente</h4>
+            
+            <p><strong>Paso 1: Cortar el circuito</strong><br>
+            Debes interrumpir el flujo de corriente en el punto donde quieres medir. En el ejemplo, cortamos el cable entre el LED y la resistencia.</p>
+            
+            <p><strong>Paso 2: Insertar el multímetro en SERIE</strong><br>
+            Conecta el multímetro <em>en el camino del circuito</em> (como si fuera una parte más del cable). La corriente debe <strong>FLUIR a través del multímetro</strong>.</p>
+            
+            <p><strong>Paso 3: Conexiones correctas</strong><br>
+            • Punta ROJA → (+) del circuito<br>
+            • Punta NEGRA → (-) del circuito</p>
+            
+            <p><strong>⚠️ ¡REGLA DE ORO!</strong><br>
+            Si conectas el multímetro en PARALELO (como para medir voltaje), <em>harás un CORTOCIRCUITO</em>. ¡El fusible del multímetro se quemará y podrías dañar el circuito!</p>
         </div>
+
+        <div class="imagen-simbolo" style="text-align: center; margin: 15px 0;">
+            <img src="img/medicion-corriente.png" alt="Medición de corriente en serie con multímetro" style="max-width: 100%; height: auto;">
+            <p class="leyenda-simbolo">Fig. 3: Medición DE CORRIENTE. El multímetro debe estar en SERIE.</p>
+        </div>
+
+        <p><strong>¿Por qué es diferente de medir voltaje?</strong> Al medir voltaje, el multímetro se conecta en paralelo (sin interrumpir el circuito). Al medir corriente, <em>debes interrumpir el circuito</em> para que toda la corriente pase a través del multímetro. ¡No hay forma de medir corriente sin abrir el circuito!</p>
+
+        <p><strong>Cómo se hace:</strong> Debes abrir el circuito e insertar el multímetro en el camino (SERIE), para que los electrones pasen <em>a través</em> de él.</p>
+         
+        <!-- === 6. La Medición Avanzada: Voltaje (voltios) vs Corriente (Amperios) === -->
+        <h2>6. La Medición Avanzada: Voltaje (voltios) vs Corriente (Amperios)</h2>
+        <p>Esta medición es diferente porque cada instrumento funciona de manera opuesta. El voltímetro y el amperímetro tienen resistencias internas opuestas que determinan cómo deben conectarse:</p>
+
+        <div class="destacado">
+            <h4>⚡ Cómo se conectan correctamente</h4>
+            
+            <p><strong>Voltímetro (V):</strong> Tiene resistencia <em>infinitamente alta</em> (casi como un cable cortado). Por eso se conecta en <strong>PARALELO</strong> con el componente. Si tuvieras que medir la presión de agua en una tubería, pondrías el manómetro en paralelo (sin interrumpir el flujo).</p>
+            
+            <p><strong>Amperímetro (A):</strong> Tiene resistencia <em>casi cero</em> (como un cable pelado). Por eso debe conectarse en <strong>SERIE</strong>, interrumpiendo el circuito para que la corriente fluya <em>a través del medidor</em>. Si tuvieras que medir cuántos litros de agua pasan por segundo, instalarías el medidor de flujo en serie (el agua debe pasar por dentro).</p>
+            
+            <p><strong>⚠️ ¡REGLA DE ORO!</strong> "Voltaje en paralelo, corriente en serie. Si conectas el amperímetro en paralelo, harás un CORTOCIRCUITO y quemarás el fusible del multímetro."</p>
+            
+            <p><strong>¿Por qué es tan peligroso?</strong> Al conectar el amperímetro en paralelo, estás creando un camino de <em>resistencia casi cero</em> directamente entre positivo y negativo. ¡La corriente se desbocará por este camino, generando calor extremo y quemando componentes!</p>
+        </div>
+
+        <div class="imagen-simbolo" style="text-align: center; margin: 15px 0;">
+            <img src="img/medicion-voltaje-corriente.png" alt="Comparación entre medición de voltaje en paralelo y corriente en serie" style="max-width: 100%; height: auto;">
+            <p class="leyenda-simbolo">Fig. 4: Voltaje (Izquierda) es Paralelo. Corriente (Derecha) es Serie.</p>
+        </div>
+
+        <p><strong>¿Por qué no se puede medir corriente en paralelo?</strong> Porque la corriente busca el camino de menor resistencia. Si conectas el amperímetro en paralelo, toda la corriente preferirá pasar por él (por su resistencia casi cero) en lugar del componente que querías medir. Esto causará:</p>
+        <ul>
+            <li><strong>Medición incorrecta:</strong> Leerás la corriente del cortocircuito, no la del componente</li>
+            <li><strong>Peligro real:</strong> El exceso de corriente calienta el multímetro y puede dañarlo</li>
+            <li><strong>Daño al circuito:</strong> El componente original dejará de funcionar por falta de corriente</li>
+        </ul>
+
+        <p><strong>Consejo para futuros docentes:</strong> Antes de que los estudiantes usen el multímetro, haz esta demostración:</p>
+        <ol>
+            <li>Mide el voltaje de un LED en paralelo (correcto)</li>
+            <li>Mide la corriente del LED en serie (correcto)</li>
+            <li>Intencionalmente mide la corriente en paralelo (¡con un multímetro de bajo costo!) para que vean el fusible quemado</li>
+        </ol>
+        <p>Pregunta: <em>"¿Por qué el LED se apagó cuando medimos la corriente en paralelo? ¿Qué pasó con la corriente?"</em> Esta experiencia práctica refuerza la diferencia de manera inolvidable.</p>
 
         <!-- NUEVA SECCIÓN: TALLER PRÁCTICO DE DIODOS -->
-        <h2>5. Taller Práctico: Midiendo tu primer LED ($\rightarrow|$)</h2>
+        <h2>7. Taller Práctico: Midiendo tu primer LED ($\rightarrow|$)</h2>
         <p>Vamos a usar el multímetro para averiguar los secretos de un LED. <strong>Importante:</strong> Haz esto con el LED suelto, desconectado de cualquier batería.</p>
 
         <div class="destacado" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
@@ -98,15 +266,7 @@
             </ul>
         </div>
 
-        <h2>6. La Medición Avanzada: Corriente (Amperios)</h2>
-        <p>Esta medición es diferente. El Amperímetro tiene resistencia casi CERO (es un cable pelado).</p>
-        <div class="svg-container">
-            <img src="img/medicion_serie_paralelo.png" alt="Esquema comparativo: Voltímetro en paralelo vs Amperímetro en serie" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 4. Voltaje (Izquierda) es Paralelo. Corriente (Derecha) es Serie.</em></small></p>
-        </div>
-        <p><strong>Cómo se hace:</strong> Debes abrir el circuito e insertar el multímetro en el camino (SERIE), para que los electrones pasen <em>a través</em> de él.</p>
-
-        <h2>7. Secretos de Oficio (Lo que nadie te dice) 🤫</h2>
+        <h2>8. Secretos de Oficio (Lo que nadie te dice) 🤫</h2>
         <h3>A. ¿Qué significa "OL" o "1 ."?</h3>
         <p>Significa <strong>"Over Limit"</strong> (Fuera de Rango). La escala es muy pequeña para lo que mides. ¡Súbela!</p>
         
@@ -273,9 +433,7 @@
             <em>"Primero simplificamos para entender. Luego complejizamos para dominar."</em>
             </p>
         </div>
-    </div>
-
-    
+    </div>    
 
         <!-- LABORATORIO STEAM INTEGRADO -->
         <div class="destacado" style="background-color: #fcf4e4; border-left-color: #ffb300; margin-top: 30px;">
@@ -333,6 +491,104 @@
             <span class="formato">🔊 MP3</span>
         </p>
     </section>
+
+    <!-- Sección de Preguntas de Consolidación (NUEVA) -->
+    <h2>❓ Preguntas de Consolidación</h2>
+    <p>Responde estas preguntas para asegurarte de que dominas los conceptos técnicos <em>y</em> estás listo para enseñarlos en tu futura aula:</p>
+
+    <details class="u1">
+    <summary>1. Explica la diferencia entre medir voltaje y medir corriente con un multímetro. ¿Por qué una medición se hace en paralelo y la otra en serie?</summary>
+    <p><strong>Explicación técnica:</strong></p>
+    <ul>
+        <li><strong>Medir voltaje (V):</strong> El voltímetro mide la <em>diferencia de potencial</em> entre dos puntos. Por eso se conecta en <strong>PARALELO</strong> con el componente. Internamente, el voltímetro tiene una resistencia muy alta (idealmente infinita) para no alterar el circuito ni consumir corriente.</li>
+        <li><strong>Medir corriente (I):</strong> El amperímetro mide el <em>flujo de electrones</em> que pasa por un punto. Por eso debe conectarse en <strong>SERIE</strong>, interrumpiendo el circuito para que toda la corriente pase a través del multímetro. Internamente, el amperímetro tiene una resistencia muy baja (idealmente cero) para no obstaculizar el flujo.</li>
+    </ul>
+    <p><strong>Analogía del agua:</strong> Medir voltaje es como medir la presión en una tubería con un manómetro (se conecta en paralelo). Medir corriente es como contar cuántos litros pasan por segundo instalando un medidor de flujo (se conecta en serie, el agua debe pasar por dentro).</p>
+    <p><strong>Regla de oro:</strong> "Voltaje en paralelo, corriente en serie. Si conectas mal el amperímetro en paralelo, ¡haces un cortocircuito y explota el fusible!"</p>
+    </details>
+
+    <details class="u1">
+    <summary>2. ¿Qué significa "OL" o "1 ." en la pantalla del multímetro? ¿Qué debes hacer cuando aparece?</summary>
+    <p><strong>Significado:</strong> "OL" significa <strong>"Over Limit"</strong> (Fuera de Rango) o "Open Loop" (Circuito Abierto). Indica que el valor que estás midiendo es mayor que el rango seleccionado en la perilla.</p>
+    
+    <p><strong>Qué hacer:</strong></p>
+    <ul>
+        <li><strong>Si estás midiendo resistencia (Ω):</strong> Significa que la resistencia es mayor al rango seleccionado. Debes girar la perilla a un rango más alto (ej: de 200Ω a 2000Ω). Si incluso en el rango más alto sigue mostrando OL, el circuito está abierto (no hay continuidad).</li>
+        <li><strong>Si estás midiendo voltaje (V):</strong> Debes aumentar el rango (ej: de 20V a 200V o 600V).</li>
+        <li><strong>En modo continuidad (🔊):</strong> OL significa que NO hay continuidad (circuito abierto).</li>
+    </ul>
+    
+    <p><strong>Para tu futura aula:</strong> Enseña a los niños que "OL" no es un error, es el multímetro diciendo: "¡Ey, esto es más grande de lo que esperaba! Ajusta mi perilla para poder medirlo bien".</p>
+    </details>
+
+    <details class="u1">
+    <summary>3. ¿Por qué es peligroso medir resistencia con el circuito encendido? ¿Qué podría dañarse?</summary>
+    <p><strong>Explicación técnica:</strong> El multímetro en modo ohmímetro (Ω) funciona inyectando una pequeña corriente propia a través del componente para calcular su resistencia. Si el circuito está encendido, esa corriente externa se suma a la corriente del circuito, causando:</p>
+    <ul>
+        <li><strong>Lectura errónea:</strong> La medición será completamente incorrecta porque el multímetro medirá la combinación de su corriente + la del circuito.</li>
+        <li><strong>Daño al multímetro:</strong> Si el voltaje del circuito es alto, puede ingresar al multímetro a través de las puntas y quemar su circuito interno (especialmente el fusible o los componentes sensibles).</li>
+        <li><strong>Daño al circuito:</strong> En casos extremos, la corriente inyectada por el multímetro podría afectar componentes delicados.</li>
+    </ul>
+    <p><strong>Regla de oro:</strong> <em>"Nunca midas resistencia con el circuito encendido. Apaga la fuente, desconecta la batería y asegúrate de que no haya voltaje antes de medir."</em></p>
+    <p><strong>Analogía:</strong> "Es como intentar medir la longitud de una liga mientras alguien la está estirando. No obtendrás la longitud real y podrías lastimarte cuando se rompa."</p>
+    </details>
+
+    <details class="u1">
+    <summary>4. Explica el experimento de la "Batería de Limón". ¿Qué principios químicos y eléctricos demuestra? ¿Cómo conectarías 4 limones para encender un LED rojo de 2V?</summary>
+    <p><strong>Explicación técnica:</strong> La batería de limón demuestra el principio de la <strong>celda electroquímica</strong>:</p>
+    <ul>
+        <li><strong>Química:</strong> El ácido cítrico del limón actúa como <strong>electrolito</strong> (solución conductora). El electrodo de zinc (clavo galvanizado) se oxida, liberando electrones (ánodo negativo). El electrodo de cobre (moneda) se reduce, aceptando electrones (cátodo positivo).</li>
+        <li><strong>Eléctrica:</strong> Esta reacción química genera una diferencia de potencial (voltaje) de aproximadamente 0.9V por cada celda de limón.</li>
+    </ul>
+    
+    <p><strong>Para encender un LED rojo de 2V:</strong></p>
+    <p>Un LED rojo típico necesita aproximadamente 2V para encender. Como cada limón produce ~0.9V, necesitas <strong>conectar los limones en SERIE</strong> para sumar voltajes:</p>
+    <ul>
+        <li>3 limones en serie: 0.9V × 3 = 2.7V ✅ (suficiente para el LED, pero necesitas resistencia para limitar corriente)</li>
+        <li>4 limones en serie: 0.9V × 4 = 3.6V (también funciona, con resistencia adecuada)</li>
+    </ul>
+    
+    <p><strong>Conexión:</strong> Conecta el cobre de un limón al zinc del siguiente, y así sucesivamente. El zinc del primer limón va al cátodo del LED (-), y el cobre del último limón va al ánodo del LED (+) a través de una resistencia de 330Ω.</p>
+    
+    <p><strong>Conexión histórica (STEAM):</strong> Este mismo principio fue usado posiblemente en la "Batería de Bagdad" (2000 años atrás) para galvanizar joyas. ¡Estás recreando tecnología ancestral!</p>
+    </details>
+
+    <details class="u1">
+    <summary>5. ¿Cuál es la diferencia entre una pila no recargable (como la CR2032) y una batería recargable (como la de un celular)? ¿Por qué no puedes recargar una pila común con un cargador de celular?</summary>
+    <p><strong>Explicación técnica:</strong></p>
+    <ul>
+        <li><strong>Pila no recargable (primaria):</strong> Utiliza una reacción química <strong>irreversible</strong>. Ej: pila alcalina, CR2032 de litio (no recargable). Una vez que los reactivos se agotan, la reacción no puede invertirse. Intentar recargarla es peligroso porque puede generar gases, calentarse y explotar.</li>
+        <li><strong>Batería recargable (secundaria):</strong> Utiliza una reacción química <strong>reversible</strong>. Ej: Li-ion, NiMH. Al aplicar corriente externa, la reacción química se invierte, restaurando los materiales originales.</li>
+    </ul>
+    
+    <p><strong>¿Por qué no puedes recargar una pila común con un cargador de celular?</strong></p>
+    <ul>
+        <li><strong>Química incompatible:</strong> El cargador de celular está diseñado para la química específica de Li-ion (voltaje 4.2V, corriente controlada). Aplicar eso a una pila alcalina puede causar sobrecalentamiento y explosión.</li>
+        <li><strong>Falta de control:</strong> Las pilas no recargables no tienen los circuitos de protección que tienen las baterías recargables para detener la carga cuando están llenas.</li>
+    </ul>
+    
+    <p><strong>Analogía:</strong> "Una pila no recargable es como un vaso de papel con agua: una vez que te lo bebes, no puedes volver a llenarlo porque el vaso se deshace. Una batería recargable es como un termo reutilizable: puedes vaciarlo y volver a llenarlo muchas veces."</p>
+    </details>
+
+    <details class="u1">
+    <summary>6. Un niño conecta un condensador electrolítico al revés en un circuito de 5V y el condensador se calienta pero no explota. ¿Qué pasó? ¿Cómo explicas esto de forma segura en el aula sin asustar a los estudiantes?</summary>
+    <p><strong>Explicación técnica (nivel estudiante):</strong> Los condensadores electrolíticos tienen una capa muy delgada de óxido en su interior que actúa como aislante. Esta capa se forma correctamente solo cuando se aplica voltaje en la polaridad correcta. Al conectarlo al revés:</p>
+    <ul>
+        <li>La capa de óxido se degrada lentamente.</li>
+        <li>Comienza a circular una pequeña corriente de fuga que calienta el condensador.</li>
+        <li>El electrolito interno puede generar gases y el condensador puede inflarse o eventualmente explotar si se mantiene así por mucho tiempo.</li>
+    </ul>
+    
+    <p><strong>Explicación segura para el aula (sin asustar):</strong></p>
+    <p>"Imagina que el condensador es como un globo con agua. Si lo conectas bien (polaridad correcta), el agua se queda adentro tranquilamente. Si lo conectas al revés, es como si apretaras el globo: el agua intenta salir, el globo se calienta y se estira, y si sigues apretando, ¡puede reventar! Por eso siempre debemos respetar la pata larga (+) y la pata corta (-), y buscar la franja blanca que marca el negativo."</p>
+    
+    <p><strong>Medidas de seguridad en el aula:</strong></p>
+    <ul>
+        <li>Usa solo condensadores de baja tensión (≤16V) y baja capacitancia (≤1000µF) en proyectos escolares.</li>
+        <li>Marca siempre el terminal positivo con cinta roja antes de entregar los componentes.</li>
+        <li>Si un estudiante conecta uno al revés y solo se calienta, no es peligroso a 5V, pero es una oportunidad de aprendizaje: "¿Ves cómo se calienta? Eso pasa por no respetar la polaridad. Desconéctalo rápido y conéctalo bien."</li>
+    </ul>
+    </details>
     
     <section class="cuaderno-section">
     <div class="cuaderno-header">

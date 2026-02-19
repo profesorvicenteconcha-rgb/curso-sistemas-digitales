@@ -220,6 +220,88 @@
         </p>
     </section>
 
+    <!-- Sección de Preguntas de Consolidación (NUEVA) -->
+    <h2>❓ Preguntas de Consolidación</h2>
+    <p>Responde estas preguntas para asegurarte de que dominas los conceptos técnicos <em>y</em> estás listo para enseñarlos en tu futura aula:</p>
+
+    <details class="u1">
+    <summary>1. Explica el significado de cada banda en una resistencia de 4 bandas. ¿Por qué la banda de tolerancia (dorada o plateada) es importante?</summary>
+    <p><strong>Explicación técnica:</strong> En una resistencia de 4 bandas:</p>
+    <ul>
+        <li><strong>Banda 1 (1er dígito):</strong> El primer número del valor.</li>
+        <li><strong>Banda 2 (2do dígito):</strong> El segundo número del valor.</li>
+        <li><strong>Banda 3 (Multiplicador):</strong> La potencia de 10 por la que se multiplican los dos primeros dígitos (número de ceros a agregar).</li>
+        <li><strong>Banda 4 (Tolerancia):</strong> Indica el margen de error del fabricante. Dorado = ±5%, Plateado = ±10%.</li>
+    </ul>
+    <p>La tolerancia es importante porque ningún componente es perfecto. Una resistencia de 100Ω ±5% puede tener un valor real entre 95Ω y 105Ω, y el circuito debe funcionar correctamente dentro de ese rango.</p>
+    <p><strong>Para tu futura aula:</strong> Usa la analogía de la "fabricación de galletas": "Así como no todas las galletas salen exactamente del mismo tamaño, las resistencias no tienen el valor exacto. La tolerancia nos dice qué tan cerca está del valor ideal".</p>
+    </details>
+
+    <details class="u1">
+    <summary>2. ¿Cuál es el valor de una resistencia con colores: Naranja - Naranja - Marrón - Dorado? ¿En qué rango puede estar su valor real?</summary>
+    <p><strong>Cálculo paso a paso:</strong></p>
+    <ul>
+        <li>Naranja (1er dígito) = 3</li>
+        <li>Naranja (2do dígito) = 3</li>
+        <li>Marrón (Multiplicador) = ×10 (agregar un cero)</li>
+        <li>Dorado (Tolerancia) = ±5%</li>
+    </ul>
+    <p><strong>Valor nominal:</strong> 33 × 10 = <strong>330 Ω</strong></p>
+    <p><strong>Rango real:</strong> 330 Ω ±5% = 330 - (330 × 0.05) = 313.5 Ω hasta 330 + (330 × 0.05) = 346.5 Ω</p>
+    <p><strong>Importante:</strong> Cualquier valor entre 313.5 Ω y 346.5 Ω es aceptable para una resistencia de 330 Ω con tolerancia dorada.</p>
+    </details>
+
+    <details class="u1">
+    <summary>3. ¿Por qué no existen resistencias de todos los valores posibles (ej: 9,847 Ω)? Explica el concepto de series estándar E12 y E24.</summary>
+    <p><strong>Explicación técnica:</strong> Fabricar resistencias con valores tan precisos y únicos sería imposible y extremadamente costoso. En su lugar, la industria acordó fabricar resistencias solo en <strong>valores redondeados y predefinidos</strong> que cubren todo el rango útil con suficiente precisión.</p>
+    <p><strong>Series estándar:</strong></p>
+    <ul>
+        <li><strong>E12:</strong> 12 valores por década (10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82). Tolerancia típica ±10%.</li>
+        <li><strong>E24:</strong> 24 valores por década (incluye los de E12 más valores intermedios). Tolerancia típica ±5%.</li>
+    </ul>
+    <p><strong>Analogía del taller mecánico:</strong> "E12 es como un juego básico de llaves con 12 tamaños. E24 es como un juego profesional con 24 tamaños. No necesitas llaves de 8.0mm, 8.1mm, 8.2mm... porque una llave de 8mm sirve para tuercas de 7.9mm a 8.1mm gracias a su tolerancia."</p>
+    </details>
+
+    <details class="u1">
+    <summary>4. ¿Qué significa que una resistencia tenga tolerancia ±5%? Si mides una resistencia de 100Ω con un multímetro y marca 97Ω, ¿está dañada?</summary>
+    <p><strong>Significado de tolerancia ±5%:</strong> El fabricante garantiza que el valor real de la resistencia está dentro de un rango del 5% alrededor del valor nominal. Para 100Ω, el rango es de 95Ω a 105Ω.</p>
+    <p><strong>Respuesta:</strong> NO, no está dañada. 97Ω está dentro del rango permitido (95Ω - 105Ω). Es normal y el circuito funcionará correctamente.</p>
+    <p><strong>Error común:</strong> Muchos principiantes creen que si la medición no es exactamente 100Ω, la resistencia está defectuosa. Esto es falso. La tolerancia existe precisamente porque la fabricación perfecta es imposible.</p>
+    <p><strong>Para tu futura aula:</strong> Realiza una demostración: mide varias resistencias del mismo valor nominal y muestra cómo todas dan valores ligeramente diferentes pero dentro del rango de tolerancia.</p>
+    </details>
+
+    <details class="u1">
+    <summary>5. Diseña una actividad de 5 minutos para que niños de 9 años memoricen el código de colores sin usar tablas, usando el juego de "Misión Secreta: Decodificadores".</summary>
+    <p><strong>Actividad: "Misión Secreta: Decodificadores"</strong></p>
+    <p><strong>Materiales por pareja:</strong> 5 resistencias de diferentes valores, una hoja con la tabla de colores (solo como referencia de emergencia), cronómetro.</p>
+    
+    <p><strong>Protocolo:</strong></p>
+    <ol>
+        <li><strong>Paso 1 (1 min) - El Desafío Inverso:</strong> "No voy a decirles el valor de la resistencia. En su lugar, les daré el número: 4700Ω. ¡Ustedes deben encontrar en la caja la resistencia que tenga esos colores!"</li>
+        <li><strong>Paso 2 (2 min) - La Búsqueda:</strong> Los niños deben recordar o deducir: 4 = Amarillo, 7 = Violeta, 00 = Rojo (multiplicador ×100). Buscan una resistencia con esos colores.</li>
+        <li><strong>Paso 3 (2 min) - Verificación y Puntuación:</strong> Verifican con la calculadora o app. Cada resistencia correcta vale puntos para "subir de rango" a Ingeniero Jefe.</li>
+    </ol>
+    
+    <p><strong>Objetivo pedagógico:</strong> Este juego entrena la asociación visual-numérica mucho más rápido que memorizar la tabla. El cerebro recuerda mejor cuando busca activamente que cuando lee pasivamente.</p>
+    
+    <p><strong>Variación competitiva:</strong> "El equipo que encuentre primero la resistencia de 220Ω (Rojo-Rojo-Marrón) gana un punto".</p>
+    </details>
+
+    <details class="u1">
+    <summary>6. Explica por qué a veces una resistencia de 330Ω puede medir 325Ω o 338Ω con el multímetro, y por qué esto no afecta el funcionamiento del circuito con un LED.</summary>
+    <p><strong>Explicación técnica:</strong> Esto se debe a la <strong>tolerancia</strong> de fabricación. Una resistencia de 330Ω con tolerancia dorada (±5%) puede tener cualquier valor entre 313.5Ω y 346.5Ω.</p>
+    
+    <p><strong>¿Por qué no afecta al LED?</strong></p>
+    <ul>
+        <li>Para un LED rojo típico (2V, 20mA) con fuente de 5V, la resistencia ideal sería 150Ω (3V / 0.02A = 150Ω).</li>
+        <li>Usamos 330Ω (mayor que 150Ω) por seguridad, lo que da aproximadamente 9mA en lugar de 20mA.</li>
+        <li>Si la resistencia real es 325Ω (menor) o 338Ω (mayor), la corriente variará ligeramente (entre 8.8mA y 9.2mA).</li>
+        <li>Esta diferencia es imperceptible para el ojo humano. El LED seguirá encendido sin problemas.</li>
+    </ul>
+    
+    <p><strong>Analogía:</strong> "Es como comprar una bolsa de papas fritas que dice 'peso neto 100g ±5g'. Si tu bolsa pesa 97g o 103g, sigue siendo una bolsa de papas y te llena igual. Lo mismo pasa con la resistencia: aunque no sea exactamente 330Ω, sigue cumpliendo su función de proteger el LED."</p>
+    </details>
+
     <!-- === TARJETA DE IDENTIDAD DEL PROMPT ÉTICO === -->
     <section class="prompt-section">
         <div class="prompt-header">

@@ -41,7 +41,7 @@
             <img src="img/circuito_serie.png" 
                  alt="Circuito en Serie con LEDs" 
                  style="max-width: 50%; height: auto; border-radius: 8px;">
-            <p><small><em>Fig 1. En serie, la corriente es la misma para todos.</em></small></p>
+            <p><small><em>Fig. 1: En serie, la corriente es la misma para todos.</em></small></p>
         </div>
 
         <div class="formula">
@@ -79,14 +79,22 @@
         <div class="destacado">
             <p><strong>🔍 ¿Cómo funciona? (Sin fórmulas complicadas)</strong></p>
             <p>Imagina este circuito simple:</p>
+            
             <div class="svg-container">
-                <img src="img/diagrama-divisor-voltaje.png" alt="Diagrama del divisor de voltaje" style="width: 60%; height: auto; border-radius: 8px; border: 1px solid #eee;">
+                <!-- Imagen ajustada al 50% como solicitaste -->
+                <img src="img/adaptador 5V a 3-3V.png" 
+                    alt="Diagrama del divisor de voltaje" 
+                    style="max-width: 75%; height: auto; border-radius: 8px;">
+                <p><small><em>Fig. 2: Divisor de Voltaje: Cómo se divide el voltaje en un circuito con dos resistencias.</em></small></p>
             </div>
+
             <p>- <strong>R₁ es el doble de grande que R₂</strong> → se queda con el doble de voltaje</p>
             <p>- Total = 3 partes (2kΩ + 1kΩ)</p>
             <p>- R₁ toma 2/3 del pastel → <strong>3.33V</strong></p>
             <p>- R₂ toma 1/3 del pastel → <strong>1.67V</strong></p>
             <p>- <strong>V<sub>out</sub> = 1.67V</strong> (el voltaje sobre R₂)</p>
+            <p>El voltaje de salida (Vout) se mide sobre R₂, por lo que Vout = 1.67V. </p>
+            <p>Este principio es fundamental para entender cómo los circuitos digitales interpretan señales analógicas y cómo se generan niveles de voltaje específicos para componentes como sensores y convertidores.</p>
         </div>
 
         <div class="formula">
@@ -120,7 +128,13 @@
         <div class="dato-extra">
             <p><strong>🌟 Aplicación real: Adaptar 5V → 3.3V</strong></p>
             <p>Necesitas alimentar un sensor de 3.3V con tu Arduino de 5V:</p>
-            <img src="img\adaptador 5V a 3-3V.png" alt="Adaptador de 5V a 3.3V con divisor de voltaje" style="max-width:45%; height:auto;";>
+            <div class="svg-container">
+                <!-- Imagen ajustada al 50% como solicitaste -->
+                <img src="img/adaptador 5V a 3-3V.png" 
+                    alt="Adaptador de 5V a 3.3V con divisor de voltaje" 
+                    style="max-width: 50%; height: auto; border-radius: 8px;">
+                <p><small><em>Fig. 3: Divisor de voltaje en acción. 5V → 3.3V.</em></small></p>
+            </div>
             <p>Cálculo rápido: 5V × (2kΩ / 3kΩ) = <strong>3.33V</strong> → ¡Perfecto!</p>
         </div>
 
@@ -150,7 +164,7 @@
             <img src="img/circuito_paralelo.png" 
                  alt="Circuito en Paralelo con LEDs" 
                  style="max-width: 50%; height: auto; border-radius: 8px;">
-            <p><small><em>Fig 2. En paralelo, el voltaje es el mismo para todos.</em></small></p>
+            <p><small><em>Fig. 4: En paralelo, el voltaje es el mismo para todos.</em></small></p>
         </div>
 
         <div class="formula">
@@ -245,7 +259,7 @@
         <div class="svg-container">
             <!-- Imagen Nueva: Topología Riesgosa -->
             <img src="img/paralelo_resistencia_compartida.png" alt="Diagrama de circuito: Una sola resistencia alimentando a 5 LEDs en paralelo" style="max-width: 60%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
-            <p><small><em>Fig 3. El diseño polémico: Una sola resistencia (cuello de botella) para todos los LEDs.</em></small></p>
+            <p><small><em>Fig. 5: El diseño polémico: Una sola resistencia (cuello de botella) para todos los LEDs.</em></small></p>
         </div>
 
         <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
@@ -366,7 +380,7 @@
                     <h4 style="margin-top: 0; color: var(--color-primario);">1. Conexión en Serie (Más Fuerza)</h4>
                     
                     <!-- Imagen Grande -->
-                    <img src="img/pilas_seire.png" alt="3 Baterías en serie" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee;">
+                    <img src="img/pilas_serie.png" alt="3 Baterías en serie" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee;">
                     
                     <p>Unimos el positivo de una con el negativo de la siguiente.</p>
                     
@@ -398,6 +412,32 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            Dos docentes exploran las diferencias entre serie y paralelo con ejemplos cotidianos, analizan el peligroso "efecto dominó" en diseños mal hechos, y comparten estrategias para enseñar el divisor de voltaje sin fórmulas complejas.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <source src="audio/leccion5.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 13:52 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
     </section>
 
     <!-- Sección de Preguntas de Consolidación -->
@@ -479,32 +519,6 @@
     
     <p><strong>Conexión STEAM:</strong> Esta es una excelente oportunidad para hablar sobre <em>ingeniería de sistemas</em>: los ingenieros diseñan las casas en Paralelo precisamente para evitar que un fallo pequeño afecte todo el sistema.</p>
     </details>
-
-    <!-- === PODCAST: Conversación entre Expertos === -->
-    <section class="podcast-section">
-        <div class="podcast-header">
-            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
-            </svg>
-            <h3>🎧 Podcast: Conversación entre Expertos</h3>
-        </div>
-        
-        <p class="podcast-descripcion">
-            Dos docentes exploran las diferencias entre serie y paralelo con ejemplos cotidianos, analizan el peligroso "efecto dominó" en diseños mal hechos, y comparten estrategias para enseñar el divisor de voltaje sin fórmulas complejas.
-        </p>
-        
-        <div class="podcast-player">
-            <audio controls preload="metadata">
-                <source src="audio/leccion5.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
-            </audio>
-        </div>
-        
-        <p class="podcast-meta">
-            <span class="duracion">⏱️ 13:52 min</span>
-            <span class="formato">🔊 MP3</span>
-        </p>
-    </section>
 
     <!-- === TARJETA DE IDENTIDAD DEL PROMPT ÉTICO === -->
     <section class="prompt-section">
