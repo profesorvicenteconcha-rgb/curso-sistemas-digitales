@@ -3,115 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección 21: El Detector de Mentiras - Fundamentos de Sistemas Digitales</title>
+    <title>Lección 21: Isomorfismo - Fundamentos de Sistemas Digitales</title>
     <link rel="stylesheet" href="estilos.css">
-    
-    <!-- KaTeX Configurado para usar $ -->
+    <!-- KaTeX -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
-        onload="renderMathInElement(document.body, {
-            delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false}
-            ]
-        });">
-    </script>
-
-    <style>
-        .tabla-verdad th { background-color: var(--color-primario); color: white; }
-        .fila-mentira { background-color: #ffebee; color: #c62828; font-weight: bold; } /* Rojo suave */
-        .fila-verdad { background-color: #e8f5e9; color: #2e7d32; } /* Verde suave */
-    </style>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 </head>
 <body>
 
 <div class="contenedor">
     <header>
         <p><small>Unidad 3: Fundamentos de Cómputo - Lección 21</small></p>
-        <h1>🤥 El Detector de Mentiras: Implicación y Circuitos</h1>
+        <h1>🗿 La Piedra Rosetta: Isomorfismo</h1>
     </header>
 
     <section>
-        <p>En ingeniería y leyes, las frases del tipo <em>"Si haces esto, entonces pasa aquello"</em> son sagradas. Hoy vamos a construir un circuito capaz de juzgar si una promesa se cumplió o se rompió.</p>
+        <p>Bienvenidos a la Unidad 3. Aquí descubriremos que la Electrónica, la Lógica y las Matemáticas son trillizas separadas al nacer. Existe un concepto llamado <strong>Isomorfismo</strong> (misma forma), que nos dice que sus reglas son idénticas.</p>
 
-        <h2>1. Verdades y Mentiras Eternas</h2>
-        <p>Antes de la promesa, veamos los extremos:</p>
-        <ul>
-            <li><strong>Tautología (Siempre Verdad):</strong> Un circuito que NUNCA se apaga ($1$).
-                <div class="formula">$$A + \bar{A} = 1$$</div>
-                <p><small>Ejemplo: "O llueve ($A$) o no llueve ($\bar{A}$)". No hay otra opción.</small></p>
-            </li>
-            <li><strong>Contradicción (Siempre Falso):</strong> Un circuito que NUNCA se prende ($0$).
-                <div class="formula">$$A \cdot \bar{A} = 0$$</div>
-                <p><small>Ejemplo: "Llueve y no llueve al mismo tiempo". ¡Imposible!</small></p>
-            </li>
-        </ul>
-        <!-- NUEVO: Nota de enlace a la Lección 24 -->
-        <div class="dato-extra" style="padding: 10px; margin-top: 10px; background-color: #e3f2fd; border-left-color: #2196f3;">
-            <p style="margin: 0;"><small><strong>🔗 Conexión Matemática:</strong> Estas dos definiciones (que la suma da 1 y el producto da 0) son los pilares del álgebra. En la <strong>Lección 24</strong> volveremos aquí para probar formalmente la "Unicidad del Complemento".</small></p>
+            <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
+            <h3>📐 ¿Qué es el álgebra de Boole?</h3>
+            <p>Es un sistema matemático formado por un conjunto \(B\) con solo dos elementos: \(\{0, 1\}\) (que representan Falso/Verdadero, Apagado/Encendido), junto con dos operaciones binarias llamadas <strong>adición</strong> (\(+\)) y <strong>producto</strong> (\(\cdot\)).</p>
+            <p>Aunque usamos los mismos símbolos que en la aritmética, las reglas son diferentes porque el conjunto es limitado. Desde niños hemos usado tablas similares para sumar y multiplicar números naturales. Ahora las adaptaremos a nuestro nuevo universo.</p>
         </div>
+
+        <h3>🧮 Tablas de la adición y el producto en aritmética</h3>
+        <p>En la escuela aprendiste tablas como estas. Observa que el resultado puede ser cualquier número natural.</p>
+        <div style="overflow-x: auto; margin-bottom: 25px;">
+            <table class="tabla-centrada">
+                <caption>Adición aritmética (ℕ)</caption>
+                <thead>
+                    <th>+</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>…</th>
+                </thead>
+                <tbody>
+                    <tr><th>0</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>…</td></tr>
+                    <tr><th>1</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>…</td></tr>
+                    <tr><th>2</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>…</td></tr>
+                    <tr><th>3</th><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>…</td></tr>
+                    <tr><th>4</th><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>…</td></tr>
+                    <tr><th>…</th><td colspan="6">…</td></tr>
+                </tbody>                
+        </div>       
+        
+        <div style="overflow-x: auto; margin-bottom: 30px;">
+            <table class="tabla-centrada">
+                <caption>Producto aritmético (ℕ)</caption>
+                <thead>
+                    <th>·</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>…</th>
+                </thead>
+                <tbody>
+                    <tr><th>0</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>…</td></tr>
+                    <tr><th>1</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>…</td></tr>
+                    <tr><th>2</th><td>0</td><td>2</td><td>4</td><td>6</td><td>8</td><td>…</td></tr>
+                    <tr><th>3</th><td>0</td><td>3</td><td>6</td><td>9</td><td>12</td><td>…</td></tr>
+                    <tr><th>4</th><td>0</td><td>4</td><td>8</td><td>12</td><td>16</td><td>…</td></tr>
+                    <tr><th>…</th><td colspan="6">…</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>🔢 Tablas del álgebra de Boole (conjunto \(B = \{0,1\}\))</h3>
+        <p>Ahora reducimos el universo a solo dos elementos. Las tablas de adición y producto cambian drásticamente:</p>
+        
+        <div style="overflow-x: auto; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+            <table class="tabla-centrada" style="min-width: 150px;">
+                <caption>Adición lógica (OR)</caption>
+                <thead>
+                    <th>+</th><th>0</th><th>1</th>
+                </thead>
+                <tbody>
+                    <tr><th>0</th><td>0</td><td>1</td></tr>
+                    <tr><th>1</th><td>1</td><td>1</td></tr>
+                </tbody>
+            </table>
+            </div>
+         
+        <div style="overflow-x: auto; margin-bottom: 30px;">
+            <table class="tabla-centrada">
+                <caption>Producto lógico (AND)</caption>
+                <thead>                    
+                    <th>·</th><th>0</th><th>1</th>
+                </thead>
+                <tbody>
+                    <tr><th>0</th><td>0</td><td>0</td></tr>
+                    <tr><th>1</th><td>0</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
+            <h3>⚠️ ¡Atención!</h3>
+            <p>En aritmética, \(1+1 = 2\); en álgebra de Boole, \(1+1 = 1\).  
+            En aritmética, \(0·0 = 0\); en álgebra de Boole, \(0·0 = 0\) (coincide).  
+            En aritmética, \(1·1 = 1\); en álgebra de Boole, \(1·1 = 1\) (también coincide).</p>
+            <p><strong>La diferencia más notable es que en Boole no existe el número 2:</strong> todo resultado se queda dentro del conjunto \(\{0,1\}\). Por eso la tabla de la adición tiene solo unos y ceros.</p>
+        </div>
+
+        <!-- ========== PROPIEDADES FUNDAMENTALES: CONMUTATIVIDAD ========== -->
+        <h2>📐 Propiedades fundamentales del álgebra de Boole</h2>
+        <p>El álgebra de Boole cumple una serie de propiedades que la convierten en una estructura matemática sólida y coherente. Estas propiedades son isomorfas a las que rigen los conjuntos y los circuitos lógicos. Comenzamos con la <strong>conmutatividad</strong>.</p>
+
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
+            <h3>Propiedad conmutativa</h3>
+            <p>El orden de las entradas no altera el resultado, tanto para la suma lógica (OR) como para el producto lógico (AND).</p>
+            <div class="svg-container">
+                <img src="img/propiedad_conmutativa.png" alt="Diagramas de las compuertas OR y AND que muestran la conmutatividad: A+B = B+A y A·B = B·A" style="max-width:100%; height:auto;">
+                <p><small><em>Fig. 1: Conmutatividad: cambiar el orden de las entradas no modifica la salida.</em></small></p>
+            </div>
+            <p>En el lenguaje de conjuntos: \(A \cup B = B \cup A\) y \(A \cap B = B \cap A\).  
+            En circuitos, la compuerta OR y la compuerta AND son <strong>conmutativas</strong>: puedes intercambiar sus entradas sin que el resultado cambie.</p>
+        </div>
+
+        <!-- ========== PROPIEDADES FUNDAMENTALES: ASOCIATIVIDAD ========== -->
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
+            <h3>Propiedad asociativa</h3>
+            <p>La forma en que se agrupan las operaciones no altera el resultado final, tanto para la suma lógica (OR) como para el producto lógico (AND).</p>
+            <div class="svg-container">
+                <img src="img/propiedad_asociativa.png" alt="Diagramas de las compuertas OR y AND que muestran la asociatividad: A+(B+C) = (A+B)+C y A·(B·C) = (A·B)·C" style="max-width:100%; height:auto;">
+                <p><small><em>Fig. 2: Asociatividad: agrupar de diferente manera no cambia la salida.</em></small></p>
+            </div>
+            <p>En el lenguaje de conjuntos: \(A \cup (B \cup C) = (A \cup B) \cup C\) y \(A \cap (B \cap C) = (A \cap B) \cap C\).  
+            En circuitos, las compuertas OR y AND se pueden conectar en cascada sin importar el orden de los paréntesis: el resultado es siempre el mismo.</p>
+        </div>
+
+        <!-- ========== PROPIEDAD DISTRIBUTIVA ========== -->
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
+            <h3>Propiedad distributiva</h3>
+            <p>El producto lógico se distribuye sobre la suma, y viceversa (algo que no ocurre en la aritmética común).</p>
+            <div class="svg-container">
+                <img src="img/propiedad_distributiva.png" alt="Diagramas que muestran las dos formas de la distributividad: A·(B+C) = A·B + A·C y A+(B·C) = (A+B)·(A+C)" style="max-width:100%; height:auto;">
+                <p><small><em>Fig. 3: Distributividad: el producto sobre la suma (izquierda) y la suma sobre el producto (derecha).</em></small></p>
+            </div>
+            <p>En el lenguaje de conjuntos: \(A \cap (B \cup C) = (A \cap B) \cup (A \cap C)\) y \(A \cup (B \cap C) = (A \cup B) \cap (A \cup C)\).  
+            En circuitos, esta propiedad permite transformar combinaciones de compuertas AND y OR, facilitando la simplificación de diseños.</p>
+        </div>
+        
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
+            <h3>🧩 ¿Qué es el isomorfismo?</h3>
+            <p>En matemáticas y computación, dos sistemas son <strong>isomorfos</strong> si existe una correspondencia biunívoca entre sus elementos y sus operaciones, de modo que todo lo que se puede hacer en uno se puede replicar exactamente en el otro.</p>
+            <p><strong>Analogía cotidiana:</strong> Un plano de una casa (dibujo) y la casa construida (realidad) son isomorfos: cada pared en el plano corresponde a una pared física, cada habitación a una habitación real, y las relaciones espaciales se preservan. Si entiendes el plano, entiendes la casa.</p>
+            <p><strong>En nuestro curso:</strong> Una misma estructura lógica puede expresarse como <strong>circuito eléctrico</strong>, como <strong>fórmula matemática</strong> o como <strong>diagrama de conjuntos</strong>. ¡Todas son la misma cosa vista desde diferentes lentes!</p>
+        </div>
+
+        <h2>1. La Tabla de Traducción Universal</h2>
+        <p>Con la Siguiente tabla puedes traducir un problema filosófico a un circuito eléctrico, o viceversa.</p>
+
+        <div style="overflow-x: auto; margin: 25px 0;">
+            <table class="tabla-centrada">
+                <thead>
+                    <th>Concepto</th>
+                    <th>Lógica (\(p, q\))</th>
+                    <th>Conjuntos (\(A, B\))</th>
+                    <th>Circuitos (\(A, B\))</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>"Y"</strong> (Intersección)</td>
+                        <td>\(\land\) (Conjunción)</td>
+                        <td>\(\cap\) (Intersección)</td>
+                        <td>\(\cdot\) (AND)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>"O"</strong> (Unión)</td>
+                        <td>\(\lor\) (Disyunción)</td>
+                        <td>\(\cup\) (Unión)</td>
+                        <td>\(+\) (OR)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>"NO"</strong> (Inverso)</td>
+                        <td>\(\neg p\) (Negación)</td>
+                        <td>\(A^c\) (Complemento)</td>
+                        <td>\(\bar{A}\) (NOT)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Todo / Verdad</strong></td>
+                        <td>\(V\) (Verdadero)</td>
+                        <td>\(U\) (Universo)</td>
+                        <td>\(1\) (5V)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nada / Falso</strong></td>
+                        <td>\(F\) (Falso)</td>
+                        <td>\(\emptyset\) (Vacío)</td>
+                        <td>\(0\) (GND)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="nota">⚠️ <strong>Nota técnica:</strong> En circuitos, "1" significa voltaje alto (generalmente 5V) y "0" significa voltaje bajo (0V, GND). Es el mismo significado lógico pero con una implementación física.</p>
+
+        <h2>2. Venn vs. Compuertas 🔴🔵</h2>
+        <p>¿Recuerdas los diagramas de bolas del colegio? Eran circuitos disfrazados. Vamos a analizar la geometría de la decisión:</p>
 
         <div class="svg-container">
-            <!-- Imagen: Tautología vs Contradicción -->
-            <img src="img/tautologia_contradiccion.png" alt="Izquierda: Circuito paralelo (siempre conecta). Derecha: Circuito serie con inverso (siempre abierto)." style="max-width:100%; height:auto;">
+            <img src="img/venn_vs_gates.png" alt="Comparación visual: Intersección de conjuntos es igual a una compuerta AND. Unión es igual a una OR." style="max-width:100%; height:auto;">
         </div>
 
-        <h2>2. La Implicación ($p \rightarrow q$): La Promesa</h2>
-        <p>No existe un chip "Implicador", pero podemos construirlo. Usemos el ejemplo de la <strong>Promesa del Político</strong>:</p>
         <div class="destacado">
-            <p><strong>"Si gano las elecciones ($A$), entonces bajaré los impuestos ($B$)."</strong></p>
+            <h3>🔹 La Intersección es "El Club Exclusivo" (AND)</h3>
+            <p>Mira la zona sombreada en la intersección ($A \cap B$). Es <strong>pequeña</strong>. Solo un pedacito en el centro.</p>
+            <ul>
+                <li><strong>En Conjuntos:</strong> Solo entran los elementos que son VIP en ambos lados.</li>
+                <li><strong>En Circuitos (AND):</strong> Es una compuerta <strong>restrictiva</strong>. Es difícil sacar un 1; necesitas que TODO sea perfecto (1 y 1). Si falla uno, te quedas fuera.</li>
+            </ul>
         </div>
 
-        <p>¿Cuándo miente el político? Analicemos la tabla:</p>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>¿Ganó? ($A$)</th>
-                    <th>¿Bajó Impuestos? ($B$)</th>
-                    <th>Juicio ($A \rightarrow B$)</th>
-                    <th>Análisis</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="fila-verdad"><td>1 (Sí)</td><td>1 (Sí)</td><td>1 (Verdad)</td><td>Cumplió.</td></tr>
-                <tr class="fila-mentira"><td>1 (Sí)</td><td>0 (No)</td><td>0 (Falso)</td><td><strong>¡MINTIÓ!</strong> (Ganó y no cumplió)</td></tr>
-                <tr class="fila-verdad"><td>0 (No)</td><td>1 (Sí)</td><td>1 (Verdad)</td><td>No ganó. (No estaba obligado).</td></tr>
-                <tr class="fila-verdad"><td>0 (No)</td><td>0 (No)</td><td>1 (Verdad)</td><td>No ganó. (No rompió promesa).</td></tr>
-            </tbody>
-        </table>
-
-        <h3>El Circuito de la Promesa</h3>
-        <p>La única forma de que la promesa sea FALSA es si $A=1$ y $B=0$. Por lo tanto, la ecuación que describe esto es:</p>
-        <div class="formula">
-            $$A \rightarrow B \equiv \bar{A} + B$$
-        </div>
-        <p><strong>Traducción:</strong> "Para cumplir, O bien NO gano ($\bar{A}$), O bien bajo los impuestos ($B$)".</p>
-
-        <div class="svg-container">
-            <!-- Imagen: Circuito Implicación -->
-            <img src="img/circuito_implicacion.png" alt="Esquema lógico: Compuerta NOT en la entrada A, conectada a una OR con la entrada B." style="max-width:100%; height:auto;">
-            <p><small><em>Fig 1. Este circuito te dice si un contrato se cumplió.</em></small></p>
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #4caf50;">
+            <h3>🔸 La Unión es "La Fiesta de Todos" (OR)</h3>
+            <p>Mira la zona de la unión ($A \cup B$). Es <strong>grande</strong>. Abarca casi todo.</p>
+            <ul>
+                <li><strong>En Conjuntos:</strong> Entra cualquiera: los de A, los de B o los de ambos.</li>
+                <li><strong>En Circuitos (OR):</strong> Es una compuerta <strong>permisiva</strong>. Es fácil sacar un 1; con que cualquiera se active, la corriente pasa.</li>
+            </ul>
         </div>
 
-        <div class="destacado" style="border-left-color: #6f42c1; background-color: #f3e5f5;">
-            <h3>🕵️ El Truco del Detective (La Contrarrecíproca)</h3>
-            <p>En lógica, decir <em>"Si A, entonces B"</em> es exactamente lo mismo que decir <em>"Si NO pasa B, entonces NO pasó A"</em>.</p>
-            <p>$$A \rightarrow B \equiv \bar{B} \rightarrow \bar{A}$$</p>
-            <p><strong>Uso en Reparaciones:</strong>
-            <br>Regla: "Si hay corriente ($A$), el LED prende ($B$)".
-            <br>Diagnóstico: Llegas y ves que el LED NO prende ($\bar{B}$).
-            <br>Conclusión: ¡Seguro NO hay corriente ($\bar{A}$)! No necesitas medir para saberlo.</p>
+        <h3>¿Y el Complemento? (El Mundo del Revés)</h3>
+        <p>En Venn, el complemento ($A^c$ o $A'$) es <strong>todo lo que está FUERA del círculo</strong> de A, pero dentro del cuadrado (el Universo).</p>
+        <p><strong>En Circuitos (NOT):</strong> Si el círculo es "Encendido" (1), todo el espacio vacío de afuera es "Apagado" (0). La compuerta NOT te lleva de adentro del círculo hacia afuera.</p>
+
+        <!-- CONEXIÓN CON UNIDAD 2 -->
+        <div class="dato-extra" style="background-color: #f0f7ff; border-left-color: #0d47a1;">
+            <h3>🔗 ¿Qué construimos en la Unidad 2?</h3>
+            <p>Cuando en la Unidad 2 armaste circuitos con compuertas NOT, AND y OR, estabas construyendo <strong>manifestaciones físicas</strong> de los conceptos de conjuntos y lógica. El isomorfismo explica por qué esos circuitos se comportaban exactamente como los diagramas de Venn que dibujabas en el colegio: ¡la estructura matemática es la misma!</p>
+            <p>Ahora, en la Unidad 3, daremos un paso más: usaremos esa misma estructura para <strong>calcular</strong> con números binarios. El isomorfismo nos permite “reutilizar” el conocimiento que ya tienes.</p>
         </div>
+
+        <h2>3. Aplicación: Diseño de un Sistema de Control de Acceso</h2>
+        <p>Imagina que debes diseñar un sistema electrónico para una oficina. La regla es:</p>
+        <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
+            <p><strong>"Se permite el acceso si (tiene tarjeta de empleado <strong>Y</strong> huella válida) <strong>O</strong> (es administrador)."</strong></p>
+        </div>
+        <p>Vamos a traducir esta regla a las tres representaciones:</p>
+
+        <div style="overflow-x: auto; margin: 20px 0;">
+            <table class="tabla-centrada">
+                <thead>
+                    <th>Representación</th>
+                    <th>Expresión</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Lógica de proposiciones</strong></td>
+                        <td>\(A = (\text{Tarjeta} \land \text{Huella}) \lor \text{Admin}\)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conjuntos</strong></td>
+                        <td>\(A = (T \cap H) \cup \text{Admin}\)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Circuito (compuertas)</strong></td>
+                        <td>\(A = (T \cdot H) + \text{Admin}\)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>¡Acabas de convertir un reglamento en un plano eléctrico! Ahora, si invirtieras el proceso, podrías tomar un circuito y explicar con palabras qué hace.</p>
+
+        <div class="destacado">
+            <h3>🔄 Ejercicio inverso (para tu cuaderno)</h3>
+            <p>Observa este circuito: \(S = \overline{A} \cdot B + A \cdot \overline{B}\).</p>
+            <p><strong>a)</strong> Escríbelo como una expresión de conjuntos.<br>
+            <strong>b)</strong> Traduce esa expresión a una frase en lenguaje natural (¿qué condición cumple la salida?).<br>
+            <strong>c)</strong> ¿Reconoces qué compuerta lógica corresponde a esta expresión? (Pista: mira la tabla de verdad).</p>
+            <p><em>Respuesta al final de la lección.</em></p>
+        </div>
+
+        <!-- SECCIÓN STEAM: LA FILOSOFÍA DEL ISOMORFISMO -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+            <h3>🎩 La magia de ver lo mismo de distintas maneras</h3>
+            <p>El isomorfismo no es solo una herramienta matemática: es una <strong>habilidad de pensamiento transversal</strong>. En cualquier campo, poder traducir un problema a otro lenguaje te da nuevas perspectivas y soluciones más elegantes.</p>
+            <ul>
+                <li>Un abogado traduce una situación legal a un esquema lógico.</li>
+                <li>Un músico traduce una emoción a una secuencia de notas.</li>
+                <li>Un programador traduce una necesidad humana a código.</li>
+                <li>¡Tú acabas de traducir una regla de oficina a un circuito!</li>
+            </ul>
+            <p><strong>Reflexión:</strong> ¿En qué otras áreas de tu vida podrías aplicar esta habilidad de “cambiar de lenguaje” para entender mejor un problema?</p>
+        </div>
+
+        <!-- EL MOMENTO EMMA -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+            <h3>🎩 El Mago de la Información: Claude Shannon (La "A" de STEAM)</h3>
+            <p>Durante casi 100 años, el Álgebra de Boole fue solo una curiosidad filosófica para "analizar el pensamiento humano". Los ingenieros de teléfonos, por otro lado, conectaban cables a prueba y error.</p>
+            <p>En 1937, un estudiante de maestría de 21 años llamado <strong>Claude Shannon</strong> tuvo una idea creativa: <em>"¿Y si los interruptores telefónicos en realidad están haciendo álgebra de Boole?"</em>.</p>
+            <p><strong>El Momento Eureka:</strong> Shannon no descubrió la electrónica ni la lógica; descubrió el <strong>puente</strong> entre ambas. Su tesis es considerada la más importante del siglo XX porque fundó la Era Digital.</p>
+            <p><em>Dato Curioso:</em> Shannon no era un científico aburrido. Era malabarista, montaba monociclo en los pasillos de los laboratorios Bell e inventó máquinas inútiles solo por diversión. ¡La creatividad y el juego son parte de la ingeniería!</p>
+        </div>
+
+        <!-- ACTIVIDAD DE AUTOEVALUACIÓN -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #4caf50;">
+            <h3>✍️ Autoevaluación: ¿Dominas el isomorfismo?</h3>
+            <p>Completa la siguiente tabla traduciendo cada frase a los otros dos lenguajes:</p>
+            <div style="overflow-x: auto;">
+                <table class="tabla-centrada">
+                    <thead>
+                        <th>Lenguaje Natural</th>
+                        <th>Lógica / Conjuntos</th>
+                        <th>Circuito</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"El sistema se activa si (detecta movimiento <strong>Y</strong> es de noche) <strong>O</strong> (hay una alarma manual)"</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>\(S = (A \cup B) \cap C\)</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>\(S = \overline{A \cdot B}\)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><em>Respuestas al final de la lección.</em></p>
+        </div>
+
+        <!-- SOLUCIONES AL EJERCICIO INVERSO Y AUTOEVALUACIÓN -->
+        <details class="u1">
+            <summary>📌 Ver soluciones</summary>
+            <div style="padding: 10px;">
+                <p><strong>Ejercicio inverso:</strong></p>
+                <ul>
+                    <li>a) Expresión de conjuntos: \(S = (\overline{A} \cap B) \cup (A \cap \overline{B})\)</li>
+                    <li>b) Frase en lenguaje natural: "La salida es 1 cuando exactamente una de las dos condiciones es verdadera" (o "cuando A y B son diferentes").</li>
+                    <li>c) Es la compuerta <strong>XOR</strong> (OR exclusiva).</li>
+                </ul>
+                <p><strong>Autoevaluación:</strong></p>
+                <ul>
+                    <li>Primera fila: Lógica: \(S = (M \land N) \lor A\); Circuito: \(S = (M \cdot N) + A\)</li>
+                    <li>Segunda fila: Lenguaje natural: "La salida es 1 si está en A o en B, pero también debe estar en C". Circuito: \(S = (A + B) \cdot C\)</li>
+                    <li>Tercera fila: Lenguaje natural: "La salida es 1 cuando no se cumple que A y B sean ambos 1". Lógica: \(S = \neg (A \land B)\)</li>
+                </ul>
+            </div>
+        </details>
     </section>
 
     <footer>
         <hr>
-        <p style="text-align: center;">
-            <a href="leccion20.html" class="btn-navegacion">← Anterior</a>
-            <a href="leccion22.html" class="btn-navegacion">Siguiente: Todos o Ninguno (Cuantificadores) →</a>
-        </p>
+        <div style="display: flex; justify-content: space-between;">
+            <a href="leccion20_laboratorio.html" class="btn-navegacion">← Anterior Unidad</a>
+            <a href="leccion22.html" class="btn-navegacion">Siguiente: El Detector de Mentiras →</a>
+        </div>
     </footer>
 </div>
 

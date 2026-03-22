@@ -27,18 +27,32 @@
         <h1>🧩 El Tetris Lógico: Mapas de Karnaugh</h1>
     </header>
 
+    <div class="destacado">
+        <h4>🔄 Recordando la Lección 15</h4>
+        <p>En la lección anterior, creamos la ecuación SOP para el jurado de 3 jueces:</p>
+        <p class="formula">P = \(\bar{A}BC + A\bar{B}C + AB\bar{C} + ABC\)</p>
+        <p>Esta ecuación era el resultado directo de aplicar el método de los minterms a la tabla de verdad. Era funcional, pero como vimos, era compleja ("fuerza bruta").</p>
+        <p>¡Ahora, con los <strong>Mapas de Karnaugh</strong>, vamos a simplificar esta ecuación gigante visualmente hasta llegar a la forma elegante: <code>P = AB + AC + BC</code>.</p>
+    </div>
+
     <!-- NARRATIVA: INTRODUCCIÓN -->
     <div class="intro-leccion">
         <p>En la lección anterior terminamos con una ecuación gigante para nuestro jurado. ¿Tenemos que construirla así? ¡No! Los ingenieros odian el desperdicio. Hoy usaremos una herramienta gráfica llamada <strong>Mapa K</strong> para jugar con los unos y ceros, agruparlos y reducir esa ecuación monstruosa a algo pequeño y elegante.</p>
+    </div>
+    
+    <div class="dato-extra">
+        <strong>🔗 Conexión con Lección 14:</strong>
+        <p>Una vez simplificada con Karnaugh, la ecuación SOP resultante es mucho más manejable para aplicar las <strong>Leyes de De Morgan</strong>, vistas en la <em>Lección 14</em>, si se desea implementar el circuito final con tipos específicos de compuertas (como solo <em>NAND</em> o solo <em>NOR</em>). Karnaugh y De Morgan son aliados en el proceso de diseño.</p>
     </div>
 
     <section>
         <h2>1. El Tablero de Juego</h2>
         <p>El Mapa K es una tabla donde organizamos las combinaciones posibles. Es como jugar "Batalla Naval": cada casilla tiene una coordenada única.</p>
-        
+
         <div class="destacado">
             <p><strong>El Código Gray:</strong> Fíjate que el orden de las columnas es <strong>00, 01, 11, 10</strong>.</p>
             <p><em>¿Por qué no 10, 11?</em> Porque la regla exige que, al pasar de una celda a la vecina, <strong>SOLO cambie un bit</strong>. Esto es lo que permite la simplificación mágica.</p>
+            <p class="dato">Este orden específico (00, 01, 11, 10 en lugar de 00, 01, 10, 11) se llama <strong>Código Gray</strong>. Garantiza que solo una variable cambie entre celdas vecinas, lo que es fundamental para la simplificación por agrupamiento.</p>
         </div>
 
         <h3>¿Cómo leer una casilla?</h3>
@@ -59,7 +73,18 @@
             <li><strong>Rectángulos:</strong> Solo líneas rectas o bloques cuadrados.</li>
             <li><strong>Solapamiento:</strong> Un 1 puede pertenecer a varios grupos (¡esto ayuda!).</li>
             <li><strong>Pac-Man:</strong> El mapa es redondo. El borde izquierdo toca el derecho.</li>
-        </ul>
+        </ul>  
+
+        <div class="destacado">
+            <h4>⚠️ Error Común: Agrupamiento Incorrecto</h4>
+            <p>Algunos errores frecuentes al agrupar unos en el mapa son:</p>
+            <ul>
+                <li><strong>Agrupar celdas diagonalmente:</strong> No se permite. Solo se puede agrupar horizontal o verticalmente (incluyendo bordes opuestos).</li>
+                <li><strong>Agrupar cantidades que no sean potencias de 2:</strong> Los grupos deben ser de 1, 2, 4, 8... celdas.</li>
+                <li><strong>No agrupar lo más grande posible:</strong> Siempre intenta formar el grupo más grande que puedas (siempre que sea una potencia de 2 y contenga solo 1s o Xs).</li>
+            </ul>
+            <p>Verifica tus agrupamientos con estos puntos para evitar simplificaciones incorrectas.</p>
+        </div>
 
         <h2>3. Simplificando al Jurado 🗳️</h2>
         
@@ -147,11 +172,34 @@
             <p><strong>Consecuencia:</strong> Puedes crear grupos que "salgan" por la derecha y "entren" por la izquierda para atrapar los unos de las esquinas. ¡No los dejes solos!</p>
         </div>
 
+        <h4>🎯 ¿Y qué pasa si... no importa la salida?</h4>
+        <p>En el mundo real, no todas las combinaciones de entrada son posibles o necesarias. Por ejemplo, en nuestro circuito del <strong>jurado de 3 jueces</strong>, ¿tiene sentido que todos los jueces voten "en contra" simultáneamente (A=0, B=0, C=0)? Quizás en el contexto del tribunal, un juicio donde todos votan "en contra" no se da.</p>
+
+        <p>Si sabemos que una entrada específica <em>nunca ocurrirá</em> o que <em>su salida no importa</em> para el funcionamiento del sistema, podemos representarla como una <strong>"X"</strong> en el Mapa de Karnaugh. Esta "X" significa "<em>Don't Care</em>" (No Importa).</p>
+
+        <p>La ventaja de la "X" es que puedes <strong>tratarla como un 0 o como un 1</strong>, <em>lo que más te convenga</em> para formar grupos más grandes y simplificar aún más la ecuación.</p>
+
+        <p>Veamos cómo podría afectar nuestro ejemplo del jurado si consideramos que la entrada <code>A=0, B=0, C=0</code> (todos en contra) es imposible y la marcamos como "X".</p>
+
+        <!-- Aquí puedes mostrar el mapa del jurado con un "X" en la posición 000 y explicar cómo podría agruparse si eso ayuda a simplificar más, o cómo se ignora si no ayuda. -->
+        <p>En este caso particular, <code>A=0, B=0, C=0</code> ya tenía salida 0 en la tabla original del jurado (ver Lección 15), por lo que marcarla como "X" no cambia el resultado final de la simplificación. Pero en otros diseños, usar "X" puede llevar a una ecuación aún más simple.</p>
+
         <!-- SECCIÓN NUEVA: DON'T CARE -->
         <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
             <h3>👻 El Comodín: Condiciones "No Importa" (X)</h3>
             <p>A veces, hay combinaciones que sabemos que son físicamente imposibles (ej: un ascensor en el piso 1 y 2 al mismo tiempo). En el mapa, marcamos esas celdas con una <strong>X</strong>.</p>
             <p><strong>El Truco:</strong> Puedes usar las X como si fueran <strong>1</strong> si te ayudan a agrandar un grupo, o como <strong>0</strong> si no te sirven. ¡Son comodines!</p>
+        </div>
+
+        <div class="dato-extra">
+            <strong>💡 Usa tu IA como Tutor de Verificación</strong><br>
+            <p>Puedes usar una IA generativa para practicar y verificar Mapas de Karnaugh:</p>
+            <ul>
+                <li><strong>Generar el mapa:</strong> "Dibuja el Mapa de Karnaugh para la función F(A,B,C) = Σm(3,5,6,7)".</li>
+                <li><strong>Verificar tu agrupamiento:</strong> "¿Cuál es la expresión simplificada para el Mapa de Karnaugh de F(A,B,C) = Σm(3,5,6,7)?"</li>
+                <li><strong>Explicar el proceso:</strong> "Explica paso a paso cómo agrupar los unos en el Mapa de Karnaugh de F(A,B,C) = Σm(3,5,6,7)".</li>
+            </ul>
+            <p><em>Recuerda:</em> La IA es tu asistente. Compara su respuesta con tu trabajo manual y anota en tu cuaderno tu reflexión crítica.</p>
         </div>
 
         <div class="dato-extra">
@@ -161,11 +209,156 @@
                 <a href="http://www.32x8.com/index.html" target="_blank" class="btn-navegacion" style="background-color: #ff7e00;">Solucionador de Mapas K ↗</a>
             </p>
         </div>
+
+        <div class="destacado">
+            <h4>🎓 Para tu futura aula: Enseñando Karnaugh a grado 10°/11°</h4>
+            <p>Imagina que estás preparando una clase para estudiantes de grado 10° o 11° que ya conocen SOP y tablas de verdad.</p>
+            <ul>
+                <li><strong>¿Cómo les explicarías el concepto de "agrupar unos adyacentes"?</strong> (Ej: "Es como unir rectángulos en un crucigrama de ceros y unos").</li>
+                <li><strong>¿Qué analogía usarías para el código Gray?</strong> (Ej: "Las casillas vecinas solo cambian un bit, como un interruptor que se mueve de a uno").</li>
+                <li><strong>¿Cómo harías visual el concepto de "eliminar variables que cambian" dentro de un grupo?</strong> (Ej: Usando colores o recortes de papel).</li>
+            </ul>
+            <p>Anota tu estrategia en tu cuaderno. Recuerda: haz que ellos descubran el patrón, no se lo des tú.</p>
+        </div>
+
+        <!-- === PODCAST: Conversación entre Expertos === -->
+        <section class="podcast-section">
+            <div class="podcast-header">
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                </svg>
+                <h3>🎧 Podcast: Conversación entre Expertos</h3>
+            </div>
+
+            <p class="podcast-descripcion">
+                Dos docentes analizan el uso del Mapa de Karnaugh como herramienta visual para la simplificación de circuitos lógicos. Comparten estrategias para enseñar el concepto de agrupamiento y cómo evitar errores comunes como agrupar cantidades no potencia de 2 o no aprovechar al máximo las condiciones "Don't Care". Discuten cómo integrar herramientas digitales y la importancia de que los futuros docentes comprendan que Karnaugh es un puente entre la teoría y la implementación práctica con chips TTL.
+            </p>
+
+            <div class="podcast-player">
+                <audio controls preload="metadata">
+                <source src="audio/leccion16.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+                </audio>
+            </div>
+
+            <p class="podcast-meta">
+                <span class="duracion">⏱️ 23:37 min</span>
+                <span class="formato">🔊 MP3</span>
+            </p>
+        </section>
+        <!-- === /PODCAST: Conversación entre Expertos === -->
+
+        <!-- === PREGUNTAS DE CONSOLIDACIÓN === -->
+        <h2>❓ Preguntas de Consolidación</h2>
+        <p>Responde estas preguntas para asegurarte de que dominas los conceptos técnicos <em>y</em> estás listo para enseñarlos en tu futura aula:</p>
+
+        <details class="u1">
+        <summary>
+            1. ¿Qué es un Mapa de Karnaugh y por qué es útil para simplificar ecuaciones lógicas?
+        </summary>
+        <p><strong>Explicación técnica:</strong> Es una representación gráfica de una tabla de verdad, organizada según el Código Gray. Permite visualizar grupos de "unos" adyacentes, lo que facilita la identificación de términos comunes en una ecuación SOP y su posterior simplificación al eliminar variables que cambian dentro del grupo.</p>
+        
+        <p><strong>Metáfora del "Tetris Lógico":</strong></p>
+        <ul>
+            <li>Es como un juego de Tetris donde en lugar de líneas completas, se forman "rectángulos" o "cuadrados" con los "unos".</li>
+            <li>Cada rectángulo representa una simplificación: cuanto más grande es el rectángulo, más variables se eliminan de la ecuación.</li>
+        </ul>
+        
+        <p><strong>Para tu futura aula:</strong> Usa cuadrículas impresas y colores para que los estudiantes "dibujen" los grupos y vean visualmente cómo se simplifica la ecuación.</p>
+        </details>
+
+        <details class="u1">
+        <summary>
+            2. ¿Cómo se relaciona el Código Gray con la estructura del Mapa de Karnaugh?
+        </summary>
+        <p><strong>Explicación técnica:</strong> El Código Gray es un sistema de numeración binaria donde dos valores consecutivos difieren solo en un bit. En el mapa, se usa para numerar filas y columnas, asegurando que al moverse de una celda a una vecina, solo una variable de entrada cambia.</p>
+        
+        <p><strong>Metáfora del "Cambio Único":</strong></p>
+        <ul>
+            <li>Imagina que cada celda del mapa es una habitación en un edificio.</li>
+            <li>El Código Gray es como un plano donde para ir de una habitación a la vecina, solo necesitas abrir/cerrar una puerta (cambiar un bit).</li>
+            <li>Este "cambio único" es lo que permite agrupar términos y simplificar.</li>
+        </ul>
+        
+        <p><strong>Conexión STEAM:</strong> Muestra cómo una idea matemática (Código Gray) tiene una aplicación directa y poderosa en la ingeniería digital.</p>
+        </details>
+
+        <details class="u1">
+        <summary>
+            3. Explica el proceso de simplificación de una ecuación SOP usando un Mapa de Karnaugh (para 3 o 4 variables).
+        </summary>
+        <p><strong>Proceso:</strong></p>
+        <ol>
+            <li><strong>Llenar el mapa:</strong> Colocar los 1s del minterm (o tabla de verdad) en las celdas correspondientes.</li>
+            <li><strong>Agrupar:</strong> Encerrar los 1s (y Xs si convienen) en grupos rectangulares de 1, 2, 4, 8... celdas. Los grupos pueden solaparse y envolver bordes.</li>
+            <li><strong>Maximizar grupos:</strong> Formar el menor número de grupos posibles, pero cada grupo debe ser lo más grande posible.</li>
+            <li><strong>Derivar términos:</strong> Cada grupo se convierte en un término de la ecuación final, eliminando las variables que cambian dentro del grupo.</li>
+            <li><strong>Sumar términos:</strong> La ecuación simplificada es la suma (OR) de todos los términos obtenidos.</li>
+        </ol>
+        
+        <p><strong>Para tu futura aula:</strong> Haz una actividad donde los estudiantes dibujen el mapa en la pizarra y usen cuerdas o cintas para "encerrar" los grupos.</p>
+        </details>
+
+        <details class="u1">
+        <summary>
+            4. ¿Qué son las condiciones "Don't Care" (X) y cómo se utilizan en un Mapa de Karnaugh?
+        </summary>
+        <p><strong>Explicación técnica:</strong> Las condiciones "Don't Care" representan combinaciones de entrada que no ocurrirán o cuya salida no importa para el diseño. Se representan con una "X" en el mapa.</p>
+        
+        <p><strong>Uso estratégico:</strong></p>
+        <ul>
+            <li>Se pueden tratar como un 0 o como un 1, lo que más convenga para formar un grupo más grande.</li>
+            <li>Si agrupar una "X" permite simplificar más, se considera como 1. Si no, se ignora (como 0).</li>
+            <li>El objetivo es maximizar la simplificación de la ecuación final.</li>
+        </ul>
+        
+        <p><strong>Ejemplo docente:</strong> Imagina un circuito que controla luces de un semáforo. La combinación "Rojo y Verde encendidos" es imposible, por lo tanto, puede ser una "X".</p>
+        </details>
+
+        <details class="u1">
+        <summary>
+            5. Diseña una actividad sencilla de 5 minutos para que estudiantes de grado 10° practiquen el agrupamiento en un Mapa de Karnaugh de 3 variables.
+        </summary>
+        <p><strong>Actividad: "Agrupar Rápido con Karnaugh"</strong></p>
+        <ol>
+            <li><strong>Preparación (1 min):</strong> Reparte una hoja con un Mapa de Karnaugh de 3 variables (A, B, C) vacío y una función simple como F(A,B,C) = Σm(1, 3, 5, 7).</li>
+            <li><strong>Llenado (1 min):</strong> Pide que ubiquen los 1s en el mapa.</li>
+            <li><strong>Agrupamiento (2 min):</strong> Indica que usen colores para encerrar los grupos posibles de 1s.</li>
+            <li><strong>Identificación (1 min):</strong> Pregúntales qué variables no cambian en cada grupo y cuál es el término simplificado resultante.</li>
+        </ol>
+        
+        <p><strong>Materiales:</strong> Hojas impresas, lápices de colores.</p>
+        
+        <p><strong>Objetivo pedagógico:</strong> Familiarizar a los estudiantes con la visualización del mapa y el concepto de agrupamiento sin realizar la simplificación completa de inmediato.</p>
+        </details>
+
+        <details class="u1">
+        <summary>
+            6. Explica cómo el proceso de agrupamiento en un Mapa de Karnaugh refleja directamente la simplificación algebraica vista en la Lección 14 (Leyes de De Morgan). Usa un ejemplo simple de un grupo de 2 unos para mostrar la conexión entre "ver el grupo" y "eliminar una variable".
+        </summary>
+        <p><strong>Conexión:</strong> El agrupamiento en Karnaugh es la <em>versión visual</em> de aplicar ciertas reglas algebraicas. Por ejemplo, agrupar dos términos adyacentes en el mapa equivale a aplicar la propiedad: \(XY + X\overline{Y} = X\).</p>
+        
+        <p><strong>Ejemplo:</strong> Supón que en un mapa de 3 variables (A, B, C), agrupas dos celdas adyacentes donde:</p>
+        <ul>
+            <li>Una celda representa el minterm \(\bar{A}BC\) (A=0, B=1, C=1).</li>
+            <li>La otra celda representa el minterm \(ABC\) (A=1, B=1, C=1).</li>
+        </ul>
+        <p>Al agruparlas, observas que la variable A cambia (0 y 1), mientras que B y C permanecen constantes (ambas 1). Visualmente, el grupo se simplifica a \(BC\).</p>
+        <p>Algebraicamente, estás sumando: \(\bar{A}BC + ABC\). Sacando factor común \(BC\): \(BC(\bar{A} + A)\). Como \((\bar{A} + A) = 1\), el resultado es \(BC \cdot 1 = BC\). ¡Exactamente lo que viste en el mapa!</p>
+        
+        <p><strong>Reflexión:</strong> ¿Por qué es más eficiente usar Karnaugh para simplificar ecuaciones complejas en lugar de aplicar las leyes de Boole paso a paso de forma algebraica?</p>
+        
+        <p><strong>Para tu futura aula:</strong> ¿Cómo podrías usar colores o figuras geométricas en la pizarra para representar este proceso de agrupamiento y "eliminación visual de variables" a estudiantes de grado 10°?</p>
+        </details>
+
+        <!-- === /PREGUNTAS DE CONSOLIDACIÓN === -->
     </section>
 
     <!-- NARRATIVA: TRAILER -->
     <div class="avance-leccion">
-        <h3>🚀 Próximamente...</h3>
+        <h3 style="color: #d35400; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2em;">🚀</span> Próximamente...
+        </h3>
         <p>Ya tenemos el plano perfecto: \(P = AB + AC + BC\). Ahora hay que construirlo. Pero... ¿dónde compramos una "Multiplicación"? ¿Dónde venden una "Suma"? En la próxima lección, conocerás a las estrellas del show: los <strong>Chips TTL 74xx</strong>, las cajitas negras donde vive la lógica.</p>
     </div>
 

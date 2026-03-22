@@ -3,90 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección 28: Matriz Generadora - Fundamentos de Sistemas Digitales</title>
+    <title>Lección 28: Códigos de Bloque - Fundamentos de Sistemas Digitales</title>
     <link rel="stylesheet" href="estilos.css">
-    
     <!-- KaTeX -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-    <style>
-        .matriz-container {
-            overflow-x: auto;
-            text-align: center;
-            margin: 20px 0;
-            font-size: 1.1em;
-        }
-    </style>
 </head>
 <body>
 
 <div class="contenedor">
     <header>
         <p><small>Unidad 4: Teoría de Códigos - Lección 28</small></p>
-        <h1>🧾 La Receta del Código: Matriz Generadora (\(G\))</h1>
+        <h1>📦 Códigos de Bloque: Empaquetando Datos</h1>
     </header>
 
     <section>
-        <p>Decidimos proteger los datos con bits extra ("La Ñapa"). Pero, ¿qué bits sumamos con cuáles? Necesitamos un plano exacto. En matemáticas, ese plano se llama <strong>Matriz Generadora</strong>.</p>
+        <p>La paridad simple es débil. Si queremos comunicaciones robustas (como en el 4G o los satélites), necesitamos "armadura pesada". Aquí entran los <strong>Códigos de Bloque</strong>.</p>
 
-        <h2>1. ¿Qué es la Matriz \(G\)?</h2>
-        <p>No te asustes. Piensa en ella como un <strong>tablero de conexiones</strong>. Aquí está la matriz del famoso código Hamming (7,4):</p>
-
-        <div class="matriz-container formula">
-            $$
-            G = \left(
-            \begin{array}{cccc|ccc}
-            1 & 0 & 0 & 0 & 1 & 1 & 0 \\
-            0 & 1 & 0 & 0 & 1 & 0 & 1 \\
-            0 & 0 & 1 & 0 & 0 & 1 & 1 \\
-            0 & 0 & 0 & 1 & 1 & 1 & 1
-            \end{array}
-            \right)
-            $$
-        </div>
+        <h2>1. El Concepto de "La Ñapa" (Redundancia)</h2>
+        <p>En Colombia, cuando compras algo y te dan un poquito más de regalo, le dicen "la ñapa". En ingeniería, a eso le llamamos <strong>Redundancia</strong>.</p>
+        <p>Para proteger la información, enviamos los datos originales MÁS unos bits extra calculados matemáticamente.</p>
 
         <div class="svg-container">
-            <!-- Imagen: Matriz Explicada (img/matriz_generadora_explicada.png) -->
-            <img src="img/matriz_generadora_explicada.png" alt="Matriz G dividida en dos: Izquierda (Identidad) y Derecha (Paridad)" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 1. Izquierda: Copia los datos. Derecha: Crea la protección.</em></small></p>
+            <!-- Imagen: Estructura Código (img/estructura_codigo_bloque.png) -->
+            <img src="img/estructura_codigo_bloque.png" alt="Diagrama de un bloque de datos dividido en K (Información) y R (Redundancia), sumando N (Total)" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. El paquete completo: Datos + Protección.</em></small></p>
         </div>
 
-        <h2>2. Traducción: De la Matriz al Cable 🔌</h2>
-        <p>Leer la matriz es muy fácil si sabes el secreto:</p>
+        <div class="formula">
+            $$n = k + r$$
+        </div>
         <ul>
-            <li>Las <strong>Filas</strong> son tus datos de entrada (\(d_1, d_2, d_3, d_4\)).</li>
-            <li>Las <strong>Columnas de la derecha</strong> son tus bits de paridad (\(p_1, p_2, p_3\)).</li>
-            <li>Si ves un <strong>1</strong>, significa: "¡Conecta este cable a la compuerta XOR!".</li>
+            <li><strong>\(k\) (Datos):</strong> Tu mensaje útil (ej: 4 bits).</li>
+            <li><strong>\(r\) (Redundancia):</strong> La "ñapa" de protección (ej: 3 bits).</li>
+            <li><strong>\(n\) (Código):</strong> El total que se envía (ej: 7 bits).</li>
         </ul>
+        <p>Por ejemplo, el famoso <strong>Código Hamming (7, 4)</strong> envía 7 bits para proteger 4 datos.</p>
 
-        <h3>La Receta de las Columnas de Paridad:</h3>
-        <p>Miremos solo la parte derecha de la matriz:</p>
-        <ul>
-            <li><strong>Columna \(p_1\) (1, 1, 0, 1):</strong> Suma con XOR los datos \(d_1, d_2, d_4\).</li>
-            <li><strong>Columna \(p_2\) (1, 0, 1, 1):</strong> Suma con XOR los datos \(d_1, d_3, d_4\).</li>
-            <li><strong>Columna \(p_3\) (0, 1, 1, 1):</strong> Suma con XOR los datos \(d_2, d_3, d_4\).</li>
-        </ul>
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
+            <h3>📱 Analogía: El Autocorrector de tu Celular</h3>
+            <p>¿Cómo sabe tu celular que quisiste escribir "HOLA" si escribiste "HILA"?</p>
+            <p>Porque "HILA" no existe en el diccionario, pero se parece mucho a "HOLA" (solo 1 letra de diferencia). A esto se le llama <strong>Distancia de Hamming</strong>.</p>
+            <p>Los códigos de bloque hacen lo mismo: crean un "diccionario" de palabras binarias válidas que están muy separadas entre sí. Si el ruido cambia un bit, el resultado no estará en el diccionario, y el sistema sabrá cuál era la palabra válida más cercana.</p>
+        </div>
+
+        <h2>2. ¿Qué es un Código "Lineal"? (El regreso de la XOR)</h2>
+        <p>Suena a matemáticas avanzadas, pero en hardware es simple: significa que los bits de protección (\(r\)) se calculan <strong>sumando (XOR)</strong> combinaciones de los bits de datos.</p>
+        
+        <div class="destacado">
+            <p><strong>Ejemplo de Linealidad:</strong></p>
+            <p>Imagina que el primer bit de protección \(p_1\) se calcula así:</p>
+            <p>$$p_1 = d_1 \oplus d_2 \oplus d_4$$</p>
+            <p>¡Solo necesitas compuertas XOR! No hay multiplicaciones raras ni integrales. Es pura lógica digital.</p>
+        </div>
+
+        <h2>3. El Codificador (La Caja Negra)</h2>
+        <p>Físicamente, un codificador es un circuito que toma tus \(k\) cables de datos y saca \(n\) cables hacia el transmisor.</p>
 
         <div class="svg-container">
-            <!-- Imagen: Circuito Hamming (img/circuito_hamming_encoder.png) -->
-            <img src="img/circuito_hamming_encoder.png" alt="Esquema eléctrico del codificador Hamming creado a partir de la matriz" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 2. ¡Mira! La matriz era en realidad un diagrama de compuertas XOR.</em></small></p>
-        </div>
-
-        <div class="dato-extra">
-            <h3>🧮 Herramienta: Verificación Matemática</h3>
-            <p>Si multiplicas tu mensaje por la matriz, obtienes el código. Pero ojo: <strong>1+1=0</strong> aquí.</p>
-            <p>Usa este enlace pre-configurado en <strong>Wolfram Alpha</strong> para ver cómo se hace la magia:</p>
-            
-            <a href="https://www.wolframalpha.com/input?i=%28%7B1%2C0%2C1%2C1%7D+.+%7B%7B1%2C0%2C0%2C0%2C1%2C1%2C0%7D%2C%7B0%2C1%2C0%2C0%2C1%2C0%2C1%7D%2C%7B0%2C0%2C1%2C0%2C0%2C1%2C1%7D%2C%7B0%2C0%2C0%2C1%2C1%2C1%2C1%7D%7D%29+mod+2" 
-               target="_blank" 
-               class="btn-navegacion" 
-               style="background-color: #ff7e00; display: block; margin: 15px auto; max-width: 300px; text-align: center;">
-               Ver en Wolfram Alpha 🐺
-            </a>
-            <p><small><em>(Prueba cambiando los números del primer vector {1,0,1,1} por los tuyos).</em></small></p>
+            <!-- Imagen: Diagrama Codificador (img/diagrama_codificador.png) -->
+            <img src="img/diagrama_codificador.png" alt="Caja negra que recibe 4 cables de entrada y saca 7 cables de salida" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 2. Entran 4, salen 7. La magia ocurre adentro con compuertas XOR.</em></small></p>
         </div>
     </section>
 
@@ -94,7 +72,7 @@
         <hr>
         <p style="text-align: center;">
             <a href="leccion27.html" class="btn-navegacion">← Anterior</a>
-            <a href="leccion29.html" class="btn-navegacion">Siguiente: Matriz de Control (H) →</a>
+            <a href="leccion29.html" class="btn-navegacion">Siguiente: Matriz Generadora (G) →</a>
         </p>
     </footer>
 </div>

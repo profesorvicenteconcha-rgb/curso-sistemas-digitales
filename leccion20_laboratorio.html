@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 20: Laboratorio 2 - Construyendo una XOR con NAND</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX: Hojas de estilo y Scripts principales -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    
+    <!-- KaTeX: Extensión Auto-Render configurada correctamente -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, { 
+            delimiters: [ 
+                { left: '$$', right: '$$', display: true }, 
+                { left: '$', right: '$', display: false }, 
+                { left: '\\(', right: '\\)', display: false } 
+            ] 
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 2: Lógica Digital - Lección 20 (Laboratorio Final)</small></p>
+        <h1>🔌 Laboratorio 2: De la XOR (1 salida) al Semisumador (2 salidas)</h1>
+    </header>
+
+    <h2>🎯 Objetivos de esta práctica</h2>
+    <ul>
+        <li>Construir físicamente (en simulador o protoboard) una compuerta XOR utilizando únicamente compuertas NAND (chip 74HC00).</li>
+        <li>Verificar experimentalmente, paso a paso, que el comportamiento del circuito coincide con la tabla de verdad de la XOR.</li>
+        <li>Comprobar la universalidad de la compuerta NAND como bloque fundamental de construcción.</li>
+        <li>Desarrollar habilidades de diagnóstico y resolución de problemas (troubleshooting) en circuitos digitales.</li>
+        <li>Identificar la relación entre el circuito XOR y la suma de bits (preparación para el half adder y la Unidad 3).</li>
+    </ul>
+
+    <!-- ================================================================== -->
+    <!-- LISTA DE MATERIALES (NECESARIA PARA EL LABORATORIO)               -->
+    <!-- ================================================================== -->
+    <section>
+        <h2>🧰 Materiales del Ingeniero</h2>
+        <div class="dato-extra" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <p>Antes de comenzar, asegúrate de tener todos los componentes listos. Trabajar ordenadamente y con el material adecuado es la primera regla del laboratorio.</p>
+        </div>
+
+        <ul style="column-count: 2; column-gap: 40px; list-style-type: disc; padding-left: 20px;">
+            <li><strong>1 × Circuito integrado 74HC00</strong> (4 compuertas NAND de 2 entradas).</li>
+            <li><strong>1 × Protoboard</strong> (placa de pruebas).</li>
+            <li><strong>2 × Interruptores DIP</strong> (o 2 pulsadores / interruptores deslizantes).</li>
+            <li><strong>2 × Resistencias de 10 kΩ</strong> (para pull-down de los interruptores).</li>
+            <li><strong>1 × LED verde</strong> (para usar como punta de prueba en los pasos intermedios).</li>
+            <li><strong>1 × LED azul</strong> (para la salida final XOR).</li>
+            <li><strong>2 × Resistencias de 330 Ω</strong> (limitadoras para los LEDs).</li>
+            <li><strong>Cables de conexión</strong> (varios colores, preferiblemente).</li>
+            <li><strong>Fuente de alimentación de 5 V</strong> (puede ser el cargador del telefono, 3 pilas AA en serie, una batería de 5V o la alimentación del simulador).</li>
+        </ul>
+
+                </ul>
+
+        <!-- Nota sobre el alcance conceptual -->
+        <div class="dato-extra" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-top: 20px;">
+            <p><strong>📌 Nota sobre el semisumador:</strong> En esta práctica construirás físicamente solo la compuerta XOR (una salida). El semisumador (dos salidas) lo exploraremos de manera conceptual mediante diagramas, tablas de verdad y mapas de Karnaugh. No necesitas componentes adicionales; todo se realiza con el mismo chip 74HC00 y los elementos ya listados.</p>
+        </div>
+
+        <!-- Nota sobre simulación (existente) -->
+        <div class="destacado" style="background-color: #fff3e0; border-left-color: #ff9800; margin-top: 20px;">
+            <p><strong>📌 Nota sobre la simulación:</strong> Si no dispones de los componentes físicos, puedes realizar este laboratorio en un simulador como <strong>Tinkercad</strong> o <strong>Falstad</strong>. En ese caso, los materiales serán virtuales pero el procedimiento y la verificación son idénticos. Te recomendamos usar Tinkercad por su facilidad para conectar y visualizar los LEDs.</p>
+        </div>
+    </section>
+
+    <div class="destacado" style="background-color: #ffebee; border-left-color: #c62828;">
+        <h3>⚡ Reglas de Oro del Laboratorio</h3>
+        <ul>
+            <li><strong>Desconecta la fuente de alimentación</strong> cada vez que vayas a modificar el cableado. Conectar o desconectar cables con la energía puesta puede causar cortocircuitos y dañar los chips.</li>
+            <li><strong>Respeta la polaridad de los LEDs.</strong> El ánodo (pata larga) va hacia la salida del chip; el cátodo (pata corta) va a tierra a través de la resistencia de 330 Ω.</li>
+            <li><strong>Verifica la alimentación del chip:</strong> Asegúrate de que el pin 14 esté en +5V y el pin 7 en GND antes de encender. ¡Una inversión de polaridad destruye el integrado!</li>
+        </ul>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- SECCIÓN: SIMULACIÓN PASO A PASO - XOR CON 4 NAND (74HC00)         -->
+    <!-- ================================================================== -->
+    <section>
+        <!-- ================================================================== -->
+<!-- PARTE 1: PRÁCTICA - CONSTRUCCIÓN DE LA XOR                        -->
+<!-- ================================================================== -->
+<section>
+    <h2>1. 🔌 Práctica: Construyendo la XOR (una salida)</h2>
+    
+    <div class="intro-leccion" style="margin-bottom: 25px;">
+        <p>En esta primera parte del laboratorio te convertirás en un ingeniero de montaje. Seguirás un procedimiento paso a paso para construir, con un solo chip 74HC00, el circuito de la compuerta XOR. Verificarás cada etapa con una punta de prueba (LED verde) y, al final, comprobarás que el LED azul se enciende exactamente cuando las dos entradas son diferentes. Es la misma función que resolvía el problema de la escalera en la Lección 6, pero ahora implementada de forma elegante y compacta.</p>
+        <p><strong>Objetivo de esta parte:</strong> Comprobar experimentalmente la universalidad de la compuerta NAND y familiarizarte con el ruteo de señales en un circuito real.</p>
+    </div>
+
+    <!-- El resto del contenido existente (diagrama de pines, pasos 1 a 4, tablas, etc.) va aquí, exactamente igual -->
+        
+        <!-- Conexión con la historia del curso -->
+        <div class="dato-extra">
+            <h3>🧩 La escalera de dos niveles (Lecciones 6 y 18)</h3>
+            <p>¿Recuerdas el problema de encender una luz desde dos interruptores, uno al inicio y otro al final de una escalera? Esa función es exactamente la <strong>XOR</strong>. En la Lección 6 lo resolvíamos usando interruptores de tres vías (SPDT) y en la Lección 18 lo resolvíamos usando compuertas AND, OR y NOT. Ahora, con lo que hemos aprendido, podemos implementar la solución usando <strong>únicamente 4 compuertas NAND</strong> dentro de un solo chip 7400. ¡Eso es eficiencia de ingeniero!</p>
+            <p>Este circuito es la versión compacta y elegante de aquella solución inicial. Puedes montarlo en tu protoboard y verificar que la lámpara se enciende justo cuando los interruptores están en posiciones distintas.</p>
+        </div>
+
+        <!-- Pregunta de reflexión -->
+        <div class="pregunta-curiosidad">
+            <h3>🤔 ¿Por qué 4 NAND y no menos?</h3>
+            <p>La XOR es una función fundamentalmente compleja: no puede implementarse con menos de 4 compuertas NAND. Esto se debe a que su expresión booleana no es simplificable a una forma que requiera menor número de operaciones NAND. Es un excelente ejemplo de cómo la complejidad lógica se traduce en número de componentes.</p>
+        </div>
+
+        <!-- Recordatorio de universalidad y optimización -->
+        <div class="intro-leccion">
+            <p>La <strong>universalidad de la compuerta NAND</strong> nos permite implementar cualquier función lógica utilizando únicamente este tipo de compuerta. Mientras que un diseño tradicional de la XOR (\(A \oplus B\)) requeriría tres chips diferentes (NOT, AND y OR), gracias a las leyes de De Morgan podemos optimizar el hardware y construirla con <strong>un solo circuito integrado 74HC00</strong>, que contiene cuatro compuertas NAND. A continuación, realizaremos la simulación paso a paso en Tinkercad, verificando cada compuerta antes de continuar.</p>
+        </div>
+
+        <!-- Diagrama de patillaje del 74HC00 (Fig 2) -->
+        <div class="svg-container">
+            <img src="img/xor_conexion_de_pines_74hc00.png" alt="Fig 2. Distribución de pines del circuito integrado 74HC00 (cuatro compuertas NAND de 2 entradas)." style="max-width:80%; height:auto;">
+            <p><small><em>Fig. 1: Relación entre la conexión de las cuatro compuertas NAND y el patillaje del 7400 cuya numeración sigue el estándar: pin 7 es GND, pin 14 es VCC.</em></small></p>
+        </div>
+
+        <!-- Resumen de conexiones del chip -->
+        <div class="dato-extra" style="margin: 20px 0;">
+            <h3>📍 Identificación de pines</h3>
+            <ul style="column-count: 2; column-gap: 30px;">
+                <li><strong>Compuerta 1:</strong> A1 = pin 1, B1 = pin 2, X1 = pin 3</li>
+                <li><strong>Compuerta 2:</strong> A2 = pin 4, B2 = pin 5, X2 = pin 6</li>
+                <li><strong>Compuerta 3:</strong> A3 = pin 9, B3 = pin 10, X3 = pin 8</li>
+                <li><strong>Compuerta 4:</strong> A4 = pin 12, B4 = pin 13, X4 = pin 11</li>
+                <li><strong>Alimentación:</strong> VCC = pin 14, GND = pin 7</li>
+            </ul>
+        </div>    
+        <p>Recuerda que el LED de prueba (verde) debe llevar una resistencia limitadora de 330 Ω en serie, y las entradas <strong>A (interruptor 1 del DIP)</strong> y <strong>B (interruptor 2 del mismo DIP)</strong> deben tener resistencias pull‑down de 10 kΩ para evitar valores flotantes.</p>
+        
+        <!-- NUEVA IMAGEN: Función de la punta de prueba (Fig 3) -->
+        <div class="svg-container">
+            <img src="img/xor_conexiones_al_inicio.png" alt="Fig 3. Configuración inicial de la punta de prueba (LED verde) y resistencias pull-down en las entradas." style="max-width:80%; height:auto;">
+            <p><small><em>Fig. 2: La punta de prueba (LED verde con resistencia de 330 Ω) se conectará al pin de salida de la compuerta que estemos verificando en cada paso. Las entradas A y B tienen resistencias pull‑down de 10 kΩ para evitar flotantes.</em></small></p>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- PASO 1: Primera NAND (genera P = /AB) – Ahora Fig 4           -->
+        <!-- ============================================================== -->
+        <div class="regla-card" style="margin: 30px 0;">
+            <h5 style="color: var(--color-primario);">🔹 Paso 1: Primera NAND – Generar \(P = \overline{A \cdot B}\)</h5>
+            <p><strong>Conexiones:</strong></p>
+            <ul>
+                <li>Pin 1 (A1) → Interruptor A</li>
+                <li>Pin 2 (B1) → Interruptor B</li>
+                <li>Pin 3 (X1) → Salida \(P\) (conectar LED verde como punta de prueba)</li>
+            </ul>
+
+            <p><strong>Tabla de verificación (Paso 1):</strong></p>
+            <table class="tabla-auditoria">
+                <thead>
+                    <tr><th>B</th><th>A</th><th>\(P = \overline{A \cdot B}\)</th><th>LED verde (pin 3)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td><td>🔴 ENCENDIDO</td></tr>
+                    <tr><td>0</td><td>1</td><td>1</td><td>🔴 ENCENDIDO</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td><td>🔴 ENCENDIDO</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>⚫ APAGADO</td></tr>
+                </tbody>
+            </table>
+            <p>✅ <em>Si tu simulación coincide, avanza al Paso 2. De lo contrario, revisa alimentación y conexiones.</em></p>
+
+            <!-- Imagen del paso 1 -->
+            <div class="svg-container">
+                <img src="img/xor_tinkercad_paso1.png" alt="Paso 1: Primera NAND conectada, LED verde en pin 3." style="max-width:70%; height:auto;">
+                <p><small><em>Fig. 3: Verificación de la primera NAND: el LED verde debe apagarse solo cuando A=1 y B=1.</em></small></p>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- PASO 2: Segunda NAND (genera Q = /(A·P) ) – Fig 5              -->
+        <!-- ============================================================== -->
+        <div class="regla-card" style="margin: 30px 0;">
+            <h5 style="color: var(--color-primario);">🔹 Paso 2: Segunda NAND – Generar \(Q = \overline{A \cdot P}\)</h5>
+            <p><strong>Conexiones (manteniendo el Paso 1):</strong></p>
+            <ul>
+                <li>Pin 4 (A2) → Interruptor A</li>
+                <li>Pin 5 (B2) → Pin 3 (\(P\))</li>
+                <li>Pin 6 (X2) → Salida \(Q\) (mover el LED verde a este pin)</li>
+            </ul>
+
+            <p><strong>Tabla de verificación (Paso 2):</strong></p>
+            <table class="tabla-auditoria">
+                <thead>
+                    <tr><th>B</th><th>A</th><th>\(P\) (de paso1)</th><th>\(Q = \overline{A \cdot P}\)</th><th>LED verde (pin 6)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td><td>\(\overline{0·1}=1\)</td><td>🔴 ENCENDIDO</td></tr>
+                    <tr><td>0</td><td>1</td><td>1</td><td>\(\overline{1·1}=0\)</td><td>⚫ APAGADO</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td><td>\(\overline{0·1}=1\)</td><td>🔴 ENCENDIDO</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>\(\overline{1·0}=1\)</td><td>🔴 ENCENDIDO</td></tr>
+                </tbody>
+            </table>
+            <p>✅ <em>Verifica especialmente el caso B=0, A=1 (LED apagado).</em></p>
+
+            <div class="svg-container">
+                <img src="img/xor_tinkercad_paso2.png" alt="Paso 2: Segunda NAND conectada, LED verde en pin 6." style="max-width:70%; height:auto;">
+                <p><small><em>Fig. 4: Verificación de la segunda NAND: el LED se apaga solo con B=0, A=1.</em></small></p>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- PASO 3: Tercera NAND (genera R = /(B·P) ) – Fig 6              -->
+        <!-- ============================================================== -->
+        <div class="regla-card" style="margin: 30px 0;">
+            <h5 style="color: var(--color-primario);">🔹 Paso 3: Tercera NAND – Generar \(R = \overline{B \cdot P}\)</h5>
+            <p><strong>Conexiones (manteniendo pasos anteriores):</strong></p>
+            <ul>
+                <li>Pin 9 (A3) → Interruptor B</li>
+                <li>Pin 10 (B3) → Pin 3 (\(P\))</li>
+                <li>Pin 8 (X3) → Salida \(R\) (mover el LED verde a este pin)</li>
+            </ul>
+
+            <p><strong>Tabla de verificación (Paso 3):</strong></p>
+            <table class="tabla-auditoria">
+                <thead>
+                    <tr><th>B</th><th>A</th><th>\(P\) (de paso1)</th><th>\(R = \overline{B \cdot P}\)</th><th>LED verde (pin 8)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td><td>\(\overline{0·1}=1\)</td><td>🔴 ENCENDIDO</td></tr>
+                    <tr><td>0</td><td>1</td><td>1</td><td>\(\overline{0·1}=1\)</td><td>🔴 ENCENDIDO</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td><td>\(\overline{1·1}=0\)</td><td>⚫ APAGADO</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>\(\overline{1·0}=1\)</td><td>🔴 ENCENDIDO</td></tr>
+                </tbody>
+            </table>
+            <p>⚠️ <strong>Caso crítico:</strong> Con B=1, A=1, \(P=0\) → \(R=1\), el LED debe estar <strong>ENCENDIDO</strong>. Si está apagado, verifica que el pin 10 esté conectado a \(P\) (pin 3) y no a otra señal.</p>
+
+            <div class="svg-container">
+                <img src="img/xor_tinkercad_paso3.png" alt="Paso 3: Tercera NAND conectada, LED verde en pin 8." style="max-width:70%; height:auto;">
+                <p><small><em>Fig. 5: Verificación de la tercera NAND: el LED se enciende para todas las combinaciones excepto B=1, A=0.</em></small></p>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- PASO 4: Cuarta NAND – Salida final XOR (X = /(Q·R)) – Fig 7    -->
+        <!-- ============================================================== -->
+        <div class="regla-card" style="margin: 30px 0;">
+            <h5 style="color: var(--color-primario);">🔹 Paso 4: Cuarta NAND – Salida final \(X = \overline{Q \cdot R}\) (XOR)</h5>
+            <p><strong>Conexiones finales:</strong></p>
+            <ul>
+                <li>Pin 12 (A4) → Pin 6 (\(Q\))</li>
+                <li>Pin 13 (B4) → Pin 8 (\(R\))</li>
+                <li>Pin 11 (X4) → Salida \(X\) (conectar LED azul con resistencia de 330 Ω a GND)</li>
+            </ul>
+
+            <p><strong>Tabla de verificación final (XOR):</strong></p>
+            <table class="tabla-auditoria">
+                <thead>
+                    <tr><th>B</th><th>A</th><th>\(Q\) (paso2)</th><th>\(R\) (paso3)</th><th>\(X = \overline{Q \cdot R}\)</th><th>LED azul (pin 11)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>\(\overline{1·1}=0\)</td><td>⚫ APAGADO</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>\(\overline{0·1}=1\)</td><td>🔴 ENCENDIDO</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>\(\overline{1·0}=1\)</td><td>🔴 ENCENDIDO</td></tr>
+                    <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>\(\overline{1·1}=0\)</td><td>⚫ APAGADO</td></tr>
+                </tbody>
+            </table>
+            <p>🎉 <strong>¡Resultado final:</strong> El LED azul se enciende solo cuando A y B son diferentes, confirmando la función XOR, exactamente como en el problema de la escalera de la Lección 6.</p>
+
+            <div class="svg-container">
+                <img src="img/xor_tinkercad_paso4.png" alt="Paso 4: Circuito completo, LED azul en pin 11." style="max-width:70%; height:auto;">
+                <p><small><em>Fig. 6: Simulación final en Tinkercad: el LED azul (pin 11) indica la salida XOR.</em></small></p>
+            </div>
+        </div>
+
+        <h3>📋 Tabla de verificación consolidada</h3>
+        <p>Completa la siguiente tabla con los resultados observados en cada paso para confirmar que tu circuito funciona correctamente.</p>
+        <table style="width:100%; max-width:600px; margin:0 auto;">
+            <thead>
+                <tr><th>Entradas</th><th>Paso 1 (P)</th><th>Paso 2 (Q)</th><th>Paso 3 (R)</th><th>Paso 4 (XOR)</th></tr>
+                <tr><th>A B</th><th>Pin 3</th><th>Pin 6</th><th>Pin 8</th><th>Pin 11</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>0 0</td><td>_</td><td>_</td><td>_</td><td>_</td></tr>
+                <tr><td>0 1</td><td>_</td><td>_</td><td>_</td><td>_</td></tr>
+                <tr><td>1 0</td><td>_</td><td>_</td><td>_</td><td>_</td></tr>
+                <tr><td>1 1</td><td>_</td><td>_</td><td>_</td><td>_</td></tr>
+            </tbody>
+        </table>
+        <p><em>(Anota 0 si el LED está apagado, 1 si está encendido)</em></p>
+
+        <!-- Reflexión final -->
+        <div class="dato-extra">
+            <h3>✅ Verificación y cierre</h3>
+            <p>Con este procedimiento has construido una compuerta XOR utilizando únicamente cuatro NAND de un solo integrado 74HC00. Cada paso fue verificado individualmente, garantizando que el circuito final funciona correctamente. Este mismo principio se aplica para construir cualquiera de las siete compuertas básicas a partir de NAND, y sienta las bases para los circuitos combinacionales de la Unidad 3.</p>
+        </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- NUEVA SECCIÓN: DIFICULTADES COMUNES Y CÓMO RESOLVERLAS (desde el fragmento original) -->
+    <!-- ================================================================== -->
+    <section>
+        <h2>⚠️ Dificultades comunes y cómo resolverlas</h2>
+        <div class="dato-extra" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <p>En un laboratorio real, los errores son parte del aprendizaje. A continuación, se presentan las dificultades más frecuentes al construir compuertas con NAND y las estrategias para identificarlas y corregirlas.</p>
+        </div>
+
+        <!-- Podemos darle un estilo de tabla más acorde con estilos.css, pero manteniendo la claridad -->
+        <div style="overflow-x: auto;">
+            <table style="width:100%; border-collapse: collapse; margin:20px 0; background: white;">
+                <thead>
+                    <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                        <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Dificultad</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Posible causa</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Solución</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>El LED no se enciende en ninguna combinación</strong></td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;">Falta alimentación al chip (VCC o GND desconectados), o el LED está mal polarizado.</td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;">Verifica que el pin 14 esté a 5V y el pin 7 a GND. Comprueba la polaridad del LED (ánodo hacia la salida).</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>La salida de la primera NAND (P) es siempre 1</strong></td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;">Las entradas A o B no están bien definidas (flotantes) por falta de resistencias pull-down.</td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;">Añade resistencias de 10 kΩ de cada interruptor a GND para que en estado abierto den 0 lógico.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>En la tercera NAND, el LED se apaga con A=1, B=1 (cuando debería encenderse)</strong></td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;">La tercera NAND está recibiendo A y B directamente en lugar de B y P (salida de la primera NAND).</td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;">Revisa que el pin 10 (B3) esté conectado a P (pin 3) y no al interruptor B.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>La XOR final no coincide con la tabla (por ejemplo, da 1 en 00 o 11)</strong></td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;">Alguna de las señales intermedias (Q o R) está invertida por error en las conexiones de las NAND 2 o 3.</td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;">Verifica paso a paso cada compuerta con la punta de prueba (LED verde) antes de conectarlas a la cuarta NAND.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>El chip se calienta o consume mucha corriente</strong></td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;">Cortocircuito en las conexiones, o salidas conectadas directamente entre sí o a tierra sin resistencia.</td>
+                        <td style="padding: 10px; border: 1px solid #dee2e6;">Desconecta la alimentación, revisa visualmente el cableado y asegura que cada LED tenga su resistencia de 330 Ω.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="destacado" style="background-color: #f1f8e9; border-left-color: #4caf50;">
+            <h3>🔍 Reflexión sobre los errores</h3>
+            <ul>
+                <li><strong>Anota cada error que encontraste:</strong> ¿En qué paso ocurrió? ¿Cómo lo detectaste?</li>
+                <li><strong>¿Qué herramienta de prueba (multímetro, LED) te ayudó a identificar la falla?</strong></li>
+                <li><strong>¿Cambiarías algo en tu método de trabajo para evitar ese error en el futuro?</strong></li>
+            </ul>
+            <p><em>“El mejor ingeniero no es el que nunca comete errores, sino el que sabe encontrarlos y corregirlos rápidamente.”</em></p>
+        </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- REFLEXIÓN: DE LA ESCALERA A LA SUMA (PUENTE A UNIDAD 3)           -->
+    <!-- ================================================================== -->
+    <section>
+        <!-- ================================================================== -->
+<!-- PARTE 2: REFLEXIÓN - DE LA XOR AL SEMISUMADOR                     -->
+<!-- ================================================================== -->
+<section>
+    <h2>2. 🧠 Reflexión: Descubriendo el Semisumador (dos salidas)</h2>
+    
+    <div class="intro-leccion" style="margin-bottom: 25px;">
+        <p>Una vez que el circuito funciona y has verificado su tabla de verdad, llega el momento de dar el salto conceptual. Ahora dejarás de ver la XOR como una función lógica aislada y empezarás a entenderla como una pieza de un sistema más grande: el <strong>semisumador (half adder)</strong>.</p>
+        <p>En esta segunda parte no necesitarás el soldador ni el simulador. Trabajarás con lápiz, papel y tu capacidad de abstracción para descubrir que el mismo circuito que acabas de construir, junto con una compuerta AND, es capaz de sumar números binarios. Este es el primer ladrillo de la aritmética computacional y la puerta de entrada a la Unidad 3.</p>
+    </div>
+
+    <!-- A continuación va todo el contenido existente de la reflexión:
+         - El esquema Entrada-Proceso-Salida
+         - El diagrama del semisumador
+         - La tabla de verdad con dos salidas
+         - Los mapas de Karnaugh y la notación sigma
+         - Los destacados de XOR y AND
+         - Las preguntas y la bitácora -->
+    
+        <div class="intro-leccion" style="margin-bottom: 25px;">
+            <p>Acabas de construir y verificar un circuito que resuelve el problema de la escalera de la <strong>Lección 6</strong>: la luz se enciende cuando los interruptores están en posiciones distintas. Has comprobado que la XOR funciona. Pero ahora viene la pregunta que separa al técnico del ingeniero: <strong>¿qué más puede hacer este circuito?</strong></p>
+            <p>Observa la tabla de verdad que acabas de validar con tus LEDs. En lugar de pensar en "Verdadero" y "Falso", imagina que las señales representan <strong>números binarios</strong> (0 y 1). De repente, el mismo circuito que encendía una luz en una escalera... ¡está sumando! Bienvenido al mundo del isomorfismo, donde una misma estructura física puede tener dos significados distintos.</p>
+        </div>
+
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: var(--color-primario); margin: 30px 0;">
+            <h3 style="margin-top: 0;">🔁 El Modelo Universal: De la Lógica a la Aritmética</h3>
+            <p>Al inicio de esta unidad (Lección 12), presentamos el esquema fundamental de todo sistema digital:</p>
+            
+            <div style="display: flex; justify-content: space-around; align-items: center; margin: 20px 0; flex-wrap: wrap;">
+                <div style="text-align: center; padding: 10px; background-color: #ffe0b2; border-radius: 8px; min-width: 120px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    <strong style="color: #e65100;">ENTRADA</strong><br>
+                    <small style="color: #666;">(Sensores)</small>
+                </div>
+                <div style="font-size: 2em; color: var(--color-primario);">→</div>
+                <div style="text-align: center; padding: 10px; background-color: #c8e6c9; border-radius: 8px; min-width: 120px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    <strong style="color: #2e7d32;">PROCESO</strong><br>
+                    <small style="color: #666;">(Compuertas)</small>
+                </div>
+                <div style="font-size: 2em; color: var(--color-primario);">→</div>
+                <div style="text-align: center; padding: 10px; background-color: #ffcdd2; border-radius: 8px; min-width: 120px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    <strong style="color: #c62828;">SALIDA</strong><br>
+                    <small style="color: #666;">(Actuadores)</small>
+                </div>
+            </div>
+            
+            <p>Hoy has materializado ese esquema: tus interruptores (Entrada) alimentaron la malla de compuertas NAND (Proceso) y el LED Azul (Salida) mostró el resultado. Pero hay algo más: <strong>este mismo esquema, con una pequeña variación, se convierte en un bloque fundamental de la aritmética computacional</strong>.</p>
+        </div>
+
+        <h3>➕ El circuito como sumador: dos entradas, dos salidas</h3>
+        
+        <p>El circuito que has construido (la XOR con NAND) tiene dos entradas (A, B). Si le añadimos en paralelo una compuerta AND para detectar el caso en que ambas entradas son 1, obtenemos un sistema "paquete" con <strong>dos entradas y dos salidas</strong> que realiza matemáticamente la suma de dos bits:</p>
+
+        <div class="svg-container">
+            <img src="img/half_adder_bloques.png" alt="Diagrama de bloques del semisumador" style="max-width:350px; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <p><small><em>Fig. 7: El semisumador (half adder). Dos entradas (A, B), dos salidas: Suma (S = A⊕B) y Acarreo (C = A·B).</em></small></p>
+        </div>
+
+        <p>Observa la similitud con el esquema inicial de la unidad: sigue siendo <strong>Entrada → Proceso → Salida</strong>, pero ahora el "Proceso" contiene dos funciones simultáneas (XOR y AND) y la "Salida" son dos señales (S y C). Este bloque, llamado <strong>semisumador (half adder)</strong>, es la primera pieza de la aritmética computacional.</p>
+
+        <!-- ================================================================== -->
+        <!-- NUEVO: DIAGRAMA DEL CIRCUITO Y TABLA DE VERDAD DEL SEMISUMADOR    -->
+        <!-- ================================================================== -->
+        <h3>🔧 El circuito del semisumador (half adder)</h3>
+        
+        <p>El semisumador combina dos compuertas en paralelo: una <strong>XOR</strong> para el bit de suma (S) y una <strong>AND</strong> para el bit de acarreo (C). El diagrama siguiente muestra esta estructura:</p>
+
+        <div class="svg-container">
+            <!-- Imagen del circuito lógico del half adder -->
+            <img src="img/half_adder_circuito.png" alt="Circuito lógico del semisumador: entradas A y B, salidas S (XOR) y C (AND)" style="max-width:80%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <p><small><em>Fig. 8: Circuito del semisumador. La salida S = A ⊕ B (XOR) y la salida C = A · B (AND).</em></small></p>
+        </div>
+        
+        <h3>📊 Tabla de verdad del semisumador (half adder)</h3>
+
+        <p>El semisumador combina las funciones XOR y AND. La siguiente tabla muestra el valor de las salidas para cada combinación de entradas:</p>
+
+        <div style="overflow-x: auto; margin: 25px 0;">
+            <table class="tabla-auditoria">
+                <thead>
+                    <!-- Primera fila: títulos agrupados -->
+                    <tr>
+                        <th colspan="2" style="padding: 10px; border: 1px solid #ddd; background-color: var(--color-primario); color: white;">Entrada</th>
+                        <th colspan="2" style="padding: 10px; border: 1px solid #ddd; background-color: var(--color-primario); color: white;">Salida</th>
+                    </tr>
+                    <!-- Segunda fila: subtítulos -->
+                    <tr style="background-color: var(--color-primario); color: white;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">B</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">A</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">C (acarreo) <br> <small>A · B</small></th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">S (suma) <br> <small>A ⊕ B</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">1</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                        <td style="padding: 8px; border: 1px solid #ddd; background-color: #d4edda; font-weight: bold;">1</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ddd;">1</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                        <td style="padding: 8px; border: 1px solid #ddd; background-color: #d4edda; font-weight: bold;">1</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ddd;">1</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">1</td>
+                        <td style="padding: 8px; border: 1px solid #ddd; background-color: #d4edda; font-weight: bold;">1</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>   
+
+        <p>Observa que la columna de Suma (S) coincide exactamente con la tabla de la XOR que ya has verificado en este laboratorio, y la columna de Acarreo (C) es la tabla de la AND. Juntas, forman la operación de suma binaria: cuando A y B son 1, la suma es 0 con acarreo 1 (es decir, 1+1=10 en binario).</p>
+       
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <h3>➕ La XOR es una suma (sin acarreo)</h3>
+            <p>Observa la tabla de la XOR que acabas de validar:</p>
+            <ul>
+                <li>0 + 0 = 0  → suma 0</li>
+                <li>0 + 1 = 1  → suma 1</li>
+                <li>1 + 0 = 1  → suma 1</li>
+                <li>1 + 1 = 0  → suma 0, pero en binario 1+1 es 2, que se escribe como "10" (acarreo 1, suma 0).</li>
+            </ul>
+            <p>¡La XOR nos da el bit de suma! El acarreo (el 1 que "se lleva" a la siguiente columna) lo genera la compuerta AND: \(A \cdot B\).</p>
+        </div>
+
+        <!-- Notación sigma para la XOR -->
+        <div class="dato-extra" style="border-left-color: #9c27b0; background-color: #f3e5f5; margin: 25px 0;">
+            <h3>📝 Notación sigma (Σ) para la XOR</h3>
+            <p>Como viste en la <strong>Lección 15</strong>, los ingenieros usan una forma compacta para representar funciones lógicas: la suma de minterms o <strong>notación Σ</strong>. Para nuestra XOR de dos variables, la tabla de verdad tiene salida 1 en las filas donde las entradas son diferentes:</p>
+            <ul>
+                <li>Fila 1: A=0, B=1  →  binario 01 = decimal <strong>1</strong></li>
+                <li>Fila 2: A=1, B=0  →  binario 10 = decimal <strong>2</strong></li>
+            </ul>
+            <p>Por lo tanto, la función XOR se puede expresar de manera elegante y concisa como:</p>
+            <div class="formula">
+                $$X(A,B) = \sum m(1,2)$$
+            </div>
+            <p>Esta notación te será especialmente útil en la <strong>Unidad 3</strong>, cuando diseñemos sumadores y otros circuitos aritméticos. ¡Es el lenguaje universal de los diseñadores digitales!</p>
+        </div>
+
+        <!-- ================================================================== -->
+        <!-- MAPA DE KARNAUGH PARA LA XOR -->
+        <!-- ================================================================== -->
+        <div class="destacado" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+            <h3>🗺️ Representación en el Mapa de Karnaugh</h3>
+            <p>La función XOR, \(X = A \oplus B\), también puede visualizarse mediante un <strong>Mapa de Karnaugh</strong> de dos variables. Las filas representan la variable \(A\) y las columnas la variable \(B\), siguiendo el orden <strong>00, 01, 11, 10</strong> (Código Gray).</p>
+
+            <div class="svg-container">
+                <img src="img/mapa_k_xor.png" alt="Mapa de Karnaugh para la función XOR: celdas con 1 en (A=0,B=1) y (A=1,B=0)" style="max-width:100%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <p><small><em>Fig. 9: Mapa de Karnaugh de la función XOR. Los unos están en posiciones diagonales, lo que impide la simplificación.</em></small></p>
+            </div>
+
+            <p>Observa que los unos (en verde) se encuentran en las celdas <strong>(A=0, B=1)</strong> y <strong>(A=1, B=0)</strong>. Estas celdas son <em>diagonales</em> entre sí, es decir, no comparten un lado común (adyacencia horizontal o vertical). Por esta razón, <strong>no es posible agruparlas</strong> en el mapa de Karnaugh, y la expresión mínima es precisamente la suma de los dos minterms:</p>
+
+            <div class="formula">
+                $$X = \overline{A}B + A\overline{B}$$
+            </div>
+
+            <p>Esta es la forma algebraica de la compuerta XOR. En notación sigma, corresponde a \(\sum m(1,2)\), como ya vimos. El mapa de Karnaugh confirma que no hay simplificación posible más allá de esta expresión.</p>
+
+            <p><small><em>Nota: El orden de las columnas (00, 01, 11, 10) sigue el Código Gray, que garantiza que celdas adyacentes difieran en un solo bit. En este caso, la diagonal no es adyacente, por lo que la función no se simplifica.</em></small></p>
+        </div>
+
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #1565c0;">
+            <h3>⏫ La AND es el acarreo (carry)</h3>
+            <p>La compuerta AND solo da 1 cuando A=1 y B=1, justo el caso en que se genera un <strong>acarreo</strong> (coloquialmente, "llevamos uno") en la suma binaria:</p>
+            <p class="formula">$$Y(A,B) = A \cdot B = \sum m(3)$$</p>
+            <p>Mientras que la XOR (que acabas de construir) se representa como:</p>
+            <p class="formula">$$X(A,B) = A \oplus B = \sum m(1,2)$$</p>
+            <p>Juntas, forman el <strong>semisumador (half adder)</strong> que estudiarás en la Lección 24.</p>
+        </div>
+        
+        <!-- ================================================================== -->
+        <!-- MAPA DE KARNAUGH PARA EL ACARREO (AND) -->
+        <!-- ================================================================== -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <h3>🗺️ Mapa de Karnaugh para el acarreo (\(Y = A \cdot B\))</h3>
+            <p>La función de acarreo (AND) tiene su única salida 1 cuando ambas entradas son 1. En el mapa de Karnaugh de dos variables, esto se representa con un único 1 en la celda <strong>(A=1, B=1)</strong>:</p>
+
+            <div class="svg-container">
+                <img src="img/mapa_k_and.png" alt="Mapa de Karnaugh para la función AND: un 1 en la celda (A=1, B=1)" style="max-width:100%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <p><small><em>Fig. 10: Mapa de Karnaugh de la función AND (acarreo). El 1 aparece únicamente cuando ambas entradas son 1.</em></small></p>
+            </div>
+
+            <p>En notación sigma, esta función se expresa como:</p>
+            <div class="formula">
+                $$Y(A,B) = A \cdot B = \sum m(3)$$
+            </div>
+            <p>Observa que, a diferencia de la XOR, aquí el 1 está aislado y no puede agruparse con ninguna otra celda, por lo que la expresión \(A \cdot B\) ya es la forma mínima.</p>
+        </div>
+
+        <p>Esto significa que el circuito que has montado (XOR) junto con una simple compuerta AND puede <strong>sumar dos bits</strong>. Este es el principio del <strong>semisumador (Half Adder)</strong>, el primer ladrillo de la aritmética computacional. En la <strong>Lección 24</strong> de la Unidad 3 lo construirás formalmente.</p>
+        <p>Pero antes, en la <strong>Lección 21: Isomorfismo</strong>, exploraremos la profunda conexión entre la lógica y la aritmética: veremos que un mismo circuito puede interpretarse como una función lógica (escalera) o como una operación aritmética (suma). ¡Prepárate para cambiar de perspectiva!</p>
+    </section>
+
+    <p>💡 <strong>¿Sabías que...?</strong> Este mismo circuito que has montado es un ejemplo de <strong>isomorfismo</strong>, el tema central de la <strong>Lección 21</strong>. La estructura física (las conexiones de las NAND) es la misma, pero puede interpretarse de dos formas: como una función lógica (XOR) o como una operación aritmética (suma de bits). Esta dualidad es la base de todo computador.</p>
+
+    <!-- === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section" style="margin-top: 40px;">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 30px; vertical-align: middle;">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3 style="display: inline;">🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        <p class="podcast-descripcion">
+            Dos docentes reflexionan sobre este laboratorio final: la importancia de la universalidad de la NAND, la conexión con el problema de la escalera, y cómo este circuito es la puerta de entrada a la aritmética binaria. Discuten estrategias para que los estudiantes no solo armen el circuito, sino que comprendan el salto conceptual hacia el isomorfismo y el half adder.
+        </p>
+        <div class="podcast-player">
+            <audio controls preload="metadata" style="width: 100%;"><source src="audio/leccion20.mp3" type="audio/mpeg"></audio>
+        </div>
+        <p class="podcast-meta"><span class="duracion">⏱️ 23:27 min</span> | <span class="formato">🔊 MP3</span></p>
+    </section>
+
+    <h2>❓ Preguntas de Consolidación</h2>
+    <details>
+        <summary>1. ¿Por qué la compuerta NAND es considerada "universal"?</summary>
+        <p>Porque con ella se puede implementar cualquier función lógica, incluyendo NOT, AND, OR, NOR, XNOR y XOR, como hemos demostrado en este laboratorio. Esto se debe a que la NAND es funcionalmente completa gracias a las Leyes de De Morgan.</p>
+    </details>
+    <details>
+        <summary>2. En el circuito, ¿qué relación observas entre la salida de la primera NAND (P) y las entradas A y B? ¿Por qué es importante esa señal?</summary>
+        <p>P es el NAND de A y B (P = \(\overline{A \cdot B}\)). Es importante porque se realimenta a las compuertas 2 y 3, permitiendo generar las señales intermedias Q y R que luego se combinan para producir la XOR. Sin esta realimentación, no se puede obtener el comportamiento exclusivo.</p>
+    </details>
+    <details>
+        <summary>3. Si quisieras construir un semisumador (half adder) que sume dos bits y genere un bit de suma y un bit de acarreo, ¿qué compuertas añadirías a este circuito y por qué?</summary>
+        <p>El circuito XOR ya genera el bit de suma. Para obtener el bit de acarreo, bastaría con añadir una compuerta AND adicional (otra de las cuatro NAND del chip, configurada como AND, o un chip 7408 externo) que tome las mismas entradas A y B. La AND da 1 solo cuando A y B son 1, que es exactamente el caso en que se genera acarreo en la suma binaria (1+1=10).</p>
+    </details>    
+    <details>
+        <summary>4. En tus propias palabras, explica qué significa que el circuito que acabas de construir (la XOR con NAND) sea un "isomorfismo" entre la lógica de la escalera y la aritmética binaria.</summary>
+        <p><strong>Respuesta orientativa:</strong> Significa que la misma estructura física (las conexiones de las cuatro compuertas NAND) puede interpretarse de dos maneras distintas: como una función lógica (la luz de la escalera se enciende cuando los interruptores son diferentes) y como una operación aritmética (el bit de suma de dos números binarios). La forma (el circuito) es la misma; lo que cambia es el significado que le asignamos a las señales. Esta dualidad es la base de todo computador.</p>
+    </details>    
+    <details>
+        <summary>5. Si el semisumador (half adder) suma dos bits y genera acarreo, ¿qué crees que necesitaríamos para sumar números de más de un bit, por ejemplo, dos números de 2 bits (A₁A₀ + B₁B₀)?</summary>
+        <p><strong>Respuesta orientativa:</strong> Necesitaríamos varios semisumadores conectados en cascada, de forma que el acarreo de una etapa (la suma de los bits menos significativos) se convierta en una entrada más para la siguiente etapa. Ese circuito se llama <strong>sumador completo (full adder)</strong> y lo construirás en la Lección 26. Aquí ya estamos vislumbrando cómo se construye un procesador: repitiendo bloques básicos una y otra vez.</p>
+    </details>
+
+    <!-- === MI CUADERNO: Bitácora de Innovación === -->
+    <section class="cuaderno-section">
+        <div class="cuaderno-header">
+            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <h3>📋 Bitácora de Innovación (Mi Cuaderno)</h3>
+        </div>
+        <p>Responde en tu cuaderno físico las siguientes preguntas de reflexión docente:</p>
+        <ol>
+            <li><strong>Errores comunes:</strong> Durante el montaje, ¿qué error crees que sería más frecuente en un estudiante? ¿Cómo lo detectaría y solucionaría?</li>
+            <li><strong>Conexión pedagógica:</strong> ¿Cómo explicarías a un estudiante de grado 10° que el mismo circuito que enciende una luz en la escalera puede usarse para sumar números binarios?</li>
+            <li><strong>Isomorfismo:</strong> Investiga el concepto de isomorfismo (o busca en tu IA favorita). Escribe una definición con tus palabras y pon un ejemplo diferente al de la XOR/suma.</li>
+            <li><strong>El salto conceptual:</strong> Hoy has pasado de "conectar cables para que un LED se encienda" a "construir un bloque que suma números binarios". Describe con tus palabras ese momento en que entendiste que la electricidad se convertía en matemáticas. ¿Fue un momento "eureka"? ¿Qué crees que falta para que un estudiante de secundaria pueda tener esa misma revelación?</li>
+        </ol>
+        </ol>
+        <textarea rows="6" placeholder="Escribe aquí tus reflexiones..." style="width: 100%; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; padding: 8px;"></textarea>
+        
+    </section>
+
+    <!-- NARRATIVA: TRAILER A LA UNIDAD 3 -->
+    <div class="avance-leccion" style="background-color: #f0f4f8; padding: 20px; border-radius: 8px; margin-top: 30px; border-left: 5px solid #3498db;">
+      
+        <h3 style="color: #d35400; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2em;">🚀</span> Próximamente: Unidad 3 – Fundamentos de Cómputo
+        </h3>
+        <p>Has construido con tus propias manos el circuito que enciende una luz en una escalera y, de paso, has descubierto que ese mismo circuito es capaz de sumar bits. Este es el momento justo para dar el salto a la tercera unidad.</p>
+        <p>En la <strong>Lección 21: Isomorfismo</strong>, exploraremos la relación profunda entre la lógica y la aritmética. Veremos cómo las leyes del pensamiento (Boole) se convierten en las reglas del cálculo (suma binaria). ¡Te esperamos!</p>
+        <p style="text-align: center; margin-top: 20px;">
+            <a href="leccion21.html" class="btn-navegacion" style="background-color: #fd7e14; transform: scale(1.1); padding: 15px 30px; box-shadow: 0 4px 15px rgba(253, 126, 20, 0.4); color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Comenzar Unidad 3 🚀</a>
+        </p>
+    </div>
+
+    <!-- Footer de Cierre de Unidad -->
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+            <a href="leccion19.html" class="btn-navegacion">← Anterior (Lección 19)</a>
+            <a href="leccion21.html" class="btn-navegacion" style="background-color: var(--u3-color, #fd7e14);">Siguiente: Isomorfismo (Lección 21) →</a>
+        </div>
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;">🏠 Volver al Índice Principal</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

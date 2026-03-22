@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 19: Compuertas Universales y Producto de Sumas- Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX: Estilos -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+    <!-- KaTeX: Script principal -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+    <!-- KaTeX: Script de auto-render configurado para detectar todos los delimitadores -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '\\[', right: '\\]', display: true}
+            ],
+            throwOnError : false
+        });">
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 2: Lógica Digital - Lección 19</small></p>
+        <h1>🧱 Universalidad y POS: Construyendo el Mundo con un Solo Chip</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN ACTUALIZADA -->
+    <div class="intro-leccion" style="margin-bottom: 25px;">
+        <p>En la lección pasada conocimos a las "Fuerzas Especiales" de la lógica (NAND, NOR, XOR, XNOR) y descubrimos una nueva forma de pensar con el Producto de Sumas (POS). Pero en la industria tecnológica, la teoría matemática debe chocar con la realidad económica: <strong>a los ingenieros no les gusta comprar decenas de chips diferentes</strong> para un solo proyecto.</p>
+        
+        <p>¿Qué pasaría si pudieras construir <strong>cualquier circuito del universo</strong> usando un solo tipo de "ladrillo"? Hoy descubrirás el verdadero superpoder de las compuertas NAND y NOR: su <strong>Universalidad</strong>.</p>
+    </div>
+
+    <!-- TARJETAS DE CONTEXTO (CONECTANDO EL PASADO CON EL PRESENTE) -->
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 35px;">
+        
+        <!-- Tarjeta 1: El Puenteo -->
+        <div style="flex: 1; min-width: 280px; background-color: #f8f9fa; border-left: 5px solid var(--color-primario); padding: 15px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <h4 style="color: var(--color-primario); margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🔧</span> El Arte del Puenteo
+            </h4>
+            <p style="font-size: 0.95em; color: #555; margin-bottom: 0; line-height: 1.5;">
+                Aprenderemos la técnica secreta para mutar una simple compuerta NAND o NOR en inversores, sumadores o multiplicadores. Te daremos la guía exacta para auditar sus señales paso a paso. ¡Son las navajas suizas digitales!
+            </p>
+        </div>
+
+        <!-- Tarjeta 2: El Jurado (POS) -->
+        <div style="flex: 1; min-width: 280px; background-color: #fff4e5; border-left: 5px solid #e67e22; padding: 15px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <h4 style="color: #d35400; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">⚖️</span> El Jurado Optimizado
+            </h4>
+            <p style="font-size: 0.95em; color: #555; margin-bottom: 0; line-height: 1.5;">
+                Tomaremos la ecuación matemática POS del Jurado que derivaste en la Lección 18 y la convertiremos en un circuito físico 100% hecho con compuertas NOR. Un hito de la optimización industrial.
+            </p>
+        </div>
+
+    </div>
+
+    <section>
+        <h2>1. El Arte del Puenteo: Optimización con Estilo</h2>
+        
+        <p>En el laboratorio, un ingeniero eficiente no solo diseña circuitos que funcionan, sino que lo hace con la menor cantidad de componentes posible. Aquí es donde el <strong>puenteo de entradas</strong> se convierte en tu mejor aliado. Al unir físicamente las dos patas de entrada de una compuerta, estamos forzando a que \(A = B\).</p>
+
+        <div class="svg-container">
+            <img src="img/puenteo_compuertas.png" alt="Diagrama de compuertas NAND, NOR, AND, OR con entradas puenteadas" style="max-width:80%; height:auto;">
+            <p><small><em>Fig. 1: El puenteo de entradas. Dependiendo de la compuerta, obtenemos un inversor, un buffer o un valor fijo.</em></small></p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 30px 0;">
+            <!-- Tarjeta: NAND y NOR -->
+            <div style="flex: 1 1 280px; background-color: #f8f9fa; border: 1px solid #eee; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <h5 style="color: var(--color-primario); margin: 0 0 10px 0; font-size: 1.1em;">✅ NAND / NOR: Los cracks del puenteo</h5>
+                <p><strong>NAND puenteada:</strong> \(F = \overline{A \cdot A} = \overline{A}\)  →  Inversor (NOT).</p>
+                <p><strong>NOR puenteada:</strong> \(F = \overline{A + A} = \overline{A}\)  →  Inversor (NOT).</p>
+                <small style="color: #666;"><em>✔️ Aceptado universalmente. Ahorras un chip 7404 (inversor) usando una compuerta NAND o NOR sobrante.</em></small>
+            </div>
+
+            <!-- Tarjeta: AND y OR -->
+            <div style="flex: 1 1 280px; background-color: #f8f9fa; border: 1px solid #eee; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <h5 style="color: var(--color-secundario); margin: 0 0 10px 0; font-size: 1.1em;">⚠️ AND / OR: Funciona, pero…</h5>
+                <p><strong>AND puenteada:</strong> \(F = A \cdot A = A\)  →  Buffer (seguidor).</p>
+                <p><strong>OR puenteada:</strong> \(F = A + A = A\)  →  Buffer (seguidor).</p>
+                <small style="color: #666;"><em>⚠️ Técnicamente correcto, pero ineficiente: usas una compuerta compleja para hacer lo que hace un simple cable.</em></small>
+            </div>
+        </div>
+
+        <div class="destacado" style="background-color: #ffebee; border-left: 5px solid #c62828; padding: 10px 20px;">
+            <h3 style="color: #c62828; margin-top: 0;">❌ XOR y XNOR: El puenteo prohibido</h3>
+            <p>Puentear las entradas de una XOR o una XNOR <strong>no genera una función útil para procesar señales variables</strong>. Al conectar ambas entradas a la misma señal \(A\), la salida se vuelve constante:</p>
+            <ul>
+                <li><strong>XOR puenteada:</strong> \(F = A \oplus A = 0\) → Siempre 0 (tierra lógica).</li>
+                <li><strong>XNOR puenteada:</strong> \(F = \overline{A \oplus A} = 1\) → Siempre 1 (alimentación).</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- === EL SECRETO PROFESIONAL: LA ALTERNATIVA AL PUENTEO === -->
+    <div class="dato-extra" style="background-color: #f1f8e9; border-left-color: #2e7d32; margin: 25px 0;">
+        <h4 style="color: #1b5e20; margin-top: 0;">👑 Secreto Profesional: La alternativa al puenteo</h4>
+        <p>Puentear las dos patas (A y B al mismo cable) es la forma más rápida de aprender, pero tiene un costo técnico: le exige el doble de corriente ("Fan-out") a la compuerta anterior porque ahora debe alimentar dos pines a la vez.</p>
+        <p>Los ingenieros veteranos usan un truco más elegante basado en las <strong>Identidades de Boole</strong> que aprendiste en la Lección 14:</p>
+        <ul style="margin-bottom: 0;">
+            <li><strong>En la NAND ( \(A \cdot 1 = A\) ):</strong> Conecta la señal <code>A</code> al pin 1, y conecta el pin 2 directo a <strong>+5V (Vcc)</strong>. Como \(A \cdot 1 = A\), la NAND lo invierte y sale \(\overline{A}\). ¡Lograste un NOT sin puentear!</li>
+            <li><strong>En la NOR ( \(A + 0 = A\) ):</strong> Conecta la señal <code>A</code> al pin 2, y conecta el pin 3 directo a <strong>Tierra (GND)</strong>. Como \(A + 0 = A\), la NOR lo invierte a \(\overline{A}\).</li>
+        </ul>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- FAMILIA NAND -->
+    <!-- ========================================================= -->
+    <section>
+        <h2>2. Construyendo el Mundo con NAND (Chip 7400)</h2>
+
+        <div class="destacado" style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 10px 20px;">
+            <h4 style="margin-top: 0;">📌 Recordatorio: El Chip 7400 (NAND)</h4>
+            <p>Antes de cablear, recuerda el orden interno del 7400. Las compuertas de abajo tienen el orden normal (Entrada-Entrada-Salida), pero las de arriba están "invertidas" visualmente:</p>
+            <ul style="font-family: monospace;">
+                <li><strong>Compuerta 1:</strong> Entradas: Pines 1 y 2 | Salida: Pin 3</li>
+                <li><strong>Compuerta 2:</strong> Entradas: Pines 4 y 5 | Salida: Pin 6</li>
+                <li><strong>Compuerta 3:</strong> Entradas: Pines 9 y 10 | Salida: Pin 8 <em>(¡Ojo aquí!)</em></li>
+                <li><strong>Compuerta 4:</strong> Entradas: Pines 12 y 13 | Salida: Pin 11 <em>(¡Ojo aquí!)</em></li>
+            </ul>
+            <p><strong>Alimentación:</strong> Vcc en Pin 14, GND en Pin 7.</p>
+            
+            <div class="svg-container">
+                <!-- Imagen: Pinout Chip (img/chip_pinout.png) -->
+                <img src="img/interno_7400.png" alt="Ilustración de un chip 7400. Muestra la muesca a la izquierda y la numeración en U antihoraria del 1 al 14." style="max-width:75%; height:auto;">
+                <p><small><em>Fig. 2: Orden interno del 7400, con la muesca a la izquierda. Abajo está el pin 1. Arriba el 14.</em></small></p>
+            </div>
+        </div>
+
+        <!-- 1. NOT con NAND -->
+        <h3>🔹 1. El Inversor (NOT) usando 1 compuerta NAND</h3>
+        <p>El inversor es la compuerta más sencilla de construir con una NAND: basta con conectar las dos entradas de la compuerta a la misma señal \(A\). De esta forma, la salida será \(\overline{A \cdot A} = \overline{A}\), es decir, la negación de la entrada.</p>
+
+        <div class="svg-container"><img src="img/not_desde_nand.png" alt="Construcción de NOT usando NAND" style="max-width:60%; height:auto;">
+            <p><small><em>fig. 3: El inversor (NOT) es la base de todo: con solo puentear las entradas de una NAND, obtenemos la negación de la señal. La tabla de verdad confirma el comportamiento.</em></small></p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0;">
+            <h4 style="margin-top: 0; color: #495057;">🔌 Guía de Cableado y Auditoría</h4>
+            <p>Conecta la entrada <strong>A</strong> a los pines <strong>1 y 2</strong>. Salida <strong>(¬A)</strong> en el pin <strong>3</strong>.</p>
+            <table class="tabla-auditoria" style="max-width: 300px;">
+                <thead><tr><th>A</th><th>\(\overline{A \cdot A}\)</th></tr></thead>
+                <tbody>
+                    <tr><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 2. AND con NAND -->
+        <h3>🔹 2. La Compuerta AND usando 2 compuertas NAND</h3>
+        <p>Para obtener la función AND (\(A \cdot B\)) a partir de NAND, primero se genera la NAND de las entradas: \(\overline{A \cdot B}\). Luego, esta señal se introduce en una segunda NAND con las entradas puenteadas (actuando como inversor), obteniendo \(\overline{\overline{A \cdot B}} = A \cdot B\). La doble negación se cancela.</p>
+        
+        <div class="svg-container"><img src="img/and_desde_nand.png" alt="Construcción de AND usando dos NAND" style="max-width:60%; height:auto;">
+            <p><small><em>fig. 4: La compuerta AND restaurada. Al pasar la señal NAND por un inversor (nuestra NAND puenteada), la doble negación se cancela devolviéndonos la multiplicación original.</em></small></p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0;">
+            <h4 style="margin-top: 0; color: #495057;">🔌 Guía de Cableado y Auditoría</h4>
+            <p>Entradas <strong>A, B</strong> a pines <strong>1, 2</strong>. Une el pin <strong>3</strong> a los pines <strong>4 y 5</strong>. Salida final en pin <strong>6</strong>.</p>
+            <table class="tabla-auditoria">
+                <thead>
+                    <tr><th>B</th><th>A</th><th>\(P = \overline{A \cdot B}\)</th><th>\(X = \overline{P \cdot P} = A \cdot B\)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+                    <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 3. OR con NAND -->
+        <h3>🔹 3. La Compuerta OR usando 3 compuertas NAND</h3>
+        <p>La compuerta OR (\(A + B\)) se obtiene aplicando el teorema de De Morgan: \(A+B = \overline{\overline{A} \cdot \overline{B}}\). Primero se invierten A y B usando dos NAND como inversores (entradas puenteadas), y luego esas señales negadas se introducen en una tercera NAND.</p>
+        
+        <div class="svg-container"><img src="img/or_desde_nand.png" alt="Construcción de OR usando tres NAND" style="max-width:60%; height:auto;">
+            <p><small><em>fig. 5: Aplicando las Leyes de De Morgan en el mundo físico. Al invertir las entradas A y B antes de combinarlas en la NAND final, la multiplicación se transforma mágicamente en una suma lógica (OR).</em></small></p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0;">
+            <h4 style="margin-top: 0; color: #495057;">🔌 Guía de Cableado y Auditoría</h4>
+            <p><strong>Inv A:</strong> Pines 1 y 2. Salida en 3.<br><strong>Inv B:</strong> Pines 4 y 5. Salida en 6.<br><strong>NAND Final:</strong> Pin 3 al 9, pin 6 al 10. Salida final en 8.</p>
+            <table class="tabla-auditoria">
+                <thead>
+                    <tr><th>B</th><th>A</th><th>\(\overline{A}\)</th><th>\(\overline{B}\)</th><th>\(X = \overline{\overline{A} \cdot \overline{B}} = A+B\)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 4. NOR con NAND -->
+        <h3>🔹 4. La Compuerta NOR usando 4 compuertas NAND</h3>
+        <p>La NOR es la negación de la OR. Una forma sencilla de construirla es partir del circuito OR (tres NAND) y añadir un inversor a su salida (una cuarta NAND puenteada). La salida final será \(\overline{A+B}\).</p>
+
+        <div class="svg-container"><img src="img/nor_desde_nand.png" alt="Construcción de NOR usando cuatro NAND" style="max-width:60%; height:auto;">
+            <p><small><em>fig. 6: La compuerta NOR es simplemente una OR seguida de un inversor. Usamos 4 compuertas NAND en total, ¡aprovechando el chip 7400 al 100%!</em></small></p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0;">
+            <h4 style="margin-top: 0; color: #495057;">🔌 Guía de Cableado y Auditoría</h4>
+            <p>Conecta la OR anterior. Su salida (pin 8) conéctala a los pines 12 y 13. Salida final en pin 11.</p>
+            <table class="tabla-auditoria">
+                <thead>
+                    <tr><th>B</th><th>A</th><th>\(\overline{A}\)</th><th>\(\overline{B}\)</th><th>\(P = \overline{\overline{A}\cdot\overline{B}}\)</th><th>\(X = \overline{P\cdot P} = \overline{A+B}\)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 5. NAND con NAND -->
+        <h3>🔹 5. La Compuerta NAND usando 1 compuerta NAND</h3>
+        <p>El caso más trivial. Conectando las señales A y B directamente a las entradas de una única NAND, obtenemos la función \(\overline{A \cdot B}\).</p>
+        
+        <div class="svg-container"><img src="img/nand_desde_nand.png" alt="Compuerta NAND directa" style="max-width:60%; height:auto;">
+            <p><small><em>fig. 7: El caso más simple y directo. La compuerta NAND es ella misma, conectando las entradas directamente sin alteraciones.</em></small></p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0;">
+            <h4 style="margin-top: 0; color: #495057;">🔌 Guía de Cableado y Auditoría</h4>
+            <p>Entradas <strong>A, B</strong> a pines <strong>1, 2</strong>. Salida en el pin <strong>3</strong>.</p>
+        </div>
+
+        <!-- 6. XOR con NAND -->
+        <h3>🔹 6. La Compuerta XOR usando 4 compuertas NAND</h3>        
+        <p>La XOR (\(A \oplus B\)) es estricta: requiere un diseño ingenioso. En lugar de construir una NOT+AND+OR, las señales se bifurcan en un diseño en forma de malla donde las salidas intermedias retroalimentan hacia adelante a otras compuertas.</p>
+
+        <div class="dato-extra" style="background-color: #fff3cd; border-left-color: #ffc107; padding: 12px; margin-bottom: 15px;">
+            <strong>🧠 Estrategia de Ingeniero: ¡Usa un lápiz!</strong><br>
+            <small>Este es el circuito más complejo hasta ahora. La señal "salta" de la salida de una compuerta a las entradas de otras dos. Te recomendamos imprimir esta guía o dibujarla en papel, e ir <strong>tachando cada cable</strong> a medida que lo conectes en tu protoboard. En la próxima lección (Laboratorio 2), armaremos y probaremos este circuito exacto paso a paso.</small>
+        </div>
+
+        <div class="svg-container"><img src="img/xor_desde_nand.png" alt="Construcción de la compuerta XOR usando cuatro NAND" style="max-width:80%; height:auto;">
+            <p><small><em>fig. 8: La XOR (<code>A⊕B</code>) requiere un diseño ingenioso en forma de malla. En lugar de conectar compuertas en línea recta (cascada), las señales de entrada y los resultados intermedios se bifurcan para alimentar múltiples compuertas simultáneamente.</em></small></p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0;">
+            <h4 style="margin-top: 0; color: #495057;">🔌 Guía de Cableado y Auditoría</h4>
+            <ul style="margin-bottom: 10px;">
+                <li><strong>NAND 1:</strong> A al 1, B al 2. Salida temp en 3.</li>
+                <li><strong>NAND 2:</strong> A al 4, pin 3 al 5. Salida temp en 6.</li>
+                <li><strong>NAND 3:</strong> B al 9, pin 3 al 10. Salida temp en 8.</li>
+                <li><strong>NAND 4:</strong> Pin 6 al 12, pin 8 al 13. Salida final en 11.</li>
+            </ul>
+            <table class="tabla-auditoria">
+                <thead>
+                    <tr><th>B</th><th>A</th><th>\(P = \overline{AB}\)</th><th>\(Q = \overline{AP}\)</th><th>\(R = \overline{BP}\)</th><th>\(X = \overline{QR} = A \oplus B\)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+                    <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 7. XNOR con NAND -->
+        <h3>🔹 7. La Compuerta XNOR usando 5 compuertas NAND</h3>
+        <p>La XNOR (igualdad) es el complemento de la XOR. Se construye añadiendo un inversor a la salida del circuito XOR de cuatro NAND.</p>
+
+        <div class="svg-container"><img src="img/xnor_desde_nand.png" alt="Construcción de la compuerta XNOR usando cinco NAND" style="max-width:80%; height:auto;">
+            <p><small><em>fig. 9: La compuerta XNOR (igualdad). Se requiere un segundo chip 7400 para añadir la quinta NAND, que actúa como inversor final de nuestro circuito XOR.</em></small></p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0;">
+            <h4 style="margin-top: 0; color: #495057;">🔌 Guía de Cableado y Auditoría</h4>
+            <p>Conecta la salida de la XOR (pin 11) a las entradas de una quinta NAND (pines 1 y 2 de un SEGUNDO chip 7400). La salida final estará en el pin 3 de ese segundo chip.</p>
+        </div>        
+
+    <!-- === EL COSTO OCULTO: RETARDO DE PROPAGACIÓN === -->
+        <div class="destacado" style="background-color: #fff3e0; border-left-color: #ff9800; margin: 30px 0;">
+            <h3 style="color: #e65100; margin-top: 0;">⏱️ El Precio a Pagar: Retardo de Propagación</h3>
+            <p>En ingeniería no hay soluciones perfectas, solo intercambios (<em>trade-offs</em>). Acabamos de ver que podemos construir una compuerta <strong>XOR</strong> usando 4 compuertas <strong>NAND</strong> para ahorrar tipos de chips. Pero, ¿qué perdimos a cambio?</p>
+            <p><strong>Velocidad.</strong></p>
+            <p>Cruzar físicamente los transistores de una compuerta TTL toma unos <strong>10 nanosegundos (10 ns)</strong>. Esto se llama <em>Retardo de Propagación</em>.</p>
+            <ul>
+                <li>Si usas un chip XOR dedicado (7486), la señal llega en <strong>10 ns</strong>.</li>
+                <li>Si usas el diseño de 4 NANDs (donde la señal debe cruzar primero por la NAND 1, luego por la 2/3 y finalmente por la 4), el tiempo total se suma: 10 + 10 + 10 = <strong>30 ns</strong>.</li>
+            </ul>
+            <p>Para encender un LED, un retraso de 30 nanosegundos es invisible al ojo humano. Pero en el procesador de tu computadora (que hace miles de millones de operaciones por segundo), ese retraso es la diferencia entre un equipo ultra rápido y uno que se congela. <strong>¡El buen ingeniero sabe cuándo ahorrar chips y cuándo priorizar velocidad!</strong></p>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- FAMILIA NOR -->
+    <!-- ========================================================= -->
+    <section>
+        <h2>3. Construyendo el Mundo con NOR (Chip 7402)</h2>
+
+        <div class="destacado" style="background-color: #e8f5e9; border-left: 5px solid #28a745; padding: 10px 20px;">
+            <h4 style="margin-top: 0;">📌 ¡ALERTA! El Patillaje Extraño del 7402 (NOR)</h4>
+            <p>El chip 7402 tiene sus pines distribuidos <strong>al revés</strong> que el resto. La salida está antes que las entradas:</p>
+            <ul style="font-family: monospace;">
+                <li><strong>Compuerta 1:</strong> Salida: Pin 1 | Entradas: Pines 2 y 3</li>
+                <li><strong>Compuerta 2:</strong> Salida: Pin 4 | Entradas: Pines 5 y 6</li>
+                <li><strong>Compuerta 3:</strong> Salida: Pin 10 | Entradas: Pines 8 y 9</li>
+                <li><strong>Compuerta 4:</strong> Salida: Pin 13 | Entradas: Pines 11 y 12</li>
+            </ul>
+            
+            <div class="svg-container">
+                <!-- Imagen: Pinout Chip (img/chip_pinout.png) -->
+                <img src="img/interno_7402.png" alt="Ilustración de un chip 7402 (NOR). El Patillaje Extraño del 7402 (NOR) con salida en los pines 1, 4, 10 y 13." style="max-width:75%; height:auto;"><p><small><em>fig. 10: ¡Cuidado con el patillaje del 7402! A diferencia de otros chips básicos, sus salidas se ubican en los pines 1, 4, 10 y 13. Un error clásico de principiante es conectar asumiendo que el pin 3 es una salida.</em></small></p>
+            </div>
+        </div>
+        <p>Así como demostramos que la compuerta NAND es universal, la compuerta <strong>NOR</strong> tiene exactamente el mismo superpoder.</p>
+
+        <!-- 1. NOT con NOR -->
+        <h3>🔹 1. El Inversor (NOT) usando 1 compuerta NOR</h3>
+        <p>Al igual que la NAND, si puenteamos las dos entradas de una NOR (\(A\)), la operación es \(\overline{A + A}\), lo que resulta en \(\overline{A}\).</p>
+
+        <div class="svg-container"><img src="img/not_desde_nor.png" alt="Circuito NOT implementado con compuerta NOR" style="max-width:60%; height:auto;">
+            <p><small><em>fig. 11: El inversor versión NOR. Al igual que con la NAND, puentear las entradas nos permite obtener la negación de la señal de forma inmediata.</em></small></p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0;">
+            <h4 style="margin-top: 0; color: #495057;">🔌 Guía de Cableado y Auditoría</h4>
+            <p>Conecta la entrada <strong>A</strong> a los pines <strong>2 y 3</strong>. Salida <strong>(¬A)</strong> en el pin <strong>1</strong>.</p>
+            <table class="tabla-auditoria" style="max-width: 300px;">
+                <thead><tr><th>A</th><th>\(\overline{A + A}\)</th></tr></thead>
+                <tbody>
+                    <tr><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 2. OR con NOR -->
+        <h3>🔹 2. La compuerta OR usando 2 compuertas NOR</h3>
+        <p>Como la NOR es "NOT-OR", si tomamos la salida de una NOR y la pasamos por un inversor (una segunda NOR puenteada), recuperamos la suma original: \(\overline{\overline{A+B}} = A+B\).</p>
+        
+        <div class="svg-container"><img src="img/or_desde_nor.png" alt="Circuito OR implementado con dos compuertas NOR" style="max-width:60%; height:auto;">
+            <p><small><em>fig. 12: La compuerta OR restaurada. Como la NOR es una suma negada por naturaleza, pasarla por un inversor adicional nos devuelve la suma pura.</em></small></p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0;">
+            <h4 style="margin-top: 0; color: #495057;">🔌 Guía de Cableado y Auditoría</h4>
+            <p><strong>A</strong> al pin <strong>2</strong>, <strong>B</strong> al pin <strong>3</strong>. Salida (pin <strong>1</strong>) a los pines <strong>5 y 6</strong>. Salida final en pin <strong>4</strong>.</p>
+            <table class="tabla-auditoria">
+                <thead>
+                    <tr><th>B</th><th>A</th><th>\(P = \overline{A + B}\)</th><th>\(X = \overline{P + P} = A+B\)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 3. AND con NOR -->
+        <h3>🔹 3. La compuerta AND usando 3 compuertas NOR</h3>
+        <p>Por De Morgan: \(A \cdot B = \overline{\overline{A} + \overline{B}}\). Invertimos cada entrada primero (dos NOR puenteadas) y luego aplicamos una tercera NOR combinadora.</p>
+        
+        <div class="svg-container"><img src="img/and_desde_nor.png" alt="Circuito AND implementado con tres compuertas NOR" style="max-width:70%; height:auto;">
+            <p><small><em>fig. 13: La simetría de De Morgan. Al invertir las entradas A y B antes de pasarlas por la NOR combinadora, la suma se transforma en una multiplicación lógica (AND).</em></small></p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 5px solid #ff9800;">
+            <h4 style="margin-top: 0; color: #e65100;">🔌 Guía de Cableado y Auditoría</h4>
+            <p><strong>Inv A:</strong> Pines 2 y 3. Salida en 1. <br><strong>Inv B:</strong> Pines 5 y 6. Salida en 4. <br><strong>NOR Final:</strong> Pin 1 al 8, pin 4 al 9. Salida en 10.</p>
+            <table class="tabla-auditoria">
+                <thead>
+                    <tr><th>B</th><th>A</th><th>\(\overline{A}\)</th><th>\(\overline{B}\)</th><th>\(\overline{A} + \overline{B}\)</th><th>\(X = \overline{\overline{A} + \overline{B}} = A \cdot B\)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 4. NAND con NOR -->
+        <h3>🔹 4. La compuerta NAND usando 4 compuertas NOR</h3>
+        <p>Utilizando la implementación de AND que ya construimos (tres NOR) y añadiendo un inversor a la salida (una cuarta NOR puenteada), obtenemos NAND: \(\overline{A \cdot B}\).</p>
+        
+        <div class="svg-container"><img src="img/nand_desde_nor.png" alt="Circuito NAND implementado con cuatro compuertas NOR" style="max-width:70%; height:auto;">
+            <p><small><em>fig. 14: La compuerta NAND construida con NORs. Requiere 4 compuertas en total, demostrando que la NOR es igual de universal y poderosa que su hermana.</em></small></p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0;">
+            <h4 style="margin-top: 0; color: #495057;">🔌 Guía de Cableado y Auditoría</h4>
+            <p>Conecta el AND anterior. Su salida (pin 10) conéctala a los pines 11 y 12. Salida final en pin 13.</p>
+            <table class="tabla-auditoria">
+                <thead>
+                    <tr><th>B</th><th>A</th><th>\(\overline{A}\)</th><th>\(\overline{B}\)</th><th>\(P = \overline{\overline{A} + \overline{B}}\)</th><th>\(X = \overline{P+P} = \overline{A \cdot B}\)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 5. NOR con NOR -->
+        <h3>🔹 5. La compuerta NOR (directa, 1 compuerta)</h3>
+        <p>Basta con usar la compuerta directamente. Conectamos A y B, y obtenemos \(\overline{A+B}\).</p>
+        
+        <div class="svg-container"><img src="img/nor_directa.png" alt="Compuerta NOR directa" style="max-width:60%; height:auto;">   
+            <p><small><em>fig. 15: La compuerta NOR en su estado natural. Conectamos las entradas directamente para obtener la suma negada.</em></small></p></div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0;">
+            <h4 style="margin-top: 0; color: #495057;">🔌 Guía de Cableado y Auditoría</h4>
+            <p>Conecta <strong>A</strong> al pin <strong>2</strong> y <strong>B</strong> al pin <strong>3</strong>. Tu salida <strong>(¬(A+B))</strong> estará en el pin <strong>1</strong>.</p>
+        </div>
+
+        <!-- 6. XNOR con NOR -->
+        <h3>🔹 6. La compuerta XNOR usando 4 compuertas NOR</h3>
+        <p>Curiosamente, construir la XNOR (igualdad) con NOR es más directo que construir la XOR. Utiliza una malla de 4 compuertas NOR cuyas señales se bifurcan hacia adelante.</p>
+        
+        <div class="svg-container"><img src="img/xnor_desde_nor.png" alt="Circuito XNOR implementado con cuatro compuertas NOR" style="max-width:80%; height:auto;">
+            <p><small><em>Fig. 16: Curiosamente, la XNOR (igualdad) es más "natural" para la familia NOR, lográndose con 4 compuertas cuyas señales se bifurcan y entrelazan de manera análoga a como la NAND crea la XOR.</em></small></p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0;">
+            <h4 style="margin-top: 0; color: #495057;">🔌 Guía de Cableado y Auditoría</h4>
+            <ul style="margin-bottom: 10px;">
+                <li><strong>NOR 1:</strong> A al 2, B al 3. Salida temp en 1.</li>
+                <li><strong>NOR 2:</strong> A al 5, pin 1 al 6. Salida temp en 4.</li>
+                <li><strong>NOR 3:</strong> B al 8, pin 1 al 9. Salida temp en 10.</li>
+                <li><strong>NOR 4:</strong> Pin 4 al 11, pin 10 al 12. Salida final (XNOR) en 13.</li>
+            </ul>
+            <table class="tabla-auditoria">
+                <thead>
+                    <tr><th>B</th><th>A</th><th>\(P = \overline{A+B}\)</th><th>\(Q = \overline{A+P}\)</th><th>\(R = \overline{B+P}\)</th><th>\(X = \overline{Q+R}\) (XNOR)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+                    <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 7. XOR con NOR -->
+        <h3>🔹 7. La compuerta XOR usando 5 compuertas NOR</h3>
+        <p>Para obtener la XOR, primero construimos la malla XNOR (4 compuertas), y luego añadimos un inversor (una 5ta NOR) a la salida.</p>
+        
+        <div class="svg-container"><img src="img/xor_desde_nor.png" alt="Circuito XOR implementado con cinco compuertas NOR" style="max-width:80%; height:auto;">
+            <p><small><em>fig. 17: La compuerta XOR construida con la familia NOR. Requiere añadir un inversor (una quinta compuerta NOR) a la salida de nuestra malla XNOR.</em></small></p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin: 15px 0;">
+            <h4 style="margin-top: 0; color: #495057;">🔌 Guía de Cableado y Auditoría</h4>
+            <p>Cablea el circuito XNOR (paso anterior). Conecta la salida (pin 13) a los pines 2 y 3 de un SEGUNDO chip 7402. La salida final (XOR) estará en el pin 1 del segundo chip.</p>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- DISEÑO DEL SISTEMA REAL (EL JURADO CON NOR) -->
+    <!-- ========================================================= -->
+        <h2>4. Diseño de un Sistema Real: El Jurado con NORs</h2>
+
+        <p>En la Lección 18, obtuvimos la expresión para el problema de los tres jueces en forma <strong>Producto de Sumas (POS)</strong> a partir de los ceros de la tabla de verdad.</p>
+        
+        <p>Recordemos la notación formal (Productoria de maxterms) que indica las filas donde la propuesta es rechazada ($P=0$):</p>
+
+        <div class="formula">
+        $$ P(A,B,C) = \prod(0, 1, 2, 4) $$
+        </div>
+
+        <p>Al traducir cada número de fila a su respectivo término de suma (donde los ceros se escriben normales y los unos se niegan), obtenemos la ecuación canónica:</p>
+
+        <div class="formula">
+        $$ P = (A + B + C)(A + B + \overline{C})(A + \overline{B} + C)(\overline{A} + B + C) $$
+        </div>
+        
+        <p>Tras simplificarla agrupadamente (usando álgebra de Boole o un Mapa de Karnaugh de ceros), llegamos a nuestra elegante ecuación mínima POS:</p>
+
+        <div class="formula">
+        $$ P = (A + B)(A + C)(B + C) $$
+        </div>
+
+        <p>Ahora implementaremos esta función utilizando <strong>únicamente compuertas NOR</strong> de dos entradas, aprovechando las leyes de De Morgan y la versatilidad del chip 7402.</p>S
+
+        <p>Analiza bien esa última ecuación. Si defines:</p>
+        <ul style="font-family: monospace; font-size: 1.1em; background: #f8f9fa; padding: 15px; border-radius: 8px; list-style-type: none;">
+            <li>U = \(\overline{A + B}\)  (NOR directo entre A y B)</li>
+            <li>V = \(\overline{A + C}\)  (NOR directo entre A y C)</li>
+            <li>W = \(\overline{B + C}\)  (NOR directo entre B y C)</li>
+        </ul>
+        <p>La ecuación completa se convierte en: <strong>$$P = \overline{U + V + W}$$</strong></p>
+
+        <div class="destacado" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <h4 style="color: #e65100; margin-top: 0;">💡 El Problema del "Hardware Físico": ¡Cuidado con la Cascada!</h4>
+            <p>Matemáticamente es hermoso: necesitamos una sola compuerta NOR gigante de 3 entradas (\(P = \overline{U + V + W}\)). Pero en la vida real, el chip 7402 solo tiene compuertas de <strong>2 entradas</strong>. ¡Debemos dividirlas!</p>
+            
+            <p><strong>⚠️ La Trampa:</strong> Con la compuerta OR (Lección 17) podías hacer una cascada directa: <code>(U + V) + W</code>. Pero con la NOR <strong>NO PUEDES</strong>. Si conectas una NOR directo a otra NOR, la matemática se rompe por culpa de la doble negación.</p>
+            
+            <p><strong>✅ La Solución:</strong> Debemos hacer la NOR de U y V, <strong>invertir ese resultado</strong> para recuperar la suma original (U+V), y finalmente pasarlo por la última NOR junto con W.</p>
+            <p class="formula">$$ P = \text{NOR}\!\left( \overline{\text{NOR}(U,V)},\; W \right) $$</p>
+            <p>Por culpa de ese inversor intermedio, necesitaremos <strong>6 compuertas NOR en total</strong> (lo que nos obliga a usar dos chips 7402).</p>
+        </div>
+
+        <h3>El Diagrama Esquemático Final</h3>
+
+        <div class="svg-container">
+            <img src="img/sistema_de_votación_circuito_con_nor.png" alt="Circuito de votación con compuertas NOR" style="max-width:90%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <p><small><em>Fig. 18: Implementación con seis compuertas NOR (dos chips 7402). Una obra maestra de optimización de un solo tipo de componente. ¡El triunfo del ladrillo universal!</em></small></p>
+        </div>
+
+        <h4 style="margin-top: 0; color: #0d47a1;">🔌 Guía de Cableado Físico (Requiere DOS chips 7402)</h4>
+
+        <p>Llamaremos <strong>Chip 1 (U1)</strong> al primero y <strong>Chip 2 (U2)</strong> al segundo. Ambos deben tener Vcc (pin 14) y GND (pin 7). <em>(Nota: A = Interruptor 1, B = Interruptor 2, C = Interruptor 3)</em>.</p>
+        
+        <h5 style="color: #1565c0; margin-bottom: 5px;">Chip 1 (U1) - Generando \(U\), \(V\) y \(W\):</h5>
+        <ul style="margin-bottom: 15px;">
+            <li><strong>NOR 1 (\(U\)):</strong> Conecta <strong>A</strong> al pin 3 y <strong>B</strong> al pin 2. Salida \(U\) en el pin <strong>1</strong>.</li>
+            <li><strong>NOR 2 (\(V\)):</strong> Conecta <strong>A</strong> al pin 6 y <strong>C</strong> al pin 5. Salida \(V\) en el pin <strong>4</strong>.</li>
+            <li><strong>NOR 3 (\(W\)):</strong> Conecta <strong>B</strong> al pin 9 y <strong>C</strong> al pin 8. Salida \(W\) en el pin <strong>10</strong>.</li>
+        </ul>
+
+        <h5 style="color: #1565c0; margin-bottom: 5px;">Chip 2 (U2) - Combinando y obteniendo \(P\):</h5>
+        <ul style="margin-bottom: 15px;">
+            <li><strong>NOR 1 (\(X\)):</strong> Conecta el pin <strong>1 de U1</strong> al pin 3, y el pin <strong>4 de U1</strong> al pin 2. Salida \(X\) en el pin <strong>1</strong>.</li>
+            <li><strong>NOR 2 (\(Y\)):</strong> Conecta el pin <strong>1 de U2</strong> a los pines <strong>5 y 6</strong> (Inversor). Salida \(Y\) en el pin <strong>4</strong>.</li>
+            <li><strong>NOR 3 (Salida \(P\)):</strong> Conecta el pin <strong>4 de U2</strong> al pin 9, y el pin <strong>10 de U1</strong> al pin 8. ¡Tu salida final \(P\) está en el pin <strong>10 de U2</strong>!</li>
+        </ul>
+        
+        <p><strong>📊 Auditoría Lógica (Paso a Paso):</strong></p>            
+            
+            <div style="background-color: #e3f2fd; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 0.9em; border-left: 3px solid #1976d2;">
+                <p style="margin-top: 0; margin-bottom: 8px;"><strong>🔍 Cómo leer esta tabla:</strong> Las primeras 3 columnas son los <strong>Jueces (Entradas del DIP Switch)</strong>. Las siguientes 3 columnas son las salidas del <strong>Chip 1 (U1)</strong>. Las últimas 3 columnas muestran cómo el <strong>Chip 2 (U2)</strong> procesa la información hasta llegar al Veredicto Final (\(P\)).</p>
+                <p style="margin: 0; color: #0d47a1;"><em>📱 <strong>Nota de navegación:</strong> Si la tabla no cabe completa en tu pantalla, <strong>desliza hacia la derecha</strong> (o usa la barra de desplazamiento en la parte inferior) para ver el resto de las columnas.</em></p>
+            </div>
+
+            <div style="overflow-x:auto;">
+                    <table class="tabla-auditoria">
+                        <thead>
+                            <tr style="background-color: #1565c0;">
+                                <th colspan="3" style="border-right: 2px solid white;">LOS 3 JUECES</th>
+                                <th colspan="3" style="border-right: 2px solid white; background-color: #0d47a1;">CHIP 1 (U1)</th>
+                                <th colspan="3" style="background-color: #0a3d91;">CHIP 2 (U2)</th>
+                            </tr>
+                            <tr>
+                                <th>C<br><small>(Int. 3)</small></th><th>B<br><small>(Int. 2)</small></th><th>A<br><small>(Int. 1)</small></th>
+                                <th>\(U=\overline{A+B}\)</th>
+                                <th>\(V=\overline{A+C}\)</th>
+                                <th>\(W=\overline{B+C}\)</th>
+                                <th>\(X=\overline{U+V}\)</th>
+                                <th>\(Y=\overline{X}\)</th>
+                                <th>\(P=\overline{Y+W}\)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>0</td><td>0</td><td>0</td> <td>1</td><td>1</td><td>1</td> <td>0</td><td>1</td> <td>0</td></tr>
+                            <tr><td>0</td><td>0</td><td>1</td> <td>0</td><td>0</td><td>1</td> <td>1</td><td>0</td> <td>0</td></tr>
+                            <tr><td>0</td><td>1</td><td>0</td> <td>0</td><td>1</td><td>0</td> <td>0</td><td>1</td> <td>0</td></tr>
+                            <tr style="background-color: #e8f5e9;"><td>0</td><td>1</td><td>1</td> <td>0</td><td>0</td><td>0</td> <td>1</td><td>0</td> <td>1</td></tr>
+                            <tr><td>1</td><td>0</td><td>0</td> <td>1</td><td>0</td><td>0</td> <td>0</td><td>1</td> <td>0</td></tr>
+                            <tr style="background-color: #e8f5e9;"><td>1</td><td>0</td><td>1</td> <td>0</td><td>0</td><td>0</td> <td>1</td><td>0</td> <td>1</td></tr>
+                            <tr style="background-color: #e8f5e9;"><td>1</td><td>1</td><td>0</td> <td>0</td><td>0</td><td>0</td> <td>1</td><td>0</td> <td>1</td></tr>
+                            <tr style="background-color: #e8f5e9;"><td>1</td><td>1</td><td>1</td> <td>0</td><td>0</td><td>0</td> <td>1</td><td>0</td> <td>1</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+        <p style="text-align: center; color: #555; font-size: 0.85em; margin-top: 5px;"><em>¡El Jurado funciona! \(P = 1\) únicamente cuando hay mayoría de jueces (dos o más en 1).</em></p>
+        
+        <!-- ================================================================== -->
+        <!-- PRECAUCIÓN: MANEJO DE ENTRADAS NO CONECTADAS                      -->
+        <!-- ================================================================== -->
+        <div class="destacado" style="background-color: #fff3e0; border-left-color: #e65100; margin: 30px 0;">
+            <h3 style="color: #e65100; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">⚠️</span> Precaución: ¿Qué hacer con las patas que sobran?
+            </h3>
+            <p>En el montaje físico del circuito del jurado estás utilizando dos chips 7402, cada uno con cuatro compuertas NOR. Nuestro diseño requiere seis compuertas, por lo que <strong>quedarán dos compuertas totalmente sin usar</strong> (una en cada chip).</p>
+            
+            <p>Si dejas las entradas de esas compuertas <strong>al aire (flotantes)</strong>, se comportarán como pequeñas antenas captando ruido electromagnético del ambiente (la red eléctrica, móviles, incluso la estática de tu mano). Ese ruido hace que el chip consuma corriente extra, se caliente y, lo peor, <strong>puede interferir con las compuertas vecinas dentro del mismo chip</strong> provocando fallos aleatorios.</p>
+
+            <div style="background-color: white; border: 1px solid #ffcc80; border-radius: 8px; padding: 15px; margin: 15px 0;">
+                <h4 style="color: #d35400; margin-top: 0; margin-bottom: 10px;">✅ La Regla de Oro del Ingeniero:</h4>
+                <p style="margin-bottom: 10px;"><strong>Nunca dejes entradas lógicas sin conectar.</strong> Deben fijarse a un nivel estable (0V o 5V).</p>
+                <p style="margin-bottom: 5px;">Para compuertas <strong>NOR (como el 7402)</strong> o <strong>NAND (7400)</strong>, la práctica más rápida y segura es:</p>
+                <ul style="margin-bottom: 0;">
+                    <li>Conectar <strong>ambas entradas a GND (tierra)</strong>.</li>
+                    <li><em>¡ADVERTENCIA CRÍTICA!</em> <strong>Jamás</strong> conectes los pines de SALIDA a GND o Vcc. Si la salida intenta dar 5V y está conectada a GND, crearás un cortocircuito interno y quemarás el chip.</li>
+                </ul>
+            </div>
+
+            <h4 style="color: #e65100; margin-bottom: 10px;">🔌 En tu montaje del Jurado:</h4>
+            <ul style="margin-bottom: 15px;">
+                <li>Revisa tu cableado: Ocupaste las compuertas 1, 2 y 3 de ambos chips.</li>
+                <li>La que sobra es la <strong>Compuerta 4</strong> en cada chip.</li>
+                <li>Conecta sus dos entradas (<strong>pines 11 y 12</strong> de U1, y <strong>pines 11 y 12</strong> de U2) directamente a la línea de Tierra (Riel azul).</li>
+                <li>Deja los pines de salida (pin 13 en ambos chips) sin conectar a nada.</li>
+            </ul>
+
+            <div style="background-color: #fff8e1; border-left: 4px solid #ffb300; padding: 10px 15px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #555;">
+                <p style="margin: 0;"><strong>💡 Nota sobre Simuladores:</strong> En programas como Tinkercad este problema rara vez aparece, porque el software modela las entradas flotantes como ceros perfectos para evitar errores de simulación. Pero en un circuito de silicio real... ¡los fantasmas eléctricos existen! Adquiere el hábito de "aterrizar" las patas sueltas y te ahorrarás horas de frustración en el laboratorio.</p>
+            </div>
+        </div>
+
+        <!-- ================================================================== -->
+        <!-- PRECAUCIÓN: MANEJO DE ENTRADAS NO CONECTADAS                      -->
+        <!-- ================================================================== -->
+        <div class="destacado" style="background-color: #fff3e0; border-left-color: #e65100; margin: 30px 0;">
+            <h3 style="color: #e65100; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">⚠️</span> Precaución: ¿Qué hacer con las patas que sobran?
+            </h3>
+            <p>En el montaje físico del circuito del jurado estás utilizando dos chips 7402, cada uno con cuatro compuertas NOR. Nuestro diseño requiere seis compuertas, por lo que <strong>quedarán dos compuertas totalmente sin usar</strong> (una en cada chip).</p>
+            
+            <p>En la <strong>Lección 10</strong> aprendimos sobre el peligro de los cables "al aire". Si dejas las entradas de esas compuertas <strong>flotantes</strong>, se comportarán como pequeñas antenas captando ruido electromagnético. Ese ruido hace que el chip consuma corriente extra, se caliente y, lo peor, <strong>puede interferir con las compuertas vecinas dentro del mismo chip</strong> provocando fallos aleatorios.</p>
+
+            <div style="background-color: white; border: 1px solid #ffcc80; border-radius: 8px; padding: 15px; margin: 15px 0;">
+                <h4 style="color: #d35400; margin-top: 0; margin-bottom: 10px;">✅ La Regla de Oro del Ingeniero:</h4>
+                <p style="margin-bottom: 10px;"><strong>Nunca dejes entradas lógicas sin conectar.</strong> Deben fijarse a un nivel estable (GND o Vcc).</p>
+                <p style="margin-bottom: 5px;"><em>¡ADVERTENCIA CRÍTICA!</em> <strong>Jamás</strong> conectes los pines de SALIDA a GND o Vcc. Si la salida intenta dar 5V y está conectada a GND, crearás un cortocircuito interno y quemarás el chip al instante.</p>
+            </div>
+
+            <h4 style="color: #e65100; margin-bottom: 10px;">🔌 En tu montaje del Jurado (NOR):</h4>
+            <ul style="margin-bottom: 25px;">
+                <li>Revisa tu cableado: Ocupaste las compuertas 1, 2 y 3 de ambos chips.</li>
+                <li>La que sobra es la <strong>Compuerta 4</strong> en cada chip.</li>
+                <li>Conecta sus dos entradas (<strong>pines 11 y 12</strong> de U1, y <strong>pines 11 y 12</strong> de U2) directamente a la línea de <strong>GND (Tierra)</strong>.</li>
+                <li>Deja los pines de salida (pin 13 en ambos chips) sin conectar a nada.</li>
+            </ul>
+
+            <!-- NUEVO BLOQUE: TABLA DE REFERENCIA UNIVERSAL PARA PINES SOBRANTES -->
+            <div style="background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; margin: 25px 0;">
+                <h4 style="color: #343a40; margin-top: 0; border-bottom: 2px solid #dee2e6; padding-bottom: 10px;">🤔 ¿Y si la compuerta que sobra es de otro tipo?</h4>
+                <p style="color: #495057; margin-bottom: 15px;">La regla general es conectar las entradas sobrantes a un estado que <strong>no altere el consumo del chip</strong> ni lo haga oscilar. Aquí tienes la guía definitiva de la industria:</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                    
+                    <!-- AND / NAND -->
+                    <div style="background: white; padding: 15px; border-radius: 6px; border-left: 4px solid #1976d2; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                        <strong style="color: #1565c0; font-size: 1.1em;">Familia AND / NAND (7408, 7400)</strong>
+                        <p style="margin: 8px 0 0 0; font-size: 0.9em; line-height: 1.5; color: #555;">
+                            Lo habitual es conectar ambas entradas no usadas a <strong>Vcc (+5V)</strong> (preferiblemente a través de una resistencia pull-up común, o directamente si es seguro). Esto garantiza que la salida de la AND sea 1, y la de la NAND sea 0, dejándolas en un estado estable que no afecta al resto del chip.
+                        </p>
+                    </div>
+
+                    <!-- OR / NOR -->
+                    <div style="background: white; padding: 15px; border-radius: 6px; border-left: 4px solid #388e3c; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                        <strong style="color: #2e7d32; font-size: 1.1em;">Familia OR / NOR (7432, 7402)</strong>
+                        <p style="margin: 8px 0 0 0; font-size: 0.9em; line-height: 1.5; color: #555;">
+                            Se conectan ambas entradas a <strong>GND (Tierra)</strong>. Esto garantiza que la salida de la OR sea 0, y la de la NOR sea 1, manteniéndolas "dormidas" y sin consumir energía extra.
+                        </p>
+                    </div>
+
+                    <!-- XOR -->
+                    <div style="background: white; padding: 15px; border-radius: 6px; border-left: 4px solid #8e24aa; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                        <strong style="color: #6a1b9a; font-size: 1.1em;">Familia XOR (7486)</strong>
+                        <p style="margin: 8px 0 0 0; font-size: 0.9em; line-height: 1.5; color: #555;">
+                            También se recomienda conectarlas a niveles fijos. Si conectas una a 1 y otra a 0, la salida será 1. Lo más simple y limpio es conectar <strong>ambas entradas a GND</strong>, forzando una salida 0 estable.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONCLUSIÓN FINAL DEL BLOQUE -->
+            <div style="background-color: #fff8e1; border-left: 4px solid #ffb300; padding: 15px; border-radius: 0 8px 8px 0; margin-top: 20px;">
+                <h4 style="color: #f57f17; margin-top: 0; margin-bottom: 8px;">🎯 Conclusión de Laboratorio</h4>
+                <p style="margin: 0; font-size: 0.95em; color: #5d4037; line-height: 1.6;">
+                    En cualquier circuito digital, las entradas flotantes son enemigas de la estabilidad. Dedica un momento al final de cada montaje para revisar qué pines de los chips quedan sin conectar y llévalos a un nivel lógico fijo (generalmente tierra para NOR/OR/XOR, y alimentación para AND/NAND). Esta pequeña práctica evitará fallos intermitentes y te ahorrará horas de depuración (troubleshooting).
+                </p>
+                <p style="margin: 10px 0 0 0; font-size: 0.85em; color: #795548; font-style: italic;">
+                    <strong>💡 Nota sobre Simuladores:</strong> En programas como Tinkercad este problema no aparece, porque el software "asume" que las entradas flotantes son ceros para no colapsar. Pero en un circuito de silicio real... ¡los fantasmas eléctricos existen!
+                </p>
+            </div>
+        </div>
+        
+        <!-- ========================================================= -->
+        <!-- TRANSICIÓN Y COMPARATIVA FINAL -->
+        <!-- ========================================================= -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+            <h3 style="color: #7b1fa2; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">⚖️</span> Veredicto Final: SOP (L17) vs POS Universal (L19)
+            </h3>
+            
+            <!-- Nueva introducción reflexiva -->
+            <p style="font-size: 1.05em; line-height: 1.6; color: #4a148c;">
+                Acabas de auditar con éxito un sistema de votación complejo utilizando <strong>únicamente compuertas NOR</strong>. Pero, como buen ingeniero, es momento de evaluar si este esfuerzo matemático valió la pena.
+            </p>
+            <p style="color: #4a148c; margin-bottom: 20px;">
+                En la Lección 17 resolviste este mismo problema usando el método SOP directo. Ahora compáralo con la versión POS Universal de hoy. ¿Qué ganamos y qué perdimos al rediseñar el circuito?
+            </p>
+        <!-- Contenedor overflow para proteger pantallas muy estrechas -->
+
+        <div style="overflow-x: auto; margin-top: 15px; border-radius: 8px; box-shadow: 0 3px 8px rgba(0,0,0,0.08);">
+            
+            <!-- 👇 AQUÍ ESTÁ EL FIX: Agregamos display: table; 👇 -->
+            <table style="width: 100%; display: table; min-width: 320px; border-collapse: collapse; text-align: center; background: white; font-size: 0.9em; line-height: 1.4;">
+                
+                <thead>
+                    <tr style="background-color: #1565c0; color: white;">
+                        <th style="padding: 10px 4px; border: 1px solid #ddd;">Diseño</th>
+                        <th style="padding: 10px 4px; border: 1px solid #ddd;">Compuertas<br>Usadas</th>
+                        <th style="padding: 10px 4px; border: 1px solid #ddd;">Chips<br>Requeridos</th>
+                        <th style="padding: 10px 4px; border: 1px solid #ddd;">Modelos en<br>Inventario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 12px 4px; border: 1px solid #ddd;">
+                            <strong>SOP (AND/OR)</strong><br><small style="color: #666;">Lección 17</small>
+                        </td>
+                        <td style="padding: 12px 4px; border: 1px solid #ddd; font-size: 1.2em; font-weight: bold; color: #444;">
+                            5
+                        </td>
+                        <td style="padding: 12px 4px; border: 1px solid #ddd;">
+                            2 chips<br><small style="color: #666;">(un 7408 y un 7432)</small>
+                        </td>
+                        <td style="padding: 12px 4px; border: 1px solid #ddd; color: #c62828;">
+                            <strong>2 modelos<br>distintos</strong>
+                        </td>
+                    </tr>
+                    <tr style="background-color: #faf5fc;">
+                        <td style="padding: 12px 4px; border: 1px solid #ddd;">
+                            <strong>POS (NOR)</strong><br><small style="color: #666;">Lección 19</small>
+                        </td>
+                        <td style="padding: 12px 4px; border: 1px solid #ddd; font-size: 1.2em; font-weight: bold; color: #444;">
+                            6
+                        </td>
+                        <td style="padding: 12px 4px; border: 1px solid #ddd;">
+                            2 chips<br><small style="color: #666;">(dos 7402)</small>
+                        </td>
+                        <td style="padding: 12px 4px; border: 1px solid #ddd; color: #2e7d32;">
+                            <strong>1 solo<br>modelo</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left: 5px solid #9c27b0; padding: 10px 20px; margin-top: 20px;">
+            <h3>🏆 Conclusión: ¿Por qué es importante esto?</h3>
+            <p>Acabas de demostrar que un sistema de votación complejo puede ser construido con un solo modelo de chip (el 7402). Esto es exactamente lo que hace la industria: en lugar de fabricar procesadores mezclando miles de compuertas diferentes, los ingenieros diseñan "mares de compuertas NAND o NOR" idénticas a nivel microscópico, y simplemente las interconectan. <strong>¡Esa es la base de los microchips y procesadores modernos!</strong></p>
+        </div>
+
+        <!-- === CONEXIÓN CON EL MUNDO REAL: MEMORIAS NAND VS NOR === -->
+        <div class="estado-flotante" style="margin: 30px 0;">
+            <h3 style="color: #1a237e; margin-top: 0;">📱 El Mundo Real: ¿Por qué tu celular usa "NAND Flash"?</h3>
+            <p>Hemos demostrado que matemáticamente y lógicamente, NAND y NOR son gemelas: ambas pueden construir el universo entero. Sin embargo, si miras las especificaciones de tu smartphone o de una memoria USB, verás que todas usan memoria <strong>NAND Flash</strong> y casi nunca NOR.</p>
+            
+            <p><strong>¿Por qué la industria eligió NAND como el rey indiscutible?</strong></p>
+            <p>La respuesta está en la física de los transistores (que está más alla del alcance de este curso):</p>
+            <ul>
+                <li><strong>Tamaño:</strong> A nivel microscópico, construir una compuerta NAND requiere transistores en serie, lo que ocupa casi la <strong>mitad del espacio físico</strong> en el silicio en comparación con una compuerta NOR (que los requiere en paralelo).</li>
+                <li><strong>Densidad:</strong> Al ser más pequeñas, puedes empaquetar miles de millones de compuertas NAND en un chip diminuto (como la tarjeta MicroSD de tu teléfono). Las memorias NOR son más rápidas para leer datos, pero son enormes y costosas.</li>
+            </ul>
+            <p><em>En el mundo real, la geometría del silicio importa tanto como la matemática de Boole.</em></p>
+        </div>
+    </section>
+
+    <!-- === PODCAST, PREGUNTAS Y CUADERNO === -->
+    <section class="podcast-section" style="margin-top: 40px;">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 30px; vertical-align: middle;">
+            <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3 style="display: inline;">🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        <p class="podcast-descripcion">
+            Dos docentes discuten por qué la "Universalidad" de NAND y NOR revolucionó la fabricación de microchips. Exploran cómo explicar el concepto de "puenteo" a estudiantes de grado 10° sin confundirlos, desglosan el rediseño del problema del jurado usando solo compuertas NOR, y analizan cómo usar De Morgan para saltar de la teoría (POS) a la implementación física.
+        </p>
+        <div class="podcast-player">
+            <audio controls preload="metadata" style="width: 100%;"><source src="audio/leccion19.mp3" type="audio/mpeg"></audio>
+        </div>
+        <p class="podcast-meta"><span class="duracion">⏱️ 18:40 min</span> | <span class="formato">🔊 MP3</span></p>
+    </section>
+
+    <h2>❓ Preguntas de Consolidación</h2>
+    <p>Responde estas preguntas para asegurarte de que dominas los conceptos técnicos <em>y</em> estás listo para enseñarlos en tu futura aula:</p>
+
+    <details class="u1" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+    <summary style="cursor: pointer; font-weight: bold;">1. Explica qué es el "puenteo de entradas" y por qué se aplica exitosamente en compuertas NAND y NOR, pero se considera una mala práctica en compuertas XOR y XNOR.</summary>
+    <p style="margin-top: 10px;"><strong>Explicación técnica:</strong> El puenteo consiste en conectar la misma señal (A) a todas las entradas de una compuerta. En NAND y NOR, esto obliga a la compuerta a ejecutar \( \overline{A \cdot A} \) o \( \overline{A + A} \), lo que resulta en \( \overline{A} \) (un Inversor/NOT útil). Sin embargo, en XOR (\(A \oplus A\)) y XNOR (\(A \odot A\)), las salidas se vuelven constantes (0 y 1 respectivamente). Usar un chip lógico complejo solo para obtener un cero o un uno constante es un desperdicio de recursos.</p>
+    </details>
+
+    <details class="u1" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+    <summary style="cursor: pointer; font-weight: bold;">2. ¿Por qué la industria electrónica prefiere construir circuitos complejos utilizando exclusivamente compuertas universales (como puros NAND) en lugar de una mezcla de AND, OR y NOT?</summary>
+    <p style="margin-top: 10px;"><strong>Explicación técnica:</strong> Construir todo con un solo tipo de compuerta simplifica enormemente la fabricación (litografía) de los microchips, ya que solo se debe replicar un único patrón de transistores millones de veces ("mar de compuertas"). Además, reduce la variedad de chips necesarios en inventario, bajando los costos y minimizando el espacio desperdiciado en los circuitos impresos (PCB).</p>
+    </details>
+
+    <details class="u1" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+    <summary style="cursor: pointer; font-weight: bold;">3. Demuestra matemáticamente cómo una compuerta OR puede construirse usando tres compuertas NAND. ¿Qué ley fundamental hace esto posible?</summary>
+    <p style="margin-top: 10px;"><strong>Explicación técnica:</strong> Esto es posible gracias a la Ley de De Morgan. La expresión de la OR es \(A + B\). Por doble negación, esto es \( \overline{\overline{A + B}} \). Aplicando De Morgan en la negación interna, obtenemos \( \overline{\overline{A} \cdot \overline{B}} \). 
+    <br><strong>Físicamente esto significa:</strong>
+    1. Invertir A usando una NAND puenteada.
+    2. Invertir B usando otra NAND puenteada.
+    3. Pasar ambos resultados por una tercera NAND. Total: 3 NANDs.</p>
+    </details>
+
+    <!-- === MI CUADERNO: Bitácora de Innovación === -->
+    <section class="cuaderno-section" style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; margin-top: 30px;">
+        <div class="cuaderno-header">
+            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 25px; vertical-align: middle;">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <h3 style="display: inline;">📋 Bitácora de Innovación (Mi Cuaderno)</h3>
+        </div>
+
+        <p>Responde en tu cuaderno físico las siguientes preguntas de reflexión docente:</p>
+
+        <ol>
+            <li>Imagina que un estudiante puentea accidentalmente las entradas de una compuerta <strong>AND</strong> (7408) pensando que creará un inversor. ¿Cómo le explicarías su error usando una analogía cotidiana?
+                <textarea rows="3" placeholder="Escribe tu analogía..." style="width: 100%; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; padding: 8px;"></textarea>
+            </li>
+            <li>En la transformación de OR usando NAND (Fig 4), aplicamos la Ley de De Morgan. Escribe paso a paso cómo harías una "mini-demostración" en la pizarra para que los alumnos vean que \( \overline{\overline{A} \cdot \overline{B}} \) es lo mismo que \(A + B\).
+                <textarea rows="3" placeholder="Diseña tu demostración de pizarra..." style="width: 100%; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; padding: 8px;"></textarea>
+            </li>
+            <li>Si tu escuela solo tuviera presupuesto para comprar cajas de un solo modelo de chip lógico para todo el semestre, ¿cuál elegirías y qué argumentos le darías al director para justificar tu compra?
+                <textarea rows="3" placeholder="Redacta tu justificación técnica/económica..." style="width: 100%; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; padding: 8px;"></textarea>
+            </li>
+        </ol>
+    </section>
+
+    <!-- NARRATIVA: TRAILER ACTUALIZADO -->
+    <div class="avance-leccion">
+        <h3 style="color: #d35400; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2em;">🚀</span> Próximamente...
+        </h3>
+        <p>¡La teoría está lista y auditada! Tienes en tu cabeza y en tus tablas de verdad los planos maestros para construir cualquier circuito del universo usando un solo tipo de "ladrillo Lego".</p>
+        
+        <p>Pero un ingeniero no se gradúa leyendo diagramas de pines; se gradúa <strong>pelando cables y rastreando señales</strong>. En la próxima lección (<strong>Laboratorio 2</strong>), nos pondremos la bata de trabajo. Construiremos paso a paso el famoso circuito de la "escalera mecánica" (XOR) usando únicamente un chip NAND (74HC00), y usarás una <strong>Punta Lógica</strong> para cazar errores en tiempo real.</p>
+        
+        <p>Además, al finalizar el montaje, te revelaremos el <strong>secreto mejor guardado de la Unidad 2</strong>: cómo ese circuito de luces esconde en su interior el corazón matemático de una calculadora. ¡Prepara tu protoboard para el gran cierre!</p>
+    </div>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion">
+        <h3>🚀 Próximamente...</h3>
+        <p>¡La teoría está lista y auditada! Tienes en tu cabeza los planos matemáticos para construir el universo usando un solo tipo de "ladrillo Lego". </p>
+        <p>Pero un ingeniero no se gradúa leyendo diagramas; se gradúa <strong>quemando LEDs, pelando cables y rastreando señales</strong>. En la próxima lección (<strong>Laboratorio 2</strong>), encenderemos los simuladores y protoboards para construir paso a paso la "escalera mecánica" (XOR) usando únicamente 4 compuertas NAND.</p>
+        <p>Y aquí viene el secreto mejor guardado de la electrónica: una vez que construyas y audites ese circuito, te demostraremos que <strong>esa simple luz que se enciende en la escalera es, en realidad, el cerebro de una calculadora sumando números binarios</strong>. ¡Prepárate para dar el gran salto de la Lógica a la Aritmética Computacional!</p>
+    </div>
+
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+            <a href="leccion18.html" class="btn-navegacion" style="text-decoration: none; color: #0d47a1;">← Anterior (Lección 18)</a>
+            <a href="leccion20_laboratorio.html" class="btn-navegacion" style="background-color: #ffc107; color: black; font-weight: bold; padding: 10px 20px; border-radius: 5px; text-decoration: none;">Ir al Laboratorio 2 →</a>            
+        </div>
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em; color: white; text-decoration: none; padding: 8px 15px; border-radius: 5px;">🏠 Volver al Índice Principal</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

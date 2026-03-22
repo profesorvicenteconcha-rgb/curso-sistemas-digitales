@@ -84,30 +84,133 @@
         </div>
 
         <div class="svg-container">
-            <img src="img/leyes_morgan.png" alt="Esquema visual: Una compuerta NAND es equivalente a una OR con entradas negadas" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 1. De Morgan nos permite transformar compuertas.</em></small></p>
+            <img src="img/leyes_morgan.png" alt="Esquema visual: Una compuerta NAND es equivalente a una OR con entradas negadas" style="max-width:90%; height:auto;">
+            <p><small><em>Fig. 1: De Morgan: Transformar expresiones algebraicas.</em></small></p>
+        </div>
+        <base>Estas leyes muestran cómo una operación compleja puede expresarse de otra manera equivalente. Por ejemplo, negar una operación AND (\(\overline{A \cdot B}\)), que es como decir "No es cierto que A sea verdadero Y B sea verdadero", es exactamente lo mismo que decir "A es falso O B es falso" (\(\overline{A} + \overline{B}\)). Lo mismo ocurre con la otra ley: negar una operación OR (\(\overline{A + B}\)) equivale a hacer una operación AND de las negaciones (\(\overline{A} \cdot \overline{B}\)).</p>
+
+    <p>Estas combinaciones de operaciones básicas (como "AND negada" o "OR negada") son tan útiles y comunes en electrónica digital que, como veremos en la Lección 18, tienen nombres y símbolos propios: NAND y NOR. Pero por ahora, lo importante es entender la equivalencia lógica que De Morgan nos muestra.</p>
+
+        <div class="destacado">
+        <h4>🧰 Caja de Herramientas: 11 Reglas Básicas</h4>
+        
+        <p><strong>Parte 1: Las 7 Reglas Fundamentales</strong> — Ya las usaste en Lecciones 12 y 13. Son tu base sólida.</p>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+            <thead>
+                <tr style="background-color: #e8f4f8;">
+                    <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">#</th>
+                    <th style="border: 1px solid #ccc; padding: 8px;">Nombre · Descripción</th>
+                    <th style="border: 1px solid #ccc; padding: 8px;">Forma AND (<em>·</em>)</th>
+                    <th style="border: 1px solid #ccc; padding: 8px;">Forma OR (<em>+</em>)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td style="border: 1px solid #ccc; padding: 6px; text-align: center;">1</td><td style="border: 1px solid #ccc; padding: 6px;"><strong>Identidad</strong><br><small>Base para simplificar expresiones.</small></td><td style="border: 1px solid #ccc; padding: 6px;">\(A \cdot 1 = A\)</td><td style="border: 1px solid #ccc; padding: 6px;">\(A + 0 = A\)</td></tr>
+                <tr><td style="border: 1px solid #ccc; padding: 6px; text-align: center;">2</td><td style="border: 1px solid #ccc; padding: 6px;"><strong>Nulo / Dominación</strong><br><small>El 0 anula en AND, el 1 domina en OR.</small></td><td style="border: 1px solid #ccc; padding: 6px;">\(A \cdot 0 = 0\)</td><td style="border: 1px solid #ccc; padding: 6px;">\(A + 1 = 1\)</td></tr>
+                <tr><td style="border: 1px solid #ccc; padding: 6px; text-align: center;">3</td><td style="border: 1px solid #ccc; padding: 6px;"><strong>Idempotencia</strong><br><small>Repetir una variable no cambia el resultado.</small></td><td style="border: 1px solid #ccc; padding: 6px;">\(A \cdot A = A\)</td><td style="border: 1px solid #ccc; padding: 6px;">\(A + A = A\)</td></tr>
+                <tr><td style="border: 1px solid #ccc; padding: 6px; text-align: center;">4</td><td style="border: 1px solid #ccc; padding: 6px;"><strong>Inverso / Complemento</strong><br><small>Una variable y su opuesto siempre dan 0 (AND) o 1 (OR).</small></td><td style="border: 1px solid #ccc; padding: 6px;">\(A \cdot \bar{A} = 0\)</td><td style="border: 1px solid #ccc; padding: 6px;">\(A + \bar{A} = 1\)</td></tr>
+                <tr><td style="border: 1px solid #ccc; padding: 6px; text-align: center;">5</td><td style="border: 1px solid #ccc; padding: 6px;"><strong>Doble Negación</strong><br><small>Dos negaciones se cancelan. Quita pares de barras innecesarias.</small></td><td colspan="2" style="border: 1px solid #ccc; padding: 6px; text-align: center;">\(\bar{\bar{A}} = A\)</td></tr>
+                <tr><td style="border: 1px solid #ccc; padding: 6px; text-align: center;">6</td><td style="border: 1px solid #ccc; padding: 6px;"><strong>Conmutatividad</strong><br><small>El orden de los operandos no altera el resultado.</small></td><td style="border: 1px solid #ccc; padding: 6px;">\(A \cdot B = B \cdot A\)</td><td style="border: 1px solid #ccc; padding: 6px;">\(A + B = B + A\)</td></tr>
+                <tr><td style="border: 1px solid #ccc; padding: 6px; text-align: center;">7</td><td style="border: 1px solid #ccc; padding: 6px;"><strong>Asociatividad</strong><br><small>Los paréntesis se pueden mover.</small></td><td style="border: 1px solid #ccc; padding: 6px;">\(A \cdot (B \cdot C) = (A \cdot B) \cdot C\)</td><td style="border: 1px solid #ccc; padding: 6px;">\(A + (B + C) = (A + B) + C\)</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>Parte 2: Los 4 "Trucos del Mago"</strong> 🪄 — Estas son las reglas que harán que tu ecuación gigante se vuelva pequeña. ¡Son el corazón de esta lección!</p>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+            <thead>
+                <tr style="background-color: #fdebd0;">
+                    <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">#</th>
+                    <th style="border: 1px solid #ccc; padding: 8px;">Nombre · Descripción</th>
+                    <th style="border: 1px solid #ccc; padding: 8px;">Forma AND (·)</th>
+                    <th style="border: 1px solid #ccc; padding: 8px;">Forma OR (+)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td style="border: 1px solid #ccc; padding: 6px; text-align: center;">8</td><td style="border: 1px solid #ccc; padding: 6px;"><strong>Distributividad (AND sobre OR)</strong><br><small>Distribuye AND sobre OR para expandir o factorizar.</small></td><td style="border: 1px solid #ccc; padding: 6px;">\(A \cdot (B + C) = A \cdot B + A \cdot C\)</td><td style="border: 1px solid #ccc; padding: 6px;">—</td></tr>
+                <tr><td style="border: 1px solid #ccc; padding: 6px; text-align: center;">9</td><td style="border: 1px solid #ccc; padding: 6px;"><strong>Distributividad (OR sobre AND)</strong><br><small>Distribuye OR sobre AND para reordenar términos.</small></td><td style="border: 1px solid #ccc; padding: 6px;">—</td><td style="border: 1px solid #ccc; padding: 6px;">\(A + (B \cdot C) = (A + B) \cdot (A + C)\)</td></tr>
+                <tr><td style="border: 1px solid #ccc; padding: 6px; text-align: center;">10</td><td style="border: 1px solid #ccc; padding: 6px;"><strong>De Morgan (OR → AND)</strong><br><small>Convierte OR negado en producto de negaciones.</small></td><td style="border: 1px solid #ccc; padding: 6px;">\(\overline{A + B} = \bar{A} \cdot \bar{B}\)</td><td style="border: 1px solid #ccc; padding: 6px;">—</td></tr>
+                <tr><td style="border: 1px solid #ccc; padding: 6px; text-align: center;">11</td><td style="border: 1px solid #ccc; padding: 6px;"><strong>De Morgan (AND → OR)</strong><br><small>Convierte AND negado en suma de negaciones.</small></td><td style="border: 1px solid #ccc; padding: 6px;">—</td><td style="border: 1px solid #ccc; padding: 6px;">\(\overline{A \cdot B} = \bar{A} + \bar{B}\)</td></tr>
+            </tbody>
+        </table>
+
+        
+        <p><strong>Parte 3: La Regla de Oro — Absorción (Regla #12)</strong> 🪄<br>
+            <em>La que hace desaparecer términos enteros de una sola vez. Es como un "borrador mágico" para expresiones redundantes.</em></p>
+
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+                <thead>
+                    <tr style="background-color: #fff3e0;">
+                        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">#</th>
+                        <th style="border: 1px solid #ccc; padding: 8px;">Nombre · Descripción</th>
+                        <th style="border: 1px solid #ccc; padding: 8px;">Forma AND (·)</th>
+                        <th style="border: 1px solid #ccc; padding: 8px;">Forma OR (+)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style="border: 1px solid #ccc; padding: 6px; text-align: center;">12a</td><td style="border: 1px solid #ccc; padding: 6px;"><strong>Absorción (Forma Básica)</strong><br><small>Si ya tienes A, agregar términos con A no cambia el resultado.</small></td><td style="border: 1px solid #ccc; padding: 6px;">\(A \cdot (A + B) = A\)</td><td style="border: 1px solid #ccc; padding: 6px;">\(A + (A \cdot B) = A\)</td></tr>
+                    <tr><td style="border: 1px solid #ccc; padding: 6px; text-align: center;">12b</td><td style="border: 1px solid #ccc; padding: 6px;"><strong>Absorción (Forma Dual)</strong><br><small>Cuando aparece una variable y su negación, se simplifica parcialmente.</small></td><td style="border: 1px solid #ccc; padding: 6px;">\(A \cdot (\bar{A} + B) = A \cdot B\)</td><td style="border: 1px solid #ccc; padding: 6px;">\(A + (\bar{A} \cdot B) = A + B\)</td></tr>
+                </tbody>
+            </table>
+
+            <p><em>💡 Recuerda:</em> No memorices estas reglas. Úsalas como herramientas para <strong>verificar y deducir</strong>. Si dudas, haz una mini tabla de verdad de 2 filas para comprobar que la regla se cumple. Eso es lo que hace un buen ingeniero: razonar, no repetir.</p>
+            
+            <p><em>💡 ¿Por qué la Absorción es "oro"?</em> Porque con ella puedes eliminar términos completos sin necesidad de expandir ni hacer tablas largas. En la próxima lección (Mapas de Karnaugh), verás cómo esta regla se aplica visualmente al "pegar" unos adyacentes.</p>
+        </div>
+        <!-- === /Caja de Herramientas: 11 Reglas Básicas === -->
+
+        <div class="dato-extra">
+            <strong>💡 Método: No Memorizar, Deducir</strong><br>
+            Este curso no te pide que recites fórmulas. Te enseña a construirlas paso a paso. Cuando trabajes con álgebra de Boole, sigue este proceso:
+            <ol>
+                <li><strong>Abstracción por bloques:</strong> Si ves una expresión compleja bajo una barra (¬), cámbiala por "Bloque X". Aplica la regla sobre el bloque primero.</li>
+                <li><strong>Caja de herramientas numerada:</strong> Usa las reglas básicas (ver tabla en herramientas) y señala siempre qué número usas en cada paso.</li>
+                <li><strong>Explicación física:</strong> Pregúntate: "¿Cómo se comportaría esto en una puerta real?". Ej: ¬(A·B) = ¬A + ¬B → "Si el camino A Y B está bloqueado, el circuito se activa si falla A O falla B".</li>
+                <li><strong>Deducción > Memoria:</strong> Si dudas, haz una mini tabla de verdad (solo 2–4 filas) para verificar que la regla se cumple por sí misma.</li>
+                <li><strong>Mnemotecnia visual:</strong> Para De Morgan: "Rompe la barra y cambia el signo" (como una galleta que se parte). ¡Así nunca olvidarás!</li>
+            </ol>
+            <p><em>Este método convierte a la IA en tu tutor de pensamiento, no en tu calculadora.</em></p>
         </div>
 
+        <!-- ====================================================================== -->
+        <!-- SECCIÓN 3 ACTUALIZADA: BURBUJAS DESLIZANTES (IDA Y VUELTA)             -->
+        <!-- ====================================================================== -->
         <h2>3. El Truco Visual: "Burbujas Deslizantes" 🫧</h2>
-        <p>Los ingenieros no siempre escribimos fórmulas; usamos este truco visual en los planos:</p>
-        
+        <p>Los ingenieros no siempre escribimos fórmulas; usamos este truco visual en los planos para simplificar la mente. Imagina que la negación (la línea arriba de la letra) es físicamente una <strong>burbuja</strong> que puede deslizarse por los cables.</p>
+
         <div class="destacado" style="background-color: #f0f4c3; border-left-color: #d4e157;">
-            <p><strong>La Regla del Cambio:</strong></p>
-            <p>Puedes mover las burbujas (negaciones) de la salida a las entradas (o viceversa), PERO debes pagar un precio: <strong>La compuerta cambia de forma.</strong></p>
+            <p><strong>La Regla de la Mutación:</strong></p>
+            <p>Puedes deslizar las burbujas a través de la compuerta (de la salida hacia las entradas, o de las entradas hacia la salida), PERO debes pagar un precio: <strong>La compuerta muta de forma.</strong></p>
             <ul>
-                <li>Si era <strong>AND</strong>, se vuelve <strong>OR</strong>.</li>
-                <li>Si era <strong>OR</strong>, se vuelve <strong>AND</strong>.</li>
+                <li>Si cruzas una <strong>AND</strong>, se muta en <strong>OR</strong>.</li>
+                <li>Si cruzas una <strong>OR</strong>, se muta en <strong>AND</strong>.</li>
             </ul>
+        </div> 
+
+        <h3>Caso 1: De 1 Salida a 2 Entradas (Rompiendo la NAND)</h3>
+        <p>Si tienes una burbuja gigante en la salida (NAND), puedes "empujarla" hacia atrás. Al cruzar la compuerta, la burbuja se divide en dos (una para cada entrada) y la forma AND se convierte en OR.</p>
+
+        <div class="svg-container">
+            <img src="img/burbujas-deslizantes-ley-de-de-morgan.png" alt="Burbujas Deslizantes (Ley de De Morgan) - NAND a OR Negada" style="max-width:60%; height:auto;">
+            <p><small><em>Fig. 3: La burbuja de salida se desliza, se divide en dos al llegar a las entradas, y la AND muta a OR. Matemáticamente: \(\overline{A \cdot B} = \bar{A} + \bar{B}\).</em></small></p>
         </div>
-        
-        <p><em>Ejemplo:</em> Una NAND (AND con burbuja en salida) es visualmente igual a una "OR con burbujas en las entradas".</p>
+
+        <h3>Caso 2: De 2 Entradas a 1 Salida (La Recíproca NOR)</h3>
+        <p>¡El truco funciona al revés! Si tienes dos burbujas en las entradas de una compuerta OR, puedes empujarlas hacia adelante. Al cruzar, se fusionan en una sola burbuja de salida, y la OR muta a AND.</p>
+
+        <div class="svg-container">
+            <!-- SUGERENCIA: Crea una imagen similar a la Fig 2, pero que muestre una OR con burbujas de entrada convirtiéndose en una AND con burbuja de salida (NAND) -->
+            <img src="img/burbujas_deslizantes_nor.png" alt="Burbujas Deslizantes recíproca - OR Negada a NAND o viceversa" style="max-width:60%; height:auto;">
+            <p><small><em>Fig. 4: Las dos burbujas de entrada se deslizan, se fusionan en la salida, y la OR muta a AND. Matemáticamente: \(\bar{A} + \bar{B} = \overline{A \cdot B}\). (Y lo mismo ocurre con la compuerta NOR mutando a AND con entradas negadas).</em></small></p>
+        </div>
 
         <div class="dato-extra">
             <h3>🕵️‍♂️ ¡No me creas, compruébalo!</h3>
-            <p>Usa lo que aprendiste en la Lección 13. Haz una Tabla de Verdad rápida en tu cuaderno para estas dos ecuaciones y verás que dan los mismos resultados:</p>
+            <p>Usa lo que aprendiste en la Lección 13. Haz una Tabla de Verdad rápida en tu cuaderno para estas dos ecuaciones de la Figura 2 y verás que dan resultados idénticos:</p>
             <ol>
-                <li>\(X = \overline{A \cdot B}\) (NAND)</li>
-                <li>\(Y = \bar{A} + \bar{B}\) (Negar y Sumar)</li>
+                <li>\(X = \overline{A \cdot B}\) <strong>(La Multiplicación Negada)</strong></li>
+                <li>\(Y = \bar{A} + \bar{B}\) <strong>(La Suma de las Negaciones)</strong></li>
             </ol>
         </div>
 
@@ -127,9 +230,117 @@
         <p>¡Listo! Pasamos de una operación compleja a una simple suma. ¡Acabas de ahorrarte tiempo y dinero en el montaje!</p>
     </section>
 
+    <!-- Ejemplo adicional de Absorción -->
+    <h2>5. Un Vistazo a la Absorción 👀</h2>
+    <p>Para que veas el poder de la Regla #12, observa este ejemplo:</p>
+    <div class="formula">
+        $$S = A + (A \cdot B)$$
+    </div>
+    <p>Aplicando <strong>Absorción (Regla 12a en su forma OR)</strong>:</p>
+    <div class="formula">
+        $$S = A$$
+    </div>
+    <p>¡Una compuerta AND completa desaparece! La expresión se reduce a una simple línea.</p>
+
+    <!-- === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section">
+    <div class="podcast-header">
+        <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+        </svg>
+        <h3>🎧 Podcast: Conversación entre Expertos</h3>
+    </div>
+
+    <p class="podcast-descripcion">
+        Dos docentes analizan las Leyes de De Morgan y su papel como "trucos del mago" para simplificar circuitos lógicos. Comparten estrategias para enseñar la idea de "romper la barra y cambiar el signo", cómo evitar errores comunes al aplicar las reglas, y reflexionan sobre la importancia de que los futuros docentes no memoricen, sino que deduzcan y verifiquen con tablas de verdad. También discuten cómo integrar herramientas digitales (como IA o simuladores) para reforzar este proceso.
+    </p>
+
+    <div class="podcast-player">
+        <audio controls preload="metadata">
+        <source src="audio/leccion14.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <p class="podcast-meta">
+        <span class="duracion">⏱️ 15:08 min</span>
+        <span class="formato">🔊 MP3</span>
+    </p>
+    </section>
+    <!-- === /PODCAST: Conversación entre Expertos === -->
+
+    <!-- === MI CUADERNO: Bitácora de Innovación === -->
+    <section class="cuaderno-section">
+        <div class="cuaderno-header">
+            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17 12H15V17H12V12H10L13 9L16 12M14 2A8 8 0 0 1 22 10A8 8 0 0 1 14 18A8 8 0 0 1 6 10A8 8 0 0 1 14 2M14 7A3 3 0 0 0 11 10A3 3 0 0 0 14 13A3 3 0 0 0 17 10A3 3 0 0 0 14 7Z" />
+            </svg>
+            <h3>📓 Mi Cuaderno: Bitácora de Innovación</h3>
+        </div>
+
+        <p class="cuaderno-contexto">
+            Tu cuaderno es tu laboratorio pedagógico. Aquí transformas la información en conocimiento útil para tu futura práctica docente.
+        </p>
+
+        <h4>1. Mis Anotaciones:</h4>
+        <p>Resume con tus palabras qué son las Leyes de De Morgan y por qué se llaman "trucos del mago".</p>
+        <textarea placeholder="Escribe aquí tu resumen..." rows="3" style="width:100%; padding:8px;"></textarea>
+
+        <h4>2. Mi Aplicación (Método "No Memorizar"):</h4>
+        <p>Aplica el método a esta expresión:  
+        \(\overline{A \cdot B + C}\) (la barra de negación cubre toda la expresión)</p>
+        
+        <div style="background-color: #f8f9fa; padding: 12px; border-radius: 6px; margin: 10px 0;">
+            <p><strong>🧪 Paso a paso (sigue esta estructura):</strong></p>
+            <ol style="margin-top: 0;">
+                <li><strong>Abstracción por bloques:</strong> Identifica el término bajo la barra y asígnale un nombre, ej: <em>Bloque X = A·B + C</em>. Reescribe: \(X = \overline{\text{Bloque X}}\).</li>
+                <li><strong>Aplica la regla:</strong> ¿Qué regla de De Morgan corresponde? (Revisa la Caja de Herramientas, Reglas #10 y #11). Escribe el primer paso algebraico indicando el número de regla usado.</li>
+                <li><strong>Explicación física:</strong> Traduce a lenguaje de compuertas. Ejemplo: "Esto significa que la salida será 1 si..."</li>
+                <li><strong>Mini tabla de verdad:</strong> Verifica tu resultado con solo 2 combinaciones clave (ej: A=1, B=1, C=0).</li>
+            </ol>
+        </div>
+
+        <textarea placeholder="Escribe tu proceso paso a paso siguiendo la estructura anterior..." rows="6" style="width:100%; padding:8px;"></textarea>
+
+        <h4>3. Mi Prompt para IA:</h4>
+        <p>Usa este formato cuando consultes una IA generativa para resolver problemas de álgebra de Boole:</p>
+        
+        <div style="background:#f8f9fa; padding:12px; border-radius:6px; font-family: monospace; white-space: pre-wrap; border: 1px solid #ccc;">
+    Actúa como tutor de electrónica que sigue el método "No Memorizar".
+    Para la expresión: \(\overline{A \cdot B + C}\):
+
+    1. Muestra la lista numerada de reglas que usarás (de la Caja de Herramientas, reglas 1-12).
+    2. Identifica los bloques y etiquétalos (ej: "Bloque X = A·B + C").
+    3. En cada paso algebraico, indica el número de regla aplicada.
+    4. Después de cada paso, explica con palabras qué está sucediendo físicamente en las compuertas.
+    5. Genera una tabla de verdad pequeña (4 filas máximo) para verificar el resultado final.
+        </div>
+
+        <details style="margin: 15px 0; padding: 10px; background-color: #eef; border-radius: 6px;">
+            <summary><strong>👁️ Ver ejemplo de respuesta esperada (haz clic para desplegar)</strong></summary>
+            <div style="padding: 10px; background-color: white; border-radius: 4px; margin-top: 10px;">
+                <p><strong>Paso 1 (Abstracción):</strong> Identifico el Bloque X = \(A \cdot B + C\). La expresión original es \(\overline{X}\).</p>
+                <p><strong>Paso 2 (Regla #10 - De Morgan OR→AND):</strong> \(\overline{A \cdot B + C} = \overline{A \cdot B} \cdot \overline{C}\).</p>
+                <p><strong>Paso 3 (Regla #11 - De Morgan AND→OR sobre el primer término):</strong> \(\overline{A \cdot B} = \bar{A} + \bar{B}\). Sustituyo: \((\bar{A} + \bar{B}) \cdot \bar{C}\).</p>
+                <p><strong>Paso 4 (Regla #8 - Distributividad):</strong> \((\bar{A} + \bar{B}) \cdot \bar{C} = \bar{A}\bar{C} + \bar{B}\bar{C}\).</p>
+                <p><strong>Explicación física:</strong> "El circuito original era una compuerta NOR de tres entradas (A·B y C juntos). Ahora tenemos dos líneas AND (Ā·C̄ y B̄·C̄) que se unen en una OR. Es más fácil de implementar con compuertas básicas."</p>
+                <p><strong>Mini tabla de verdad (verificación):</strong> Para A=1, B=1, C=0: Original = 0, Simplificada = 0 ✓</p>
+            </div>
+        </details>
+
+        <p><strong>💡 Recuerda:</strong> No copies textualmente. Resume con tus palabras, dibuja, conecta con tu realidad. Tu cuaderno es para ti, no para el profesor. Es donde transformas información en comprensión y preparas tus futuras clases con autenticidad.</p>
+
+        <div style="background-color: #e8f5e8; padding: 12px; border-radius: 6px; margin-top: 15px; border-left: 4px solid #2e7d32;">
+            <p><strong>🧠 Desafío extra (opcional):</strong> ¿Puedes simplificar aún más \(\bar{A}\bar{C} + \bar{B}\bar{C}\) usando la regla de Distributividad al revés (factorización)? ¿Qué regla te permite hacer eso? (Pista: Regla #8 leída de derecha a izquierda).</p>
+        </div>
+    </section>
+    <!-- === /MI CUADERNO: Bitácora de Innovación === -->
+    
     <!-- NARRATIVA: TRAILER -->
     <div class="avance-leccion">
-        <h3>🚀 Próximamente...</h3>
+        <h3 style="color: #d35400; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2em;">🚀</span> Próximamente...
+        </h3>
         <p>¡Ya tienes las "tijeras matemáticas" para recortar cualquier ecuación! Pero... hay un detalle. Hasta ahora, yo te he dado las ecuaciones. En el mundo real, los problemas vienen como listas de requisitos (Tablas). <strong>¿Cómo conviertes una Tabla de Verdad en una Ecuación?</strong> En la próxima clase, aprenderemos a hacer <strong>Ingeniería Inversa</strong> para extraer la fórmula mágica directamente desde los datos.</p>
     </div>
 

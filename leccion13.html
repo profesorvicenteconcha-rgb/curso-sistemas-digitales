@@ -96,10 +96,20 @@
         <h2>2. Las Tres Grandes: Símbolos y Tablas</h2>
         <p>Vamos a asociar nuestras operaciones con sus <strong>Símbolos Lógicos</strong> (los dibujos para los planos) y sus tablas.</p>
 
+        
         <div class="svg-container">
-            <img src="img/compuertas_basicas.png" alt="Infografía mostrando símbolos y tablas de verdad para NOT, AND, y OR" style="max-width:60%; height:auto;">
-            <p><small><em>Fig 1. Símbolos estándar y sus tablas.</em></small></p>
+            <img src="img/compuertas_basicas.png" alt="Infografía mostrando símbolos y tablas de verdad para NOT, AND, y OR" style="max-width:100%; height:auto; border: 1px solid #ccc; border-radius: 8px;">
+            <p><small><em>Fig. 1: Símbolos estándar y sus tablas de verdad.</em></small></p>
         </div>
+
+        -<!-- Ejemplo de elaboración de la tabla de verdad para ejercicio ya conocido -->
+        <p>Esta idea de "entrada vs. salida" no es nueva. ¿Recuerdas el circuito inversor del <a href="leccion9_laboratorio.html">Laboratorio de la Lección 9</a>? Allí viste cómo un interruptor (entrada) controlaba un LED (salida) de forma opuesta. Podemos representar ese comportamiento con una tabla de verdad simple:</p>
+        <table class="tabla-centrada">
+            <tr><th>Entrada (Interruptor)</th><th>Salida (LED)</th></tr>
+            <tr><td>0 (Soltado)</td><td>1 (Encendido)</td></tr>
+            <tr><td>1 (Presionado)</td><td>0 (Apagado)</td></tr>
+        </table>
+        <p>Esta es la tabla de verdad para la operación NOT (Inversión).</p>
 
         <h3>A. La Compuerta NOT (Inversor)</h3>
         <p>Ecuación: \(X = \bar{A}\). Su función es llevar la contraria: lo que entra, sale al revés.</p>
@@ -158,6 +168,17 @@
             <tr><td>1</td><td>1</td><td class="salida-activa">1</td></tr>
         </table>
 
+        <!-- Ejemplo de conexión con precisión -->
+        <p>Observa que en nuestras tablas, la salida solo puede ser 0 o 1. No hay "tal vez", "quizás" o "un poco". Esta precisión binaria (Verdadero/Falso, Sí/No, Encendido/Apagado) es fundamental para eliminar la ambigüedad en los sistemas digitales y es la base sobre la cual operan las computadoras y, por ende, muchas inteligencias artificiales.</p>
+
+        <!-- Ejemplo de bloque de error común -->
+        <div class="destacado">
+            <strong>Error Común:</strong> Al construir tablas de verdad, es fácil olvidar una combinación de entradas o confundir qué columna representa la entrada y cuál la salida calculada. Recuerda: primero enumera todas las combinaciones posibles de entradas (ordenadas como 00, 01, 10, 11...) y luego calcula la salida para <em>cada</em> fila según la función lógica.
+        </div>  
+
+        <h4>Para tu futura aula:</h4>
+        <p>La idea de "todas las posibilidades" (entrada/salida) puede introducirse con juegos lógicos simples. Por ejemplo, con reglas tipo "Si llueve Y tengo paraguas, entonces salgo seco". Haz que los niños identifiquen si la afirmación es verdadera o falsa para diferentes combinaciones de "llueve/no llueve" y "tengo paraguas/no tengo paraguas".</p>
+
         <h2>3. Del Problema a la Tabla: El Sistema de Alarma 🚨</h2>
         <p>Imagina una alarma ($A$) que suena si detecta Movimiento ($M$) <strong>O</strong> si se abre la Ventana ($V$).</p>
         <p>Operación: <strong>OR</strong> (\(A = M + V\)).</p>
@@ -176,6 +197,11 @@
             <p>Si eres profesor, puedes usar las Tablas de Verdad para crear reglas de juego justas en el aula:</p>
             <p><em>"Ganarás el premio si: (Haces la tarea) <strong>AND</strong> (Ayudas a un compañero)."</em></p>
             <p>Enseñar a los niños a visualizar estas reglas en una tabla (1=Sí, 0=No) desarrolla su <strong>Pensamiento Computacional</strong> y les ayuda a entender que las consecuencias son resultados lógicos de sus acciones.</p>
+        </div>
+
+        <!-- Ejemplo de integración de IAG -->
+        <div class="dato-extra">
+            <strong>Pensamiento Aumentado:</strong> Puedes usar una IA generativa para que te muestre la tabla de verdad de una función lógica compleja como "F = (A AND B) OR (NOT C)". Pídele que la dibuje o formatee como una tabla. Verifica el resultado contra tus cálculos manuales para confirmar tu comprensión.
         </div>
 
         <!-- HERRAMIENTA EXTERNA MEJORADA -->
@@ -205,10 +231,78 @@
             <p>Imagina que para abrir una caja ($Open$) necesitas: Tener la llave ($K=1$) <strong>Y</strong> saber la contraseña ($P=1$).</p>
             <p>Dibuja la tabla de verdad en tu cuaderno. ¿En cuántos casos logras abrir la caja? (Respuesta: Solo 1 de 4).</p>
         </div>
+
+        <!-- === PODCAST: Conversación entre Expertos === -->
+        <section class="podcast-section">
+            <div class="podcast-header">
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                </svg>
+                <h3>🎧 Podcast: Conversación entre Expertos</h3>
+            </div>
+            
+            <p class="podcast-descripcion">
+                Dos expertos analizan los conceptos de esta lección y comparten estrategias para enseñar las Tablas de Verdad y su importancia como herramienta visual para entender circuitos lógicos. Discuten cómo introducir la idea de "todas las posibilidades" de forma comprensible y cómo conectar este concepto con la toma de decisiones en la vida cotidiana y con la operación de las computadoras. Comparten analogías útiles y reflexiones sobre la integración de herramientas digitales, como simuladores o IA, para verificar tablas de verdad y explorar funciones complejas.
+            </p>
+            
+            <div class="podcast-player">
+                <audio controls preload="metadata">
+                    <!-- Asegúrate de reemplazar 'audio/leccion13_podcast.mp3' con la ruta correcta a tu archivo de audio cuando esté listo -->
+                    <source src="audio/leccion13.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+            </div>
+            
+            <p class="podcast-meta">
+                <span class="duracion">⏱️ 12:37 min</span>
+                <span class="formato">🔊 MP3</span>
+            </p>
+        </section>
+        <!-- === /PODCAST: Conversación entre Expertos === -->
+
+        <!-- Ejemplo de conexión con herramienta de software -->
+        <div class="dato-extra">
+            <strong>Herramienta Digital:</strong> Puedes usar <a href="https://www.wolframalpha.com/" target="_blank">WolframAlpha</a> para generar automáticamente la tabla de verdad de una expresión lógica. Por ejemplo, escribe "truth table (A and B) or (not C)" en la caja de búsqueda. Esto es útil para verificar tus resultados o explorar funciones más grandes.
+        </div>
     </section>
 
+    <!-- === MI CUADERNO: Bitácora de Innovación === -->
+    <section class="cuaderno-section">
+        <div class="cuaderno-header">
+            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17 12H15V17H12V12H10L13 9L16 12M14 2A8 8 0 0 1 22 10A8 8 0 0 1 14 18A8 8 0 0 1 6 10A8 8 0 0 1 14 2M14 7A3 3 0 0 0 11 10A3 3 0 0 0 14 13A3 3 0 0 0 17 10A3 3 0 0 0 14 7Z" />
+            </svg>
+            <h3>📓 Mi Cuaderno: Bitácora de Innovación</h3>
+        </div>
+        
+        <p class="cuaderno-contexto">
+            Tu cuaderno es tu laboratorio pedagógico. Aquí transformas la información en conocimiento útil para tu futura práctica docente.
+        </p>
+
+        <h4>1. Mis Anotaciones:</h4>
+        <p>Resume con tus palabras qué es una tabla de verdad y por qué es útil.</p>
+        <textarea placeholder="Escribe aquí tu resumen..." rows="3"></textarea>
+
+        <h4>2. Mi Dibujo:</h4>
+        <p>Dibuja la tabla de verdad para la operación lógica NOT. Incluye las columnas de entrada y salida.</p>
+        <textarea placeholder="Describe aquí tu dibujo o pégal una imagen si es en papel..." rows="2"></textarea>
+
+        <h4>3. Mi Aplicación:</h4>
+        <p>Imagina que estás diseñando un juego simple de "Verdadero o Falso" para niños. Escribe una regla del juego que involucre una operación lógica AND o OR (por ejemplo: "Si la pregunta es sobre animales Y la respuesta es sí, ganas un punto").</p>
+        <textarea placeholder="Escribe aquí tu regla del juego..." rows="2"></textarea>
+
+        <h4>4. Mis Preguntas:</h4>
+        <p>Escribe al menos una duda que te quedó de esta lección. Ej: "¿Cómo se construye la tabla de verdad para una operación XOR?"</p>
+        <textarea placeholder="Escribe aquí tu(s) pregunta(s)..." rows="2"></textarea>
+
+        <p><strong>💡 Recuerda:</strong> No copies textualmente. Resume con tus palabras, dibuja, conecta con tu realidad. Tu cuaderno es para ti, no para el profesor. Es donde transformas información en comprensión y preparas tus futuras clases con autenticidad.</p>
+    </section>
+    <!-- === /MI CUADERNO: Bitácora de Innovación === -->
+
     <!-- NARRATIVA: TRAILER -->
-    <div class="avance-leccion">
+        <h3 style="color: #d35400; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2em;">🚀</span> Próximamente...
+        </h3>
         <h3>🚀 Próximamente...</h3>
         <p>¡Perfecto! Ya no tienes que adivinar; con la tabla sabes exactamente qué hace el circuito. Pero... ¿qué pasa si la tabla nos dice que necesitamos una ecuación gigante con muchos chips? ¿Es obligatorio armarla así? <strong>No.</strong> En la próxima lección, aprenderemos los <strong>Trucos de Magia Matemática</strong> (Propiedades y Leyes de De Morgan) para convertir circuitos monstruosos en soluciones elegantes y baratas.</p>
     </div>

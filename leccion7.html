@@ -127,6 +127,26 @@
             con manos de niño. Por eso en educación usamos siempre through-hole: visible, táctil y seguro.</p>
         </div>
 
+        <div class="intro-leccion">
+                <h3>🔍 Observa y compara: ¿todos los interruptores son iguales?</h3>
+                <p>En la Lección 6 conociste dos tipos de interruptores: el <strong>pulsador</strong> (como un timbre) y el <strong>interruptor de palanca</strong> (como la luz del pasillo). Ahora, mira esta fotografía de una protoboard montada:</p>
+
+                <figure style="text-align: center; margin: 20px 0;">
+                    <!-- Asegúrate de que la imagen esté en la carpeta img/ con este nombre -->
+                    <img src="img/conexión-dip-vs-pusbutton.png" alt="Protoboard con pulsador, LED y conexiones" width="80%" style="max-width: 70%; border-radius: 8px; border: 2px solid #4caf50;">
+                    <figcaption><em><small>Fig. 2: Dos LEDs y dos tipos de interruptores en una misma protoboard. ¿Puedes identificar cuál es el pulsador y cuál es el interruptor de palanca? ¿Por qué están conectados de forma diferente?</em></small></figcaption>
+                </figure>
+
+                <p><strong>No te preocupes por si el circuito “funciona” o no aún.</strong> Tu tarea ahora es <em>observar</em>:</p>
+                <ul>
+                    <li>¿Qué componente cruza el canal central (el hueco del medio)?</li>
+                    <li>¿Cuál está colocado en una sola columna o en columnas adyacentes?</li>
+                    <li>¿Cómo están conectados los cables verdes? ¿Por qué crees que hay uno entre las columnas 3 y 9?</li>
+                </ul>
+
+                <p>Este es tu primer diagnóstico visual. Como dice la Regla de Oro: <em>“Misma columna = contacto eléctrico. Columnas distintas = circuito abierto… a menos que haya un puente”</em>. Aquí, los puentes verdes son tus “mensajeros”. Pero antes de preguntarte <em>qué hace</em> cada interruptor, pregunta primero: <strong>¿cómo se ve su estructura física en la protoboard?</strong></p>
+            </div>
+
         <!-- RINCÓN DOCENTE: LA CIUDAD ELECTRÓNICA (VERSIÓN MEJORADA) -->
         <div class="destacado">
             <h3>🍎 Rincón del Docente: La Ciudad Electrónica en Acción</h3>
@@ -209,7 +229,7 @@
         <div class="svg-container" style="margin: 20px 0;">
             <img src="img/diagrama_nodo.png" alt="Diagrama circuito R1, 5V, LED1, Tierra" 
                 style="max-width: 350px; height: auto;">
-            <p><small><em>Fig. 2: Diagrama esquemático - ¿Dónde va cada cosa?</em></small></p>
+            <p><small><em>Fig. 3: Diagrama esquemático - ¿Dónde va cada cosa?</em></small></p>
         </div>
 
         <div class="dato-extra">
@@ -447,7 +467,7 @@
                         <div style="text-align: center; margin: 20px 0;">
                             <!-- Asegúrate de guardar tu captura con este nombre -->
                             <img src="img/tinkercad_lab1_final.png" alt="Circuito final encendido en Tinkercad" style="max-width: 90%; border-radius: 8px; border: 2px solid #4caf50;">
-                            <p><small><em>Fig. 3: Así debe verse tu éxito: El LED encendido y el multímetro marcando corriente.</em></small></p>
+                            <p><small><em>Fig. 4: Así debe verse tu éxito: El LED encendido y el multímetro marcando corriente.</em></small></p>
                         </div>
 
                         <p>Si tu LED no enciende, revisa:</p>
@@ -502,7 +522,7 @@
     <div class="svg-container">
         <!-- IMAGEN: fig. 4: - La línea que conecta LED2 con R2 -->
         <img src="img/linea_led2_r2.png" alt="La 'Línea' Eléctrica: Un Nodo Compartido - Diagrama de conexión entre LED2 y R2" style="max-width:45%; height:auto;">
-        <p><small><em>Fig. 4: La línea que conecta LED₂ con R₂. Esta línea representa un nodo eléctrico que en la protoboard se implementa compartiendo la misma columna vertical.</em></small></p>
+        <p><small><em>Fig. 5: La línea que conecta LED₂ con R₂. Esta línea representa un nodo eléctrico que en la protoboard se implementa compartiendo la misma columna vertical.</em></small></p>
     </div>
 
     <h3>Guía Paso a Paso: Añadiendo la Segunda Rama</h3>
@@ -538,7 +558,7 @@
     <div class="svg-container">
         <!-- IMAGEN: Fig. 5 - Montaje del circuito en paralelo implementado en Tinkercad -->
         <img src="img/montaje_paralelo_tinkercad.png" alt="CIRCUITO PARALELO: SIMETRÍA PERFECTA - Cables rojo/negro reflejados en Columna 10"; style="max-width: 70%; border-radius: 8px; border: 2px solid #4caf50;">
-        <p><small><em>Fig. 5: Montaje del circuito en paralelo implementado en Tinkercad. Se observan las dos ramas independientes con sus respectivos componentes y la simetría de los cables de alimentación.</em></small></p>
+        <p><small><em>Fig. 6: Montaje del circuito en paralelo implementado en Tinkercad. Se observan las dos ramas independientes con sus respectivos componentes y la simetría de los cables de alimentación.</em></small></p>
     </div>
 
     <h3>🔬 Análisis con Ley de Ohm</h3>
@@ -631,7 +651,7 @@
         <div class="svg-container">
             <!-- IMAGEN: Fig. 6 - Diseño que supera el problema de una sola resistencia -->
             <img src="img/cuello_botella.png" alt="ERROR COMÚN vs. BUENA PRÁCTICA - Una resistencia única ↔ Resistencia por LED" style="max-width:75%; height:auto;">
-            <p><small><em>Fig. 6: Diseño que supera el problema de una sola resistencia (cuello de botella) para todos los LEDs. A la izquierda: riesgo de sobrecarga con resistencia única. A la derecha: solución correcta con resistencia independiente por LED.</em></small></p>
+            <p><small><em>Fig. 7: Diseño que supera el problema de una sola resistencia (cuello de botella) para todos los LEDs. A la izquierda: riesgo de sobrecarga con resistencia única. A la derecha: solución correcta con resistencia independiente por LED.</em></small></p>
         </div>
         
         <p><strong>Aplicación en este circuito:</strong> Hemos aplicado correctamente este principio. Cada LED (LED₁ rojo y LED₂ amarillo) tiene su propia resistencia (R₁ y R₂ de 330Ω), asegurando que cada rama funcione de manera independiente y segura. Consultando la tabla de \( V_f \), podemos estimar las corrientes: ≈ 9.1 mA para el rojo (2.0V) y ≈ 8.5 mA para el amarillo (2.2V). La corriente total que debe suministrar la fuente es la suma de ambas: \( I_{\text{total}} = I_1 + I_2 \approx 9.1 \, \text{mA} + 8.5 \, \text{mA} = 17.6 \, \text{mA} \). Esto demuestra que, incluso con la misma resistencia, las corrientes —y por tanto los brillos— pueden variar ligeramente debido a la diferencia en \( V_f \).</p>

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección 27: Códigos de Bloque - Fundamentos de Sistemas Digitales</title>
+    <title>Lección 27: Ruido y Paridad - Fundamentos de Sistemas Digitales</title>
     <link rel="stylesheet" href="estilos.css">
+    
     <!-- KaTeX -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
@@ -15,65 +16,69 @@
 <div class="contenedor">
     <header>
         <p><small>Unidad 4: Teoría de Códigos - Lección 27</small></p>
-        <h1>📦 Códigos de Bloque: Empaquetando Datos</h1>
+        <h1>📡 El Enemigo Invisible: Ruido y Paridad</h1>
     </header>
 
     <section>
-        <p>La paridad simple es débil. Si queremos comunicaciones robustas (como en el 4G o los satélites), necesitamos "armadura pesada". Aquí entran los <strong>Códigos de Bloque</strong>.</p>
+        <p>Hasta ahora, nuestros datos viajaban seguros en la protoboard. Pero cuando enviamos datos por cables largos o por aire (Wi-Fi), existe un enemigo: el <strong>Ruido Eléctrico</strong>. Una interferencia puede cambiar un 0 por un 1. ¿Cómo nos protegemos?</p>
 
-        <h2>1. El Concepto de "La Ñapa" (Redundancia)</h2>
-        <p>En Colombia, cuando compras algo y te dan un poquito más de regalo, le dicen "la ñapa". En ingeniería, a eso le llamamos <strong>Redundancia</strong>.</p>
-        <p>Para proteger la información, enviamos los datos originales MÁS unos bits extra calculados matemáticamente.</p>
-
-        <div class="svg-container">
-            <!-- Imagen: Estructura Código (img/estructura_codigo_bloque.png) -->
-            <img src="img/estructura_codigo_bloque.png" alt="Diagrama de un bloque de datos dividido en K (Información) y R (Redundancia), sumando N (Total)" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 1. El paquete completo: Datos + Protección.</em></small></p>
-        </div>
-
-        <div class="formula">
-            $$n = k + r$$
-        </div>
-        <ul>
-            <li><strong>\(k\) (Datos):</strong> Tu mensaje útil (ej: 4 bits).</li>
-            <li><strong>\(r\) (Redundancia):</strong> La "ñapa" de protección (ej: 3 bits).</li>
-            <li><strong>\(n\) (Código):</strong> El total que se envía (ej: 7 bits).</li>
-        </ul>
-        <p>Por ejemplo, el famoso <strong>Código Hamming (7, 4)</strong> envía 7 bits para proteger 4 datos.</p>
-
-        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
-            <h3>📱 Analogía: El Autocorrector de tu Celular</h3>
-            <p>¿Cómo sabe tu celular que quisiste escribir "HOLA" si escribiste "HILA"?</p>
-            <p>Porque "HILA" no existe en el diccionario, pero se parece mucho a "HOLA" (solo 1 letra de diferencia). A esto se le llama <strong>Distancia de Hamming</strong>.</p>
-            <p>Los códigos de bloque hacen lo mismo: crean un "diccionario" de palabras binarias válidas que están muy separadas entre sí. Si el ruido cambia un bit, el resultado no estará en el diccionario, y el sistema sabrá cuál era la palabra válida más cercana.</p>
-        </div>
-
-        <h2>2. ¿Qué es un Código "Lineal"? (El regreso de la XOR)</h2>
-        <p>Suena a matemáticas avanzadas, pero en hardware es simple: significa que los bits de protección (\(r\)) se calculan <strong>sumando (XOR)</strong> combinaciones de los bits de datos.</p>
+        <h2>1. Aritmética Módulo 2 (El Regreso de la XOR)</h2>
+        <p>En la teoría de códigos, sumamos de una forma especial: \(1 + 1 = 0\). No hay acarreo.</p>
         
         <div class="destacado">
-            <p><strong>Ejemplo de Linealidad:</strong></p>
-            <p>Imagina que el primer bit de protección \(p_1\) se calcula así:</p>
-            <p>$$p_1 = d_1 \oplus d_2 \oplus d_4$$</p>
-            <p>¡Solo necesitas compuertas XOR! No hay multiplicaciones raras ni integrales. Es pura lógica digital.</p>
+            <p><strong>¡Clave de Ingeniería!</strong><br>
+            Siempre que en esta unidad digamos "SUMAR", en realidad estamos diciendo "Usar una compuerta <strong>XOR (7486)</strong>".</p>
+            <p>$$A + B \pmod 2 \equiv A \oplus B$$</p>
         </div>
 
-        <h2>3. El Codificador (La Caja Negra)</h2>
-        <p>Físicamente, un codificador es un circuito que toma tus \(k\) cables de datos y saca \(n\) cables hacia el transmisor.</p>
+        <h2>2. El Bit de Paridad: Tu Primer Escudo 🛡️</h2>
+        <p>La idea es simple: agregamos un bit extra (\(P\)) a nuestros datos para asegurar que la cantidad total de unos sea siempre <strong>PAR</strong>.</p>
+        
+        <ul>
+            <li><strong>Dato Original:</strong> <code>1 0 1 1</code> (Tres unos \(\rightarrow\) Impar).</li>
+            <li><strong>Acción:</strong> Ponemos \(P = 1\) para completar.</li>
+            <li><strong>Transmisión:</strong> <code>1 0 1 1 <strong>1</strong></code> (Cuatro unos \(\rightarrow\) Par).</li>
+        </ul>
+        <p>Si en el camino el ruido cambia un bit (ej: llega <code>1 0 0 1 1</code>), el receptor cuenta los unos (3) y dice: <em>"¡Impar! Aquí hay un error"</em>.</p>
+
+        <h2>3. Construyendo el Generador de Paridad</h2>
+        <p>¿Cómo calculamos \(P\) automáticamente? Sumando todos los bits con XORs.</p>
+        <div class="formula">
+            <p>$$P = D_1 \oplus D_2 \oplus D_3 \oplus D_4$$</p>
+        </div>
 
         <div class="svg-container">
-            <!-- Imagen: Diagrama Codificador (img/diagrama_codificador.png) -->
-            <img src="img/diagrama_codificador.png" alt="Caja negra que recibe 4 cables de entrada y saca 7 cables de salida" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 2. Entran 4, salen 7. La magia ocurre adentro con compuertas XOR.</em></small></p>
+            <!-- Imagen: Generador Paridad (img/circuito_generador_paridad.png) -->
+            <img src="img/circuito_generador_paridad.png" alt="Circuito lógico mostrando 4 entradas conectadas en cascada a compuertas XOR para generar un bit de paridad" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. Conectando XORs en cadena creamos un detector de errores simple.</em></small></p>
+        </div>
+
+        <div class="dato-extra">
+            <h3>🤔 El Límite de la Paridad</h3>
+            <p>Este sistema es barato y fácil, pero tiene un problema grave: si el ruido cambia <strong>dos bits</strong> al mismo tiempo (ej: 00 se vuelve 11), la cantidad de unos sigue siendo par y el sistema se deja engañar.</p>
+            <p>Para corregir errores y detectar fallas múltiples, necesitamos herramientas más pesadas: <strong>Matrices y Códigos Lineales</strong>. ¡Eso veremos en la próxima lección!</p>
         </div>
     </section>
 
+    <!-- RINCÓN DOCENTE: MAGIA CON PARIDAD -->
+    <div class="dato-extra" style="border-left: 4px solid #ffc107; background-color: #fff9db;">
+        <h3>🍎 Rincón del Docente: El Truco de Magia</h3>
+        <p>¿Cómo explicar la "Corrección de Errores" a niños de primaria? ¡Con un truco de magia!</p>
+        <ol>
+            <li>Pon cartas (boca arriba/abajo) en una cuadrícula de 5x5 al azar.</li>
+            <li><strong>El Secreto (Codificación):</strong> Agrega una fila y una columna extra para que en todas las filas y columnas haya un número PAR de cartas boca arriba. (Nadie lo notará).</li>
+            <li>Pide a un alumno que voltee UNA carta mientras no miras (<strong>Ruido</strong>).</li>
+            <li><strong>El Diagnóstico:</strong> Mira la cuadrícula. La fila y la columna que ahora tengan un número IMPAR de cartas se cruzarán exactamente en la carta volteada. ¡Podrás señalarla al instante!</li>
+        </ol>
+        <p>Estás enseñando el algoritmo de Hamming jugando a ser mago.</p>
+    </div>
+
     <footer>
         <hr>
-        <p style="text-align: center;">
-            <a href="leccion26.html" class="btn-navegacion">← Anterior</a>
-            <a href="leccion28.html" class="btn-navegacion">Siguiente: Matriz Generadora (G) →</a>
-        </p>
+        <div style="display: flex; justify-content: space-between;">
+            <a href="leccion26_sumador_completo.html" class="btn-navegacion">← Anterior Unidad</a>
+            <a href="leccion28.html" class="btn-navegacion">Siguiente: Códigos de Bloque →</a>
+        </div>
     </footer>
 </div>
 

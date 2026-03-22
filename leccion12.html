@@ -34,6 +34,9 @@
 
     <section>
         <h2>El Mapa del Tesoro: ¿Dónde estamos?</h2>
+        <p>Ahora que entendemos cómo la electricidad puede representar información (0 o 1), exploremos cómo las <strong>Inteligencias Artificiales (IA)</strong> usan millones de estas representaciones binarias para "razonar" y tomar decisiones. El Álgebra de Boole es el lenguaje fundamental que permite esta "lectura" y "comprensión" elemental para las máquinas. Comprender esta base nos ayuda a interactuar de manera más efectiva con estas herramientas.</p>
+        <!-- Modificación o adición al párrafo del punto 1 -->
+<p>Cada vez que una IA procesa una instrucción simple como 'si el correo es spam, muéstralo en otra carpeta', está ejecutando operaciones de lógica booleana como las que aprenderemos hoy.</p>
         <p>Antes de entrar en las matemáticas, mira el panorama completo. Todo sistema digital (desde una alarma hasta tu celular) sigue este esquema:</p>
 
         <div class="svg-container">
@@ -99,6 +102,24 @@
             <p>En la <strong>Lección 10</strong> vimos que un cable suelto (flotante) capta ruido. Ese ruido suele tener un voltaje de entre <strong>1V y 1.5V</strong>.</p>
             <p>Si miras la gráfica de arriba, verás que ese voltaje cae justo en la <strong>ZONA PROHIBIDA</strong> (Zona Gris). Por eso el chip se volvía loco: el voltaje no era ni 0 ni 1 suficientemente fuerte.</p>
             <p><strong>La solución:</strong> La resistencia Pull-Down obliga al voltaje a bajar a <strong>0V</strong> (Zona Segura), sacándolo del peligro.</p>
+        </div>        
+
+        <div class="destacado">
+            <h4>🧠 Entendiendo "Álgebra de Boole": Un Nuevo Juego con Reglas Nuevas</h4>
+            <p>Antes de empezar con AND, OR y NOT, es crucial entender qué significa "<em>Álgebra</em>". No es solo una palabra bonita.</p>
+
+            <ol>
+                <li><strong>1. El "Terreno de Juego" (El Conjunto):</strong>
+                <p>En la escuela, trabajábamos con números reales: 1, 2, 50, -3.5, π... un universo infinito. La <em>Álgebra de Boole</em> cambia este terreno de juego. Aquí solo existen <strong>dos valores posibles</strong>: <strong>0</strong> y <strong>1</strong> (como Apagado/Encendido, Falso/Verdadero). Es como si jugáramos ajedrez, pero en un tablero de solo 2 casillas.</p>
+                </li>
+                <li><strong>2. Las "Reglas de Interacción" (Operaciones):</strong>
+                <p>Usamos símbolos familiares: <em>Suma (+)</em> y <em>Producto (·)</em>. Pero, como el tablero es diferente, <strong>sus reglas cambian</strong>. Por ejemplo, en álgebra normal <em>1 + 1 = 2</em>. En Boole, <em>1 + 1 = 1</em> (porque en el mundo del "todo o nada", si una condición es verdadera (1) y otra también es verdadera (1), el resultado de la operación "O" (OR) sigue siendo verdadero (1), no "más verdadero"). No es un error, es la regla de este nuevo juego.</p>
+                </li>
+                <li><strong>3. ¿Por qué "Boole"? (El Origen):</strong>
+                <p>Un matemático llamado George Boole tuvo una idea revolucionaria: ¿Y si se podían usar símbolos matemáticos para representar y calcular el razonamiento lógico (Verdadero/Falso), como si fueran números? Él creó las reglas para este "álgebra de la lógica". Por eso lleva su nombre. No es magia, es una herramienta matemática diseñada para el pensamiento binario.</p>
+                </li>
+            </ol>
+            <p><strong>En resumen:</strong> Estamos usando el lenguaje de las matemáticas (álgebra), pero en un universo simplificado (0 y 1) con reglas específicas (AND, OR, NOT) para representar y manipular la información binaria. ¡Estás jugando al álgebra, pero en el tablero de la lógica digital!</p>
         </div>
 
         <h2>3. Las Operaciones Básicas (Traducción)</h2>
@@ -132,10 +153,16 @@
             </ul>
             <p>Matemáticamente es una multiplicación: basta con que haya un solo cero para que todo el resultado sea cero (\(1 \cdot 0 \cdot 1 \cdot 1 = 0\)).</p>
         </div>
+        
+        <!-- Ejemplo de bloque destacado -->
+        <div class="dato-extra">
+            <strong>Pensamiento Aumentado:</strong> El Álgebra de Boole es el lenguaje básico del razonamiento lógico en computadoras e IAs. Puedes usar una IA generativa para generar ejemplos adicionales de operaciones AND y OR en contextos cotidianos o para verificar tu comprensión de los conceptos básicos. Intenta formular un prompt claro como: "Dame un ejemplo de cómo se aplica la operación lógica AND en la vida diaria de un estudiante."
+        </div>
 
         <h3>C. Inversión (NOT) \(\bar{A}\)</h3>
         <p>Es la operación del <strong>Complemento</strong>. Su única función es llevar la contraria.</p>
-
+        <!-- Despues de la introducción de AND y OR -->
+<p>Además de AND y OR, existe una operación fundamental llamada <strong>NOT</strong> (o Negación/Inverso), que también es crucial en lógica digital. Juntas, estas tres operaciones (AND, OR, NOT) forman la base para construir razonamientos lógicos complejos, tanto para nosotros como para las computadoras y las IAs. Profundizaremos en el NOT en próximas lecciones. Puedes preguntarle a una IA: "¿Qué hace la operación lógica NOT y cómo se representa?"</p>
         <div class="destacado" style="background-color: #fce4ec; border-left-color: #e91e63;">
             <p><strong>El "Adolescente Rebelde" de las Matemáticas</strong></p>
             <p>La compuerta NOT nunca está de acuerdo con la entrada. Siempre invierte la realidad:</p>
@@ -152,11 +179,61 @@
             <p>$$Fiesta = A \cdot B$$</p>
             <p>Si solo tienes dinero (\(A=1\)) pero no tiempo (\(B=0\)), el resultado es \(1 \cdot 0 = 0\). ¡No hay fiesta!</p>
         </div>
+
+        <!-- Dentro de una sección de práctica o exploración -->
+        <p><strong>Explora Digitalmente:</strong> Visita el simulador <a href="leccion17.html#falstad-link">Falstad</a> (disponible en la página de herramientas) o usa una calculadora booleana en línea para experimentar con expresiones simples como A AND B o A OR B. Observa cómo cambia la salida (resultado) al modificar las entradas (A y B).</p>
     </section>
+
+    <!-- === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            <!-- Inserta aquí la descripción específica para la lección correspondiente -->
+            Dos expertos analizan los conceptos de esta lección y comparten estrategias para enseñar el Álgebra de Boole y su importancia como base de la lógica digital en el aula. Discuten cómo introducir las operaciones AND, OR y NOT de forma comprensible y cómo conectar estos conceptos con la toma de decisiones en la vida cotidiana y con la operación de las computadoras e inteligencias artificiales. Comparten analogías útiles y reflexiones sobre la integración de herramientas digitales en el proceso de enseñanza-aprendizaje.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <!-- Asegúrate de cambiar la ruta del src al archivo de audio correcto para esta lección -->
+                <source src="audio/leccion12.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 23:17 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+    <!-- === /PODCAST: Conversación entre Expertos === -->
+
+    <!-- Ejemplo de nueva sección -->
+    <h3>Interacción con IA Generativa</h3>
+    <p>Abre tu cuaderno y escribe:</p>
+    <ol>
+        <li><strong>"Comprendí que..."</strong> Resume con tus palabras qué son las operaciones lógicas AND y OR.</li>
+        <li><strong>"y quiero saber..."</strong> Plantea una duda específica sobre cómo se relacionan AND/OR con la toma de decisiones en una IA simple.</li>
+        <li><strong>"Explícame como si fuera a enseñárselo a..."</strong> Define tu audiencia (por ejemplo, estudiantes de grado 7°).</li>
+        <li>Copia tu prompt completo y consúltalo en tu IA generativa favorita.</li>
+        <li><strong>Importante:</strong> Anota en tu cuaderno tanto la respuesta de la IA como tu reflexión crítica sobre ella.</li>
+    </ol>
+
+    <!-- Opcional: Bloque de Ética Docente similar al de leccion2.html -->
+    <div class="dato-extra">
+        ⚠️ <strong>Ética Docente:</strong> La IA es tu asistente de pensamiento, no tu reemplazo. Nunca copies textualmente sus respuestas en evaluaciones. Usa sus ideas para inspirar tu propio razonamiento.
+    </div>
 
     <!-- NARRATIVA: TRAILER -->
     <div class="avance-leccion">
-        <h3>🚀 Próximamente...</h3>
+        <h3 style="color: #d35400; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2em;">🚀</span> Próximamente...
+        </h3>
         <p>Tenemos las ecuaciones básicas ($A \cdot B$, $A + B$). Pero, ¿cómo estamos seguros de qué hace nuestro circuito en <strong>cada</strong> situación posible? ¿Qué pasa si A es 0 y B es 1? Para no adivinar, necesitamos un mapa completo. En la siguiente lección, aprenderemos a crear <strong>Tablas de Verdad</strong>.</p>
     </div>
 

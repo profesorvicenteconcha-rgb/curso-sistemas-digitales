@@ -215,6 +215,17 @@
             <li><strong>Botón Presionado (Cerrado):</strong> Entran los 5V directos (camino fácil). La corriente prefiere ir a la entrada del chip que pasar por la resistencia difícil de 10k. <strong>Lectura: 1 Solido.</strong></li>
         </ul>
 
+        <div class="figura">
+            <p>La resistencia conecta la señal a GND (0 V). El interruptor conecta la señal a V<sub>CC</sub> (+5 V).</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="img/protoboard-pull-down.png" alt="Esquema Pull-Down: interruptor entre señal y Vcc, resistencia entre señal y GND" width="320">
+                <p><small><em>Fig. 3: Resistencia Pull-Down — Jalar a Tierra.</em></small></p>
+            </div>
+            <p><strong>Comportamiento:</strong><br>
+            • Botón abierto → Señal = 0 V (Pull-Down “jala” hacia abajo) → Lectura = 0<br>
+            • Botón cerrado → Señal ≈ 5 V (V<sub>CC</sub> gana sobre la resistencia) → Lectura = 1</p>
+        </div>
+
        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
             <h3>🤓 Pregunta de Ingeniero: ¿Por qué 10kΩ?</h3>
             <p>En la Lección 2 calculamos 330Ω para el LED. ¿Por qué aquí usamos una tan grande (10,000Ω)?</p>
@@ -252,7 +263,18 @@
         <div class="svg-container">
             <!-- Imagen: Pull Up (img/esquema_pull_up.png) -->
             <img src="img/esquema_pull_up.png" alt="Esquema Pull-Down: Resistencia a positivo, Botón a tierra" style="max-width:100%; height:auto;">
-            <p><small><em>Fig. 3: Pull-Down: El "techo" seguro.</em></small></p>
+            <p><small><em>Fig. 4: Pull-Up: El "techo" seguro.</em></small></p>
+        </div>
+
+        <div class="figura">
+            <p>La resistencia conecta la señal a V<sub>CC</sub> (+5 V). El interruptor conecta la señal a GND (0 V).</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="img/protoboard-pull-up.png" alt="Esquema Pull-Up: resistencia entre señal y Vcc, interruptor entre señal y GND" width="320">
+                <p><small><em>Fig. 5: Resistencia Pull-Up — Jalar al Techo.</em></small></p>
+            </div>
+            <p><strong>Comportamiento:</strong><br>
+            • Botón abierto → Señal = 5 V (Pull-Up “jala” hacia arriba) → Lectura = 1<br>
+            • Botón cerrado → Señal ≈ 0 V (GND gana) → Lectura = 0</p>
         </div>
 
         <!-- NUEVO: CONVENCIÓN DEL CURSO -->

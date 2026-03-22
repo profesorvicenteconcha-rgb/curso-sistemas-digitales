@@ -88,13 +88,19 @@
         </div>
 
         <h2>2. Ejemplo Real: El Jurado de Votación ⚖️</h2>
+
+        <div class="destacado">
+            <h4>🧠 Síntesis Lógica: Del Especificar al Construir</h4>
+            <p>Lo que estás haciendo ahora no es solo copiar filas; estás realizando una <strong>síntesis lógica</strong>: convertir una especificación funcional (la tabla de verdad) en una implementación concreta (la ecuación lógica).</p>
+            <p>Es el mismo proceso que usa un ingeniero al diseñar un chip: primero define qué debe hacer (por ejemplo, "encenderse si hay mayoría"), luego decide cómo construirlo (con compuertas AND, OR, NOT). ¡Estás pensando como un diseñador de sistemas digitales!</p>
+        </div>
         <p>Vamos a diseñar un circuito para un jurado de 3 jueces (A, B, C). La propuesta se aprueba (\(P=1\)) si hay <strong>mayoría simple</strong> (2 o 3 votos a favor).</p>
 
         <!-- TABLA CORREGIDA VISUALMENTE -->
         <table class="tabla-verdad">
             <thead>
                 <tr>
-                    <th>A</th><th>B</th><th>C</th>
+                    <th>C</th><th>B</th><th>A</th>
                     <th>Salida (P)</th>
                     <th>Minterm (Traducción)</th>
                 </tr>
@@ -105,12 +111,12 @@
                 <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>-</td></tr>
                 
                 <!-- FILAS RESALTADAS (Los 1s) -->
-                <tr class="minterm-row"><td>0</td><td>1</td><td>1</td><td>1</td><td>\(\bar{A} \cdot B \cdot C\)</td></tr>
+                <tr class="minterm-row"><td>0</td><td>1</td><td>1</td><td>1</td><td>\(A \cdot B \cdot \bar{C}\)</td></tr>
                 
                 <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>-</td></tr>
                 
                 <tr class="minterm-row"><td>1</td><td>0</td><td>1</td><td>1</td><td>\(A \cdot \bar{B} \cdot C\)</td></tr>
-                <tr class="minterm-row"><td>1</td><td>1</td><td>0</td><td>1</td><td>\(A \cdot B \cdot \bar{C}\)</td></tr>
+                <tr class="minterm-row"><td>1</td><td>1</td><td>0</td><td>1</td><td>\(\bar{A} \cdot B \cdot C\)</td></tr>
                 <tr class="minterm-row"><td>1</td><td>1</td><td>1</td><td>1</td><td>\(A \cdot B \cdot C\)</td></tr>
             </tbody>
         </table>
@@ -118,7 +124,7 @@
         <h3>El Resultado Final</h3>
         <p>Observa que hemos resaltado en <strong>verde</strong> las filas donde la salida es <strong>1</strong>. Para obtener la ecuación final, simplemente sumamos estos cuatro términos:</p>
         <div class="formula">
-            $$P = \bar{A}BC + A\bar{B}C + AB\bar{C} + ABC$$
+            $$P = AB\bar{C} + A\bar{B}C + \bar{A}BC + ABC$$
         </div>
         <p>¡Listo! Esta ecuación describe perfectamente la "Mayoría". Si la construyes, funcionará.</p>
 
@@ -134,7 +140,7 @@
             <li>111 (Binario) = <strong>7</strong> (Decimal)</li>
         </ul>
 
-        <p>Entonces, en lugar de la ecuación larga, \( P = \bar{A}BC + A\bar{B}C + AB\bar{C} + ABC \), escribimos esto:</p>
+        <p>Entonces, en lugar de la ecuación larga, $P = AB\bar{C} + A\bar{B}C + \bar{A}BC + ABC$, escribimos esto:</p>
         
         <div class="formula">
             $$P(A,B,C) = \sum m(3, 5, 6, 7)$$
@@ -147,11 +153,187 @@
             <h3>🤔 El Problema del Ingeniero</h3>
             <p>Mira la ecuación: \( P = \bar{A}BC + A\bar{B}C + AB\bar{C} + ABC \). Es <strong>gigante</strong>. Necesitarías muchos chips y cables para armarla. ¿No habrá una forma de decir lo mismo con menos palabras?</p>
         </div>
+
+        <div class="dato-extra">
+            <strong>💡 Usa tu IA como Tutor de Verificación</strong><br>
+            <p>No necesitas memorizar ni hacer cálculos a mano. Puedes usar una IA generativa para:</p>
+            <ul>
+                <li><strong>Generar la tabla de verdad</strong> a partir de un enunciado: "Crea la tabla de verdad para 'la salida es 1 si hay mayoría de 3 variables'".</li>
+                <li><strong>Verificar tu ecuación SOP</strong>: "Dada la tabla de verdad de 3 entradas donde las filas 3, 5, 6, 7 son 1, ¿cuál es la ecuación SOP?".</li>
+                <li><strong>Convertir a notación Σ</strong>: "Expresa la ecuación \(P = \bar{A}BC + A\bar{B}C + AB\bar{C} + ABC\) en notación Sigma".</li>
+                <li><strong>Preparar para la siguiente lección</strong>: "Simplifica la ecuación SOP usando Leyes de De Morgan y distributividad".</li>
+            </ul>
+            <p><em>Recuerda:</em> La IA es tu asistente, no tu reemplazo. Anota en tu cuaderno tanto su respuesta como tu reflexión crítica sobre ella.</p>
+        </div>
+
+        <div class="dato-extra">
+            <strong>🔍 Más allá de SOP:</strong>
+            <p>Existe una forma dual llamada <strong>Producto de Sumas (POS)</strong>, donde se usan <em>maxterms</em> (sumas donde la salida es 0). No la usaremos ahora, pero en la <strong>Lección 18</strong> verás cómo las compuertas <em>NOR</em> y <em>NAND</em> se relacionan naturalmente con esta forma. Por ahora, dominemos la SOP, que es la más intuitiva para empezar.</p>
+        </div>
+
+        <div class="dato-extra">
+            <strong>🔗 Conexión con Lección 14:</strong>
+            
+            <p>Esta notación Σ es útil para escribir la función, pero la ecuación subyacente 
+                \(P = \bar{A}BC + A\bar{B}C + AB\bar{C} + ABC\) aún es compleja. 
+                En la <strong>Lección 14</strong> aprendiste las <em>Leyes de De Morgan</em>; en la <strong>siguiente (Lección 16)</strong>, verás cómo aplicarlas —junto con los <em>Mapas de Karnaugh</em>— para reducirla a una forma mucho más simple, como \(P = AB + AC + BC\). ¡No te detengas en la SOP, sigue hacia la simplificación!
+            </p>
+        </div>
+
+        <h2>4. Mi reflexión docente</h2>
+        <p>Imagina que estás preparando una clase para estudiantes de <strong>grado 10°</strong> que ya conocen tablas de verdad y operaciones lógicas básicas (AND, OR, NOT).</p>
+        <ul>
+            <li><strong>¿Cómo les explicarías qué es un <em>minterm</em>?</strong> (Ej: "Es como una 'fórmula ganadora' para una combinación específica de entradas").</li>
+            <li><strong>¿Qué analogía usarías para la notación Σ?</strong> (Ej: "Es como un código postal: cada número (3,5,6,7) indica una dirección de entrada donde la salida es 1").</li>
+            <li><strong>¿Qué error común esperarías?</strong> (Ej: olvidar negar una variable en el minterm, confundir AND con OR).</li>
+        </ul>
+        <p>Anota tu estrategia en tu cuaderno. Recuerda: no se trata de enseñar la fórmula, sino de guiar el descubrimiento.</p>
+
+        <div class="destacado">
+            <h4>🎓 Para tu futura aula: Enseñando Minterms a grado 10°</h4>
+            <p>Imagina que estás preparando una clase para estudiantes de grado 10° que ya conocen tablas de verdad y operaciones lógicas básicas (AND, OR, NOT).</p>
+            <ul>
+                <li><strong>¿Qué analogía usarías para explicar un <em>minterm</em>?</strong> (Ej: "Es como un código de acceso único para una puerta").</li>
+                <li><strong>¿Cómo introducirías la notación Σ?</strong> (Ej: "Es como un índice de libro: Σm(3,5,6,7) significa 'lee las páginas 3, 5, 6 y 7'").</li>
+                <li><strong>¿Qué error común esperarías que cometan?</strong> (Ej: olvidar negar una variable cuando la entrada es 0).</li>
+            </ul>
+            <p>Escribe tu estrategia en tu cuaderno. Recuerda: no se trata de enseñar la fórmula, sino de guiar el descubrimiento. ¡Tú eres el facilitador, no el transmisor!</p>
+        </div>
+
+        <!-- === PODCAST: Conversación entre Expertos === -->
+        <section class="podcast-section">
+            <div class="podcast-header">
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                </svg>
+                <h3>🎧 Podcast: Conversación entre Expertos</h3>
+            </div>
+
+            <p class="podcast-descripcion">
+                Dos docentes analizan el proceso de síntesis lógica: cómo convertir una tabla de verdad en una ecuación usando minterms y la forma SOP. Comparten estrategias para enseñar este concepto a estudiantes de grado 10°, cómo introducir la notación sigma de forma clara y reflexionan sobre la importancia de que los futuros docentes comprendan que esta ecuación es solo un paso intermedio, que debe simplificarse para obtener un diseño eficiente.
+            </p>
+
+            <div class="podcast-player">
+                <audio controls preload="metadata">
+                <source src="audio/leccion15.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+                </audio>
+            </div>
+
+            <p class="podcast-meta">
+                <span class="duracion">⏱️ 21:46 min</span>
+                <span class="formato">🔊 MP3</span>
+            </p>
+        </section>
+        <!-- === /PODCAST: Conversación entre Expertos === -->
     </section>
+
+    <!-- === PREGUNTAS DE CONSOLIDACIÓN (Estilo Lección 6) === -->
+    <h2>❓ Preguntas de Consolidación</h2>
+    <p>Responde estas preguntas para asegurarte de que dominas los conceptos técnicos <em>y</em> estás listo para enseñarlos en tu futura aula:</p>
+
+    <details class="u1">
+    <summary>
+        1. ¿Qué es un minterm y cómo se relaciona con una fila específica de una tabla de verdad donde la salida es 1?
+    </summary>
+    <p><strong>Explicación técnica:</strong> Un minterm es una expresión lógica que representa <em>exactamente una combinación única de entradas</em> que produce una salida de 1. Se construye multiplicando (AND) todas las variables, negando aquellas que son 0 en esa fila. Por ejemplo, si A=0, B=1, C=1, el minterm es \(\bar{A} \cdot B \cdot C\).</p>
+    
+    <p><strong>Metáfora del "Código de Acceso":</strong></p>
+    <ul>
+        <li>Imagina que cada fila de la tabla es una puerta con un código único de 3 dígitos (A, B, C).</li>
+        <li>Un minterm es como el <em>único código</em> que abre esa puerta (salida = 1). Si introduces cualquier otro código, la puerta permanece cerrada.</li>
+    </ul>
+    
+    <p><strong>Para tu futura aula:</strong> Usa tarjetas con combinaciones binarias (000, 001, etc.) y pide a los estudiantes que "activen" solo la tarjeta que corresponde a una salida 1. Luego, construyan su "código de acceso" (minterm) con bloques de AND y NOT.</p>
+    </details>
+
+    <details class="u1">
+    <summary>
+        2. ¿Por qué es útil la notación Suma de Productos (SOP)?
+    </summary>
+    <p><strong>Explicación técnica:</strong> La SOP es una representación <em>formal y universal</em> que permite: (1) sintetizar circuitos directamente desde una tabla de verdad, (2) simplificar con herramientas algebraicas (De Morgan, Karnaugh), y (3) implementar en hardware (chips, FPGA) sin ambigüedad. Las descripciones verbales son ambiguas y no escalables.</p>
+    
+    <p><strong>Metáfora del "Lenguaje de Máquina":</strong></p>
+    <ul>
+        <li>Decir "enciende si hay mayoría" es como hablar en español: útil para humanos, pero inútil para una computadora.</li>
+        <li>La SOP es como el código binario: no es bonito, pero es preciso, ejecutable y universal.</li>
+    </ul>
+    
+    <p><strong>Conexión STEAM:</strong> Esto muestra por qué la matemática es el lenguaje de la ingeniería: sin ella, no podríamos diseñar sistemas complejos como smartphones o robots.</p>
+    </details>
+
+    <details class="u1">
+    <summary>
+        3. ¿Qué representa la notación Sigma (Σ) como Σm(3, 5, 6, 7)?
+    </summary>
+    <p><strong>Explicación técnica:</strong> La notación Σm indica una <em>suma de minterms</em>. Los números entre paréntesis (3, 5, 6, 7) son los índices decimales de las filas donde la salida es 1. Para convertirla a SOP, se escribe cada minterm correspondiente:</p>
+    <p class="formula">Σm(3,5,6,7) = \(\bar{A}BC + A\bar{B}C + AB\bar{C} + ABC\)</p>
+    
+    <p><strong>Metáfora del "Índice de Libro":</strong></p>
+    <ul>
+        <li>La tabla de verdad es un libro con 8 páginas (0 a 7).</li>
+        <li>Σm(3,5,6,7) es como decir: "Lee las páginas 3, 5, 6 y 7 y súmalas".</li>
+        <li>Cada página es un minterm; la suma es la función completa.</li>
+    </ul>
+    
+    <p><strong>Para tu futura aula:</strong> Haz una actividad con tarjetas numeradas del 0 al 7. Pide a los estudiantes que identifiquen qué combinaciones binarias corresponden a esos números y construyan los minterms con bloques físicos.</p>
+    </details>
+
+    <details class="u1">
+    <summary>
+        4. ¿Qué le dirías a un estudiante que cree que SOP es suficiente y no necesita simplificar?
+    </summary>
+    <p><strong>Explicación técnica:</strong> Tienes razón: la SOP siempre funciona. Pero es como escribir un programa en ensamblador: correcto, pero ineficiente. Una SOP puede requerir muchos chips (ej: 4 compuertas AND + 1 OR), mientras que una forma simplificada (usando De Morgan y Karnaugh) puede reducirla a 2 compuertas. Menos componentes = menos costo, menos energía, menos fallos.</p>
+    
+    <p><strong>Metáfora del "Mapa de Carreteras":</strong></p>
+    <ul>
+        <li>SOP es como tomar todas las calles pequeñas: llegas al destino, pero es lento y consume más combustible.</li>
+        <li>La forma simplificada es como usar una autopista: menos curvas, menos tiempo, menos desgaste.</li>
+    </ul>
+    
+    <p><strong>Ética Docente:</strong> Enseñar solo la SOP sería como enseñar a sumar con lápiz y papel sin mostrar la calculadora. El ingeniero debe saber cuándo usar cada herramienta.</p>
+    </details>
+
+    <details class="u1">
+    <summary>
+        5. Diseña una actividad de 7 minutos para practicar SOP con 2 entradas.
+    </summary>
+    <p><strong>Actividad: "El Juego de los Minterms"</strong></p>
+    <ol>
+        <li><strong>Preparación (1 min):</strong> Entrega a cada pareja una hoja con una tabla de verdad de 2 entradas (A, B) y una salida F (ej: F = 1 solo cuando A=1 y B=0).</li>
+        <li><strong>Exploración (3 min):</strong> Piden que identifiquen las filas donde F=1 y escriban el minterm correspondiente (ej: A·\(\bar{B}\)).</li>
+        <li><strong>Síntesis (2 min):</strong> Construyen la ecuación SOP (ej: F = A·\(\bar{B}\)).</li>
+        <li><strong>Verificación (1 min):</strong> Comparan su ecuación con la tabla original. ¿Coincide?</li>
+    </ol>
+    
+    <p><strong>Materiales:</strong> Hojas impresas, marcadores, y opcionalmente, bloques de AND/OR/NOT de cartón.</p>
+    
+    <p><strong>Objetivo pedagógico:</strong> Que descubran por sí mismos que cada fila con salida 1 genera un minterm, y que la SOP es su suma. Sin definiciones, solo experimentación y patrones.</p>
+    </details>
+    <details class="u1">
+  <summary>
+    6. Diseña tú mismo una tabla de verdad simple (con 2 o 3 entradas) que represente una regla lógica (por ejemplo, "la alarma suena si hay intruso EN LA ZONA A Y ESTÁ OSCURO, O si hay intruso EN LA ZONA B SIEMPRE"). Luego, aplica el método de los minterms para obtener su ecuación SOP y exprésala también en notación Sigma (Σ).
+    </summary>
+    <p><strong>Proceso:</strong></p>
+    <ol>
+        <li><strong>Definir entradas y salida:</strong> Por ejemplo, Intruso_Zona_A (A), Oscuridad (B), Intruso_Zona_B (C). Salida: Alarma (F).</li>
+        <li><strong>Crear la tabla:</strong> Llena la tabla de verdad según la regla. ¿Cuándo debe encenderse la alarma (F=1)?</li>
+        <li><strong>Aplicar Minterms:</strong> Identifica las filas donde F=1. Escribe el minterm para cada fila (ej: \(\bar{A} \cdot B \cdot \bar{C}\)).</li>
+        <li><strong>Formar SOP:</strong> Une todos los minterms con un signo más (+).</li>
+        <li><strong>Expresar en Σ:</strong> Convierte las filas con F=1 a su equivalente decimal y escríbelo como \(\sum m(\text{...})\).</li>
+    </ol>
+    
+    <p><strong>Reflexión:</strong> ¿Qué pasaría si intentaras describir esta regla solo con palabras? ¿Por qué la ecuación SOP es más precisa para construir el circuito?</p>
+    
+    <p><strong>Para tu futura aula:</strong> Esta es una excelente actividad para grado 10° o 11°. Permite a los estudiantes ser creativos con la regla lógica, y al mismo tiempo, practican el proceso completo de síntesis lógica.</p>
+    </details>
+    <!-- === /PREGUNTAS DE CONSOLIDACIÓN === -->
 
     <!-- NARRATIVA: TRAILER -->
     <div class="avance-leccion">
-        <h3>🚀 Próximamente...</h3>
+        <h3 style="color: #d35400; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2em;">🚀</span> Próximamente...
+        </h3>
         <p>Acabamos de crear una ecuación que funciona, pero es "fuerza bruta". Es cara y difícil de armar. ¿Recuerdas que te prometí trucos de magia? En la siguiente lección, usaremos una herramienta gráfica llamada <strong>Mapas de Karnaugh</strong> para jugar "Tetris" con esos unos y reducir esa ecuación gigante a algo diminuto y elegante.</p>
     </div>
 

@@ -1154,3 +1154,89 @@ footer { margin-top: 50px; text-align: center; color: #777; font-size: 0.9em; pa
     height: 0;
     overflow: hidden;
 }
+
+.cuaderno-section textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-size: 0.95em;
+}
+
+/* Estilo para las tarjetas (opcional, puedes integrarlo en estilos.css) */
+        .regla-card {
+        background-color: #f9f9f9;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .regla-card h5 {
+        margin-top: 0;
+        color: #2c3e50;
+        }
+        .regla-card p {
+        margin: 8px 0;
+        font-family: 'Courier New', monospace;
+        font-size: 0.95em;
+        line-height: 1.4;
+        }
+        .regla-card small {
+        color: #7f8c8d;
+        font-style: italic;
+        }
+
+/* ==========================================================================
+   TABLAS DE AUDITORÍA LÓGICA (Paso a Paso)
+   Usadas en Lección 19 (Universalidad) y Lección 20 (Laboratorio XOR)
+   ========================================================================== */
+
+.tabla-auditoria {
+    width: 100%;
+    max-width: 550px;
+    margin: 15px auto;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 0.95em;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+    background: white;
+}
+
+.tabla-auditoria th {
+    background-color: #0d47a1; /* Azul profundo corporativo */
+    color: white;
+    padding: 10px 8px;
+    border: 1px solid #1565c0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1em;
+}
+
+.tabla-auditoria td {
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.tabla-auditoria tr:nth-child(even) { 
+    background-color: #f8f9fa; 
+}
+
+/* Resalta la última columna (la salida final de la compuerta o circuito) */
+.tabla-auditoria td:last-child { 
+    font-weight: bold; 
+    background-color: #e3f2fd; /* Azul muy suave */
+    color: #0d47a1;
+}
+
+/* Resaltado de celdas con salida activa (1 lógico) */
+.salida-activa {
+    background-color: #d4edda;
+    font-weight: bold;
+    color: #155724;
+}
+
+/* Clase genérica para resaltar filas completas (ej: minterms) */
+.highlight-row {
+    background-color: #d4edda !important;
+    font-weight: bold;
+    color: #155724;
+}
