@@ -126,16 +126,87 @@
             En circuitos, las compuertas OR y AND se pueden conectar en cascada sin importar el orden de los paréntesis: el resultado es siempre el mismo.</p>
         </div>
 
+        <!-- ========== PROPIEDAD DEL NEUTRO (ELEMENTO IDENTIDAD) ========== -->
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
+            <h3>Propiedad del neutro (elemento identidad)</h3>
+            <p>Existen dos elementos especiales en el conjunto \(\{0,1\}\) que actúan como <strong>identidades</strong> para las operaciones de suma y producto lógico.</p>
+            <div class="svg-container">
+                <img src="img/propiedad_del_neutro.png" alt="Diagramas que muestran la identidad: A+0 = A y A·1 = A" style="max-width:100%; height:auto;">
+                <p><small><em>Fig. 3: El 0 es el elemento neutro para la suma lógica (OR); el 1 es el elemento neutro para el producto lógico (AND).</em></small></p>
+            </div>
+            <p><strong>En álgebra de Boole:</strong> \(A + 0 = A\) y \(A \cdot 1 = A\).</p>
+            <p><strong>En teoría de conjuntos:</strong> \(A \cup \emptyset = A\) y \(A \cap U = A\) (donde \(U\) es el universo).</p>
+            <p><strong>En circuitos:</strong> Conectar una entrada a tierra (0) en una compuerta OR no altera la otra entrada; conectar una entrada a Vcc (1) en una compuerta AND tampoco altera la otra entrada.</p>
+        </div>
+
+        <!-- 54 Inverso (complemento) -->
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
+            <h3>Propiedad del inverso (complemento)</h3>
+            <p>Para cada elemento existe su complemento, que satisface estas relaciones.</p>
+            <div class="svg-container">
+                <img src="img/propiedad_del_inverso.png" alt="Complemento: A + \bar{A} = 1 y A · \bar{A} = 0" style="max-width:100%; height:auto;">
+                <p><small><em>Fig. 4: La suma con su complemento da 1; el producto da 0.</em></small></p>
+            </div>
+            <p>En conjuntos: \(A \cup A^c = U\) y \(A \cap A^c = \emptyset\). En circuitos: son las tautologías y contradicciones que veremos en la lección 22.</p>
+        </div>
+
         <!-- ========== PROPIEDAD DISTRIBUTIVA ========== -->
         <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
             <h3>Propiedad distributiva</h3>
             <p>El producto lógico se distribuye sobre la suma, y viceversa (algo que no ocurre en la aritmética común).</p>
             <div class="svg-container">
                 <img src="img/propiedad_distributiva.png" alt="Diagramas que muestran las dos formas de la distributividad: A·(B+C) = A·B + A·C y A+(B·C) = (A+B)·(A+C)" style="max-width:100%; height:auto;">
-                <p><small><em>Fig. 3: Distributividad: el producto sobre la suma (izquierda) y la suma sobre el producto (derecha).</em></small></p>
+                <p><small><em>Fig. 5: Distributividad: el producto sobre la suma (izquierda) y la suma sobre el producto (derecha).</em></small></p>
             </div>
             <p>En el lenguaje de conjuntos: \(A \cap (B \cup C) = (A \cap B) \cup (A \cap C)\) y \(A \cup (B \cap C) = (A \cup B) \cap (A \cup C)\).  
             En circuitos, esta propiedad permite transformar combinaciones de compuertas AND y OR, facilitando la simplificación de diseños.</p>
+        </div>
+
+        <!-- ========== CONCLUSIÓN: LAS CINCO PROPIEDADES FUNDAMENTALES ========== -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <h3>🧩 Las cinco propiedades que unifican todo</h3>
+            <p>Las propiedades que acabamos de explorar (conmutativa, asociativa, distributiva, identidad y complemento) no son simples reglas aisladas. Forman el <strong>esqueleto matemático</strong> que sostiene por igual al álgebra de Boole, a la teoría de conjuntos y a los circuitos digitales.</p>
+
+            <div style="overflow-x: auto; margin: 20px 0;">
+                <table class="tabla-centrada">
+                    <thead>
+                        <th>Propiedad</th>
+                        <th>Álgebra de Boole (B={0,1})</th>
+                        <th>Teoría de conjuntos</th>
+                        <th>Circuitos (compuertas)</th>
+                    </thead>
+                    <tbody>
+                        <td>Conmutativa</td>
+                            <td>\(A+B = B+A\)<br>\(A\cdot B = B\cdot A\)</td>
+                            <td>\(A\cup B = B\cup A\)<br>\(A\cap B = B\cap A\)</td>
+                            <td>OR y AND con entradas intercambiables</td>
+                        </tr>
+                        <td>Asociativa</td>
+                            <td>\((A+B)+C = A+(B+C)\)<br>\((A\cdot B)\cdot C = A\cdot(B\cdot C)\)</td>
+                            <td>\((A\cup B)\cup C = A\cup(B\cup C)\)<br>\((A\cap B)\cap C = A\cap(B\cap C)\)</td>
+                            <td>Cascada de ORs o ANDs sin importar el orden</td>
+                        </tr>
+                        <td>Distributiva</td>
+                            <td>\(A\cdot(B+C) = A\cdot B + A\cdot C\)<br>\(A + (B\cdot C) = (A+B)\cdot(A+C)\)</td>
+                            <td>\(A\cap(B\cup C) = (A\cap B)\cup(A\cap C)\)<br>\(A\cup(B\cap C) = (A\cup B)\cap(A\cup C)\)</td>
+                            <td>AND se distribuye sobre OR, y OR sobre AND</td>
+                        </tr>
+                        <td>Elemento neutro<br>(identidad)</td>
+                            <td>\(A+0 = A\)<br>\(A\cdot 1 = A\)</td>
+                            <td>\(A\cup\emptyset = A\)<br>\(A\cap U = A\)</td>
+                            <td>OR con 0, AND con 1 no alteran la señal</td>
+                        </tr>
+                        <td>Complemento<br>(inverso)</td>
+                            <td>\(A+\bar{A}=1\)<br>\(A\cdot\bar{A}=0\)</td>
+                            <td>\(A\cup A^c = U\)<br>\(A\cap A^c = \emptyset\)</td>
+                            <td>NOT + OR = siempre 1; NOT + AND = siempre 0</td>
+                        </tr>
+                    </tbody>
+            </div>
+
+            <p><strong>¿Por qué es esto tan importante?</strong> Porque estas cinco propiedades son las que definen un <strong>álgebra de Boole</strong>. Cualquier sistema (conjuntos, circuitos, lógica proposicional) que las cumpla es, estructuralmente, el mismo. Esa es la esencia del <strong>isomorfismo</strong>: la misma forma se manifiesta en contextos diferentes.</p>
+
+            <p>En las próximas lecciones aprovecharemos esta equivalencia para simplificar circuitos usando el álgebra de Boole, para diseñar sumadores con compuertas lógicas y, más adelante, para construir códigos detectores de errores. Has construido los cimientos sobre los que se levanta toda la computación moderna.</p>
         </div>
         
         <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
