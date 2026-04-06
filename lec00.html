@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 22: El Detector de Mentiras - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+
+    
+    <!-- KaTeX: Script principal y auto-render (carga robusta) -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 3: Fundamentos de Cómputo - Lección 22</small></p>
+        <h1>🤥 El Detector de Mentiras: Implicación y Circuitos</h1>
+    </header>
+
+    <section>
+        <p>En \(X = \overline{A}B + A\overline{B}\) ingeniería y leyes, las frases del tipo <em>"Si haces esto, entonces pasa aquello"</em> son sagradas. Hoy vamos a construir un circuito capaz de juzgar si una promesa se cumplió o se rompió.</p>
+
+        <h2>1. Verdades y Mentiras Eternas</h2>
+        <p>Antes de la promesa, veamos los extremos: expresiones que siempre dan el mismo resultado, sin importar las entradas.</p>
+
+        <!-- TAUTOLOGÍAS (SIEMPRE 1) -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <h3>🔁 Siempre 1: Tautologías</h3>
+            <p>Estas expresiones son <strong>siempre verdaderas</strong>. Su circuito dará 1 en cualquier situación.</p>
+            <div style="overflow-x: auto;">
+                <table class="tabla-centrada">
+                    <thead>
+                        <th>Expresión</th>
+                        <th>Nombre / Regla</th>
+                        <th>Circuito equivalente</th>
+                        <th>Ejemplo cotidiano</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>\(A + 1 = 1\)</td>
+                            <td>Dominación (OR)</td>
+                            <td>OR con una entrada fija en 1</td>
+                            <td>"Si sales con paraguas O el sol siempre brilla (verdad fija), la afirmación siempre es cierta".</td>
+                        </tr>
+                        <tr>
+                            <td>\(A + \overline{A} = 1\)</td>
+                            <td>Complemento (OR)</td>
+                            <td>OR entre A y su negación</td>
+                            <td>"O llueve (\(A\)) o no llueve (\(\overline{A}\)). No hay otra opción. Siempre es verdadero."</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>💡 <strong>Ejemplo visual:</strong> Conecta un inversor (NOT) a una entrada de una compuerta OR y la otra entrada directa. La salida siempre será 1, sin importar el valor de A.</p>
+        </div>
+
+        <!-- CONTRADICCIONES (SIEMPRE 0) -->
+        <div class="destacado" style="background-color: #ffebee; border-left-color: #c62828;">
+            <h3>⭕ Siempre 0: Contradicciones</h3>
+            <p>Estas expresiones son <strong>siempre falsas</strong>. Su circuito dará 0 en cualquier situación.</p>
+            <div style="overflow-x: auto;">
+                <table class="tabla-centrada">
+                    <thead>
+                        <th>Expresión</th>
+                        <th>Nombre / Regla</th>
+                        <th>Circuito equivalente</th>
+                        <th>Ejemplo cotidiano</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>\(A \cdot 0 = 0\)</td>
+                            <td>Dominación (AND)</td>
+                            <td>AND con una entrada fija en 0</td>
+                            <td>"Si está lloviendo Y el cielo es de color naranja permanente (falso), la afirmación completa es falsa".</td>
+                        </tr>
+                        <tr>
+                            <td>\(A \cdot \overline{A} = 0\)</td>
+                            <td>Complemento (AND)</td>
+                            <td>AND entre A y su negación</td>
+                            <td>"Llueve y no llueve al mismo tiempo". ¡Imposible! Siempre es falso.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>💡 <strong>Ejemplo visual:</strong> Conecta un inversor (NOT) a una entrada de una compuerta AND y la otra entrada directa. La salida siempre será 0, sin importar el valor de A.</p>
+        </div>
+
+        <div class="dato-extra" style="padding: 10px; margin-top: 10px; background-color: #e3f2fd; border-left-color: #2196f3;">
+            <p style="margin: 0;"><small><strong>🔗 Conexión Matemática:</strong> Estas cuatro expresiones son casos particulares de las leyes del álgebra de Boole. En la <strong>Lección 24</strong> volveremos aquí para probar formalmente la "Unicidad del Complemento".</small></p>
+        </div>
+
+        <div class="svg-container">
+            <img src="img/tautologia_contradiccion.png" alt="Izquierda: Circuito que implementa A + ¬A = 1 (siempre 1). Derecha: Circuito que implementa A · ¬A = 0 (siempre 0)." style="max-width:100%; height:auto;">
+            <p><small><em>Fig 1. A la izquierda, la tautología; a la derecha, la contradicción.</em></small></p>
+        </div>
+
+        <h2>2. La Implicación (\(p \rightarrow q\)): La Promesa</h2>
+        <p>No existe un chip "Implicador", pero podemos construirlo. Usemos el ejemplo de la <strong>Promesa del Político</strong>:</p>
+        <div class="destacado">
+            <p><strong>"Si gano las elecciones (\(A\)), entonces bajaré los impuestos (\(B\))."</strong></p>
+        </div>
+
+        <p>¿Cuándo miente el político? Analicemos la tabla:</p>
+
+        <div style="overflow-x: auto; margin: 25px 0;">
+            <table class="tabla-auditoria">
+                <thead>
+                    <th colspan="2" style="background-color: var(--color-primario); color: white;">Entrada</th>
+                    <th colspan="2" style="background-color: var(--color-primario); color: white;">Salida</th>
+                </tr>
+                <tr style="background-color: var(--color-primario); color: white;">
+                    <th>B (Impuestos)</th>
+                    <th>A (Ganó)</th>
+                    <th>Juicio</th>
+                    <th>Análisis</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ddd;">1 (Sí)</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">1 (Sí)</td>
+                        <td class="salida-activa">1 (Verdad)</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">Cumplió.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ddd;">1 (Sí)</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0 (No)</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0 (Falso)</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;"><strong>¡MINTIÓ!</strong> (Ganó y no cumplió)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0 (No)</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">1 (Sí)</td>
+                        <td class="salida-activa">1 (Verdad)</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">No ganó. (No estaba obligado).</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0 (No)</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">0 (No)</td>
+                        <td class="salida-activa">1 (Verdad)</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">No ganó. (No rompió promesa).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>El Circuito de la Promesa</h3>
+        <p>La única forma de que la promesa sea FALSA es si \(A=1\) y \(B=0\). Por lo tanto, la ecuación que describe esto es:</p>
+        <div class="formula">
+            $$A \rightarrow B \equiv \overline{A} + B$$
+        </div>
+        <p><strong>Traducción:</strong> "Para cumplir, O bien NO gano (\(\overline{A}\)), O bien bajo los impuestos (\(B\))".</p>
+
+        <div class="svg-container">
+            <img src="img/circuito_implicacion.png" alt="Esquema lógico: Compuerta NOT en la entrada A, conectada a una OR con la entrada B." style="max-width:100%; height:auto;">
+            <p><small><em>Fig 2. Este circuito te dice si un contrato se cumplió.</em></small></p>
+        </div>
+
+        <div class="destacado" style="border-left-color: #6f42c1; background-color: #f3e5f5;">
+            <h3>🕵️ El Truco del Detective (La Contrarrecíproca)</h3>
+            <p>En lógica, decir <em>"Si A, entonces B"</em> es exactamente lo mismo que decir <em>"Si NO pasa B, entonces NO pasó A"</em>.</p>
+            <p>$$A \rightarrow B \equiv \overline{B} \rightarrow \overline{A}$$</p>
+            <p><strong>Uso en Reparaciones:</strong>
+            <br>Regla: "Si hay corriente (\(A\)), el LED prende (\(B\))".
+            <br>Diagnóstico: Llegas y ves que el LED NO prende (\(\overline{B}\)).
+            <br>Conclusión: ¡Seguro NO hay corriente (\(\overline{A}\))! No necesitas medir para saberlo.</p>
+        </div>
+    </section>
+
+    <!-- PODCAST -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        <p class="podcast-descripcion">
+            Dos docentes analizan cómo la implicación lógica puede ser implementada con compuertas NOT y OR, y discuten estrategias para enseñar la diferencia entre tautologías, contradicciones y proposiciones condicionales.
+        </p>
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <source src="audio/leccion22.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 13:22 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- TARJETA DE PROMPT ÉTICO -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        <p class="prompt-contexto">
+            Usa esta guía para construir prompts que te ayuden a generar ejemplos de implicaciones lógicas en contextos reales.
+        </p>
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            <div class="paso"><strong>1️⃣ "Comprendí que..."</strong> (Resume qué es la implicación y por qué es útil).</div>
+            <div class="paso"><strong>2️⃣ "y quiero saber..."</strong> (Pide un ejemplo de cómo usar la implicación para diseñar un sistema de alarma).</div>
+            <div class="paso"><strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong> (Estudiantes de secundaria).</div>
+            <div class="paso"><strong>4️⃣ "Incluye un error común que debo evitar..."</strong> (Confundir la dirección de la implicación).</div>
+        </div>
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo de Prompt:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que la implicación \(A \rightarrow B\) solo es falsa cuando A es verdadero y B es falso, y que en circuitos se implementa como \(\overline{A} + B\). Quiero saber: si diseño un sistema de riego automático que debe activarse solo si (hay poca humedad Y no está lloviendo) O (es de noche Y hay programación manual), ¿cómo puedo expresar esa regla como una implicación y qué circuito la implementaría? Explícame como si fuera a enseñárselo a mis estudiantes de grado 9° que están empezando con lógica digital. Incluye un error común que debo evitar al explicar por qué la implicación no es lo mismo que la equivalencia."
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- MI CUADERNO -->
+    <section class="cuaderno-section">
+        <div class="cuaderno-header">
+            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <h3>📋 Bitácora de Innovación (Mi Cuaderno)</h3>
+        </div>
+        <p>Responde en tu cuaderno físico:</p>
+        <ol>
+            <li><strong>La promesa rota:</strong> Escribe una regla de tu vida cotidiana en forma de implicación (\(A \rightarrow B\)). Por ejemplo, "Si estudio, entonces apruebo". ¿En qué casos esa promesa sería falsa?</li>
+            <li><strong>Circuitos en el mundo real:</strong> Describe una situación donde usarías la contrarrecíproca (\(\overline{B} \rightarrow \overline{A}\)) para diagnosticar un problema sin necesidad de medir directamente.</li>
+            <li><strong>Ejercicio de diseño:</strong> Diseña un circuito que indique si un contrato se cumplió según la promesa "Si el cliente paga (\(A\)), entonces recibe el producto (\(B\))". Usa la ecuación \(\overline{A} + B\).</li>
+        </ol>
+    </section>
+
+    <!-- TRAILER -->
+    <div class="avance-leccion">
+        <h3 style="color: #d35400; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2em;">🚀</span> Próximamente...
+        </h3>
+        <p>Has construido un circuito que juzga promesas. Ahora imagina que en lugar de un solo juicio, tienes que juzgar a un conjunto completo de señales. En la próxima lección, daremos el salto al <strong>mundo de los buses de datos</strong> y aprenderemos a usar los cuantificadores para decir cosas como "TODOS los sensores están activos" o "EXISTE al menos un error en el sistema". ¡De la lógica individual a la lógica colectiva!</p>
+    </div>
+
+    --- START OF FILE leccion24.html ---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección 24: Álgebra Formal y Unicidad - Fundamentos de Sistemas Digitales</title>
+    <link rel="stylesheet" href="estilos.css">
+    
+    <!-- KaTeX: Script principal y auto-render -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div class="contenedor">
+    <header>
+        <p><small>Unidad 3: Fundamentos de Cómputo - Lección 24</small></p>
+        <h1>🏛️ Álgebra Formal y Unicidad: El Fin de las Tablas</h1>
+    </header>
+
+    <!-- NARRATIVA: INTRODUCCIÓN CON LAS IMÁGENES DE DE MORGAN -->
+    <div class="intro-leccion" style="margin-bottom: 30px;">
+        <p>A lo largo de este curso, hemos utilizado las <strong>Tablas de Verdad</strong> como nuestra herramienta de confianza. Cada vez que queríamos estar seguros de que un circuito funcionaba, o que una ley matemática era cierta, evaluábamos todos los casos posibles (00, 01, 10, 11).</p>
+        
+        <p>Observa estas dos imágenes familiares de las <strong>Leyes de De Morgan</strong> que exploramos en la Unidad 2:</p>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 25px 0;">
+            <!-- IMAGEN 1: De Morgan (NAND = OR Negada) -->
+            <div style="flex: 1; min-width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <img src="img/demorgan_nand.png" alt="Comprobación de la Primera Ley de De Morgan mediante tabla de verdad" style="width: 100%; height: auto; border-radius: 4px;">
+                <p style="text-align: center; font-size: 0.85em; color: #555; margin-top: 10px;"><em>Fig 1. Comprobación empírica: Probamos los 4 estados posibles para verificar que \(\overline{A \cdot B} = \bar{A} + \bar{B}\).</em></p>
+            </div>
+            
+            <!-- IMAGEN 2: De Morgan (NOR = AND Negada) -->
+            <div style="flex: 1; min-width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <img src="img/demorgan_nor.png" alt="Comprobación de la Segunda Ley de De Morgan mediante tabla de verdad" style="width: 100%; height: auto; border-radius: 4px;">
+                <p style="text-align: center; font-size: 0.85em; color: #555; margin-top: 10px;"><em>Fig 2. Comprobación empírica: Probamos los 4 estados posibles para verificar que \(\overline{A + B} = \bar{A} \cdot \bar{B}\).</em></p>
+            </div>
+        </div>
+
+        <div style="background-color: #fff3e0; border-left: 5px solid #e65100; padding: 20px; border-radius: 0 8px 8px 0; margin-top: 20px;">
+            <h3 style="color: #e65100; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.2em;">🛑</span> El Límite de la Fuerza Bruta
+            </h3>
+            <p>Hacer tablas de verdad es un método empírico (de "fuerza bruta"). Funciona perfecto para 2 variables (4 filas) o 3 variables (8 filas).</p>
+            <p><strong>Pero, ¿qué pasa en el mundo real?</strong> Un procesador moderno evalúa ecuaciones lógicas con 64 variables. ¡Una tabla de verdad para 64 variables tendría <strong>18.4 trillones de filas</strong>! Si revisaras una fila por segundo, te tomaría 584,000 años comprobar si una Ley de De Morgan funciona en ese circuito.</p>
+            <p style="font-size: 1.1em; color: #bf360c; font-weight: bold; margin-bottom: 0;">Hoy dejaremos atrás las tablas de verdad. Bienvenidos al Álgebra Formal.</p>
+        </div>
+    </div>
+
+    <section>
+        <h2>1. Demostrar vs. Comprobar</h2>
+        <p>Un técnico <strong>comprueba</strong> un circuito probando sus entradas. Un ingeniero matemático <strong>demuestra</strong> que el circuito es perfecto usando únicamente las reglas fundamentales de la lógica, sin probar un solo número. A estas reglas fundamentales las llamamos <strong>Axiomas o Postulados</strong>.</p>
+
+        <!-- EL RESTO DE LA LECCIÓN 24 CONTINÚA AQUÍ... -->
+
+    <footer>
+        <hr>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+            <a href="leccion21.html" class="btn-navegacion">← Anterior (Isomorfismo)</a>
+            <a href="leccion23.html" class="btn-navegacion" style="background-color: var(--u3-color, #fd7e14);">Siguiente: Cuantificadores →</a>
+        </div>
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em;">🏠 Volver al Índice Principal</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

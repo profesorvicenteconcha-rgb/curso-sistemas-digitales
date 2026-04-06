@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección 29: Matriz Generadora - Fundamentos de Sistemas Digitales</title>
+    <title>Lección 30: El Diagnóstico - Fundamentos de Sistemas Digitales</title>
     <link rel="stylesheet" href="estilos.css">
     
     <!-- KaTeX -->
@@ -12,89 +12,113 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 
     <style>
-        .matriz-container {
-            overflow-x: auto;
-            text-align: center;
+        .tabla-sindrome {
+            width: 100%;
             margin: 20px 0;
-            font-size: 1.1em;
+            border-collapse: collapse;
+            text-align: center;
         }
+        .tabla-sindrome th { background-color: var(--color-secundario); color: white; padding: 10px; }
+        .tabla-sindrome td { border: 1px solid #ddd; padding: 8px; }
+        .fila-sana { background-color: #d4edda; color: #155724; font-weight: bold; }
+        .fila-enferma { background-color: #f8d7da; color: #721c24; }
     </style>
 </head>
 <body>
 
 <div class="contenedor">
     <header>
-        <p><small>Unidad 4: Teoría de Códigos - Lección 29</small></p>
-        <h1>🧾 La Receta del Código: Matriz Generadora (\(G\))</h1>
+        <p><small>Unidad 4: Teoría de Códigos - Lección 30</small></p>
+        <h1>🩺 El Diagnóstico: Matriz de Control (\(H\)) y el Síndrome</h1>
     </header>
 
     <section>
-        <p>Decidimos proteger los datos con bits extra ("La Ñapa"). Pero, ¿qué bits sumamos con cuáles? Necesitamos un plano exacto. En matemáticas, ese plano se llama <strong>Matriz Generadora</strong>.</p>
+        <p>Hemos recibido un paquete de 7 bits. ¿Llegó sano o enfermo por el ruido? Para saberlo, usamos una herramienta matemática precisa llamada <strong>Matriz de Control de Paridad (\(H\))</strong>.</p>
 
-        <h2>1. ¿Qué es la Matriz \(G\)?</h2>
-        <p>No te asustes. Piensa en ella como un <strong>tablero de conexiones</strong>. Aquí está la matriz del famoso código Hamming (7,4):</p>
+        <h2>1. El Chequeo Médico: La Matriz \(H\)</h2>
+        <p>Esta matriz contiene las reglas que debe cumplir un mensaje sano. Para nuestro código Hamming (7,4) es así:</p>
 
-        <div class="matriz-container formula">
+        <div class="formula">
             $$
-            G = \left(
-            \begin{array}{cccc|ccc}
-            1 & 0 & 0 & 0 & 1 & 1 & 0 \\
-            0 & 1 & 0 & 0 & 1 & 0 & 1 \\
-            0 & 0 & 1 & 0 & 0 & 1 & 1 \\
+            H = \begin{pmatrix}
+            1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+            0 & 1 & 1 & 0 & 0 & 1 & 1 \\
             0 & 0 & 0 & 1 & 1 & 1 & 1
-            \end{array}
-            \right)
+            \end{pmatrix}
             $$
         </div>
+        <p>Cada fila es una prueba de paridad distinta. Al aplicar estas pruebas a los bits recibidos, obtenemos 3 resultados: \(s_1, s_2, s_3\).</p>
+
+        <h2>2. El Síndrome (\(S\)): Leyendo los Síntomas</h2>
+        <p>El resultado de las pruebas se llama <strong>Vector Síndrome</strong>. Es un número de 3 bits que nos da el diagnóstico final.</p>
 
         <div class="svg-container">
-            <!-- Imagen: Matriz Explicada (img/matriz_generadora_explicada.png) -->
-            <img src="img/matriz_generadora_explicada.png" alt="Matriz G dividida en dos: Izquierda (Identidad) y Derecha (Paridad)" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 1. Izquierda: Copia los datos. Derecha: Crea la protección.</em></small></p>
+            <!-- Imagen: Diagnóstico Síndrome (img/diagnostico_sindrome.png) -->
+            <img src="img/diagnostico_sindrome.png" alt="Ilustración comparando S=000 (Check verde, Sano) vs S=101 (Alerta roja, Error en bit 5)" style="max-width:60%; height:auto;">
+            <p><small><em>Fig 1. Si el Síndrome es 0, descansa tranquilo. Si no, ¡a operar!</em></small></p>
         </div>
 
-        <h2>2. Traducción: De la Matriz al Cable 🔌</h2>
-        <p>Leer la matriz es muy fácil si sabes el secreto:</p>
-        <ul>
-            <li>Las <strong>Filas</strong> son tus datos de entrada (\(d_1, d_2, d_3, d_4\)).</li>
-            <li>Las <strong>Columnas de la derecha</strong> son tus bits de paridad (\(p_1, p_2, p_3\)).</li>
-            <li>Si ves un <strong>1</strong>, significa: "¡Conecta este cable a la compuerta XOR!".</li>
-        </ul>
+        <div class="destacado">
+            <h3>💊 Tabla de Diagnóstico</h3>
+            <p>Convierte el síndrome binario a decimal. ¡Ese número es la posición exacta del error!</p>
+            <table class="tabla-sindrome">
+                <tr><th>Síndrome (Binario)</th><th>Decimal</th><th>Diagnóstico</th></tr>
+                <tr class="fila-sana"><td>0 0 0</td><td>0</td><td>✅ Paciente Sano (Sin errores)</td></tr>
+                <tr class="fila-enferma"><td>0 0 1</td><td>1</td><td>Error en Bit 1</td></tr>
+                <tr class="fila-enferma"><td>0 1 0</td><td>2</td><td>Error en Bit 2</td></tr>
+                <tr class="fila-enferma"><td>0 1 1</td><td>3</td><td>Error en Bit 3</td></tr>
+                <tr class="fila-enferma"><td>1 0 0</td><td>4</td><td>Error en Bit 4</td></tr>
+                <tr class="fila-enferma"><td>1 0 1</td><td>5</td><td>Error en Bit 5</td></tr>
+                <tr class="fila-enferma"><td>1 1 0</td><td>6</td><td>Error en Bit 6</td></tr>
+                <tr class="fila-enferma"><td>1 1 1</td><td>7</td><td>Error en Bit 7</td></tr>
+            </table>
+        </div>
 
-        <h3>La Receta de las Columnas de Paridad:</h3>
-        <p>Miremos solo la parte derecha de la matriz:</p>
-        <ul>
-            <li><strong>Columna \(p_1\) (1, 1, 0, 1):</strong> Suma con XOR los datos \(d_1, d_2, d_4\).</li>
-            <li><strong>Columna \(p_2\) (1, 0, 1, 1):</strong> Suma con XOR los datos \(d_1, d_3, d_4\).</li>
-            <li><strong>Columna \(p_3\) (0, 1, 1, 1):</strong> Suma con XOR los datos \(d_2, d_3, d_4\).</li>
-        </ul>
-
+        <h3>Visualizando el Síndrome: Diagramas de Venn</h3>
+        <p>¿Recuerdas los conjuntos de la Unidad 3? El Código Hamming se puede dibujar como 3 círculos mágicos.</p>
+        
         <div class="svg-container">
-            <!-- Imagen: Circuito Hamming (img/circuito_hamming_encoder.png) -->
-            <img src="img/circuito_hamming_encoder.png" alt="Esquema eléctrico del codificador Hamming creado a partir de la matriz" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 2. ¡Mira! La matriz era en realidad un diagrama de compuertas XOR.</em></small></p>
+            <!-- Imagen Nueva: Venn Hamming -->
+            <img src="img/venn_hamming.png" alt="Diagrama de Venn de 3 círculos. Cada círculo es una paridad. Las intersecciones contienen los bits de datos." style="max-width:300px; height:auto;">
+            <p><small><em>Fig 1.5. Cada círculo debe tener paridad par. Si un círculo falla, ¡sabemos dónde buscar!</em></small></p>
+        </div>
+
+        <h2>3. El Circuito Detector (Hardware)</h2>
+        <p>Para construir esto, solo necesitas conectar compuertas XOR siguiendo los 1s de las filas de la Matriz \(H\).</p>
+        
+        <div class="svg-container">
+            <!-- Imagen: Circuito Síndrome (img/circuito_calculadora_sindrome.png) -->
+            <img src="img/circuito_calculadora_sindrome.png" alt="Esquema lógico de 3 grupos de XORs conectados a las entradas para calcular s1, s2 y s3" style="max-width:100%; height:auto;">
+            <p><small><em>Fig 2. Tres grupos de XORs nos darán el número del error.</em></small></p>
         </div>
 
         <div class="dato-extra">
-            <h3>🧮 Herramienta: Verificación Matemática</h3>
-            <p>Si multiplicas tu mensaje por la matriz, obtienes el código. Pero ojo: <strong>1+1=0</strong> aquí.</p>
-            <p>Usa este enlace pre-configurado en <strong>Wolfram Alpha</strong> para ver cómo se hace la magia:</p>
+            <h3>🛠️ Herramienta: Segunda Opinión Médica</h3>
+            <p>Calcular el síndrome a mano puede ser agotador. Usa <strong>dCode</strong> para verificar tus diagnósticos.</p>
             
-            <a href="https://www.wolframalpha.com/input?i=%28%7B1%2C0%2C1%2C1%7D+.+%7B%7B1%2C0%2C0%2C0%2C1%2C1%2C0%7D%2C%7B0%2C1%2C0%2C0%2C1%2C0%2C1%7D%2C%7B0%2C0%2C1%2C0%2C0%2C1%2C1%7D%2C%7B0%2C0%2C0%2C1%2C1%2C1%2C1%7D%7D%29+mod+2" 
-               target="_blank" 
-               class="btn-navegacion" 
-               style="background-color: #ff7e00; display: block; margin: 15px auto; max-width: 300px; text-align: center;">
-               Ver en Wolfram Alpha 🐺
-            </a>
-            <p><small><em>(Prueba cambiando los números del primer vector {1,0,1,1} por los tuyos).</em></small></p>
+            <div style="background: white; padding: 15px; border-radius: 8px; margin: 15px 0; border: 1px solid #ddd;">
+                <strong>📝 Mini-Tutorial (Interfaz dCode):</strong>
+                <ol style="margin-top: 5px; padding-left: 20px;">
+                    <li>Entra al enlace de abajo.</li>
+                    <li>Busca la sección de arriba llamada <strong>"Hamming Code Error Corrector"</strong>.</li>
+                    <li>En la caja de texto (Binary message...), escribe tu código "enfermo": <code>1110101</code></li>
+                    <li>Deja la opción <strong>VERSION</strong> en <em>"Detect automatically..."</em> (o selecciona Hamming 7,4).</li>
+                    <li>Dale clic al botón <strong>CORRECT/ANALYZE</strong>.</li>
+                    <li>Mira el resultado a la izquierda: Busca donde diga <strong>"Errors' positions"</strong> (te dirá el bit) y <strong>"Corrected message"</strong>.</li>
+                </ol>
+            </div>
+
+            <p style="text-align: center;">
+                <a href="https://www.dcode.fr/hamming-error-correction" target="_blank" class="btn-navegacion">Ir a la Calculadora Hamming ↗</a>
+            </p>
         </div>
     </section>
 
     <footer>
         <hr>
         <p style="text-align: center;">
-            <a href="leccion28.html" class="btn-navegacion">← Anterior</a>
-            <a href="leccion30.html" class="btn-navegacion">Siguiente: Matriz de Control (H) →</a>
+            <a href="leccion29.html" class="btn-navegacion">← Anterior</a>
+            <a href="leccion31_proyecto_hamming.html" class="btn-navegacion" style="background-color: var(--u4-color);">Ir al Gran Final (Laboratorio) →</a>
         </p>
     </footer>
 </div>

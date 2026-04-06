@@ -65,7 +65,22 @@
         </div>
 
         <p>Si en tu Tabla de Verdad tienes una fila donde \(A=0, B=1, C=1\) y la salida es <strong>1</strong>, entonces pones ese 1 en <strong>esta casilla exacta</strong>: Fila <strong>0</strong>, Columna <strong>11</strong>.</p>
-
+        <!-- CONEXIÓN ÁLGEBRA Y GEOMETRÍA: LA ABSORCIÓN -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin: 25px 0;">
+            <h3 style="color: #7b1fa2; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🪄</span> El Borrador Mágico en Acción (Ley de Absorción)
+            </h3>
+            <p>En la <strong>Lección 14</strong> conociste la Ley de Absorción (\(A + A \cdot B = A\)) y te prometimos que era el "borrador mágico" del álgebra. En el Mapa de Karnaugh, esta ley es la razón matemática de una de nuestras reglas de oro:</p>
+            
+            <p style="font-weight: bold; text-align: center; color: #4a148c; font-size: 1.1em; margin: 15px 0;">
+                "Haz los grupos lo más grandes posible y NO hagas grupos pequeños dentro de los grandes."
+            </p>
+            
+            <p><strong>¿Por qué?</strong> Imagina que tienes un grupo gigante de 4 celdas (que representa el término \(A\)). Si por error encierras también una parejita de unos que está dentro de ese mismo grupo gigante (que representaría el término \(A \cdot B\)), tu ecuación final quedaría como \(A + A \cdot B\).</p>
+            
+            <p>Visualmente, el rectángulo grande <strong>"absorbe"</strong> al rectángulo pequeño. ¡El mapa está haciendo el álgebra por ti, eliminando la redundancia sin que tengas que escribir una sola fórmula matemática!</p>
+        </div>
+        
         <h2>2. Las Reglas del Juego (Agrupando)</h2>
         <p>Tu misión es encerrar los <strong>1s</strong> en "globos" o grupos. Reglas:</p>
         <ul>

@@ -3,124 +3,398 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección 24: El Semisumador - Fundamentos de Sistemas Digitales</title>
+    <title>Lección 24: Álgebra Formal y Unicidad - Fundamentos de Sistemas Digitales</title>
     <link rel="stylesheet" href="estilos.css">
     
-    <!-- KaTeX -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
-        onload="renderMathInElement(document.body, {
-            delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-              {left: '\\(', right: '\\)', display: false}
-            ]
-        });">
+    <!-- KaTeX: Script principal y auto-render -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError: false
+            });
+        });
     </script>
-
-    <style>
-        /* Corrección de contraste: Texto oscuro sobre fondos claros */
-        .col-suma { 
-            background-color: #e3f2fd; 
-            font-weight: bold; 
-            color: #000; /* Forzar color negro */
-        }
-        .col-carry { 
-            background-color: #fff3e0; 
-            font-weight: bold; 
-            color: #000; /* Forzar color negro */
-        }
-    </style>
 </head>
 <body>
 
 <div class="contenedor">
     <header>
         <p><small>Unidad 3: Fundamentos de Cómputo - Lección 24</small></p>
-        <h1>➕ Enseñando a sumar al Silicio (I): El Semisumador</h1>
+        <h1>🏛️ Álgebra Formal y Unicidad: Axiomas, Involución y Dualidad</h1>
     </header>
 
+    <!-- NARRATIVA: INTRODUCCIÓN CON ISOMORFISMO Y LÍMITE DE LA FUERZA BRUTA -->
+    <div class="intro-leccion" style="margin-bottom: 30px;">
+        <p>A lo largo de todo este curso, nuestra herramienta de confianza para comprobar si teníamos razón ha sido la <strong>Tabla de Verdad</strong>. Cada vez que queríamos estar seguros de que un circuito funcionaba, evaluábamos todos los casos posibles (00, 01, 10, 11). Era un método infalible… mientras los cables fueran pocos.</p>
+       
+        <p>Observa estas dos imágenes familiares de las <strong>Leyes de De Morgan</strong> que exploramos en la Unidad 2. En su momento, las comprobamos con tablas de verdad de 4 filas:</p>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 25px 0;">
+            <div style="flex: 1; min-width: 280px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <img src="img/demorgan_nand.png" alt="Comprobación de la Primera Ley de De Morgan mediante tabla de verdad" style="width: 100%; height: auto; border-radius: 4px;">
+                <p style="text-align: center; font-size: 0.85em; color: #555; margin-top: 10px;"><em>Fig 1. Comprobación empírica: probamos los 4 estados posibles para verificar que \(\overline{A + B} = \bar{A} \cdot \bar{B}\).</em></p>
+            </div>
+            <div style="flex: 1; min-width: 280px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <img src="img/demorgan_nor.png" alt="Comprobación de la Segunda Ley de De Morgan mediante tabla de verdad" style="width: 100%; height: auto; border-radius: 4px;">
+                <p style="text-align: center; font-size: 0.85em; color: #555; margin-top: 10px;"><em>Fig 2. Comprobación empírica: probamos los 4 estados posibles para verificar que \(\overline{A \cdot B} = \bar{A} + \bar{B}\).</em></p>
+            </div>
+        </div>
+
+        <div style="background-color: #fff3e0; border-left: 5px solid #e65100; padding: 20px; border-radius: 0 8px 8px 0; margin-top: 20px;">
+            <h3 style="color: #e65100; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.2em;">🛑</span> El Límite de la Fuerza Bruta
+            </h3>
+            <p>Hacer tablas de verdad es un método empírico (de "fuerza bruta"). Funciona perfecto para 2 variables (4 filas) o 3 variables (8 filas).</p>
+            <p><strong>Pero, ¿qué pasa en el mundo real?</strong> Un procesador moderno evalúa ecuaciones lógicas de 64 variables. ¡Una tabla de verdad para 64 variables tendría <strong>18,4 trillones de filas</strong>! Si revisaras una fila por segundo, te tomaría 584.000 años comprobar si una Ley de De Morgan funciona en ese circuito.</p>
+            <p style="font-size: 1.1em; color: #bf360c; font-weight: bold; margin-bottom: 0;">Hoy dejaremos atrás las tablas de verdad. Bienvenidos al <strong>Álgebra Formal</strong>, donde las reglas de la lógica se convierten en axiomas y los teoremas se demuestran, no se prueban.</p>
+        </div>
+
+        <div class="dato-extra" style="background-color: #f0f7ff; border-left-color: #0d47a1; margin-top: 25px;">
+            <h3 style="color: #0d47a1; margin-top: 0;">🔗 Recordatorio: el isomorfismo está con nosotros</h3>
+            <p>En la <strong>Lección 21</strong> descubrimos que la lógica, la teoría de conjuntos y los circuitos electrónicos son isomorfos: las mismas reglas gobiernan los tres mundos. Los axiomas que hoy vamos a formalizar son los pilares de ese isomorfismo. Así que cuando estudies cada propiedad, recuerda que no solo estás aprendiendo matemática abstracta, sino también la estructura profunda de cómo piensan los conjuntos, cómo se comportan las compuertas y cómo se diseñan los procesadores.</p>
+        </div>
+    </div>
+
     <section>
-        <p>Si le preguntas a una compuerta cuánto es \(1+1\), no sabe qué decir, porque el "2" no existe en su mundo. Hoy vamos a enseñarle a sumar usando binario.</p>
+        <h2>1. Demostrar vs. Comprobar</h2>
+        <p>Un técnico <strong>comprueba</strong> un circuito probando sus entradas (0s y 1s). Un ingeniero matemático <strong>demuestra</strong> que el circuito es perfecto usando únicamente las reglas fundamentales de la lógica, sin probar un solo número.</p>
 
-        <h2>1. Jerarquía de Bits (LSB vs MSB)</h2>
-        <p>Antes de sumar, debes saber que no todos los bits valen lo mismo. En el número decimal <strong>52</strong>, el 5 vale más que el 2. En binario pasa igual:</p>
-        <div class="destacado">
-            <ul>
-                <li><strong>LSB (Least Significant Bit):</strong> El bit de la derecha. Vale menos.</li>
-                <li><strong>MSB (Most Significant Bit):</strong> El bit de la izquierda. Vale más.</li>
+        <div class="dato-extra" style="background-color: #f0f7ff; border-left-color: #1976d2;">
+            <h4 style="color: #0d47a1; margin-top: 0;">♟️ El Ajedrez Matemático: Axiomas y Teoremas</h4>
+            <p>Para hacer una demostración formal, el Álgebra de Boole se comporta como un juego de ajedrez:</p>
+            <ul style="margin-bottom: 0;">
+                <li><strong>Los Axiomas (Postulados):</strong> Son las reglas básicas del juego (ej: "el caballo se mueve en L"). Son verdades absolutas que aceptamos sin discutir.</li>
+                <li><strong>Los Teoremas:</strong> Son las jugadas maestras. Son verdades complejas que <strong>SÍ</strong> debemos demostrar combinando lógicamente los axiomas.</li>
             </ul>
-            <p><em>Regla de Oro:</em> Al conectar circuitos, ¡nunca confundas el LSB con el MSB o tu número saldrá al revés!</p>
         </div>
 
-        <h2>2. La Suma Binaria y el Problema del "2"</h2>
-        <p>Sumar en binario es igual que en decimal, pero solo llegamos hasta 1.</p>
-        <div class="formula">
-            <p>$$0 + 0 = 0$$</p>
-            <p>$$0 + 1 = 1$$</p>
-            <p>$$1 + 0 = 1$$</p>
-            <p>$$1 + 1 = 10_2 \quad \text{(Cero y llevo 1)}$$</p>
-        </div>
-        <p>¡Fíjate en la última línea! El resultado tiene <strong>dos dígitos</strong>: la Suma (0) y el Acarreo (1).</p>
+        <h3>📚 Nuestro Inventario de Axiomas</h3>
+        <p>En la Lección 21 (Isomorfismo) te presentamos las 5 propiedades fundamentales. Hoy las elevaremos a la categoría de <strong>Axiomas de Huntington</strong> (las reglas de nuestro tablero):</p>
 
-        <!-- RINCÓN DOCENTE: BINARIO MANUAL -->
-        <div class="dato-extra" style="border-left: 4px solid #ffc107; background-color: #fff9db;">
-            <h3>🍎 Rincón del Docente: Superpoderes Binarios</h3>
-            <p>A los niños les encanta saber que pueden contar más allá de 10 con sus dedos. Enséñales a contar en <strong>Binario</strong>:</p>
+        <div style="overflow-x: auto; margin-bottom: 30px;">
+            <table class="tabla-auditoria" style="width: 100%;">
+                <thead>
+                    <tr style="background-color: #34495e;">
+                        <th style="padding: 12px;">Axioma</th>
+                        <th style="padding: 12px;">Forma OR ($+$)</th>
+                        <th style="padding: 12px;">Forma AND ($\cdot$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>A1. Conmutatividad</strong></td>
+                        <td><span>$A + B = B + A$</span></td>
+                        <td><span>$A \cdot B = B \cdot A$</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>A2. Asociatividad</strong></td>
+                        <td><span>$(A + B) + C = A + (B + C)$</span></td>
+                        <td><span>$(A \cdot B) \cdot C = A \cdot (B \cdot C)$</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>A3. Identidad (Neutro)</strong></td>
+                        <td><span>$A + 0 = A$</span></td>
+                        <td><span>$A \cdot 1 = A$</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>A4. Distributividad</strong></td>
+                        <td><span>$A + (B \cdot C) = (A + B) \cdot (A + C)$</span></td>
+                        <td><span>$A \cdot (B + C) = (A \cdot B) + (A \cdot C)$</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>A5. Complemento</strong></td>
+                        <td><span>$A + \bar{A} = 1$</span></td>
+                        <td><span>$A \cdot \bar{A} = 0$</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>2. La Gran Demostración: La Unicidad del Complemento</h2>
+        <p>Vamos a hacer nuestra primera demostración formal. Vamos a resolver una duda filosófica profunda:</p>
+        <p style="font-size: 1.1em; text-align: center; font-weight: bold; color: #4a148c; font-style: italic;">"Si tengo una señal $A$, ¿cuántos inversos (NOT) puede tener?"</p>
+        <p>La lógica nos dice que el opuesto del blanco es negro. Pero, ¿cómo lo demostramos matemáticamente sin usar tablas de verdad?</p>
+
+        <!-- CAJA DE DEMOSTRACIÓN FORMAL -->
+        <div class="destacado" style="background-color: #fdfefe; border: 2px solid #00bcd4; border-radius: 8px;">
+            <h3 style="color: #0097a6; margin-top: 0; text-align: center;">🏛️ Teorema: El complemento de una variable es único.</h3>
+            
+            <p><strong>El Método (Reducción al absurdo):</strong> Imaginemos un universo extraño donde la variable <span>$A$</span> tiene <strong>DOS inversos diferentes</strong>. Llamemos al primero <span>$\bar{A}$</span> y al segundo <span>$X$</span>.</p>
+            
+            <p>Si ambos son inversos legítimos de <span>$A$</span>, ambos deben obedecer ciegamente el Axioma 4 (Complemento):</p>
             <ul>
-                <li>Cada dedo es un bit (Dedo arriba = 1, Dedo abajo = 0).</li>
-                <li>Los dedos tienen valor: Pulgar=1, Índice=2, Medio=4, Anular=8, Meñique=16.</li>
+                <li>Para <span>$\bar{A}$</span>: <span>$A + \bar{A} = 1$</span> &emsp; y &emsp; <span>$A \cdot \bar{A} = 0$</span></li>
+                <li>Para <span>$X$</span>: <span>$A + X = 1$</span> &emsp; y &emsp; <span>$A \cdot X = 0$</span></li>
             </ul>
-            <p><strong>El resultado:</strong> Con una sola mano, en lugar de llegar a 5, ¡pueden contar hasta 31! (16+8+4+2+1). Es una forma divertida de introducir el concepto de <strong>Valor Posicional (LSB/MSB)</strong> sin usar pizarrón.</p>
+
+            <p>Comencemos a jugar con nuestra variable intrusa <span>$X$</span> justificando cada paso solo con nuestros Axiomas:</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-family: 'Courier New', Courier, monospace; font-size: 1.05em; line-height: 2;">
+                <!-- Paso 1 -->
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 5px;">
+                    <span>1. $X = X \cdot 1$</span>
+                    <span style="color: #666; font-size: 0.85em;">(Por Axioma 3: Identidad)</span>
+                </div>
+                <!-- Paso 2 -->
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0 5px 0;">
+                    <span>2. $X = X \cdot (A + \bar{A})$</span>
+                    <span style="color: #666; font-size: 0.85em;">(Sustituimos el 1, por Axioma 5)</span>
+                </div>
+                <!-- Paso 3 -->
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0 5px 0;">
+                    <span>3. $X = (X \cdot A) + (X \cdot \bar{A})$</span>
+                    <span style="color: #666; font-size: 0.85em;">(Por Axioma 4: Distributividad)</span>
+                </div>
+                <!-- Paso 4 -->
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0 5px 0;">
+                    <span>4. $X = (A \cdot X) + (X \cdot \bar{A})$</span>
+                    <span style="color: #666; font-size: 0.85em;">(Por Axioma 1: Conmutatividad)</span>
+                </div>
+                <!-- Paso 5 -->
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0 5px 0;">
+                    <span>5. $X = 0 + (X \cdot \bar{A})$</span>
+                    <span style="color: #666; font-size: 0.85em;">(Porque $X$ es inverso, $A \cdot X = 0$)</span>
+                </div>
+                <!-- Paso 6 -->
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0 5px 0;">
+                    <span>6. $X = (A \cdot \bar{A}) + (X \cdot \bar{A})$</span>
+                    <span style="color: #666; font-size: 0.85em;">(Sustituimos el 0, por Axioma 5)</span>
+                </div>
+                <!-- Paso 7 -->
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0 5px 0;">
+                    <span>7. $X = \bar{A} \cdot (A + X)$</span>
+                    <span style="color: #666; font-size: 0.85em;">(Por Axioma 4: Factorizamos $\bar{A}$)</span>
+                </div>
+                <!-- Paso 8 -->
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0 5px 0;">
+                    <span>8. $X = \bar{A} \cdot 1$</span>
+                    <span style="color: #666; font-size: 0.85em;">(Porque $X$ es inverso, $A + X = 1$)</span>
+                </div>
+                <!-- Paso 9 -->
+                <div style="display: flex; justify-content: space-between; padding: 10px 0 0 0;">
+                    <span style="font-weight: bold; color: #d32f2f;">9. $X = \bar{A}$</span>
+                    <span style="color: #d32f2f; font-weight: bold; font-size: 0.85em;">(Por Axioma 3: Q.E.D.)</span>
+                </div>
+            </div>
+
+            <p style="margin-top: 20px; font-size: 1.1em; color: #00838f;"><strong>¡Magia Matemática!</strong> Comenzamos asumiendo que <span>$X$</span> era un inverso diferente, y al operar descubrimos que <span>$X$</span> es exactamente <span>$\bar{A}$</span>. Hemos demostrado, para siempre y para cualquier cantidad de variables, que <strong>el inverso de una señal lógica es único.</strong></p>
         </div>
 
-        <h2>3. Diseñando el Circuito</h2>
-        <p>Hagamos la tabla de verdad de esta suma. Necesitamos dos salidas: <strong>Suma</strong> ($S$) y <strong>Acarreo</strong> ($C$).</p>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Entrada A</th>
-                    <th>Entrada B</th>
-                    <th class="col-suma">Salida S (Suma)</th>
-                    <th class="col-carry">Salida C (Acarreo)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>0</td><td>0</td><td class="col-suma">0</td><td class="col-carry">0</td></tr>
-                <tr><td>0</td><td>1</td><td class="col-suma">1</td><td class="col-carry">0</td></tr>
-                <tr><td>1</td><td>0</td><td class="col-suma">1</td><td class="col-carry">0</td></tr>
-                <tr><td>1</td><td>1</td><td class="col-suma">0</td><td class="col-carry">1</td></tr>
-            </tbody>
-        </table>
-
-        <h3>¡La Lógica al Rescate!</h3>
-        <p>Mira las columnas de colores:</p>
-        <ul>
-            <li>La columna <strong>Suma</strong> es idéntica a una compuerta <strong>XOR</strong> ($0, 1, 1, 0$).</li>
-            <li>La columna <strong>Acarreo</strong> es idéntica a una compuerta <strong>AND</strong> ($0, 0, 0, 1$).</li>
-        </ul>
-
-        <div class="svg-container">
-            <!-- Imagen: Semisumador (img/semisumador.png) -->
-            <img src="img/semisumador.png" alt="Esquema de un Semisumador: Entradas A y B conectadas a una XOR (Suma) y una AND (Acarreo)" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 1. El Semisumador (Half Adder). Con dos chips, el silicio sabe sumar.</em></small></p>
+        <!-- NOTA SOBRE EL SIGNIFICADO FÍSICO DE LA UNICIDAD -->
+        <div class="dato-extra" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin: 25px 0;">
+            <h4 style="color: #1b5e20; margin-top: 0;">🔌 Significado físico: ¿Por qué es tan importante?</h4>
+            <p>La unicidad del complemento no es solo un resultado matemático abstracto. En el mundo del hardware, este teorema garantiza que la compuerta <strong>NOT (inversor)</strong> es una función perfectamente definida y determinista:</p>
+            <ul>
+                <li><strong>Una entrada, una sola salida:</strong> Cuando conectas una señal \(A\) a la entrada de un inversor (chip 7404), la salida será <strong>única y predecible</strong>. No existe ambigüedad ni posibilidad de que dos señales diferentes sean ambas el inverso de \(A\).</li>
+                <li><strong>Sin sorpresas:</strong> En un circuito físico, esto significa que si mides la salida del inversor, puedes estar seguro de que es la negación correcta, sin importar el ruido o las variaciones de fabricación (dentro de los márgenes de tolerancia).</li>
+                <li><strong>Base de la lógica determinista:</strong> Sin esta unicidad, los sistemas digitales serían impredecibles. Cada vez que negaras una señal, podrías obtener resultados distintos, lo que haría imposible diseñar computadoras confiables.</li>
+            </ul>
+            <p>En otras palabras: la demostración matemática que acabas de presenciar es la razón de fondo por la cual puedes comprar un chip 7404, conectarle una señal, y saber con certeza absoluta qué voltaje aparecerá en su salida. ¡La matemática garantiza la física!</p>
         </div>
 
-        <div class="dato-extra">
-            <h3>¿Por qué "Semi"? 🤔</h3>
-            <p>Este circuito es genial, pero es "amnésico". Suma A y B, pero no tiene una entrada para recibir el "1 que llevabas" de una suma anterior. ¡Solo sirve para la primera columna de la suma!</p>
-            <p>Para sumar números grandes, necesitamos conectar varios en cadena. Eso lo haremos en la Lección 25.</p>
+        <!-- ========== SECCIÓN NUEVA: LEY DE INVOLUCIÓN ========== -->
+        <h2 style="margin-top: 40px;">3. Consecuencia Directa: La Ley de Involución</h2>
+        <p>Ahora que hemos demostrado que el inverso es <strong>único</strong>, ¿qué pasa si negamos una señal que ya estaba negada?</p>
+        
+        <p>Sabemos que el inverso de $A$ es $\bar{A}$. Por lo tanto, el inverso de $\bar{A}$ tiene que ser $A$. Al escribir esto matemáticamente y dibujarlo en circuitos, obtenemos uno de los teoremas más famosos: la <strong>Ley de Involución (o Doble Negación)</strong>.</p>
+
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3; margin: 20px 0;">
+            <h3 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🔄</span> El "Buffer" Inadvertido
+            </h3>
+            
+            <div class="svg-container" style="margin: 15px 0;">
+                <img src="img/ley_involucion.png" alt="Ley de Involución: dos compuertas NOT conectadas en serie" style="max-width:60%; height:auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <p><small><em>Fig 3. La Ley de Involución en hardware. Matemáticamente: $\bar{\bar{A}} = A$.</em></small></p>
+            </div>
+            
+            <!-- Demostración algebraica de la involución -->
+            <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3; margin: 20px 0;">
+                <h4 style="color: #0d47a1; margin-top: 0;">📐 Demostración algebraica de la involución</h4>
+                <p>Usando los axiomas que acabamos de listar, podemos probar formalmente que \(\bar{\bar{A}} = A\).</p>
+                <p>Sabemos que \(\bar{A}\) es el complemento de \(A\), es decir, cumple:</p>
+                <ul>
+                    <li>\(A + \bar{A} = 1\) y \(A \cdot \bar{A} = 0\) (Axioma de Complemento).</li>
+                </ul>
+                <p>Ahora preguntémonos: ¿cuál es el complemento de \(\bar{A}\)? Por definición, un complemento de \(\bar{A}\) es un elemento \(X\) tal que:</p>
+                <ul>
+                    <li>\(\bar{A} + X = 1\) y \(\bar{A} \cdot X = 0\).</li>
+                </ul>
+                <p>Pero observa que \(A\) mismo cumple esas dos condiciones (por la conmutatividad y el axioma de complemento):</p>
+                <ul>
+                    <li>\(\bar{A} + A = A + \bar{A} = 1\) (Conmutatividad + Complemento).</li>
+                    <li>\(\bar{A} \cdot A = A \cdot \bar{A} = 0\) (Conmutatividad + Complemento).</li>
+                </ul>
+                <p>Como el complemento de \(\bar{A}\) es <strong>único</strong> (teorema demostrado más arriba), el único elemento que puede ser su complemento es \(A\). Por lo tanto:</p>
+                <div class="formula" style="font-size: 1.2em;">
+                    $$\bar{\bar{A}} = A$$
+                </div>
+                <p>Esta es la <strong>Ley de Involución</strong> (o Doble Negación). En palabras: negar dos veces una señal te devuelve la señal original.</p>
+            </div>
+
+            <p><strong>El Ojo del Ingeniero:</strong> Podrías pensar: <em>"¿Para qué voy a gastar dos compuertas NOT si la señal sale exactamente igual que como entró? ¡Mejor pongo un cable directo!"</em>.</p>
+            
+            <p>En el mundo ideal del álgebra, tienes razón, es un desperdicio. Pero en la ingeniería de silicio, conectar dos inversores seguidos tiene un propósito vital: se le llama <strong>Buffer no inversor</strong>. Se usa para "limpiar" una señal que viene débil, inyectándole corriente fresca de la fuente (Vcc), o para introducir un pequeño <strong>retraso de tiempo intencional</strong> (recuerda el retardo de propagación de la Lección 22) para que dos señales se sincronicen perfectamente al llegar a otro chip.</p>
+            <p><em>¡Las matemáticas te dicen que se anulan, pero la física te dice que te dan tiempo y fuerza!</em></p>
+        </div>
+
+        <h2>4. El Principio de Dualidad (El atajo supremo)</h2>
+        <p>Si miras la tabla de Axiomas de arriba, notarás un patrón hermoso: vienen en parejas. A esta simetría perfecta de la naturaleza digital la llamamos el <strong>Principio de Dualidad</strong>.</p>
+        
+        <div class="destacado" style="background-color: #fffde7; border-left-color: #fbc02d;">
+            <p>La regla es asombrosamente sencilla: Si tienes una ecuación o teorema válido en álgebra de Boole, puedes crear <strong>instantáneamente otro teorema válido</strong> si sigues tres pasos ciegos:</p>
+            <ol>
+                <li>Cambia todos los signos de suma ($+$) por producto ($\cdot$).</li>
+                <li>Cambia todos los signos de producto ($\cdot$) por suma ($+$).</li>
+                <li>Cambia todos los unos ($1$) por ceros ($0$) y los ceros ($0$) por unos ($1$).</li>
+            </ol>
+            <p><em>(Ojo: ¡NO cambies las letras ni sus negaciones! Si hay una $\bar{A}$, se queda como $\bar{A}$).</em></p>
+        </div>
+
+        <p><strong>Ejemplo en acción:</strong></p>
+        <p>En la Lección 22 comprobamos la Tautología de la <em>Dominación</em>: <span>$A + 1 = 1$</span>.<br>
+        Si le aplicamos Dualidad (cambiamos $+$ por $\cdot$, y $1$ por $0$), obtenemos: <span>$A \cdot 0 = 0$</span>.<br>
+        ¡Hemos descubierto la Contradicción gratis, sin necesidad de demostrarla!</p>
+
+        <!-- EJERCICIO DE DUALIDAD CON DE MORGAN -->
+        <div class="destacado" style="background-color: #f5f5f5; border-left-color: #9c27b0; margin-top: 20px;">
+            <h4 style="color: #7b1fa2; margin-top: 0;">✍️ Tu turno: Aplica el principio de dualidad</h4>
+            <p>Sabemos que la <strong>Primera Ley de De Morgan</strong> es:</p>
+            <div class="formula" style="font-size: 1.1em;">
+                $$\overline{A \cdot B} = \bar{A} + \bar{B}$$
+            </div>
+            <p>Usa los tres pasos del principio de dualidad para obtener la <strong>Segunda Ley de De Morgan</strong>. Recuerda:</p>
+            <ol>
+                <li>Cambia \( \cdot \) por \( + \) y viceversa.</li>
+                <li>Cambia \(0\) por \(1\) y viceversa.</li>
+                <li>Deja las letras y sus negaciones como están.</li>
+            </ol>
+            <details>
+                <summary style="cursor: pointer; color: #1976d2; font-weight: bold;">🔍 Ver solución</summary>
+                <div style="padding: 12px; background-color: #fff; border-radius: 6px; margin-top: 8px;">
+                    <p><strong>Paso a paso:</strong><br>
+                    Partimos de \(\overline{A \cdot B} = \bar{A} + \bar{B}\).</p>
+                    <p>1. Cambiamos \(\cdot\) por \(+\) y \(+\) por \(\cdot\) en ambos lados:<br>
+                    \(\overline{A + B} = \bar{A} \cdot \bar{B}\)</p>
+                    <p>2. No hay constantes \(0\) o \(1\) que cambiar, así que el resultado es:</p>
+                    <div class="formula" style="font-size: 1.1em;">
+                        $$\overline{A + B} = \bar{A} \cdot \bar{B}$$
+                    </div>
+                    <p>¡Esa es exactamente la Segunda Ley de De Morgan!</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- BLOQUE ECONÓMICO REDUCIDO (RECORDATORIO) -->
+        <div class="dato-extra" style="background-color: #e3f2fd; border-left-color: #0d47a1; margin: 30px 0;">
+            <h3 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">💰</span> Recordatorio: El ahorro está en los axiomas
+            </h3>
+            <p>En la <strong>Lección 21</strong> vimos con detalle cómo la propiedad distributiva se traduce en ahorro de hardware. Vale la pena recordarlo: la expresión \(A \cdot (B + C)\) requiere <strong>2 compuertas</strong> (una OR y una AND), mientras que su forma expandida \((A \cdot B) + (A \cdot C)\) necesita <strong>3 compuertas</strong> (dos AND y una OR). Saber factorizar no es solo álgebra: es reducir el costo de fabricación, el consumo de energía y el espacio en la placa.</p>
+            <p style="margin-bottom: 0;">Este es solo un ejemplo de cómo los axiomas del álgebra de Boole no son reglas abstractas, sino herramientas concretas de optimización que los ingenieros usan a diario para diseñar circuitos más eficientes.</p>
+        </div>
+
+    </section>
+
+    <!-- PODCAST -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        <p class="podcast-descripcion">
+            Dos docentes discuten la barrera psicológica que enfrentan los estudiantes al pasar de las tablas de verdad a las demostraciones formales. Exploran analogías para enseñar los Axiomas de Huntington como si fueran reglas de un juego de mesa, y analizan la elegancia pedagógica de la prueba de "Unicidad del Complemento" para formar ingenieros que no solo creen en fórmulas, sino que saben deducirlas.
+        </p>
+        <div class="podcast-player">
+            <audio controls preload="metadata" style="width: 100%;">
+                <source src="audio/leccion24.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 17:05 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- TARJETA DE PROMPT ÉTICO -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        <p class="prompt-contexto">
+            Usa esta guía para pedirle a una Inteligencia Artificial que te ayude a estudiar y generar demostraciones formales paso a paso.
+        </p>
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            <div class="paso"><strong>1️⃣ "Comprendí que..."</strong> (Resume la diferencia entre comprobar con tablas y demostrar con axiomas).</div>
+            <div class="paso"><strong>2️⃣ "y quiero saber..."</strong> (Pide que te demuestre un teorema complejo, como la Ley de Absorción o Idempotencia).</div>
+            <div class="paso"><strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong> (Estudiantes de matemáticas discretas que necesitan ver la justificación en cada renglón).</div>
+            <div class="paso"><strong>4️⃣ "Incluye un error común que debo evitar..."</strong> (Ej: confundir la Dualidad con las Leyes de De Morgan).</div>
+        </div>
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo de Prompt:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que las tablas de verdad no son escalables para 64 bits, y que por eso usamos el Álgebra Formal y los 4 Axiomas de Huntington para demostrar teoremas. Quiero saber: ¿Puedes demostrar formalmente el teorema de Idempotencia ($A + A = A$) utilizando únicamente los axiomas de Identidad, Complemento, Distributividad y Conmutatividad? Explícame cada renglón como si fuera a enseñárselo a mis estudiantes de grado 11°. Incluye un error común que debo evitar al explicar la diferencia entre el Principio de Dualidad y las Leyes de De Morgan."
+            </blockquote>
         </div>
     </section>
 
+    <!-- MI CUADERNO -->
+    <section class="cuaderno-section">
+        <div class="cuaderno-header">
+            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <h3>📋 Bitácora de Innovación (Mi Cuaderno)</h3>
+        </div>
+        <p>Responde en tu cuaderno físico (o aquí) las siguientes reflexiones:</p>
+        <ol>
+            <li><strong>El Cambio de Paradigma:</strong> Escribe con tus propias palabras una metáfora para explicarle a un niño de 12 años la diferencia entre "Comprobar" algo (Tabla de Verdad) y "Demostrarlo" (Álgebra Formal).
+                <textarea rows="3" style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+            <li><strong>El Reto de la Dualidad:</strong> Toma la Primera Ley de De Morgan ($\overline{A \cdot B} = \bar{A} + \bar{B}$). Aplícale ciegamente los 3 pasos del Principio de Dualidad. ¿Qué ecuación obtuviste? ¿Te resulta familiar?
+                <textarea rows="3" placeholder="Transforma signos y ceros/unos..." style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+            <li><strong>Análisis de la Demostración:</strong> En la prueba de la Unicidad del Complemento (Paso 7), usamos la Distributividad para agrupar ("factorizar") la $\bar{A}$. Si el álgebra de Boole NO tuviera la propiedad distributiva, ¿podríamos asegurar que las computadoras funcionan de manera predecible? ¿Por qué?
+                <textarea rows="3" style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+        </ol>
+    </section>
+
+    <!-- NARRATIVA: TRAILER L24 -->
+    <div class="avance-leccion" style="background-color: #f8f9fa; padding: 25px; border-radius: 12px; margin-top: 40px; border-left: 6px solid var(--u3-color, #fd7e14); box-shadow: 0 4px 15px rgba(253, 126, 20, 0.1);">
+        <h3 style="color: var(--u3-color, #fd7e14); display: flex; align-items: center; gap: 10px; margin-top: 0;">
+            <span style="font-size: 1.3em;">🚀</span> Próximamente...
+        </h3>
+        <p style="font-size: 1.05em; color: #444; line-height: 1.6;">Has tocado el techo del Álgebra de Boole. Entiendes las leyes físicas de los chips, optimizas circuitos gigantes con Karnaugh y puedes demostrar teoremas invencibles como un matemático puro.</p>
+        <p style="font-size: 1.05em; color: #444; line-height: 1.6;">La teoría de la Unidad 3 está completa. Ha llegado la hora de cobrar tu recompensa. Todo este inmenso viaje de 24 lecciones tuvo un único y grandioso propósito: <strong>enseñarle a un pedazo de silicio a pensar en números</strong>.</p>
+        <p style="font-size: 1.05em; color: #444; line-height: 1.6; font-weight: bold;">En la próxima lección (Lección 25: Laboratorio Final), uniremos el Isomorfismo con todo el hardware que conoces para construir el Sumador Completo (Full Adder). ¡Dejaremos de encender LEDs de colores y empezaremos a crear calculadoras!</p>
+    </div>
+
     <footer>
         <hr>
-        <p style="text-align: center;">
-            <a href="leccion23.html" class="btn-navegacion">← Anterior</a>
-            <a href="leccion25.html" class="btn-navegacion">Siguiente: Álgebra Formal →</a>
-        </p>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+            <a href="leccion23.html" class="btn-navegacion">← Anterior (Cuantificadores)</a>
+            <a href="leccion25_sumador_completo.html" class="btn-navegacion" style="background-color: #ffc107; color: black; font-weight: bold; padding: 10px 20px; border-radius: 5px; text-decoration: none;">Ir al Laboratorio 3: El Sumador Completo →</a>
+        </div>
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;">🏠 Volver al Índice Principal</a>
+        </div>
     </footer>
 </div>
 

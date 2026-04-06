@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  ... (scripts y estilos aquí)
+  <meta charset="UTF-8">
+  <title>Lección 22: El Detector de Mentiras</title>
+  <link rel="stylesheet" href="estilos.css">
+  <!-- KaTeX (solo lo necesario, sin romper estilos existentes) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "\\(", right: "\\)", display: false }
+        ],
+        throwOnError: false
+      });
+    });
+  </script>
+</head>
+<body>
+<div class="contenedor">
+  Unidad 3: Fundamentos de Cómputo - Lección 22
+  🤥 El Detector de Mentiras: Implicación y Circuitos
+  ... (todo el contenido original, SIN CAMBIOS) ...
+    <section>
+        <div class="intro-leccion">
+            <p>En ingeniería, matemáticas y leyes, las frases del tipo <em>"Si haces esto, entonces pasa aquello"</em> son sagradas. Son la base del pensamiento condicional.</p>
+            <p>Hoy vamos a analizar cómo se comporta la lógica frente a las promesas, y construiremos un circuito capaz de juzgar matemáticamente si un acuerdo se cumplió o se rompió. ¡Bienvenidos al estrado judicial de la electrónica!</p>
+        </div>
+
+        <h2>1. Verdades y Mentiras Eternas</h2>
+        <p>Antes de juzgar una promesa, debemos entender los extremos absolutos de la lógica: expresiones que siempre dan el mismo resultado, sin importar lo que pase en el mundo exterior.</p>
+
+        <!-- TAUTOLOGÍAS (SIEMPRE 1) -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <h3 style="color: #1b5e20; margin-top: 0;">🔁 Siempre 1: Tautologías</h3>
+            <p>Una tautología es una afirmación que es <strong>siempre verdadera</strong> por pura lógica. Su circuito dará 1 (5V) en cualquier situación, ¡incluso si desconectas los sensores!</p>
+            <div style="overflow-x: auto; margin: 15px 0;">
+                <table class="tabla-auditoria" style="margin: 0;">
+                    <thead>
+                        <tr>
+                            <th style="background-color: #2e7d32;">Expresión</th>
+                            <th style="background-color: #2e7d32;">Regla</th>
+                            <th style="background-color: #2e7d32;">Ejemplo Cotidiano</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-size: 1.1em;">\(A + 1 = 1\)</td>
+                            <td>Dominación (OR)</td>
+                            <td>"Si traes el ticket (A) <strong>O</strong> si eres el dueño del cine (1 constante), entras". Al ser el dueño, siempre entras, sin importar el ticket.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 1.1em;">\(A + \bar{A} = 1\)</td>
+                            <td>Complemento (OR)</td>
+                            <td>"<strong>O</strong> llueve (\(A\)) <strong>O</strong> no llueve (\(\bar{A}\))". No hay una tercera opción. La frase completa siempre es cierta.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-bottom: 0;">💡 <strong>En hardware:</strong> Conecta un inversor (NOT) a una entrada de una compuerta OR y la otra entrada directa. La salida quedará bloqueada en 1 para siempre.</p>
+        </div>
+    </section>
+
+</div>
+</body>
+</html>

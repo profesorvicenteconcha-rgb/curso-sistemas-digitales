@@ -5,10 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lección 21: Isomorfismo - Fundamentos de Sistemas Digitales</title>
     <link rel="stylesheet" href="estilos.css">
-    <!-- KaTeX -->
+        
+    <!-- KaTeX: Estilos -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <!-- KaTeX: Script principal y auto-render (carga robusta) -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -18,411 +34,487 @@
         <h1>🗿 La Piedra Rosetta: Isomorfismo</h1>
     </header>
 
+    <!-- NARRATIVA: INTRODUCCIÓN -->
+    <div class="intro-leccion" style="margin-bottom: 30px;">
+        <p style="font-size: 1.1em; color: var(--color-primario); font-weight: bold; margin-bottom: 10px;">¡Bienvenido a la Unidad 3: Fundamentos de Cómputo!</p>
+        <p>Al final del último laboratorio (Lección 20) te revelamos un secreto que separa a los técnicos de los verdaderos arquitectos de hardware: el circuito físico que armaste para encender la luz de una escalera resultó ser, asombrosamente, el motor matemático exacto para sumar dos números binarios.</p>
+        <p><strong>¿Cómo es posible que un interruptor de luz y una suma matemática sean la misma cosa?</strong></p>
+        <p>Hoy descubriremos el principio más profundo de la computación: la Electrónica, la Lógica Filosófica y las Matemáticas de Conjuntos son, en realidad, trillizas separadas al nacer. A este fenómeno lo llamamos <strong>Isomorfismo</strong>. A partir de hoy, dejarás de ver simples "cables con corriente" y comenzarás a ver el flujo puro del pensamiento humano materializado en silicio.</p>
+    </div>
+
     <section>
-        <p>Bienvenidos a la Unidad 3. Aquí descubriremos que la Electrónica, la Lógica y las Matemáticas son trillizas separadas al nacer. Existe un concepto llamado <strong>Isomorfismo</strong> (misma forma), que nos dice que sus reglas son idénticas.</p>
-
-            <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
-            <h3>📐 ¿Qué es el álgebra de Boole?</h3>
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
+            <h3 style="margin-top: 0;">📐 ¿Qué es el álgebra de Boole?</h3>
             <p>Es un sistema matemático formado por un conjunto \(B\) con solo dos elementos: \(\{0, 1\}\) (que representan Falso/Verdadero, Apagado/Encendido), junto con dos operaciones binarias llamadas <strong>adición</strong> (\(+\)) y <strong>producto</strong> (\(\cdot\)).</p>
-            <p>Aunque usamos los mismos símbolos que en la aritmética, las reglas son diferentes porque el conjunto es limitado. Desde niños hemos usado tablas similares para sumar y multiplicar números naturales. Ahora las adaptaremos a nuestro nuevo universo.</p>
+            <p>Aunque usamos los mismos símbolos que en la aritmética, las reglas son diferentes porque el conjunto es limitado. Veamos cómo cambia la matemática cuando le quitamos todos los números excepto el cero y el uno.</p>
         </div>
 
-        <h3>🧮 Tablas de la adición y el producto en aritmética</h3>
-        <p>En la escuela aprendiste tablas como estas. Observa que el resultado puede ser cualquier número natural.</p>
-        <div style="overflow-x: auto; margin-bottom: 25px;">
-            <table class="tabla-centrada">
-                <caption>Adición aritmética (ℕ)</caption>
-                <thead>
-                    <th>+</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>…</th>
-                </thead>
-                <tbody>
-                    <tr><th>0</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>…</td></tr>
-                    <tr><th>1</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>…</td></tr>
-                    <tr><th>2</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>…</td></tr>
-                    <tr><th>3</th><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>…</td></tr>
-                    <tr><th>4</th><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>…</td></tr>
-                    <tr><th>…</th><td colspan="6">…</td></tr>
-                </tbody>                
-        </div>       
+        <h3>🧮 Tablas de la adición y el producto en Aritmética (\(\mathbb{N}\))</h3>
+        <p>En la escuela aprendiste tablas como estas. Observa que el resultado puede ser cualquier número natural al infinito.</p>
         
-        <div style="overflow-x: auto; margin-bottom: 30px;">
-            <table class="tabla-centrada">
-                <caption>Producto aritmético (ℕ)</caption>
-                <thead>
-                    <th>·</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>…</th>
-                </thead>
-                <tbody>
-                    <tr><th>0</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>…</td></tr>
-                    <tr><th>1</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>…</td></tr>
-                    <tr><th>2</th><td>0</td><td>2</td><td>4</td><td>6</td><td>8</td><td>…</td></tr>
-                    <tr><th>3</th><td>0</td><td>3</td><td>6</td><td>9</td><td>12</td><td>…</td></tr>
-                    <tr><th>4</th><td>0</td><td>4</td><td>8</td><td>12</td><td>16</td><td>…</td></tr>
-                    <tr><th>…</th><td colspan="6">…</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h3>🔢 Tablas del álgebra de Boole (conjunto \(B = \{0,1\}\))</h3>
-        <p>Ahora reducimos el universo a solo dos elementos. Las tablas de adición y producto cambian drásticamente:</p>
-        
-        <div style="overflow-x: auto; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-            <table class="tabla-centrada" style="min-width: 150px;">
-                <caption>Adición lógica (OR)</caption>
-                <thead>
-                    <th>+</th><th>0</th><th>1</th>
-                </thead>
-                <tbody>
-                    <tr><th>0</th><td>0</td><td>1</td></tr>
-                    <tr><th>1</th><td>1</td><td>1</td></tr>
-                </tbody>
-            </table>
-            </div>
-         
-        <div style="overflow-x: auto; margin-bottom: 30px;">
-            <table class="tabla-centrada">
-                <caption>Producto lógico (AND)</caption>
-                <thead>                    
-                    <th>·</th><th>0</th><th>1</th>
-                </thead>
-                <tbody>
-                    <tr><th>0</th><td>0</td><td>0</td></tr>
-                    <tr><th>1</th><td>0</td><td>1</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
-            <h3>⚠️ ¡Atención!</h3>
-            <p>En aritmética, \(1+1 = 2\); en álgebra de Boole, \(1+1 = 1\).  
-            En aritmética, \(0·0 = 0\); en álgebra de Boole, \(0·0 = 0\) (coincide).  
-            En aritmética, \(1·1 = 1\); en álgebra de Boole, \(1·1 = 1\) (también coincide).</p>
-            <p><strong>La diferencia más notable es que en Boole no existe el número 2:</strong> todo resultado se queda dentro del conjunto \(\{0,1\}\). Por eso la tabla de la adición tiene solo unos y ceros.</p>
-        </div>
-
-        <!-- ========== PROPIEDADES FUNDAMENTALES: CONMUTATIVIDAD ========== -->
-        <h2>📐 Propiedades fundamentales del álgebra de Boole</h2>
-        <p>El álgebra de Boole cumple una serie de propiedades que la convierten en una estructura matemática sólida y coherente. Estas propiedades son isomorfas a las que rigen los conjuntos y los circuitos lógicos. Comenzamos con la <strong>conmutatividad</strong>.</p>
-
-        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
-            <h3>Propiedad conmutativa</h3>
-            <p>El orden de las entradas no altera el resultado, tanto para la suma lógica (OR) como para el producto lógico (AND).</p>
-            <div class="svg-container">
-                <img src="img/propiedad_conmutativa.png" alt="Diagramas de las compuertas OR y AND que muestran la conmutatividad: A+B = B+A y A·B = B·A" style="max-width:100%; height:auto;">
-                <p><small><em>Fig. 1: Conmutatividad: cambiar el orden de las entradas no modifica la salida.</em></small></p>
-            </div>
-            <p>En el lenguaje de conjuntos: \(A \cup B = B \cup A\) y \(A \cap B = B \cap A\).  
-            En circuitos, la compuerta OR y la compuerta AND son <strong>conmutativas</strong>: puedes intercambiar sus entradas sin que el resultado cambie.</p>
-        </div>
-
-        <!-- ========== PROPIEDADES FUNDAMENTALES: ASOCIATIVIDAD ========== -->
-        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
-            <h3>Propiedad asociativa</h3>
-            <p>La forma en que se agrupan las operaciones no altera el resultado final, tanto para la suma lógica (OR) como para el producto lógico (AND).</p>
-            <div class="svg-container">
-                <img src="img/propiedad_asociativa.png" alt="Diagramas de las compuertas OR y AND que muestran la asociatividad: A+(B+C) = (A+B)+C y A·(B·C) = (A·B)·C" style="max-width:100%; height:auto;">
-                <p><small><em>Fig. 2: Asociatividad: agrupar de diferente manera no cambia la salida.</em></small></p>
-            </div>
-            <p>En el lenguaje de conjuntos: \(A \cup (B \cup C) = (A \cup B) \cup C\) y \(A \cap (B \cap C) = (A \cap B) \cap C\).  
-            En circuitos, las compuertas OR y AND se pueden conectar en cascada sin importar el orden de los paréntesis: el resultado es siempre el mismo.</p>
-        </div>
-
-        <!-- ========== PROPIEDAD DEL NEUTRO (ELEMENTO IDENTIDAD) ========== -->
-        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
-            <h3>Propiedad del neutro (elemento identidad)</h3>
-            <p>Existen dos elementos especiales en el conjunto \(\{0,1\}\) que actúan como <strong>identidades</strong> para las operaciones de suma y producto lógico.</p>
-            <div class="svg-container">
-                <img src="img/propiedad_del_neutro.png" alt="Diagramas que muestran la identidad: A+0 = A y A·1 = A" style="max-width:100%; height:auto;">
-                <p><small><em>Fig. 3: El 0 es el elemento neutro para la suma lógica (OR); el 1 es el elemento neutro para el producto lógico (AND).</em></small></p>
-            </div>
-            <p><strong>En álgebra de Boole:</strong> \(A + 0 = A\) y \(A \cdot 1 = A\).</p>
-            <p><strong>En teoría de conjuntos:</strong> \(A \cup \emptyset = A\) y \(A \cap U = A\) (donde \(U\) es el universo).</p>
-            <p><strong>En circuitos:</strong> Conectar una entrada a tierra (0) en una compuerta OR no altera la otra entrada; conectar una entrada a Vcc (1) en una compuerta AND tampoco altera la otra entrada.</p>
-        </div>
-
-        <!-- 54 Inverso (complemento) -->
-        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
-            <h3>Propiedad del inverso (complemento)</h3>
-            <p>Para cada elemento existe su complemento, que satisface estas relaciones.</p>
-            <div class="svg-container">
-                <img src="img/propiedad_del_inverso.png" alt="Complemento: A + \bar{A} = 1 y A · \bar{A} = 0" style="max-width:100%; height:auto;">
-                <p><small><em>Fig. 4: La suma con su complemento da 1; el producto da 0.</em></small></p>
-            </div>
-            <p>En conjuntos: \(A \cup A^c = U\) y \(A \cap A^c = \emptyset\). En circuitos: son las tautologías y contradicciones que veremos en la lección 22.</p>
-        </div>
-
-        <!-- ========== PROPIEDAD DISTRIBUTIVA ========== -->
-        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
-            <h3>Propiedad distributiva</h3>
-            <p>El producto lógico se distribuye sobre la suma, y viceversa (algo que no ocurre en la aritmética común).</p>
-            <div class="svg-container">
-                <img src="img/propiedad_distributiva.png" alt="Diagramas que muestran las dos formas de la distributividad: A·(B+C) = A·B + A·C y A+(B·C) = (A+B)·(A+C)" style="max-width:100%; height:auto;">
-                <p><small><em>Fig. 5: Distributividad: el producto sobre la suma (izquierda) y la suma sobre el producto (derecha).</em></small></p>
-            </div>
-            <p>En el lenguaje de conjuntos: \(A \cap (B \cup C) = (A \cap B) \cup (A \cap C)\) y \(A \cup (B \cap C) = (A \cup B) \cap (A \cup C)\).  
-            En circuitos, esta propiedad permite transformar combinaciones de compuertas AND y OR, facilitando la simplificación de diseños.</p>
-        </div>
-
-        <!-- ========== CONCLUSIÓN: LAS CINCO PROPIEDADES FUNDAMENTALES ========== -->
-        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
-            <h3>🧩 Las cinco propiedades que unifican todo</h3>
-            <p>Las propiedades que acabamos de explorar (conmutativa, asociativa, distributiva, identidad y complemento) no son simples reglas aisladas. Forman el <strong>esqueleto matemático</strong> que sostiene por igual al álgebra de Boole, a la teoría de conjuntos y a los circuitos digitales.</p>
-
-            <div style="overflow-x: auto; margin: 20px 0;">
-                <table class="tabla-centrada">
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 30px;">
+            <div style="overflow-x: auto;">
+                <table class="tabla-centrada" style="background: white;">
+                    <caption style="font-weight: bold; margin-bottom: 10px;">Adición Aritmética</caption>
                     <thead>
-                        <th>Propiedad</th>
-                        <th>Álgebra de Boole (B={0,1})</th>
-                        <th>Teoría de conjuntos</th>
-                        <th>Circuitos (compuertas)</th>
+                        <tr><th>+</th><th>0</th><th>1</th><th>2</th><th>3</th><th>…</th></tr>
                     </thead>
                     <tbody>
-                        <td>Conmutativa</td>
-                            <td>\(A+B = B+A\)<br>\(A\cdot B = B\cdot A\)</td>
-                            <td>\(A\cup B = B\cup A\)<br>\(A\cap B = B\cap A\)</td>
-                            <td>OR y AND con entradas intercambiables</td>
+                        <tr><th>0</th><td>0</td><td>1</td><td>2</td><td>3</td><td>…</td></tr>
+                        <tr><th>1</th><td>1</td><td>2</td><td>3</td><td>4</td><td>…</td></tr>
+                        <tr><th>2</th><td>2</td><td>3</td><td>4</td><td>5</td><td>…</td></tr>
+                        <tr><th>…</th><td colspan="5">…</td></tr>
+                    </tbody>
+                </table>
+            </div>               
+            
+            <div style="overflow-x: auto;">
+                <table class="tabla-centrada" style="background: white;">
+                    <caption style="font-weight: bold; margin-bottom: 10px;">Producto Aritmético</caption>
+                    <thead>
+                        <tr><th>·</th><th>0</th><th>1</th><th>2</th><th>3</th><th>…</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><th>0</th><td>0</td><td>0</td><td>0</td><td>0</td><td>…</td></tr>
+                        <tr><th>1</th><td>0</td><td>1</td><td>2</td><td>3</td><td>…</td></tr>
+                        <tr><th>2</th><td>0</td><td>2</td><td>4</td><td>6</td><td>…</td></tr>
+                        <tr><th>…</th><td colspan="5">…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>🔢 Tablas del álgebra de Boole (Conjunto \(B = \{0,1\}\))</h3>
+        <p>Ahora reducimos el universo a solo dos elementos. Las tablas cambian drásticamente:</p>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 20px;">
+            <div style="overflow-x: auto;">
+                <table class="tabla-centrada" style="background: white; min-width: 200px;">
+                    <caption style="font-weight: bold; margin-bottom: 10px; color: #d35400;">Adición Lógica (OR)</caption>
+                    <thead>
+                        <tr><th style="background-color: #e67e22;">+</th><th style="background-color: #e67e22;">0</th><th style="background-color: #e67e22;">1</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><th style="background-color: #fdf2e9;">0</th><td>0</td><td style="background-color: #d4edda; font-weight: bold;">1</td></tr>
+                        <tr><th style="background-color: #fdf2e9;">1</th><td style="background-color: #d4edda; font-weight: bold;">1</td><td style="background-color: #d4edda; font-weight: bold;">1</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="overflow-x: auto;">
+                <table class="tabla-centrada" style="background: white; min-width: 200px;">
+                    <caption style="font-weight: bold; margin-bottom: 10px; color: #2e7d32;">Producto Lógico (AND)</caption>
+                    <thead>                    
+                        <tr><th style="background-color: #4caf50;">·</th><th style="background-color: #4caf50;">0</th><th style="background-color: #4caf50;">1</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><th style="background-color: #e8f5e9;">0</th><td>0</td><td>0</td></tr>
+                        <tr><th style="background-color: #e8f5e9;">1</th><td>0</td><td style="background-color: #d4edda; font-weight: bold;">1</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
+            <h3 style="margin-top: 0;">⚠️ ¡El Choque Mental del Ingeniero!</h3>
+            <p>Compara las tablas: <br>
+            ✅ En ambas, \(0 \cdot 0 = 0\) y \(1 \cdot 1 = 1\).<br>
+            ❌ <strong>Pero en aritmética \(1+1 = 2\), mientras que en Boole \(1+1 = 1\).</strong></p>
+            <p><strong>¿Por qué?</strong> Porque en Boole no existe el número 2 ni la "cantidad". Todo es un <em>estado</em>. Si tienes una cubeta llena de agua (1) y le viertes otra cubeta llena (1), el resultado es simplemente... ¡Lleno (1)!</p>
+        </div>
+
+        <!-- ========== PROPIEDADES FUNDAMENTALES ========== -->
+        <h2>📐 Las 5 Propiedades Fundamentales</h2>
+        <p>Estas cinco propiedades son las columnas vertebrales de todo el universo digital. Son exactamente idénticas tanto para compuertas físicas como para teoría de conjuntos.</p>
+
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
+            <h3 style="margin-top: 0;">P1. Conmutativa (El orden no importa)</h3>
+            <div class="svg-container">
+                <img src="img/propiedad_conmutativa.png" alt="A+B = B+A y A·B = B·A" style="max-width:70%; height:auto;">
+                <p><small><em>Fig. 1: Cambiar el orden de los cables de entrada no modifica la salida de la compuerta.</em></small></p>
+            </div>
+            <p><strong>Conjuntos:</strong> \(A \cup B = B \cup A\) y \(A \cap B = B \cap A\).</p>
+        </div>
+
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
+            <h3 style="margin-top: 0;">P2. Asociativa (Agrupar da igual)</h3>
+            <div class="svg-container">
+                <img src="img/propiedad_asociativa.png" alt="A+(B+C) = (A+B)+C" style="max-width:70%; height:auto;">
+                <p><small><em>Fig. 2: Agrupar en cascada de diferente manera no cambia la salida final.</em></small></p>
+            </div>
+            <p><strong>Conjuntos:</strong> \(A \cup (B \cup C) = (A \cup B) \cup C\) y \(A \cap (B \cap C) = (A \cap B) \cap C\).</p>
+        </div>
+
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
+            <h3 style="margin-top: 0;">P3. Propiedad de Identidad (Elemento Neutro)</h3>
+            <div class="svg-container">
+                <img src="img/propiedad_del_neutro.png" alt="A+0 = A y A·1 = A" style="max-width:70%; height:auto;">
+                <p><small><em>Fig. 3: El 0 no afecta a la OR; el 1 no afecta a la AND.</em></small></p>
+            </div>
+            <p><strong>Boole:</strong> \(A + 0 = A\) y \(A \cdot 1 = A\).</p>
+            <p><strong>Conjuntos:</strong> \(A \cup \emptyset = A\) y \(A \cap U = A\) (donde \(U\) es el Universo).</p>
+        </div>
+
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
+            <h3 style="margin-top: 0;">P4. Complemento (Inversos)</h3>
+            <div class="svg-container">
+                <img src="img/propiedad_del_inverso.png" alt="A + \bar{A} = 1 y A · \bar{A} = 0" style="max-width:70%; height:auto;">
+                <p><small><em>Fig. 4: Una señal SUMADA con su propia negación da siempre 1. MULTIPLICADA da siempre 0.</em></small></p>
+            </div>
+            <p><strong>Conjuntos:</strong> \(A \cup A^c = U\) y \(A \cap A^c = \emptyset\).</p>
+        </div>
+
+        <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
+            <h3 style="margin-top: 0;">P5. Distributiva (El gran truco)</h3>
+            <div class="svg-container">
+                <img src="img/propiedad_distributiva.png" alt="A·(B+C) = A·B + A·C" style="max-width:70%; height:auto;">
+                <p><small><em>Fig. 5: AND se distribuye sobre OR, y OR se distribuye sobre AND.</em></small></p>
+            </div>
+            <div style="background: white; padding: 10px; border-left: 4px solid #f44336; border-radius: 4px; margin-top: 15px;">
+                <p style="margin: 0; color: #c62828;"><strong>🤯 ¡Atención! ¡Esto rompe la matemática normal!</strong></p>
+                <p style="margin: 5px 0 0 0; font-size: 0.9em;">En Boole, la suma se distribuye sobre el producto: <strong>\(A + (B \cdot C) = (A + B) \cdot (A + C)\)</strong>.<br>Si intentas esto con números normales (\(2 + (3 \times 4)\)), ¡el resultado es totalmente falso! Es una regla exclusiva y mágica de la lógica binaria.</p>
+            </div>
+        </div>
+
+        <!-- ========== CONCLUSIÓN: TABLA DE ISOMORFISMO ========== -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <h3 style="margin-top: 0;">🧩 La Piedra Rosetta: El Diccionario de Isomorfismo</h3>
+            <p>Cualquier sistema que cumpla las 5 reglas anteriores es un "Álgebra de Boole". Míralo tú mismo: la misma estructura vive bajo tres disfraces diferentes.</p>
+
+            <div style="overflow-x: auto; margin: 20px 0; border-radius: 8px; box-shadow: 0 3px 8px rgba(0,0,0,0.05);">
+                <table class="tabla-centrada" style="background: white; margin: 0; width: 100%;">
+                    <thead>
+                        <tr style="background-color: #2e7d32; color: white;">
+                            <th style="padding: 12px;">Propiedad</th>
+                            <th style="padding: 12px;">Lógica / Boole</th>
+                            <th style="padding: 12px;">Conjuntos</th>
+                            <th style="padding: 12px;">Circuitos (Hardware)</th>
                         </tr>
-                        <td>Asociativa</td>
-                            <td>\((A+B)+C = A+(B+C)\)<br>\((A\cdot B)\cdot C = A\cdot(B\cdot C)\)</td>
-                            <td>\((A\cup B)\cup C = A\cup(B\cup C)\)<br>\((A\cap B)\cap C = A\cap(B\cap C)\)</td>
-                            <td>Cascada de ORs o ANDs sin importar el orden</td>
+                    </thead>
+                    <tbody style="font-size: 0.95em;">
+                        <tr>
+                            <td><strong>Operaciones</strong></td>
+                            <td>AND (\(\cdot\)) <br> OR (\(+\)) <br> NOT (\(\overline{A}\))</td>
+                            <td>Intersección (\(\cap\)) <br> Unión (\(\cup\)) <br> Complemento (\(A^c\))</td>
+                            <td>Compuerta 7408 <br> Compuerta 7432 <br> Compuerta 7404</td>
                         </tr>
-                        <td>Distributiva</td>
-                            <td>\(A\cdot(B+C) = A\cdot B + A\cdot C\)<br>\(A + (B\cdot C) = (A+B)\cdot(A+C)\)</td>
-                            <td>\(A\cap(B\cup C) = (A\cap B)\cup(A\cap C)\)<br>\(A\cup(B\cap C) = (A\cup B)\cap(A\cup C)\)</td>
-                            <td>AND se distribuye sobre OR, y OR sobre AND</td>
+                        <tr>
+                            <td><strong>Límites</strong></td>
+                            <td>Verdadero (1) <br> Falso (0)</td>
+                            <td>Universo (\(U\)) <br> Vacío (\(\emptyset\))</td>
+                            <td>Vcc (5V) <br> GND (0V)</td>
                         </tr>
-                        <td>Elemento neutro<br>(identidad)</td>
-                            <td>\(A+0 = A\)<br>\(A\cdot 1 = A\)</td>
-                            <td>\(A\cup\emptyset = A\)<br>\(A\cap U = A\)</td>
-                            <td>OR con 0, AND con 1 no alteran la señal</td>
+                        <tr>
+                            <td><strong>Conmutativa</strong></td>
+                            <td>\(A+B = B+A\)</td>
+                            <td>\(A\cup B = B\cup A\)</td>
+                            <td>Pines de entrada intercambiables</td>
                         </tr>
-                        <td>Complemento<br>(inverso)</td>
-                            <td>\(A+\bar{A}=1\)<br>\(A\cdot\bar{A}=0\)</td>
-                            <td>\(A\cup A^c = U\)<br>\(A\cap A^c = \emptyset\)</td>
-                            <td>NOT + OR = siempre 1; NOT + AND = siempre 0</td>
+                        <tr>
+                            <td><strong>Identidad</strong></td>
+                            <td>\(A \cdot 1 = A\)</td>
+                            <td>\(A\cap U = A\)</td>
+                            <td>AND conectada a Vcc pasa la señal igual</td>
                         </tr>
                     </tbody>
+                </table>
             </div>
-
-            <p><strong>¿Por qué es esto tan importante?</strong> Porque estas cinco propiedades son las que definen un <strong>álgebra de Boole</strong>. Cualquier sistema (conjuntos, circuitos, lógica proposicional) que las cumpla es, estructuralmente, el mismo. Esa es la esencia del <strong>isomorfismo</strong>: la misma forma se manifiesta en contextos diferentes.</p>
-
-            <p>En las próximas lecciones aprovecharemos esta equivalencia para simplificar circuitos usando el álgebra de Boole, para diseñar sumadores con compuertas lógicas y, más adelante, para construir códigos detectores de errores. Has construido los cimientos sobre los que se levanta toda la computación moderna.</p>
-        </div>
-        
-        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
-            <h3>🧩 ¿Qué es el isomorfismo?</h3>
-            <p>En matemáticas y computación, dos sistemas son <strong>isomorfos</strong> si existe una correspondencia biunívoca entre sus elementos y sus operaciones, de modo que todo lo que se puede hacer en uno se puede replicar exactamente en el otro.</p>
-            <p><strong>Analogía cotidiana:</strong> Un plano de una casa (dibujo) y la casa construida (realidad) son isomorfos: cada pared en el plano corresponde a una pared física, cada habitación a una habitación real, y las relaciones espaciales se preservan. Si entiendes el plano, entiendes la casa.</p>
-            <p><strong>En nuestro curso:</strong> Una misma estructura lógica puede expresarse como <strong>circuito eléctrico</strong>, como <strong>fórmula matemática</strong> o como <strong>diagrama de conjuntos</strong>. ¡Todas son la misma cosa vista desde diferentes lentes!</p>
+            <p><strong>Analogía cotidiana:</strong> Un plano dibujado en papel y la casa construida en cemento son <em>isomorfos</em>. El plano no es la casa, pero sus relaciones y distancias son exactamente las mismas. Si entiendes el plano, entiendes la casa.</p>
         </div>
 
-        <h2>1. La Tabla de Traducción Universal</h2>
-        <p>Con la Siguiente tabla puedes traducir un problema filosófico a un circuito eléctrico, o viceversa.</p>
-
-        <div style="overflow-x: auto; margin: 25px 0;">
-            <table class="tabla-centrada">
-                <thead>
-                    <th>Concepto</th>
-                    <th>Lógica (\(p, q\))</th>
-                    <th>Conjuntos (\(A, B\))</th>
-                    <th>Circuitos (\(A, B\))</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>"Y"</strong> (Intersección)</td>
-                        <td>\(\land\) (Conjunción)</td>
-                        <td>\(\cap\) (Intersección)</td>
-                        <td>\(\cdot\) (AND)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>"O"</strong> (Unión)</td>
-                        <td>\(\lor\) (Disyunción)</td>
-                        <td>\(\cup\) (Unión)</td>
-                        <td>\(+\) (OR)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>"NO"</strong> (Inverso)</td>
-                        <td>\(\neg p\) (Negación)</td>
-                        <td>\(A^c\) (Complemento)</td>
-                        <td>\(\bar{A}\) (NOT)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Todo / Verdad</strong></td>
-                        <td>\(V\) (Verdadero)</td>
-                        <td>\(U\) (Universo)</td>
-                        <td>\(1\) (5V)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Nada / Falso</strong></td>
-                        <td>\(F\) (Falso)</td>
-                        <td>\(\emptyset\) (Vacío)</td>
-                        <td>\(0\) (GND)</td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- ========== EL POR QUÉ DE LAS MATEMÁTICAS (AHORRO ECONÓMICO) ========== -->
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #0d47a1; margin-top: 35px; box-shadow: 0 4px 10px rgba(13, 71, 161, 0.1);">
+            <h3 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">💰</span> ¿Por qué nos importan las Propiedades? (El Dinero)
+            </h3>
+            
+            <p>Es normal pensar que estas cinco reglas son solo teoría aburrida de matemáticas. Pero en la ingeniería de hardware, <strong>el álgebra es literalmente dinero</strong>. Observa de nuevo la <strong>Propiedad Distributiva</strong>:</p>
+            
+            <div class="formula" style="font-size: 1.2em; padding: 15px; margin: 15px 0; background: white; border: 2px solid #90caf9; color: #1565c0; border-radius: 8px;">
+                $$A \cdot (B + C) \quad \equiv \quad (A \cdot B) + (A \cdot C)$$
+            </div>
+            
+            <p>Matemáticamente, el lado izquierdo y el lado derecho dan el mismo resultado (son lógicamente equivalentes). <strong>Pero físicamente, NO son iguales:</strong></p>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+                <div style="flex: 1; min-width: 250px; background: white; padding: 15px; border-radius: 8px; border-top: 4px solid #2e7d32; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h4 style="margin-top: 0; color: #1b5e20;">Lado Izquierdo: \(A \cdot (B + C)\)</h4>
+                    <ul style="margin-bottom: 0;">
+                        <li>1 compuerta OR (para \(B+C\)).</li>
+                        <li>1 compuerta AND (para multiplicar por \(A\)).</li>
+                        <li style="font-weight: bold; color: #2e7d32; margin-top: 10px;">Total: 2 compuertas.</li>
+                    </ul>
+                </div>
+                
+                <div style="flex: 1; min-width: 250px; background: white; padding: 15px; border-radius: 8px; border-top: 4px solid #c62828; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h4 style="margin-top: 0; color: #b71c1c;">Lado Derecho: \((A \cdot B) + (A \cdot C)\)</h4>
+                    <ul style="margin-bottom: 0;">
+                        <li>2 compuertas AND (una para \(A \cdot B\), otra para \(A \cdot C\)).</li>
+                        <li>1 compuerta OR (para sumarlas).</li>
+                        <li style="font-weight: bold; color: #c62828; margin-top: 10px;">Total: 3 compuertas.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background-color: #fff9c4; padding: 15px; border-radius: 6px; border-left: 4px solid #f57f17;">
+                <p style="margin: 0; font-size: 1.05em; color: #555;">
+                    <strong style="color: #e65100;">La conclusión del Ingeniero:</strong> Conocer las propiedades del álgebra de Boole te permite transformar una ecuación costosa (derecha) en su versión más barata y eficiente (izquierda). Saber factorizar y distribuir te permite elegir la versión que requiera comprar menos chips, soldar menos cables y consumir menos energía de la batería. <strong>¡El álgebra diseña; la economía decide!</strong>
+                </p>
+            </div>
         </div>
-        <p class="nota">⚠️ <strong>Nota técnica:</strong> En circuitos, "1" significa voltaje alto (generalmente 5V) y "0" significa voltaje bajo (0V, GND). Es el mismo significado lógico pero con una implementación física.</p>
 
         <h2>2. Venn vs. Compuertas 🔴🔵</h2>
-        <p>¿Recuerdas los diagramas de bolas del colegio? Eran circuitos disfrazados. Vamos a analizar la geometría de la decisión:</p>
+        <p>¿Recuerdas los diagramas de bolas del colegio? ¡Eran compuertas lógicas disfrazadas!</p>
 
-        <div class="svg-container">
-            <img src="img/venn_vs_gates.png" alt="Comparación visual: Intersección de conjuntos es igual a una compuerta AND. Unión es igual a una OR." style="max-width:100%; height:auto;">
+        <!-- Primer grupo: AND, OR, NOT (funciones básicas) -->
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 30px 0;">
+            <!-- AND -->
+            <div style="flex: 1; min-width: 250px; background: white; padding: 20px; border-radius: 8px; border-top: 5px solid #000; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <h4 style="margin-top: 0; text-align: center;">El Club Exclusivo (AND / ∩)</h4>
+                <div class="svg-container" style="margin: 10px 0;"><img src="img/club_exclusivo_and.png" alt="Intersección AND" style="width:100%;"></div>
+                <p style="font-size: 0.9em; color: #555;">La zona sombreada es minúscula. Es muy restrictiva. Solo entran los elementos que son VIP en AMBOS lados al mismo tiempo.</p>
+            </div>
+            
+            <!-- OR -->
+            <div style="flex: 1; min-width: 250px; background: white; padding: 20px; border-radius: 8px; border-top: 5px solid #000; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <h4 style="margin-top: 0; text-align: center;">La Fiesta de Todos (OR / ∪)</h4>
+                <div class="svg-container" style="margin: 10px 0;"><img src="img/fiesta_de_todos_or.png" alt="Unión OR" style="width:100%;"></div>
+                <p style="font-size: 0.9em; color: #555;">La zona sombreada es enorme. Es permisiva. Entran los de A, los de B, o los que están en ambos. Con uno basta.</p>
+            </div>
+
+            <!-- NOT -->
+            <div style="flex: 1; min-width: 250px; background: white; padding: 20px; border-radius: 8px; border-top: 5px solid #000; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <h4 style="margin-top: 0; text-align: center;">El Mundo del Revés (NOT / ^c)</h4>
+                <div class="svg-container" style="margin: 10px 0;"><img src="img/complemento_not.png" alt="Complemento NOT" style="width:100%;"></div>
+                <p style="font-size: 0.9em; color: #555;">Es todo lo que está AFUERA del círculo, pero dentro del Universo. Te expulsa de adentro hacia afuera.</p>
+            </div>
+        </div>
+
+        <!-- Sección XOR y XNOR (funciones compuestas) -->
+        <h3 style="margin-top: 40px; color: #d35400; border-bottom: 2px solid #d35400; padding-bottom: 10px;">Las Compuertas de Decisión Compleja (XOR y XNOR)</h3>
+        <p>A diferencia de AND y OR, las compuertas XOR y XNOR no son funciones básicas, sino <strong>compuestas</strong>. Son las verdaderas "Fuerzas Especiales" porque toman decisiones basadas en la comparación. Geométricamente, sus diagramas de Venn son fascinantes.</p>
+
+        <!-- XOR -->
+        <div class="destacado" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <h4 style="margin-top: 0; color: #e65100;">El Dilema Estricto (XOR / Disyunción Exclusiva)</h4>
+            <p>La XOR es la compuerta de la diferencia: "O tú o yo, pero NUNCA los dos".</p>
+            <div class="svg-container">
+                <img src="img/xor_venn.png" 
+                    alt="Diagrama de Venn mostrando la XOR y su equivalente en compuerta lógica" 
+                    style="max-width:100%; height:auto; border-radius: 8px; margin: 10px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <p><small><em>Fig. 9: La XOR (\(A \oplus B\)) selecciona todo lo que pertenece a A y a B, <strong>excluyendo</strong> su intersección.</em></small></p>
+            </div>
+            <p>Mira el diagrama de Venn: es como una rosquilla a la que le falta el centro. La zona verde abarca los elementos que son exclusivos de A y exclusivos de B.</p>
+            <ul>
+                <li><strong>En Lógica / Conjuntos:</strong> Se define como \((A^c \cap B) \cup (A \cap B^c)\). Traducido: "Lo que está en B pero no en A, UNIDO a lo que está en A pero no en B".</li>
+                <li><strong>En Circuitos:</strong> \(X = \bar{A}B + A\bar{B}\). ¿Te resulta familiar? Es exactamente la ecuación matemática que armaste con 4 compuertas NAND en la Lección 20.</li>
+                <li><strong>Su gran secreto:</strong> La geometría de este diagrama de Venn es la base visual de la <strong>Suma Binaria</strong>. Este "hueco" en el medio es lo que nos obliga a "llevar una" (acarreo) cuando sumamos \(1+1\).</li>
+            </ul>
+        </div>
+
+        <!-- XNOR -->
+        <div class="destacado" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+            <h4 style="margin-top: 0; color: #7b1fa2;">El Juez de Igualdad (XNOR / Equivalencia o Coincidencia)</h4>
+            <p>La XNOR es la negación de la XOR. Actúa como un detector de almas gemelas: la salida es 1 <strong>solo si ambas entradas son idénticas</strong> (ambas 0 o ambas 1).</p>
+            <div class="svg-container">
+                <img src="img/xnor_venn.png" 
+                    alt="Diagrama de Venn mostrando la XNOR y su equivalente en compuerta lógica" 
+                    style="max-width:100%; height:auto; border-radius: 8px; margin: 10px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <p><small><em>Fig. 10: La XNOR (\(A \odot B\)) selecciona la intersección de los conjuntos UNIDA a todo lo que está fuera de ellos.</em></small></p>
+            </div>
+            <p>El diagrama de Venn de la XNOR es visualmente impactante. La zona verde cubre el centro (ambos son 1) y todo el universo exterior (ambos son 0). Solo penaliza las lunas laterales donde hay diferencias.</p>
+            <ul>
+                <li><strong>En Lógica / Conjuntos:</strong> Se define como \((A \cap B) \cup (A \cup B)^c\). Traducido: "La intersección de ambos, UNIDA a lo que está fuera de los dos".</li>
+                <li><strong>En Circuitos:</strong> \(X = A \cdot B + \bar{A} \cdot \bar{B}\).</li>
+                <li><strong>Aplicación:</strong> Esta compuerta es el corazón de los circuitos <strong>comparadores</strong>. Si quieres que tu celular se desbloquee, el circuito XNOR comparará el PIN que escribiste con el PIN guardado en la memoria. Si hay "coincidencia" (equivalencia), la puerta se abre.</li>
+            </ul>
+        </div>
+
+        <!-- Nota sobre leyes de XOR -->
+        <div class="dato-extra" style="background-color: #e8f4f8; border-left-color: #0288d1; margin-top: 20px;">
+            <h4 style="margin-top: 0; color: #0277bd;">⚠️ Cuidado con las Leyes Matemáticas de la XOR</h4>
+            <p>Dado que la XOR (\(\oplus\)) es una operación especial, sus reglas algebraicas pueden engañar a la intuición:</p>
+            <ul style="margin-bottom: 0;">
+                <li>✅ <strong>SÍ es Conmutativa y Asociativa:</strong> \(A \oplus B = B \oplus A\). ¡Puedes invertir los cables y funcionará igual!</li>
+                <li>❌ <strong>NO es Distributiva sobre el producto (AND):</strong> A diferencia de la suma normal (OR), la XOR <strong>no</strong> se distribuye igual. Es decir, \(A \oplus (B \cdot C) \neq (A \oplus B) \cdot (A \oplus C)\).</li>
+                <li>✅ Sin embargo, la operación AND <strong>SÍ</strong> se distribuye sobre la XOR: \(A \cdot (B \oplus C) = (A \cdot B) \oplus (A \cdot C)\).</li>
+            </ul>
+            <p style="font-size: 0.9em; color: #555; margin-top: 10px;"><em>Como ingeniero, debes recordar que la XOR es como una herramienta de precisión: hace maravillas para sumar y comparar, pero no obedece todas las reglas de expansión del álgebra de Boole tradicional.</em></p>
+        </div>
+
+        <!-- Segundo grupo: NAND y NOR (compuertas universales) -->
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 30px 0;">
+            <!-- NAND -->
+            <div style="flex: 1; min-width: 250px; background: white; padding: 20px; border-radius: 8px; border-top: 5px solid #000; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <h4 style="margin-top: 0; text-align: center;">Todos menos el Club (NAND / ∩^c)</h4>
+                <div class="svg-container" style="margin: 10px 0;"><img src="img/todos_menos_club_nand.png" alt="NAND: Todo menos la intersección" style="width:100%;"></div>
+                <p style="font-size: 0.9em; color: #555;">La zona sombreada es casi todo el universo, <strong>excepto</strong> la pequeña intersección central. La corriente pasa siempre, a menos que AMBAS condiciones sean perfectas (1 y 1).</p>
+            </div>
+
+            <!-- NOR -->
+            <div style="flex: 1; min-width: 250px; background: white; padding: 20px; border-radius: 8px; border-top: 5px solid #000; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <h4 style="margin-top: 0; text-align: center;">El Club de los Rechazados (NOR / ∪^c)</h4>
+                <div class="svg-container" style="margin: 10px 0;"><img src="img/rechazados_nor.png" alt="NOR: Todo fuera de la unión" style="width:100%;"></div>
+                <p style="font-size: 0.9em; color: #555;">La zona sombreada es solo lo que queda <strong>afuera</strong> de ambos círculos. Es la más pesimista: solo deja pasar la corriente si NINGUNO de los dos se activa (0 y 0).</p>
+            </div>
+        </div>
+
+        <h2>3. Traduciendo el Mundo: Ejercicios de Isomorfismo</h2>
+        
+        <!-- EL MOMENTO CLAUDE SHANNON (STEAM) -->
+        <div class="dato-extra" style="background-color: #fdf2e9; border-left-color: #e67e22;">
+            <h3 style="color: #d35400; margin-top: 0; display: flex; align-items: center; gap: 8px;"><span style="font-size: 1.2em;">🎓</span> El Mago de la Información: Claude Shannon</h3>
+            <p>Durante casi 100 años, el Álgebra de Boole fue solo una "curiosidad filosófica" para analizar el pensamiento humano. Mientras tanto, los ingenieros conectaban cables de telégrafo a pura prueba y error.</p>
+            <p>En 1937, un estudiante de maestría de 21 años llamado <strong>Claude Shannon</strong> tuvo una idea genial: <em>"¿Y si los interruptores eléctricos están obedeciendo exactamente las leyes del álgebra de Boole?"</em>.</p>
+            <p><strong>El Momento Eureka:</strong> Shannon no descubrió la electrónica ni la lógica; descubrió el <strong>puente (isomorfismo)</strong> entre ambas. Su tesis es considerada la más importante del siglo XX porque, literalmente, <strong>fundó la Era Digital</strong>.</p>
         </div>
 
         <div class="destacado">
-            <h3>🔹 La Intersección es "El Club Exclusivo" (AND)</h3>
-            <p>Mira la zona sombreada en la intersección ($A \cap B$). Es <strong>pequeña</strong>. Solo un pedacito en el centro.</p>
+            <h3>📝 Ejercicio 1: El Abogado Digital</h3>
+            <p>Un contrato legal dice: <em>"El seguro paga (S) si se firma el acta (P) <strong>Y</strong> se entrega la evidencia (Q), <strong>O</strong> si hay orden judicial (R)."</em></p>
+            <p>Míralo a través de la Piedra Rosetta:</p>
             <ul>
-                <li><strong>En Conjuntos:</strong> Solo entran los elementos que son VIP en ambos lados.</li>
-                <li><strong>En Circuitos (AND):</strong> Es una compuerta <strong>restrictiva</strong>. Es difícil sacar un 1; necesitas que TODO sea perfecto (1 y 1). Si falla uno, te quedas fuera.</li>
+                <li><strong>Lógica Legal:</strong> \(S \leftrightarrow (P \land Q) \lor R\)</li>
+                <li><strong>Matemática de Conjuntos:</strong> \(S = (P \cap Q) \cup R\)</li>
+                <li><strong>Diseño del Chip:</strong> \(S = (P \cdot Q) + R\)</li>
             </ul>
-        </div>
-
-        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #4caf50;">
-            <h3>🔸 La Unión es "La Fiesta de Todos" (OR)</h3>
-            <p>Mira la zona de la unión ($A \cup B$). Es <strong>grande</strong>. Abarca casi todo.</p>
-            <ul>
-                <li><strong>En Conjuntos:</strong> Entra cualquiera: los de A, los de B o los de ambos.</li>
-                <li><strong>En Circuitos (OR):</strong> Es una compuerta <strong>permisiva</strong>. Es fácil sacar un 1; con que cualquiera se active, la corriente pasa.</li>
-            </ul>
-        </div>
-
-        <h3>¿Y el Complemento? (El Mundo del Revés)</h3>
-        <p>En Venn, el complemento ($A^c$ o $A'$) es <strong>todo lo que está FUERA del círculo</strong> de A, pero dentro del cuadrado (el Universo).</p>
-        <p><strong>En Circuitos (NOT):</strong> Si el círculo es "Encendido" (1), todo el espacio vacío de afuera es "Apagado" (0). La compuerta NOT te lleva de adentro del círculo hacia afuera.</p>
-
-        <!-- CONEXIÓN CON UNIDAD 2 -->
-        <div class="dato-extra" style="background-color: #f0f7ff; border-left-color: #0d47a1;">
-            <h3>🔗 ¿Qué construimos en la Unidad 2?</h3>
-            <p>Cuando en la Unidad 2 armaste circuitos con compuertas NOT, AND y OR, estabas construyendo <strong>manifestaciones físicas</strong> de los conceptos de conjuntos y lógica. El isomorfismo explica por qué esos circuitos se comportaban exactamente como los diagramas de Venn que dibujabas en el colegio: ¡la estructura matemática es la misma!</p>
-            <p>Ahora, en la Unidad 3, daremos un paso más: usaremos esa misma estructura para <strong>calcular</strong> con números binarios. El isomorfismo nos permite “reutilizar” el conocimiento que ya tienes.</p>
-        </div>
-
-        <h2>3. Aplicación: Diseño de un Sistema de Control de Acceso</h2>
-        <p>Imagina que debes diseñar un sistema electrónico para una oficina. La regla es:</p>
-        <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
-            <p><strong>"Se permite el acceso si (tiene tarjeta de empleado <strong>Y</strong> huella válida) <strong>O</strong> (es administrador)."</strong></p>
-        </div>
-        <p>Vamos a traducir esta regla a las tres representaciones:</p>
-
-        <div style="overflow-x: auto; margin: 20px 0;">
-            <table class="tabla-centrada">
-                <thead>
-                    <th>Representación</th>
-                    <th>Expresión</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Lógica de proposiciones</strong></td>
-                        <td>\(A = (\text{Tarjeta} \land \text{Huella}) \lor \text{Admin}\)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Conjuntos</strong></td>
-                        <td>\(A = (T \cap H) \cup \text{Admin}\)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Circuito (compuertas)</strong></td>
-                        <td>\(A = (T \cdot H) + \text{Admin}\)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <p>¡Acabas de convertir un reglamento en un plano eléctrico! Ahora, si invirtieras el proceso, podrías tomar un circuito y explicar con palabras qué hace.</p>
-
-        <div class="destacado">
-            <h3>🔄 Ejercicio inverso (para tu cuaderno)</h3>
-            <p>Observa este circuito: \(S = \overline{A} \cdot B + A \cdot \overline{B}\).</p>
-            <p><strong>a)</strong> Escríbelo como una expresión de conjuntos.<br>
-            <strong>b)</strong> Traduce esa expresión a una frase en lenguaje natural (¿qué condición cumple la salida?).<br>
-            <strong>c)</strong> ¿Reconoces qué compuerta lógica corresponde a esta expresión? (Pista: mira la tabla de verdad).</p>
-            <p><em>Respuesta al final de la lección.</em></p>
-        </div>
-
-        <!-- SECCIÓN STEAM: LA FILOSOFÍA DEL ISOMORFISMO -->
-        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
-            <h3>🎩 La magia de ver lo mismo de distintas maneras</h3>
-            <p>El isomorfismo no es solo una herramienta matemática: es una <strong>habilidad de pensamiento transversal</strong>. En cualquier campo, poder traducir un problema a otro lenguaje te da nuevas perspectivas y soluciones más elegantes.</p>
-            <ul>
-                <li>Un abogado traduce una situación legal a un esquema lógico.</li>
-                <li>Un músico traduce una emoción a una secuencia de notas.</li>
-                <li>Un programador traduce una necesidad humana a código.</li>
-                <li>¡Tú acabas de traducir una regla de oficina a un circuito!</li>
-            </ul>
-            <p><strong>Reflexión:</strong> ¿En qué otras áreas de tu vida podrías aplicar esta habilidad de “cambiar de lenguaje” para entender mejor un problema?</p>
-        </div>
-
-        <!-- EL MOMENTO EMMA -->
-        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
-            <h3>🎩 El Mago de la Información: Claude Shannon (La "A" de STEAM)</h3>
-            <p>Durante casi 100 años, el Álgebra de Boole fue solo una curiosidad filosófica para "analizar el pensamiento humano". Los ingenieros de teléfonos, por otro lado, conectaban cables a prueba y error.</p>
-            <p>En 1937, un estudiante de maestría de 21 años llamado <strong>Claude Shannon</strong> tuvo una idea creativa: <em>"¿Y si los interruptores telefónicos en realidad están haciendo álgebra de Boole?"</em>.</p>
-            <p><strong>El Momento Eureka:</strong> Shannon no descubrió la electrónica ni la lógica; descubrió el <strong>puente</strong> entre ambas. Su tesis es considerada la más importante del siglo XX porque fundó la Era Digital.</p>
-            <p><em>Dato Curioso:</em> Shannon no era un científico aburrido. Era malabarista, montaba monociclo en los pasillos de los laboratorios Bell e inventó máquinas inútiles solo por diversión. ¡La creatividad y el juego son parte de la ingeniería!</p>
+            <p>¡Acabas de convertir una ley humana en un plano eléctrico para construir una máquina!</p>
         </div>
 
         <!-- ACTIVIDAD DE AUTOEVALUACIÓN -->
         <div class="destacado" style="background-color: #e8f5e9; border-left-color: #4caf50;">
-            <h3>✍️ Autoevaluación: ¿Dominas el isomorfismo?</h3>
-            <p>Completa la siguiente tabla traduciendo cada frase a los otros dos lenguajes:</p>
+            <h3 style="margin-top: 0;">✍️ Autoevaluación: ¿Dominas el Isomorfismo?</h3>
+            <p>Completa las celdas vacías traduciendo la idea a los otros lenguajes:</p>
             <div style="overflow-x: auto;">
-                <table class="tabla-centrada">
+                <table class="tabla-auditoria" style="width: 100%;">
                     <thead>
-                        <th>Lenguaje Natural</th>
-                        <th>Lógica / Conjuntos</th>
-                        <th>Circuito</th>
+                        <tr>
+                            <th style="background-color: #2e7d32;">Lenguaje Natural (Humano)</th>
+                            <th style="background-color: #2e7d32;">Lógica / Conjuntos</th>
+                            <th style="background-color: #2e7d32;">Circuito Físico</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>"El sistema se activa si (detecta movimiento <strong>Y</strong> es de noche) <strong>O</strong> (hay una alarma manual)"</td>
-                            <td></td>
-                            <td></td>
+                            <td>"La alarma (S) suena si detecta movimiento (M) Y es de noche (N), O si presionas el pánico (A)"</td>
+                            <td><em>(Responde aquí)</em></td>
+                            <td><em>(Responde aquí)</em></td>
                         </tr>
                         <tr>
-                            <td></td>
+                            <td><em>(Responde aquí)</em></td>
                             <td>\(S = (A \cup B) \cap C\)</td>
-                            <td></td>
+                            <td><em>(Responde aquí)</em></td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <td><em>(Responde aquí)</em></td>
+                            <td><em>(Responde aquí)</em></td>
                             <td>\(S = \overline{A \cdot B}\)</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p><em>Respuestas al final de la lección.</em></p>
         </div>
 
-        <!-- SOLUCIONES AL EJERCICIO INVERSO Y AUTOEVALUACIÓN -->
-        <details class="u1">
-            <summary>📌 Ver soluciones</summary>
-            <div style="padding: 10px;">
-                <p><strong>Ejercicio inverso:</strong></p>
+        <!-- SOLUCIONES (ACORDEÓN) -->
+        <details class="u1" style="margin-top: 20px;">
+            <summary>📌 Ver soluciones de la Autoevaluación</summary>
+            <div style="padding: 15px; background: white;">
                 <ul>
-                    <li>a) Expresión de conjuntos: \(S = (\overline{A} \cap B) \cup (A \cap \overline{B})\)</li>
-                    <li>b) Frase en lenguaje natural: "La salida es 1 cuando exactamente una de las dos condiciones es verdadera" (o "cuando A y B son diferentes").</li>
-                    <li>c) Es la compuerta <strong>XOR</strong> (OR exclusiva).</li>
-                </ul>
-                <p><strong>Autoevaluación:</strong></p>
-                <ul>
-                    <li>Primera fila: Lógica: \(S = (M \land N) \lor A\); Circuito: \(S = (M \cdot N) + A\)</li>
-                    <li>Segunda fila: Lenguaje natural: "La salida es 1 si está en A o en B, pero también debe estar en C". Circuito: \(S = (A + B) \cdot C\)</li>
-                    <li>Tercera fila: Lenguaje natural: "La salida es 1 cuando no se cumple que A y B sean ambos 1". Lógica: \(S = \neg (A \land B)\)</li>
+                    <li><strong>Fila 1:</strong> Lógica: \(S = (M \cap N) \cup A\). Circuito: \(S = (M \cdot N) + A\)</li>
+                    <li><strong>Fila 2:</strong> Humano: "La salida se activa si sucede A o B, pero es OBLIGATORIO que suceda C". Circuito: \(S = (A + B) \cdot C\)</li>
+                    <li><strong>Fila 3:</strong> Humano: "La alarma suena siempre, EXCEPTO cuando A y B ocurren al mismo tiempo". Lógica: \(S = (A \cap B)^c\)</li>
                 </ul>
             </div>
         </details>
     </section>
 
+    <!-- === PODCAST: Conversación entre Expertos === -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        <p class="podcast-descripcion">
+            Dos docentes exploran la magia del isomorfismo, discutiendo cómo la genialidad de Claude Shannon conectó la filosofía de George Boole con los circuitos eléctricos. Analizan estrategias prácticas para que los estudiantes dejen de memorizar tablas y comiencen a "traducir" el mundo real usando los diagramas de Venn como puente cognitivo.
+        </p>
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <source src="audio/leccion21.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 14:20 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- === TARJETA DE IDENTIDAD DEL PROMPT ÉTICO === -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        
+        <p class="prompt-contexto">
+            Usa esta guía para construir prompts que te ayuden a generar ejemplos creativos usando el isomorfismo para traducir problemas humanos a código máquina.
+        </p>
+        
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            <div class="paso"><strong>1️⃣ "Comprendí que..."</strong> (Resume qué es el isomorfismo y la relación entre lógica, conjuntos y circuitos).</div>
+            <div class="paso"><strong>2️⃣ "y quiero saber..."</strong> (Pide un ejemplo práctico de traducción de un problema real a ecuación lógica).</div>
+            <div class="paso"><strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong> (Estudiantes de ciencias sociales o humanidades).</div>
+            <div class="paso"><strong>4️⃣ "Incluye un error común que debo evitar..."</strong> (Ej: confundir la suma lógica con la suma aritmética).</div>
+        </div>
+        
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo de Prompt:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que gracias al isomorfismo descubierto por Claude Shannon, las reglas del álgebra de Boole, los diagramas de Venn y los circuitos electrónicos son estructuralmente idénticos, permitiéndonos traducir problemas lógicos en hardware físico. Quiero saber: ¿Puedes darme un ejemplo de la vida real (como el reglamento de una biblioteca o las condiciones para obtener una beca) y traducirlo paso a paso desde el lenguaje natural hasta su ecuación de circuito lógico? Explícame como si fuera a enseñárselo a mis estudiantes de 10° grado que creen que las humanidades y la ingeniería no tienen relación. Incluye un error común que debo evitar al explicar por qué 1+1=1 en este sistema."
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- === MI CUADERNO: Bitácora de Innovación === -->
+    <section class="cuaderno-section">
+        <div class="cuaderno-header">
+            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <h3>📋 Bitácora de Innovación (Mi Cuaderno)</h3>
+        </div>
+
+        <p>Responde en tu cuaderno físico las siguientes preguntas de reflexión:</p>
+
+        <ol>
+            <li><strong>Choque cognitivo:</strong> ¿Cómo le explicarías a un estudiante que está frustrado porque la propiedad \(A + (B \cdot C) = (A + B) \cdot (A + C)\) contradice lo que aprendió en su clase de matemáticas tradicional? Escribe la analogía que usarías.</li>
+            <li><strong>Claude Shannon:</strong> Investiga un poco más sobre la tesis de maestría de Shannon de 1937. ¿Por qué crees que a un ingeniero eléctrico puro de esa época jamás se le habría ocurrido usar la filosofía de George Boole?</li>
+            <li><strong>Creación propia:</strong> Redacta la regla de un videojuego (ej. "Pasas de nivel si consigues la llave y derrotas al jefe, o si encuentras el pasadizo secreto"). Luego, dibuja su diagrama de Venn equivalente y escribe su ecuación en Álgebra de Boole.</li>
+        </ol>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion" style="background-color: #f8f9fa; padding: 25px; border-radius: 12px; margin-top: 40px; border-left: 6px solid var(--color-secundario); box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <h3 style="color: #d35400; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2em;">🚀</span> Próximamente...
+        </h3>
+        <p>Ya dominas el "diccionario universal" que conecta la filosofía, los conjuntos y la electricidad. Sabes que la lógica matemática funciona perfectamente para traducir el mundo.</p>
+        <p>Pero los seres humanos somos complejos, hacemos promesas y, a veces, las rompemos. ¿Puede una máquina juzgar el comportamiento humano? En la <strong>próxima lección</strong>, construiremos el "estrado judicial" de la electrónica: <strong>La Implicación Lógica</strong>. Aprenderás a diseñar un circuito que actúe como un implacable "Detector de Mentiras" y descubriremos los límites de las Verdades y Mentiras eternas (Tautologías y Contradicciones).</p>
+    </div>
+
     <footer>
         <hr>
-        <div style="display: flex; justify-content: space-between;">
-            <a href="leccion20_laboratorio.html" class="btn-navegacion">← Anterior Unidad</a>
-            <a href="leccion22.html" class="btn-navegacion">Siguiente: El Detector de Mentiras →</a>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+            <a href="leccion20_laboratorio.html" class="btn-navegacion">← Anterior (Laboratorio 2)</a>
+            <a href="leccion22.html" class="btn-navegacion" style="background-color: var(--u3-color, #fd7e14);">Siguiente: El Detector de Mentiras →</a>
+        </div>
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;">🏠 Volver al Índice Principal</a>
         </div>
     </footer>
 </div>

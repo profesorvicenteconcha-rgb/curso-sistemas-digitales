@@ -1,122 +1,483 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+  
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección 22: El Detector de Mentiras - Fundamentos de Sistemas Digitales</title>
-    <link rel="stylesheet" href="estilos.css">
-    
-
-    <!-- KaTeX: Script principal -->
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-
-    <!-- KaTeX: Script de auto-render configurado para detectar todos los delimitadores -->
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
-        onload="renderMathInElement(document.body, {
-            delimiters: [
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false},
-                {left: '\\(', right: '\\)', display: false},
-                {left: '\\[', right: '\\]', display: true}
-            ],
-            throwOnError : false
-        });">
-    </script>
-
-    <style>
-        .tabla-verdad th { background-color: var(--color-primario); color: white; }
-        .fila-mentira { background-color: #ffebee; color: #c62828; font-weight: bold; } /* Rojo suave */
-        .fila-verdad { background-color: #e8f5e9; color: #2e7d32; } /* Verde suave */
-    </style>
+    <title>Lección 22: Tautologías, Contradicciones e Implicación - Fundamentos de Sistemas Digitales</title>
+  <link rel="stylesheet" href="estilos.css">
+  <!-- KaTeX (solo lo necesario, sin romper estilos existentes) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "\\(", right: "\\)", display: false }
+        ],
+        throwOnError: false
+      });
+    });
+  </script>
 </head>
 <body>
-
 <div class="contenedor">
     <header>
         <p><small>Unidad 3: Fundamentos de Cómputo - Lección 22</small></p>
-        <h1>🤥 El Detector de Mentiras: Implicación y Circuitos</h1>
+        <h1>🤥 El Detector de Mentiras: Tautologías, Contradicciones e Implicación</h1>
     </header>
 
     <section>
-        <p>En ingeniería y leyes, las frases del tipo <em>"Si haces esto, entonces pasa aquello"</em> son sagradas. Hoy vamos a construir un circuito capaz de juzgar si una promesa se cumplió o se rompió.</p>
+        <!-- NARRATIVA: INTRODUCCIÓN -->
+        <div class="intro-leccion" style="margin-bottom: 30px;">
+            <p>En la lección anterior descubrimos que podemos traducir el pensamiento humano a circuitos eléctricos gracias al Isomorfismo. Hoy pondremos a prueba ese poder con la estructura mental más importante en ingeniería, matemáticas y leyes: <strong>El Pensamiento Condicional</strong>.</p>
+            <p>Las frases del tipo <em>"Si haces esto, entonces pasa aquello"</em> son sagradas. Hoy vamos a analizar cómo se comporta la lógica frente a las promesas humanas. Construiremos un circuito capaz de juzgar matemáticamente si un acuerdo se cumplió o si alguien acaba de mentir. ¡Bienvenidos al estrado judicial de la electrónica!</p>
+        </div>
 
         <h2>1. Verdades y Mentiras Eternas</h2>
-        <p>Antes de la promesa, veamos los extremos:</p>
-        <ul>
-            <li><strong>Tautología (Siempre Verdad):</strong> Un circuito que NUNCA se apaga ($1$).
-                <div class="formula">$$A + \bar{A} = 1$$</div>
-                <p><small>Ejemplo: "O llueve ($A$) o no llueve ($\bar{A}$)". No hay otra opción.</small></p>
-            </li>
-            <li><strong>Contradicción (Siempre Falso):</strong> Un circuito que NUNCA se prende ($0$).
-                <div class="formula">$$A \cdot \bar{A} = 0$$</div>
-                <p><small>Ejemplo: "Llueve y no llueve al mismo tiempo". ¡Imposible!</small></p>
-            </li>
-        </ul>
-        <!-- NUEVO: Nota de enlace a la Lección 24 -->
-        <div class="dato-extra" style="padding: 10px; margin-top: 10px; background-color: #e3f2fd; border-left-color: #2196f3;">
-            <p style="margin: 0;"><small><strong>🔗 Conexión Matemática:</strong> Estas dos definiciones (que la suma da 1 y el producto da 0) son los pilares del álgebra. En la <strong>Lección 24</strong> volveremos aquí para probar formalmente la "Unicidad del Complemento".</small></p>
+        <p>Antes de juzgar una promesa, debemos entender los extremos absolutos de la lógica: expresiones que siempre dan el mismo resultado, sin importar lo que pase en el mundo exterior.</p>
+
+        <!-- TAUTOLOGÍAS (SIEMPRE 1) -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <h3 style="color: #1b5e20; margin-top: 0;">🔁 Siempre 1: Tautologías</h3>
+            <p>Una tautología es una afirmación que es <strong>siempre verdadera</strong> por pura lógica. Su circuito dará 1 (5V) en cualquier situación, ¡incluso si desconectas los sensores!</p>
+            <div style="overflow-x: auto; margin: 15px 0;">
+                <table class="tabla-auditoria" style="margin: 0;">
+                    <thead>
+                        <tr>
+                            <th style="background-color: #2e7d32;">Expresión</th>
+                            <th style="background-color: #2e7d32;">Regla</th>
+                            <th style="background-color: #2e7d32;">Ejemplo Cotidiano</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-size: 1.1em;">\(A + 1 = 1\)</td>
+                            <td>Dominación (OR)</td>
+                            <td>"Si traes el ticket (A) <strong>O</strong> si eres el dueño del cine (1 constante), entras". Al ser el dueño, siempre entras, sin importar el ticket.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 1.1em;">\(A + \bar{A} = 1\)</td>
+                            <td>Complemento (OR)</td>
+                            <td>"<strong>O</strong> llueve (\(A\)) <strong>O</strong> no llueve (\(\bar{A}\))". No hay una tercera opción. La frase completa siempre es cierta.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>💡 <strong>En hardware (dos formas de obtener siempre 1):</strong></p>
+            <ul>
+                <li><strong>Dominación (OR):</strong> Conecta una de las entradas de la compuerta OR directamente a Vcc (+5 V) y la otra entrada a la señal \(A\). La salida quedará bloqueada en 1 para siempre, sin importar el valor de \(A\).</li>
+                <li><strong>Complemento (OR):</strong> Conecta la señal \(A\) a una entrada de la compuerta OR y la misma señal \(A\) a un inversor (NOT); la salida del inversor (\(\bar{A}\)) se conecta a la segunda entrada de la OR. La salida también será siempre 1.</li>
+            </ul>
+            <p>Ambos circuitos producen una tautología (siempre 1) y se muestran en la figura siguiente.</p>
         </div>
 
         <div class="svg-container">
-            <!-- Imagen: Tautología vs Contradicción -->
-            <img src="img/tautologia_contradiccion.png" alt="Izquierda: Circuito paralelo (siempre conecta). Derecha: Circuito serie con inverso (siempre abierto)." style="max-width:100%; height:auto;">
+            <img src="img/tautologia_or.png" 
+                 alt="Circuitos de tautología: Dominación (OR) con entrada fija en 1, y Complemento (OR) con A y su negación." 
+                 style="max-width:80%; height:auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px;">
+            <p><small><em>Fig. 1: En la parte superior, la Dominación (OR) \(A + 1 = 1\); en el inferior, el Complemento (OR) \(A + \bar{A} = 1\). Ambos circuitos producen una salida siempre en 1.</em></small></p>
         </div>
 
-        <h2>2. La Implicación ($p \rightarrow q$): La Promesa</h2>
-        <p>No existe un chip "Implicador", pero podemos construirlo. Usemos el ejemplo de la <strong>Promesa del Político</strong>:</p>
-        <div class="destacado">
-            <p><strong>"Si gano las elecciones ($A$), entonces bajaré los impuestos ($B$)."</strong></p>
+        <!-- EL SECRETO DEL HARDWARE: RIESGOS DINÁMICOS -->
+        <div class="dato-extra" style="background-color: #fff8e1; border-left-color: #ffb300; margin: 30px 0;">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">👻</span> El Fantasma en la Tautología (Glitch)
+            </h3>
+            <p>En el papel matemático, el circuito \(A + \bar{A}\)  siempre da 1. Pero en el mundo físico de la electrónica... ¡puede mentir por una fracción de segundo!</p>
+            <p>Recordemos la Lección 19: las compuertas tienen un <strong>Retardo de Propagación</strong>. En nuestro circuito de tautología, la señal \(A\) llega directamente a la compuerta OR. Sin embargo, la señal \(\bar{A}\) tarda unos nanosegundos extra porque primero debe "cruzar" el inversor (NOT).</p>
+            <p>Si cambias el interruptor de 1 a 0, durante esos minúsculos nanosegundos de desfase, la compuerta OR podría recibir dos ceros al mismo tiempo, provocando que la salida caiga a 0 por un instante antes de volver a 1. A esto se le llama un <strong>Riesgo Lógico (Logic Hazard) o Glitch</strong>. ¡El buen ingeniero sabe que las matemáticas son perfectas, pero los electrones toman tiempo en viajar!</p>
         </div>
 
-        <p>¿Cuándo miente el político? Analicemos la tabla:</p>
+        <!-- CONTRADICCIONES (SIEMPRE 0) -->
+        <div class="destacado" style="background-color: #ffebee; border-left-color: #c62828;">
+            <h3 style="color: #b71c1c; margin-top: 0;">⭕ Siempre 0: Contradicciones</h3>
+            <p>Una contradicción es <strong>siempre falsa</strong>. Su circuito está condenado a dar 0 (GND) perpetuamente.</p>
+            <div style="overflow-x: auto; margin: 15px 0;">
+                <table class="tabla-auditoria" style="margin: 0;">
+                    <thead>
+                        <tr>
+                            <th style="background-color: #c62828;">Expresión</th>
+                            <th style="background-color: #c62828;">Regla</th>
+                            <th style="background-color: #c62828;">Ejemplo Cotidiano</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-size: 1.1em;">\(A \cdot 0 = 0\)</td>
+                            <td>Dominación (AND)</td>
+                            <td>"Si estudias (\(A\)) <strong>Y</strong> la gravedad deja de existir (0), apruebas". Como la gravedad siempre existe, la condición total jamás se cumplirá.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 1.1em;">\(A \cdot \bar{A} = 0\)</td>
+                            <td>Complemento (AND)</td>
+                            <td>"Está lloviendo <strong>Y</strong> no está lloviendo al mismo tiempo". ¡Absurdo! Siempre es falso.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>💡 <strong>En hardware (dos formas de obtener siempre 0):</strong></p>
+            <ul>
+                <li><strong>Dominación (AND):</strong> Conecta una de las entradas de la compuerta AND a GND (0 V) y la otra entrada a la señal \(A\). La salida quedará bloqueada en 0 para siempre.</li>
+                <li><strong>Complemento (AND):</strong> Conecta la señal \(A\) a una entrada de la compuerta AND y la misma señal \(A\) a un inversor (NOT); la salida del inversor (\(\bar{A}\)) se conecta a la segunda entrada de la AND. La salida también será siempre 0.</li>
+            </ul>
+        </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>¿Ganó? ($A$)</th>
-                    <th>¿Bajó Impuestos? ($B$)</th>
-                    <th>Juicio ($A \rightarrow B$)</th>
-                    <th>Análisis</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="fila-verdad"><td>1 (Sí)</td><td>1 (Sí)</td><td>1 (Verdad)</td><td>Cumplió.</td></tr>
-                <tr class="fila-mentira"><td>1 (Sí)</td><td>0 (No)</td><td>0 (Falso)</td><td><strong>¡MINTIÓ!</strong> (Ganó y no cumplió)</td></tr>
-                <tr class="fila-verdad"><td>0 (No)</td><td>1 (Sí)</td><td>1 (Verdad)</td><td>No ganó. (No estaba obligado).</td></tr>
-                <tr class="fila-verdad"><td>0 (No)</td><td>0 (No)</td><td>1 (Verdad)</td><td>No ganó. (No rompió promesa).</td></tr>
-            </tbody>
-        </table>
+                <div class="svg-container">
+            <img src="img/contradicciones_and.png" 
+                 alt="Circuitos de contradicción: Dominación (AND) con entrada fija en 0, y Complemento (AND) con A y su negación." 
+                 style="max-width:80%; height:auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px;">
+            <p><small><em>Fig. 2: En la parte superior, la Dominación (AND) \(A \cdot 0 = 0\); en el inferior, el Complemento (AND) \(A \cdot \bar{A} = 0\). Ambos circuitos producen una salida siempre en 0.</em></small></p>
+        </div>
 
-        <h3>El Circuito de la Promesa</h3>
-        <p>La única forma de que la promesa sea FALSA es si $A=1$ y $B=0$. Por lo tanto, la ecuación que describe esto es:</p>
+        <div class="dato-extra" style="padding: 15px; margin-top: 20px; background-color: #e3f2fd; border-left-color: #2196f3;">
+            <p style="margin: 0;"><small><strong>🔗 Conexión Matemática:</strong> Estas cuatro expresiones son pilares del álgebra de Boole. En la <strong>Lección 24</strong> volveremos a la expresión \(A \cdot \bar{A} = 0\) para demostrar matemáticamente algo asombroso: ¡el opuesto de una señal es único en todo el universo!</small></p>
+        </div>
+
+        <h2>2. La Implicación (\(A \rightarrow B\)): Evaluando Promesas</h2>
+        <p>No existe un chip llamado "Implicador" en la ferretería, pero podemos construirlo. Para entenderlo, usemos el clásico ejemplo de la <strong>Promesa del Político</strong>:</p>
+        
+        <div class="destacado" style="text-align: center; font-size: 1.2em; font-style: italic; color: #4a148c; border-left-color: #9c27b0; background-color: #f3e5f5;">
+            "Si gano las elecciones (\(A\)), entonces bajaré los impuestos (\(B\))."
+        </div>
+
+        <p>Como ciudadanos (y como ingenieros), nuestro trabajo es juzgar si el político <strong>dijo la verdad (1)</strong> o si <strong>mintió (0)</strong>. Analicemos los 4 escenarios posibles:</p>
+
+        <div style="overflow-x: auto; margin: 25px 0; box-shadow: 0 3px 8px rgba(0,0,0,0.08); border-radius: 8px; background-color: white;">
+            <!-- AQUÍ ESTÁ EL FIX: style="width: 100%; display: table; max-width: none; margin: 0;" -->
+            <table class="tabla-auditoria" style="width: 100%; display: table; max-width: none; margin: 0;">
+                <thead>
+                    <tr style="background-color: #1565c0; color: white;">
+                        <th colspan="2" style="border-right: 2px solid white; padding: 10px;">Entrada (La Realidad)</th>
+                        <th colspan="2" style="background-color: #0d47a1; padding: 10px;">Salida (El Veredicto: <span>\(A \rightarrow B\)</span>)</th>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px;">A (Ganó)</th>
+                        <th style="padding: 10px;">B (Bajó Impuestos)</th>
+                        <th style="padding: 10px;">Juicio de Verdad</th>
+                        <th style="padding: 10px;">Análisis del Ciudadano</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1 (Sí)</td>
+                        <td>1 (Sí)</td>
+                        <td class="salida-activa" style="background-color: #d4edda; color: #155724; font-weight: bold;">1 (Verdad)</td>
+                        <td style="text-align: left;">Prometió y cumplió. ¡Es un político honesto!</td>
+                    </tr>
+                    <tr style="background-color: #ffebee;">
+                        <td><strong>1 (Sí)</strong></td>
+                        <td><strong>0 (No)</strong></td>
+                        <td style="color: #c62828; font-weight: bold; background-color: #ffcdd2;">0 (Falso)</td>
+                        <td style="text-align: left;"><strong>¡MINTIÓ!</strong> Ganó, pero no cumplió su parte del trato.</td>
+                    </tr>
+                    <tr>
+                        <td>0 (No)</td>
+                        <td>1 (Sí)</td>
+                        <td class="salida-activa" style="background-color: #d4edda; color: #155724; font-weight: bold;">1 (Verdad)</td>
+                        <td style="text-align: left;">No ganó, pero igual bajó los impuestos. (No rompió su promesa porque no estaba obligado).</td>
+                    </tr>
+                    <tr>
+                        <td>0 (No)</td>
+                        <td>0 (No)</td>
+                        <td class="salida-activa" style="background-color: #d4edda; color: #155724; font-weight: bold;">1 (Verdad)</td>
+                        <td style="text-align: left;">No ganó, y no bajó los impuestos. (Tampoco rompió su promesa, porque la condición de ganar nunca ocurrió).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- LA VERDAD VACUA -->
+        <div class="destacado" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin-bottom: 25px;">
+            <h4 style="color: #7b1fa2; margin-top: 0;">🧠 El choque mental: La "Verdad Vacua"</h4>
+            <p>Observa las dos últimas filas de la tabla (cuando el político NO gana, \(A=0\). El resultado del juicio es 1 (Verdad), ¡incluso si sube los impuestos!</p>
+            <p>Muchos estudiantes se confunden aquí: <em>"¿Por qué es 'Verdadero' si no bajó los impuestos?"</em>. En lógica, a esto se le llama <strong>Verdad Vacua</strong> (o verdad por defecto). La regla de la implicación dice que solo podemos juzgarte como "Mentiroso" si se dan las condiciones para exigirte la promesa. Si la condición \(A=1\) nunca ocurrió, el contrato queda anulado, por lo que es imposible que lo hayas roto. Al no haber mentira, la lógica asume "Verdad" por defecto.</p>
+        </div>
+
+        <div class="destacado" style="background-color: #fff9c4; border-left-color: #ffc107;">
+          <h3 style="color: #f57f17; margin-top: 0;">🧠 Tautología: la equivalencia lógica también es una verdad eterna</h3>
+          <p>Decimos que dos expresiones lógicas son <strong>equivalentes (\(\equiv\))</strong> si producen exactamente el mismo resultado para todas las combinaciones posibles de entrada. Esta equivalencia en sí misma es una <strong>tautología</strong>: una verdad absoluta e incuestionable en nuestro universo digital.</p>
+          <p>Verificaremos esto con la tabla de verdad, que compara la columna del Veredicto (\(A \rightarrow B\)) y la columna de la ecuación matemática (\(\bar{A} + B\)) encontrando que son <strong>idénticas</strong> en todas sus filas. Esta coincidencia perfecta nos da el permiso matemático para reemplazar la "promesa" abstracta por cables y chips físicos sin cambiar el comportamiento del circuito.</p>
+        </div>
+
+        <div class="destacado" style="background-color: #e8f0fe; border-left-color: #1976d2;">
+            <h3 style="color: #0d47a1; margin-top: 0;">📐 Demostración de la equivalencia</h3>
+            <p>Para confirmar que la implicación \(A \rightarrow B\) es idéntica a la expresión \(\bar{A} + B\), podemos usar una <strong>tabla de verdad</strong> que compare ambas columnas paso a paso:</p>
+            
+            <div class="destacado" style="background-color: #e8f0fe; border-left-color: #1976d2;">
+                <div style="overflow-x: auto; margin: 15px 0; background-color: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <table class="tabla-auditoria" style="width: 100%; display: table; max-width: none; margin: 0;">
+                    <thead>
+                        <tr style="background-color: #0d47a1; color: white;">
+                            <th style="padding: 10px;">B</th>
+                            <th style="padding: 10px;">A</th>
+                            <th style="padding: 10px; background-color: #1565c0;"><span>\(A \rightarrow B\)</span></th>
+                            <th style="padding: 10px;"><span>\(\bar{A}\)</span></th>
+                            <th style="padding: 10px; background-color: #1565c0;"><span>\(\bar{A} + B\)</span></th>
+                            <th style="padding: 10px; background-color: #0a3d91;">¿Son Equivalentes? <br> <span>\((A \rightarrow B) \equiv (\bar{A} + B)\)</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td><td>0</td>
+                            <td class="salida-activa">1</td>
+                            <td>1</td>
+                            <td class="salida-activa">1</td>
+                            <td class="salida-activa" style="color: #2e7d32; font-weight: bold;">¡Sí! (1 = 1)</td>
+                        </tr>
+                        <tr>
+                            <td>0</td><td>1</td>
+                            <td style="color: #c62828; font-weight: bold; background-color: #ffcdd2;">0</td>
+                            <td>0</td>
+                            <td style="color: #c62828; font-weight: bold; background-color: #ffcdd2;">0</td>
+                            <td class="salida-activa" style="color: #2e7d32; font-weight: bold;">¡Sí! (0 = 0)</td>
+                        </tr>
+                        <tr>
+                            <td>1</td><td>0</td>
+                            <td class="salida-activa">1</td>
+                            <td>1</td>
+                            <td class="salida-activa">1</td>
+                            <td class="salida-activa" style="color: #2e7d32; font-weight: bold;">¡Sí! (1 = 1)</td>
+                        </tr>
+                        <tr>
+                            <td>1</td><td>1</td>
+                            <td class="salida-activa">1</td>
+                            <td>0</td>
+                            <td class="salida-activa">1</td>
+                            <td class="salida-activa" style="color: #2e7d32; font-weight: bold;">¡Sí! (1 = 1)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <p>Al confirmar que ambas columnas principales son iguales fila por fila, demostramos que \(A \rightarrow B \equiv \bar{A} + B\). Esta es la belleza del álgebra de Boole: convertir un problema filosófico en una ecuación que podemos soldar en una placa.</p>
+            </div>
+            
+            <p>Observa que las columnas de \(A \rightarrow B\) y \(\bar{A} + B\) son idénticas en todos los casos posibles. Cuando dos expresiones lógicas arrojan exactamente la misma tabla de verdad, decimos que son <strong>Lógicamente Equivalentes (\(\equiv\))</strong>. Esta equivalencia inquebrantable es en sí misma una <strong>tautología</strong>: una verdad absoluta. Esto prueba matemáticamente que podemos construir cualquier circuito de implicación (una promesa condicional) reemplazándolo por algo que sí existe en la ferretería: un inversor seguido de una compuerta OR.</p>
+            
+            <p><strong>Demostración algebraica (opcional):</strong><br>
+            Partimos de la definición de implicación: \(A \rightarrow B \equiv \neg (A \land \neg B)\).<br>
+            Esta definición, <em>“<strong>A</strong> implica <strong>B</strong>”</em> equivale a decir que <strong>no</strong> puede darse el caso en el que <em>“<strong>A</strong>”</em> sea verdadera y <em>“<strong>B</strong>”</em> falsa.<br>
+            Aplicamos De Morgan: \(\neg (A \land \neg B) \equiv \neg A \lor \neg \neg B \equiv \neg A \lor B\).<br>
+            Por lo tanto, \(A \rightarrow B \equiv \bar{A} + B\).</p>
+        </div>
+
+        <h3>El Circuito que Evalúa la Verdad</h3>
+        <p>Observa la tabla: la promesa es evaluada como verdadera en 3 de los 4 casos. La <em>única</em> forma de que el resultado sea FALSO (0) es si \(A=1\) y \(B=0\).</p>
+        <p>Si aplicas los Minterms de la Lección 15 a los unos (1) y simplificas, descubrirás que la ecuación matemática que describe esta tabla es:</p>
         <div class="formula">
             $$A \rightarrow B \equiv \bar{A} + B$$
         </div>
-        <p><strong>Traducción:</strong> "Para cumplir, O bien NO gano ($\bar{A}$), O bien bajo los impuestos ($B$)".</p>
+        <p><strong>Traducción lógica:</strong> "Para que mi declaración sea verdadera, O bien NO gano las elecciones (\(\bar{A}\)), O bien bajo los impuestos (\(B\))."</p>
 
         <div class="svg-container">
-            <!-- Imagen: Circuito Implicación -->
-            <img src="img/circuito_implicacion.png" alt="Esquema lógico: Compuerta NOT en la entrada A, conectada a una OR con la entrada B." style="max-width:100%; height:auto;">
-            <p><small><em>Fig 1. Este circuito te dice si un contrato se cumplió.</em></small></p>
+          <img src="img/implicacion_tabla_circuito.png" 
+                alt="Tabla de verdad y circuito esquemático de la función \(\bar{A} + B\)" 
+                style="max-width:100%; height:auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+          <p><small><em>Fig. 3: Tabla de verdad y circuito esquemático de la función \(\bar{A} + B\), que implementa la implicación lógica \(A \rightarrow B\).</em></small></p>
         </div>
 
-        <div class="destacado" style="border-left-color: #6f42c1; background-color: #f3e5f5;">
-            <h3>🕵️ El Truco del Detective (La Contrarrecíproca)</h3>
-            <p>En lógica, decir <em>"Si A, entonces B"</em> es exactamente lo mismo que decir <em>"Si NO pasa B, entonces NO pasó A"</em>.</p>
-            <p>$$A \rightarrow B \equiv \bar{B} \rightarrow \bar{A}$$</p>
-            <p><strong>Uso en Reparaciones:</strong>
-            <br>Regla: "Si hay corriente ($A$), el LED prende ($B$)".
-            <br>Diagnóstico: Llegas y ves que el LED NO prende ($\bar{B}$).
-            <br>Conclusión: ¡Seguro NO hay corriente ($\bar{A}$)! No necesitas medir para saberlo.</p>
+        <div class="dato-extra" style="background-color: #e3f2fd; border-left-color: #2196f3;">
+            <h3 style="color: #1565c0; margin-top: 0;">📐 Construyendo la Implicación en Silicio</h3>
+            <p>Este es un ejemplo clásico de cómo el álgebra de Boole nos permite crear operaciones complejas usando herramientas básicas. Para armar un "Implicador" en tu protoboard, solo necesitas pasar la señal A por un inversor (chip 7404) y sumarla a la señal B usando una compuerta OR (chip 7432).</p>
+        </div>
+
+        <div class="svg-container">
+            <img src="img/circuito_implicacion.png" alt="Esquema lógico: Compuerta NOT en la entrada A, conectada a una OR con la entrada B." style="max-width:70%; height:auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <p><small><em>Fig. 4: Circuito físico de la implicación (\(A \rightarrow B = \bar{A} + B\)) implementado con un inversor (7404) y una compuerta OR (7432).</em></small></p>
+        </div>
+
+        <!-- LA ALARMA DE MENTIRAS (DOBLE IMPACTO VISUAL) -->
+        <div class="destacado" style="background-color: #fff3e0; border-left-color: #e65100; margin-top: 30px;">
+            <h3 style="color: #e65100; margin-top: 0;">🚨 El "Detector de Mentiras" (La Alarma)</h3>
+            <p>El circuito anterior (Fig. 4) evalúa si se dijo la <strong>Verdad</strong>. Pero en un sistema de seguridad, las cosas funcionan al revés: queremos que suene una sirena (1 lógico) únicamente cuando se detecte una <strong>Mentira</strong> (una promesa rota).</p>
+            
+            <p>¿Cómo creamos la Alarma de Mentira? ¡Aplicando la magia de la Lección 14! Simplemente negamos la ecuación de la Verdad usando las Leyes de De Morgan:</p>
+            
+            <div class="formula" style="font-size: 1.1em; background: transparent; border: none; padding: 5px;">
+                $$\text{Mentira} = \overline{(\bar{A} + B)} = \overline{\overline{A}} \cdot \bar{B} = A \cdot \bar{B}$$
+            </div>
+            
+            <p><strong>Traducción:</strong> ¡La alarma solo suena (1) cuando el político SÍ ganó las elecciones (\(A\)) <strong>Y</strong> NO bajó los impuestos (\(\bar{B}\))!</p>
+            
+            <!-- PASO 2: EL PLANO LÓGICO Y LA TABLA (Tu nueva imagen) -->
+            <div class="svg-container" style="margin: 20px 0;">
+                <img src="img/esquema_tabla_alarma.png" alt="Símbolo lógico y tabla de verdad del detector de mentiras" style="max-width:70%; height:auto; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <p><small><em>Fig. 5: El esquema lógico del Detector de Mentiras (\(A \cdot \bar{B}\)). La tabla confirma que el único 1 ocurre cuando la promesa se rompe.</em></small></p>
+            </div>
+
+            <!-- PASO 3: EL MONTAJE FÍSICO (Tu imagen de Tinkercad) -->
+            <div class="svg-container" style="margin: 30px 0 20px 0; padding-top: 20px; border-top: 1px dashed #ffb74d;">
+                <h4 style="color: #d35400; text-align: center; margin-top: 0;">De la Lógica a la Protoboard</h4>
+                <img src="img/tinkercad_alarma_mentiras.png" alt="Montaje físico en Tinkercad del Detector de Mentiras" style="max-width:90%; height:auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">
+                <p><small><em>Fig. 6: Circuito físico del Detector de Mentiras (\(A \cdot \bar{B}\)). Observa cómo De Morgan mutó el circuito de la Fig. 4: el inversor cambió de la entrada A hacia la entrada B, y la compuerta OR (7432) se transformó en una AND (7408).</em></small></p>
+            </div>
+            
+            <p style="margin-bottom: 0;">Esta compuerta AND (chip 7408), con un inversor (chip 7404) astutamente colocado en la condición B, es tu verdadero "Detector de Mentiras" en hardware.</p>
+        </div>
+
+        <!-- SIMULACIÓN INTERACTIVA -->
+        <div class="destacado" style="background-color: #f8f9fa; border-left-color: #6c757d;">
+            <h3 style="margin-top: 0;">🔬 Simulación Interactiva: El Estrado Judicial</h3>
+            <p>Haz clic en los interruptores (A, B). El circuito de la izquierda evalúa la Verdad (\(\bar{A} + B\)). El circuito de la derecha es la Alarma de Mentiras (\(A \cdot \bar{B}\)). ¡Observa cómo actúan como complementos exactos!</p>
+            <div class="svg-container" style="border: 2px solid #dee2e6; border-radius: 8px; overflow: hidden; margin-top: 15px;">
+                <iframe width="100%" height="450" src="https://www.falstad.com/circuit/circuitjs.html?cct=$+1+0.000005+10.20027730826997+50+5+43%0A165+176+128+192+128+2+0%0A165+176+176+192+176+2+0%0A150+176+128+144+128+0+2+1+5%0A150+176+176+144+176+0+2+0+5%0Aw+192+128+208+128+0%0Aw+192+176+208+176+0%0A151+272+152+320+152+0+2+1+5%0A151+304+152+352+152+0+2+0+5%0Aw+352+152+368+152+0%0A165+416+128+448+128+2+0%0A165+416+176+448+176+2+0%0A150+416+128+384+128+0+2+1+5%0A150+416+176+384+176+0+2+0+5%0Aw+464+152+480+152+0%0Aw+240+152+256+152+0%0Ax+135+116+189+119+4+24+AND%0Ax+430+117+476+120+4+24+OR%0Ax+259+142+311+145+4+24+NOT%0A" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <h2>3. Errores Comunes de la Lógica Humana</h2>
+        
+        <!-- Error 1: Converse, inverso, contrarrecíproca -->
+        <div class="destacado" style="background-color: #fff9c4; border-left-color: #fbc02d;">
+            <h3 style="color: #f57f17; margin-top: 0;">⚠️ Cuidado: Las Trampas del Lenguaje</h3>
+            <p>Dada una implicación real \(A \rightarrow B\), los seres humanos solemos inventar tres variantes falsas en nuestra cabeza:</p>
+            
+            <p><strong>Ejemplo Base:</strong> “Si llueve (\(A\)), entonces el suelo se moja (\(B\)).” (Verdadero)</p>
+            
+            <ul>
+                <li style="margin-bottom: 10px;">❌ <strong>Converse (\(B \rightarrow A\)):</strong> “Si el suelo está mojado, entonces llovió”. <br><span style="color: #d32f2f;">(Falso: Pudo ser un aspersor o alguien lavando el piso).</span></li>
+                <li style="margin-bottom: 10px;">❌ <strong>Inverso (\(\bar{A} \rightarrow \bar{B}\)):</strong> “Si no llueve, entonces el suelo no se moja”. <br><span style="color: #d32f2f;">(Falso: El aspersor lo puede mojar igual).</span></li>
+                <li style="background-color: #e8f5e9; padding: 5px; border-radius: 4px; border-left: 3px solid #4caf50;">✅ <strong>Contrarrecíproca (\(\bar{B} \rightarrow \bar{A}\)):</strong> “Si el suelo NO está mojado, entonces NO llovió”. <br><span style="color: #2e7d32;">(¡Verdadero! Esta es la única deducción lógicamente perfecta y equivalente a la original).</span></li>
+            </ul>
+        </div>
+
+        <!-- Error 2: Simetría -->
+        <div class="destacado" style="background-color: #ffebee; border-left-color: #c62828;">
+            <h3 style="color: #c62828; margin-top: 0;">⚠️ La implicación NO es simétrica</h3>
+            <p>Muchos estudiantes cometen el error de pensar que “Si A entonces B” significa también “Si B entonces A”. <strong>Esto es una falacia.</strong></p>
+            <p><strong>Ejemplo:</strong> “Si un animal es un perro, entonces tiene cuatro patas”. De ahí no puedes deducir que “Si tiene cuatro patas, entonces es un perro” (¡podría ser un gato!).</p>
+            <p><strong>Regla de oro:</strong> La implicación es una calle de un solo sentido. Para que sea válida en ambos sentidos, necesitas la <strong>Compuerta XNOR (Bicondicional)</strong>.</p>
+        </div>
+
+        <!-- Isomorfismo: Conjuntos y Código -->
+        <h2>4. Isomorfismo: Conjuntos y Código</h2>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
+            <div style="flex: 1; min-width: 280px; background-color: #f0f7ff; border-left: 4px solid #0d47a1; padding: 15px; border-radius: 6px;">
+                <h4 style="color: #0d47a1; margin-top: 0;">🔗 En Teoría de Conjuntos</h4>
+                <p>Recordando el isomorfismo de la Lección 21, la implicación tiene su equivalente exacto en los diagramas de Venn:</p>
+                <div class="formula" style="font-size: 1.1em;">
+                    $$A \rightarrow B \quad \equiv \quad A^c \cup B$$
+                </div>
+                <p style="font-size: 0.9em; color: #555;"><em>Interpretación:</em> “Si es un cuadrado, entonces tiene cuatro lados” equivale al conjunto de “Todas las figuras que NO son cuadrados, UNIDO a todas las figuras que tienen cuatro lados”.</p>
+            </div>
+
+            <div style="flex: 1; min-width: 280px; background-color: #e8f5e9; border-left: 4px solid #2e7d32; padding: 15px; border-radius: 6px;">
+                <h4 style="color: #1b5e20; margin-top: 0;">💻 En Programación (C++ / Arduino)</h4>
+                <p>Cuando escribes una sentencia condicional <code>if</code> en un programa, estás ordenando al procesador que evalúe una implicación:</p>
+<pre style="background: #282c34; color: #abb2bf; padding: 12px; border-radius: 6px; overflow-x: auto; font-family: monospace; font-size: 0.9em;"><code>if (ganaElecciones == true) {
+    bajarImpuestos = true;
+}</code></pre>
+                <p style="font-size: 0.9em; color: #555; margin-bottom: 0;">A nivel microscópico, el compilador traduce esa estructura abstracta de software a compuertas físicas (NOT y OR) dentro de la CPU para procesarla.</p>
+            </div>
+        </div>
+
+        <!-- Adelanto Bicondicional -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin-top: 30px;">
+            <h3 style="color: #7b1fa2; margin-top: 0;">🔁 Adelanto: El Bicondicional (Equivalencia)</h3>
+            <p>Cuando la promesa es de doble vía, es decir, “<strong>si y solo si</strong>”, se utiliza el <strong>bicondicional</strong> (\(A \leftrightarrow B\)).</p>
+            <p>Se construye uniendo dos implicaciones con una compuerta AND:</p>
+            <div class="formula">
+                $$A \leftrightarrow B \equiv (A \rightarrow B) \cdot (B \rightarrow A)$$
+            </div>
+            <p>¿Te resulta familiar el símbolo \(\leftrightarrow\)? ¡Es la mismísima <strong>Compuerta XNOR</strong> que vimos en la Lección 18! Es el "Juez de Igualdad", verdadero solo cuando ambas partes cumplen su parte del trato o ambas se abstienen.</p>
+        </div>
+
+    </section>
+
+    <!-- PODCAST -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        <p class="podcast-descripcion">
+            Dos docentes analizan cómo la implicación lógica puede ser implementada con compuertas NOT y OR, discuten la diferencia crucial entre el "Juicio de Verdad" y la "Alarma de Mentiras" (usando De Morgan), y comparten estrategias para erradicar las falacias del "converse" y el "inverso" en el razonamiento de los estudiantes.
+        </p>
+        <div class="podcast-player">
+            <audio controls preload="metadata" style="width: 100%;">
+                <source src="audio/leccion22.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 13:22 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- TARJETA DE PROMPT ÉTICO -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        <p class="prompt-contexto">
+            Usa esta guía para construir prompts que te ayuden a generar ejemplos de implicaciones lógicas en contextos reales de programación o robótica.
+        </p>
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            <div class="paso"><strong>1️⃣ "Comprendí que..."</strong> (Resume qué es la implicación y cuál es la ecuación de la "alarma de mentiras").</div>
+            <div class="paso"><strong>2️⃣ "y quiero saber..."</strong> (Pide un ejemplo de cómo usar esto para diseñar un sistema de seguridad de software).</div>
+            <div class="paso"><strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong> (Estudiantes de secundaria que aprenden Arduino).</div>
+            <div class="paso"><strong>4️⃣ "Incluye un error común que debo evitar..."</strong> (Confundir la dirección de la implicación o asumir simetría).</div>
+        </div>
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo de Prompt:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que la implicación (\(A \rightarrow B\)) evalúa si una regla se cumplió (\(\bar{A} + B\)), pero para activar una alarma de incumplimiento usamos su negación (\(A \cdot \bar{B}\)). Quiero saber: si diseño el código para un robot que debe detenerse (B) si detecta el borde de la mesa (A), ¿cómo estructuro el circuito de alarma que pite si el sensor falla y el robot se cae? Explícame como si fuera a enseñárselo a mis estudiantes de robótica de grado 9°. Incluye un error lógico común que los estudiantes cometen al escribir sentencias 'If-Then' pensando que funcionan en ambas direcciones."
+            </blockquote>
         </div>
     </section>
 
+    <!-- MI CUADERNO -->
+    <section class="cuaderno-section">
+        <div class="cuaderno-header">
+            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <h3>📋 Bitácora de Innovación (Mi Cuaderno)</h3>
+        </div>
+        <p>Responde en tu cuaderno físico (o aquí) las siguientes reflexiones:</p>
+        <ol>
+            <li><strong>La promesa rota:</strong> Escribe una regla de tu vida cotidiana en forma de implicación (\(A \rightarrow B\)). Por ejemplo, "Si estudio toda la noche, entonces aprobaré el examen". Analiza: ¿Qué sucede si no estudiaste pero igual aprobaste? ¿Rompiste la regla lógica?
+                <textarea rows="3" placeholder="Escribe aquí tu análisis..." style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+            <li><strong>Diagnóstico inteligente:</strong> Describe una situación real donde usarías la <em>contrarrecíproca</em> (\(\bar{B} \rightarrow \bar{A}\)) para diagnosticar un problema técnico en tu casa sin tener que revisar la causa original.
+                <textarea rows="3" placeholder="Ejemplo: Si la TV no enciende, entonces..." style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+            <li><strong>Diseño de Alarmas:</strong> Tu jefe te pide una alarma que suene (1) si "El cliente se lleva el producto (A) Y NO ha pagado en caja (B)". Diseña la ecuación booleana. ¿Te das cuenta de que acabas de aplicar De Morgan a una implicación?
+                <textarea rows="3" placeholder="Escribe la ecuación aquí..." style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+        </ol>
+    </section>
+
+    <!-- NARRATIVA: TRAILER -->
+    <div class="avance-leccion" style="background-color: #f8f9fa; padding: 25px; border-radius: 12px; margin-top: 40px; border-left: 6px solid var(--color-secundario); box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <h3 style="color: #d35400; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2em;">🚀</span> Próximamente...
+        </h3>
+        <p>Has construido un circuito que juzga promesas individuales. Eres el juez implacable de dos variables (A y B).</p>
+        <p>Pero el mundo real no se mueve de a un bit por vez. ¿Qué pasa cuando la información viaja en "manadas"? Imagina que tienes 8 sensores de humo en un rascacielos y necesitas tomar una decisión de emergencia basada en el comportamiento colectivo.</p>
+        
+        <!-- EL FIX ESTÁ AQUÍ ABAJO (Usando caracteres Unicode directos) -->
+        <p>En la <strong>próxima lección</strong>, daremos el gran salto al <strong>mundo de los Buses de Datos</strong>. Aprenderemos a usar los <strong>Cuantificadores Lógicos</strong> (<span style="font-family: serif; font-size: 1.2em;">&forall;</span>, <span style="font-family: serif; font-size: 1.2em;">&exist;</span>) para diseñar circuitos masivos que respondan a preguntas como <em>"¿TODOS los sensores están activos?"</em> o <em>"¿EXISTE al menos un fallo?"</em>. ¡Pasaremos de la lógica individual a la arquitectura de computadores!</p>
+    </div>
+
     <footer>
         <hr>
-        <p style="text-align: center;">
-            <a href="leccion21.html" class="btn-navegacion">← Anterior</a>
-            <a href="leccion23.html" class="btn-navegacion">Siguiente: Todos o Ninguno (Cuantificadores) →</a>
-        </p>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+            <a href="leccion21.html" class="btn-navegacion">← Anterior (Isomorfismo)</a>
+            <a href="leccion23.html" class="btn-navegacion" style="background-color: var(--u3-color, #fd7e14); transform: scale(1.05); font-weight: bold; box-shadow: 0 4px 10px rgba(253, 126, 20, 0.3);">Siguiente: Cuantificadores →</a>
+        </div>
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;">🏠 Volver al Índice Principal</a>
+        </div>
     </footer>
 </div>
 
