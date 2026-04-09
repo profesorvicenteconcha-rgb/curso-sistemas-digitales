@@ -3,118 +3,400 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio Final: Hamming - Fundamentos de Sistemas Digitales</title>
+    <title>Laboratorio Final: Proyecto Hamming - Fundamentos de Sistemas Digitales</title>
     <link rel="stylesheet" href="estilos.css">
-    <!-- KaTeX -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+    <!-- KaTeX: Script principal y auto-render -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true }
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+
+    <style>
+        .tabla-auditoria {
+            width: 100%;
+            max-width: 650px;
+            margin: 15px auto;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 0.95em;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+            background: white;
+        }
+        .tabla-auditoria th {
+            background-color: #0d47a1;
+            color: white;
+            padding: 10px 8px;
+            border: 1px solid #1565c0;
+        }
+        .tabla-auditoria td {
+            padding: 8px;
+            border: 1px solid #e0e0e0;
+        }
+    </style>
 </head>
 <body>
 
 <div class="contenedor">
     <header>
-        <p><small>Unidad 4: Teoría de Códigos - Lección 31 (Final del Curso)</small></p>
+        <p><small>Unidad 4: Teoría de Códigos - Lección 30 (Final del Curso)</small></p>
         <h1>🏆 Laboratorio Final: El Proyecto Hamming (Magia Digital)</h1>
     </header>
 
+    <div class="intro-leccion" style="margin-bottom: 30px;">
+        <p style="font-size: 1.1em; color: var(--color-secundario); font-weight: bold; margin-bottom: 10px;">¡Ingenieros, bienvenidos al reto final de su formación!</p>
+        <p>A lo largo de este curso han dominado la física de los electrones, el álgebra de Boole, la aritmética binaria y el diseño de circuitos óptimos. Hoy, aplicaremos todo ese conocimiento para construir una máquina que parece pura magia: <strong>un sistema capaz de detectar errores por sí mismo y decirnos exactamente dónde están</strong>.</p>
+        <p style="margin-bottom: 0;">Vamos a implementar físicamente el "Doctor del Sistema": la <strong>Matriz de Control ($H$)</strong> que estudiamos en la lección pasada. ¡Preparen sus cables y compuertas XOR!</p>
+    </div>
+
     <section>
-        <p>¡Ingenieros, bienvenidos al reto final! Vamos a construir un circuito que parece magia: un sistema capaz de detectar errores por sí mismo. Implementaremos físicamente la <strong>Matriz de Control \(H\)</strong>.</p>
+        <h2>1. El Reto: "Adivina qué interruptor cambié"</h2>
+        <p>Vamos a construir el Decodificador / Calculador de Síndrome. Este circuito leerá 7 interruptores (simulando un paquete de datos que acaba de llegar por el aire) y nos mostrará en 3 LEDs la posición exacta de cualquier error que introduzcas a propósito (simulando el ruido electromagnético).</p>
 
-        <h2>1. El Reto: "Adivina" qué interruptor cambié</h2>
-        <p>Vamos a construir un decodificador que lee 7 interruptores y nos muestra en 3 LEDs la posición exacta de cualquier error que introduzcas a propósito (ruido manual).</p>
+        <div class="destacado" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin: 25px 0;">
+            <h3 style="color: #7b1fa2; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">📝</span> Las Ecuaciones del Síndrome (El Plano)
+            </h3>
+            <p>Necesitamos construir 3 circuitos de paridad independientes (las 3 filas de la Matriz $H$ que vimos en la Lección 29):</p>
+            
+            <div class="formula" style="font-size: 1.1em; background: white; border: 1px solid #ce93d8; margin: 15px 0;">
+                $$s_1 = D_1 \oplus D_3 \oplus D_5 \oplus D_7$$
+                $$s_2 = D_2 \oplus D_3 \oplus D_6 \oplus D_7$$
+                $$s_3 = D_4 \oplus D_5 \oplus D_6 \oplus D_7$$
+            </div>
+            <p style="margin-bottom: 0; font-size: 0.95em; color: #555;"><em>Recuerda: El LED $s_1$ será nuestro bit menos significativo (derecha), y $s_3$ el más significativo (izquierda), formando el número binario del error.</em></p>
+        </div>
 
-        <div class="destacado">
-            <h3>📝 Las Ecuaciones del Síndrome</h3>
-            <p>Necesitamos 3 circuitos de paridad independientes (3 filas de la matriz H):</p>
-            <ul>
-                <li><strong>LED 1 (\(s_1\)):</strong> XOR de bits 1, 3, 5, 7.</li>
-                <li><strong>LED 2 (\(s_2\)):</strong> XOR de bits 2, 3, 6, 7.</li>
-                <li><strong>LED 3 (\(s_3\)):</strong> XOR de bits 4, 5, 6, 7.</li>
+        <h2>2. Materiales y Estrategia de Ruteo</h2>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+            <div style="flex: 1; min-width: 250px; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <h4 style="color: #343a40; margin-top: 0; border-bottom: 2px solid #dee2e6; padding-bottom: 8px;">🧰 El Inventario</h4>
+                <ul style="margin-bottom: 0; padding-left: 20px;">
+                    <li><strong>El Cerebro:</strong> 3 Chips <strong>74LS86</strong> o <strong>74HC86</strong> (Cuádruple XOR).</li>
+                    <li><strong>La Entrada:</strong> 1 Dip Switch de 8 posiciones (usaremos 7) + 7 Resistencias Pull-Down (10kΩ). En caso de no tenerlo, podremos emplear dos Dip Switches de 4 posiciones.</li>
+                    <li><strong>La Salida:</strong> 3 LEDs de colores + 3 Resistencias (330Ω) <em>(limitan la corriente a unos 10-15 mA, evitando que los LEDs se quemen)</em>.</li>
+                    <li><strong>Energía:</strong> Fuente de 5V y muuuuchos cables jumpers.</li>
+                </ul>
+            </div>
+            
+            <div style="flex: 1; min-width: 250px; background-color: #fff3e0; border: 1px solid #ffcc80; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <h4 style="color: #e65100; margin-top: 0; border-bottom: 2px solid #ffcc80; padding-bottom: 8px;">⚠️ ¡Peligro de Corto!</h4>
+                <ul style="margin-bottom: 0; padding-left: 20px; color: #b71c1c;">
+                    <li>¡No olvides conectar <strong>VCC (Pin 14)</strong> y <strong>GND (Pin 7)</strong> en los 3 chips antes de hacer nada más!</li>
+                    <li>Como aprendiste en la Lección 10, si olvidas las resistencias Pull-Down en el Dip Switch, el estado flotante volverá locos a tus LEDs de Síndrome.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- NUEVO: Verificación previa -->
+        <div class="dato-extra" style="background-color: #ffebee; border-left-color: #c62828; margin-bottom: 20px;">
+            <h4 style="color: #c62828; margin-top: 0;">🔌 Antes de encender la fuente</h4>
+            <p>Revisa con un multímetro en modo continuidad que no haya cortos entre VCC y GND. Verifica que todas las resistencias Pull-Down estén conectadas correctamente a GND. Un error en el cableado puede quemar los chips. ¡La paciencia y la revisión son las mejores herramientas del ingeniero!</p>
+        </div>
+
+        <!-- NUEVO BLOQUE: MAPEO DE ENTRADAS Y SALIDAS -->
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-bottom: 30px;">
+            <h3 style="color: #0d47a1; margin-top: 0;">🧭 Arquitectura de la Placa: Mapeo de Variables</h3>
+            <p>Para que tu circuito tenga sentido humano, debes organizar físicamente las entradas y salidas de forma inteligente:</p>
+            
+            <h4 style="color: #1565c0; margin-bottom: 5px;">Las Entradas (El Mensaje Recibido)</h4>
+            <p style="margin-top: 0; margin-bottom: 10px;">Asignaremos los 7 interruptores del DIP Switch de izquierda a derecha para que coincidan con las variables de nuestras ecuaciones ($D_1$ a $D_7$):</p>
+            <ul style="font-family: monospace; background: white; padding: 10px 10px 10px 30px; border-radius: 6px; border: 1px solid #90caf9;">
+                <li>Int. 1 = \(D_1\) (Dato 1)</li>
+                <li>Int. 2 = \(D_2\) (Dato 2)</li>
+                <li>Int. 3 = \(D_3\) (Dato 3)</li>
+                <li>Int. 4 = \(D_4\) (Dato 4)</li>
+                <li>Int. 5 = \(D_5\) (Paridad \(p_1\))</li>
+                <li>Int. 6 = \(D_6\) (Paridad \(p_2\))</li>
+                <li>Int. 7 = \(D_7\) (Paridad \(p_3\))</li>
+            </ul>
+
+            <h4 style="color: #1565c0; margin-bottom: 5px;">Las Salidas (Los LEDs del Síndrome)</h4>
+            <p style="margin-top: 0;">Para poder "leer" el síndrome en binario natural, acomoda tus 3 LEDs en la protoboard <strong>de Izquierda a Derecha</strong> así:</p>
+            <ul style="font-family: monospace; background: white; padding: 10px 10px 10px 30px; border-radius: 6px; border: 1px solid #90caf9;">
+                <li><strong>Izquierda:</strong> LED 3 (\(s_3\)) - El bit más significativo (MSB) - Vale 4</li>
+                <li><strong>Centro:</strong> LED 2 (\(s_2\)) - Vale 2</li>
+                <li><strong>Derecha:</strong> LED 1 (\(s_1\)) - El bit menos significativo (LSB) - Vale 1</li>
             </ul>
         </div>
 
-        <h2>2. Materiales y Estrategia</h2>
-        <ul>
-            <li><strong>Cerebro:</strong> 3 Chips <strong>7486</strong> (Cuádruple XOR).</li>
-            <li><strong>Entrada:</strong> 7 Interruptores (Dip Switch) + 7 Resistencias Pull-Down (10kΩ).</li>
-            <li><strong>Salida:</strong> 3 LEDs + 3 Resistencias (330Ω).</li>
-        </ul>
-
-        <h3>Cómo conectar 4 entradas a XORs</h3>
-        <p>Como el chip 7486 solo suma de a dos, usaremos la técnica de "Cascada" (Árbol XOR):</p>
-        <div class="svg-container">
-            <!-- Imagen: Cascada XOR (img/xor_cascada.png) -->
-            <img src="img/xor_cascada.png" alt="Esquema conectando 4 entradas usando 3 compuertas XOR en forma de árbol para obtener una sola salida" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 1. Para sumar 4 bits, necesitas 3 compuertas.</em></small></p>
+        <!-- NUEVA CAJA EXPLICATIVA: MSB y LSB -->
+        <div style="background-color: #fff9c4; border-left: 4px solid #fbc02d; padding: 15px; border-radius: 0 8px 8px 0; margin-top: 15px; margin-bottom: 25px;">
+            <h5 style="margin-top: 0; color: #f57f17; font-size: 1.05em;">🤔 ¿Por qué "Más" y "Menos" Significativo?</h5>
+            <p style="margin-bottom: 10px; font-size: 0.95em; color: #555;">En la escuela primaria aprendiste que en el número <strong>725</strong>, el "7" vale <em>setecientos</em> y el "5" vale solo <em>cinco</em>. Si borras el 7, pierdes muchísimo dinero (cambia drásticamente el valor). Si borras el 5, pierdes muy poco.</p>
+            <p style="margin-bottom: 0; font-size: 0.95em; color: #555;">Por eso, el dígito de la extrema izquierda es el <strong>Más Significativo</strong> (tiene más peso o valor). En binario ocurre exactamente lo mismo: el bit de la izquierda (<strong>MSB</strong> - <em>Most Significant Bit</em>) en un número de 3 bits vale 4, mientras que el de la extrema derecha (<strong>LSB</strong> - <em>Least Significant Bit</em>) vale solo 1. ¡Acomodarlos visualmente en ese orden evita que leas los números al revés!</p>
         </div>
 
-        <h2>3. Simulación Interactiva (¡Pruébalo aquí!)</h2>
-        <p>Antes de gastar cables, juega con esta simulación. Cambia los interruptores de la izquierda para generar un código, y luego cambia uno solo para ver cómo los LEDs de la derecha te indican el error.</p>
+        <!-- === EL TRUCO DEL ÁRBOL (OPTIMIZACIÓN DE VELOCIDAD) === -->
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-top: 30px;">
+            <h3 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🌳</span> Arquitectura de Alta Velocidad: El Árbol Equilibrado
+            </h3>
+            <p>Como las ecuaciones del Síndrome requieren sumar 4 variables (ej: $D_1 \oplus D_3 \oplus D_5 \oplus D_7$), pero el chip 7486 solo tiene compuertas de 2 entradas, no podemos conectarlos todos a la vez.</p>
+            <p>La forma novata de resolver esto sería conectar las compuertas en <strong>"Cadena" (Daisy Chain)</strong>: sumar $D_1$ y $D_3$, pasar el resultado a otra compuerta para sumarle $D_5$, y pasar ese resultado a una tercera para sumarle $D_7$.</p>
+            
+            <h4 style="color: #c62828; margin-bottom: 5px;">⏱️ El Problema del Retardo (El Cuello de Botella)</h4>
+            <p style="margin-top: 0;">¿Recuerdas el <em>Retardo de Propagación</em> de la Lección 22? Cada chip toma tiempo en "pensar". Si usamos una cadena, la señal $D_1$ tendría que cruzar <strong>3 compuertas consecutivas</strong> antes de encender el LED. Eso hace que el circuito sea lento.</p>
+
+            <h4 style="color: #2e7d32; margin-bottom: 5px;">⚡ La Solución del Ingeniero: El Árbol XOR</h4>
+            <p style="margin-top: 0;">Para que el circuito sea ultra rápido (eficaz), los ingenieros diseñan un <strong>"Árbol Equilibrado" (Balanced Tree)</strong>. Emparejamos las entradas de dos en dos en una primera capa simultánea, y luego sumamos sus resultados en una segunda capa.</p>
+
+            <div class="svg-container" style="margin: 20px 0; background-color: white; padding: 15px; border-radius: 8px; border: 1px solid #bbdefb; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+                <img src="img/xor_cascada.png" alt="Esquema conectando 4 entradas usando 3 compuertas XOR en forma de árbol equilibrado" style="max-width:70%; height:auto;">
+                <p style="margin-top: 15px; color: #555;"><small><em>Fig 1. El Árbol XOR. Al hacer que las dos primeras compuertas trabajen en paralelo (al mismo tiempo), <strong>todas las señales cruzan exactamente 2 compuertas</strong> para llegar a la salida, en lugar de 3. ¡Hemos acelerado el procesador un 33% con solo cambiar el orden de los cables!</em></small></p>
+            </div>
+            <p style="font-size: 0.95em; color: #555;">En la práctica, para calcular \(s_1 = D_1 \oplus D_3 \oplus D_5 \oplus D_7\), conectamos dos XOR en paralelo: (D₁⊕D₃) y (D₅⊕D₇), y luego sus salidas a una tercera XOR. Así todas las señales recorren exactamente 2 compuertas.</p>
+        </div>
+
+        <h2>3. Pasos para el Montaje Físico (El Ruteo)</h2>
+        <p>Construir este circuito es una prueba de orden, paciencia y limpieza espacial (arquitectura). Sigue estos pasos para no enredarte en un "nido de pájaros":</p>
+
+        <div style="background-color: white; border-radius: 8px; padding: 20px; border-left: 5px solid #00bcd4; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin: 20px 0;">
+            <ol style="margin-bottom: 0; line-height: 1.8;">
+                <li><strong>Entradas:</strong> Coloca el Dip Switch a la izquierda de la placa con sus resistencias Pull-Down. Verifica con el multímetro que los pines den 0V y 5V al mover los interruptores 1 al 7.</li>
+                <li><strong>Árbol 1 (Para el LED de la DERECHA - \(s_1\)):</strong>
+                    <ul>
+                        <li>Usa el <strong>Chip #1</strong>. Conecta las señales $D_1$ y $D_3$ a las entradas de la primera XOR (pines 1 y 2).</li>
+                        <li>Conecta las señales $D_5$ y $D_7$ a las entradas de la segunda XOR (pines 4 y 5).</li>
+                        <li>Toma las salidas de ambas (pines 3 y 6) y conéctalas a las entradas de la tercera XOR (pines 9 y 10).</li>
+                        <li>La salida final (pin 8) va al <strong>LED 1 (Derecha)</strong>.</li>
+                    </ul>
+                </li>
+                <li><strong>Árbol 2 (Para el LED del CENTRO - \(s_2\)):</strong> Repite el proceso exacto usando el <strong>Chip #2</strong>, pero alimentando las compuertas con los cables $D_2, D_3, D_6, D_7$. El pin 8 irá al <strong>LED 2 (Centro)</strong>.</li>
+                <li><strong>Árbol 3 (Para el LED de la IZQUIERDA - \(s_3\)):</strong> Usa el <strong>Chip #3</strong> con las señales $D_4, D_5, D_6, D_7$. El pin 8 irá al <strong>LED 3 (Izquierda)</strong>.</li>
+            </ol>
+            <p style="margin-top: 15px; margin-bottom: 0; font-weight: bold; color: #0097a6; text-align: center;">¡Tip de Ingeniero! Usa cables de colores distintos para cada Árbol. Así, si el LED 2 falla, sabrás exactamente qué cables revisar.</p>
+        </div>
+
+        <!-- NUEVO BLOQUE: EL TEST DE ACEPTACIÓN -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin-top: 30px;">
+            <h3 style="color: #1b5e20; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🧪</span> El Test de Aceptación (QA)
+            </h3>
+            <p>Antes de jugar con el ruido, debemos comprobar que tu máquina funciona.</p>
+            <ol>
+                <li>Configura tus 7 interruptores en esta posición: <code>1 0 1 1 0 1 0</code> (Esta es la palabra sana que calculamos en la Lección 28).</li>
+                <li><strong>Observa tus LEDs:</strong> Si armaste todo bien, los tres LEDs deben estar <strong>APAGADOS</strong> (Síndrome <code>0 0 0</code>). ¡El paciente está sano!</li>
+                <li><strong>Introduce el ruido:</strong> Ahora, cambia el Interruptor 4 (pásalo de 1 a 0).</li>
+                <li><strong>La Magia:</strong> ¡El LED de la Izquierda ($s_3$) debería encenderse! Leyendo los LEDs de izquierda a derecha verás <code>1 0 0</code> (Que en binario es el número 4).</li>
+            </ol>
+            <p style="margin-top: 10px; margin-bottom: 0; font-size: 0.95em; background-color: #fff9c4; padding: 8px; border-radius: 6px;">
+                📋 <strong>Recuerda consultar la Tabla de Diagnóstico de la Lección 29:</strong> síndrome <code>100</code> (decimal 4) significa error en el bit 4 (D₄). ¡Así sabrás qué interruptor corregir!
+            </p>
+        </div>
+
+        <!-- === NUEVO BLOQUE: HIGIENE ELÉCTRICA (PINES FLOTANTES) === -->
+        <div class="destacado" style="background-color: #fff9c4; border-left-color: #fbc02d; margin-top: 30px;">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🧹</span> Higiene Eléctrica: ¿Qué hacemos con las compuertas sobrantes?
+            </h3>
+            <p>Si analizas tu inventario, verás que cada chip 74HC86 tiene 4 compuertas XOR, pero cada Árbol del Síndrome solo necesita 3 compuertas. Esto significa que <strong>te sobrará exactamente una compuerta XOR completa en cada uno de los tres chips</strong> (típicamente los pines 11, 12 y 13).</p>
+            
+            <p>Como aprendiste en el Laboratorio de la Lección 25, dejar pines de entrada "al aire" (flotantes) en tecnología CMOS/TTL es una receta para el desastre. Las patas sueltas actúan como antenas que captan ruido del ambiente, haciendo que las compuertas internas oscilen a alta velocidad, se calienten y consuman energía de tu fuente inútilmente.</p>
+            
+            <div style="background-color: white; padding: 15px; border-radius: 8px; border: 1px solid #ffe0b2; margin-top: 15px;">
+                <h4 style="margin-top: 0; color: #e65100;">✅ El Cierre Profesional del Montaje:</h4>
+                <p style="margin-bottom: 10px;">Antes de encender la fuente de poder, localiza los pines de entrada de las compuertas que no usaste en cada chip (por ejemplo, los pines <strong>12 y 13</strong>) y conéctalos directamente a <strong>GND (Tierra)</strong>.</p>
+                <ul style="margin-bottom: 0;">
+                    <li>Al conectar ambas entradas a 0V, la ecuación es $0 \oplus 0 = 0$.</li>
+                    <li>La salida (Pin 11) se quedará estable en 0V, sin molestar al resto del chip.</li>
+                    <li><strong>¡ADVERTENCIA CRÍTICA!</strong> Asegúrate de dejar los pines de SALIDA de esas compuertas libres (sin conectar a nada). Si conectas una salida a tierra, ¡crearás un cortocircuito interno!</li>
+                </ul>
+            </div>
+            <p style="margin-top: 15px; margin-bottom: 0; font-size: 0.95em; color: #555; text-align: center;"><em>Un circuito profesional no solo funciona bien; está diseñado para no fallar bajo estrés ambiental.</em></p>
+        </div>
+
+        <h2>4. Simulación Interactiva (La Prueba de Fuego)</h2>
+        <p>Antes de gastar cables o si no tienes los componentes físicos a mano, juega con esta simulación virtual. Configura los interruptores para generar un código sano (Síndrome <code>0 0 0</code>), y luego cambia <strong>un solo interruptor</strong> (simulando el ruido). ¡Mira cómo los LEDs de la derecha te indican en binario el número exacto del interruptor que tocaste!</p>
         
-        <div class="svg-container" style="border: 2px solid #ccc; border-radius: 8px; overflow: hidden; margin: 20px 0;">
-            <!-- Iframe de Falstad (Enlace genérico limpio por ahora) -->
+        <div class="svg-container" style="border: 2px solid #ccc; border-radius: 8px; overflow: hidden; margin: 20px 0; background: #fff;">
+            <!-- Iframe de Falstad -->
             <iframe 
                 width="100%" 
-                height="500" 
-                src="https://www.falstad.com/circuit/circuitjs.html" 
+                height="550" 
+                src="https://www.falstad.com/circuit/circuitjs.html?cct=$+1+0.000005+10.20027730826997+50+5+43%0A" 
                 frameborder="0">
             </iframe>
-            <p style="padding: 10px; background:#f9f9f9;"><small><em>Simulación potenciada por Falstad. (Dibuja aquí tu circuito de 3 árboles XOR).</em></small></p>
+            <p style="padding: 10px; background:#f9f9f9; margin: 0;"><small><em>💡 Puedes dibujar tu propio circuito en Falstad usando el menú 'Circuitos Integrados Digitales' → 'Añadir compuerta XOR' y construyendo los tres árboles manualmente. ¡Así validas tu diseño antes de cablear!</em></small></p>
         </div>
 
-        <h2>4. Pasos para el Montaje Físico</h2>
-        <div class="destacado" style="background-color: #fff3cd; border-left-color: #ffc107;">
-            ⚠️ <strong>¡No olvides VCC y GND en los 3 chips!</strong>
-        </div>
-        <ol>
-            <li><strong>Entradas:</strong> Coloca el Dip Switch y sus resistencias Pull-Down. Verifica con el multímetro que tienes 0V y 5V al moverlos.</li>
-            <li><strong>Árbol 1 (LED \(s_1\)):</strong>
-                <ul>
-                    <li>Usa el Chip #1. Conecta las entradas 1 y 3 a la primera XOR.</li>
-                    <li>Conecta las entradas 5 y 7 a la segunda XOR.</li>
-                    <li>Toma los resultados de ambas y mételos a la tercera XOR.</li>
-                    <li>La salida final va al <strong>LED 1</strong>.</li>
-                </ul>
-            </li>
-            <li><strong>Repite para LED 2 y 3:</strong> Sigue las ecuaciones con paciencia. ¡Usa cables de colores distintos para cada árbol!</li>
-        </ol>
+        <!-- ========================================================= -->
+        <!-- REFLEXIÓN FINAL: EL IMPACTO EN EL MUNDO REAL Y LA HISTORIA-->
+        <!-- ========================================================= -->
+        <h2>5. La Filosofía del Ingeniero</h2>
 
-        <div class="destacado" style="border-left: 4px solid #6f42c1; background-color: #f3e5f5;">
-            <h3>🧬 El ADN: El Código Original</h3>
-            <p>Lo que hizo Richard Hamming en los años 50, la naturaleza lo inventó hace millones de años.</p>
-            <p>Cuando tus células se dividen, copian millones de letras de ADN (A, C, T, G). A veces ocurren errores (mutaciones por radiación o azar). Tus células tienen enzimas que actúan como una <strong>Matriz de Control Biológica</strong>: recorren la cadena, detectan el error (el síndrome) y cortan el pedazo malo para repararlo.</p>
-            <p>Al entender Hamming, estás entendiendo la lógica que te mantiene vivo frente al caos y la entropía.</p>
+        <div class="destacado" style="border-left: 4px solid #6f42c1; background-color: #f3e5f5; margin-bottom: 30px;">
+            <h3 style="color: #7b1fa2; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.3em;">🧬</span> El ADN: El Código Original
+            </h3>
+            <p>Lo que hizo el matemático Richard Hamming en los laboratorios Bell en los años 50, la naturaleza lo inventó hace millones de años.</p>
+            <p>Cuando tus células se dividen, copian miles de millones de letras de ADN (A, C, T, G). A veces ocurren errores (mutaciones causadas por radiación UV o simple azar). Sin embargo, tus células tienen enzimas especializadas que actúan como una <strong>Matriz de Control Biológica</strong>: recorren la cadena, detectan el error estructural (el síndrome), cortan el pedazo malo y lo reparan automáticamente.</p>
+            <p style="margin-bottom: 0; font-weight: bold; color: #4a148c;">Al entender el Código Hamming, estás entendiendo la lógica universal que mantiene viva y estable a la información frente al caos y la entropía del universo, ya sea en el silicio o en el carbono.</p>
         </div>
 
-        <div class="dato-extra">
-            <h3>🎉 ¡Graduación!</h3>
-            <p>Si lograste que funcione, has completado el <strong>Curso de Fundamentos de Sistemas Digitales</strong>. Has recorrido el camino desde entender qué es un electrón hasta construir sistemas tolerantes a fallos.</p>
-            <p>Ya tienes las bases para explorar microcontroladores (Arduino), diseño de procesadores (FPGA) o telecomunicaciones avanzadas. ¡El mundo digital es tuyo!</p>
-            <p><strong>¿Dónde se usa esto hoy?</strong> Tu computador tiene algo llamado <strong>Memoria ECC</strong> (Error Correction Code) que usa una versión avanzada de Hamming para corregir errores causados por interferencia o incluso ¡rayos cósmicos! También es la razón por la que un <strong>Código QR</strong> funciona aunque esté sucio o roto.</p>
-
-            <div class="destacado" style="border-left-color: #000; background-color: #f4f4f4; margin-top: 40px;">
-                <h3>⚖️ La Responsabilidad del Ingeniero</h3>
-                <p>Hoy has construido un sistema que corrige errores. Puede parecer un simple juego de luces, pero la filosofía detrás de esto salva vidas.</p>
-                
-                <div style="background: #fff; padding: 15px; border-radius: 5px; margin: 15px 0; border: 1px solid #ddd;">
-                    <strong>🌑 Caso Histórico: El Challenger (1986)</strong>
-                    <p>El transbordador espacial explotó 73 segundos después del despegue, cobrando la vida de 7 astronautas. La causa no fue un arma ni un meteorito. Fue una simple <strong>junta de goma (O-ring)</strong> que se congeló y falló.</p>
-                    <p>Un componente diminuto falló, y el sistema colapsó. Fue una lección dolorosa sobre la fragilidad de la tecnología.</p>
-                </div>
-
-                <p><strong>Tu Misión:</strong> La Teoría de Códigos (Hamming) nos enseña a agregar <strong>Redundancia</strong> (bits extra). No lo hacemos por desperdiciar recursos; lo hacemos para que, cuando ese "pequeño bit" falle por el ruido, el sistema sea capaz de notarlo, corregirlo automáticamente y seguir funcionando.</p>
-                <p>Tu trabajo como ingeniero no es solo hacer cosas que funcionen cuando todo va bien, sino diseñar sistemas que <strong>sobrevivan cuando algo sale mal</strong>.</p>
+        <div class="dato-extra" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin-bottom: 40px;">
+            <h3 style="color: #1b5e20; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.3em;">⚖️</span> La Responsabilidad del Ingeniero
+            </h3>
+            <p>Hoy has construido un sistema que corrige errores. Puede parecer un simple juego de luces en una protoboard, pero la filosofía detrás de este circuito salva vidas humanas todos los días.</p>
+            
+            <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #c8e6c9; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <h4 style="margin-top: 0; color: #c62828;">🌑 Caso Histórico: El Transbordador Challenger (1986)</h4>
+                <p>El transbordador espacial explotó 73 segundos después del despegue, cobrando la vida de 7 astronautas. La causa no fue una bomba ni un meteorito. Fue una simple <strong>junta tórica de goma (O-ring)</strong> que se congeló y falló.</p>
+                <p style="margin-bottom: 0;">Un componente diminuto falló, y no había un sistema redundante lo suficientemente robusto para compensarlo. Todo el sistema colapsó. Fue la lección más dolorosa de la NASA sobre la fragilidad de la tecnología compleja.</p>
             </div>
+
+            <p style="font-size: 1.1em; color: #333;"><strong>Tu Misión como Profesional:</strong></p>
+            <p>La Teoría de Códigos nos enseña a agregar <strong>Redundancia</strong> (bits extra). No lo hacemos por capricho ni para desperdiciar recursos; lo hacemos para que, cuando ese "pequeño bit" falle inevitablemente por la radiación o el desgaste, el sistema sea capaz de notarlo, aislarlo, corregirlo automáticamente y seguir funcionando.</p>
+            <p style="font-weight: bold; color: #2e7d32; font-size: 1.1em; text-align: center; padding: 15px; background-color: #c8e6c9; border-radius: 6px; margin-bottom: 0;">
+                Tu trabajo como ingeniero no es solo diseñar cosas que funcionen cuando todo va bien.<br>Es diseñar sistemas que sobrevivan cuando todo sale mal.
+            </p>
+        </div>
+
+        <!-- NUEVO: Checklist del Ingeniero Graduado -->
+        <div class="destacado" style="background-color: #e0f2fe; border-left-color: #0288d1; margin: 40px 0;">
+            <h3 style="color: #01579b; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.3em;">✅</span> Checklist del Ingeniero Graduado
+            </h3>
+            <p>Antes de celebrar, asegúrate de poder responder “sí” a cada una de estas preguntas:</p>
+            <ul style="list-style: none; padding-left: 0;">
+                <li>☐ ¿Construiste el circuito y los LEDs mostraron el síndrome correcto (000) con la palabra sana?</li>
+                <li>☐ ¿Introdujiste ruido en un solo bit y el síndrome decimal te indicó exactamente qué interruptor cambiar?</li>
+                <li>☐ ¿Comprendes por qué el árbol equilibrado (dos capas) es más rápido que la cadena?</li>
+                <li>☐ ¿Sabes explicar qué significan \(s_1, s_2, s_3\) y cómo se relacionan con la matriz \(H\)?</li>
+                <li>☐ ¿Puedes justificar por qué este código corrige 1 error pero no 2 (distancia mínima \(d=3\))?</li>
+                <li>☐ ¿Conectaste a GND las entradas de las compuertas XOR sobrantes para evitar ruido?</li>
+            </ul>
+            <p style="margin-bottom: 0; font-weight: bold; text-align: center; color: #01579b;">Si respondiste 'sí' a todo, ¡estás listo para el mundo profesional! 🎉</p>
+        </div>
+
+    </section>
+
+    <!-- PODCAST FINAL -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: El Viaje del Ingeniero (Episodio Final)</h3>
+        </div>
+        <p class="podcast-descripcion">
+            En este episodio de cierre, reflexionamos sobre el largo camino desde la Ley de Ohm hasta los Códigos de Corrección de Errores. Discutimos la ética de la ingeniería, la importancia de enseñar a los estudiantes a amar el "troubleshooting", y cómo la redundancia no es un desperdicio, sino la máxima expresión del diseño responsable.
+        </p>
+        <div class="podcast-player">
+            <audio controls preload="metadata" style="width: 100%;">
+                <source src="audio/leccion30.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 18:45 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- TARJETA DE PROMPT ÉTICO FINAL -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        <p class="prompt-contexto">
+            Usa esta última guía para reflexionar junto con la IA sobre el impacto de lo que has aprendido en el curso.
+        </p>
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            <div class="paso"><strong>1️⃣ "Comprendí que..."</strong> (Resume la importancia de la redundancia y el Código Hamming).</div>
+            <div class="paso"><strong>2️⃣ "y quiero saber..."</strong> (Pide una reflexión filosófica o ética sobre la dependencia de la humanidad hacia estos sistemas).</div>
+            <div class="paso"><strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong> (Colegas docentes el día de tu graduación).</div>
+            <div class="paso"><strong>4️⃣ "Incluye un error común que debo evitar..."</strong> (Ej: Pensar que la tecnología avanzada no falla).</div>
         </div>
     </section>
 
-    <footer>
-        <hr>
-        <div style="text-align: center; padding: 40px 0;">
-            <h1>🎓 ¡Felicidades Ingeniero!</h1>
-            <p>Has completado las 4 Unidades.</p>
-            <a href="index.html" class="btn-navegacion" style="background-color: var(--color-primario); font-size: 1.2em; padding: 15px 30px;">🏠 Volver al Inicio del Curso</a>
+    <!-- ========================================================= -->
+    <!-- CIERRE Y GRADUACIÓN (EL VEREDICTO FINAL)                  -->
+    <!-- ========================================================= -->
+    <footer style="margin-top: 60px;">
+        <hr style="border: 0; height: 2px; background: linear-gradient(to right, transparent, var(--color-primario), transparent); margin-bottom: 40px;">
+        
+        <div style="text-align: center; padding: 20px 0 30px 0;">
+            <h1 style="font-size: 3em; margin-bottom: 10px; color: #333;">🎓 ¡Felicidades, Ingeniero y Maestro!</h1>
+            <p style="font-size: 1.3em; color: #555; max-width: 800px; margin: 0 auto 30px auto; line-height: 1.6;">
+                Si lograste que esos 3 LEDs diagnosticaran el error, <strong>has completado con éxito el Curso de Fundamentos de Sistemas Digitales</strong>. Mira tus manos y mira tu protoboard. Lo que acabas de construir no es un juguete; es la misma arquitectura lógica que protege a las sondas espaciales de la radiación cósmica.
+            </p>
+        </div>
+
+        <!-- EL INVENTARIO DE SUPERPODERES -->
+        <div class="destacado" style="background-color: #f8f9fa; border-left-color: #C04F15; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); padding: 30px;">
+            <h2 style="color: #C04F15; margin-top: 0; text-align: center; margin-bottom: 25px;">Tu Nuevo Perfil Profesional</h2>
+            
+            <p style="text-align: center; color: #444; margin-bottom: 30px; font-size: 1.15em; line-height: 1.6;">
+                En la Lección 1 te enseñamos que la palabra <em>Ingeniero</em> provenía del latín <strong>Ingenium</strong>: "el que tiene ingenio". Hoy has demostrado exactamente eso. Has dejado de ser un usuario pasivo y consumidor de la tecnología para convertirte en un <strong>Arquitecto Creador</strong>. Ya no ves "cables que prenden luces", sino que utilizas la electrónica como un lienzo para resolver problemas con pura creatividad. A partir de hoy, posees habilidades reales y tangibles:
+            </p>
+
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                
+                <!-- Columna 1 -->
+                <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
+                    <h4 style="margin-top: 0; display: flex; align-items: center; color: #333;">
+                        <span style="display: inline-block; width: 12px; height: 12px; background-color: #C04F15; border-radius: 50%; margin-right: 10px; box-shadow: 0 0 8px rgba(192, 79, 21, 0.6);"></span>
+                        Dominio del Hardware
+                    </h4>
+                    <p style="font-size: 0.95em; color: #555; line-height: 1.5; margin-bottom: 0;">Ya no conectas cables "a ver si prende". Lees Datasheets, respetas la polaridad y dominas el <strong>Troubleshooting</strong> aislando errores con tu Punta Lógica.</p>
+                </div>
+
+                <!-- Columna 2 -->
+                <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
+                    <h4 style="margin-top: 0; display: flex; align-items: center; color: #333;">
+                        <span style="display: inline-block; width: 12px; height: 12px; background-color: #C04F15; border-radius: 50%; margin-right: 10px; box-shadow: 0 0 8px rgba(192, 79, 21, 0.6);"></span>
+                        Mente Matemática
+                    </h4>
+                    <p style="font-size: 0.95em; color: #555; line-height: 1.5; margin-bottom: 0;">Traduces problemas humanos a silicio. Usas Mapas de Karnaugh y De Morgan para aplastar ecuaciones gigantes y ahorrar dinero en chips.</p>
+                </div>
+                
+                <!-- EL RECONOCIMIENTO PEDAGÓGICO (MÉTODO FEYNMAN) -->
+                <div style="background: #fff8e1; padding: 20px; border-radius: 8px; border: 2px solid #ffc107; grid-column: 1 / -1; box-shadow: 0 4px 10px rgba(255, 193, 7, 0.15);">
+                    <h4 style="margin-top: 0; display: flex; align-items: center; color: #b71c1c; font-size: 1.2em;">
+                        <span style="font-size: 1.5em; margin-right: 10px;">🍎</span>
+                        Maestría Pedagógica: El Método Feynman
+                    </h4>
+                    <p style="font-size: 1em; color: #444; line-height: 1.6; margin-bottom: 0;">Más allá de los circuitos, te has graduado como un <strong>Formador de Formadores</strong>. Al asimilar este curso, has interiorizado el <em>Método Feynman</em>: aprendiste a tomar la matemática más abstracta e intimidante del mundo (álgebra lineal, matrices, isomorfismo) y traducirla a analogías simples, juegos de magia, semáforos y trenes que pasan por ventanas. Estás listo no solo para construir tecnología, sino para inspirar a la próxima generación de mentes a perderle el miedo a la ingeniería. <strong>¡Ese es tu verdadero superpoder!</strong></p>
+                </div>
+
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 50px;">
+            <p style="font-size: 1.15em; color: #444; margin-bottom: 30px;">
+                Ya posees los cimientos para dominar microcontroladores (Arduino, Raspberry Pi, ESP32, etc.), arquitectura avanzada de procesadores o telecomunicaciones. <strong>¡El mundo digital te pertenece!</strong>
+            </p>
+            
+            <a href="index.html" class="btn-navegacion" style="background-color: var(--color-secundario); font-size: 1.3em; padding: 20px 40px; box-shadow: 0 6px 15px rgba(255, 140, 0, 0.4); border-radius: 50px; font-weight: bold; color: white; text-decoration: none; transition: transform 0.2s;">
+                🏠 Volver al Inicio del Curso
+            </a>
+        </div>
+        
+        <!-- FOOTER ACADÉMICO UNIFICADO -->
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eaeaea; text-align: center; color: #666;">
+            <p style="margin-bottom: 5px;"><strong>Fundamentos de Sistemas Digitales</strong></p>
+            <p style="margin-bottom: 5px; font-size: 0.9em;">Diseñado para formar a la próxima generación de ingenieros y docentes en Colombia.</p>
+            <p style="font-size: 0.8em; margin-bottom: 0;">Material Educativo Abierto (REA) - 2026</p>
         </div>
     </footer>
 </div>

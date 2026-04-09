@@ -3,99 +3,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección 29: Matriz Generadora - Fundamentos de Sistemas Digitales</title>
+    <title>Lección 28: Matriz Generadora (G) - Fundamentos de Sistemas Digitales</title>
     <link rel="stylesheet" href="estilos.css">
     
-    <!-- KaTeX -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-    <style>
-        .matriz-container {
-            overflow-x: auto;
-            text-align: center;
-            margin: 20px 0;
-            font-size: 1.1em;
-        }
-    </style>
+    <!-- KaTeX: Script principal y auto-render -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true }
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
 </head>
 <body>
 
 <div class="contenedor">
     <header>
-        <p><small>Unidad 4: Teoría de Códigos - Lección 29</small></p>
-        <h1>🧾 La Receta del Código: Matriz Generadora (\(G\))</h1>
+        <p><small>Unidad 4: Teoría de Códigos - Lección 28</small></p>
+        <h1>🧾 La Receta del Escudo: Matriz Generadora ($G$)</h1>
     </header>
 
+    <div class="intro-leccion" style="margin-bottom: 30px;">
+        <p>En la lección anterior decidimos proteger nuestros datos agregándoles bits extra de redundancia (la "ñapa"). Pero, ¿qué bits sumamos con cuáles para que el escudo sea perfecto y podamos localizar el error después? No podemos conectarlos al azar.</p>
+        <p>Necesitamos un plano exacto, una receta que le diga a nuestra computadora cómo "amasar" los datos originales para generar los bits de protección. En el mundo del Álgebra Lineal, a este plano maestro se le llama <strong>Matriz Generadora ($G$)</strong>.</p>
+        <p style="margin-bottom: 0;">Hoy descubriremos un <strong>isomorfismo deslumbrante</strong> (recordando la Unidad 3): cómo una tabla llena de ceros y unos en un papel se transforma mágicamente en un diagrama de cables y compuertas lógicas físicas. Así como el álgebra de Boole era isomorfa a los circuitos, aquí la multiplicación de matrices es isomorfa al cableado de XORs.</p>
+    </div>
+
     <section>
-        <p>Decidimos proteger los datos con bits extra ("La Ñapa"). Pero, ¿qué bits sumamos con cuáles? Necesitamos un plano exacto. En matemáticas, ese plano se llama <strong>Matriz Generadora</strong>.</p>
+        <h2>1. ¿Qué es la Matriz $G$?</h2>
+        <p>No te dejes intimidar por la palabra "matriz". Piensa en ella simplemente como un <strong>tablero de conexiones telefónicas</strong> o un mapa de ruteo. Aquí está la matriz $G$ del famoso <strong>Código Hamming (7,4)</strong>:</p>
 
-        <h2>1. ¿Qué es la Matriz \(G\)?</h2>
-        <p>No te asustes. Piensa en ella como un <strong>tablero de conexiones</strong>. Aquí está la matriz del famoso código Hamming (7,4):</p>
-
-        <div class="matriz-container formula">
+        <div class="formula" style="font-size: 1.3em; background-color: white; border: 2px solid #9c27b0; border-radius: 8px; padding: 20px; margin: 20px auto; max-width: 500px; box-shadow: 0 4px 10px rgba(156, 39, 176, 0.1);">
             $$
-            G = \left(
+            G = \left[
             \begin{array}{cccc|ccc}
             1 & 0 & 0 & 0 & 1 & 1 & 0 \\
             0 & 1 & 0 & 0 & 1 & 0 & 1 \\
             0 & 0 & 1 & 0 & 0 & 1 & 1 \\
             0 & 0 & 0 & 1 & 1 & 1 & 1
             \end{array}
-            \right)
+            \right]
             $$
         </div>
 
-        <div class="svg-container">
-            <!-- Imagen: Matriz Explicada (img/matriz_generadora_explicada.png) -->
-            <img src="img/matriz_generadora_explicada.png" alt="Matriz G dividida en dos: Izquierda (Identidad) y Derecha (Paridad)" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 1. Izquierda: Copia los datos. Derecha: Crea la protección.</em></small></p>
+        <!-- NUEVO: Aplicación real (ECC en RAM) -->
+        <div class="dato-extra" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-bottom: 20px;">
+            <h4 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">💾</span> Aplicación real: Memorias ECC
+            </h4>
+            <p style="margin-bottom: 0;">Las memorias RAM ECC (Error-Correcting Code) usan matrices similares a \(G\) y \(H\) para corregir errores de un bit en tiempo real. Sin ellas, los servidores de Google, Amazon o bancos colapsarían por fallos de memoria inducidos por radiación cósmica.</p>
+        </div>
+
+        <div class="destacado" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+            <h3 style="color: #7b1fa2; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🔍</span> La Anatomía de la Matriz (Códigos Sistemáticos)
+            </h3>
+            <p>Observa la línea divisoria vertical en el medio de la matriz. Divide a $G$ en dos partes con misiones completamente distintas:</p>
+            <ul style="margin-bottom: 0;">
+                <li><strong>Mitad Izquierda (La Escalera de Unos):</strong> Se llama <em>Matriz Identidad</em> ($I_k$). Su único trabajo es <strong>copiar</strong> intactos los 4 bits de tus datos originales ($d_1, d_2, d_3, d_4$) para que viajen legibles en el mensaje. Como aprendiste en la lección pasada, a esto se le llama un "Código Sistemático".</li>
+                <li><strong>Mitad Derecha (El Caos Controlado):</strong> Se llama <em>Submatriz de Paridad</em> ($P$). Esta es la verdadera "receta". Te dice exactamente cómo mezclar los datos para crear los 3 bits del escudo protector ($p_1, p_2, p_3$).</li>
+            </ul>
+            <!-- NUEVO: Interpretación geométrica (espacio de filas) -->
+            <div style="background-color: #fff9c4; padding: 12px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #fbc02d;">
+                <p style="margin: 0; font-size: 0.95em;"><strong>🧠 Interpretación geométrica:</strong> Las 4 filas de \(G\) son 4 palabras válidas (de 7 bits) que forman la <em>base</em> del código. Cualquier combinación lineal (XOR) de ellas genera otra palabra válida. ¡Por eso se llama Matriz <strong>Generadora</strong>!</p>
+            </div>
+            <!-- NUEVO: Nota de seguridad (códigos no sistemáticos) -->
+            <div style="background-color: #ffebee; padding: 12px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #f44336;">
+                <p style="margin: 0; font-size: 0.95em;"><strong>⚠️ Nota de seguridad:</strong> En comunicaciones encriptadas, a veces se usan códigos <em>no sistemáticos</em> (sin matriz identidad) para ocultar los datos originales. Pero en la mayoría de sistemas prácticos (discos duros, memorias RAM), la simplicidad del código sistemático es preferible.</p>
+            </div>
+        </div>
+
+        <div class="svg-container" style="margin: 25px 0;">
+            <img src="img/matriz_generadora_explicada.png" alt="Matriz G dividida en dos: Izquierda (Identidad) y Derecha (Paridad)" style="max-width:90%; height:auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <p><small><em>Fig 1. Izquierda: Copia los datos puros. Derecha: Crea los bits de protección. La matriz completa $G = [I_k | P]$ multiplicada por los 4 bits de datos genera el paquete final de 7 bits.</em></small></p>
+        </div>
+
+        <!-- NUEVO: Formato sistemático del paquete final -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin-top: 20px;">
+            <h3 style="color: #1b5e20; margin-top: 0;">📦 El paquete final que viaja por el canal</h3>
+            <p>La <strong>palabra de código</strong> (codeword) se ensambla así:</p>
+            <div class="formula" style="font-size: 1.2em; background: white;">
+                $$[d_1, d_2, d_3, d_4, \; p_1, p_2, p_3]$$
+            </div>
+            <p>Los primeros 4 bits son los datos originales (gracias a la matriz identidad), los últimos 3 son la redundancia calculada con la submatriz \(P\).</p>
         </div>
 
         <h2>2. Traducción: De la Matriz al Cable 🔌</h2>
-        <p>Leer la matriz es muy fácil si sabes el secreto:</p>
-        <ul>
-            <li>Las <strong>Filas</strong> son tus datos de entrada (\(d_1, d_2, d_3, d_4\)).</li>
-            <li>Las <strong>Columnas de la derecha</strong> son tus bits de paridad (\(p_1, p_2, p_3\)).</li>
-            <li>Si ves un <strong>1</strong>, significa: "¡Conecta este cable a la compuerta XOR!".</li>
+        <p>Leer la matriz para armar un circuito es increíblemente fácil si sabes el secreto del <strong>isomorfismo</strong> (recordando la Lección 21):</p>
+        <ul style="font-size: 1.05em; background-color: #f8f9fa; padding: 15px 15px 15px 35px; border-radius: 8px; border: 1px solid #dee2e6;">
+            <li>Las <strong>Filas horizontales</strong> representan los cables de tus datos de entrada ($d_1, d_2, d_3, d_4$).</li>
+            <li>Las <strong>Columnas verticales de la derecha</strong> representan los cables de tus bits de paridad ($p_1, p_2, p_3$).</li>
+            <li>Si ves un <strong>1</strong> en una celda, significa: <span style="color: #c62828; font-weight: bold;">"¡Conecta este cable de dato a la compuerta XOR de esta paridad!"</span>. Si ves un <strong>0</strong>, no conectas nada.</li>
         </ul>
 
         <h3>La Receta de las Columnas de Paridad:</h3>
-        <p>Miremos solo la parte derecha de la matriz:</p>
-        <ul>
-            <li><strong>Columna \(p_1\) (1, 1, 0, 1):</strong> Suma con XOR los datos \(d_1, d_2, d_4\).</li>
-            <li><strong>Columna \(p_2\) (1, 0, 1, 1):</strong> Suma con XOR los datos \(d_1, d_3, d_4\).</li>
-            <li><strong>Columna \(p_3\) (0, 1, 1, 1):</strong> Suma con XOR los datos \(d_2, d_3, d_4\).</li>
-        </ul>
-
-        <div class="svg-container">
-            <!-- Imagen: Circuito Hamming (img/circuito_hamming_encoder.png) -->
-            <img src="img/circuito_hamming_encoder.png" alt="Esquema eléctrico del codificador Hamming creado a partir de la matriz" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 2. ¡Mira! La matriz era en realidad un diagrama de compuertas XOR.</em></small></p>
+        <p>Miremos solo la submatriz de paridad $P$ (la parte derecha de la línea) y leámosla bajando por cada columna para descubrir qué sumar:</p>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 15px; margin: 20px 0;">
+            <div style="flex: 1; min-width: 250px; background-color: #e3f2fd; border-left: 4px solid #1976d2; padding: 15px; border-radius: 6px;">
+                <h4 style="margin-top: 0; color: #0d47a1;">Columna $p_1$ (1, 1, 0, 1)</h4>
+                <p style="margin-bottom: 5px;">Tiene '1s' en la fila 1, 2 y 4.</p>
+                <p style="font-weight: bold; margin: 0; color: #1565c0;">Ecuación: $p_1 = d_1 \oplus d_2 \oplus d_4$</p>
+            </div>
+            
+            <div style="flex: 1; min-width: 250px; background-color: #e8f5e9; border-left: 4px solid #388e3c; padding: 15px; border-radius: 6px;">
+                <h4 style="margin-top: 0; color: #1b5e20;">Columna $p_2$ (1, 0, 1, 1)</h4>
+                <p style="margin-bottom: 5px;">Tiene '1s' en la fila 1, 3 y 4.</p>
+                <p style="font-weight: bold; margin: 0; color: #2e7d32;">Ecuación: $p_2 = d_1 \oplus d_3 \oplus d_4$</p>
+            </div>
+            
+            <div style="flex: 1; min-width: 250px; background-color: #fff3e0; border-left: 4px solid #f57f17; padding: 15px; border-radius: 6px;">
+                <h4 style="margin-top: 0; color: #e65100;">Columna $p_3$ (0, 1, 1, 1)</h4>
+                <p style="margin-bottom: 5px;">Tiene '1s' en la fila 2, 3 y 4.</p>
+                <p style="font-weight: bold; margin: 0; color: #d35400;">Ecuación: $p_3 = d_2 \oplus d_3 \oplus d_4$</p>
+            </div>
         </div>
 
-        <div class="dato-extra">
-            <h3>🧮 Herramienta: Verificación Matemática</h3>
-            <p>Si multiplicas tu mensaje por la matriz, obtienes el código. Pero ojo: <strong>1+1=0</strong> aquí.</p>
-            <p>Usa este enlace pre-configurado en <strong>Wolfram Alpha</strong> para ver cómo se hace la magia:</p>
+        <p>¿Te resultan familiares estas ecuaciones? ¡Son exactamente las mismas que vimos en la lección anterior! Pero ahora entiendes de dónde salieron: no son aleatorias, son la lectura vertical de la Matriz $G$.</p>
+
+        <!-- NUEVO: Extracción formal de las ecuaciones desde la matriz -->
+        <div class="destacado" style="background-color: #fcf3cf; border-left-color: #fbc02d; margin: 20px 0;">
+            <h3 style="color: #f57f17; margin-top: 0;">📐 Matemáticamente: ¿Cómo se obtienen esas ecuaciones?</h3>
+            <p>Cada bit de paridad se obtiene multiplicando (en <strong>Módulo 2</strong>) el vector de datos por la columna correspondiente de \(P\):</p>
+            <div class="formula" style="font-size: 1.1em; background: white;">
+                $$p_1 = [d_1\; d_2\; d_3\; d_4] \cdot [1,1,0,1]^T = d_1 \oplus d_2 \oplus d_4$$
+            </div>
+            <p>Y lo mismo para \(p_2\) y \(p_3\). Esto es exactamente el <strong>producto matricial</strong> \(c = m \cdot G\) (en módulo 2) que veremos a continuación.</p>
+        </div>
+
+        <!-- NUEVO: Puente a la Matriz H (G·H^T = 0) -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin-bottom: 20px;">
+            <h4 style="color: #7b1fa2; margin-top: 0;">🔗 Puente a la siguiente lección</h4>
+            <p style="margin-bottom: 0;">La matriz de control \(H\) que veremos en la Lección 29 es la "hermana ortogonal" de \(G\). Cumple que \(G \cdot H^T = 0\) (en módulo 2). Esto permite que el receptor verifique si un paquete recibido es válido multiplicándolo por \(H\) y comprobando que el resultado sea cero. ¡El isomorfismo nos permite pasar del diseño (G) a la verificación (H)!</p>
+        </div>
+
+        <div class="svg-container" style="margin: 30px 0;">
+            <img src="img/circuito_hamming_encoder.png" alt="Esquema eléctrico del codificador Hamming creado a partir de la matriz" style="max-width:90%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <p><small><em>Fig 2. ¡Mira con atención! Las conexiones a las compuertas XOR en este circuito corresponden exactamente a los '1s' de las 3 últimas columnas de la matriz \(G\). <strong>Acabas de compilar una matriz matemática directamente a hardware (El Codificador del Emisor).</strong> Este es el poder del isomorfismo: una tabla se vuelve cableado.</em></small></p>
+        </div>
+
+        
+
+        <!-- ========================================================= -->
+        <!-- NUEVA SECCIÓN: RINCÓN DOCENTE (ENSEÑANDO MATRICES EN SECUNDARIA) -->
+        <!-- ========================================================= -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: Matrices sin lágrimas para Secundaria
+            </h3>
+            <p>En el currículo colombiano, los estudiantes suelen ver matrices por primera vez entre los grados 9° y 10°. Muchos las odian porque parecen "tablas inútiles de números para multiplicar de forma enredada". Como docente, el Código Hamming es tu arma secreta para cambiar esa percepción.</p>
             
-            <a href="https://www.wolframalpha.com/input?i=%28%7B1%2C0%2C1%2C1%7D+.+%7B%7B1%2C0%2C0%2C0%2C1%2C1%2C0%7D%2C%7B0%2C1%2C0%2C0%2C1%2C0%2C1%7D%2C%7B0%2C0%2C1%2C0%2C0%2C1%2C1%7D%2C%7B0%2C0%2C0%2C1%2C1%2C1%2C1%7D%7D%29+mod+2" 
-               target="_blank" 
-               class="btn-navegacion" 
-               style="background-color: #ff7e00; display: block; margin: 15px auto; max-width: 300px; text-align: center;">
-               Ver en Wolfram Alpha 🐺
-            </a>
-            <p><small><em>(Prueba cambiando los números del primer vector {1,0,1,1} por los tuyos).</em></small></p>
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">La Analogía del "Escáner de Seguridad"</h4>
+                <p style="margin-bottom: 15px;">Para enseñar a multiplicar un mensaje de 4 bits (vector) por la matriz $G$ de 7 columnas sin asustar a los estudiantes, no hables de álgebra lineal. Usa esta dinámica visual:</p>
+                
+                <ol style="margin-bottom: 15px; line-height: 1.6;">
+                    <li><strong>El Mensaje es un tren:</strong> Dibuja el mensaje $[d_1, d_2, d_3, d_4]$ (ej: <code>1 0 1 1</code>) como un tren horizontal.</li>
+                    <li><strong>La Matriz es un Escáner de 7 puertas:</strong> Dibuja las 7 columnas de la matriz $G$ como 7 puertas verticales (escáneres) por las que el tren debe pasar.</li>
+                    <li><strong>El Filtro Mágico (El Producto Punto):</strong> Explícales que cuando el tren (horizontal) choca contra una puerta (vertical), los '1s' de la puerta actúan como "ventanas" que dejan pasar la carga del tren, y los '0s' actúan como "paredes" que la bloquean.</li>
+                    <li><strong>La Suma XOR (Módulo 2):</strong> Todos los vagones del tren que logran pasar por las ventanas caen en una licuadora gigante (compuerta XOR). Si caen un número impar de vagones cargados (1), la licuadora escupe un 1. Si cae un número par, escupe un 0.</li>
+                </ol>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>El resultado:</strong> El tren entra con 4 vagones, pasa por las 7 puertas-escáner, y al otro lado salen 7 bits nuevos. ¡Los estudiantes estarán haciendo álgebra lineal avanzada de tensores sin siquiera darse cuenta!</p>
+            </div>
+        </div>
+
+        <h2>3. Simulando Matemáticas de Alto Nivel</h2>
+        
+        <!-- NUEVO: Ejemplo numérico de multiplicación matricial paso a paso -->
+        <div class="destacado" style="background-color: #f8f9fa; border-left-color: #0d47a1; margin-bottom: 20px;">
+            <h3 style="color: #1565c0; margin-top: 0;">🧮 Multiplicación paso a paso (Módulo 2)</h3>
+            <p>Tomemos el mensaje \(m = [1, 0, 1, 1]\) y multipliquémoslo por la matriz \(G\) para obtener el paquete protegido \(c = m \cdot G\) (en aritmética módulo 2, donde \(1+1=0\)):</p>
+            <div style="background-color: white; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.95em; line-height: 1.8; overflow-x: auto;">
+                $$
+                \begin{aligned}
+                c_1 &= 1\cdot1 + 0\cdot0 + 1\cdot0 + 1\cdot0 = 1 \\
+                c_2 &= 1\cdot0 + 0\cdot1 + 1\cdot0 + 1\cdot0 = 0 \\
+                c_3 &= 1\cdot0 + 0\cdot0 + 1\cdot1 + 1\cdot0 = 1 \\
+                c_4 &= 1\cdot0 + 0\cdot0 + 1\cdot0 + 1\cdot1 = 1 \\
+                c_5 &= 1\cdot1 + 0\cdot1 + 1\cdot0 + 1\cdot1 = 1 \oplus 0 \oplus 0 \oplus 1 = 0 \quad (\text{porque } 1+1=0) \\
+                c_6 &= 1\cdot1 + 0\cdot0 + 1\cdot1 + 1\cdot1 = 1 \oplus 0 \oplus 1 \oplus 1 = 1 \\
+                c_7 &= 1\cdot0 + 0\cdot1 + 1\cdot1 + 1\cdot1 = 0 \oplus 0 \oplus 1 \oplus 1 = 0
+                \end{aligned}
+                $$
+            </div>
+            <p>Resultado: \(c = [1,0,1,1,0,1,0]\). ¡Pruébalo en Wolfram Alpha para verificar!</p>
+        </div>
+
+        <div class="dato-extra" style="background-color: #fffde7; border-left-color: #fbc02d; margin-top: 20px;">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🧮</span> Herramienta: Verificación con Wolfram Alpha
+            </h3>
+            <p>En el mundo real, los procesadores de telecomunicaciones no "ven" compuertas lógicas individuales dibujadas; ellos ejecutan <strong>multiplicación de matrices</strong> a velocidades asombrosas. Si multiplicas el vector de tu mensaje de datos (1x4) por la matriz $G$ (4x7), obtienes instantáneamente el código protegido final (1x7) que viajará por el aire.</p>
+            <p><strong>Pero OJO:</strong> Al igual que vimos en la Lección 26, el procesador debe usar <strong>Aritmética Módulo 2</strong> (donde $1+1=0$) para que la suma matemática se comporte como las compuertas XOR de nuestro circuito.</p>
+            
+            <p>Hemos pre-configurado este cálculo matricial en el motor de conocimiento <strong>Wolfram Alpha</strong> para ti. Haz clic en el botón de abajo y mira cómo la matriz transforma el frágil mensaje <code>[1, 0, 1, 1]</code> en el paquete blindado <code>[1, 0, 1, 1, 0, 0, 0]</code> (¡nota que es diferente a nuestro ejemplo porque Wolfram usa otro orden de columnas!):</p>
+            
+            <p style="text-align: center; margin: 25px 0;">
+                <a href="https://www.wolframalpha.com/input?i=%28%7B1%2C0%2C1%2C1%7D+.+%7B%7B1%2C0%2C0%2C0%2C1%2C1%2C0%7D%2C%7B0%2C1%2C0%2C0%2C1%2C0%2C1%7D%2C%7B0%2C0%2C1%2C0%2C0%2C1%2C1%7D%2C%7B0%2C0%2C0%2C1%2C1%2C1%2C1%7D%7D%29+mod+2" 
+                   target="_blank" 
+                   class="btn-navegacion" 
+                   style="background-color: #ff9800; font-size: 1.1em; padding: 15px 30px; box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);">
+                   Ver Magia Matricial en Wolfram Alpha 🐺 ↗
+                </a>
+            </p>
+            <p style="text-align: center; font-size: 0.9em; color: #666;"><em>(Una vez en la página de Wolfram, prueba cambiando los ceros y unos del primer vector {1,0,1,1} por cualquier otro mensaje de 4 bits para ver cómo la matriz recalcula los bits de "ñapa" instantáneamente).</em></p>
         </div>
     </section>
 
+    <!-- PODCAST -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        <p class="podcast-descripcion">
+            Dos docentes analizan cómo romper el miedo de los estudiantes frente a las matrices de álgebra lineal. Discuten cómo la analogía del "Tablero de Conexiones" permite enseñar la Matriz $G$ del Código Hamming como si fuera un simple plano de cableado para compuertas XOR, dándole un sentido físico inmediato a las matemáticas. Además, comparten experiencias sobre el uso de Wolfram Alpha en clase como herramienta de validación rápida.
+        </p>
+        <div class="podcast-player">
+            <audio controls preload="metadata" style="width: 100%;">
+                <source src="audio/leccion28.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 12:45 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- NUEVO: Conexión con Inteligencia Artificial (movida al final, antes de la tarjeta de prompt) -->
+    <div class="destacado" style="background-color: #fcf3cf; border-left-color: #fbc02d; margin-top: 35px; margin-bottom: 35px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+        <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3em;">🤖</span> ¿Y esto qué tiene que ver con la Inteligencia Artificial?
+        </h3>
+        <p style="font-size: 1.05em; color: #444;">Los códigos de Hamming no solo protegen satélites y memorias de PC; también son los guardianes silenciosos del funcionamiento fiable de los sistemas de IA actuales. Así es como se conectan estos dos mundos:</p>
+        
+        <ul style="line-height: 1.7; color: #333; margin-bottom: 20px;">
+            <li><strong>🛡️ Protección del hardware de IA:</strong> Los modelos masivos (como los LLMs) se entrenan multiplicando gigantescas matrices de datos durante meses en clústeres de GPUs. Un simple 'bit flip' causado por radiación cósmica en la memoria RAM puede corromper un peso neuronal y arruinar millones de dólares de cálculo matricial. La memoria ECC (basada en las matrices de Hamming) es el escudo que evita estos fallos.</li>
+            <li><strong>🧠 IA diseñando sus propias armaduras:</strong> Los investigadores actuales usan Aprendizaje por Refuerzo y redes neuronales para <em>crear nuevos códigos de corrección de errores</em> más eficientes que los diseñados por humanos. La IA "aprende" a maximizar la Distancia de Hamming minimizando la redundancia.</li>
+
+            <li><strong>🔄 Decodificación neuronal:</strong> En lugar de usar complejos cálculos matemáticos matriciales, una red neuronal puede ser entrenada para "mirar" un mensaje corrupto y adivinar la palabra original casi al instante, acelerando las comunicaciones en entornos ruidosos como el 5G.</li>
+            <li><strong>📊 Distancia de Hamming como métrica de Machine Learning:</strong> El concepto fundamental que acabas de aprender se usa hoy para medir similitudes entre datos binarios en tareas de clasificación (clustering), búsqueda rápida de imágenes o detección de anomalías.</li>
+        </ul>        
+        <div style="background-color: #fff9c4; padding: 15px; border-radius: 6px; border-left: 4px solid #fbc02d;">
+            <p style="margin: 0; font-weight: bold; color: #f57f17; font-size: 1.1em;">La Simbiosis Perfecta:</p>
+            <p style="margin: 5px 0 0 0; color: #555;">La IA necesita códigos clásicos como Hamming para funcionar de manera fiable en el mundo físico. Y a su vez, los ingenieros de telecomunicaciones usan la IA para diseñar los códigos de corrección del futuro. ¡Una relación de doble vía que empuja los límites del mundo digital!</p>
+        </div>
+    </div>
+
+    <!-- TARJETA DE PROMPT ÉTICO -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        <p class="prompt-contexto">
+            Usa esta guía para pedirle a la Inteligencia Artificial que te ayude a diseñar o explicar matrices generadoras de otros códigos de bloque, extendiendo el concepto de "matriz a circuito".
+        </p>
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            <div class="paso"><strong>1️⃣ "Comprendí que..."</strong> (Resume la relación entre los 1s de la matriz $G$ y el cableado físico de las compuertas XOR).</div>
+            <div class="paso"><strong>2️⃣ "y quiero saber..."</strong> (Pide que te genere una matriz sencilla para un código básico distinto, como un Código de Repetición).</div>
+            <div class="paso"><strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong> (Estudiantes de matemáticas discretas que prefieren lo visual a lo algebraico).</div>
+            <div class="paso"><strong>4️⃣ "Incluye un error común que debo evitar..."</strong> (Ej: Confundir la matriz identidad con la submatriz de paridad al leer el circuito).</div>
+        </div>
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo de Prompt:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que en un Código de Bloque Sistemático, la Matriz Generadora ($G$) tiene una mitad de Identidad (que copia los datos puros) y una mitad de Paridad, donde cada '1' en las columnas indica qué bits de datos deben sumarse con compuertas XOR. Quiero saber: ¿Cómo se vería la matriz $G$ para un simple 'Código de Repetición (3,1)' donde un solo bit de dato se envía triplicado (ej: entra 1, sale 111)? Construye la matriz y explícame cómo se leería esa matriz si tuviera que soldar los cables, como si fuera a enseñárselo a mis estudiantes de grado 10°. Incluye un error común que cometen los estudiantes al multiplicar estas matrices usando aritmética Módulo 2 en lugar de aritmética normal."
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- MI CUADERNO -->
+    <section class="cuaderno-section">
+        <div class="cuaderno-header">
+            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <h3>📋 Bitácora de Innovación (Mi Cuaderno)</h3>
+        </div>
+        <p>Responde en tu cuaderno físico (o aquí) las siguientes reflexiones y ejercicios prácticos:</p>
+        <ol>
+            <li><strong>Hackeando la Matriz:</strong> Observa la ecuación de $p_1 = d_1 \oplus d_2 \oplus d_4$. Si en lugar de mirar la Matriz $G$ de esta lección, tú como ingeniero jefe quisieras que la protección $p_1$ sumara los datos $d_2, d_3$ y $d_4$, ¿cómo tendrías que cambiar los ceros y unos de la primera columna de paridad de la matriz? Escribe los 4 números de esa nueva columna.
+                <textarea rows="2" placeholder="Escribe los 4 bits (de arriba hacia abajo)..." style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+            <li><strong>El Valor de la Matriz Identidad:</strong> ¿Por qué crees que los ingenieros se toman la molestia de enviar los 4 bits de datos puros intactos (usando la Matriz Identidad $I_k$) en lugar de cifrar o mezclar todo el mensaje de forma ilegible? ¿Qué ventaja tiene esto para el receptor si asume que el canal de comunicación (como un cable USB corto) casi nunca tiene ruido?
+                <textarea rows="3" style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+            <!-- NUEVO: Ejercicio de diseño de matriz (5,2) -->
+            <li><strong>Diseña tu propio código:</strong> Construye una matriz \(G\) para un código \((5,2)\) que repita cada bit de datos dos veces y añada un bit de paridad impar (ej: dato 0 → 000, dato 1 → 111). Escribe la matriz completa \(G = [I_2 \mid P]\) y deduce las ecuaciones de los 3 bits de redundancia.
+                <textarea rows="3" placeholder="Escribe la matriz y las ecuaciones..." style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+        </ol>
+    </section>
+
+    <!-- TRAILER A LA MATRIZ DE CONTROL H -->
+    <div class="avance-leccion" style="background-color: #f8f9fa; padding: 25px; border-radius: 12px; margin-top: 40px; border-left: 6px solid var(--u4-color, #6f42c1); box-shadow: 0 4px 15px rgba(111, 66, 193, 0.1);">
+        <h3 style="color: var(--u4-color, #6f42c1); display: flex; align-items: center; gap: 10px; margin-top: 0;">
+            <span style="font-size: 1.3em;">🚀</span> Próximamente...
+        </h3>
+        <p style="font-size: 1.05em; color: #444; line-height: 1.6;">El Emisor ya hizo su trabajo. Ha encapsulado los datos y ha forjado una armadura de 3 bits de paridad perfectamente calculados gracias a las ecuaciones dictadas por la Matriz $G$. El paquete es lanzado al ruidoso espacio exterior.</p>
+        <p style="font-size: 1.05em; color: #444; line-height: 1.6;">Ahora nos teletransportamos al otro lado de la comunicación, al Receptor. Le acaba de llegar un paquete de 7 bits, pero... ¿cómo sabe si el ruido lo dañó en el camino? ¿Cómo hace la máquina para, mágicamente, saber en qué milisegundo exacto y en qué bit específico ocurrió el error?</p>
+        <p style="font-size: 1.05em; color: #444; line-height: 1.6; font-weight: bold;">En la próxima lección (Lección 29), conoceremos al "Doctor del Sistema": la poderosa <strong>Matriz de Control de Paridad ($H$)</strong>. Aprenderemos a diagnosticar la salud de la información leyendo los síntomas a través de algo llamado "El Síndrome". ¡La magia matemática de la autocuración digital te espera!</p>
+    </div>
+
     <footer>
         <hr>
-        <p style="text-align: center;">
-            <a href="leccion28.html" class="btn-navegacion">← Anterior</a>
-            <a href="leccion30.html" class="btn-navegacion">Siguiente: Matriz de Control (H) →</a>
-        </p>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+            <a href="leccion27.html" class="btn-navegacion">← Anterior (Códigos de Bloque)</a>
+            <a href="leccion29.html" class="btn-navegacion" style="background-color: var(--u4-color, #6f42c1); transform: scale(1.05); font-weight: bold; box-shadow: 0 4px 10px rgba(111, 66, 193, 0.3);">Siguiente: Matriz de Control (H) →</a>
+        </div>
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;">🏠 Volver al Índice Principal</a>
+        </div>
+        
+        <!-- FOOTER ACADÉMICO UNIFICADO -->
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eaeaea; text-align: center; color: #666;">
+            <p style="margin-bottom: 5px;"><strong>Fundamentos de Sistemas Digitales</strong></p>
+            <p style="margin-bottom: 5px; font-size: 0.9em;">Diseñado para formar a la próxima generación de ingenieros y docentes en Colombia.</p>
+            <p style="font-size: 0.8em; margin-bottom: 0;">Material Educativo Abierto (REA) - 2026</p>
+        </div>
     </footer>
 </div>
 

@@ -3,77 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección 28: Códigos de Bloque - Fundamentos de Sistemas Digitales</title>
+    <title>Lección 27: Códigos de Bloque - Fundamentos de Sistemas Digitales</title>
     <link rel="stylesheet" href="estilos.css">
-    <!-- KaTeX -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+    <!-- KaTeX: Script principal y auto-render -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                    { left: "\\(", right: "\\)", display: false }
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
 </head>
 <body>
 
 <div class="contenedor">
     <header>
-        <p><small>Unidad 4: Teoría de Códigos - Lección 28</small></p>
+        <p><small>Unidad 4: Teoría de Códigos - Lección 27</small></p>
         <h1>📦 Códigos de Bloque: Empaquetando Datos</h1>
     </header>
 
+    <div class="intro-leccion" style="margin-bottom: 30px;">
+        <p>En la lección pasada descubrimos una verdad aterradora: la paridad simple es débil. Si una tormenta solar o una interferencia de motor cambia <strong>dos bits</strong> de nuestro mensaje al mismo tiempo, el sistema nos dirá que todo está perfecto, entregándole datos corruptos a nuestra computadora.</p>
+        <p>Si queremos comunicaciones robustas y profesionales (como las que usan las redes 5G, los discos duros o los satélites en el espacio profundo), necesitamos "armadura pesada". Aquí es donde entran al rescate los <strong>Códigos de Bloque</strong>.</p>
+        
+        <!-- NUEVO: Aplicaciones reales (contexto motivador) -->
+        <div class="dato-extra" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-top: 15px;">
+            <h4 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">📡</span> Aplicaciones Reales
+            </h4>
+            <p style="margin-bottom: 0;">El código Hamming (7,4) y sus variantes se usan en: <strong>memorias ECC</strong> (servidores y PCs de alta gama), <strong>comunicaciones por satélite</strong> (como las sondas Voyager), <strong>telemetría</strong> donde no se puede retransmitir, y en sistemas de <strong>radio digital</strong> para evitar interferencias.</p>
+        </div>
+    </div>
+
     <section>
-        <p>La paridad simple es débil. Si queremos comunicaciones robustas (como en el 4G o los satélites), necesitamos "armadura pesada". Aquí entran los <strong>Códigos de Bloque</strong>.</p>
-
         <h2>1. El Concepto de "La Ñapa" (Redundancia)</h2>
-        <p>En Colombia, cuando compras algo y te dan un poquito más de regalo, le dicen "la ñapa". En ingeniería, a eso le llamamos <strong>Redundancia</strong>.</p>
-        <p>Para proteger la información, enviamos los datos originales MÁS unos bits extra calculados matemáticamente.</p>
+        <p>En Colombia, cuando compras algo en el mercado y te dan un poquito más de regalo, le dicen "la ñapa". En ingeniería de telecomunicaciones, a ese extra le llamamos <strong>Redundancia</strong>.</p>
+        <p>Para proteger la información contra el ruido del universo, no enviamos los datos puros. Enviamos los datos originales MÁS unos "bits de ñapa" que son calculados matemáticamente para vigilar a los datos originales.</p>
 
-        <div class="svg-container">
-            <!-- Imagen: Estructura Código (img/estructura_codigo_bloque.png) -->
-            <img src="img/estructura_codigo_bloque.png" alt="Diagrama de un bloque de datos dividido en K (Información) y R (Redundancia), sumando N (Total)" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 1. El paquete completo: Datos + Protección.</em></small></p>
+        <div class="svg-container" style="margin: 25px 0;">
+            <img src="img/estructura_codigo_bloque.png" alt="Diagrama de un bloque de datos dividido en K (Información) y R (Redundancia), sumando N (Total)" style="max-width:80%; height:auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px;">
+            <p><small><em>Fig 1. La anatomía de un Código de Bloque: El paquete completo que viaja por el cable.</em></small></p>
         </div>
 
-        <div class="formula">
-            $$n = k + r$$
-        </div>
-        <ul>
-            <li><strong>\(k\) (Datos):</strong> Tu mensaje útil (ej: 4 bits).</li>
-            <li><strong>\(r\) (Redundancia):</strong> La "ñapa" de protección (ej: 3 bits).</li>
-            <li><strong>\(n\) (Código):</strong> El total que se envía (ej: 7 bits).</li>
-        </ul>
-        <p>Por ejemplo, el famoso <strong>Código Hamming (7, 4)</strong> envía 7 bits para proteger 4 datos.</p>
-
-        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
-            <h3>📱 Analogía: El Autocorrector de tu Celular</h3>
-            <p>¿Cómo sabe tu celular que quisiste escribir "HOLA" si escribiste "HILA"?</p>
-            <p>Porque "HILA" no existe en el diccionario, pero se parece mucho a "HOLA" (solo 1 letra de diferencia). A esto se le llama <strong>Distancia de Hamming</strong>.</p>
-            <p>Los códigos de bloque hacen lo mismo: crean un "diccionario" de palabras binarias válidas que están muy separadas entre sí. Si el ruido cambia un bit, el resultado no estará en el diccionario, y el sistema sabrá cuál era la palabra válida más cercana.</p>
+        <div class="destacado" style="background-color: #f8f9fa; border-left-color: #0d47a1;">
+            <h3 style="color: #1565c0; margin-top: 0;">La Fórmula Universal del Paquete</h3>
+            <div class="formula" style="font-size: 1.3em; background: white; border: 1px solid #90caf9; margin: 15px 0;">
+                $$n = k + r$$
+            </div>
+            <ul style="font-size: 1.05em; line-height: 1.6; margin-bottom: 0;">
+                <li><strong>Datos Útiles ($k$):</strong> Es el mensaje puro que quieres enviar. (Ej: 4 bits de un número binario).</li>
+                <li><strong>Redundancia ($r$):</strong> La "ñapa" de protección. Son bits extra calculados a partir de los datos. (Ej: 3 bits de escudo).</li>
+                <li><strong>Código Final ($n$):</strong> Es la longitud total de la "palabra" (codeword) que se envía por el aire o el cable. (Ej: $4 + 3 = 7$ bits en total).</li>
+            </ul>
+            <p style="margin-top: 15px; margin-bottom: 0;"><strong>Nomenclatura:</strong> A este sistema se le conoce internacionalmente como un código <strong>($n, k$)</strong>. El famoso código que armaremos se llama <strong>Hamming (7, 4)</strong>, porque envía paquetes de 7 bits, donde 4 son de información útil.</p>
+            
+            <!-- NUEVO: Tasa de código y compromiso eficiencia vs robustez -->
+            <div style="background-color: #fff9c4; padding: 12px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #fbc02d;">
+                <p style="margin: 0; font-size: 0.95em;"><strong>📊 Tasa de código ($R = k/n$):</strong> En Hamming (7,4), $R \approx 0.57$ (sacrificamos el 43% del ancho de banda para ganar robustez). Para enviar fotos de Marte vale la pena; para una videollamada en 5G, quizás no. Los ingenieros eligen la tasa según el nivel de ruido esperado.</p>
+            </div>
+            
+            <!-- NUEVO: Código sistemático -->
+            <div style="background-color: #e8f5e9; padding: 12px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #4caf50;">
+                <p style="margin: 0; font-size: 0.95em;"><strong>🔖 Código Sistemático:</strong> En Hamming (7,4), los 4 bits de datos viajan <strong>tal cual</strong> dentro del paquete (no se cifran). Esto facilita extraer la información si no hay errores, y es la base de la Matriz Generadora que veremos en la próxima lección.</p>
+            </div>
         </div>
 
         <h2>2. ¿Qué es un Código "Lineal"? (El regreso de la XOR)</h2>
-        <p>Suena a matemáticas avanzadas, pero en hardware es simple: significa que los bits de protección (\(r\)) se calculan <strong>sumando (XOR)</strong> combinaciones de los bits de datos.</p>
+        <p>Los matemáticos hablan de "Códigos de Bloque Lineales". La palabra "Lineal" suena a cálculo avanzado, pero para nosotros, los ingenieros de hardware, es una bendición: significa que las matemáticas son puras sumas modulares.</p>
         
-        <div class="destacado">
-            <p><strong>Ejemplo de Linealidad:</strong></p>
-            <p>Imagina que el primer bit de protección \(p_1\) se calcula así:</p>
-            <p>$$p_1 = d_1 \oplus d_2 \oplus d_4$$</p>
-            <p>¡Solo necesitas compuertas XOR! No hay multiplicaciones raras ni integrales. Es pura lógica digital.</p>
+        <div class="destacado" style="background-color: #fff3e0; border-left-color: #e65100;">
+            <h3 style="color: #d35400; margin-top: 0;">🔧 Lineal = Todo se hace con XOR</h3>
+            <p>En un código lineal, cada bit de protección (redundancia $r$) se calcula <strong>sumando (XOR)</strong> diferentes combinaciones estratégicas de los bits de datos ($k$).</p>
+            
+            <p><strong>Ejemplo de Linealidad:</strong> Imagina que tienes 4 bits de datos ($d_1, d_2, d_3, d_4$). El primer bit de tu escudo protector ($p_1$) podría calcularse simplemente así:</p>
+            
+            <div class="formula" style="font-size: 1.2em; background: white; border: 1px solid #ffcc80;">
+                $$p_1 = d_1 \oplus d_2 \oplus d_4$$
+            </div>
+            
+            <p style="margin-bottom: 0;">¡No hay multiplicaciones complejas, ni divisiones, ni integrales! Solo necesitas las confiables compuertas <strong>XOR (7486)</strong> que ya sabes cablear en la protoboard.</p>
         </div>
 
-        <h2>3. El Codificador (La Caja Negra)</h2>
-        <p>Físicamente, un codificador es un circuito que toma tus \(k\) cables de datos y saca \(n\) cables hacia el transmisor.</p>
-
-        <div class="svg-container">
-            <!-- Imagen: Diagrama Codificador (img/diagrama_codificador.png) -->
-            <img src="img/diagrama_codificador.png" alt="Caja negra que recibe 4 cables de entrada y saca 7 cables de salida" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 2. Entran 4, salen 7. La magia ocurre adentro con compuertas XOR.</em></small></p>
+        <!-- NUEVO: Las tres ecuaciones completas del código Hamming (7,4) -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin: 25px 0;">
+            <h3 style="color: #7b1fa2; margin-top: 0;">📜 La Receta del Código Hamming (7,4)</h3>
+            <p>El código Hamming (7,4) utiliza <strong>tres ecuaciones lineales</strong> para generar sus 3 bits de redundancia ($p_1, p_2, p_3$) a partir de los 4 bits de datos ($d_1, d_2, d_3, d_4$):</p>
+            <div class="formula" style="font-size: 1.1em; background: white; margin: 15px 0;">
+                $$
+                \begin{aligned}
+                p_1 &= d_1 \oplus d_2 \oplus d_4 \\
+                p_2 &= d_1 \oplus d_3 \oplus d_4 \\
+                p_3 &= d_2 \oplus d_3 \oplus d_4
+                \end{aligned}
+                $$
+            </div>
+            <p><strong>¿De dónde salen estas ecuaciones?</strong> Se construyen de modo que cada bit de redundancia "vigile" un subconjunto diferente de los bits de datos. La elección de qué datos incluir en cada ecuación no es aleatoria: está diseñada para que, en el receptor, los tres resultados de las pruebas (el <em>síndrome</em>) apunten a la posición exacta del error, como veremos en la Lección 29. Matemáticamente, estas ecuaciones se organizan en una <strong>Matriz Generadora ($G$)</strong> que simplemente las escribe en forma de tabla: la parte izquierda de $G$ copia los datos originales, y la parte derecha contiene los coeficientes (1 o 0) que indican qué datos participan en cada $p_i$.</p>
+            <p style="margin-bottom: 0;">Estas ecuaciones son el "plano maestro" que define el codificador. En la próxima lección las veremos organizadas dentro de una <strong>Matriz Generadora ($G$)</strong>.</p>
         </div>
+
+        <h2>3. La Distancia de Hamming: El Autocorrector de la Máquina</h2>
+        <p>Ya sabemos empacar el mensaje, pero ¿cómo logra el receptor no solo detectar el error, sino <strong>arreglarlo automáticamente</strong> sin pedir que le reenvíen el mensaje?</p>
+
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin: 25px 0;">
+            <h3 style="color: #7b1fa2; margin-top: 0;">📱 Analogía: El Autocorrector de tu Celular</h3>
+            <p>Imagina que recibes un saludo a través de un mensaje de texto que dice: <strong>"HILA"</strong>.</p>
+            <p>Tú sabes inmediatamente que la persona quería escribir <strong>"HOLA"</strong>. ¿Por qué? Porque la palabra "HILA" nos indica que está tejiendo, y la palabra válida más parecida (solo hay 1 letra de diferencia) es "HOLA".</p>
+            
+            <p style="font-weight: bold; margin-top: 15px;">Los códigos de bloque hacen exactamente lo mismo en binario:</p>
+            <ol style="margin-bottom: 0;">
+                <li>El emisor y el receptor acuerdan un <strong>"Diccionario"</strong> de palabras binarias válidas (los codewords). ¡Solo ciertas combinaciones de 7 bits están permitidas!</li>
+                <li>Si el ruido ataca en el camino y cambia un 0 por un 1, la palabra que llega <strong>no existirá en el diccionario</strong>.</li>
+                <li>El receptor mira la palabra corrupta, busca en el diccionario, y dice: <em>"Esta palabra no existe, pero solo tiene 1 bit de diferencia con la palabra válida 'X'. ¡El emisor debió enviar 'X'!"</em> Y la corrige automáticamente.</li>
+            </ol>
+        </div>
+
+        <p>A la cantidad de letras (o bits) diferentes entre dos palabras se le llama <strong>Distancia de Hamming</strong>. (Entre "HILA" y "HOLA", la distancia es 1).</p>
+
+        <!-- NUEVO: Ejemplo concreto de cálculo de distancia de Hamming -->
+        <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0; border: 1px solid #dee2e6;">
+            <h4 style="margin-top: 0; color: #0d47a1;">📏 Ejemplo: Calculando la Distancia de Hamming</h4>
+            <p>Comparemos las cadenas binarias <code>1 0 1 1 0</code> y <code>1 0 0 1 0</code>. Las alineamos:</p>
+            <div style="font-family: monospace; font-size: 1.2em; text-align: center; margin: 10px 0;">
+                1 0 1 1 0<br>
+                1 0 0 1 0<br>
+                &nbsp;&nbsp;↑&nbsp;&nbsp;
+            </div>
+            <p style="margin-bottom: 0;">El bit en la posición 3 es diferente. Por lo tanto, la <strong>Distancia de Hamming es 1</strong>.</p>
+        </div>
+
+        <!-- NUEVO: Capacidad de detección y corrección según la distancia mínima -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin: 20px 0;">
+            <h3 style="color: #1b5e20; margin-top: 0;">🛡️ El Poder de la Distancia Mínima ($d$)</h3>
+            <p>Si la <strong>distancia mínima</strong> entre todas las palabras válidas de un código es $d$, entonces:</p>
+            <ul>
+                <li>El código puede <strong>detectar</strong> hasta $d-1$ errores.</li>
+                <li>El código puede <strong>corregir</strong> hasta $\left\lfloor \frac{d-1}{2} \right\rfloor$ errores.</li>
+            </ul>
+            <p><strong>En Hamming (7,4), la distancia mínima es $d=3$.</strong> Por lo tanto:</p>
+            <ul>
+                <li>✅ Detecta hasta <strong>2 errores</strong> (aunque solo puede corregir 1).</li>
+                <li>✅ Corrige <strong>1 error</strong> (el famoso "autocorrector de un bit").</li>
+            </ul>
+            <p style="margin-bottom: 0;">¡Por eso es tan famoso! Es el equilibrio perfecto entre redundancia y capacidad de corrección.</p>
+        </div>
+
+        <!-- NUEVO: Advertencia sobre falsa corrección -->
+        <div class="error-comun" style="background-color: #ffebee; border-left-color: #c62828; padding: 15px; border-radius: 8px; margin: 20px 0;">
+            <strong style="color: #c62828; display: block; margin-bottom: 5px;">⚠️ ¡Cuidado! La falsa corrección</strong>
+            <p style="margin-bottom: 0;">Si el ruido daña <strong>más bits de los que el código puede corregir</strong> (por ejemplo, 2 errores en Hamming 7,4), el receptor "corregirá" hacia una palabra válida equivocada. Esto se llama <strong>falsa corrección</strong>. Por eso los ingenieros miden el nivel de ruido esperado antes de elegir un código.</p>
+        </div>
+
+        <!-- NUEVO: Adelanto del síndrome (GPS del error) -->
+        <div class="dato-extra" style="background-color: #fff9c4; border-left-color: #fbc02d; margin: 20px 0;">
+            <h3 style="color: #f57f17; margin-top: 0;">🔮 ¿Qué viene después? El GPS del error</h3>
+            <p>En la próxima lección veremos que, gracias a una propiedad mágica del código Hamming, el receptor calcula un número de 3 bits llamado <strong>síndrome</strong>. Este número no solo nos dice que hay un error, sino que su valor en decimal indica <strong>exactamente la posición del bit dañado</strong>. ¡Como un GPS del error!</p>
+            <p style="margin-bottom: 0;">Luego, en el laboratorio final, construiremos físicamente ese detector con compuertas XOR.</p>
+        </div>
+
+        <h2>4. El Codificador (La Caja Negra del Emisor)</h2>
+        <p>Físicamente, un codificador de bloque no es un software, es un circuito electrónico de alta velocidad. Es una caja que se ubica justo antes de la antena Wi-Fi o del cable de red.</p>
+
+        <div class="svg-container" style="margin: 25px 0; background-color: white; padding: 20px; border-radius: 8px; border: 1px solid #dee2e6; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+            <img src="img/diagrama_codificador.png" alt="Diagrama de un Codificador. Entran 4 cables de datos, salen 7 cables hacia el canal." style="max-width:70%; height:auto;">
+            <p style="margin-top: 15px; color: #555;"><small><em>Fig 2. La arquitectura del Emisor (Hamming 7,4). Entran 4 cables con el mensaje de nuestro procesador, el circuito calcula las XORs, y escupe 7 cables perfectamente blindados hacia el mundo exterior ruidoso.</em></small></p>
+        </div>
+        
+        <p>Ese misterioso bloque verde ("Codificador") esconde un laberinto de compuertas lógicas. Las ecuaciones que vimos arriba ($p_1, p_2, p_3$) son el plano exacto de ese cableado. En la siguiente lección, organizaremos esas ecuaciones en una <strong>Matriz Generadora ($G$)</strong> que nos permitirá diseñar el circuito de forma sistemática.</p>
+
+        <!-- Sección de resumen con ícono diferente y alineación izquierda -->
+        <div class="avance-leccion" style="background-color: #f8f9fa; padding: 20px; border-radius: 12px; margin-top: 30px; border-left: 6px solid var(--u4-color, #6f42c1); text-align: left;">
+            <h3 style="color: var(--u4-color, #6f42c1); margin-top: 0;">📌 Resumen: Lo que ya sabes</h3>
+            <ul style="margin-bottom: 0;">
+                <li>Un código de bloque $(n,k)$ añade $r = n-k$ bits de redundancia.</li>
+                <li>La distancia de Hamming mide cuán diferentes son las cadenas binarias.</li>
+                <li>Con $d=3$ se corrige 1 error y se detectan hasta 2.</li>
+                <li>El código Hamming (7,4) usa tres ecuaciones XOR para generar sus bits de paridad.</li>
+            </ul>
+            <p style="margin-top: 15px; font-weight: bold; text-align: center;">¡Estás listo para la Lección 28, donde convertiremos estas ecuaciones en una Matriz Generadora!</p>
+        </div>
+    </section>
+
+    <!-- PODCAST -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        <p class="podcast-descripcion">
+            Dos docentes discuten la revolución conceptual de los Códigos de Bloque. Exploran cómo explicar la fórmula $n = k + r$ usando la analogía de "La Ñapa" colombiana, y debaten por qué el concepto de la "Distancia de Hamming" es idéntico a la psicología detrás del autocorrector de los teléfonos móviles. Un episodio imperdible sobre cómo enseñar matemáticas discretas sin aburrir a los estudiantes.
+        </p>
+        <div class="podcast-player">
+            <audio controls preload="metadata" style="width: 100%;">
+                <source src="audio/leccion27.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 15:45 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- TARJETA DE PROMPT ÉTICO -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        <p class="prompt-contexto">
+            Usa esta guía para pedirle a la Inteligencia Artificial que te ayude a diseñar ejercicios sobre la Distancia de Hamming en el lenguaje natural.
+        </p>
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            <div class="paso"><strong>1️⃣ "Comprendí que..."</strong> (Resume la ecuación de redundancia $n=k+r$ y el concepto del autocorrector).</div>
+            <div class="paso"><strong>2️⃣ "y quiero saber..."</strong> (Pide una actividad lúdica donde los estudiantes deban calcular "distancias" entre palabras para corregir errores simulados).</div>
+            <div class="paso"><strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong> (Estudiantes de secundaria que usan WhatsApp todos los días).</div>
+            <div class="paso"><strong>4️⃣ "Incluye un error común que debo evitar..."</strong> (Ej: Que los alumnos piensen que el sistema puede corregir cualquier cantidad infinita de errores).</div>
+        </div>
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo de Prompt:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que los Códigos de Bloque lineales añaden redundancia (r bits) a un mensaje original (k bits) para crear un diccionario de palabras válidas, y que la 'Distancia de Hamming' permite al receptor corregir palabras corruptas buscando la más cercana en ese diccionario, igual que un autocorrector. Quiero saber: ¿Puedes diseñarme un ejercicio de 10 minutos para clase donde los alumnos tengan un mini-diccionario de 4 palabras válidas en español (ej: GATO, PERO, LIMA, DADO) y deban 'corregir' palabras ruidosas (ej: PATO, LOMO) calculando su Distancia de Hamming? Explícame la dinámica como si fuera a enseñárselo a estudiantes de 8° grado. Incluye un error conceptual común que debo evitar al explicar los límites de la corrección de errores."
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- MI CUADERNO -->
+    <section class="cuaderno-section">
+        <div class="cuaderno-header">
+            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <h3>📋 Bitácora de Innovación (Mi Cuaderno)</h3>
+        </div>
+        <p>Responde en tu cuaderno físico (o aquí) las siguientes reflexiones:</p>
+        <ol>
+            <li><strong>El Precio de la Seguridad:</strong> En un código Hamming (7, 4), enviamos 7 bits en total por el aire, pero solo 4 de ellos son el mensaje real que le importa al usuario. El resto es "ñapa" (redundancia). ¿Qué porcentaje del "ancho de banda" (espacio en el cable) estamos sacrificando para tener seguridad? ¿Crees que en misiones a Marte valdría la pena sacrificar aún más espacio enviando un código (15, 4) con 11 bits de protección?
+                <textarea rows="3" style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+            <li><strong>Midiendo Distancias:</strong> La Distancia de Hamming es el número de posiciones en las que dos cadenas binarias difieren. Compara la palabra <code>0 1 1 0 1</code> con la palabra <code>0 1 0 0 0</code>. ¿Cuál es su Distancia de Hamming?
+                <textarea rows="2" placeholder="Pista: Cuenta cuántos bits son diferentes si los pones uno encima del otro..." style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+            <li><strong>Pensamiento Computacional:</strong> Si dos palabras de tu "diccionario válido" tienen una distancia de Hamming de apenas 1 (ej: 000 y 001), y el ruido ataca un solo bit durante el viaje... ¿el receptor podría saber cuál de las dos palabras era la original? ¿Por qué es tan importante que las palabras del diccionario válido estén "lejos" unas de otras?
+                <textarea rows="3" style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+        </ol>
     </section>
 
     <footer>
         <hr>
-        <p style="text-align: center;">
-            <a href="leccion27.html" class="btn-navegacion">← Anterior</a>
-            <a href="leccion29.html" class="btn-navegacion">Siguiente: Matriz Generadora (G) →</a>
-        </p>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+            <a href="leccion26.html" class="btn-navegacion">← Anterior (Ruido y Paridad)</a>
+            <a href="leccion28.html" class="btn-navegacion" style="background-color: var(--u4-color, #6f42c1); transform: scale(1.05); font-weight: bold; box-shadow: 0 4px 10px rgba(111, 66, 193, 0.3);">Siguiente: Matriz Generadora (G) →</a>
+        </div>
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;">🏠 Volver al Índice Principal</a>
+        </div>
+        
+        <!-- FOOTER ACADÉMICO UNIFICADO -->
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eaeaea; text-align: center; color: #666;">
+            <p style="margin-bottom: 5px;"><strong>Fundamentos de Sistemas Digitales</strong></p>
+            <p style="margin-bottom: 5px; font-size: 0.9em;">Diseñado para formar a la próxima generación de ingenieros y docentes en Colombia.</p>
+            <p style="font-size: 0.8em; margin-bottom: 0;">Material Educativo Abierto (REA) - 2026</p>
+        </div>
     </footer>
 </div>
 

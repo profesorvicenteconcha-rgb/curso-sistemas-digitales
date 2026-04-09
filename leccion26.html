@@ -6,10 +6,22 @@
     <title>Lección 26: Ruido y Paridad - Fundamentos de Sistemas Digitales</title>
     <link rel="stylesheet" href="estilos.css">
     
-    <!-- KaTeX -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    <!-- KaTeX: Script principal y auto-render (Carga robusta) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "$", right: "$", display: false }
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -19,66 +31,292 @@
         <h1>📡 El Enemigo Invisible: Ruido y Paridad</h1>
     </header>
 
-    <section>
-        <p>Hasta ahora, nuestros datos viajaban seguros en la protoboard. Pero cuando enviamos datos por cables largos o por aire (Wi-Fi), existe un enemigo: el <strong>Ruido Eléctrico</strong>. Una interferencia puede cambiar un 0 por un 1. ¿Cómo nos protegemos?</p>
+    <div class="intro-leccion" style="margin-bottom: 30px;">
+        <p style="font-size: 1.1em; color: var(--u4-color, #6f42c1); font-weight: bold; margin-bottom: 10px;">¡Bienvenido a la Unidad 4: Teoría de Códigos!</p>
+        <p>Hasta ahora, nuestros datos viajaban seguros a través de los cortos cables de nuestra protoboard. Pero en el mundo real, cuando enviamos datos por cables submarinos de kilómetros de largo o por el aire a través del Wi-Fi, existe un enemigo implacable: el <strong>Ruido Electromagnético</strong>.</p>
+        <p style="margin-bottom: 0;">Un rayo lejano, el motor de una nevera o la radiación solar pueden alterar el voltaje de una señal en tránsito, cambiando accidentalmente un 0 por un 1. Si tu banco recibe un 1 en lugar de un 0, podrías perder millones. ¿Cómo nos protegemos? Hoy aprenderemos a darle a la información un escudo matemático básico.</p>
+    </div>
 
+    <section>
         <h2>1. Aritmética Módulo 2 (El Regreso de la XOR)</h2>
-        <p>En la teoría de códigos, sumamos de una forma especial: \(1 + 1 = 0\). No hay acarreo.</p>
+        <p>Para proteger la información, los ingenieros de telecomunicaciones no usan la suma normal que aprendimos en la Unidad 3. Usan una matemática más rápida llamada <strong>Aritmética Módulo 2</strong>.</p>
+        <p>En este sistema, sumamos números pero <strong>ignoramos por completo el acarreo</strong> (el "llevo 1").</p>
         
-        <div class="destacado">
-            <p><strong>¡Clave de Ingeniería!</strong><br>
-            Siempre que en esta unidad digamos "SUMAR", en realidad estamos diciendo "Usar una compuerta <strong>XOR (7486)</strong>".</p>
-            <p>$$A + B \pmod 2 \equiv A \oplus B$$</p>
+        <div class="destacado" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+            <h3 style="color: #7b1fa2; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🔑</span> ¡Clave de Ingeniería!
+            </h3>
+            <p>Si sumamos $1 + 1$ ignorando el acarreo, el resultado es simplemente $0$. ¿Te resulta familiar este comportamiento?</p>
+            <p>¡Exacto! Es la compuerta <strong>XOR (7486)</strong> que armaste en la lección anterior. Siempre que en esta unidad digamos "SUMAR", en realidad estamos diciendo "Pasa los bits por una compuerta XOR".</p>
+            
+            <div class="formula" style="font-size: 1.2em; background: white; border: 1px solid #ce93d8; margin: 15px 0;">
+                $$A + B \pmod 2 \quad \equiv \quad A \oplus B$$
+            </div>
         </div>
 
         <h2>2. El Bit de Paridad: Tu Primer Escudo 🛡️</h2>
-        <p>La idea es simple: agregamos un bit extra (\(P\)) a nuestros datos para asegurar que la cantidad total de unos sea siempre <strong>PAR</strong>.</p>
+        <p>La idea más antigua para detectar errores es increíblemente simple: el transmisor agrega un bit extra ($P$) al final de nuestros datos para asegurar que la cantidad total de unos (1s) en el mensaje sea <strong>siempre un número PAR</strong>.</p>
         
-        <ul>
-            <li><strong>Dato Original:</strong> <code>1 0 1 1</code> (Tres unos \(\rightarrow\) Impar).</li>
-            <li><strong>Acción:</strong> Ponemos \(P = 1\) para completar.</li>
-            <li><strong>Transmisión:</strong> <code>1 0 1 1 <strong>1</strong></code> (Cuatro unos \(\rightarrow\) Par).</li>
-        </ul>
-        <p>Si en el camino el ruido cambia un bit (ej: llega <code>1 0 0 1 1</code>), el receptor cuenta los unos (3) y dice: <em>"¡Impar! Aquí hay un error"</em>.</p>
+        <div style="background-color: white; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <h4 style="margin-top: 0; color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px;">Ejemplo de Transmisión Segura:</h4>
+            <ul style="margin-bottom: 0; line-height: 1.8;">
+                <li><strong>Dato Original:</strong> <code>1 0 1 1</code> (Hay tres "1" $\rightarrow$ Cantidad Impar).</li>
+                <li><strong>Acción del Transmisor:</strong> Como necesitamos que sean pares, le agregamos un bit de paridad $P = \mathbf{1}$.</li>
+                <li><strong>Paquete Enviado:</strong> <code>1 0 1 1 <strong style="color: #d32f2f;">1</strong></code> (Ahora hay cuatro "1" $\rightarrow$ Cantidad Par).</li>
+            </ul>
+        </div>
+        
+        <p><strong>¿Qué pasa si ataca el ruido?</strong> Si en el camino el ruido altera un bit (ej: llega <code>1 <strong style="color: #d32f2f;">1</strong> 1 1 1</code>), el receptor cuenta los "1" y dice: <em>"¡Hay cinco unos! El paquete es impar. Sé que hay un error, rechazaré este mensaje y pediré que lo envíen de nuevo"</em>.</p>
 
         <h2>3. Construyendo el Generador de Paridad</h2>
-        <p>¿Cómo calculamos \(P\) automáticamente? Sumando todos los bits con XORs.</p>
-        <div class="formula">
-            <p>$$P = D_1 \oplus D_2 \oplus D_3 \oplus D_4$$</p>
+        <p>¿Cómo calcula la computadora transmisora este bit $P$ automáticamente en nanosegundos? Sumando todos los bits de datos usando nuestra Aritmética Módulo 2 (XOR).</p>
+        
+        <div class="formula" style="font-size: 1.1em;">
+            $$P = D_1 \oplus D_2 \oplus D_3 \oplus D_4$$
         </div>
 
         <div class="svg-container">
-            <!-- Imagen: Generador Paridad (img/circuito_generador_paridad.png) -->
-            <img src="img/circuito_generador_paridad.png" alt="Circuito lógico mostrando 4 entradas conectadas en cascada a compuertas XOR para generar un bit de paridad" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 1. Conectando XORs en cadena creamos un detector de errores simple.</em></small></p>
+            <img src="img/circuito_generador_paridad_4bits.png" alt="Circuito lógico mostrando 4 entradas conectadas en cascada a compuertas XOR para generar un bit de paridad" style="max-width:80%; height:auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; margin: 15px 0;">
+            <p><small><em>Fig. 1: El Emisor: Conectando compuertas XOR en cascada creamos el generador de paridad. Si entra un número impar de unos, la salida (P) será 1 para compensar.</em></small></p>
         </div>
 
-        <div class="dato-extra">
-            <h3>🤔 El Límite de la Paridad</h3>
-            <p>Este sistema es barato y fácil, pero tiene un problema grave: si el ruido cambia <strong>dos bits</strong> al mismo tiempo (ej: 00 se vuelve 11), la cantidad de unos sigue siendo par y el sistema se deja engañar.</p>
-            <p>Para corregir errores y detectar fallas múltiples, necesitamos herramientas más pesadas: <strong>Matrices y Códigos Lineales</strong>. ¡Eso veremos en la próxima lección!</p>
+        <!-- ====================================================================== -->
+        <!-- NUEVA SECCIÓN: EL DETECTOR EN EL RECEPTOR Y SÍNDROME                   -->
+        <!-- ====================================================================== -->
+        <h2>4. El Detector de Paridad: Verificando en el Receptor</h2>
+        <p>El emisor agregó el bit $P$ para que el número total de unos sea par. Cuando el paquete llega al receptor, este <strong>no confía</strong> en el bit $P$ ni en los datos. El receptor debe hacer su propio cálculo para verificar si el mensaje sigue siendo válido.</p>
+        
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #1976d2;">
+            <h3 style="color: #0d47a1; margin-top: 0;">🔍 El Circuito Detector (Comparador)</h3>
+            <p>El receptor recibe 5 bits: los 4 datos originales ($D_1, D_2, D_3, D_4$) más el bit de paridad $P$ que viajó con ellos. Para saber si hubo error, el receptor <strong>vuelve a calcular</strong> la paridad de los datos recibidos usando exactamente el mismo circuito XOR del transmisor, y luego compara ese nuevo resultado con el bit $P$ recibido.</p>
+            
+            <div class="svg-container">
+                <!-- Asegúrate de tener la imagen: circuito_detector_paridad.png -->
+                <img src="img/circuito_detector_paridad_sindrome.png" alt="Circuito detector de paridad: XOR de los datos recibidos comparado con el bit de paridad recibido mediante una segunda XOR" style="max-width:80%; height:auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; margin: 15px 0;">
+                <p><small><em>Fig. 2: Esquema del detector de paridad. Los datos <span class="math">\(D_1 \dots D_4\)</span> se procesan por el mismo árbol XOR (salida <span class="math">Q</span>). Luego <span class="math">Q</span> se compara con el bit de paridad recibido <span class="math">P</span> mediante una cuarta XOR. La salida <span class="math">S</span> es 0 si no hay error detectable (o error par), y 1 si hay un error (número impar de bits alterados).</em></small></p>
+            </div>
+            
+            <p><strong>Matemáticamente, el receptor calcula el <em>Síndrome</em> ($S$):</strong></p>
+            <div class="formula" style="font-size: 1.1em; background: white; border: 1px solid #90caf9;">
+                $$S = (D_1 \oplus D_2 \oplus D_3 \oplus D_4) \oplus P$$
+            </div>
+            <p>Si $S = 0$, el número total de unos en el paquete recibido es par &rarr; <strong>No se detectó error</strong>.<br>
+            Si $S = 1$, el número total de unos es impar &rarr; <strong>¡Se detectó un error!</strong> (al menos un bit cambió).</p>
+            
+            <div style="background-color: white; padding: 15px; border-radius: 8px; margin-top: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <p style="margin-top: 0; color: #1565c0; font-weight: bold;">📊 Tabla de diagnóstico del detector (Síndrome):</p>
+                <div style="overflow-x: auto;">
+                    <table class="tabla-auditoria" style="margin: 0 auto; width: 100%;">
+                        <thead>
+                            <tr style="background-color: #1565c0; color: white;">
+                                <th style="padding: 10px;">Paridad recalculada<br><small>$(D_1 \oplus D_2 \oplus D_3 \oplus D_4)$</small></th>
+                                <th style="padding: 10px;">Bit $P$ recibido</th>
+                                <th style="padding: 10px; background-color: #0d47a1;">Síndrome ($S$)</th>
+                                <th style="padding: 10px;">Significado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0 (par)</td>
+                                <td>0</span></td>
+                                <td style="font-weight: bold; color: #155724; background-color: #d4edda;">0</td>
+                                <td style="text-align: left; color: #155724;">✅ Sin error detectable (o error doble)</td>
+                            </tr>
+                            <tr style="background-color: #ffebee;">
+                                <td>0 (par)</td>
+                                <td>1</td>
+                                <td style="font-weight: bold; color: #c62828; background-color: #ffcdd2;">1</td>
+                                <td style="text-align: left; color: #c62828;">❌ Error detectado (bit alterado)</td>
+                            </tr>
+                            <tr style="background-color: #ffebee;">
+                                <td>1 (impar)</td>
+                                <td>0</td>
+                                <td style="font-weight: bold; color: #c62828; background-color: #ffcdd2;">1</td>
+                                <td style="text-align: left; color: #c62828;">❌ Error detectado (bit alterado)</td>
+                            </tr>
+                            <tr>
+                                <td>1 (impar)</td>
+                                <td>1</td>
+                                <td style="font-weight: bold; color: #155724; background-color: #d4edda;">0</td>
+                                <td style="text-align: left; color: #155724;">✅ Sin error detectable (o error doble)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="dato-extra" style="background-color: #fff9c4; border-left-color: #fbc02d; margin: 25px 0;">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">⚖️</span> Paridad Par vs. Paridad Impar
+            </h3>
+            <p>En esta lección hemos usado <strong>paridad par</strong> (el total de unos en el paquete debe ser par). Sin embargo, algunos sistemas prefieren usar <strong>paridad impar</strong> (el total de unos debe ser impar).</p>
+            
+            <div style="background-color: white; padding: 15px; border-radius: 8px; border-left: 4px solid #f57f17; margin: 15px 0;">
+                <p style="margin-top: 0; font-weight: bold; color: #e65100;">🛠️ El Cambio en el Hardware:</p>
+                <p style="margin-bottom: 0;">Si el protocolo exige paridad impar, el generador y el detector se modifican ligeramente. En lugar de usar una XOR en la etapa final de cada circuito, se emplea una compuerta <strong>XNOR (74266)</strong>, la cual invierte el resultado.  En el caso del generador de paridad impar, esto aplica una única negación global al resultado, asegurando que la salida sea 1 cuando entra un número par de unos. Matemáticamente, la paridad impar se define como \(P_{impar} = \overline{D_1 \oplus D_2 \oplus D_3 \oplus D_4}\).</p>
+            </div>
+            <p>¿Te resulta familiar esa línea encima de la suma XOR? ¡Exacto! La negación de una XOR es la compuerta XNOR (74266) que conocimos en la Lección 18. </p>
+            <div class="svg-container">
+                <img src="img/circuito_generador_paridad_impar.png" alt="Circuito detector de paridad impar"  style="max-width:60%; height:auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; margin: 15px 0;">
+            </div>
+            
+            
+            <p style="margin-bottom: 0; font-size: 0.9em; color: #555;"><strong>💡 Dato histórico:</strong> Los primeros sistemas de comunicación por módem usaban paridad impar porque facilitaba la detección de la pérdida total de la señal (una línea muerta en 0 constante se consideraba error al instante, porque un paquete de puros ceros no cumple la paridad impar). Hoy en día, la mayoría de los protocolos permiten configurar ambos modos por software.</p>
+        </div>
+
+        <h3>📉 Ejemplo: El error doble que NO se detecta</h3>
+        <p>La paridad simple es vulnerable cuando el ruido es tan fuerte que altera <strong>dos bits</strong> al mismo tiempo. Veamos un ejemplo matemático concreto:</p>
+        
+        <div style="background-color: white; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <ol style="margin-bottom: 0; line-height: 1.8; color: #333;">
+                <li><strong>El Emisor:</strong> Tiene los Datos $D = 1\,0\,1\,1$ (tres unos &rarr; impar).<br>
+                Calcula y agrega $P = 1$ (para hacer par).<br>
+                <strong>Paquete enviado:</strong> <code style="background: #e8f5e9; padding: 2px 6px; border-radius: 4px;">1 0 1 1 <strong>1</strong></code> (cuatro unos en total).</li>
+                
+                <li style="margin-top: 15px;"><strong>El Ruido:</strong> Una interferencia electromagnética golpea el cable y cambia el segundo bit ($0 \rightarrow 1$) y el cuarto bit ($1 \rightarrow 0$).<br>
+                <strong>Paquete recibido corrupto:</strong> <code style="background: #ffebee; padding: 2px 6px; border-radius: 4px;">1 <strong style="color: #c62828;">1</strong> 1 <strong style="color: #c62828;">0</strong> 1</code>.</li>
+                
+                <li style="margin-top: 15px;"><strong>El Receptor evalúa:</strong> Recalcula la paridad de los datos que le llegaron ($1,1,1,0$):<br>
+                $1 \oplus 1 = 0$, $0 \oplus 1 = 1$, $1 \oplus 0 = 1$ &rarr; <strong>Paridad recalculada = 1</strong> (impar).</li>
+                
+                <li style="margin-top: 15px;"><strong>El Síndrome ($S$):</strong> Compara el recálculo (1) con el bit P que recibió (1):<br>
+                $S = (\text{paridad recalculada}) \oplus P \quad \rightarrow \quad S = 1 \oplus 1 = \mathbf{0}$.</li>
+                
+                <li style="margin-top: 15px;"><strong>El Desastre:</strong> Como $S = 0$, el receptor concluye felizmente que <strong>no hay error</strong> y envía datos corruptos al procesador principal.</li>
+            </ol>
+        </div>
+
+        <div class="destacado" style="background-color: #ffebee; border-left-color: #c62828; margin-top: 30px;">
+            <h3 style="color: #b71c1c; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">⚠️</span> El Límite Fatal de la Paridad
+            </h3>
+            <p>Como acabamos de demostrar matemáticamente, la paridad simple <strong>solo detecta errores cuando el número de bits alterados es impar (1, 3, 5 bits)</strong>.</p>
+            <p>Si el ruido cambia dos bits (un error par), la cantidad de unos se compensa a sí misma y el sistema falla silenciosamente aceptando un archivo corrupto.</p>
+            <p style="margin-bottom: 0; font-weight: bold;">Para sobrevivir en el espacio exterior o en servidores de alta disponibilidad, necesitamos abandonar la paridad simple y equiparnos con "armadura pesada": Matrices y Códigos Lineales. ¡Eso veremos en la próxima lección!</p>
         </div>
     </section>
 
     <!-- RINCÓN DOCENTE: MAGIA CON PARIDAD -->
-    <div class="dato-extra" style="border-left: 4px solid #ffc107; background-color: #fff9db;">
-        <h3>🍎 Rincón del Docente: El Truco de Magia</h3>
-        <p>¿Cómo explicar la "Corrección de Errores" a niños de primaria? ¡Con un truco de magia!</p>
+    <section>
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 40px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🎩</span> Rincón del Docente: El Truco de Magia de la Paridad
+            </h3>
+            <p>¿Cómo explicar la "Detección de Errores" a niños de primaria o secundaria sin usar una sola fórmula matemática? ¡Con un truco de magia mental!</p>
+            
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px;">
+                <h4 style="margin-top: 0; color: #333;">La Preparación:</h4>
+                <ol style="margin-bottom: 15px; line-height: 1.6;">
+                    <li>Pide a un alumno que coloque 25 cartas (boca arriba o boca abajo, al azar) formando una cuadrícula de 5x5 en la mesa.</li>
+                    <li>Dile que para hacerlo "más difícil", tú vas a agregar una fila y una columna extra, formando una cuadrícula de 6x6.</li>
+                    <li><strong>El Secreto (La Codificación):</strong> Al colocar tus cartas extra, asegúrate de que cada fila y cada columna tenga un número PAR de cartas boca arriba. (Nadie notará que lo estás calculando mentalmente).</li>
+                </ol>
+
+                <h4 style="margin-top: 0; color: #333;">El Clímax (El Ruido):</h4>
+                <ol start="4" style="margin-bottom: 15px; line-height: 1.6;">
+                    <li>Date la vuelta y pide al alumno que voltee <strong>UNA sola carta</strong> de la cuadrícula mientras no miras (simulando el Ruido en la transmisión).</li>
+                    <li><strong>El Diagnóstico:</strong> Voltea a ver la cuadrícula. Busca la única fila y la única columna que ahora tienen un número IMPAR de cartas boca arriba. ¡La carta cruzada entre esa fila y columna es exactamente la carta que el alumno volteó!</li>
+                </ol>
+            </div>
+            <p style="margin-top: 15px; margin-bottom: 0; font-style: italic; color: #f57f17; font-weight: bold; text-align: center;">¡Estás enseñando la esencia del algoritmo de Hamming jugando a ser mago!</p>
+        </div>
+    </section>
+
+    <!-- PODCAST -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        <p class="podcast-descripcion">
+            Dos docentes exploran el salto cognitivo de enseñar a sumar bits a protegerlos. Analizan la elegancia de la Aritmética Módulo 2 y desglosan paso a paso cómo ejecutar en el aula "El Truco de Magia de la Paridad" bidimensional para que los estudiantes entiendan intuitivamente cómo las matemáticas pueden encontrar un error invisible en un mar de datos.
+        </p>
+        <div class="podcast-player">
+            <audio controls preload="metadata" style="width: 100%;">
+                <source src="audio/leccion26.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 14:10 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- TARJETA DE PROMPT ÉTICO -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        <p class="prompt-contexto">
+            Usa esta guía para pedirle a la Inteligencia Artificial que te ayude a crear dinámicas de aula sobre detección de errores.
+        </p>
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            <div class="paso"><strong>1️⃣ "Comprendí que..."</strong> (Resume qué es el bit de paridad par y cómo falla si hay dos errores simultáneos).</div>
+            <div class="paso"><strong>2️⃣ "y quiero saber..."</strong> (Pide una actividad o analogía para enseñar los límites de este sistema).</div>
+            <div class="paso"><strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong> (Estudiantes de secundaria que no saben estadística).</div>
+            <div class="paso"><strong>4️⃣ "Incluye un error común que debo evitar..."</strong> (Ej: Confundir paridad par con impar en el receptor).</div>
+        </div>
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo de Prompt:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que el Bit de Paridad simple permite detectar un error sumando los bits con compuertas XOR, pero fracasa por completo si el ruido altera dos bits al mismo tiempo. Quiero saber: ¿Podrías diseñarme un juego de roles (role-play) de 10 minutos para realizar en el aula, donde los alumnos actúen como 'Emisor', 'Canal ruidoso' y 'Receptor', para que ellos mismos descubran por qué la paridad falla cuando hay errores dobles? Explícame la dinámica como si fuera a enseñárselo a estudiantes de grado 9°. Incluye un error común de instrucción que debo evitar para que el juego no fracase."
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- MI CUADERNO -->
+    <section class="cuaderno-section">
+        <div class="cuaderno-header">
+            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <h3>📋 Bitácora de Innovación (Mi Cuaderno)</h3>
+        </div>
+        <p>Responde en tu cuaderno físico (o aquí) las siguientes reflexiones:</p>
         <ol>
-            <li>Pon cartas (boca arriba/abajo) en una cuadrícula de 5x5 al azar.</li>
-            <li><strong>El Secreto (Codificación):</strong> Agrega una fila y una columna extra para que en todas las filas y columnas haya un número PAR de cartas boca arriba. (Nadie lo notará).</li>
-            <li>Pide a un alumno que voltee UNA carta mientras no miras (<strong>Ruido</strong>).</li>
-            <li><strong>El Diagnóstico:</strong> Mira la cuadrícula. La fila y la columna que ahora tengan un número IMPAR de cartas se cruzarán exactamente en la carta volteada. ¡Podrás señalarla al instante!</li>
+            <li><strong>Matemáticas en la vida real:</strong> Investiga qué tipo de sistemas actuales siguen utilizando el humilde "Bit de Paridad" (Pista: busca qué significa la letra 'P' en los protocolos UART o RS-232, como los que usan las placas Arduino). ¿Por qué crees que siguen usándolo si es tan vulnerable a errores dobles?
+                <textarea rows="3" style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+            <li><strong>Preparando la magia:</strong> Ensaya mentalmente el "Truco de Magia de la Paridad" descrito en la lección. Dibuja en tu cuaderno una cuadrícula inicial de 3x3 con ceros y unos al azar. Ahora, agrégale la cuarta fila y cuarta columna de paridad par. Cambia un bit en el centro y verifica si logras detectarlo cruzando las filas y columnas.
+                <textarea rows="3" placeholder="Anota aquí tus observaciones sobre la dinámica del truco..." style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
         </ol>
-        <p>Estás enseñando el algoritmo de Hamming jugando a ser mago.</p>
+    </section>
+
+    <!-- TRAILER -->
+    <div class="avance-leccion" style="background-color: #f8f9fa; padding: 25px; border-radius: 12px; margin-top: 40px; border-left: 6px solid var(--u4-color, #6f42c1); box-shadow: 0 4px 15px rgba(111, 66, 193, 0.1);">
+        <h3 style="color: var(--u4-color, #6f42c1); display: flex; align-items: center; gap: 10px; margin-top: 0;">
+            <span style="font-size: 1.3em;">🚀</span> Próximamente...
+        </h3>
+        <p style="font-size: 1.05em; color: #444; line-height: 1.6;">Ya sabemos cómo detectar si un rayo de interferencia electromagnética cambió uno de nuestros valiosos bits. Pero, ¿y si queremos proteger satélites, discos duros o naves espaciales donde retransmitir un mensaje toma 40 minutos?</p>
+        <p style="font-size: 1.05em; color: #444; line-height: 1.6;">La paridad simple no basta. Detectar un error es útil, pero ser capaz de arreglarlo sin pedir ayuda es el verdadero santo grial de la comunicación digital. Necesitamos "armadura pesada".</p>
+        <p style="font-size: 1.05em; color: #444; line-height: 1.6; font-weight: bold;">En la próxima lección (<strong>Códigos de Bloque</strong>), aprenderemos cómo los ingenieros empaquetan y estructuran matemáticamente los mensajes para no solo <em>detectar</em> que hay un error, sino tener la inteligencia para <strong>curarse a sí mismos</strong>.</p>
     </div>
 
     <footer>
         <hr>
-        <div style="display: flex; justify-content: space-between;">
-            <a href="leccion25_sumador_completo.html" class="btn-navegacion">← Anterior Unidad</a>
-            <a href="leccion27.html" class="btn-navegacion">Siguiente: Códigos de Bloque →</a>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+            <a href="leccion25_sumador_completo.html" class="btn-navegacion">← Anterior (El Sumador Completo)</a>
+            <a href="leccion27.html" class="btn-navegacion" style="background-color: var(--u4-color, #6f42c1); transform: scale(1.05); font-weight: bold; box-shadow: 0 4px 10px rgba(111, 66, 193, 0.3);">Siguiente: Códigos de Bloque →</a>
         </div>
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;">🏠 Volver al Índice Principal</a>
+        </div>
+        
+        <!-- FOOTER ACADÉMICO UNIFICADO -->
+        <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eaeaea; text-align: center; color: #666;">
+            <p style="margin-bottom: 5px;"><strong>Fundamentos de Sistemas Digitales</strong></p>
+            <p style="margin-bottom: 5px; font-size: 0.9em;">Diseñado para formar a la próxima generación de ingenieros y docentes en Colombia.</p>
+            <p style="font-size: 0.8em; margin-bottom: 0;">Material Educativo Abierto (REA) - 2026</p>
+        </footer>
     </footer>
 </div>
 

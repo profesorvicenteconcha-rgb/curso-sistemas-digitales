@@ -3,123 +3,506 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección 30: El Diagnóstico - Fundamentos de Sistemas Digitales</title>
+    <title>Lección 29: Matriz de Control (H) y Síndrome - Fundamentos de Sistemas Digitales</title>
     <link rel="stylesheet" href="estilos.css">
     
-    <!-- KaTeX -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-    <style>
-        .tabla-sindrome {
-            width: 100%;
-            margin: 20px 0;
-            border-collapse: collapse;
-            text-align: center;
-        }
-        .tabla-sindrome th { background-color: var(--color-secundario); color: white; padding: 10px; }
-        .tabla-sindrome td { border: 1px solid #ddd; padding: 8px; }
-        .fila-sana { background-color: #d4edda; color: #155724; font-weight: bold; }
-        .fila-enferma { background-color: #f8d7da; color: #721c24; }
-    </style>
+    <!-- KaTeX: Script principal y auto-render -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true }
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
 </head>
 <body>
 
 <div class="contenedor">
     <header>
-        <p><small>Unidad 4: Teoría de Códigos - Lección 30</small></p>
-        <h1>🩺 El Diagnóstico: Matriz de Control (\(H\)) y el Síndrome</h1>
+        <p><small>Unidad 4: Teoría de Códigos - Lección 29</small></p>
+        <h1>🩺 El Diagnóstico: Matriz de Control ($H$) y el Síndrome</h1>
     </header>
 
+    <div class="intro-leccion" style="margin-bottom: 30px;">
+        <p>El Emisor hizo su trabajo en la lección pasada. Ha enviado un paquete blindado de 7 bits a través de un canal ruidoso. Ahora nos teletransportamos al Receptor.</p>
+        <p>Acaba de llegar un paquete de datos, pero no sabemos si el ruido electromagnético cambió algún 0 por un 1 durante el viaje. ¿Cómo sabemos si llegó sano o enfermo? Y si llegó enfermo, ¿cómo sabemos <strong>exactamente qué bit está mal</strong> para poder curarlo?</p>
+        <p style="margin-bottom: 0;">Para lograr este milagro médico-digital, usaremos una nueva herramienta matemática: la <strong>Matriz de Control de Paridad ($H$)</strong>, y le leeremos los síntomas al paquete buscando algo llamado <strong>El Síndrome</strong>.</p>
+        
+        <!-- NUEVO: Aplicaciones modernas -->
+        <div class="dato-extra" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-top: 15px;">
+            <h4 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">📀</span> Aplicaciones modernas
+            </h4>
+            <p style="margin-bottom: 0;">Los principios de Hamming se usan en <strong>discos duros</strong> (códigos LDPC), <strong>memorias flash</strong> (códigos BCH), <strong>comunicaciones 5G</strong> (códigos polares) y <strong>transmisiones de video digital</strong> (Reed-Solomon). El síndrome es un concepto universal en la detección y corrección de errores.</p>
+        </div>
+
+        <!-- NUEVO: Isomorfismo -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin-top: 15px;">
+            <h4 style="color: #7b1fa2; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🔁</span> Recordatorio del isomorfismo (Unidad 3)
+            </h4>
+            <p style="margin-bottom: 0;">Así como el álgebra de Boole es isomorfa a los circuitos de compuertas, la multiplicación de matrices (en módulo 2) es isomorfa al cableado de compuertas XOR. La matriz \(H\) es una representación algebraica del circuito detector que construiremos en el laboratorio final.</p>
+        </div>
+    </div>
+
     <section>
-        <p>Hemos recibido un paquete de 7 bits. ¿Llegó sano o enfermo por el ruido? Para saberlo, usamos una herramienta matemática precisa llamada <strong>Matriz de Control de Paridad (\(H\))</strong>.</p>
+        <h2>1. El Chequeo Médico: La Matriz $H$</h2>
+        
+        <!-- NUEVA SECCIÓN INTRODUCTORIA AMIGABLE -->
+        <div class="destacado" style="background-color: #fff8e1; border-left-color: #ff8c00; margin-bottom: 25px;">
+            <h3 style="color: #e65100; margin-top: 0;">🧐 La Matriz $H$: El Inspector de Calidad</h3>
+            <p>Imagina que estás enviando un mensaje por WhatsApp. En el camino, un "rayo cósmico" o una interferencia podrían cambiar un 0 por un 1. ¿Cómo sabe el celular que recibió algo dañado? Aquí entra la <strong>Matriz $H$</strong>.</p>
+            <ul>
+                <li><strong>¿Qué es?</strong> Si la Matriz $G$ es el plano para construir el mensaje, la Matriz $H$ es el <strong>inspector de calidad</strong>. Es una tabla organizada de números que contiene las reglas que el mensaje debe cumplir para ser considerado "sano".</li>
+                <li><strong>La prueba matemática:</strong> En el colegio nos enseñan que $5 - 5 = 0$. En electrónica digital, usamos una lógica similar: <strong>multiplicamos el mensaje recibido por esta matriz</strong> (en aritmética módulo 2).</li>
+                <li><strong>El veredicto:</strong> 
+                    <ul>
+                        <li>✅ Si el resultado es <strong>cero</strong>, ¡felicidades! El mensaje llegó perfecto.</li>
+                        <li>❌ Si el resultado <strong>no es cero</strong>, la matriz detecta que hay un "enfermo" (un error) y, gracias a su estructura, nos dice <strong>exactamente en qué posición</strong> está para que podamos curarlo.</li>
+                    </ul>
+                </li>
+            </ul>
+            <p style="margin-bottom: 0;">En pocas palabras: <strong>La Matriz $H$ es el filtro de seguridad.</strong> Su única misión es asegurar que la relación entre los datos originales y los de control sea coherente. Si esa relación se rompe, la Matriz $H$ hace sonar la alarma.</p>
+        </div>
 
-        <h2>1. El Chequeo Médico: La Matriz \(H\)</h2>
-        <p>Esta matriz contiene las reglas que debe cumplir un mensaje sano. Para nuestro código Hamming (7,4) es así:</p>
+        <p>Si la matriz $G$ era el manual de construcción, la matriz $H$ es la lista de requisitos de calidad. Contiene las reglas estrictas que debe cumplir un mensaje para ser considerado "sano".</p>
+        <p>Para nuestro código Hamming (7,4), la matriz de control de paridad $H$ se ve así:</p>
 
-        <div class="formula">
+        <div class="formula" style="font-size: 1.3em; background-color: white; border: 2px solid #0d47a1; border-radius: 8px; padding: 20px; margin: 20px auto; max-width: 500px; box-shadow: 0 4px 10px rgba(13, 71, 161, 0.1);">
             $$
-            H = \begin{pmatrix}
+            H = \left[
+            \begin{array}{ccccccc}
             1 & 0 & 1 & 0 & 1 & 0 & 1 \\
             0 & 1 & 1 & 0 & 0 & 1 & 1 \\
             0 & 0 & 0 & 1 & 1 & 1 & 1
-            \end{pmatrix}
+            \end{array}
+            \right]
             $$
         </div>
-        <p>Cada fila es una prueba de paridad distinta. Al aplicar estas pruebas a los bits recibidos, obtenemos 3 resultados: \(s_1, s_2, s_3\).</p>
 
-        <h2>2. El Síndrome (\(S\)): Leyendo los Síntomas</h2>
-        <p>El resultado de las pruebas se llama <strong>Vector Síndrome</strong>. Es un número de 3 bits que nos da el diagnóstico final.</p>
+        <!-- NUEVO: Relación fundamental G·H^T = 0 -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin-bottom: 20px;">
+            <h3 style="color: #1b5e20; margin-top: 0;">🔗 Relación fundamental: $G \cdot H^T = 0$</h3>
+            <p>La matriz \(H\) es la "hermana ortogonal" de \(G\). En aritmética módulo 2, se cumple que \(G \cdot H^T = 0\) (una matriz de ceros). Esto significa que <strong>cualquier palabra de código válida</strong> (generada por \(G\)) al multiplicarse por \(H^T\) da cero. Por lo tanto, si el receptor calcula \(r \cdot H^T\) y obtiene cero, el paquete llegó sano.</p>
+        </div>        
 
-        <div class="svg-container">
-            <!-- Imagen: Diagnóstico Síndrome (img/diagnostico_sindrome.png) -->
-            <img src="img/diagnostico_sindrome.png" alt="Ilustración comparando S=000 (Check verde, Sano) vs S=101 (Alerta roja, Error en bit 5)" style="max-width:60%; height:auto;">
-            <p><small><em>Fig 1. Si el Síndrome es 0, descansa tranquilo. Si no, ¡a operar!</em></small></p>
+        <!-- NUEVO: Rincón del Docente para explicar G·H^T = 0 -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 20px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: ¿Qué significa ese "cero"?
+            </h3>
+            <p>Si ves la fórmula \(G \cdot H^T = 0\) y te asustas, ¡tranquilo! En el mundo de las matrices, esto es lo más parecido a un <strong>"apretón de manos" perfecto</strong>.</p>
+            <p>Imagina que la Matriz \(G\) (Generadora) y la Matriz \(H\) (de Control) son dos piezas de un rompecabezas o una llave y su cerradura:</p>
+            <ul>
+                <li><strong>Son "hermanas ortogonales":</strong> Esto es una forma elegante de decir que están diseñadas para anularse entre sí. Es como si \(G\) fuera la que crea el "ruido" controlado y \(H\) fuera el "silenciador". En el álgebra de matrices, que el resultado sea cero significa que ambas matrices son ortogonales (como si fueran las dos líneas perfectamente perpendiculares de una escuadra técnica). Están diseñadas para que, si el mensaje es auténtico, se "anulen" entre sí matemáticamente.</li>
+                <li><strong>¿Por qué da cero?</strong> Cuando multiplicas una palabra de código válida por la matriz de control, el resultado \(0\) es la señal de que todo está en equilibrio. Es el "OK" del sistema.</li>
+                <li><strong>El truco de la transpuesta (\(H^T\)):</strong> Esa pequeña \(^T\) arriba de la \(H\) significa que giramos la matriz (lo que era fila ahora es columna). Hacemos esto para que "encaje" matemáticamente al multiplicar, como quien gira una llave para que entre en la cerradura.</li>
+            </ul>
+            <p>En lenguaje sencillo para tu laboratorio: <strong>Es como si \(G\) y \(H\) fueran dos amigos que comparten un secreto.</strong> Si alguien intenta alterar el mensaje en el camino, ese "cero" se romperá y se convertirá en un número diferente. Ese número (el síndrome) es el que nos dirá: "¡Ey! Alguien cambió un bit".</p>
+            <p><strong>En resumen:</strong> Esta fórmula es la <strong>Prueba de Oro</strong>. Si el receptor recibe un mensaje \(r\) y al pasarle el escáner de la matriz (\(r \cdot H^T\)) el resultado es \(0\), el estudiante puede estar seguro de que el mensaje no sufrió accidentes en el viaje. Si da cualquier otro número, ¡la alarma de error se enciende!</p>
+            <p style="margin-top: 10px; font-style: italic; color: #555;"><strong>Tip para tu cuaderno:</strong> Piensa en esta relación como una balanza perfecta. Si pones el peso exacto de \(G\) y lo comparas con la medida de \(H\), la aguja siempre debe marcar \(0\). ¡Es la simetría de la informática!</p>
         </div>
 
-        <div class="destacado">
-            <h3>💊 Tabla de Diagnóstico</h3>
-            <p>Convierte el síndrome binario a decimal. ¡Ese número es la posición exacta del error!</p>
-            <table class="tabla-sindrome">
-                <tr><th>Síndrome (Binario)</th><th>Decimal</th><th>Diagnóstico</th></tr>
-                <tr class="fila-sana"><td>0 0 0</td><td>0</td><td>✅ Paciente Sano (Sin errores)</td></tr>
-                <tr class="fila-enferma"><td>0 0 1</td><td>1</td><td>Error en Bit 1</td></tr>
-                <tr class="fila-enferma"><td>0 1 0</td><td>2</td><td>Error en Bit 2</td></tr>
-                <tr class="fila-enferma"><td>0 1 1</td><td>3</td><td>Error en Bit 3</td></tr>
-                <tr class="fila-enferma"><td>1 0 0</td><td>4</td><td>Error en Bit 4</td></tr>
-                <tr class="fila-enferma"><td>1 0 1</td><td>5</td><td>Error en Bit 5</td></tr>
-                <tr class="fila-enferma"><td>1 1 0</td><td>6</td><td>Error en Bit 6</td></tr>
-                <tr class="fila-enferma"><td>1 1 1</td><td>7</td><td>Error en Bit 7</td></tr>
-            </table>
+        <!-- NUEVO: Construcción de H a partir de G -->
+        <div class="dato-extra" style="background-color: #fff9c4; border-left-color: #fbc02d; margin-bottom: 20px;">
+            <h4 style="color: #f57f17; margin-top: 0;">📐 Construcción de \(H\) desde \(G\) (sistemático)</h4>
+            <p>Para un código sistemático con \(G = [I_k \mid P]\), la matriz de control de paridad es \(H = [P^T \mid I_{n-k}]\). En Hamming (7,4):</p>
+            <ul>
+                <li>\(P\) es la submatriz de 4×3 de la derecha de \(G\).</li>
+                <li>\(P^T\) es de 3×4 (las columnas de \(P\) se convierten en filas).</li>
+                <li>Al añadir la matriz identidad \(I_3\) (3×3) a la derecha, obtenemos la \(H\) de 3×7 que ves arriba.</li>
+            </ul>
+            <p style="margin-bottom: 0;">¡Pruébalo: extrae \(P\) de \(G\) y verifica que \(H = [P^T \mid I_3]\) coincide!</p>
         </div>
 
-        <h3>Visualizando el Síndrome: Diagramas de Venn</h3>
-        <p>¿Recuerdas los conjuntos de la Unidad 3? El Código Hamming se puede dibujar como 3 círculos mágicos.</p>
-        
-        <div class="svg-container">
-            <!-- Imagen Nueva: Venn Hamming -->
-            <img src="img/venn_hamming.png" alt="Diagrama de Venn de 3 círculos. Cada círculo es una paridad. Las intersecciones contienen los bits de datos." style="max-width:300px; height:auto;">
-            <p><small><em>Fig 1.5. Cada círculo debe tener paridad par. Si un círculo falla, ¡sabemos dónde buscar!</em></small></p>
-        </div>
-
-        <h2>3. El Circuito Detector (Hardware)</h2>
-        <p>Para construir esto, solo necesitas conectar compuertas XOR siguiendo los 1s de las filas de la Matriz \(H\).</p>
-        
-        <div class="svg-container">
-            <!-- Imagen: Circuito Síndrome (img/circuito_calculadora_sindrome.png) -->
-            <img src="img/circuito_calculadora_sindrome.png" alt="Esquema lógico de 3 grupos de XORs conectados a las entradas para calcular s1, s2 y s3" style="max-width:100%; height:auto;">
-            <p><small><em>Fig 2. Tres grupos de XORs nos darán el número del error.</em></small></p>
-        </div>
-
-        <div class="dato-extra">
-            <h3>🛠️ Herramienta: Segunda Opinión Médica</h3>
-            <p>Calcular el síndrome a mano puede ser agotador. Usa <strong>dCode</strong> para verificar tus diagnósticos.</p>
+        <!-- NUEVO RINCÓN DEL DOCENTE: Analogía de Lego para construir H -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 25px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: El truco de Lego 🏗️
+            </h3>
             
-            <div style="background: white; padding: 15px; border-radius: 8px; margin: 15px 0; border: 1px solid #ddd;">
-                <strong>📝 Mini-Tutorial (Interfaz dCode):</strong>
-                <ol style="margin-top: 5px; padding-left: 20px;">
-                    <li>Entra al enlace de abajo.</li>
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Imagina que las matrices no son solo números, sino figuras de Lego armadas por bloques más pequeños. En un código <strong>sistemático</strong> (que es una forma elegante de decir "muy ordenado"), estas piezas se reciclan.</p>
+
+            <h4 style="color: #0d47a1; margin-bottom: 8px; font-size: 1.1em;">1. La anatomía del Constructor (Matriz \(G\))</h4>
+            <p style="margin-top: 0; color: #444;">La matriz \(G\) está hecha de dos bloques unidos, así: <strong>\(G = [ I_k \mid P ]\)</strong></p>
+            <ul style="color: #444; line-height: 1.6; margin-bottom: 20px;">
+                <li><strong>El bloque \(I_k\) (Identidad):</strong> Es como un pasillo transparente. Su trabajo es dejar que tu mensaje original pase directo, sin cambiarle nada.</li>
+                <li><strong>El bloque \(P\) (Paridad):</strong> Es el cuarto de máquinas. Toma tu mensaje y fabrica los "bits de seguridad" que lo acompañarán.</li>
+            </ul>
+
+            <h4 style="color: #0d47a1; margin-bottom: 8px; font-size: 1.1em;">2. Armando al Inspector (Matriz \(H\))</h4>
+            <p style="margin-top: 0; color: #444;">Para que el Inspector (\(H\)) sepa exactamente cómo revisar el mensaje, se construye usando las mismas piezas de \(G\), pero reacomodadas:</p>
+            <ul style="color: #444; line-height: 1.6; margin-bottom: 25px;">
+                <li><strong>Paso 1 (El giro ninja):</strong> Tomamos el cuarto de máquinas (el bloque \(P\)) y lo volteamos de lado. En matemáticas, a esto se le llama <em>Transpuesta</em> y se le pone una pequeña "T" arriba (<strong>\(P^T\)</strong>). ¡Es exactamente como girar una ficha de Tetris para que encaje de forma horizontal! Las columnas ahora se vuelven filas.</li>
+                <li><strong>Paso 2 (El sello final):</strong> Le pegamos al lado su propio pasillo transparente (un nuevo bloque Identidad <strong>\(I_{n-k}\)</strong>).</li>
+            </ul>
+
+            <div style="background-color: #e8f4fd; padding: 18px; border-radius: 8px; border-left: 4px solid #1976d2; margin-bottom: 15px;">
+                <h5 style="margin: 0 0 8px 0; color: #0d47a1; font-size: 1.1em;">✨ ¡La fórmula mágica!</h5>
+                <p style="margin: 0; color: #333; line-height: 1.5;">Por eso decimos que <strong>\(H = [ P^T \mid I_{n-k} ]\)</strong>. El inspector se armó robándole los secretos de seguridad al constructor (\(P\)), dándoles la vuelta como una pieza de Tetris, y poniéndoles su propio sello transparente al final.</p>
+            </div>
+
+            <div style="margin-top: 15px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 8px; border: 1px solid #ffeeba; font-size: 0.95em;">
+                <strong>📝 Reto para el cuaderno:</strong> Toma los números del bloque \(P\) de la matriz generadora de la Lección 28, gíralos 90 grados como si los acostaras sobre la línea del renglón, y verás cómo mágicamente aparecen en la matriz \(H\) de esta lección. ¡Haz la prueba con lápiz y papel!
+            </div>
+        </div>        
+
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #1976d2;">
+            <h3 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🔬</span> Las 3 Pruebas de Laboratorio
+            </h3>
+            <p>Cada una de las 3 filas de esta matriz es una "prueba de paridad" distinta. El receptor multiplicará (con compuertas XOR) el mensaje de 7 bits recibido por cada una de estas 3 filas.</p>
+            <p>Al pasar el paquete de datos por estas tres pruebas, obtendremos 3 resultados binarios: $s_1$, $s_2$ y $s_3$.</p>
+        </div>
+
+        <h2>2. El Síndrome ($S$): Leyendo los Síntomas</h2>
+        <p>Al unir los tres resultados de las pruebas ($s_3, s_2, s_1$), formamos un número binario de 3 bits llamado <strong>Vector Síndrome ($S$)</strong>.</p>
+        <p>Este pequeño número de 3 bits es el diagnóstico final. ¡Es como el termómetro de nuestro sistema!</p>
+
+        <!-- NUEVO: Ejemplo numérico de cálculo del síndrome paso a paso -->
+        <div class="destacado" style="background-color: #f8f9fa; border-left-color: #0d47a1; margin-bottom: 20px;">
+            <h3 style="color: #1565c0; margin-top: 0;">📝 Ejemplo: Calculando el síndrome a mano</h3>
+            <p><strong>Caso 1: Mensaje sano.</strong> Supongamos que el receptor obtiene \(r = [1,0,1,1,0,1,0]\) (es una palabra válida). Calculamos \(S = r \cdot H^T\) (en módulo 2):</p>
+            <div style="background-color: white; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.95em; line-height: 1.8; overflow-x: auto;">
+                $$
+                \begin{aligned}
+                s_1 &= 1\cdot1 + 0\cdot0 + 1\cdot1 + 1\cdot0 + 0\cdot1 + 1\cdot0 + 0\cdot1 = 1 \oplus 1 = 0 \\
+                s_2 &= 1\cdot0 + 0\cdot1 + 1\cdot1 + 1\cdot0 + 0\cdot0 + 1\cdot1 + 0\cdot1 = 1 \oplus 1 = 0 \\
+                s_3 &= 1\cdot0 + 0\cdot0 + 1\cdot0 + 1\cdot1 + 0\cdot1 + 1\cdot1 + 0\cdot1 = 1 \oplus 1 = 0
+                \end{aligned}
+                $$
+            </div>
+            <p>Síndrome \(S = 000\). ¡El mensaje está sano!</p>
+            <p><strong>Caso 2: Mensaje con error.</strong> Ahora supón que el ruido cambia el bit 5 de ese mensaje: \(r = [1,0,1,1,1,1,0]\). Recalculamos:</p>
+            <div style="background-color: white; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.95em; line-height: 1.8; overflow-x: auto;">
+                $$
+                \begin{aligned}
+                s_1 &= 1\cdot1 + 0\cdot0 + 1\cdot1 + 1\cdot0 + 1\cdot1 + 1\cdot0 + 0\cdot1 = 1 \oplus 1 \oplus 1 = 1 \\
+                s_2 &= 1\cdot0 + 0\cdot1 + 1\cdot1 + 1\cdot0 + 1\cdot0 + 1\cdot1 + 0\cdot1 = 1 \oplus 1 = 0 \\
+                s_3 &= 1\cdot0 + 0\cdot0 + 1\cdot0 + 1\cdot1 + 1\cdot1 + 1\cdot1 + 0\cdot1 = 1 \oplus 1 \oplus 1 = 1
+                \end{aligned}
+                $$
+            </div>
+            <p>Síndrome \(S = 101_2 = 5_{10}\). Según la tabla de diagnóstico, ¡el error está en el <strong>bit 5</strong>! Lo corregimos invirtiendo ese bit y obtenemos el mensaje original.</p>
+        </div>
+
+        <div class="svg-container" style="margin: 25px 0;">
+            <img src="img/diagnostico_sindrome.png" alt="Ilustración comparando S=000 (Sano) vs S=101 (Error en bit 5)" style="max-width:70%; height:auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px;">
+            <p><small><em>Fig. 1: Si el Síndrome es $000$, el paciente está sano. Cualquier otro número indica exactamente en qué camilla (bit) está el enfermo.</em></small></p>
+        </div>
+
+        <div class="destacado" style="background-color: #fff9c4; border-left-color: #fbc02d; margin-top: 30px;">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">💊</span> Tabla de Diagnóstico (La Autocuración)
+            </h3>
+            <p>Aquí está la magia de Richard W. Hamming: Si conviertes el síndrome binario a un número decimal normal... <strong>¡Ese número te dirá la posición EXACTA del bit que el ruido alteró!</strong></p>
+            <p>Si sabes qué bit está mal, simplemente lo pasas por una compuerta NOT (lo inviertes) y ¡pum! Has curado el mensaje sin pedir que lo reenvíen.</p>
+            
+            <!-- NUEVO: Vínculo con la distancia de Hamming -->
+            <div style="background-color: #e8f5e9; padding: 10px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #2e7d32;">
+                <p style="margin: 0; font-size: 0.95em;"><strong>🔢 ¿Por qué funciona?</strong> Como la distancia mínima del código Hamming (7,4) es \(d=3\), cualquier error de 1 bit produce un síndrome único (no cero) que apunta a la posición. Si la distancia fuera 1, dos palabras válidas podrían confundirse con un solo error.</p>
+            </div>
+
+            <!-- NUEVO: Limitación (falsa corrección) -->
+            <div style="background-color: #ffebee; padding: 10px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #f44336;">
+                <p style="margin: 0; font-size: 0.95em;"><strong>⚠️ Limitación importante:</strong> El código Hamming (7,4) solo puede corregir <strong>1 error</strong> y detectar hasta <strong>2 errores</strong>. Si ocurren 2 errores, el síndrome será distinto de cero pero apuntará a una posición incorrecta (falsa corrección). Si ocurren 3 o más, puede no detectarlos. Por eso en entornos muy ruidosos se usan códigos más robustos (Reed-Solomon o LDPC).</p>
+            </div>
+
+            <div style="overflow-x: auto; margin-top: 15px;">
+                <table class="tabla-auditoria" style="margin: 0 auto; width: 100%;">
+                    <thead>
+                        <tr style="background-color: #f57f17; color: white;">
+                            <th style="padding: 10px;">Síndrome ($S$)<br><small>Binario</small></th>
+                            <th style="padding: 10px;">Decimal</th>
+                            <th style="padding: 10px;">Diagnóstico Médico</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #d4edda; font-weight: bold; color: #155724;">
+                            <td>0 0 0</td><td>0</td><td style="text-align: left;">✅ Paciente Sano (No hay errores detectables)</td>
+                        </tr>
+                        <tr style="background-color: #ffebee; color: #c62828;"><td>0 0 1</td><td>1</td><td style="text-align: left;">❌ Error en el <strong>Bit 1</strong> (Corrígelo con NOT)</td></tr>
+                        <tr style="background-color: #ffebee; color: #c62828;"><td>0 1 0</td><td>2</td><td style="text-align: left;">❌ Error en el <strong>Bit 2</strong> (Corrígelo con NOT)</td></tr>
+                        <tr style="background-color: #ffebee; color: #c62828;"><td>0 1 1</td><td>3</td><td style="text-align: left;">❌ Error en el <strong>Bit 3</strong> (Corrígelo con NOT)</td></tr>
+                        <tr style="background-color: #ffebee; color: #c62828;"><td>1 0 0</td><td>4</td><td style="text-align: left;">❌ Error en el <strong>Bit 4</strong> (Corrígelo con NOT)</td></tr>
+                        <tr style="background-color: #ffebee; color: #c62828;"><td>1 0 1</td><td>5</td><td style="text-align: left;">❌ Error en el <strong>Bit 5</strong> (Corrígelo con NOT)</td></tr>
+                        <tr style="background-color: #ffebee; color: #c62828;"><td>1 1 0</td><td>6</td><td style="text-align: left;">❌ Error en el <strong>Bit 6</strong> (Corrígelo con NOT)</td></tr>
+                        <tr style="background-color: #ffebee; color: #c62828;"><td>1 1 1</td><td>7</td><td style="text-align: left;">❌ Error en el <strong>Bit 7</strong> (Corrígelo con NOT)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- NUEVO: Interpretación geométrica (espacio nulo) -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin: 20px 0;">
+            <h4 style="color: #7b1fa2; margin-top: 0;">🧠 Visión algebraica: El espacio nulo de \(H\)</h4>
+            <p>El conjunto de todas las palabras válidas (el código) es el <strong>espacio nulo</strong> de \(H\). Es decir, son todos los vectores \(c\) de 7 bits que cumplen \(c \cdot H^T = 0\). El síndrome \(S = r \cdot H^T\) mide la "distancia" de la palabra recibida \(r\) a ese espacio nulo. Si \(S=0\), \(r\) está en el código; si no, el valor decimal de \(S\) nos dice qué bit hay que cambiar para volver al código.</p>
+        </div>
+
+        <h3>Visualizando el Síndrome: Los Diagramas de Venn Mágicos</h3>
+        <p>¿Recuerdas los conjuntos de la Unidad 3? El Código Hamming se puede dibujar geométricamente como 3 círculos entrelazados.</p>
+        
+        <div class="svg-container" style="background-color: white; padding: 20px; border-radius: 8px; border: 1px solid #dee2e6; margin: 25px 0; text-align: center;">
+            <img src="img/venn_hamming.png" alt="Diagrama de Venn de 3 círculos para código Hamming" style="max-width: 100%; height:auto; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+            <p style="margin-top: 15px; color: #555;"><small><em>Fig. 2 Cada círculo representa una prueba de paridad. Si un círculo tiene paridad impar, se "enciende" en rojo. Si dos círculos se encienden, ¡la intersección de ambos te apunta directamente al bit enfermo!</em></small></p>
+        </div>
+
+            
+        <div style="text-align: left; margin-top: 20px; font-size: 0.95em;">
+                <h4 style="color: #2c3e50;">¿Cómo leer este diagrama?</h4>
+                <ul style="list-style-type: none; padding-left: 0;">
+                    <li>🔵 <strong>Círculo A (Superior Izq.):</strong> Prueba de paridad $s_1$ (primera fila de $H$).</li>
+                    <li>🟢 <strong>Círculo B (Superior Der.):</strong> Prueba de paridad $s_2$ (segunda fila de $H$).</li>
+                    <li>🟣 <strong>Círculo C (Inferior):</strong> Prueba de paridad $s_3$ (tercera fila de $H$).</li>
+                </ul>
+
+                <p><strong>Ubicación de los bits ($D_1$ a $D_7$):</strong></p>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-family: sans-serif;">
+                <thead>
+                    <tr style="background-color: #007bff; color: white;">
+                        <th style="border: 1px solid #ddd; padding: 12px; text-align: center;">Bit con Error</th>
+                        <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Fallo en Círculos (Pruebas)</th>
+                        <th style="border: 1px solid #ddd; padding: 12px; text-align: center;">Síndrome Binario $(s_3, s_2, s_1)$</th>
+                        <th style="border: 1px solid #ddd; padding: 12px; text-align: center;">Síndrome Decimal</th>
+                        <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Región en el Diagrama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">$D_1$</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Solo Círculo A</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-family: monospace;">001</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold; color: #d9534f;">1</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Región exclusiva de A</td>
+                    </tr>
+                    <tr style="background-color: #f9f9f9;">
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">$D_2$</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Solo Círculo B</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-family: monospace;">010</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold; color: #d9534f;">2</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Región exclusiva de B</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">$D_3$</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Círculos A y B</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-family: monospace;">011</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold; color: #d9534f;">3</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Intersección $A \cap B$</td>
+                    </tr>
+                    <tr style="background-color: #f9f9f9;">
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">$D_4$</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Solo Círculo C</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-family: monospace;">100</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold; color: #d9534f;">4</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Región exclusiva de C</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">$D_5$</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Círculos A y C</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-family: monospace;">101</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold; color: #d9534f;">5</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Intersección $A \cap C$</td>
+                    </tr>
+                    <tr style="background-color: #f9f9f9;">
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">$D_6$</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Círculos B y C</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-family: monospace;">110</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold; color: #d9534f;">6</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Intersección $B \cap C$</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">$D_7$</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Círculos A, B y C</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-family: monospace;">111</td>
+                        <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold; color: #d9534f;">7</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">Intersección central $A \cap B \cap C$</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
+            <div class="logic-explanation" style="background-color: #f0f7ff; padding: 15px; border-left: 5px solid #007bff;">
+            <h4>💡 El Secreto del Síndrome</h4>
+            <p>Observa que si el <strong>Síndrome Decimal es 5</strong>, ¡el error está exactamente en el bit <strong>$D_5$</strong>! 
+            Esto sucede porque el diseño del diagrama de Venn coloca los bits estratégicamente para que la suma de los valores de los círculos "encendidos" siempre nos dé la dirección del bit enfermo.</p>
+
+            <p style="margin-top: 15px; color: #555; background-color: #fff3cd; padding: 10px; border-radius: 4px;">
+                <small><em><strong>Efecto "Luz":</strong> Si una prueba falla, el círculo se "enciende". Por ejemplo, si fallan $s_1$ y $s_3$, la intersección A ∩ C te señala que el error está en el bit $D_5$. ¡Magia matemática!</em></small>
+            </p>
+        </div>
+
+        <!-- RINCÓN DOCENTE: ENSEÑANDO EL SÍNDROME EN SECUNDARIA -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: El síndrome como "semáforo de errores"
+            </h3>
+            <p>En el currículo colombiano, los estudiantes de secundaria pueden sentirse abrumados por las matrices y las multiplicaciones. Para enseñar el síndrome de forma lúdica, usa esta analogía del <strong>"Semáforo de 3 luces"</strong>:</p>
+            
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">La Analogía del Semáforo (3 pruebas = 3 luces)</h4>
+                <p style="margin-bottom: 15px;">Imagina que el mensaje de 7 bits llega a una caseta de peaje con 3 sensores (cada fila de \(H\) es un sensor). Cada sensor hace una pregunta al paquete: "¿La suma XOR de ciertos bits da 0 o 1?".</p>
+                
+                <ul style="margin-bottom: 15px; line-height: 1.6;">
+                    <li>Si los 3 sensores responden <strong>0,0,0</strong> → semáforo en <strong>verde</strong>: ¡el mensaje está sano!</li>
+                    <li>Si algún sensor responde <strong>1</strong>, el semáforo se pone en <strong>rojo</strong> y muestra un número de 3 bits (el síndrome). Ese número, al convertirlo a decimal, es el <strong>número de la casilla (bit) donde está el error</strong>.</li>
+                    <li>Los estudiantes pueden jugar a "adivina el error": tú introduces un mensaje con un error secreto, ellos calculan el síndrome y te dicen qué bit cambiaste.</li>
+                </ul>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>Resultado:</strong> Los estudiantes aprenden a calcular el síndrome como un juego de detectives, sin miedo a las matrices. Luego, cuando vean álgebra lineal en grados superiores, reconocerán que ya lo estaban usando.</p>
+            </div>
+        </div>
+
+        <h2>3. El Circuito Detector en Hardware</h2>
+        <p>Hacer multiplicaciones de matrices suena a código de software lento, pero en hardware es instantáneo. Para construir este Doctor en la placa base, solo necesitas conectar compuertas <strong>XOR (7486)</strong> en cascada, siguiendo los "1s" de las filas de la Matriz $H$.</p>
+        
+        <!-- NUEVO: Implementación en hardware (registros) -->
+        <div class="dato-extra" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-bottom: 15px;">
+            <h4 style="color: #0d47a1; margin-top: 0;">⚙️ En un chip real</h4>
+            <p>Los 3 bits del síndrome se almacenan en un <strong>registro de 3 bits</strong>. Luego, un decodificador (un simple circuito combinacional) enciende el LED correspondiente a la posición del error según la tabla de diagnóstico. Así, el hardware puede corregir automáticamente el bit dañado usando una compuerta NOT controlada.</p>
+        </div>
+
+        <div class="svg-container" style="margin: 25px 0;">
+            <img src="img/circuito_calculadora_sindrome.png" alt="Esquema lógico de 3 grupos de XORs conectados para calcular s1, s2 y s3" style="max-width:90%; height:auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <p><small><em>Fig. 3: El Hardware del Diagnóstico: Tres árboles de compuertas XOR evaluando los 7 bits que llegaron. Sus tres salidas formarán el número binario del error. ¡Este será tu proyecto final de grado!</em></small></p>
+        </div>
+
+        <!-- HERRAMIENTA EXTERNA MEJORADA -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin-top: 30px;">
+            <h3 style="color: #7b1fa2; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🛠️</span> Herramienta: Segunda Opinión Médica
+            </h3>
+            <p>Calcular el síndrome y corregir bits a mano para un mensaje de 7 bits puede ser un ejercicio agotador en el cuaderno. Los ingenieros usan herramientas para verificar sus diseños. Usa la plataforma <strong>dCode</strong> para auditar tus diagnósticos manuales.</p>
+            
+            <div style="background: white; padding: 15px; border-radius: 8px; margin: 15px 0; border: 1px solid #ce93d8;">
+                <strong style="color: #4a148c; font-size: 1.1em;">📝 Mini-Tutorial (Interfaz dCode):</strong>
+                <ol style="margin-top: 10px; padding-left: 20px; line-height: 1.6; color: #333;">
+                    <li>Entra al enlace naranja de abajo.</li>
                     <li>Busca la sección de arriba llamada <strong>"Hamming Code Error Corrector"</strong>.</li>
-                    <li>En la caja de texto (Binary message...), escribe tu código "enfermo": <code>1110101</code></li>
+                    <li>En la caja de texto (<em>Binary message...</em>), escribe un código "enfermo" de 7 bits. (Ej: <code>1110101</code>).</li>
                     <li>Deja la opción <strong>VERSION</strong> en <em>"Detect automatically..."</em> (o selecciona Hamming 7,4).</li>
-                    <li>Dale clic al botón <strong>CORRECT/ANALYZE</strong>.</li>
+                    <li>Dale clic al botón azul <strong>CORRECT/ANALYZE</strong>.</li>
                     <li>Mira el resultado a la izquierda: Busca donde diga <strong>"Errors' positions"</strong> (te dirá el bit) y <strong>"Corrected message"</strong>.</li>
                 </ol>
             </div>
 
-            <p style="text-align: center;">
-                <a href="https://www.dcode.fr/hamming-error-correction" target="_blank" class="btn-navegacion">Ir a la Calculadora Hamming ↗</a>
+            <p style="text-align: center; margin-top: 25px;">
+                <a href="https://www.dcode.fr/hamming-error-correction" target="_blank" class="btn-navegacion" style="background-color: #fa8f03; font-size: 1.1em; padding: 15px 30px; box-shadow: 0 4px 10px rgba(156, 39, 176, 0.3);">
+                   Ir a la Calculadora D'Code 🩺 ↗
+                </a>
             </p>
+        </div>
+
+        
+
+    </section>
+
+    <!-- PODCAST -->
+    <section class="podcast-section">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+        </div>
+        <p class="podcast-descripcion">
+            Dos docentes exploran el "Aha! Moment" de la Matriz $H$. Discuten cómo el Síndrome transforma un problema matemático abstracto en un número decimal que te señala directamente al culpable, como un GPS del error. Además, comparten estrategias para usar los Diagramas de Venn en el aula y ayudar a los estudiantes a "ver" el error sin tener que hacer multiplicaciones de matrices.
+        </p>
+        <div class="podcast-player">
+            <audio controls preload="metadata" style="width: 100%;">
+                <source src="audio/leccion29.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        <p class="podcast-meta">
+            <span class="duracion">⏱️ 15:10 min</span>
+            <span class="formato">🔊 MP3</span>
+        </p>
+    </section>
+
+    <!-- TARJETA DE PROMPT ÉTICO -->
+    <section class="prompt-section">
+        <div class="prompt-header">
+            <svg class="prompt-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <h3>🪪 Tarjeta de Identidad del Prompt Ético</h3>
+        </div>
+        <p class="prompt-contexto">
+            Usa esta guía para pedirle a la Inteligencia Artificial que te explique el proceso de detección y corrección de un mensaje binario específico.
+        </p>
+        <div class="prompt-tarjeta">
+            <h4>📝 Mi Fórmula de 4 Pasos:</h4>
+            <div class="paso"><strong>1️⃣ "Comprendí que..."</strong> (Resume la función de la Matriz H y cómo el Síndrome apunta a la posición del error).</div>
+            <div class="paso"><strong>2️⃣ "y quiero saber..."</strong> (Pide que te diagnostique y corrija un mensaje de 7 bits paso a paso).</div>
+            <div class="paso"><strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong> (Estudiantes de secundaria usando la analogía de los círculos de Venn).</div>
+            <div class="paso"><strong>4️⃣ "Incluye un error común que debo evitar..."</strong> (Ej: Leer el Síndrome binario al revés de izquierda a derecha en lugar de MSB a LSB).</div>
+        </div>
+        <div class="prompt-ejemplo-box">
+            <h4>💡 Ejemplo de Prompt:</h4>
+            <blockquote class="prompt-ejemplo">
+                "Comprendí que la Matriz de Paridad (H) en Hamming (7,4) se usa para realizar 3 pruebas de paridad sobre el mensaje recibido, generando un vector de 3 bits llamado Síndrome (S). El valor decimal de S indica la posición exacta del bit corrupto. Quiero saber: Si recibo el mensaje corrupto <code>1011110</code>, ¿puedes calcular el Síndrome paso a paso, decirme qué bit está enfermo y mostrarme el mensaje corregido final? Explícame la solución como si fuera a enseñárselo a estudiantes de 9° grado usando la analogía de los 3 círculos de Venn (donde el error está en la intersección de los círculos que fallan). Incluye un error común que cometen los estudiantes al convertir el vector binario $s_3, s_2, s_1$ a número decimal."
+            </blockquote>
         </div>
     </section>
 
+    <!-- MI CUADERNO -->
+    <section class="cuaderno-section">
+        <div class="cuaderno-header">
+            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <h3>📋 Bitácora de Innovación (Mi Cuaderno)</h3>
+        </div>
+        <p>Responde en tu cuaderno físico (o aquí) las siguientes reflexiones y ejercicios prácticos:</p>
+        <ol>
+            <li><strong>El Poder de la Redundancia:</strong> Si en la Lección 26 vimos que el Bit de Paridad Par fallaba al haber dos errores simultáneos... ¿Qué pasa con el Código Hamming (7,4) si el ruido espacial golpea y cambia <strong>DOS bits</strong> del mensaje al mismo tiempo? (Pista: Intenta cambiar dos bits en la calculadora dCode y mira el Síndrome). ¿Detecta la falla correctamente o se confunde de camilla?
+                <textarea rows="3" style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+            <li><strong>Hackeando el Diagnóstico:</strong> Mira la tabla de Diagnóstico de la Sección 2. ¿Qué pasaría si quisieras diseñar un Código Hamming más grande, digamos uno que pueda ubicar el error en un mensaje de 15 bits en total? ¿Cuántos bits tendría que tener el Vector Síndrome ($S$) para poder apuntar a 15 posiciones diferentes?
+                <textarea rows="2" placeholder="Pista: Piensa en las potencias de 2..." style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+            <!-- NUEVO: Ejercicio de cálculo manual del síndrome -->
+            <li><strong>Calculando el síndrome a mano:</strong> Dado el mensaje recibido \(r = [1,1,0,1,0,0,1]\) y la matriz \(H\) de esta lección, calcula manualmente los tres bits del síndrome \(s_1, s_2, s_3\) usando el producto punto (en módulo 2). Luego, consulta la tabla de diagnóstico y responde: ¿Hay error? Si lo hay, ¿en qué bit? ¿Cuál es el mensaje corregido?
+                <textarea rows="3" placeholder="Muestra tus cálculos y el resultado..." style="width: 100%; margin-top: 5px; border-radius: 4px; padding: 8px; border: 1px solid #ccc;"></textarea>
+            </li>
+        </ol>
+    </section>
+
+    <!-- TRAILER AL LABORATORIO FINAL -->
+    <div class="avance-leccion" style="background-color: #f8f9fa; padding: 25px; border-radius: 12px; margin-top: 40px; border-left: 6px solid var(--u4-color, #6f42c1); box-shadow: 0 4px 15px rgba(111, 66, 193, 0.1);">
+        <h3 style="color: var(--u4-color, #6f42c1); display: flex; align-items: center; gap: 10px; margin-top: 0;">
+            <span style="font-size: 1.3em;">🚀</span> El Gran Final te espera...
+        </h3>
+        <p style="font-size: 1.05em; color: #444; line-height: 1.6;">Acabas de comprender el algoritmo de detección y corrección de errores más importante de los años 50, el mismo que sentó las bases para el Wi-Fi, la memoria RAM de los servidores y las sondas Voyager que envían fotos desde los confines del sistema solar.</p>
+        <p style="font-size: 1.05em; color: #444; line-height: 1.6;">Conoces la teoría. Conoces las matrices. Conoces el circuito.</p>
+        <p style="font-size: 1.05em; color: #444; line-height: 1.6; font-weight: bold;">En la próxima y última lección de este curso (<strong>Laboratorio Final: Proyecto Hamming</strong>), tomarás 3 chips 7486, un puñado de LEDs y 7 interruptores para construir físicamente este Detector de Síndrome. Te retarás a ti mismo introduciendo "ruido" con tus dedos y verás cómo tu circuito diagnostica la falla en tiempo real. ¡Prepárate para la graduación!</p>
+    </div>
+
     <footer>
         <hr>
-        <p style="text-align: center;">
-            <a href="leccion29.html" class="btn-navegacion">← Anterior</a>
-            <a href="leccion31_proyecto_hamming.html" class="btn-navegacion" style="background-color: var(--u4-color);">Ir al Gran Final (Laboratorio) →</a>
-        </p>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+            <a href="leccion28.html" class="btn-navegacion">← Anterior (Matriz Generadora G)</a>
+            <a href="leccion30_proyecto_hamming.html" class="btn-navegacion" style="background-color: var(--color-secundario); color: white; transform: scale(1.05); font-weight: bold; box-shadow: 0 4px 10px rgba(255, 140, 0, 0.3);">¡Ir al Gran Laboratorio Final! 🏆 →</a>
+        </div>
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;">🏠 Volver al Índice Principal</a>
+        </div>
+        
+<!-- FOOTER ACADÉMICO UNIFICADO -->
+        <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eaeaea; text-align: center; color: #666;">
+            <p style="margin-bottom: 5px;"><strong>Fundamentos de Sistemas Digitales</strong></p>
+            <p style="margin-bottom: 5px; font-size: 0.9em;">Diseñado para formar a la próxima generación de ingenieros y docentes en Colombia.</p>
+            <p style="font-size: 0.8em; margin-bottom: 0;">Material Educativo Abierto (REA) - 2026</p>
+        </footer>
     </footer>
 </div>
 

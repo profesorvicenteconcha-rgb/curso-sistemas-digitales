@@ -111,7 +111,38 @@
 
         <div class="dato-extra" style="background-color: #fff9c4; border-left-color: #fbc02d; margin-top: 20px;">
             <h3 style="color: #f57f17; margin-top: 0;">💾 El Héroe Real: Chip 74LS30 (NAND de 8 Entradas)</h3>
-            <p>En lugar de construir una OR de 8 entradas para detectar si <em>"Existe al menos un sensor de humo en 0 (falla)"</em>, los ingenieros compran el chip <strong>7430</strong>. Es una sola compuerta NAND gigantesca de 14 pines que procesa un Bus de Datos entero de un solo golpe. Si todos los sensores están bien (todos en $1$), la salida es $0$. ¡Si <strong>un solo sensor cae a $0$</strong>, el chip detona un $1$ en la salida! Es De Morgan trabajando a escala industrial.</p>
+            <p>En lugar de construir una OR de 8 entradas combinando docenas de compuertas, los ingenieros compran el chip <strong>74LS30</strong>. Es una sola compuerta NAND gigantesca de 14 pines que procesa un Bus de Datos entero de un solo golpe. Es De Morgan trabajando a escala industrial.</p>
+            
+            <!-- NUEVO: Pinout del 74LS30 -->
+            <div class="svg-container" style="margin: 20px 0; background: white; padding: 15px; border-radius: 8px; border: 1px solid #ffe0b2;">
+                <!-- Guarda tu imagen del pinout como 'pinout_7430.png' -->
+                <img src="img/pinout_7430.png" alt="Pinout del chip 74LS30 mostrando 8 entradas (A-H), 1 salida (X) y pines NC" style="max-width: 60%; height: auto;">
+                <p><small><em>Fig. 2: Diagrama de conexión (Pinout) del 74LS30. Observa que las 8 entradas están distribuidas alrededor del chip, la salida está en el pin 8, y hay tres pines marcados como <strong>NC (No Connect)</strong> en los que no debes enchufar absolutamente nada.</em></small></p>
+            </div>
+        </div>
+
+        <!-- BLOQUE PROPORCIONADO POR TI: Ejemplo práctico con el 74LS30 -->
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #0d47a1; margin-top: 30px;">
+            <h3 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">💡</span> Ejemplo Práctico: Alarma de Emergencia con 74LS30
+            </h3>
+            <p>Imagina que tienes 8 sensores de humo en un edificio. Cada sensor entrega un nivel lógico <strong>1 (alto)</strong> cuando <strong>no detecta humo</strong> (estado seguro). Quieres que se encienda una alarma (LED rojo) si <strong>al menos un sensor detecta humo</strong> (es decir, su salida pasa a <strong>0</strong>).</p>
+            <p>Usando el chip 74LS30, conectamos cada sensor a una de las 8 entradas del chip. La salida del chip será:</p>
+            
+            <div class="formula" style="background: white; border: 1px solid #bbdefb;">
+                $$ \text{Salida} = \overline{D_0 \cdot D_1 \cdot D_2 \cdots D_7} $$
+            </div>
+            
+            <p>Si todos los sensores están en 1 (tranquilidad), el producto es 1 y la salida es <strong>0</strong> (LED apagado). Si algún sensor se pone a 0 (humo), el producto se vuelve 0 y la salida se pone a <strong>1</strong>, encendiendo el LED. ¡Acabamos de construir un detector de pánico masivo con un solo chip!</p>
+            
+            <div class="svg-container" style="margin: 15px 0; background: white; padding: 15px; border-radius: 8px; border: 1px solid #bbdefb;">
+                <!-- Guarda la imagen de tu circuito como 'ejemplo_7430_alarma.png' -->
+                <img src="img/ejemplo_7430_alarma.png" alt="Diagrama de conexión de 8 sensores a un chip 74LS30 cuya salida enciende un LED" style="max-width:70%; height:auto;">
+                <p><small><em>Fig. 3: Alarma de emergencia con 74LS30. La lógica implementa el cuantificador existencial de las señales negadas: \(LED = \overline{D_0 \cdot D_1 \cdots D_7} = \overline{D_0} + \overline{D_1} + \cdots + \overline{D_7}\). Es decir, el LED se enciende si <strong>existe al menos un sensor en 0</strong> (humo).</em></small></p>
+            </div>
+            
+            <p style="margin-bottom: 0; font-weight: bold; color: #1565c0;">Pregunta para reflexionar:</p>
+            <p style="margin-top: 5px;">¿Qué pasaría si en lugar de conectar los sensores directamente, los conectaras a través de inversores (NOT)? ¿Qué tipo de cuantificador estarías implementando?</p>
         </div>
 
         <!-- EL REGRESO DE LOS AXIOMAS (OPTIMIZACIÓN DE BUSES) -->
@@ -132,7 +163,7 @@
             <!-- AQUÍ ENTRA TU NUEVA IMAGEN -->
             <div class="svg-container" style="margin: 20px 0;">
                 <img src="img/ley_idempotencia.png" alt="Ley de Idempotencia en compuertas AND y OR" style="max-width:65%; height:auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                <p><small><em>Fig. 2: Ley de Idempotencia. Conectar la misma señal a ambas patas de una compuerta no altera la información, solo desperdicia pines.</em></small></p>
+                <p><small><em>Fig. 4: Ley de Idempotencia. Conectar la misma señal a ambas patas de una compuerta no altera la información, solo desperdicia pines.</em></small></p>
             </div>
 
             <p><strong>La Intervención del Ingeniero:</strong> Como ves en la figura, no necesitas comprar un chip con pines extra para procesar dos veces la misma señal. Por la ley de <strong>Idempotencia</strong>, una señal multiplicada (o sumada) consigo misma no aporta información nueva. Simplemente cortas el cable <span>\(D_3\)</span>, lo ignoras, y envías el resto al chip. Has ahorrado recursos físicos usando matemáticas.</p>
@@ -152,7 +183,7 @@
             <!-- AQUÍ VA TU NUEVA IMAGEN DE ABSORCIÓN -->
             <div class="svg-container" style="margin: 20px 0;">
                 <img src="img/ley_absorcion.png" alt="Ley de Absorción en compuertas lógicas" style="max-width:70%; height:auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                <p><small><em>Fig. 3: Ley de Absorción. Como ves en la tabla, la salida X es idéntica a la entrada A. ¡La compuerta AND y la señal B no tienen ningún efecto final!</em></small></p>
+                <p><small><em>Fig. 5: Ley de Absorción. Como ves en la tabla, la salida X es idéntica a la entrada A. ¡La compuerta AND y la señal B no tienen ningún efecto final!</em></small></p>
             </div>
 
             <p><strong>La Intervención del Ingeniero:</strong> Si lo que quieres saber es <em>"¿Existe alguna alarma encendida?"</em>, la señal del cable \(D_1\) (\(A \cdot C\)) es <strong>completamente inútil</strong> para la toma de decisión final. Si la cocina se incendia, la Alarma General (\(A\)) ya estará en \(1\), disparando la compuerta OR. </p>
@@ -189,7 +220,7 @@
             </audio>
         </div>
         <p class="podcast-meta">
-            <span class="duracion">⏱️ 16:45 min</span>
+            <span class="duracion">⏱️ 12:22 min</span>
             <span class="formato">🔊 MP3</span>
         </p>
     </section>
@@ -261,6 +292,12 @@
         <div style="text-align: center;">
             <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;">🏠 Volver al Índice Principal</a>
         </div>
+        
+        <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eaeaea; text-align: center; color: #666;">
+            <p style="margin-bottom: 5px;"><strong>Fundamentos de Sistemas Digitales</strong></p>
+            <p style="margin-bottom: 5px; font-size: 0.9em;">Diseñado para formar a la próxima generación de ingenieros y docentes en Colombia.</p>
+            <p style="font-size: 0.8em; margin-bottom: 0;">Material Educativo Abierto (REA) - 2026</p>
+        </footer>
     </footer>
 </div>
 
