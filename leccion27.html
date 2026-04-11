@@ -70,6 +70,19 @@
             <div style="background-color: #fff9c4; padding: 12px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #fbc02d;">
                 <p style="margin: 0; font-size: 0.95em;"><strong>📊 Tasa de código ($R = k/n$):</strong> En Hamming (7,4), $R \approx 0.57$ (sacrificamos el 43% del ancho de banda para ganar robustez). Para enviar fotos de Marte vale la pena; para una videollamada en 5G, quizás no. Los ingenieros eligen la tasa según el nivel de ruido esperado.</p>
             </div>
+
+            <!-- === NUEVO BLOQUE: LA REGLA DE HAMMING === -->
+            <div style="background-color: #f3e5f5; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #9c27b0;">
+                <h4 style="color: #7b1fa2; margin-top: 0; margin-bottom: 10px;">📐 La Regla de Oro: ¿Cuántos bits $r$ necesito?</h4>
+                <p style="margin-bottom: 10px; font-size: 0.95em;">Para que un código pueda <strong>corregir 1 error</strong>, los bits de redundancia ($r$) deben tener suficientes combinaciones posibles ($2^r$) para apuntar a cada uno de los bits del mensaje total ($n = k + r$), más un estado extra para decir "Todo está bien". La inecuación matemática que gobierna esto es:</p>
+                <div class="formula" style="font-size: 1.1em; background: white; border: 1px solid #ce93d8; padding: 8px; margin: 10px 0;">
+                    $$ 2^r \geq k + r + 1 $$
+                </div>
+                <p style="margin-bottom: 0; font-size: 0.9em; color: #555;"><strong>Comprobación para $k=4$:</strong><br>
+                Si probamos con $r=2$: $2^2 \geq 4 + 2 + 1 \rightarrow 4 \geq 7$ (¡Falso! Faltan bits).<br>
+                Si probamos con $r=3$: $2^3 \geq 4 + 3 + 1 \rightarrow 8 \geq 8$ (¡Verdadero!). Por eso el código es Hamming (7,4) y no (6,4).</p>
+                <p>Esto nos dice que <strong>podemos escalar la expresión</strong> a cualquier tamaño de bus (ej. Hamming 15,11 o 31,26).</p>
+            </div>
             
             <!-- NUEVO: Código sistemático -->
             <div style="background-color: #e8f5e9; padding: 12px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #4caf50;">

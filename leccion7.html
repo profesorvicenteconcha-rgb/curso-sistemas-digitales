@@ -251,38 +251,68 @@
         </div>
         </div>
 
+        <!-- === LA TRAMPA DEL RIEL PARTIDO Y EL CABLEADO SEGURO === -->
         <h3>B. La Trampa del Riel Partido 💔</h3>
-        <p>¡Ojo! En muchas protoboards grandes, las líneas de energía (Roja y Azul) se cortan justo en la mitad de la tabla. A veces se ve porque la línea pintada se rompe.</p>
-        <p><strong>Solución:</strong> Si vas a usar toda la tabla, debes poner dos pequeños cables (puentes) en el centro para unir la mitad izquierda con la derecha. Si no lo haces, ¡la energía no llegará al otro lado!</p>
-        <h3>C. Los Cables Correctos para Cada Tarea</h3>
-        <p>No todos los cables son iguales. Usa el adecuado para cada trabajo:</p>
-        <ul>
-            <li><strong>Cables rígidos (pre-cortados de distintas longitudes):</strong> Ideales para conexiones cortas y ordenadas dentro de la protoboard.</li>
-            <li><strong>Cables Dupont macho-macho:</strong> Perfectos para conectar entre columnas distantes.</li>
-            <li><strong>Cables Dupont macho-hembra:</strong> Útiles para conectar sensores o módulos externos.</li>
-            <li><strong>Cables Caimán-Pin:</strong> Para conectar fuentes de alimentación o componentes grandes.</li>
-        </ul>
+        <p>¡Ojo! En muchas protoboards medianas o grandes, las líneas de energía (Roja y Azul) se cortan justo en la mitad de la tabla. A veces se ve a simple vista porque la línea pintada de color se rompe o hay una separación mayor entre los agujeros del medio.</p>
+        <p><strong>Solución:</strong> Si vas a usar toda la tabla, debes poner dos pequeños cables (puentes) en el centro exacto de los rieles para unir la mitad izquierda con la derecha. Si no lo haces, ¡la energía no llegará al otro lado de la placa!</p>
 
-        <h3>D. Técnica de Inserción Correcta</h3>
-        <ol>
-            <li><strong>Endereza las patas</strong> del componente con unos alicates o con los dedos.</li>
-            <li>Inserta <strong>perpendicularmente</strong> a la tabla (no inclinado).</li>
-            <li>Empuja firmemente hasta que el componente quede <strong>a 1-2 mm del plástico</strong>.</li>
-            <li>Si es un chip, inserta primero un extremo, alinea y luego el otro.</li>
-        </ol>
+        <!-- === PREPARANDO LA FUENTE Y EL DIODO GUARDIÁN === -->
+        <h3>C. Preparando tu Fuente y el "Diodo Guardián"</h3>
+        <p>Si usas un cable USB cortado, solo nos importan el cable <strong>Rojo (+)</strong> y el <strong>Negro (-)</strong>. Ignora el Blanco y el Verde (son de datos). Pero antes de conectar esos cables a tu protoboard, te enseñaremos un secreto de supervivencia:</p>
+        
+        <div class="destacado" style="background-color: #fff9c4; border-left-color: #fbc02d; margin-top: 15px; margin-bottom: 25px;">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🛡️</span> Truco de Ingeniero Experto: La Válvula Salvavidas
+            </h3>
+            <p>Por pura estadística, en algún momento estarás cansado y <strong>conectarás el cable Rojo (+) en el riel Azul (-) y viceversa</strong>. Si tienes chips costosos conectados, se quemarán al instante por "polaridad inversa", costándote dinero y horas de frustración.</p>
+            
+            <p>Para evitarlo, los profesionales usan un <strong>Diodo Rectificador</strong> (como el barato <code>1N4007</code>). Como aprendiste con los LEDs, los diodos son "calles de un solo sentido" para los electrones.</p>
 
-        <h3>E. Preparando tu Fuente (El Cable USB)</h3>
-        <p>Si usas un cable USB cortado:</p>
-        <ul>
-            <li>Solo nos importan el cable <strong>Rojo (+)</strong> y el <strong>Negro (-)</strong>.</li>
-            <li>Corta e ignora los cables Blanco y Verde (son de datos).</li>
-            <li>Pela un poquito la punta del Rojo y el Negro.</li>
-            <li style="margin-top: 10px; background-color: #e8f5e9; padding: 10px; border-radius: 5px; border-left: 4px solid #28a745;">
-                <strong>Tip Pro (La Conexión Perfecta):</strong><br>
-                Aquí es donde brillan tus <strong>Cables Caimán-Pin</strong>.
-                <br>Usa el lado del <strong>Caimán (Pinza)</strong> para morder el cable pelado del USB, y conecta el lado del <strong>Pin</strong> firmemente en el riel de la protoboard. ¡Es la forma más segura y profesional sin necesidad de soldar!
-            </li>
-        </ul>
+            <div style="background-color: white; padding: 15px; border-radius: 8px; border: 1px solid #ffe0b2; margin-top: 15px;">
+                <h4 style="margin-top: 0; color: #e65100;">Cómo instalar tu seguro de vida:</h4>
+                <ul style="margin-bottom: 0; line-height: 1.6;">
+                    <li>No conectes el cable rojo del USB directo al riel de la protoboard. <strong>Pon el diodo 1N4007 como un puente en medio</strong>.</li>
+                    <li>Asegúrate de que la <strong>rayita gris o plateada</strong> impresa en el cilindro negro del diodo apunte <em>hacia</em> el riel de tu protoboard (indicando el sentido permitido de la corriente).</li>
+                    <li><strong>El Milagro:</strong> Si conectas la energía bien, la corriente fluye. Si te equivocas y conectas la fuente al revés, el diodo actuará como una puerta de acero hermética. ¡Tus chips sobreviven sin un rasguño!</li>
+                </ul>
+            </div>
+
+            <!-- AQUÍ ENTRA TU NUEVA IMAGEN ACTUALIZADA -->
+            <div class="svg-container" style="margin: 25px 0;">
+                <img src="img/protoboard_cableado_seguro.png" alt="Protoboard con Diodo de protección, LED testigo, puentes centrales y laterales" style="max-width:95%; height:auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">
+                
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid #dee2e6; margin-top: 15px; text-align: left; font-size: 0.95em; color: #444;">
+                    <p style="margin-top: 0; color: #1565c0; font-weight: bold;">🔍 Radiografía de un Cableado Perfecto:</p>
+                    <ul style="margin-bottom: 0; line-height: 1.6;">
+                        <li><strong>1. El Diodo Guardián (Arriba Izq.):</strong> Bloquea la corriente si conectas el USB al revés.</li>
+                        <li><strong>2. El LED Testigo (Izquierda):</strong> Una práctica estándar en ingeniería. Al encenderse, te confirma dos cosas: que hay energía en la placa y que colocaste el diodo guardián en la dirección correcta.</li>
+                        <li><strong>3. Puentes de Riel Partido (Centro):</strong> Los cables cortos rojo y negro aseguran que la energía cruce la "zona muerta" central de la protoboard.</li>
+                        <li><strong>4. Enlace de Rieles (Derecha):</strong> Los cables largos unen el riel superior con el inferior, garantizando que siempre tengas Vcc y GND cerca de tus componentes.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- NOTA TÉCNICA: EL PEAJE DEL DIODO (CONEXIÓN L12) -->
+            <div style="background-color: #f1f8e9; padding: 15px; border-radius: 8px; border-left: 4px solid #4caf50; margin-top: 20px;">
+                <h4 style="margin-top: 0; color: #2e7d32; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.1em;">📉</span> Nota Técnica: El "Peaje" del Diodo
+                </h4>
+                <p style="margin-bottom: 10px; font-size: 0.95em; color: #333;">Como ingeniero, debes saber que la seguridad tiene un pequeño costo. El diodo 1N4007 no es un conductor perfecto; al atravesarlo, los electrones pierden un poco de energía (una <strong>caída de voltaje de ~0.7V</strong>).</p>
+                <ul style="margin-bottom: 10px; font-size: 0.95em; color: #333;">
+                    <li>Si tu cargador USB entrega <strong>5.0V</strong>, después de pasar por el diodo, el riel rojo de tu protoboard tendrá aproximadamente <strong>4.3V</strong>.</li>
+                    <li>Por lo tanto, tus LEDs brillarán un poquito menos porque la corriente ($I = V/R$) será menor.</li>
+                </ul>
+                <p style="margin-bottom: 0; font-size: 0.95em; color: #333; font-style: italic;">
+                    <strong>¿Afectará esto a los chips inteligentes que usaremos más adelante?</strong> ¡No! En la <strong>Lección 12</strong> descubrirás que los "Cerebros Digitales" (Chips TTL) son lo suficientemente listos para aceptar 4.3V como un "1 Lógico" perfecto. ¡Es un precio bajo a pagar por no quemar tus componentes!
+                </p>
+            </div>
+            
+            <p style="margin-top: 15px; margin-bottom: 0; text-align: center; color: #f57f17; font-weight: bold;">
+                Gastar 10 centavos en un diodo te salvará de quemar miles de pesos en circuitos integrados.
+            </p>
+        </div>
+
+        <!-- Y A CONTINUACIÓN SIGUE "D. Técnica de Inserción Correcta" -->
 
         <div class="destacado" style="background-color: #e8f5e9; border-left-color: #4caf50;">
             <h3>🔧 Técnica de Taller: "La Prueba del Meneíto"</h3>
@@ -467,7 +497,7 @@
                         <div style="text-align: center; margin: 20px 0;">
                             <!-- Asegúrate de guardar tu captura con este nombre -->
                             <img src="img/tinkercad_lab1_final.png" alt="Circuito final encendido en Tinkercad" style="max-width: 90%; border-radius: 8px; border: 2px solid #4caf50;">
-                            <p><small><em>Fig. 4: Así debe verse tu éxito: El LED encendido y el multímetro marcando corriente.</em></small></p>
+                            <p><small><em>Fig. 5: Así debe verse tu éxito: El LED encendido y el multímetro marcando corriente.</em></small></p>
                         </div>
 
                         <p>Si tu LED no enciende, revisa:</p>
@@ -522,7 +552,7 @@
     <div class="svg-container">
         <!-- IMAGEN: fig. 4: - La línea que conecta LED2 con R2 -->
         <img src="img/linea_led2_r2.png" alt="La 'Línea' Eléctrica: Un Nodo Compartido - Diagrama de conexión entre LED2 y R2" style="max-width:45%; height:auto;">
-        <p><small><em>Fig. 5: La línea que conecta LED₂ con R₂. Esta línea representa un nodo eléctrico que en la protoboard se implementa compartiendo la misma columna vertical.</em></small></p>
+        <p><small><em>Fig. 6: La línea que conecta LED₂ con R₂. Esta línea representa un nodo eléctrico que en la protoboard se implementa compartiendo la misma columna vertical.</em></small></p>
     </div>
 
     <h3>Guía Paso a Paso: Añadiendo la Segunda Rama</h3>
@@ -558,7 +588,7 @@
     <div class="svg-container">
         <!-- IMAGEN: Fig. 5 - Montaje del circuito en paralelo implementado en Tinkercad -->
         <img src="img/montaje_paralelo_tinkercad.png" alt="CIRCUITO PARALELO: SIMETRÍA PERFECTA - Cables rojo/negro reflejados en Columna 10"; style="max-width: 70%; border-radius: 8px; border: 2px solid #4caf50;">
-        <p><small><em>Fig. 6: Montaje del circuito en paralelo implementado en Tinkercad. Se observan las dos ramas independientes con sus respectivos componentes y la simetría de los cables de alimentación.</em></small></p>
+        <p><small><em>Fig. 7: Montaje del circuito en paralelo implementado en Tinkercad. Se observan las dos ramas independientes con sus respectivos componentes y la simetría de los cables de alimentación.</em></small></p>
     </div>
 
     <h3>🔬 Análisis con Ley de Ohm</h3>
@@ -651,7 +681,7 @@
         <div class="svg-container">
             <!-- IMAGEN: Fig. 6 - Diseño que supera el problema de una sola resistencia -->
             <img src="img/cuello_botella.png" alt="ERROR COMÚN vs. BUENA PRÁCTICA - Una resistencia única ↔ Resistencia por LED" style="max-width:75%; height:auto;">
-            <p><small><em>Fig. 7: Diseño que supera el problema de una sola resistencia (cuello de botella) para todos los LEDs. A la izquierda: riesgo de sobrecarga con resistencia única. A la derecha: solución correcta con resistencia independiente por LED.</em></small></p>
+            <p><small><em>Fig. 8: Diseño que supera el problema de una sola resistencia (cuello de botella) para todos los LEDs. A la izquierda: riesgo de sobrecarga con resistencia única. A la derecha: solución correcta con resistencia independiente por LED.</em></small></p>
         </div>
         
         <p><strong>Aplicación en este circuito:</strong> Hemos aplicado correctamente este principio. Cada LED (LED₁ rojo y LED₂ amarillo) tiene su propia resistencia (R₁ y R₂ de 330Ω), asegurando que cada rama funcione de manera independiente y segura. Consultando la tabla de \( V_f \), podemos estimar las corrientes: ≈ 9.1 mA para el rojo (2.0V) y ≈ 8.5 mA para el amarillo (2.2V). La corriente total que debe suministrar la fuente es la suma de ambas: \( I_{\text{total}} = I_1 + I_2 \approx 9.1 \, \text{mA} + 8.5 \, \text{mA} = 17.6 \, \text{mA} \). Esto demuestra que, incluso con la misma resistencia, las corrientes —y por tanto los brillos— pueden variar ligeramente debido a la diferencia en \( V_f \).</p>

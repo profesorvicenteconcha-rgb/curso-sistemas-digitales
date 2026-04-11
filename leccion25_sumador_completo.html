@@ -363,6 +363,30 @@
         </div>
     </section>
 
+    <!-- === EL SECRETO DEL CARRY LOOK-AHEAD === -->
+    <div class="destacado" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-top: 25px;">
+        <h4 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2em;">🔮</span> Ingeniería Avanzada: Predecir el Futuro (Carry Look-Ahead)
+        </h4>
+        <p>Mencionamos que los procesadores modernos no esperan al dominó del <em>Ripple Carry</em>; usan sumadores ultra-rápidos llamados <em>Carry Look-Ahead</em>. ¿Cómo "predice" el chip un acarreo sin esperar al anterior?</p>
+        <p>¡Usando Álgebra de Boole (Lección 24)! Los ingenieros "desenrollan" las ecuaciones. El sumador 2 no espera al 1; mira directamente las entradas originales (\(A_0, B_0, A_1, B_1\)) y calcula si le va a llegar un acarreo usando una ecuación monstruosa como esta:</p>
+        
+        <div class="formula" style="font-size: 0.9em; background: white; border: 1px solid #90caf9; padding: 10px; margin: 15px 0; overflow-x: auto; color: #1565c0;">
+            $$C_2 = (A_1 \cdot B_1) + (A_1 \oplus B_1) \cdot (A_0 \cdot B_0) + (A_1 \oplus B_1) \cdot (A_0 \oplus B_0) \cdot C_{in}$$
+        </div>
+        
+        <h5 style="color: #0277bd; margin-bottom: 10px;">⚖️ La Paradoja del Ingeniero: Velocidad vs. Espacio</h5>
+        <ul style="margin-bottom: 0; line-height: 1.6;">
+            <li><strong>La Ventaja:</strong> Es casi instantáneo. Las señales no viajan en cascada; cruzan las compuertas en paralelo.</li>
+            <li><strong>El Problema Físico (Fan-In):</strong> Mira la ecuación de arriba. Para el bit 2 ya necesitas una AND de 3 entradas. Para predecir el acarreo del bit 64, ¡necesitarías una compuerta AND monstruosa de 65 entradas!</li>
+        </ul>
+        
+        <div style="background-color: #fff9c4; padding: 15px; border-radius: 6px; border-left: 4px solid #fbc02d; margin-top: 15px;">
+            <p style="margin: 0; font-size: 0.95em; color: #555;"><strong>🤔 ¿Pero no dijimos en la Lección 17 que los chips comerciales no pasan de 8 entradas por culpa de la lentitud (Fan-In)?</strong></p>
+            <p style="margin: 10px 0 0 0; font-size: 0.95em; color: #555;">¡Exacto! Por eso es imposible armar un <em>Carry Look-Ahead</em> de 64 bits en una protoboard. En el mundo real (dentro de los procesadores Intel o AMD de silicio microscópico), los ingenieros hacen "trampa": fabrican bloques predictores pequeños de 4 bits, y luego conectan esos bloques a <em>otro</em> predictor superior. Es una jerarquía. <br><strong>Ganan velocidad, pero sacrifican millones de transistores extra y consumen mucha más batería.</strong> ¡Ese es el arte del diseño de microprocesadores!</p>
+        </div>
+    </div>
+
     <!-- ================================================================== -->
     <!-- LABORATORIO: LA CALCULADORA BINARIA                                -->
     <!-- ================================================================== -->

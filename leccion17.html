@@ -97,6 +97,15 @@
             <p><small><em>Fig. 1: Esquema lógico para P = AB + AC + BC. Implementación en cascada con compuertas básicas (AND y OR). Observa cómo las compuertas OR se encadenan para lograr la suma triple.</em></small></p>
         </div>
 
+        <!-- === NUEVA CURIOSIDAD DE INGENIERÍA: FAN-IN === -->
+        <div class="dato-extra" style="background-color: #f1f8e9; border-left-color: #2e7d32; margin: 25px 0;">
+            <h4 style="color: #1b5e20; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🧱</span> Curiosidad de Ingeniero: El Límite del "Fan-In"
+            </h4>
+            <p style="margin-bottom: 10px;">Quizás te preguntes: <em>"¿Por qué no fabrican una compuerta gigante de 30 entradas y me ahorro hacer cascadas?"</em>.</p>
+            <p style="margin-bottom: 0;">La respuesta está en la física del silicio. El número máximo de entradas que una compuerta lógica puede manejar se llama <strong>Fan-In</strong>. Cada pata extra que le agregas al chip añade <em>capacitancia parásita</em> (resistencia al cambio rápido). Si los ingenieros fabricaran una compuerta AND de 30 entradas, los electrones tardarían tanto en llenarla que el procesador sería desesperantemente lento. Por eso, la industria estandariza chips rápidos de 2, 3, 4 y máximo 8 entradas (como verás en la Unidad 3). ¡La cascada es el precio que pagamos por la velocidad!</p>
+        </div>
+
         <p>Ahora que el plano respeta las leyes de la física, ¿cómo construimos eso? La respuesta está en unos componentes negros con patitas metálicas llamados <strong>Circuitos Integrados</strong> de la familia <strong>TTL (74xx)</strong>. Cariñosamente les decimos "chips".</p>
 
         <h2>2. ¿Qué es un Chip? ¡Aprende a contar las patas!</h2>
@@ -209,30 +218,46 @@
             <p>Haz esto PRIMERO, antes de poner cualquier otro cable.</p>
         </div>
 
-        <!-- ====================================================================== -->
-        <!-- SECCIÓN 4: PRUEBA DEL 7408 (AND)                                       -->
-        <!-- ====================================================================== -->
+        <!-- === SECCIÓN 5: TU PRIMER MONTAJE CON EL 7408 === -->
         <h2>5. Tu Primer Montaje: La Prueba de Fuego del 7408</h2>
         <p>Antes de armar la ecuación gigante del jurado, vamos a probar que la matemática funciona en el mundo real construyendo una sola operación: \(X = A \cdot B\). Usaremos un chip 7408 (Compuerta AND).</p>
 
         <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
-            <h3>🛠️ Diseño Inteligente: Lógica Positiva y Orden Espacial</h3>
+            <h3 style="color: #1b5e20; margin-top: 0;">🛠️ Diseño Inteligente: Lógica Positiva y Orden Espacial</h3>
             <p><strong>1. El regreso del Pull-Down:</strong> ¿Recuerdas la Lección 10? Para que el circuito sea intuitivo para un usuario (Interruptor Arriba = 1 Lógico), usamos resistencias <strong>Pull-Down</strong> conectadas a Tierra.</p>
             <p><strong>2. Ergonomía en la Protoboard:</strong> Aunque el chip tiene 4 compuertas, usamos la <strong>Compuerta 1</strong> (entradas en pines 1 y 2, salida en pin 3). Esto mantiene todos los cables agrupados a la izquierda, facilitando la lectura del circuito y evitando "nidos de espagueti".</p>
         </div>
 
-        <div class="svg-container">
-            <img src="img/montaje_7408_pulldown.png" alt="Montaje en protoboard de un chip 7408 con interruptores DIP, resistencias pull-down conectadas a tierra y un LED a la salida del pin 3" style="max-width:85%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <p><small><em>Fig. 5: Montaje físico del 7408. Observa cómo las resistencias van a tierra (Pull-Down) y se utilizan los pines 1 (A1), 2 (B1) y 3 (Y1).</em></small></p>
+        <div class="svg-container" style="margin: 25px 0;">
+            <!-- Guarda tu nueva imagen como 'montaje_7408_pulldown.png' (sobrescribe la anterior) -->
+            <img src="img/montaje_7408_pulldown.png" alt="Montaje en protoboard de un chip 7408 con interruptores DIP, resistencias pull-down, diodo de protección y un LED a la salida" style="max-width:90%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+            
+            <!-- EL NUEVO CÓDIGO DE COLORES Y EL DIODO -->
+            <div style="background-color: white; border: 1px solid #dee2e6; padding: 15px; border-radius: 6px; margin-top: 15px; text-align: left; font-size: 0.95em; color: #444;">
+                <p style="margin-top: 0; color: var(--color-primario); font-weight: bold;">🔍 Radiografía de tu Primer Montaje Profesional:</p>
+                <ul style="margin-bottom: 10px; line-height: 1.6;">
+                    <li><strong>🛡️ El Seguro de Vida:</strong> Observa el cilindro negro a la salida del cable USB rojo. Es tu <strong>Diodo 1N4007</strong> (Lecciones 7 y 12). Garantiza que si conectas el USB al revés, tu valioso chip 7408 no explote.</li>
+                    <li><strong>🎨 El Código de Colores del Ingeniero:</strong> Para no volverte loco buscando errores (<em>troubleshooting</em>), acostúmbrate a usar este estándar de colores en tus cables:
+                        <ul style="margin-top: 5px;">
+                            <li><strong style="color: #d32f2f;">Rojo:</strong> Exclusivo para Vcc (+5V).</li>
+                            <li><strong>Negro:</strong> Exclusivo para GND (Tierra).</li>
+                            <li><strong style="color: #388e3c;">Verde:</strong> Para Señales de Entrada (Los cables que van de los interruptores a los pines 1 y 2 del chip).</li>
+                            <li><strong style="color: #fbc02d;">Amarillo:</strong> Para Señales de Salida (El cable que va del pin 3 hacia tu LED indicador).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <p style="margin-top: 15px;"><small><em>Fig. 5: Montaje físico del 7408. Observa cómo las resistencias van a tierra (Pull-Down), el diodo protege la entrada de voltaje, y los colores de los cables te cuentan la historia del circuito.</em></small></p>
         </div>
 
         <div class="dato-extra" style="border-left-color: #2196f3; background-color: #e3f2fd;">
-            <h3>🔬 La Matemática se hace Luz (La Multiplicación)</h3>
-            <p>Al encender la fuente, el chip 7408 multiplicará constantemente las entradas. El LED (Salida) <em>solo</em> se encenderá cuando subas el interruptor 1 <strong>Y</strong> el interruptor 2 simultáneamente (\(1 \cdot 1 = 1\)). Si bajas cualquiera de los dos, el LED se apagará (\(1 \cdot 0 = 0\)).</p>
+            <h3 style="color: #1565c0; margin-top: 0;">🔬 La Matemática se hace Luz (La Multiplicación)</h3>
+            <p>Al encender la fuente, el chip 7408 multiplicará constantemente las señales verdes. El LED amarillo (Salida) <em>solo</em> se encenderá cuando subas el interruptor 1 <strong>Y</strong> el interruptor 2 simultáneamente (\(1 \cdot 1 = 1\)). Si bajas cualquiera de los dos, el LED se apagará (\(1 \cdot 0 = 0\)). ¡Es magia matemática pura!</p>
         </div>
 
         <!-- ====================================================================== -->
-        <!-- NUEVA SECCIÓN 5: PRUEBA DEL 7432 (OR) - LA MAGIA MODULAR                 -->
+        <!-- NUEVA SECCIÓN 6: PRUEBA DEL 7432 (OR) - LA MAGIA MODULAR                 -->
         <!-- ====================================================================== -->
         <h2>6. La Magia Modular: Cambiando al 7432 (La Suma)</h2>
         <p>Aquí viene uno de los conceptos más alucinantes de la electrónica digital: <strong>La estandarización</strong>.</p>
@@ -278,7 +303,7 @@
         </div>
         
         <!-- ====================================================================== -->
-        <!-- SECCIÓN 6: PREPARACIÓN PARA EL LABORATORIO                             -->
+        <!-- SECCIÓN 7: PREPARACIÓN PARA EL LABORATORIO                             -->
         <!-- ====================================================================== -->
         <h2>7. Simulando en Tinkercad el Diseño Final</h2>
         <p>Ahora que dominas tanto la compuerta AND como la OR por separado, mira nuestra ecuación simplificada del jurado: <code>P = AB + AC + BC</code>. Esta requiere combinar ambos mundos:</p>
@@ -294,7 +319,7 @@
 
         <p style="text-align: center; margin-top: 15px;">
             <!-- PROFE: Reemplaza el # con el enlace real de tu proyecto público en Tinkercad -->
-            <a href="#" target="_blank" class="btn-navegacion" style="background-color: #0277bd;">Abrir Simulación en Tinkercad ↗</a>
+            <a href="https://www.tinkercad.com/joinclass/MPFX5QRXP" target="_blank" class="btn-navegacion" style="background-color: #0277bd;">Abrir Simulación en Tinkercad ↗</a>
         </p>
 
         <section>

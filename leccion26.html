@@ -68,6 +68,13 @@
         
         <p><strong>¿Qué pasa si ataca el ruido?</strong> Si en el camino el ruido altera un bit (ej: llega <code>1 <strong style="color: #d32f2f;">1</strong> 1 1 1</code>), el receptor cuenta los "1" y dice: <em>"¡Hay cinco unos! El paquete es impar. Sé que hay un error, rechazaré este mensaje y pediré que lo envíen de nuevo"</em>.</p>
 
+        <!-- === NUEVO BLOQUE: PROTOCOLO ARQ === -->
+        <div class="dato-extra" style="background-color: #f1f8e9; border-left-color: #2e7d32; margin-bottom: 25px;">
+            <h4 style="color: #1b5e20; margin-top: 0;">🔄 ¿Qué hace la máquina al detectar el error? (Protocolo ARQ)</h4>
+            <p style="margin-bottom: 10px;">El bit de paridad es "ciego": sabe que hay un error, pero no sabe en qué bit está. Por lo tanto, <strong>no puede corregirlo</strong>.</p>
+            <p style="margin-bottom: 0;">En la industria, los sistemas que usan paridad simple (como el protocolo TCP/IP básico o los puertos serie USB) implementan un mecanismo llamado <strong>ARQ (Automatic Repeat reQuest)</strong>. Cuando el receptor detecta que la paridad no cuadra, simplemente <strong>descarta el paquete completo y le envía un mensaje al transmisor exigiendo que lo vuelva a enviar</strong>. Es barato en hardware, pero terrible si el canal (como un cable muy largo) tiene ruido constante, ya que el sistema pasará todo el tiempo pidiendo retransmisiones y la velocidad de internet caerá a cero.</p>
+        </div>
+        
         <h2>3. Construyendo el Generador de Paridad</h2>
         <p>¿Cómo calcula la computadora transmisora este bit $P$ automáticamente en nanosegundos? Sumando todos los bits de datos usando nuestra Aritmética Módulo 2 (XOR).</p>
         

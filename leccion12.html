@@ -87,6 +87,27 @@
             <li><strong>0 Lógico (LOW):</strong> Voltaje entre 0V y 0.8V. (Falso).</li>
         </ul>
 
+        <!-- CONEXIÓN L7: EL DIODO Y LOS UMBRALES TTL -->
+        <div class="destacado" style="background-color: #fff9c4; border-left-color: #fbc02d; margin-top: 25px; margin-bottom: 25px;">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🛡️</span> El Veredicto Final: ¿Por qué usamos el Diodo Guardián?
+            </h3>
+            <p>Observa la gráfica de arriba. Nos dice que cualquier voltaje <strong>entre 2.0V y 5.0V</strong> es interpretado perfectamente como un "1 Lógico" por los chips de la familia TTL (los que usarás de ahora en adelante).</p>
+            
+            <p>¿Recuerdas el <strong>Diodo 1N4007</strong> que instalamos en el riel de energía en la <strong>Lección 7</strong> para evitar quemar los circuitos si conectabas el USB al revés?</p>
+            
+            <ul style="margin-bottom: 10px;">
+                <li>Ese diodo te cobra un "peaje" de <strong>0.7V</strong>.</li>
+                <li>Tu fuente USB entrega <strong>5.0V</strong>.</li>
+                <li>El voltaje final que llega a tus chips es: $5.0V - 0.7V = \mathbf{4.3V}$.</li>
+            </ul>
+            
+            <div style="background-color: white; padding: 15px; border-radius: 8px; border: 1px solid #ffe0b2; margin-top: 15px;">
+                <h4 style="margin-top: 0; color: #e65100;">✅ ¡Misión Cumplida!</h4>
+                <p style="margin-bottom: 0;">Como <strong>4.3V</strong> está muy por encima del límite de riesgo de 2.0V, el chip lo lee como un <strong>1 perfecto y claro</strong>. Esta es la razón de oro por la que te invitamos a <strong>proteger TODOS tus circuitos físicos</strong> de las Unidades 2, 3 y 4 con el diodo 1N4007. Tendrás total seguridad contra cortocircuitos por polaridad invertida, sin sacrificar la estabilidad matemática de tus compuertas lógicas.</p>
+            </div>
+        </div>
+
         <div class="destacado" style="background-color: #e3f2fd; border-left-color: #2196f3;">
             <h3>🛡️ El Margen de Ruido: ¿Por qué la diferencia entre "Garantizado" e "Interpretado"?</h3>
             <p>Observa un detalle muy importante: una salida TTL <strong>garantiza</strong> enviar un "0" entre 0V y 0.4V, pero la entrada <strong>interpreta</strong> como "0" cualquier voltaje hasta 0.8V. ¡Esa diferencia de 0.4V es nuestro escudo contra el ruido!</p>

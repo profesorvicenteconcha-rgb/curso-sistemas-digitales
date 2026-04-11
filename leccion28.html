@@ -84,8 +84,50 @@
 
         <div class="svg-container" style="margin: 25px 0;">
             <img src="img/matriz_generadora_explicada.png" alt="Matriz G dividida en dos: Izquierda (Identidad) y Derecha (Paridad)" style="max-width:90%; height:auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-            <p><small><em>Fig 1. Izquierda: Copia los datos puros. Derecha: Crea los bits de protección. La matriz completa $G = [I_k | P]$ multiplicada por los 4 bits de datos genera el paquete final de 7 bits.</em></small></p>
+            <p><small><em>Fig. 1: Izquierda: Copia los datos puros. Derecha: Crea los bits de protección. La matriz completa $G = [I_k | P]$ multiplicada por los 4 bits de datos genera el paquete final de 7 bits.</em></small></p>
         </div>
+
+        <!-- NUEVO RINCÓN DEL DOCENTE: Interpretación geométrica de G -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: Las filas de G como "Colores Primarios"
+            </h3>
+
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">
+                Observa las <strong>4 filas</strong> de la matriz \(G\). Cada fila es una <strong>palabra de 7 bits</strong> (válida dentro de nuestro código). 
+                Son como los <strong>colores primarios</strong> (rojo, azul, amarillo) de un pintor: al mezclarlos puedes obtener todos los demás colores del cuadro.
+            </p>
+
+            <h4 style="color: #e65100; margin-bottom: 8px;">🎨 ¿Qué significa "mezclar" filas?</h4>
+            <p style="margin-top: 0; color: #444;">
+                En nuestro mundo digital, "mezclar" dos palabras se hace con la operación <strong>XOR</strong> (suma módulo 2). 
+                Si tomas dos filas de \(G\) y las sumas bit a bit, obtienes <strong>otra palabra que también es válida</strong> dentro del código. 
+                ¡Es como si mezclaras rojo y azul para obtener un morado perfecto!
+            </p>
+
+            <div style="background-color: white; padding: 18px; border-radius: 6px; border-left: 4px solid #007bff; margin: 15px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <h5 style="margin: 0 0 8px 0; color: #0056b3; font-size: 1.1em;">✨ Ejemplo concreto:</h5>
+                <p style="margin: 0; color: #333; font-family: monospace; font-size: 1.05em;">
+                    Fila 1: 1 0 0 0 1 1 0<br>
+                    Fila 2: 0 1 0 0 1 0 1<br>
+                    --------------------- XOR<br>
+                    <strong>Mezcla: 1 1 0 0 0 1 1</strong>
+                </p>
+                <p style="margin-top: 10px; margin-bottom: 0; color: #555;">Esa "mezcla" es otra palabra 100% protegida y válida. ¡Nunca saldrás del "diccionario" del código!</p>
+            </div>
+
+            <p style="color: #444; line-height: 1.6;">
+                De la misma manera que con 4 colores primarios puedes generar una paleta completa, con estas <strong>4 filas base</strong> (que forman una <em>base lineal</em>) puedes generar <strong>todas las \(2^4 = 16\) palabras válidas</strong> del código Hamming (7,4). 
+                Por eso se llama Matriz <strong>Generadora</strong>: porque <em>genera</em> todo el universo de palabras válidas a partir de sus filas.
+            </p>
+
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+                <strong>📝 Reto para el cuaderno:</strong> Elige dos filas cualesquiera de \(G\) y súmalas con XOR (bit a bit). Verifica que el resultado también es una palabra perfecta comprobando que cumple la condición \( \text{resultado} \cdot H^T = 0 \) (que veremos en la próxima lección). ¡Te habrás convertido en un mezclador de códigos!
+            </div>
+        </div>
+
+        <!-- NUEVO: Formato sistemático del paquete final -->
+        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin-top: 20px;">
 
         <!-- NUEVO: Formato sistemático del paquete final -->
         <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin-top: 20px;">
@@ -130,15 +172,44 @@
 
         <p>¿Te resultan familiares estas ecuaciones? ¡Son exactamente las mismas que vimos en la lección anterior! Pero ahora entiendes de dónde salieron: no son aleatorias, son la lectura vertical de la Matriz $G$.</p>
 
-        <!-- NUEVO: Extracción formal de las ecuaciones desde la matriz -->
-        <div class="destacado" style="background-color: #fcf3cf; border-left-color: #fbc02d; margin: 20px 0;">
-            <h3 style="color: #f57f17; margin-top: 0;">📐 Matemáticamente: ¿Cómo se obtienen esas ecuaciones?</h3>
-            <p>Cada bit de paridad se obtiene multiplicando (en <strong>Módulo 2</strong>) el vector de datos por la columna correspondiente de \(P\):</p>
-            <div class="formula" style="font-size: 1.1em; background: white;">
-                $$p_1 = [d_1\; d_2\; d_3\; d_4] \cdot [1,1,0,1]^T = d_1 \oplus d_2 \oplus d_4$$
+        
+        <!-- NUEVO RINCÓN DEL DOCENTE: El Baile de las Matrices -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: El "Baile de las Matrices" (Multiplicación en Módulo 2)
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Imagina que el mensaje de datos es un <strong>tren de 4 vagones</strong>: \([d_1, d_2, d_3, d_4]\).  
+            La matriz \(P\) (la parte derecha de \(G\)) es un <strong>escáner</strong> que tiene 3 columnas (una por cada bit de paridad \(p_1, p_2, p_3\)).</p>
+
+            <h4 style="color: #e65100; margin-bottom: 8px;">🎯 Para calcular \(p_1\) (primera columna):</h4>
+            <p style="margin-top: 0;">Mira la primera columna de \(P\): \([1, 1, 0, 1]^T\).  
+            Cada número le dice: <em>"¿Este vagón del tren debe subirse a la suma?"</em></p>
+            <ul style="color: #444; line-height: 1.6; margin-bottom: 15px;">
+                <li>El <strong>1</strong> en la fila 1 significa: <em>toma \(d_1\) y súmalo</em></li>
+                <li>El <strong>1</strong> en la fila 2 significa: <em>toma \(d_2\) y súmalo</em></li>
+                <li>El <strong>0</strong> en la fila 3 significa: <em>ignora \(d_3\)</em></li>
+                <li>El <strong>1</strong> en la fila 4 significa: <em>toma \(d_4\) y súmalo</em></li>
+            </ul>
+            <p>Ahora, suma esos vagones usando <strong>aritmética de la licuadora (módulo 2)</strong>:  
+            \(d_1 + d_2 + d_4\), pero como es módulo 2, escribimos \(\oplus\) (XOR).  
+            ¡Así obtenemos \(p_1 = d_1 \oplus d_2 \oplus d_4\)!</p>
+
+            <h4 style="color: #e65100; margin-bottom: 8px;">🔁 Lo mismo con las otras columnas:</h4>
+            <ul style="color: #444; line-height: 1.6; margin-bottom: 15px;">
+                <li>Columna 2 (\([1,0,1,1]^T\)) → \(p_2 = d_1 \oplus d_3 \oplus d_4\)</li>
+                <li>Columna 3 (\([0,1,1,1]^T\)) → \(p_3 = d_2 \oplus d_3 \oplus d_4\)</li>
+            </ul>
+
+            <div style="background-color: #e8f4fd; padding: 18px; border-radius: 6px; border-left: 4px solid #007bff; margin-top: 15px;">
+                <h5 style="margin: 0 0 8px 0; color: #0056b3; font-size: 1.1em;">✨ ¡Conclusión mágica!</h5>
+                <p style="margin: 0; color: #333; line-height: 1.5;">La multiplicación de matrices (en módulo 2) no es más que seguir las instrucciones de los 1s y 0s de la matriz. Es como un <strong>baile coordinado</strong>: cada columna te dice qué datos debes juntar para crear la paridad. ¡Y así es como un simple papel con números se convierte en un circuito de compuertas XOR!</p>
             </div>
-            <p>Y lo mismo para \(p_2\) y \(p_3\). Esto es exactamente el <strong>producto matricial</strong> \(c = m \cdot G\) (en módulo 2) que veremos a continuación.</p>
-        </div>
+
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+                <strong>📝 Reto para el cuaderno:</strong> Dibuja tu propio "tren" con números y practica con las tres columnas de \(P\). Luego, inventa una nueva columna de paridad (por ejemplo, \([1,1,1,0]^T\)) y escribe la ecuación correspondiente. ¡Así dominarás el baile!
+            </div>
+        </div>        
 
         <!-- NUEVO: Puente a la Matriz H (G·H^T = 0) -->
         <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin-bottom: 20px;">
@@ -148,10 +219,122 @@
 
         <div class="svg-container" style="margin: 30px 0;">
             <img src="img/circuito_hamming_encoder.png" alt="Esquema eléctrico del codificador Hamming creado a partir de la matriz" style="max-width:90%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <p><small><em>Fig 2. ¡Mira con atención! Las conexiones a las compuertas XOR en este circuito corresponden exactamente a los '1s' de las 3 últimas columnas de la matriz \(G\). <strong>Acabas de compilar una matriz matemática directamente a hardware (El Codificador del Emisor).</strong> Este es el poder del isomorfismo: una tabla se vuelve cableado.</em></small></p>
-        </div>
-
+            <p><small><em>Fig. 2: ¡Mira con atención! Las conexiones a las compuertas XOR en este circuito corresponden exactamente a los '1s' de las 3 últimas columnas de la matriz \(G\). <strong>Acabas de compilar una matriz matemática directamente a hardware (El Codificador del Emisor).</strong> Este es el poder del isomorfismo: una tabla se vuelve cableado.</em></small></p>
+        </div>       
         
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550" width="900" height="550">
+  <defs>
+    <style>
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #0d47a1; text-anchor: middle; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; fill: #555; text-anchor: middle; font-style: italic; }
+      .wire { stroke: #2c3e50; stroke-width: 1.5; fill: none; }
+      .wire-red { stroke: #c62828; stroke-width: 2; fill: none; }
+      .gate { fill: #f0f0f0; stroke: #333; stroke-width: 1.5; }
+      .gate-text { font-family: 'Courier New', monospace; font-size: 11px; font-weight: bold; fill: #c62828; text-anchor: middle; dominant-baseline: central; }
+      .input-label { font-family: 'Courier New', monospace; font-size: 13px; font-weight: bold; fill: #1565c0; text-anchor: end; }
+      .output-label { font-family: 'Courier New', monospace; font-size: 13px; font-weight: bold; fill: #2e7d32; text-anchor: start; }
+      .pin-label { font-family: 'Segoe UI', Arial; font-size: 10px; fill: #333; text-anchor: middle; }
+    </style>
+    <!-- Símbolo de compuerta XOR -->
+    <symbol id="xor-gate" viewBox="0 0 40 30">
+      <path d="M 10,5 Q 20,5 28,5 Q 38,5 38,15 Q 38,25 28,25 Q 20,25 10,25 Q 5,25 5,15 Q 5,5 10,5 Z" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+      <path d="M 10,5 Q 15,15 10,25" fill="none" stroke="#333" stroke-width="1.5"/>
+      <text x="25" y="18" class="gate-text">XOR</text>
+    </symbol>
+  </defs>
+
+  <!-- Título -->
+  <text x="450" y="30" class="title">Codificador Hamming (7,4) - Circuito a partir de la Matriz G</text>
+  <text x="450" y="55" class="subtitle">Las conexiones siguen los '1s' de la submatriz de paridad P (columnas 5 a 7 de G)</text>
+
+  <!-- Entradas: d1, d2, d3, d4 (lado izquierdo) -->
+  <g id="entradas">
+    <text x="80" y="120" class="input-label">d₁</text>
+    <text x="80" y="180" class="input-label">d₂</text>
+    <text x="80" y="240" class="input-label">d₃</text>
+    <text x="80" y="300" class="input-label">d₄</text>
+  </g>
+
+  <!-- ================================================== -->
+  <!-- GENERACIÓN DE p₁ = d₁ ⊕ d₂ ⊕ d₄ -->
+  <!-- ================================================== -->
+  <g id="p1">
+    <text x="450" y="90" class="output-label" fill="#c62828">p₁ = d₁ ⊕ d₂ ⊕ d₄</text>
+    
+    <!-- XOR1: d1 y d2 -->
+    <use href="#xor-gate" x="180" y="105" width="40" height="30" />
+    <line x1="120" y1="120" x2="180" y2="120" class="wire" />
+    <line x1="120" y1="180" x2="180" y2="135" class="wire" />
+    <text x="150" y="115" class="pin-label" style="fill:#1565c0;">d₁</text>
+    <text x="150" y="170" class="pin-label" style="fill:#1565c0;">d₂</text>
+
+    <!-- XOR2: resultado de XOR1 y d4 -->
+    <use href="#xor-gate" x="320" y="180" width="40" height="30" />
+    <line x1="220" y1="120" x2="320" y2="195" class="wire" />
+    <line x1="120" y1="300" x2="320" y2="210" class="wire" />
+    <text x="270" y="190" class="pin-label" style="fill:#1565c0;">d₄</text>
+
+    <!-- Salida p₁ -->
+    <line x1="360" y1="195" x2="450" y2="195" class="wire-red" />
+    <text x="460" y="200" class="output-label" fill="#c62828">p₁</text>
+  </g>
+
+  <!-- ================================================== -->
+  <!-- GENERACIÓN DE p₂ = d₁ ⊕ d₃ ⊕ d₄ -->
+  <!-- ================================================== -->
+  <g id="p2">
+    <text x="450" y="270" class="output-label" fill="#c62828">p₂ = d₁ ⊕ d₃ ⊕ d₄</text>
+
+    <!-- XOR1: d1 y d3 -->
+    <use href="#xor-gate" x="180" y="255" width="40" height="30" />
+    <line x1="120" y1="120" x2="180" y2="270" class="wire" />
+    <line x1="120" y1="240" x2="180" y2="285" class="wire" />
+    <text x="150" y="265" class="pin-label" style="fill:#1565c0;">d₁</text>
+    <text x="150" y="320" class="pin-label" style="fill:#1565c0;">d₃</text>
+
+    <!-- XOR2: resultado de XOR1 y d4 -->
+    <use href="#xor-gate" x="320" y="330" width="40" height="30" />
+    <line x1="220" y1="270" x2="320" y2="345" class="wire" />
+    <line x1="120" y1="300" x2="320" y2="360" class="wire" />
+    <text x="270" y="350" class="pin-label" style="fill:#1565c0;">d₄</text>
+
+    <!-- Salida p₂ -->
+    <line x1="360" y1="345" x2="450" y2="345" class="wire-red" />
+    <text x="460" y="350" class="output-label" fill="#c62828">p₂</text>
+  </g>
+
+  <!-- ================================================== -->
+  <!-- GENERACIÓN DE p₃ = d₂ ⊕ d₃ ⊕ d₄ -->
+  <!-- ================================================== -->
+  <g id="p3">
+    <text x="450" y="450" class="output-label" fill="#c62828">p₃ = d₂ ⊕ d₃ ⊕ d₄</text>
+
+    <!-- XOR1: d2 y d3 -->
+    <use href="#xor-gate" x="180" y="405" width="40" height="30" />
+    <line x1="120" y1="180" x2="180" y2="420" class="wire" />
+    <line x1="120" y1="240" x2="180" y2="435" class="wire" />
+    <text x="150" y="415" class="pin-label" style="fill:#1565c0;">d₂</text>
+    <text x="150" y="470" class="pin-label" style="fill:#1565c0;">d₃</text>
+
+    <!-- XOR2: resultado de XOR1 y d4 -->
+    <use href="#xor-gate" x="320" y="480" width="40" height="30" />
+    <line x1="220" y1="420" x2="320" y2="495" class="wire" />
+    <line x1="120" y1="300" x2="320" y2="510" class="wire" />
+    <text x="270" y="500" class="pin-label" style="fill:#1565c0;">d₄</text>
+
+    <!-- Salida p₃ -->
+    <line x1="360" y1="495" x2="450" y2="495" class="wire-red" />
+    <text x="460" y="500" class="output-label" fill="#c62828">p₃</text>
+  </g>
+
+  <!-- Pequeña nota sobre la conexión con la matriz -->
+  <rect x="580" y="450" width="280" height="80" rx="6" fill="rgba(0,0,0,0.05)" stroke="#ccc" stroke-width="1"/>
+  <text x="720" y="475" font-family="'Segoe UI'" font-size="12" font-weight="bold" fill="#0d47a1" text-anchor="middle">Conexión con la matriz G</text>
+  <text x="720" y="495" font-family="'Courier New'" font-size="10" fill="#333" text-anchor="middle">Las compuertas XOR siguen los '1s'</text>
+  <text x="720" y="510" font-family="'Courier New'" font-size="10" fill="#333" text-anchor="middle">de las columnas 5, 6 y 7 de G.</text>
+  <text x="720" y="525" font-family="'Segoe UI'" font-size="9" fill="#555" text-anchor="middle">(Ver submatriz P en la lección)</text>
+
+</svg>
 
         <!-- ========================================================= -->
         <!-- NUEVA SECCIÓN: RINCÓN DOCENTE (ENSEÑANDO MATRICES EN SECUNDARIA) -->

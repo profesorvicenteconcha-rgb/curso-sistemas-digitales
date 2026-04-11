@@ -302,44 +302,62 @@
             <p>En un laboratorio real, los errores son parte del aprendizaje. A continuación, se presentan las dificultades más frecuentes al construir compuertas con NAND y las estrategias para identificarlas y corregirlas.</p>
         </div>
 
-        <!-- Podemos darle un estilo de tabla más acorde con estilos.css, pero manteniendo la claridad -->
         <div style="overflow-x: auto;">
-            <table style="width:100%; border-collapse: collapse; margin:20px 0; background: white;">
+            <table class="tabla-auditoria" style="width:100%; margin:20px 0;">
                 <thead>
-                    <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
-                        <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Dificultad</th>
-                        <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Posible causa</th>
-                        <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Solución</th>
+                    <tr style="background-color: #f57f17; color: white;">
+                        <th style="padding: 12px;">Síntoma (Dificultad)</th>
+                        <th style="padding: 12px;">Diagnóstico (Posible causa)</th>
+                        <th style="padding: 12px;">Solución del Ingeniero</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>El LED no se enciende en ninguna combinación</strong></td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">Falta alimentación al chip (VCC o GND desconectados), o el LED está mal polarizado.</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">Verifica que el pin 14 esté a 5V y el pin 7 a GND. Comprueba la polaridad del LED (ánodo hacia la salida).</td>
+                        <td style="text-align: left;"><strong>El LED no enciende nunca</strong></td>
+                        <td style="text-align: left;">Falta alimentación (VCC o GND), o el LED está invertido.</td>
+                        <td style="text-align: left;">Mide 5V entre los pines 14 y 7. Voltea el LED.</td>
                     </tr>
                     <tr>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>La salida de la primera NAND (P) es siempre 1</strong></td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">Las entradas A o B no están bien definidas (flotantes) por falta de resistencias pull-down.</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">Añade resistencias de 10 kΩ de cada interruptor a GND para que en estado abierto den 0 lógico.</td>
+                        <td style="text-align: left;"><strong>Paso 1: La salida (P) es siempre 1</strong></td>
+                        <td style="text-align: left;">Entradas A o B "flotando" por falta de resistencias pull-down.</td>
+                        <td style="text-align: left;">Añade resistencias de 10 kΩ de cada interruptor a GND.</td>
+                    </tr>
+                    <tr style="background-color: #fff9c4;">
+                        <td style="text-align: left; font-weight: bold; color: #d35400;">El circuito da "1" aunque olvidé conectar un cable de entrada.</td>
+                        <td style="text-align: left; color: #d35400;"><strong>¡El fantasma del TTL (Floating High)!</strong> Los chips asumen que un pin desconectado es un "1".</td>
+                        <td style="text-align: left; color: #d35400;">Apaga todo y revisa visualmente que cada pin de entrada de las 4 compuertas tenga un cable conectado.</td>
                     </tr>
                     <tr>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>En la tercera NAND, el LED se apaga con A=1, B=1 (cuando debería encenderse)</strong></td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">La tercera NAND está recibiendo A y B directamente en lugar de B y P (salida de la primera NAND).</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">Revisa que el pin 10 (B3) esté conectado a P (pin 3) y no al interruptor B.</td>
+                        <td style="text-align: left;"><strong>La XOR final no coincide con la tabla</strong></td>
+                        <td style="text-align: left;">Una señal intermedia (Q o R) está mal conectada (cruzaste Árbol 1 con 2).</td>
+                        <td style="text-align: left;">Usa tu LED verde (punta de prueba) para rehacer la auditoría desde el Paso 1.</td>
                     </tr>
                     <tr>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>La XOR final no coincide con la tabla (por ejemplo, da 1 en 00 o 11)</strong></td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">Alguna de las señales intermedias (Q o R) está invertida por error en las conexiones de las NAND 2 o 3.</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">Verifica paso a paso cada compuerta con la punta de prueba (LED verde) antes de conectarlas a la cuarta NAND.</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>El chip se calienta o consume mucha corriente</strong></td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">Cortocircuito en las conexiones, o salidas conectadas directamente entre sí o a tierra sin resistencia.</td>
-                        <td style="padding: 10px; border: 1px solid #dee2e6;">Desconecta la alimentación, revisa visualmente el cableado y asegura que cada LED tenga su resistencia de 330 Ω.</td>
+                        <td style="text-align: left;"><strong>El chip quema al tacto (Muy caliente)</strong></td>
+                        <td style="text-align: left;">Cortocircuito grave (VCC a GND o a un pin de salida).</td>
+                        <td style="text-align: left;">¡Desconecta la fuente de inmediato! Revisa los pines 7 y 14.</td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <!-- NUEVO BLOQUE: EL SECRETO DEL TTL -->
+        <div class="dato-extra" style="background-color: #ffebee; border-left-color: #d32f2f; margin-top: 20px;">
+            <h4 style="color: #c62828; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">👻</span> La Trampa del "1 por defecto" (Floating High)
+            </h4>
+            <p style="margin-bottom: 10px;">Fíjate en el tercer síntoma de la tabla. Por la forma física en que están construidos los transistores dentro de la familia <strong>TTL (74xx)</strong>, si dejas un pin de entrada desconectado (flotando al aire), el chip es "optimista" y <strong>lo lee internamente como un 1 lógico (ALTO)</strong>.</p>
+            <p style="margin-bottom: 0;">Esto es sumamente peligroso en un laboratorio. Si olvidas conectar el cable $B$ a una compuerta AND, el chip asumirá que $B=1$. Si luego pones $A=1$, el LED encenderá. ¡Creerás que tu circuito está perfecto, pero es un <em>falso positivo</em> porque el cable $B$ ni siquiera existe! Por eso la inspección visual (el Ruteo) es tan vital como la auditoría con el LED.</p>
+        </div>
+
+        <div class="destacado" style="background-color: #f1f8e9; border-left-color: #4caf50; margin-top: 20px;">
+            <h3 style="color: #2e7d32; margin-top: 0;">🔍 Reflexión sobre los errores</h3>
+            <ul style="color: #333;">
+                <li><strong>Anota cada error que encontraste:</strong> ¿En qué paso ocurrió? ¿Cómo lo detectaste?</li>
+                <li><strong>Herramientas:</strong> ¿El LED verde te ayudó a encontrar un cable mal puesto antes de llegar al final?</li>
+                <li><strong>Mentalidad:</strong> ¿Cambiarías algo en tu método de trabajo para evitar un cortocircuito en el futuro?</li>
+            </ul>
+            <p style="margin-bottom: 0; font-style: italic; color: #555; text-align: center;">“El mejor ingeniero no es el que nunca comete errores, sino el que sabe encontrarlos y corregirlos sistemáticamente.”</p>
         </div>
 
         <div class="destacado" style="background-color: #f1f8e9; border-left-color: #4caf50;">
