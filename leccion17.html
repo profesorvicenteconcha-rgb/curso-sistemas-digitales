@@ -106,6 +106,55 @@
             <p style="margin-bottom: 0;">La respuesta está en la física del silicio. El número máximo de entradas que una compuerta lógica puede manejar se llama <strong>Fan-In</strong>. Cada pata extra que le agregas al chip añade <em>capacitancia parásita</em> (resistencia al cambio rápido). Si los ingenieros fabricaran una compuerta AND de 30 entradas, los electrones tardarían tanto en llenarla que el procesador sería desesperantemente lento. Por eso, la industria estandariza chips rápidos de 2, 3, 4 y máximo 8 entradas (como verás en la Unidad 3). ¡La cascada es el precio que pagamos por la velocidad!</p>
         </div>
 
+        <!-- NUEVO BLOQUE: TTL VS CMOS Y EL TRANSISTOR -->
+        <div class="destacado" style="background-color: #fff8e1; border-left-color: #ffc107; margin: 30px 0;">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🤓</span> Curiosidad de Ingeniero: ¿Qué hay dentro de la Caja Negra?
+            </h3>
+            <p>En la <strong>Lección 6</strong> te contamos el secreto del futuro: el <strong>Transistor</strong> (el interruptor que se presiona a sí mismo con electricidad). ¡Pues bien, un chip de la familia <strong>74xx</strong> no es más que una ciudad microscópica llena de esos transistores interconectados!</p>
+            
+            <p>Por ejemplo, para construir una simple compuerta <strong>NOT</strong>, los ingenieros conectan un par de transistores de tal forma que, si entra un 1 (5V), el transistor desvía la corriente hacia la tierra, sacando un 0 (0V).</p>
+
+            <h4 style="color: #f57f17; margin-bottom: 10px; margin-top: 20px;">Las Dos Grandes Familias: TTL vs CMOS</h4>
+            <p style="margin-bottom: 15px;">En el mercado verás dos grandes familias de chips. Su diferencia radica en el <em>tipo</em> de transistor microscópico que usan por dentro:</p>
+            
+            <div style="overflow-x: auto; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95em; background: white;">
+                    <thead>
+                        <tr style="background-color: #333; color: white;">
+                            <th style="padding: 12px; border: 1px solid #555;">Característica</th>
+                            <th style="padding: 12px; border: 1px solid #555;">TTL (Ej: 74LS08)</th>
+                            <th style="padding: 12px; border: 1px solid #555;">CMOS (Ej: CD4081)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold; background-color: #f8f9fa;">Significado</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;"><strong>T</strong>ransistor-<strong>T</strong>ransistor <strong>L</strong>ogic</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;"><strong>C</strong>omplementary <strong>M</strong>etal-<strong>O</strong>xide <strong>S</strong>emiconductor</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold; background-color: #f8f9fa;">El "Ladrillo"</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Transistores BJT (Viejitos pero rápidos y fuertes)</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Transistores MOSFET (Modernos, fríos y minúsculos)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold; background-color: #f8f9fa;">Resistencia Física</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; color: #2e7d32;">💪 <strong>Tanque de Guerra:</strong> Aguanta estática, maltrato y dedos torpes.</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; color: #c62828;">⚠️ <strong>Delicado:</strong> Una chispa de estática de tu suéter puede freírlo.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold; background-color: #f8f9fa;">Consumo Batería</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; color: #c62828;">Alto (Se calientan más)</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; color: #2e7d32;">Casi Cero (Ideales para celulares y relojes)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p style="margin-top: 15px; font-weight: bold; color: #e65100; text-align: center;">Veredicto del Curso: Para aprender en la protoboard, usamos TTL porque perdonan los errores humanos. ¡Cuando seas un experto y diseñes un iPhone, usarás tecnología CMOS!</p>
+        </div>
+
         <p>Ahora que el plano respeta las leyes de la física, ¿cómo construimos eso? La respuesta está en unos componentes negros con patitas metálicas llamados <strong>Circuitos Integrados</strong> de la familia <strong>TTL (74xx)</strong>. Cariñosamente les decimos "chips".</p>
 
         <h2>2. ¿Qué es un Chip? ¡Aprende a contar las patas!</h2>
@@ -443,15 +492,17 @@
         </details>
         <!-- === /PREGUNTAS DE CONSOLIDACIÓN === -->
 
-    <!-- NARRATIVA: TRAILER ACTUALIZADO -->
-    <div class="avance-leccion">
-        <h3 style="color: #d35400; display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 1.2em;">🚀</span> Próximamente...
-        </h3>
-        <p>Ya sabes cómo leer un "pinout", dominas la Santísima Trinidad de los chips básicos (AND, OR, NOT) y sabes cómo conectarlos impecablemente agrupándolos a la izquierda de tu protoboard.</p>
-        <p>Pero, ¿has oído hablar de las <strong>"Fuerzas Especiales"</strong> de la lógica digital? En la próxima lección conoceremos a las compuertas <strong>NAND (7400)</strong>, <strong>NOR (7402)</strong>, <strong>XOR (7486)</strong> y <strong>XNOR (74266)</strong>.</p>
-        <p>Descubrirás cómo una sola compuerta puede reemplazar a una AND y a un NOT trabajando juntas, y exploraremos "la otra cara de la moneda" de las matemáticas: el <strong>Producto de Sumas (POS)</strong>. ¡El arsenal de diseño de ingeniería está a punto de expandirse!</p>
-    </div>
+        <!-- NARRATIVA: TRAILER ACTUALIZADO (L17 -> L18) -->
+        <div class="avance-leccion" style="background-color: #f8f9fa; padding: 25px; border-radius: 12px; margin-top: 40px; border-left: 6px solid var(--color-secundario); box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h3 style="color: #d35400; display: flex; align-items: center; gap: 10px; margin-top: 0;">
+                <span style="font-size: 1.3em;">🚀</span> Próximamente...
+            </h3>
+            <p style="font-size: 1.05em; color: #444; line-height: 1.6;">Ya sabes cómo leer el "plano" de un chip, dominas la Santísima Trinidad de la electrónica (AND, OR, NOT), entiendes por qué preferimos los rudos chips TTL sobre los delicados CMOS, y sabes cómo ordenar tus cables usando colores profesionales.</p>
+            
+            <p style="font-size: 1.05em; color: #444; line-height: 1.6;">Pero la ingeniería militar e industrial exige herramientas más poderosas. ¿Has oído hablar de las <strong>"Fuerzas Especiales"</strong> de la lógica digital?</p>
+            
+            <p style="font-size: 1.05em; color: #444; line-height: 1.6; font-weight: bold;">En la próxima lección (Lección 18), te presentaremos a cuatro compuertas nuevas que dominan el mundo moderno: <strong>NAND, NOR, XOR y XNOR</strong>. Descubrirás cómo estas piezas son capaces de detectar la igualdad absoluta o la diferencia estricta, y exploraremos "la otra cara de la moneda" matemática: el <strong>Producto de Sumas (POS)</strong>. ¡Tu arsenal de diseño está a punto de evolucionar!</p>
+        </div>
 
     <footer>
         <hr>

@@ -444,6 +444,32 @@
             <p style="text-align: center; margin-top: 15px;"><em>(Si el tiempo de tu clase es corto o la frustración es demasiada, puedes saltar directo a la Fase 2, donde los ingenieros resolvieron este problema empacando todo ese caos en un solo chip).</em></p>
         </div>
 
+        <!-- NUEVO RINCÓN DEL DOCENTE: EL SALTO A LA ARITMÉTICA -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: Forzando el "Momento Eureka"
+            </h3>
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Has llegado al punto de inflexión del curso. Tus estudiantes acaban de armar un Half Adder. Ven un LED azul (Suma) y uno rojo (Acarreo) prendiendo y apagando. <strong>Si te detienes aquí, solo habrán aprendido a conectar dos chips.</strong> Tu trabajo como maestro es hacer que sus cerebros hagan "clic" y vean números donde hay luces.</p>
+            
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">La Dinámica de la "Traducción Mágica"</h4>
+                <p style="margin-bottom: 15px;">Para lograr que entiendan la aritmética binaria, haz este ejercicio de interrogación socrática en el laboratorio:</p>
+                
+                <ol style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>El Reto Físico:</strong> Pídeles que suban el interruptor A (1) y dejen el B en 0. Pregunta: <em>"¿Cuánto es 1 más 0 matemáticamente?"</em> (Responderán: 1). Luego diles: <em>"Miren sus luces. El LED azul prendió, el rojo no. El azul vale 1."</em></li>
+                    <li><strong>La Paradoja:</strong> Ahora pídeles que suban A (1) y B (1). Pregunta: <em>"¿Cuánto es 1 más 1?"</em> (Responderán: 2). Diles: <em>"¡Miren la protoboard! El LED azul (que valía 1) se apagó, y el rojo se encendió. ¿Qué significa ese LED rojo?"</em></li>
+                    <li><strong>El Descubrimiento:</strong> Déjalos sufrir unos segundos en silencio. Cuando alguien grite <em>"¡El rojo vale 2!"</em>, confirma su victoria. Explícales que acaban de ver nacer el sistema binario: la posición de la luz determina su peso (1, 2, 4, 8...).</li>
+                    <li><strong>La Consolidación:</strong> Diles: <em>"Escriban los resultados de las luces en orden: Rojo primero, Azul después. Si el rojo prende (1) y el azul apaga (0), escriben '10'. ¡'10' en binario es el número 2 decimal! Su circuito no prendió una alarma, ¡acaba de resolver un problema de matemáticas!"</em>.</li>
+                </ol>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>La lección vital para el maestro:</strong> Nunca les digas "el acarreo vale 2". Deja que la imposibilidad de mostrar un "2" con un solo LED los obligue a deducir que necesitan una luz nueva (una nueva columna posicional). Ese descubrimiento forzado es la base de la ingeniería computacional.</p>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+                <strong>📝 Tip de Aula:</strong> Antes de pasar a la Fase 2 (el chip 74LS283 de 4 bits), asegúrate de que TODOS en el aula hayan entendido que el LED rojo vale 2. Si no entienden el salto posicional en el Half Adder, la suma de 4 bits (16, 8, 4, 2, 1) les parecerá magia incomprensible.
+            </div>
+        </div>
+
         <h3>Fase 2: El Poder de la Abstracción (El Chip 74LS283)</h3>
         <p>Armar un Full Adder de 1 bit requiere compuertas XOR, AND y OR. Armar uno de 4 bits en cascada (Ripple Carry) requeriría docenas de chips y un mar de cables. ¡Sería imposible de depurar en una protoboard!</p>
         <p>Por suerte, los ingenieros encapsulan soluciones complejas en cajas negras. Conoce al <strong>Chip 74LS283</strong>: un <strong>Sumador Binario de 4 bits con Acarreo Rápido</strong> en una sola pastilla de silicio de 16 pines.</p>
@@ -541,19 +567,28 @@
             <div class="svg-container" style="margin: 15px 0;">
                 <!-- Guarda la imagen con la flecha roja que me enviaste como 'error_punteria_74283.png' -->
                 <img src="img/error_punteria_74283.png" alt="Simulación en Tinkercad mostrando un error de conexión en el pin 16" style="max-width:90%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
-                <p><small><em>Fig. 12: <strong>Un error de puntería letal</strong>. El simulador arroja el mensaje: "Voltage at pin A0 is 5.00V, while maximum is Vcc = 0.00V".</em></small></p>
+                <p><small><em>Fig. 12: <strong>Un error de puntería letal</strong>. El simulador arroja el mensaje: "Voltage at pin A0 is 4.49V, while maximum is Vcc = 0.00V".</em></small></p>
             </div>
 
             <h5 style="color: #d32f2f; margin-bottom: 5px;">🕵️‍♂️ El Diagnóstico del Ingeniero:</h5>
-            <p>El mensaje de Tinkercad es muy claro: el chip está recibiendo 5 voltios por uno de sus pines de datos (A0), pero <strong>su alimentación principal (Vcc) es de cero voltios</strong>.</p>
+            <p>El mensaje de Tinkercad es muy claro: el chip está recibiendo 4.49 voltios por uno de sus pines de datos (A0), pero <strong>su alimentación principal (Vcc) es de cero voltios</strong>.</p>
             <p>Si observas la flecha roja en el cableado del estudiante:</p>
             <ul style="margin-bottom: 10px;">
                 <li>Los rieles superiores <strong>sí tienen energía</strong> (mira los puentes rojo y negro en la extrema derecha de la placa).</li>
                 <li>El estudiante tomó un cable rojo para alimentar el <strong>Pin 16</strong> (Vcc)... ¡Pero falló la puntería por un agujero!</li>
                 <li>Lo insertó en la fila superior (la línea azul/negra de <strong>Tierra</strong>) en lugar de la fila inferior (la línea roja de <strong>+5V</strong>).</li>
             </ul>
-            <p><strong>El resultado:</strong> El pin Vcc está conectado a tierra (0V). Al inyectarle 5V por las entradas de datos a un chip que está "apagado", la corriente busca un camino desesperado hacia tierra quemando la electrónica interna. <strong>En la protoboard, un milímetro de error es la diferencia entre el éxito y el humo. ¡Revisa cada conexión con lupa!</strong></p>
+            <p><strong>El resultado:</strong> El pin Vcc está conectado a tierra (0V). Al inyectarle 4.49V por las entradas de datos a un chip que está "apagado", la corriente busca un camino desesperado hacia tierra quemando la electrónica interna. <strong>En la protoboard, un milímetro de error es la diferencia entre el éxito y el humo. ¡Revisa cada conexión con lupa!</strong></p>
         </div>
+
+        <!-- NUEVO BLOQUE: EL MISTERIO DE LOS 4.49V -->
+            <div style="background-color: #fff; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #1976d2; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <h5 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.2em;">🔍</span> El Ojo del Ingeniero: ¿Por qué 4.49V y no 4.3V?
+                </h5>
+                <p style="margin-bottom: 10px; font-size: 0.95em; color: #444;">Si eres muy observador, notaste un detalle extraño. En la Lección 7 te enseñamos que el <strong>Diodo de Protección</strong> resta <strong>0.7V</strong> de los 5.0V originales, lo que debería darnos <strong>4.3V</strong>. Pero el mensaje de Tinkercad dice que están entrando <strong>4.49V</strong>. ¿Por qué la matemática falló?</p>
+                <p style="margin-bottom: 0; font-size: 0.95em; color: #444;"><strong>¡La física de los simuladores es perfecta!</strong> La regla de "0.7V" es un promedio práctico que usamos los humanos para cálculos rápidos. En la realidad (y en Tinkercad), la caída de voltaje exacta de un diodo depende de <em>cuánta corriente está pasando a través de él</em> en ese instante. Como el chip principal estaba apagado por el error del cable, el circuito casi no consumía corriente. A muy baja corriente, el diodo "cobra un peaje" menor (en este caso, solo 0.51V). A medida que enciendas más LEDs y el circuito exija más corriente, verás cómo ese peaje se acerca a los 0.7V prometidos.</p>
+            </div>
 
         <div style="background-color: #e8f5e9; border-left: 4px solid #4caf50; padding: 10px 15px; border-radius: 0 6px 6px 0; margin-top: 15px; font-size: 0.9em; color: #333;">
             <p style="margin: 0;"><strong>🤓 Dato Nerd (Para mentes curiosas):</strong> ¿Por qué el chip mide el voltaje de A0 "en contra" de Vcc? Porque Vcc actúa como su <strong>Voltaje de Referencia</strong> máximo (su techo). Todos los chips tienen válvulas de seguridad microscópicas (diodos ESD) que bloquean cualquier energía que intente entrar al chip si es más alta que su propio "techo". Al bajarle el techo a 0V, la válvula de seguridad intentó tragar los 5V de golpe y explotó por exceso de corriente.</p>
@@ -588,6 +623,21 @@
             <p style="margin-bottom: 0; color: #388e3c; font-weight: bold; text-align: center;">
                 ¡Con este truco ninja, acabas de mapear las 5 salidas y los 9 pines de entrada del chip sin leer un solo manual!
             </p>
+        </div>
+
+        <!-- === NUEVO BLOQUE: EL SALTO CONCEPTUAL DEL COLOR === -->
+        <div class="dato-extra" style="background-color: #fff9c4; border-left-color: #fbc02d; margin: 30px 0; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+            <h4 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🎨</span> Evolución Visual: ¿Por qué ahora todos los LEDs son iguales?
+            </h4>
+            <p style="margin-bottom: 10px; font-size: 1.05em; color: #444;">En el Semisumador (Fase 1), usamos un LED <strong>Azul para la Suma</strong> y uno <strong>Rojo para el Acarreo</strong>. Queríamos que tu cerebro separara claramente ambas funciones.</p>
+            
+            <p style="margin-bottom: 15px; font-size: 1.05em; color: #444;">Pero ahora, al armar un sumador de 4 bits, notarás en los diagramas que usaremos <strong>5 LEDs del mismo color</strong> para leer el resultado. ¿Por qué rompemos nuestra propia regla?</p>
+            
+            <div style="background-color: white; border: 1px solid #ffe0b2; border-left: 4px solid #ff9800; padding: 15px; border-radius: 6px;">
+                <p style="margin: 0; font-weight: bold; color: #e65100; margin-bottom: 5px;">El salto a la Arquitectura Real:</p>
+                <p style="margin: 0; color: #555; line-height: 1.6;">Cuando conectas sumadores en cascada, el Acarreo Final (\(C_{out}\)) deja de ser un simple "indicador de sobra" y se convierte oficialmente en el <strong>quinto bit de tu número</strong> (el bit más significativo, que vale 16). Al usar LEDs del mismo color, obligamos a tu cerebro a leer los 5 focos como <strong>una sola palabra binaria unificada</strong>. ¡Así es exactamente como un procesador de computadora almacena los números en su memoria!</p>
+            </div>
         </div>
 
         <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin-top: 25px;">
@@ -731,7 +781,7 @@
             </audio>
         </div>
         <p class="podcast-meta">
-            <span class="duracion">⏱️ 18:20 min</span>
+            <span class="duracion">⏱️ 24:01 min</span>
             <span class="formato">🔊 MP3</span>
         </p>
     </section>

@@ -63,20 +63,35 @@
 
     <section>
         <h2>1. El Reto: "Adivina qué interruptor cambié"</h2>
-        <p>Vamos a construir el Decodificador / Calculador de Síndrome. Este circuito leerá 7 interruptores (simulando un paquete de datos que acaba de llegar por el aire) y nos mostrará en 3 LEDs la posición exacta de cualquier error que introduzcas a propósito (simulando el ruido electromagnético).</p>
+        <p>Construiremos el <strong>Decodificador de Síndrome</strong>. Este circuito leerá 7 interruptores (simulando el paquete de datos $r$ de 7 bits que acaba de llegar por el aire) y nos mostrará en 3 LEDs la posición exacta (en binario) de cualquier error que introduzcas a propósito simulando ruido.</p>
 
-        <div class="destacado" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin: 25px 0;">
-            <h3 style="color: #7b1fa2; margin-top: 0; display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 1.2em;">📝</span> Las Ecuaciones del Síndrome (El Plano)
+        <!-- NUEVO: Mapeo de la palabra recibida (r) -->
+        <div class="destacado" style="background-color: #fff9c4; border-left-color: #fbc02d; margin: 25px 0;">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🏷️</span> Anatomía del Paquete Recibido ($r$)
             </h3>
-            <p>Necesitamos construir 3 circuitos de paridad independientes (las 3 filas de la Matriz $H$ que vimos en la Lección 29):</p>
-            
-            <div class="formula" style="font-size: 1.1em; background: white; border: 1px solid #ce93d8; margin: 15px 0;">
-                $$s_1 = D_1 \oplus D_3 \oplus D_5 \oplus D_7$$
-                $$s_2 = D_2 \oplus D_3 \oplus D_6 \oplus D_7$$
-                $$s_3 = D_4 \oplus D_5 \oplus D_6 \oplus D_7$$
+            <p>En la Lección 28 enviamos un paquete de 7 bits: 4 de datos ($d$) y 3 de paridad ($p$). Al llegar al receptor, llamaremos a esos 7 cables simplemente $r_1$ hasta $r_7$ (paquete recibido). Así los asignaremos a nuestros 7 interruptores:</p>
+            <div style="overflow-x: auto; margin-top: 15px;">
+                <table class="tabla-auditoria" style="margin: 0 auto; width: 100%;">
+                    <thead>
+                        <tr style="background-color: #f57f17; color: white;">
+                            <th>Interruptor (DIP)</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Señal Recibida</strong></td>
+                            <td>$r_1$</td><td>$r_2$</td><td>$r_3$</td><td>$r_4$</td><td>$r_5$</td><td>$r_6$</td><td>$r_7$</td>
+                         </tr>
+                        <tr style="background-color: #fffde7; font-size: 0.9em; color: #555;">
+                            <td><em>(Origen en el Emisor)</em></td>
+                            <td><em>($d_1$)</em></td><td><em>($d_2$)</em></td><td><em>($d_3$)</em></td><td><em>($d_4$)</em></td>
+                            <td><em>($p_1$)</em></td><td><em>($p_2$)</em></td><td><em>($p_3$)</em></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <p style="margin-bottom: 0; font-size: 0.95em; color: #555;"><em>Recuerda: El LED $s_1$ será nuestro bit menos significativo (derecha), y $s_3$ el más significativo (izquierda), formando el número binario del error.</em></p>
         </div>
 
         <h2>2. Materiales y Estrategia de Ruteo</h2>
@@ -93,7 +108,7 @@
             </div>
             
             <div style="flex: 1; min-width: 250px; background-color: #fff3e0; border: 1px solid #ffcc80; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                <h4 style="color: #e65100; margin-top: 0; border-bottom: 2px solid #ffcc80; padding-bottom: 8px;">⚠️ ¡Peligro de Corto!</h4>
+                <h4 style="color: #e65100; margin-top: 0; border-bottom: 2px solid #ffcc80; padding-bottom: 8px;">⚠️ ¡Peligro de Corto y Antenas!</h4>
                 <ul style="margin-bottom: 0; padding-left: 20px; color: #b71c1c;">
                     <li>¡No olvides conectar <strong>VCC (Pin 14)</strong> y <strong>GND (Pin 7)</strong> en los 3 chips antes de hacer nada más!</li>
                     <li>Como aprendiste en la Lección 10, si olvidas las resistencias Pull-Down en el Dip Switch, el estado flotante volverá locos a tus LEDs de Síndrome.</li>
@@ -110,20 +125,7 @@
         <!-- NUEVO BLOQUE: MAPEO DE ENTRADAS Y SALIDAS -->
         <div class="destacado" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-bottom: 30px;">
             <h3 style="color: #0d47a1; margin-top: 0;">🧭 Arquitectura de la Placa: Mapeo de Variables</h3>
-            <p>Para que tu circuito tenga sentido humano, debes organizar físicamente las entradas y salidas de forma inteligente:</p>
             
-            <h4 style="color: #1565c0; margin-bottom: 5px;">Las Entradas (El Mensaje Recibido)</h4>
-            <p style="margin-top: 0; margin-bottom: 10px;">Asignaremos los 7 interruptores del DIP Switch de izquierda a derecha para que coincidan con las variables de nuestras ecuaciones ($D_1$ a $D_7$):</p>
-            <ul style="font-family: monospace; background: white; padding: 10px 10px 10px 30px; border-radius: 6px; border: 1px solid #90caf9;">
-                <li>Int. 1 = \(D_1\) (Dato 1)</li>
-                <li>Int. 2 = \(D_2\) (Dato 2)</li>
-                <li>Int. 3 = \(D_3\) (Dato 3)</li>
-                <li>Int. 4 = \(D_4\) (Dato 4)</li>
-                <li>Int. 5 = \(D_5\) (Paridad \(p_1\))</li>
-                <li>Int. 6 = \(D_6\) (Paridad \(p_2\))</li>
-                <li>Int. 7 = \(D_7\) (Paridad \(p_3\))</li>
-            </ul>
-
             <h4 style="color: #1565c0; margin-bottom: 5px;">Las Salidas (Los LEDs del Síndrome)</h4>
             <p style="margin-top: 0;">Para poder "leer" el síndrome en binario natural, acomoda tus 3 LEDs en la protoboard <strong>de Izquierda a Derecha</strong> así:</p>
             <ul style="font-family: monospace; background: white; padding: 10px 10px 10px 30px; border-radius: 6px; border: 1px solid #90caf9;">
@@ -152,13 +154,35 @@
             <p style="margin-top: 0;">¿Recuerdas el <em>Retardo de Propagación</em> de la Lección 22? Cada chip toma tiempo en "pensar". Si usamos una cadena, la señal $D_1$ tendría que cruzar <strong>3 compuertas consecutivas</strong> antes de encender el LED. Eso hace que el circuito sea lento.</p>
 
             <h4 style="color: #2e7d32; margin-bottom: 5px;">⚡ La Solución del Ingeniero: El Árbol XOR</h4>
-            <p style="margin-top: 0;">Para que el circuito sea ultra rápido (eficaz), los ingenieros diseñan un <strong>"Árbol Equilibrado" (Balanced Tree)</strong>. Emparejamos las entradas de dos en dos en una primera capa simultánea, y luego sumamos sus resultados en una segunda capa.</p>
+            <p>Como cada ecuación ($s_1, s_2, s_3$) suma 4 variables, pero el chip 7486 solo tiene compuertas de 2 entradas, usaremos la arquitectura de <strong>"Árbol Equilibrado" (Balanced Tree)</strong> (Lección 23) para que la señal sea ultra rápida (eficaz). Emparejamos las entradas de dos en dos en una primera capa simultánea, y luego sumamos sus resultados en una segunda capa.</p>
+            
+            <div class="svg-container" style="margin: 20px 0; background-color: white; padding: 15px; border-radius: 8px; border: 1px solid #bbdefb; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+                <img src="img/xor_cascada.png" alt="Esquema conectando 4 entradas usando 3 compuertas XOR en forma de árbol equilibrado" style="max-width:70%; height:auto;">
+                <p style="margin-top: 15px; color: #555;"><small><em>Fig. 1: El Árbol XOR.</strong> Al hacer que las dos primeras compuertas trabajen en paralelo (al mismo tiempo), <strong>todas las señales cruzan exactamente 2 compuertas</strong> para llegar a la salida, en lugar de 3. Físicamente usaste los mismos 3 chips, pero al cambiar el orden de los cables... <strong>¡has acelerado el procesador un 33%!</strong></em></small></p>
+            </div>
+            <p style="font-size: 0.95em; color: #555;">En la práctica, para calcular \(s_1 = D_1 \oplus D_3 \oplus D_5 \oplus D_7\), conectamos dos XOR en paralelo: (D₁⊕D₃) y (D₅⊕D₇), y luego sus salidas a una tercera XOR. Así todas las señales recorren exactamente 2 compuertas.</p>
+        </div>
+
+        <!-- === EL TRUCO DEL ÁRBOL (OPTIMIZACIÓN DE VELOCIDAD) === -->
+        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-top: 30px; margin-bottom: 30px;">
+            <h3 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🌳</span> Arquitectura de Alta Velocidad: El Árbol Equilibrado
+            </h3>
+            <p>Como las ecuaciones del Síndrome requieren sumar 4 variables (ej: $D_1 \oplus D_3 \oplus D_5 \oplus D_7$), pero el chip 7486 solo tiene compuertas de 2 entradas, necesitamos 3 compuertas para resolver cada ecuación.</p>
+            <p>La forma novata de resolver esto sería conectar las compuertas en <strong>"Cadena" (Daisy Chain)</strong>: sumar $D_1$ y $D_3$, pasar el resultado a otra compuerta para sumarle $D_5$, y pasar ese resultado a una tercera para sumarle $D_7$.</p>
+            
+            <div style="background-color: white; padding: 15px; border-radius: 8px; border: 1px solid #bbdefb; margin: 15px 0;">
+                <h4 style="color: #c62828; margin-top: 0; margin-bottom: 5px;">⏱️ El Problema del Retardo</h4>
+                <p style="margin-bottom: 10px; font-size: 0.95em;">¿Recuerdas el <em>Retardo de Propagación</em> de la Lección 22? Cada chip toma tiempo en "pensar". Si usamos una cadena, la señal $D_1$ tendría que cruzar <strong>3 compuertas consecutivas</strong> antes de encender el LED de síndrome.</p>
+
+                <h4 style="color: #2e7d32; margin-top: 0; margin-bottom: 5px;">⚡ La Solución del Ingeniero: El Árbol XOR</h4>
+                <p style="margin-bottom: 0; font-size: 0.95em;">Para que el circuito sea ultra rápido, los ingenieros diseñan un <strong>"Árbol Equilibrado" (Balanced Tree)</strong>. Emparejamos las entradas de dos en dos en una primera capa simultánea, y luego sumamos sus resultados en una segunda capa.</p>
+            </div>
 
             <div class="svg-container" style="margin: 20px 0; background-color: white; padding: 15px; border-radius: 8px; border: 1px solid #bbdefb; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
                 <img src="img/xor_cascada.png" alt="Esquema conectando 4 entradas usando 3 compuertas XOR en forma de árbol equilibrado" style="max-width:70%; height:auto;">
-                <p style="margin-top: 15px; color: #555;"><small><em>Fig 1. El Árbol XOR. Al hacer que las dos primeras compuertas trabajen en paralelo (al mismo tiempo), <strong>todas las señales cruzan exactamente 2 compuertas</strong> para llegar a la salida, en lugar de 3. ¡Hemos acelerado el procesador un 33% con solo cambiar el orden de los cables!</em></small></p>
+                <p style="margin-top: 15px; color: #555; text-align: left; line-height: 1.6;"><small><em><strong>Fig 1. El Árbol XOR.</strong> Al hacer que las dos primeras compuertas trabajen en paralelo (al mismo tiempo), <strong>todas las señales cruzan exactamente 2 compuertas</strong> para llegar a la salida, en lugar de 3. Físicamente usaste los mismos 3 chips, pero al cambiar el orden de los cables... <strong>¡has acelerado el procesador un 33%!</strong></em></small></p>
             </div>
-            <p style="font-size: 0.95em; color: #555;">En la práctica, para calcular \(s_1 = D_1 \oplus D_3 \oplus D_5 \oplus D_7\), conectamos dos XOR en paralelo: (D₁⊕D₃) y (D₅⊕D₇), y luego sus salidas a una tercera XOR. Así todas las señales recorren exactamente 2 compuertas.</p>
         </div>
 
         <h2>3. Pasos para el Montaje Físico (El Ruteo)</h2>
@@ -368,6 +392,24 @@
                         Mente Matemática
                     </h4>
                     <p style="font-size: 0.95em; color: #555; line-height: 1.5; margin-bottom: 0;">Traduces problemas humanos a silicio. Usas Mapas de Karnaugh y De Morgan para aplastar ecuaciones gigantes y ahorrar dinero en chips.</p>
+                </div>   
+
+                <!-- Columna 3 -->
+                <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
+                    <h4 style="margin-top: 0; display: flex; align-items: center; color: #333;">
+                        <span style="display: inline-block; width: 12px; height: 12px; background-color: #C04F15; border-radius: 50%; margin-right: 10px; box-shadow: 0 0 8px rgba(192, 79, 21, 0.6);"></span>
+                        Arquitectura Digital
+                    </h4>
+                    <p style="font-size: 0.95em; color: #555; line-height: 1.5; margin-bottom: 0;">Le enseñaste a una máquina a pensar en números construyendo el Sumador Completo (Full Adder). Entiendes el control masivo con Buses y Cuantificadores.</p>
+                </div>
+
+                <!-- Columna 4 -->
+                <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
+                    <h4 style="margin-top: 0; display: flex; align-items: center; color: #333;">
+                        <span style="display: inline-block; width: 12px; height: 12px; background-color: #C04F15; border-radius: 50%; margin-right: 10px; box-shadow: 0 0 8px rgba(192, 79, 21, 0.6);"></span>
+                        Diseño Tolerante a Fallos
+                    </h4>
+                    <p style="font-size: 0.95em; color: #555; line-height: 1.5; margin-bottom: 0;">Sabes aplicar Matrices Generadoras ($G$) y de Control ($H$) para crear Redundancia Matemática, logrando que tus circuitos se diagnostiquen a sí mismos.</p>
                 </div>
                 
                 <!-- EL RECONOCIMIENTO PEDAGÓGICO (MÉTODO FEYNMAN) -->

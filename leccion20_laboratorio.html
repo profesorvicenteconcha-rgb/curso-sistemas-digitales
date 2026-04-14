@@ -133,12 +133,63 @@
                 <li><strong>Alimentación:</strong> VCC = pin 14, GND = pin 7</li>
             </ul>
         </div>    
-        <p>Recuerda que el LED de prueba (verde) debe llevar una resistencia limitadora de 330 Ω en serie, y las entradas <strong>A (interruptor 1 del DIP)</strong> y <strong>B (interruptor 2 del mismo DIP)</strong> deben tener resistencias pull‑down de 10 kΩ para evitar valores flotantes.</p>
         
-        <!-- NUEVA IMAGEN: Función de la punta de prueba (Fig 3) -->
-        <div class="svg-container">
-            <img src="img/xor_conexiones_al_inicio.png" alt="Fig 3. Configuración inicial de la punta de prueba (LED verde) y resistencias pull-down en las entradas." style="max-width:80%; height:auto;">
-            <p><small><em>Fig. 2: La punta de prueba (LED verde con resistencia de 330 Ω) se conectará al pin de salida de la compuerta que estemos verificando en cada paso. Las entradas A y B tienen resistencias pull‑down de 10 kΩ para evitar flotantes.</em></small></p>
+        <!-- NUEVA IMAGEN: Función de la punta de prueba (Fig 2 Actualizada) -->
+        <div class="destacado" style="background-color: #f1f8e9; border-left-color: #4caf50; margin: 25px 0;">
+            <h4 style="color: #2e7d32; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🔍</span> El Arma Secreta: Tu Punta Lógica Casera
+            </h4>
+            <p>Antes de empezar a cruzar cables como locos, vamos a preparar nuestra herramienta de diagnóstico. Instala tu LED verde en la columna 30 con su resistencia a Tierra (GND). Conecta un cable largo y flexible (como el rosa de la imagen) al ánodo del LED.</p>
+            <p>Ese cable rosa será tu "sonda" móvil. Al tocar con él los diferentes pines del chip, el LED verde se encenderá si hay un 1 lógico (HIGH) y se apagará si hay un 0 lógico (LOW). ¡Esta es la única forma de saber qué está pasando dentro del laberinto de silicio!</p>
+
+            <div class="svg-container" style="background-color: white; padding: 15px; border-radius: 8px; border: 1px solid #c8e6c9; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-top: 20px;">
+                <!-- Guarda tu nueva imagen como 'xor_conexiones_punta_logica.png' -->
+                <img src="img/xor_conexiones_punta_logica.png" alt="Configuración de la punta lógica (LED verde) y resistencias pull-down en las entradas" style="max-width:90%; height:auto;">
+                <p style="margin-top: 15px; color: #555; text-align: left; padding: 0 15px;">
+                    <small><em><strong>Fig. 2: El Tablero de Juego Listo.</strong> Observa las 3 reglas de oro aplicadas:<br>
+                    1. <strong>Seguridad:</strong> El Diodo 1N4007 protege la entrada de voltaje del USB.<br>
+                    2. <strong>Estabilidad:</strong> Las resistencias Pull-Down de 10kΩ evitan los estados flotantes en los interruptores 1 y 2.<br>
+                    3. <strong>Diagnóstico:</strong> La Punta Lógica (LED verde) esperando a que uses el cable rosa para auditar los pines de salida de las compuertas en cada paso.</em></small>
+                </p>
+            </div>
+        </div>
+
+        <!-- === NUEVA INSTRUCCIÓN DE REGISTRO === -->
+        <div class="destacado" style="background-color: #fff9c4; border-left-color: #fbc02d; margin: 30px 0; border: 1px solid #fff59d;">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">📋</span> Preparando la Bitácora de Auditoría
+            </h3>
+            <p style="margin-bottom: 10px;">Como todo buen ingeniero de pruebas (QA), no vas a confiar en tu memoria. Vas a construir tu circuito por etapas y documentar el flujo de la señal en tiempo real.</p>
+            <p style="margin-bottom: 10px;"><strong>Copia esta tabla vacía en tu cuaderno antes de tocar el primer cable:</strong></p>
+            
+            <table class="tabla-auditoria" style="width: 90%; margin: 15px auto;">
+                <thead>
+                    <tr style="background-color: #f57f17; color: white;">
+                        <th colspan="2">Entradas (DIP)</th>
+                        <th>Paso 1 (\(P\))</th>
+                        <th>Paso 2 (\(Q\))</th>
+                        <th>Paso 3 (\(R\))</th>
+                        <th style="background-color: #e65100;">Paso 4 (XOR Final)</th>
+                    </tr>
+                    <tr>
+                        <th>B</th><th>A</th>
+                        <th>Pin 3</th>
+                        <th>Pin 6</th>
+                        <th>Pin 8</th>
+                        <th style="background-color: #e65100;">Pin 11</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0</td><td>_</td><td>_</td><td>_</td><td>_</td></tr>
+                    <tr><td>0</td><td>1</td><td>_</td><td>_</td><td>_</td><td>_</td></tr>
+                    <tr><td>1</td><td>0</td><td>_</td><td>_</td><td>_</td><td>_</td></tr>
+                    <tr><td>1</td><td>1</td><td>_</td><td>_</td><td>_</td><td>_</td></tr>
+                </tbody>
+            </table>
+            
+            <p style="margin-bottom: 0; font-style: italic; color: #555; text-align: center;">
+                <strong>Tu Misión:</strong> Al terminar cada uno de los 4 pasos siguientes, detente, mueve tus interruptores A y B por las 4 combinaciones posibles (00, 01, 10, 11), mira qué hace tu LED Verde (Punta Lógica) y anota un "1" (Encendido) o un "0" (Apagado) en la columna correspondiente de tu cuaderno.
+            </p>
         </div>
 
         <!-- ============================================================== -->
@@ -239,7 +290,7 @@
         </div>
 
         <!-- ============================================================== -->
-        <!-- PASO 4: Cuarta NAND – Salida final XOR (X = /(Q·R)) – Fig 7    -->
+        <!-- PASO 4: Cuarta NAND – Salida final XOR (X = /(Q·R)) – Fig 6    -->
         <!-- ============================================================== -->
         <div class="regla-card" style="margin: 30px 0;">
             <h5 style="color: var(--color-primario);">🔹 Paso 4: Cuarta NAND – Salida final \(X = \overline{Q \cdot R}\) (XOR)</h5>
@@ -247,13 +298,13 @@
             <ul>
                 <li>Pin 12 (A4) → Pin 6 (\(Q\))</li>
                 <li>Pin 13 (B4) → Pin 8 (\(R\))</li>
-                <li>Pin 11 (X4) → Salida \(X\) (conectar LED azul con resistencia de 330 Ω a GND)</li>
+                <li>Pin 11 (X4) → Salida final \(X\). Conecta un cable amarillo desde aquí hasta tu <strong>LED Azul</strong> (Salida Permanente) no olvides agregar la resistencia de 330 Ω y la conexión a tierra o GND.</li>
             </ul>
 
             <p><strong>Tabla de verificación final (XOR):</strong></p>
-            <table class="tabla-auditoria">
+            <table class="tabla-auditoria" style="width: 90%; margin: 15px auto;">
                 <thead>
-                    <tr><th>B</th><th>A</th><th>\(Q\) (paso2)</th><th>\(R\) (paso3)</th><th>\(X = \overline{Q \cdot R}\)</th><th>LED azul (pin 11)</th></tr>
+                    <tr><th>B</th><th>A</th><th>\(Q\) (paso2)</th><th>\(R\) (paso3)</th><th>\(X = \overline{Q \cdot R}\)</th><th>LED Azul (Salida)</th></tr>
                 </thead>
                 <tbody>
                     <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>\(\overline{1·1}=0\)</td><td>⚫ APAGADO</td></tr>
@@ -262,29 +313,18 @@
                     <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>\(\overline{1·1}=0\)</td><td>⚫ APAGADO</td></tr>
                 </tbody>
             </table>
-            <p>🎉 <strong>¡Resultado final:</strong> El LED azul se enciende solo cuando A y B son diferentes, confirmando la función XOR, exactamente como en el problema de la escalera de la Lección 6.</p>
+            
+            <div style="background-color: #e8f5e9; padding: 15px; border-radius: 6px; border-left: 4px solid #4caf50; margin: 20px 0;">
+                <h5 style="color: #2e7d32; margin-top: 0; margin-bottom: 5px;">🎉 El Test Definitivo (Tu Punta Lógica)</h5>
+                <p style="margin-bottom: 0;">Para la confirmación absoluta, toma el <strong>cable rosa de tu Punta Lógica (LED Verde)</strong> y colócalo también en la pata 11. Al cambiar los interruptores A y B, ambos LEDs (el azul y el verde) deberán encender y apagar al mismo tiempo. ¡El LED verde te confirma que la señal cruzó todo el laberinto de NANDs de forma exitosa!</p>
+            </div>
 
             <div class="svg-container">
-                <img src="img/xor_tinkercad_paso4.png" alt="Paso 4: Circuito completo, LED azul en pin 11." style="max-width:70%; height:auto;">
-                <p><small><em>Fig. 6: Simulación final en Tinkercad: el LED azul (pin 11) indica la salida XOR.</em></small></p>
+                <!-- Guarda la imagen que me enviaste como 'xor_equivalente_nand.png' -->
+                <img src="img/xor_equivalente_nand.png" alt="Circuito equivalente de una compuerta XOR usando 4 NAND, con LED azul de salida y LED verde de punta lógica conectados al pin 11" style="max-width:85%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                <p><small><em>Fig. 6: El circuito final comprobado. Al colocar la Punta Lógica en la pata 11, confirmamos que todo el circuito funciona como una sola compuerta XOR. Observa el Diodo 1N4007 protegiendo la fuente y el cableado ordenado.</em></small></p>
             </div>
-        </div>
-
-        <h3>📋 Tabla de verificación consolidada</h3>
-        <p>Completa la siguiente tabla con los resultados observados en cada paso para confirmar que tu circuito funciona correctamente.</p>
-        <table style="width:100%; max-width:600px; margin:0 auto;">
-            <thead>
-                <tr><th>Entradas</th><th>Paso 1 (P)</th><th>Paso 2 (Q)</th><th>Paso 3 (R)</th><th>Paso 4 (XOR)</th></tr>
-                <tr><th>A B</th><th>Pin 3</th><th>Pin 6</th><th>Pin 8</th><th>Pin 11</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>0 0</td><td>_</td><td>_</td><td>_</td><td>_</td></tr>
-                <tr><td>0 1</td><td>_</td><td>_</td><td>_</td><td>_</td></tr>
-                <tr><td>1 0</td><td>_</td><td>_</td><td>_</td><td>_</td></tr>
-                <tr><td>1 1</td><td>_</td><td>_</td><td>_</td><td>_</td></tr>
-            </tbody>
-        </table>
-        <p><em>(Anota 0 si el LED está apagado, 1 si está encendido)</em></p>
+        </div>        
 
         <!-- Reflexión final -->
         <div class="dato-extra">
@@ -292,6 +332,30 @@
             <p>Con este procedimiento has construido una compuerta XOR utilizando únicamente cuatro NAND de un solo integrado 74HC00. Cada paso fue verificado individualmente, garantizando que el circuito final funciona correctamente. Este mismo principio se aplica para construir cualquiera de las siete compuertas básicas a partir de NAND, y sienta las bases para los circuitos combinacionales de la Unidad 3.</p>
         </div>
     </section>
+
+    <!-- === RINCÓN DEL DOCENTE: EVALUACIÓN LÓGICA === -->
+    <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 40px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+        <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: Evaluando el "Por Qué", no solo el "Qué"
+        </h3>
+        <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Como maestro, es muy tentador pasar por las mesas de laboratorio y simplemente mirar si el LED Azul del estudiante enciende cuando los interruptores están en 0-1 y 1-0. Si enciende, le pones un 10. <strong>¡Esa es una evaluación técnica, no una evaluación de ingeniería!</strong></p>
+        
+        <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+            <h4 style="margin-top: 0; color: #e65100;">La "Prueba del Cable Rosa" (Auditoría Inversa)</h4>
+            <p style="margin-bottom: 15px;">Para saber si tus estudiantes realmente entendieron el flujo lógico del Álgebra de Boole a través de las compuertas NAND, no evalúes el final; evalúa el medio. Aplica esta dinámica en tu aula:</p>
+            
+            <ol style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                <li><strong>El Reto:</strong> Pídele al estudiante que ponga sus interruptores en <code>A=1</code> y <code>B=1</code>.</li>
+                <li><strong>La Pregunta Sorpresa:</strong> Antes de que mueva la punta lógica (cable rosa), pregúntale: <em>"¿Estará encendido o apagado el LED verde si lo conecto al Pin 6 (salida Q)?"</em>.</li>
+                <li><strong>El Razonamiento:</strong> El estudiante no debe adivinar. Debe mirar el circuito y decir: <em>"Bueno, si A y B son 1, la primera NAND (Pin 3) dará 0. Si el Pin 3 es 0 y entra a la segunda NAND junto con A(1), la salida en el Pin 6 debe ser 1 (porque basta un 0 para que la NAND dé 1). Así que el LED encenderá."</em></li>
+                <li><strong>La Verificación:</strong> Ahora sí, que conecte el cable rosa al Pin 6. Si el LED enciende, ¡su lógica matemática fue perfecta!</li>
+            </ol>
+        </div>
+        
+        <p style="margin-top: 15px; margin-bottom: 0; font-style: italic; color: #856404; text-align: center;">
+            <strong>La lección:</strong> No evalúes si el circuito funciona; evalúa si el estudiante sabe <strong>por qué</strong> funciona en cada milímetro de cable. Esa es la diferencia entre formar ensambladores y formar pensadores.
+        </p>
+    </div>
 
     <!-- ================================================================== -->
     <!-- NUEVA SECCIÓN: DIFICULTADES COMUNES Y CÓMO RESOLVERLAS (desde el fragmento original) -->

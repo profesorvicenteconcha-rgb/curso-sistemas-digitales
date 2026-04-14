@@ -41,11 +41,11 @@
         <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 25px 0;">
             <div style="flex: 1; min-width: 280px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                 <img src="img/demorgan_nand.png" alt="Comprobación de la Primera Ley de De Morgan mediante tabla de verdad" style="width: 100%; height: auto; border-radius: 4px;">
-                <p style="text-align: center; font-size: 0.85em; color: #555; margin-top: 10px;"><em>Fig 1. Comprobación empírica: probamos los 4 estados posibles para verificar que \(\overline{A + B} = \bar{A} \cdot \bar{B}\).</em></p>
+                <p style="text-align: center; font-size: 0.85em; color: #555; margin-top: 10px;"><em>Fig. 1: Comprobación empírica: probamos los 4 estados posibles para verificar que \(\overline{A + B} = \bar{A} \cdot \bar{B}\).</em></p>
             </div>
             <div style="flex: 1; min-width: 280px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                 <img src="img/demorgan_nor.png" alt="Comprobación de la Segunda Ley de De Morgan mediante tabla de verdad" style="width: 100%; height: auto; border-radius: 4px;">
-                <p style="text-align: center; font-size: 0.85em; color: #555; margin-top: 10px;"><em>Fig 2. Comprobación empírica: probamos los 4 estados posibles para verificar que \(\overline{A \cdot B} = \bar{A} + \bar{B}\).</em></p>
+                <p style="text-align: center; font-size: 0.85em; color: #555; margin-top: 10px;"><em>Fig. 2: Comprobación empírica: probamos los 4 estados posibles para verificar que \(\overline{A \cdot B} = \bar{A} + \bar{B}\).</em></p>
             </div>
         </div>
 
@@ -78,7 +78,17 @@
         </div>
 
         <h3>📚 Nuestro Inventario de Axiomas</h3>
-        <p>En la Lección 21 (Isomorfismo) te presentamos las 5 propiedades fundamentales. Hoy las elevaremos a la categoría de <strong>Axiomas de Huntington</strong> (las reglas de nuestro tablero):</p>
+        <p>En la Lección 21 (Isomorfismo) te presentamos las 5 propiedades fundamentales. Hoy las elevaremos a la categoría de <strong>Axiomas de Huntington</strong> (las reglas de nuestro tablero).</p>
+
+        <!-- HISTORIA STEAM: EDWARD HUNTINGTON -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin: 25px 0; padding: 20px; border-radius: 8px;">
+            <h4 style="color: #7b1fa2; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">📐</span> Historia STEAM: El Limpiador de las Matemáticas
+            </h4>
+            <p>George Boole inventó las reglas, pero dejó un desastre. Su álgebra original era confusa y tenía demasiadas reglas redundantes. En 1904, un brillante matemático estadounidense de Harvard llamado <strong>Edward Vermilye Huntington</strong> se obsesionó con la "limpieza".</p>
+            <p>Huntington se hizo una pregunta de ingeniero: <em>"¿Cuál es la cantidad mínima absoluta de reglas que necesito para que todo este universo de ceros y unos funcione sin colapsar?"</em></p>
+            <p style="margin-bottom: 0;">Destiló todo el trabajo de Boole en un puñado de postulados perfectos, independientes y no contradictorios. <strong>Si un sistema cumple estas 5 reglas que verás abajo, ¡es oficialmente un Álgebra de Boole!</strong> Gracias a su obsesión por la eficiencia, hoy no tienes que memorizar 50 leyes, sino solo estos 5 axiomas.</p>
+        </div>
 
         <div style="overflow-x: auto; margin-bottom: 30px;">
             <table class="tabla-auditoria" style="width: 100%;">
@@ -201,6 +211,32 @@
             <p>En otras palabras: la demostración matemática que acabas de presenciar es la razón de fondo por la cual puedes comprar un chip 7404, conectarle una señal, y saber con certeza absoluta qué voltaje aparecerá en su salida. ¡La matemática garantiza la física!</p>
         </div>
 
+        <!-- NUEVO RINCÓN DEL DOCENTE: CÓMO ENSEÑAR DEMOSTRACIONES -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: Cómo enseñar a "Demostrar" sin causar pánico
+            </h3>
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">La transición de "hacer tablas de verdad" a "demostrar teoremas con axiomas" es el mayor abismo cognitivo para un estudiante. De repente, sienten que la matemática se volvió un bloque de texto incomprensible. Como docente, tu misión es quitarles el miedo usando analogías de sistemas cerrados que ellos ya dominan: <strong>Los Deportes o los Videojuegos</strong>.</p>
+            
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">El Juego del Abogado Deportivo</h4>
+                <p style="margin-bottom: 15px;">Para enseñarles qué es una demostración formal, haz esta dinámica en clase antes de mostrarles la primera ecuación de Boole:</p>
+                
+                <ol style="margin-bottom: 15px; line-height: 1.6;">
+                    <li><strong>Los Axiomas (Las Reglas Intocables):</strong> Diles: <em>"En el fútbol, un axioma es: 'Solo el portero puede tocar el balón con las manos en el área'. Esa regla no se discute, se acepta"</em>.</li>
+                    <li><strong>El Teorema (Lo que hay que demostrar):</strong> Diles: <em>"Quiero que me demuestren lógicamente esta afirmación: 'Si un jugador de campo toca el balón con la mano en su propia área, es penalti'"</em>.</li>
+                    <li><strong>La Demostración (Paso a Paso):</strong> Pídeles que construyan el argumento usando <strong>SÓLO</strong> las reglas del reglamento de la FIFA (Axiomas), paso por paso, sin saltarse ninguno ni inventar reglas nuevas.</li>
+                    <li><strong>El "Q.E.D.":</strong> Cuando lleguen a la conclusión innegable, explícales que acaban de hacer una <em>Demostración Formal</em>.</li>
+                </ol>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>La lección vital para el alumno:</strong> "En el álgebra de Boole, los 5 Axiomas de Huntington son nuestro reglamento de la FIFA. No puedes dar un solo paso en la ecuación si no puedes señalar qué regla del reglamento te da permiso para hacerlo. Una demostración matemática no es un cálculo aburrido; es un juicio donde tú eres el abogado y los axiomas son tus leyes".</p>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+                <strong>📝 Tip de Pizarra:</strong> Cuando hagas la demostración en el tablero, obliga a los estudiantes a gritar el nombre del Axioma que justifica tu siguiente paso. Si escribes un renglón y nadie sabe qué regla usaste... ¡es una "falta" matemática y debes borrar el renglón!
+            </div>
+        </div>
+
         <!-- ========== SECCIÓN NUEVA: LEY DE INVOLUCIÓN ========== -->
         <h2 style="margin-top: 40px;">3. Consecuencia Directa: La Ley de Involución</h2>
         <p>Ahora que hemos demostrado que el inverso es <strong>único</strong>, ¿qué pasa si negamos una señal que ya estaba negada?</p>
@@ -214,7 +250,7 @@
             
             <div class="svg-container" style="margin: 15px 0;">
                 <img src="img/ley_involucion.png" alt="Ley de Involución: dos compuertas NOT conectadas en serie" style="max-width:60%; height:auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                <p><small><em>Fig 3. La Ley de Involución en hardware. Matemáticamente: $\bar{\bar{A}} = A$.</em></small></p>
+                <p><small><em>Fig. 3: La Ley de Involución en hardware. Matemáticamente: $\bar{\bar{A}} = A$.</em></small></p>
             </div>
             
             <!-- Demostración algebraica de la involución -->
@@ -323,7 +359,7 @@
             </audio>
         </div>
         <p class="podcast-meta">
-            <span class="duracion">⏱️ 24:01 min</span>
+            <span class="duracion">⏱️ 22:43 min</span>
             <span class="formato">🔊 MP3</span>
         </p>
     </section>
