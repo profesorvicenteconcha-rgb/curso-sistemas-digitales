@@ -136,6 +136,27 @@
             <p style="margin: 0;"><small><strong>🔗 Conexión Matemática:</strong> Estas cuatro expresiones son pilares del álgebra de Boole. En la <strong>Lección 24</strong> volveremos a la expresión \(A \cdot \bar{A} = 0\) para demostrar matemáticamente algo asombroso: ¡el opuesto de una señal es único en todo el universo!</small></p>
         </div>
 
+        <!-- === RINCÓN DEL DOCENTE 1: TAUTOLOGÍAS === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: La "Lámpara Rota"
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Para un estudiante de secundaria, las tautologías y contradicciones suenan a trabalenguas filosóficos. Tu trabajo es convertirlas en un <strong>problema físico que puedan tocar</strong>.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">La Dinámica de la "Lámpara Rota"</h4>
+                <p style="margin-bottom: 15px;">Diles a tus alumnos: <em>"Ayer compré una lámpara mágica. Le conecté un interruptor y, sin importar cuántas veces lo subiera o lo bajara, la lámpara JAMÁS se apagó. ¿Me estafaron?"</em></p>
+                
+                <ul style="margin-bottom: 0; line-height: 1.6; color: #333;">
+                    <li>Pídeles que armen el circuito \(A + \bar{A}\) en Tinkercad (Una entrada conectada a una compuerta OR, y la misma entrada pasando por un inversor hacia la otra pata de la OR).</li>
+                    <li>Pon un LED a la salida y diles: <em>"Muevan el interruptor \(A\) todas las veces que quieran"</em>.</li>
+                    <li><strong>El Asombro:</strong> Verán que el LED se queda prendido eternamente (Tautología). No es magia ni una estafa; es álgebra de Boole física.</li>
+                    <li><strong>El Remate:</strong> Haz lo mismo cambiando la OR por una AND (\(A \cdot \bar{A}\)). El LED nunca encenderá (Contradicción). Diles: <em>"Acaban de construir la lámpara más inútil del mundo, pero la lección matemática más valiosa"</em>.</li>
+                </ul>
+            </div>
+        </div>
+
         <h2>2. La Implicación (\(A \rightarrow B\)): Evaluando Promesas</h2>
         <p>No existe un chip llamado "Implicador" en la ferretería, pero podemos construirlo. Para entenderlo, usemos el clásico ejemplo de la <strong>Promesa del Político</strong>:</p>
         
@@ -348,6 +369,35 @@
             <p>Muchos estudiantes cometen el error de pensar que “Si A entonces B” significa también “Si B entonces A”. <strong>Esto es una falacia.</strong></p>
             <p><strong>Ejemplo:</strong> “Si un animal es un perro, entonces tiene cuatro patas”. De ahí no puedes deducir que “Si tiene cuatro patas, entonces es un perro” (¡podría ser un gato!).</p>
             <p><strong>Regla de oro:</strong> La implicación es una calle de un solo sentido. Para que sea válida en ambos sentidos, necesitas la <strong>Compuerta XNOR (Bicondicional)</strong>.</p>
+        </div>
+
+        <!-- === RINCÓN DEL DOCENTE 2: EL JUEGO DE ROL DE LA IMPLICACIÓN === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: El Juicio del Político
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Explicar por qué \(0 \rightarrow 1\) es "Verdadero" (Verdad Vacua) es el momento en el que el 80% de los estudiantes se rinden. No uses la tabla de verdad todavía; conviértelo en una <strong>obra de teatro</strong>.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">Juego de Rol: "El Detector de Mentiras Humano"</h4>
+                <p style="margin-bottom: 15px;">Pon a un estudiante al frente (El Político) y dale un letrero que diga: <em>"Si gano (A), les doy pizza (B)"</em>. El resto del salón es el Jurado.</p>
+                
+                <ol style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>Caso 1 (\(1 \rightarrow 1\)):</strong> Diles: <em>"Ganó las elecciones y trajo pizza. ¿Mintió?"</em>. El jurado gritará: <em>"¡No, dijo la verdad (1)!"</em>.</li>
+                    <li><strong>Caso 2 (\(1 \rightarrow 0\)):</strong> Diles: <em>"Ganó, pero no trajo nada. ¿Mintió?"</em>. El jurado gritará indignado: <em>"¡Sí, mentiroso (0)!"</em>.</li>
+                    <li><strong>Caso Crítico (\(0 \rightarrow 1\)):</strong> Diles: <em>"Perdió las elecciones (A=0)... pero de buena gente les trajo pizza (B=1). ¡Ojo a la pregunta! ¿Rompió su promesa original?"</em>. Deja que debatan. Guíalos a ver que la promesa era condicionada a ganar. Como no ganó, el contrato se anuló. ¡Es imposible llamarlo mentiroso! Por descarte lógico, la declaración sigue siendo válida (1).</li>
+                </ol>
+
+                <div style="background-color: #e8f4fd; padding: 18px; border-radius: 6px; border-left: 4px solid #007bff; margin-bottom: 0;">
+                    <h5 style="margin: 0 0 8px 0; color: #0056b3; font-size: 1.1em;">✨ El Anclaje Final</h5>
+                    <p style="margin: 0; color: #333; line-height: 1.5;">Una vez que el salón acepte que "No mintió = Verdadero", saca la Tabla de Verdad. Recuérdales las falacias del Converse y el Inverso. Cuando vean que la ecuación de la alarma es \(\text{Mentira} = A \cdot \bar{B}\), lo entenderán de inmediato porque ellos mismos sintieron la indignación del Caso 2 en el juego de rol.</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+                <strong>📝 Tip de Pizarra:</strong> Escribe en grande: <em>"La lógica digital solo castiga la Mentira Directa  (1 \(\rightarrow\) 0). Todo lo demás es inocente hasta que se demuestre lo contrario (1)"</em>.
+            </div>
         </div>
 
         <!-- Isomorfismo: Conjuntos y Código -->

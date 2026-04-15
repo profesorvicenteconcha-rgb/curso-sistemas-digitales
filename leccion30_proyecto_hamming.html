@@ -116,6 +116,21 @@
             </div>
         </div>
 
+        <!-- === HERRAMIENTA: APP ELECTRODOC === -->
+        <div class="dato-extra" style="background-color: #f1f8e9; border-left-color: #388e3c; margin: 25px 0;">
+            <h3 style="color: #2e7d32; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">📱</span> El Manual de Bolsillo: App Electrodoc
+            </h3>
+            <p>Estás a punto de conectar tres chips 74HC86. ¿Estás seguro de en qué pata exacta está la tercera compuerta XOR? En lugar de tener que abrir el navegador de tu computadora y buscar la imagen en la Lección 19 cada dos minutos, los técnicos de hardware usan su teléfono móvil.</p>
+            <p>Descarga la aplicación gratuita <strong>Electrodoc</strong> (antes ElectroDroid) para Android o iOS. En su sección de "Recursos", tienes el diagrama de pines (<em>Pinout</em>) de toda la familia de chips TTL 74xx offline. Deja tu celular al lado de la protoboard con la imagen del chip 7486 abierta en la pantalla. ¡Es como tener el plano de construcción directamente en la mesa de trabajo!</p>
+            
+            <p style="text-align: center; margin: 20px 0;">
+                <a href="https://electrodroid.it/" target="_blank" class="btn-navegacion" style="background-color: #388e3c; font-size: 1.1em; padding: 15px 30px; box-shadow: 0 4px 10px rgba(56, 142, 60, 0.3);">
+                   Descargar Electrodoc App ↗
+                </a>
+            </p>
+        </div>
+
         <!-- NUEVO: Verificación previa -->
         <div class="dato-extra" style="background-color: #ffebee; border-left-color: #c62828; margin-bottom: 20px;">
             <h4 style="color: #c62828; margin-top: 0;">🔌 Antes de encender la fuente</h4>
@@ -129,9 +144,9 @@
             <h4 style="color: #1565c0; margin-bottom: 5px;">Las Salidas (Los LEDs del Síndrome)</h4>
             <p style="margin-top: 0;">Para poder "leer" el síndrome en binario natural, acomoda tus 3 LEDs en la protoboard <strong>de Izquierda a Derecha</strong> así:</p>
             <ul style="font-family: monospace; background: white; padding: 10px 10px 10px 30px; border-radius: 6px; border: 1px solid #90caf9;">
-                <li><strong>Izquierda:</strong> LED 3 (\(s_3\)) - El bit más significativo (MSB) - Vale 4</li>
-                <li><strong>Centro:</strong> LED 2 (\(s_2\)) - Vale 2</li>
-                <li><strong>Derecha:</strong> LED 1 (\(s_1\)) - El bit menos significativo (LSB) - Vale 1</li>
+                <li><span style="display:inline-block; width:15px; height:15px; border-radius:50%; background:#1565c0; margin-right:10px;"></span><strong>Izquierda:</strong> LED 3 (\(s_3\)) - El bit Más Significativo (MSB). Vale <strong>4</strong>.</li>
+                <li><span style="display:inline-block; width:15px; height:15px; border-radius:50%; background:#2e7d32; margin-right:10px;"></span><strong>Centro:</strong> LED 2 (\(s_2\)) - Vale <strong>2</strong>.</li>
+                <li><span style="display:inline-block; width:15px; height:15px; border-radius:50%; background:#c62828; margin-right:10px;"></span><strong>Derecha:</strong> LED 1 (\(s_1\)) - El bit Menos Significativo (LSB). Vale <strong>1</strong>.</li>
             </ul>
         </div>
 
@@ -162,45 +177,40 @@
             </div>
             <p style="font-size: 0.95em; color: #555;">En la práctica, para calcular \(s_1 = D_1 \oplus D_3 \oplus D_5 \oplus D_7\), conectamos dos XOR en paralelo: (D₁⊕D₃) y (D₅⊕D₇), y luego sus salidas a una tercera XOR. Así todas las señales recorren exactamente 2 compuertas.</p>
         </div>
-
-        <!-- === EL TRUCO DEL ÁRBOL (OPTIMIZACIÓN DE VELOCIDAD) === -->
-        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-top: 30px; margin-bottom: 30px;">
-            <h3 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 1.2em;">🌳</span> Arquitectura de Alta Velocidad: El Árbol Equilibrado
-            </h3>
-            <p>Como las ecuaciones del Síndrome requieren sumar 4 variables (ej: $D_1 \oplus D_3 \oplus D_5 \oplus D_7$), pero el chip 7486 solo tiene compuertas de 2 entradas, necesitamos 3 compuertas para resolver cada ecuación.</p>
-            <p>La forma novata de resolver esto sería conectar las compuertas en <strong>"Cadena" (Daisy Chain)</strong>: sumar $D_1$ y $D_3$, pasar el resultado a otra compuerta para sumarle $D_5$, y pasar ese resultado a una tercera para sumarle $D_7$.</p>
-            
-            <div style="background-color: white; padding: 15px; border-radius: 8px; border: 1px solid #bbdefb; margin: 15px 0;">
-                <h4 style="color: #c62828; margin-top: 0; margin-bottom: 5px;">⏱️ El Problema del Retardo</h4>
-                <p style="margin-bottom: 10px; font-size: 0.95em;">¿Recuerdas el <em>Retardo de Propagación</em> de la Lección 22? Cada chip toma tiempo en "pensar". Si usamos una cadena, la señal $D_1$ tendría que cruzar <strong>3 compuertas consecutivas</strong> antes de encender el LED de síndrome.</p>
-
-                <h4 style="color: #2e7d32; margin-top: 0; margin-bottom: 5px;">⚡ La Solución del Ingeniero: El Árbol XOR</h4>
-                <p style="margin-bottom: 0; font-size: 0.95em;">Para que el circuito sea ultra rápido, los ingenieros diseñan un <strong>"Árbol Equilibrado" (Balanced Tree)</strong>. Emparejamos las entradas de dos en dos en una primera capa simultánea, y luego sumamos sus resultados en una segunda capa.</p>
-            </div>
-
-            <div class="svg-container" style="margin: 20px 0; background-color: white; padding: 15px; border-radius: 8px; border: 1px solid #bbdefb; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
-                <img src="img/xor_cascada.png" alt="Esquema conectando 4 entradas usando 3 compuertas XOR en forma de árbol equilibrado" style="max-width:70%; height:auto;">
-                <p style="margin-top: 15px; color: #555; text-align: left; line-height: 1.6;"><small><em><strong>Fig 1. El Árbol XOR.</strong> Al hacer que las dos primeras compuertas trabajen en paralelo (al mismo tiempo), <strong>todas las señales cruzan exactamente 2 compuertas</strong> para llegar a la salida, en lugar de 3. Físicamente usaste los mismos 3 chips, pero al cambiar el orden de los cables... <strong>¡has acelerado el procesador un 33%!</strong></em></small></p>
-            </div>
-        </div>
-
+        
         <h2>3. Pasos para el Montaje Físico (El Ruteo)</h2>
         <p>Construir este circuito es una prueba de orden, paciencia y limpieza espacial (arquitectura). Sigue estos pasos para no enredarte en un "nido de pájaros":</p>
 
-        <div style="background-color: white; border-radius: 8px; padding: 20px; border-left: 5px solid #00bcd4; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin: 20px 0;">
+        <div style="background-color: white; border-radius: 8px; padding: 20px; border-left: 5px solid #00bcd4; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin: 10px 0;">
             <ol style="margin-bottom: 0; line-height: 1.8;">
-                <li><strong>Entradas:</strong> Coloca el Dip Switch a la izquierda de la placa con sus resistencias Pull-Down. Verifica con el multímetro que los pines den 0V y 5V al mover los interruptores 1 al 7.</li>
-                <li><strong>Árbol 1 (Para el LED de la DERECHA - \(s_1\)):</strong>
+                <li><strong>Entradas:</strong> Coloca el Dip Switch a la izquierda con sus 7 resistencias Pull-Down a GND.</li>
+                
+                <li style="margin-top: 10px;"><strong>Árbol 1 (<span style="color:#c62828; font-weight:bold;">Para el LED de la DERECHA - \(s_1\)</span>):</strong>
                     <ul>
-                        <li>Usa el <strong>Chip #1</strong>. Conecta las señales $D_1$ y $D_3$ a las entradas de la primera XOR (pines 1 y 2).</li>
-                        <li>Conecta las señales $D_5$ y $D_7$ a las entradas de la segunda XOR (pines 4 y 5).</li>
-                        <li>Toma las salidas de ambas (pines 3 y 6) y conéctalas a las entradas de la tercera XOR (pines 9 y 10).</li>
-                        <li>La salida final (pin 8) va al <strong>LED 1 (Derecha)</strong>.</li>
+                        <li>Usa el <strong>Chip U1</strong>. Conecta los interruptores $r_1$ y $r_3$ a los pines 1 y 2.</li>
+                        <li>Conecta los interruptores $r_5$ y $r_7$ a los pines 4 y 5.</li>
+                        <li>Conecta el pin 3 al pin 9, y el pin 6 al pin 10.</li>
+                        <li>La salida (pin 8) va a tu <strong>LED 1</strong> (Derecha).</li>
                     </ul>
                 </li>
-                <li><strong>Árbol 2 (Para el LED del CENTRO - \(s_2\)):</strong> Repite el proceso exacto usando el <strong>Chip #2</strong>, pero alimentando las compuertas con los cables $D_2, D_3, D_6, D_7$. El pin 8 irá al <strong>LED 2 (Centro)</strong>.</li>
-                <li><strong>Árbol 3 (Para el LED de la IZQUIERDA - \(s_3\)):</strong> Usa el <strong>Chip #3</strong> con las señales $D_4, D_5, D_6, D_7$. El pin 8 irá al <strong>LED 3 (Izquierda)</strong>.</li>
+                
+                <li style="margin-top: 10px;"><strong>Árbol 2 (<span style="color:#2e7d32; font-weight:bold;">Para el LED del CENTRO - \(s_2\)</span>):</strong>
+                    <ul>
+                        <li>Usa el <strong>Chip U2</strong>. Conecta los interruptores $r_2$ y $r_3$ a los pines 1 y 2.</li>
+                        <li>Conecta los interruptores $r_6$ y $r_7$ a los pines 4 y 5.</li>
+                        <li>Conecta el pin 3 al pin 9, y el pin 6 al pin 10.</li>
+                        <li>La salida (pin 8) va a tu <strong>LED 2</strong> (Centro).</li>
+                    </ul>
+                </li>
+
+                <li style="margin-top: 10px;"><strong>Árbol 3 (<span style="color:#1565c0; font-weight:bold;">Para el LED de la IZQUIERDA - \(s_3\)</span>):</strong>
+                    <ul>
+                        <li>Usa el <strong>Chip U3</strong>. Conecta los interruptores $r_4$ y $r_5$ a los pines 1 y 2.</li>
+                        <li>Conecta los interruptores $r_6$ y $r_7$ a los pines 4 y 5.</li>
+                        <li>Conecta el pin 3 al pin 9, y el pin 6 al pin 10.</li>
+                        <li>La salida (pin 8) va a tu <strong>LED 3</strong> (Izquierda).</li>
+                    </ul>
+                </li>
             </ol>
             <p style="margin-top: 15px; margin-bottom: 0; font-weight: bold; color: #0097a6; text-align: center;">¡Tip de Ingeniero! Usa cables de colores distintos para cada Árbol. Así, si el LED 2 falla, sabrás exactamente qué cables revisar.</p>
         </div>
@@ -241,6 +251,32 @@
                 </ul>
             </div>
             <p style="margin-top: 15px; margin-bottom: 0; font-size: 0.95em; color: #555; text-align: center;"><em>Un circuito profesional no solo funciona bien; está diseñado para no fallar bajo estrés ambiental.</em></p>
+        </div>
+
+        <!-- === NUEVO RINCÓN DEL DOCENTE: LA PEDAGOGÍA DE LA FRUSTRACIÓN === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: La Pedagogía de la Frustración
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Este laboratorio es el "jefe final" del curso. Físicamente requiere conectar más de 30 cables en un espacio reducido. Estadísticamente, <strong>la mayoría de tus estudiantes fallarán en su primer intento</strong>. Habrá cortocircuitos, LEDs que no prenden y mucha frustración en el aula.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">El Arte de "Las Manos Atrás"</h4>
+                <p style="margin-bottom: 15px;">El peor error que puede cometer un profesor de tecnología cuando un alumno dice <em>"Profe, no me funciona"</em>, es tomar la protoboard del estudiante, encontrar el cable suelto y conectarlo por él. ¡Al hacer eso, le robas la oportunidad de convertirse en ingeniero!</p>
+                
+                <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>Aplica el Método Socrático:</strong> En lugar de tocar su placa, haz preguntas. <em>"¿Qué dice la tabla de troubleshooting? ¿Ya mediste el pin 14 con el multímetro? ¿Qué voltaje te da el Árbol 2?"</em></li>
+                    <li><strong>Normaliza el fallo:</strong> Dile a la clase desde el minuto uno: <em>"Hoy las cosas van a fallar, y eso es excelente. Un circuito que funciona a la primera te enseña a seguir instrucciones; un circuito que falla te enseña ingeniería."</em></li>
+                    <li><strong>Usa la Punta Lógica (Cable Rosa):</strong> Oblígalos a usar el LED verde de prueba en cada pin intermedio (pines 3 y 6) antes de conectar los pines finales (8). Si rastrean la señal paso a paso, encontrarán su propio error.</li>
+                </ul>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>El momento de gloria:</strong> Cuando el estudiante finalmente encuentra ese único cable mal puesto por sus propios medios, corrige el error, cambia el interruptor y ve que la máquina "adivina" su trampa... el brillo en sus ojos es inolvidable. Ese es el momento exacto en que un joven decide estudiar ciencias o ingeniería.</p>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+                <strong>📝 Tip de Gestión de Aula:</strong> Fomenta el "Troubleshooting Cruzado". Si un grupo termina rápido y su circuito funciona, nómbralos <em>"Auditores de Calidad"</em>. Envíalos a ayudar a los grupos atascados, pero con una regla estricta: <strong>tienen prohibido tocar los cables de sus compañeros</strong>, solo pueden darles pistas verbales.
+            </div>
         </div>
 
         <h2>4. Simulación Interactiva (La Prueba de Fuego)</h2>

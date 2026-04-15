@@ -85,6 +85,39 @@
             <p><em>Ejemplo Cotidiano:</em> "¿Hay humo en alguna habitación?". No necesitas que se queme todo el edificio; si un solo sensor detecta humo ($1$), suenas la alarma general.</p>
         </div>
 
+        <!-- === NUEVO RINCÓN DEL DOCENTE: LA ANALOGÍA DEL SALÓN DE CLASES === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: El "Bus de Estudiantes"
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Pasar de evaluar 1 cable a evaluar un Bus de 8 cables asusta a cualquier estudiante de secundaria. Las fórmulas gigantes como \(D_0 \cdot D_1 \dots D_7\) parecen incomprensibles. Como docente, tu misión es demostrarles que ellos procesan Cuantificadores Lógicos todos los días en el salón de clases de forma automática.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">La Analogía del Examen y la Chicharra</h4>
+                <p style="margin-bottom: 15px;">Diles a tus alumnos que el salón de clases (de 8 estudiantes) es un <strong>Bus de Datos</strong> de 8 cables. Cada alumno es un bit. Si el alumno levantó la mano, vale 1; si la bajó, vale 0.</p>
+                
+                <ul style="margin-bottom: 25px; line-height: 1.6; color: #333;">
+                    <li><strong>El Inspector Estricto (La Compuerta AND Gigante - \(\forall\)):</strong><br>
+                    Diles: <em>"La regla es: Solo salimos al recreo (1) si TODOS ustedes terminaron el examen (levantaron la mano)"</em>. <br>
+                    <strong>La lección:</strong> Diles que miren alrededor. Si ven 7 manos arriba y <strong>una sola mano abajo (un 0)</strong>, nadie sale al recreo. Acaban de experimentar en carne propia cómo funciona una compuerta AND de 8 entradas: el cero domina a la multitud.</li>
+                    
+                    <li><strong>El Detector de Pánico (La Compuerta OR Gigante - \(\exists\)):</strong><br>
+                    Diles: <em>"La regla es: Suena la chicharra de evacuación (1) si ALGUIEN huele humo"</em>.<br>
+                    <strong>La lección:</strong> Pregúntales si necesitan que los 8 huelan humo para correr. ¡No! Con que <strong>un solo alumno levante la mano gritando fuego (un 1)</strong>, se activa la sirena para todos. Acaban de experimentar una compuerta OR de 8 entradas: el uno domina a la multitud.</li>
+                </ul>
+
+                <div style="background-color: #e8f4fd; padding: 18px; border-radius: 6px; border-left: 4px solid #007bff; margin-bottom: 0;">
+                    <h5 style="margin: 0 0 8px 0; color: #0056b3; font-size: 1.1em;">✨ El Salto Físico al Hardware</h5>
+                    <p style="margin: 0; color: #333; line-height: 1.5;">Una vez que entiendan la regla del salón, muéstrales las fórmulas con las "D" multiplicándose o sumándose. Ya no verán matemáticas; verán a 8 compañeros decidiendo si salen al recreo o evacúan el colegio. ¡El álgebra de Boole se volvió una experiencia social!</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+                <strong>📝 Tip de Aula (Juego de Roles):</strong> Nombra a un estudiante "El Procesador" y ponlo de espaldas. Haz que 8 alumnos levanten o bajen la mano. El Procesador debe voltearse, mirar el "Bus" (las 8 manos) por un solo segundo, y gritar si el resultado de la AND o la OR es 1 o 0. Esto entrena la lectura rápida de estados lógicos (reconocimiento de patrones).
+            </div>
+        </div>
+
         <h2>3. De Morgan a Escala Industrial (El Chip 7430)</h2>
         
         <p>¿Qué pasa cuando la lógica matemática de los Cuantificadores choca con la ingeniería del mundo real? <strong>Fabricar compuertas AND gigantes de 8 entradas es costoso e ineficiente en silicio.</strong> La industria prefiere fabricar compuertas NAND.</p>

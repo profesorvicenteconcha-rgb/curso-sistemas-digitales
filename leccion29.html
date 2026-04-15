@@ -250,6 +250,36 @@
             <p>El conjunto de todas las palabras válidas (el código) es el <strong>espacio nulo</strong> de \(H\). Es decir, son todos los vectores \(c\) de 7 bits que cumplen \(c \cdot H^T = 0\). El síndrome \(S = r \cdot H^T\) mide la "distancia" de la palabra recibida \(r\) a ese espacio nulo. Si \(S=0\), \(r\) está en el código; si no, el valor decimal de \(S\) nos dice qué bit hay que cambiar para volver al código.</p>
         </div>
 
+        <!-- === NUEVO BLOQUE: EL ATAJO DE WOLFRAM ALPHA (MOD 2) === -->
+        <div class="dato-extra" style="background-color: #fffde7; border-left-color: #fbc02d; margin-top: 25px; margin-bottom: 30px;">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🧮</span> El Atajo del Ingeniero: Multiplicación de Matrices Online
+            </h3>
+            <p>Hacer el cálculo manual de \(S = r \cdot H^T\) es excelente para entender la teoría, pero en la vida real, los ingenieros utilizan herramientas informáticas para auditar grandes volúmenes de datos al instante.</p>
+            <p>Como viste en la sección de <strong>Herramientas</strong> del curso, el motor computacional <strong>Wolfram Alpha</strong> es capaz de realizar multiplicación de matrices. Sin embargo, recuerda la regla de oro de la Lección 26: estamos trabajando en <strong>Aritmética Módulo 2</strong> (donde \(1+1=0\)).</p>
+            
+            <div style="background-color: white; padding: 15px; border-radius: 8px; border: 1px solid #ffe0b2; margin: 15px 0;">
+                <h4 style="margin-top: 0; color: #e65100;">Prueba tu propio Síndrome:</h4>
+                <p style="margin-bottom: 10px;">Hemos pre-configurado un enlace directo que toma un vector de 7 bits (el mensaje recibido \(r\)) y lo multiplica por la matriz transpuesta \(H^T\), aplicando automáticamente la regla <code>mod 2</code> al final del cálculo.</p>
+                <ul style="margin-bottom: 0;">
+                    <li>Haz clic en el botón de abajo para abrir la plantilla.</li>
+                    <li>Verás el cálculo del <strong>Caso 2</strong> que hicimos arriba a mano (\(r = [1,0,1,1,1,1,0]\)).</li>
+                    <li>Cambia los ceros y unos del primer corchete por cualquier mensaje de 7 bits que inventes.</li>
+                    <li>Dale al botón igual (\(=\)) en la web y mira cómo te arroja el Síndrome de 3 bits al instante. ¡Usa este número decimal en nuestra Tabla de Diagnóstico para ver qué bit "enfermaste"!</li>
+                </ul>
+            </div>
+
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="https://www.wolframalpha.com/input?i=%28%7B1%2C0%2C1%2C1%7D+.+%7B%7B1%2C0%2C0%2C0%2C1%2C1%2C0%7D%2C%7B0%2C1%2C0%2C0%2C1%2C0%2C1%7D%2C%7B0%2C0%2C1%2C0%2C0%2C1%2C1%7D%2C%7B0%2C0%2C0%2C1%2C1%2C1%2C1%7D%7D%29+mod+2" 
+                   target="_blank" 
+                   class="btn-navegacion" 
+                   style="background-color: #f57f17; font-size: 1.1em; padding: 15px 30px; box-shadow: 0 4px 10px rgba(245, 127, 23, 0.3);">
+                   Calcular Matriz Mod 2 en Wolfram Alpha 🐺 ↗
+                </a>
+            </p>
+            <p style="text-align: center; font-size: 0.85em; color: #666; margin-bottom: 0;"><em>(Nota: El enlace de arriba está configurado actualmente para la Matriz G de la Lección 28. Puedes editar la estructura de corchetes en Wolfram para que coincida exactamente con las 3 filas de la Matriz H de esta lección).</em></p>
+        </div>
+
         <h3>Visualizando el Síndrome: Los Diagramas de Venn Mágicos</h3>
         <p>¿Recuerdas los conjuntos de la Unidad 3? El Código Hamming se puede dibujar geométricamente como 3 círculos entrelazados.</p>
         

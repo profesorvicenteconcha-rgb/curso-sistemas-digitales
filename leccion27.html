@@ -169,6 +169,38 @@
             <p style="margin-bottom: 0;">¡Por eso es tan famoso! Es el equilibrio perfecto entre redundancia y capacidad de corrección.</p>
         </div>
 
+        <!-- === NUEVO RINCÓN DEL DOCENTE: DISTANCIA DE HAMMING === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 30px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: El Dilema de la Falsa Corrección
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Tus alumnos más astutos preguntarán: <em>"Profe, si el código detecta 2 errores, ¿por qué solo arregla 1?"</em>. La respuesta matemática es la fórmula \(\lfloor (d-1)/2 \rfloor\), pero la respuesta didáctica es la <strong>Metáfora de las Islas Seguras</strong>.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">La Analogía del Océano de Bits</h4>
+                <p style="margin-bottom: 15px;">Dibuja dos islas en la pizarra separadas por 3 kilómetros de mar (Distancia \(d=3\)). Las islas son las "Palabras Válidas" y el mar son las "Palabras Corruptas".</p>
+                
+                <ol style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>Error de 1 bit (A la deriva, cerca de casa):</strong> El mensaje sale de la Isla A, pero el ruido lo empuja 1 km hacia el mar. El radar de rescate lo encuentra flotando. Como está a solo 1 km de la Isla A y a 2 km de la Isla B, el rescatista sabe lógicamente que zarpó de la Isla A y lo "corrige" llevándolo de vuelta a casa.</li>
+                    
+                    <li style="margin-top: 10px; color: #d32f2f; font-weight: bold;">Error de 2 bits (El Naufragio en la Frontera):</li>
+                    <li>El mensaje sale de la Isla A, pero una tormenta brutal (ruido doble) lo empuja 2 km hacia el mar. ¡Ahora el barco está a solo 1 km de la Isla B!</li>
+                    <li><strong>El Detector funciona:</strong> El radar sabe que el barco está en el mar (no en una isla). ¡Detectó que hay un error! (Por eso detectamos hasta 2 errores).</li>
+                    <li><strong>El Autocorrector fracasa:</strong> El rescatista automático lo encuentra, ve que está a 1 km de la Isla B, asume equivocadamente que zarpó de B, y lo "corrige" llevándolo a la isla equivocada (Falsa Corrección).</li>
+                </ol>
+
+                <div style="background-color: #e8f4fd; padding: 18px; border-radius: 6px; border-left: 4px solid #007bff; margin-bottom: 0;">
+                    <h5 style="margin: 0 0 8px 0; color: #0056b3; font-size: 1.1em;">✨ El Salto Físico (El Límite del Autocorrector)</h5>
+                    <p style="margin: 0; color: #333; line-height: 1.5;">Explícales: <em>"La máquina no es inteligente, solo calcula distancias. Si el ruido empuja el mensaje más allá de la mitad del camino (\(1.5\) bits), la máquina pensará que el mensaje original era el del vecino. Por eso, con distancia 3, solo podemos darnos el lujo de corregir 1 error con 100% de certeza."</em></p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+                <strong>📝 Tip de Aula:</strong> Haz que tres estudiantes pasen al frente. Dos en los extremos (Islas) y uno en el medio dando pasos. Visualizar el espacio físico ($d=3$) romperá el miedo a la abstracción binaria al instante.
+            </div>
+        </div>
+
         <!-- NUEVO: Advertencia sobre falsa corrección -->
         <div class="error-comun" style="background-color: #ffebee; border-left-color: #c62828; padding: 15px; border-radius: 8px; margin: 20px 0;">
             <strong style="color: #c62828; display: block; margin-bottom: 5px;">⚠️ ¡Cuidado! La falsa corrección</strong>
