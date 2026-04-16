@@ -87,6 +87,35 @@
             </ol>
         </div>
 
+        <!-- === EL SECRETO DEL MINTERM (EL DETECTOR DE CASOS ÚNICOS) === -->
+        <div class="destacado" style="background-color: #fff8e1; border-left-color: #ffb300; margin-top: 25px; margin-bottom: 35px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🔐</span> ¿Por qué funciona un Minterm? (El Candado Perfecto)
+            </h3>
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em; margin-bottom: 15px;">Quizás te preguntes por qué la receta te obliga a negar los ceros (\(\bar{A}\)) y a multiplicarlo todo (AND). No es un capricho matemático; es física de semiconductores.</p>
+            
+            <p style="color: #444; line-height: 1.6; margin-bottom: 15px;">Recuerda la Lección 13: La compuerta <strong>AND</strong> es el "portero estricto". Solo da <strong>1</strong> (salida activa) cuando <strong>TODAS sus entradas son 1</strong>.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">Diseñando una cerradura a la medida</h4>
+                <p style="margin-bottom: 10px;">Supongamos que quieres que una alarma suene <em>únicamente</em> cuando la combinación sea <code>A=0, B=1, C=1</code>.</p>
+                <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li>Si conectas los cables directos a una compuerta AND gigante, entrará <code>0, 1, 1</code>. El cero arruinará la multiplicación y la alarma no sonará.</li>
+                    <li><strong>El Truco del Ingeniero:</strong> Pones un inversor (NOT) en el cable de la \(A\). Al entrar el \(0\), el inversor lo voltea a \(1\).</li>
+                    <li>Ahora la compuerta AND recibe <code>1, 1, 1</code>. ¡La alarma suena!</li>
+                </ul>
+                
+                <div style="background-color: #e8f4fd; padding: 15px; border-radius: 6px; border-left: 4px solid #007bff; margin-bottom: 0;">
+                    <p style="margin: 0; color: #0d47a1; font-family: monospace; font-size: 1.1em; text-align: center;">
+                        Ecuación física: \(\bar{A} \cdot B \cdot C\)
+                    </p>
+                    <p style="margin-top: 10px; margin-bottom: 0; color: #333; line-height: 1.5; font-size: 0.95em;">
+                        <strong>Conclusión:</strong> Un Minterm es simplemente una compuerta AND "disfrazada" de cerradura. Las barras de negación son los "dientes de la llave" que engañan a la compuerta para que se active solo con la combinación que tú deseas.
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <h2>2. Ejemplo Real: El Jurado de Votación ⚖️</h2>
 
         <div class="destacado">
@@ -127,6 +156,32 @@
             $$P = AB\bar{C} + A\bar{B}C + \bar{A}BC + ABC$$
         </div>
         <p>¡Listo! Esta ecuación describe perfectamente la "Mayoría". Si la construyes, funcionará.</p>
+
+        <!-- === NUEVO RINCÓN DEL DOCENTE: LA ANALOGÍA DEL CLUB VIP (SOP) === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: ¿Por qué "Sumamos" los Productos?
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Cuando tus estudiantes vean la ecuación final del Jurado (\(P = \bar{A}BC + A\bar{B}C + AB\bar{C} + ABC\)), entenderán de dónde salió cada bloque (los minterms). Pero se preguntarán: <em>"¿Por qué los unimos con signos de suma (+)?"</em>.</p>
+            <p style="color: #444; line-height: 1.6; margin-top: 0;">Si no les explicas esto, pensarán que es una regla matemática arbitraria. ¡Usa la <strong>Analogía del Club VIP</strong>!</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">La Metáfora de las Puertas del Club</h4>
+                <p style="margin-bottom: 15px;">Diles a tus alumnos: <em>"Imagina que el circuito final (la salida \(P\)) es la entrada a un Club VIP muy exclusivo. Para entrar, debes pasar por los guardias de seguridad."</em></p>
+                
+                <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>Los Minterms (El Guardia AND):</strong> <em>"Cada minterm es un guardia de seguridad súper estricto (Compuerta AND). Te revisa de pies a cabeza. Solo te deja pasar si cumples EXACTAMENTE con su lista de requisitos (ej: \(\bar{A}BC\) = NO gafas, SÍ tenis, SÍ chaqueta). Si fallas en uno solo, te rechaza (0)."</em></li>
+                    <li><strong>La Suma (La Puerta OR):</strong> <em>"Pero el Club VIP tiene 4 puertas diferentes (nuestros 4 minterms de la ecuación). Si el guardia de la Puerta 1 te rechaza, ¡no pasa nada! Puedes intentar por la Puerta 2, la 3 o la 4. Con que <strong>UNO SOLO</strong> de los guardias te acepte, ya estás dentro de la fiesta (Salida = 1)."</em></li>
+                </ul>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>El Cierre Pedagógico:</strong> <em>"Por eso unimos los guardias (Minterms) con sumas (+). En lógica, la suma es una compuerta OR, que significa 'o entras por aquí, O entras por allá'. Si los uniéramos con multiplicaciones (AND), tendrías que pasar las 4 puertas al mismo tiempo, ¡y eso es físicamente imposible porque cada puerta pide ropa diferente!"</em></p>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+                <strong>📝 Tip de Pizarra:</strong> Dibuja 4 compuertas AND alimentando a una gran compuerta OR final. Muéstrales cómo la corriente intenta "buscar un camino" a través de las 4 opciones hasta lograr salir por la OR. ¡El concepto de "Suma de Productos" dejará de ser álgebra y se convertirá en un laberinto físico!
+            </div>
+        </div>
 
         <!-- NUEVA SECCIÓN: NOTACIÓN SIGMA -->
         <h2>3. El Atajo de los Ingenieros: Notación Sigma (\(\Sigma\))</h2>

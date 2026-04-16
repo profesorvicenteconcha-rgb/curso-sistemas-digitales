@@ -114,6 +114,37 @@
         </ul>
     </div>
 
+    <!-- === RINCÓN DEL DOCENTE 1: EL PUENTEO (FOTOCOPIADORA) === -->
+    <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+        <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: "La Fotocopiadora Mágica" (El secreto del puenteo)
+        </h3>
+        
+        <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Para ti, escribir \(A \cdot A = A\) es obvio. Pero para un alumno que apenas está perdiendo el miedo a quemar la protoboard, decirle que "una el cable A con el cable B en la misma entrada" suena a cortocircuito. Tu deber es darles una imagen física de seguridad que <strong>no puedan olvidar</strong>.</p>
+
+        <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+            <h4 style="margin-top: 0; color: #e65100;">📠 La Analogía de la Fotocopiadora Mágica</h4>
+            <p style="margin-bottom: 15px;">Diles a tus estudiantes: <em>"Imagina que tienes una fotocopiadora que funciona con una regla muy extraña: <strong>copia una hoja, pero siempre le suma una tilde (~) a todas las letras</strong>. Esa es nuestra compuerta NAND (o NOR)."</em></p>
+            
+            <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                <li><strong>El Puenteo (Fotocopiar dos veces la misma hoja):</strong> <em>"Ahora, tomas una hoja con la palabra 'VERDAD' (1) y la introduces en las dos bandejas de entrada de la fotocopiadora al mismo tiempo. La máquina ve dos hojas iguales, las procesa juntas, y en la salida aparece una sola hoja con la palabra '~VERDAD' (0)."</em></li>
+                <li><strong>¿Por qué funciona?</strong> <em>"La fotocopiadora no sabe que las dos hojas son la misma señal; simplemente las procesa juntas (A · A). Pero al final, la tilde (~) se aplica a todo el paquete. ¡Eso es justo lo que hace el puenteo: la señal entra por ambas patas, el chip opera, y el resultado es la negación de A!"</em></li>
+            </ul>
+
+            <div style="background-color: #fff3cd; padding: 15px; border-radius: 6px; border-left: 4px solid #ffc107; margin: 15px 0;">
+                <h5 style="margin: 0 0 8px 0; color: #e65100;">🧠 ¿Qué pasa con la XOR (la fotocopiadora caprichosa)?</h5>
+                <p style="margin: 0; color: #5d4037; font-size: 0.95em;">Continúa la analogía: <em>"Ahora imagina una fotocopiadora diferente, una que es <strong>muy caprichosa</strong>: si las dos hojas que entran son idénticas, la máquina se bloquea y escupe una hoja en blanco (0). Solo si las dos hojas son diferentes, escupe la hoja original (1)."</em></p>
+                <p style="margin-top: 10px; margin-bottom: 0; color: #5d4037; font-size: 0.95em;"><em>"Si introduces la misma hoja por las dos bandejas (puenteo), ¡la máquina siempre escupirá hojas en blanco! Por eso puentear una XOR es inútil: nunca obtenemos la tilde (~), solo un cero constante (\(A \oplus A = 0\))."</em></p>
+            </div>
+
+            <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>La lección vital para el maestro:</strong> Al usar la "fotocopiadora mágica", el estudiante entiende que la señal de entrada no se "choca" consigo misma causando un corto, simplemente se duplica en las entradas del chip. Al quitarles el miedo físico, su mente se abre a la matemática del puenteo.</p>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+            <strong>📝 Tip de Aula Extrema:</strong> Lleva dos hojas de papel idénticas a la clase (con un gran "1" dibujado). Haz la demostración en vivo: júntalas ("puenteo"), mételas en una caja imaginaria, y saca por el otro lado una hoja con un "0". ¡El cerebro de los alumnos recordará esta acción teatral mucho mejor que una ecuación en la pizarra!
+        </div>
+    </div>
+
     <!-- ========================================================= -->
     <!-- FAMILIA NAND -->
     <!-- ========================================================= -->
@@ -459,6 +490,34 @@
             <p>Cablea el circuito XNOR (paso anterior). Conecta la salida (pin 13) a los pines 2 y 3 de un SEGUNDO chip 7402. La salida final (XOR) estará en el pin 1 del segundo chip.</p>
         </div>
     </section>
+
+    <!-- === RINCÓN DEL DOCENTE 2: EL SECRETO DE LAS FÁBRICAS === -->
+    <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+        <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: ¿Para qué complicarnos la vida?
+        </h3>
+        
+        <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Cuando muestres la Fig. 16 a tus estudiantes (una XOR hecha con 5 NORs enredadas), uno de ellos levantará la mano indignado y te dirá: <em>"Profe, si venden el chip 7486 que hace esto con un solo cable, ¿para qué nos hace sufrir conectando 5 compuertas iguales?"</em>. Si le respondes "porque así es la tarea", perderás su respeto. Debes contarles el <strong>Secreto de la Industria de los Microchips</strong>.</p>
+
+        <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+            <h4 style="margin-top: 0; color: #e65100;">La Fábrica de Sellos (Litografía)</h4>
+            <p style="margin-bottom: 15px;">Diles a tus alumnos: <em>"Imagina que quieres imprimir una placa con un millón de compuertas."</em></p>
+            
+            <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                <li><strong>El Método Aficionado (Comprar de todo):</strong> <em>"Si usas AND, OR, NOT y XOR, la máquina que imprime el silicio necesita 4 'sellos' diferentes. Tiene que cambiar de sello millones de veces, alinear los circuitos milimétricamente y usar transistores de tamaños distintos. Es lento, genera calor y cuesta miles de millones de dólares."</em></li>
+                <li><strong>El Método Profesional (El Ladrillo Universal):</strong> <em>"¿Qué pasa si la máquina solo tiene UN sello (NAND o NOR)? ¡La fábrica no se detiene! Imprime un 'mar' de millones de compuertas idénticas a velocidad de la luz. Aunque gaste 5 compuertas NOR para hacer una sola XOR, es infinitamente más barato y rápido fabricar piezas iguales que piezas distintas."</em></li>
+            </ul>
+
+            <div style="background-color: #e8f4fd; padding: 18px; border-radius: 6px; border-left: 4px solid #007bff; margin-bottom: 0;">
+                <h5 style="margin: 0 0 8px 0; color: #0056b3; font-size: 1.1em;">✨ El Anclaje de Ingeniería</h5>
+                <p style="margin: 0; color: #333; line-height: 1.5;">Concluye diciéndoles: <em>"Armar este nido de cables en su protoboard hoy es un dolor de cabeza, sí. Pero les está enseñando cómo piensan los ingenieros que diseñan los procesadores Intel o Apple de sus celulares. Ellos no mezclan chips; ellos programan mares de transistores universales."</em></p>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+            <strong>📝 Tip de Aula:</strong> Usar la economía y la manufactura a escala como justificación matemática es el gancho perfecto para captar la atención de los estudiantes más prácticos que suelen odiar la teoría abstracta.
+        </div>
+    </div>
 
     <!-- ========================================================= -->
     <!-- DISEÑO DEL SISTEMA REAL (EL JURADO CON NOR) -->

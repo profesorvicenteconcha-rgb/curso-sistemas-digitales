@@ -296,10 +296,55 @@
             <p><em>(Ojo: ¡NO cambies las letras ni sus negaciones! Si hay una $\bar{A}$, se queda como $\bar{A}$).</em></p>
         </div>
 
-        <p><strong>Ejemplo en acción:</strong></p>
-        <p>En la Lección 22 comprobamos la Tautología de la <em>Dominación</em>: <span>$A + 1 = 1$</span>.<br>
-        Si le aplicamos Dualidad (cambiamos $+$ por $\cdot$, y $1$ por $0$), obtenemos: <span>$A \cdot 0 = 0$</span>.<br>
-        ¡Hemos descubierto la Contradicción gratis, sin necesidad de demostrarla!</p>
+        <!-- === NUEVA CONEXIÓN: DUALIDAD EN SOP Y POS === -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin: 25px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h4 style="color: #7b1fa2; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🤯</span> El momento "¡Ajá!": Ya usabas la Dualidad
+            </h4>
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">¿Recuerdas las Lecciones 15 y 18, donde aprendiste a extraer ecuaciones de una tabla de verdad usando <strong>Minterms (SOP)</strong> y <strong>Maxterms (POS)</strong>?</p>
+            
+            <p style="margin-bottom: 15px;">Te dijimos que eran "dos caras de la misma moneda". Ahora tienes el lenguaje matemático para entender por qué:</p>
+            
+            <ul style="background-color: white; padding: 20px 20px 20px 40px; border-radius: 8px; border: 1px solid #e1bee7; margin-bottom: 0; line-height: 1.7; color: #333;">
+                <li>En la <strong>Suma de Productos (SOP)</strong>, buscabas los <strong>1s</strong>, multiplicabas las variables (AND) y luego sumabas los grupos (OR).</li>
+                <li>En el <strong>Producto de Sumas (POS)</strong>, buscabas los <strong>0s</strong>, sumabas las variables (OR) y luego multiplicabas los grupos (AND).</li>
+            </ul>
+            
+            <div style="background-color: #f8bbd0; padding: 15px; border-radius: 6px; border-left: 4px solid #c2185b; margin-top: 15px;">
+                <p style="margin: 0; color: #880e4f; font-weight: bold; text-align: center; font-size: 1.1em;">
+                    ¡El método POS es el DUAL exacto del método SOP!
+                </p>
+                <p style="margin-top: 10px; margin-bottom: 0; color: #880e4f; font-size: 0.95em; text-align: center;">
+                    Cambiaste los 1s por 0s, los ANDs por ORs, y los ORs por ANDs. Sin saberlo, aplicaste las tres reglas del Principio de Dualidad a escala industrial para diseñar hardware. La Dualidad garantiza que ambos circuitos (SOP y POS) se comportarán idénticamente.
+                </p>
+            </div>
+        </div>
+        
+        <!-- === EJEMPLO MEJORADO DE DUALIDAD === -->
+        <h4 style="color: #0d47a1; margin-top: 35px; border-bottom: 2px solid #bbdefb; padding-bottom: 5px;">
+            <span style="font-size: 1.2em;">🎭</span> El "2x1" Matemático: Obteniendo teoremas gratis
+        </h4>
+        <p style="font-size: 1.05em; color: #444; line-height: 1.6;">El poder real de la Dualidad es que <strong>te ahorra la mitad del trabajo</strong>. Si logras demostrar que una ecuación es cierta (como hicimos arriba con la Unicidad), la versión Dual de esa ecuación también será cierta automáticamente, ¡sin necesidad de hacer otra demostración!</p>
+        
+        <div style="background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <p style="margin-top: 0; font-weight: bold; color: #333; font-size: 1.1em;">Mira esta transformación instantánea:</p>
+            
+            <ul style="margin-bottom: 15px; line-height: 1.8; color: #444; font-size: 1.05em;">
+                <li>En la Lección 22 comprobamos la <strong>Tautología de Dominación</strong>: <br>
+                    <span style="display: inline-block; background: #e8f5e9; padding: 5px 10px; border-radius: 4px; font-weight: bold; color: #2e7d32; margin-top: 5px;">$A + 1 = 1$</span>
+                </li>
+                
+                <li style="margin-top: 15px;">Si le aplicamos los tres pasos ciegos de la Dualidad (cambiamos $+$ por $\cdot$, y $1$ por $0$), obtenemos inmediatamente: <br>
+                    <span style="display: inline-block; background: #ffebee; padding: 5px 10px; border-radius: 4px; font-weight: bold; color: #c62828; margin-top: 5px;">$A \cdot 0 = 0$</span>
+                </li>
+            </ul>
+            
+            <div style="background-color: #e3f2fd; padding: 15px; border-radius: 6px; border-left: 4px solid #1976d2;">
+                <p style="margin: 0; color: #0d47a1; font-style: italic;">
+                    <strong>¡Magia!</strong> Acabamos de descubrir la ecuación de la <strong>Contradicción</strong> gratis, sin necesidad de probarla con tablas de verdad ni armar el circuito. La Dualidad garantiza que es matemáticamente perfecta.
+                </p>
+            </div>
+        </div>
 
         <!-- EJERCICIO DE DUALIDAD CON DE MORGAN -->
         <div class="destacado" style="background-color: #f5f5f5; border-left-color: #9c27b0; margin-top: 20px;">

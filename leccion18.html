@@ -174,6 +174,29 @@
         <p><strong>-</strong> OR final = 1 + 0 = 1 → <code>X = 1</code>. </p> 
         <p>¡Exactamente lo que predice la tabla de verdad de la XOR!</p>
 
+        <!-- === RINCÓN DEL DOCENTE 1: LA PARADOJA DEL RESTAURANTE (XOR) === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: Cómo explicar la ecuación \(A\bar{B} + \bar{A}B\) sin asustar
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Cuando escribes \(X = \bar{A}B + A\bar{B}\) en la pizarra, la mitad de tu clase dejará de prestar atención. Es demasiado abstracta. Tu trabajo es convertir esa ecuación en una historia de la vida cotidiana donde la regla "uno sí y el otro no" sea de vida o muerte.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">La Analogía del Menú Ejecutivo</h4>
+                <p style="margin-bottom: 15px;">Diles a tus alumnos: <em>"Fueron a un restaurante elegante. El mesero les dice que su menú incluye el plato principal y, de postre, pueden elegir Helado (A) o Pastel (B)."</em></p>
+                
+                <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>Caso 1 (0 y 0):</strong> <em>"No piden ni Helado ni Pastel. El mesero está triste. Salida = 0."</em></li>
+                    <li><strong>Caso 2 (1 y 0):</strong> <em>"Piden Helado (\(A\)) pero NO Pastel (\(\bar{B}\)). El mesero se los trae feliz. Salida = 1."</em></li>
+                    <li><strong>Caso 3 (0 y 1):</strong> <em>"NO piden Helado (\(\bar{A}\)) pero sí Pastel (\(B\)). El mesero se los trae feliz. Salida = 1."</em></li>
+                    <li><strong>El Clímax (1 y 1):</strong> <em>"¡Piden Helado Y Pastel al mismo tiempo! El mesero se enoja y les dice: '¡O el uno o el otro, no pueden llevarse los dos por el mismo precio!'. Salida = 0."</em></li>
+                </ul>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>El anclaje matemático:</strong> Solo cuando hayan reído con la analogía, señala la ecuación en la pizarra. <em>"Miren la primera mitad: \(A\bar{A}\). Eso es pedir Helado y rechazar el Pastel. Miren la segunda: \(\bar{A}B\). Eso es rechazar el Helado y pedir el Pastel. El signo \(+\) en medio significa que cualquiera de las dos opciones es válida. ¡Esa es toda la magia de la XOR!"</em></p>
+            </div>
+        </div>
+
         <p><strong>El "Paso a Paso" del Circuito:</strong> Para entender cómo funciona, hagamos el seguimiento de las señales como si fuéramos la corriente eléctrica. Desglosemos la ecuación en una tabla de verdad:</p>
 
         <table class="tabla-verdad" style="font-size: 0.9em;">
@@ -333,6 +356,35 @@
                 text-align: center;
             }
             </style>
+
+            <!-- === EL SECRETO DEL MAXTERM (EL DETECTOR DE ERRORES) === -->
+            <div class="destacado" style="background-color: #fff3e0; border-left-color: #ff9800; margin-top: 25px; margin-bottom: 35px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <h3 style="color: #e65100; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.2em;">🛡️</span> ¿Por qué funciona un Maxterm? (El Filtro Anti-Ceros)
+                </h3>
+                <p style="color: #444; line-height: 1.6; font-size: 1.05em; margin-bottom: 15px;">En la Lección 15 aprendimos que un <em>Minterm</em> es un "candado" (compuerta AND) que se abre (da 1) solo con la llave correcta. Pero la forma <strong>POS</strong> usa <em>Maxterms</em> (compuertas OR). ¿Por qué las reglas se invierten aquí?</p>
+                
+                <p style="color: #444; line-height: 1.6; margin-bottom: 15px;">Recuerda la Lección 13: La compuerta <strong>OR</strong> es "la fiesta de todos". Solo da <strong>0</strong> (falla) cuando <strong>TODAS sus entradas son 0</strong>. ¡Cualquier 1 que entre arruina el cero!</p>
+
+                <div style="background-color: white; padding: 20px; border-radius: 8px; border: 1px solid #ffe0b2;">
+                    <h4 style="margin-top: 0; color: #e65100;">Diseñando un Escudo Específico</h4>
+                    <p style="margin-bottom: 10px;">Supongamos que en el Jurado, si la combinación es <code>A=0, B=1, C=0</code>, la propuesta se rechaza (salida 0). Queremos crear un "escudo" que atrape EXACTAMENTE esa combinación y la obligue a dar 0.</p>
+                    <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                        <li>Si conectas los cables directos a una compuerta OR gigante, entrará <code>0, 1, 0</code>. El "1" del medio arruinará el cero, y la compuerta dará 1. ¡El escudo falló!</li>
+                        <li><strong>El Truco Inverso:</strong> Pones un inversor (NOT) en el cable de la \(B\). Al entrar el \(1\), el inversor lo voltea a \(0\).</li>
+                        <li>Ahora la compuerta OR recibe <code>0, 0, 0</code>. ¡El escudo se activa y la salida es 0 perfecto!</li>
+                    </ul>
+                    
+                    <div style="background-color: #e8f4fd; padding: 15px; border-radius: 6px; border-left: 4px solid #007bff; margin-bottom: 0;">
+                        <p style="margin: 0; color: #0d47a1; font-family: monospace; font-size: 1.1em; text-align: center;">
+                            Ecuación física del Maxterm: \((A + \bar{B} + C)\)
+                        </p>
+                        <p style="margin-top: 10px; margin-bottom: 0; color: #333; line-height: 1.5; font-size: 0.95em;">
+                            <strong>Conclusión:</strong> Un Maxterm es una trampa hecha con una compuerta OR. Tienes que negar las variables que valen 1 para convertirlas en 0, logrando que la compuerta OR reciba puros ceros <em>únicamente</em> en esa combinación específica. Luego, multiplicas todos los escudos (AND) para que el circuito final dé 0 si choca contra cualquiera de ellos.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
             <p>Vamos a diseñar un circuito para un jurado de 3 jueces (A, B, C). La propuesta se aprueba (\(P = 1\)) si hay <strong>mayoría simple</strong> (2 o 3 votos a favor). Ahora obtendremos la expresión en forma de <strong>producto de sumas (POS)</strong> a partir de las filas donde la salida es 0.</p>
 
@@ -643,6 +695,33 @@
                 <li>✅ ¿Es igual el bit de paridad calculado con el recibido?</li>
             </ul>
         </div>
+
+        <!-- === RINCÓN DEL DOCENTE 2: EL CAJERO AUTOMÁTICO (XNOR) === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: El Juez de Igualdad en Acción
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">La XNOR (\(A \odot B\)) da como resultado 1 cuando las entradas son iguales. Esto suena aburrido hasta que le das un contexto de seguridad cibernética. Convierte tu salón en un banco.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">Juego de Rol: "El PIN del Cajero Automático"</h4>
+                <p style="margin-bottom: 15px;">Dibuja una puerta de bóveda en la pizarra con una compuerta XNOR gigante. Diles: <em>"La entrada A es la contraseña correcta que está guardada en la base de datos del banco. La entrada B es el número que el cliente acaba de teclear en el cajero."</em></p>
+                
+                <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>Si el banco espera un 1 y el cliente teclea un 1:</strong> <em>"¡Coinciden! La compuerta XNOR da 1 (Verdadero). La bóveda se abre."</em></li>
+                    <li><strong>Si el banco espera un 0 y el cliente teclea un 0:</strong> <em>"¡También coinciden! La compuerta XNOR da 1 (Verdadero). La bóveda se abre."</em></li>
+                    <li><strong>El Intento de Robo (1 y 0):</strong> <em>"Si el banco espera un 1 pero el ladrón teclea un 0... la compuerta ve que son diferentes. Da 0 (Falso). ¡Suena la alarma policial!"</em></li>
+                </ul>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>El anclaje pedagógico:</strong> Enséñales que en el mundo real, los ingenieros conectan cientos de compuertas XNOR en paralelo para comparar contraseñas de 64 bits de un solo golpe. Si TODAS las XNOR dan 1, la contraseña es correcta. Acabas de enseñarles el principio básico de los "Comparadores de Magnitud" que verán en la universidad.</p>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+                <strong>📝 Tip de Pizarra:</strong> Haz que un alumno diga un número binario al azar (Ej: 101) y otro alumno intente adivinarlo. Muestra en la pizarra cómo la XNOR evalúa cada bit (1 con 1, 0 con 0) para decidir si ganan o pierden.
+            </div>
+        </div>
+        <!-- === /RINCÓN DEL DOCENTE 2 === -->
         
         <h2>5. Catálogo de Referencia</h2>
         <table class="tabla-centrada">

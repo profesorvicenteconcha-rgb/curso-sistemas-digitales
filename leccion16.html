@@ -88,7 +88,28 @@
             <li><strong>Rectángulos:</strong> Solo líneas rectas o bloques cuadrados.</li>
             <li><strong>Solapamiento:</strong> Un 1 puede pertenecer a varios grupos (¡esto ayuda!).</li>
             <li><strong>Pac-Man:</strong> El mapa es redondo. El borde izquierdo toca el derecho.</li>
-        </ul>  
+        </ul>
+
+        <!-- === RINCÓN DEL DOCENTE 1: EL TETRIS DE KARNAUGH === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: El "Tetris" Prohibido
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Cuando les dices a tus alumnos "agrupen los unos en rectángulos", el 90% de la clase intentará hacer grupos de 3 o de 6 celdas, o peor aún, agrupar en diagonal como en el juego del "Gato" (Triqui / Tres en línea). Tu misión es cambiarles el chip mental de inmediato.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">La Dinámica de las "Fichas de Dominó"</h4>
+                <p style="margin-bottom: 15px;">Para evitar que cometan errores visuales, prohíbeles usar el lápiz libremente en los primeros ejercicios. Dales una restricción física:</p>
+                
+                <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>Las Fichas Permitidas:</strong> Diles: <em>"Imaginen que solo tienen fichas de dominó (tamaño 2x1), bloques de Lego cuadrados (2x2), o barras largas (4x1 o 4x2). ¡NO existen piezas en forma de 'L', ni piezas de tamaño 3!"</em>.</li>
+                    <li><strong>El Juego de Mesa:</strong> Imprime mapas de Karnaugh grandes y entrégales fichas de cartulina rectangulares (de 2, 4 y 8 celdas). Diles: <em>"Tienen que tapar todos los '1' del tablero usando la menor cantidad de fichas de cartulina posibles. ¡Las fichas se pueden superponer (encimar)!"</em>.</li>
+                </ul>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>El Beneficio Real:</strong> Al usar objetos físicos (o imaginarios) que solo tienen tamaños de potencias de 2 (1, 2, 4, 8), el cerebro del estudiante deja de intentar agrupar de a 3. Obligarlos a usar la "ficha más grande que quepa" les enseña intuitivamente a maximizar la simplificación (Absorción) sin usar álgebra.</p>
+            </div>
+        </div>
 
         <div class="destacado">
             <h4>⚠️ Error Común: Agrupamiento Incorrecto</h4>
@@ -183,8 +204,43 @@
 
         <div class="destacado" style="border-left-color: #9c27b0; background-color: #f3e5f5;">
             <p><strong>El Superpoder Oculto:</strong></p>
-            <p>Gracias a esta fusión, la columna de la extrema <strong>Izquierda</strong> es vecina inmediata de la columna de la extrema <strong>Derecha</strong>.</p>
-            <p><strong>Consecuencia:</strong> Puedes crear grupos que "salgan" por la derecha y "entren" por la izquierda para atrapar los unos de las esquinas. ¡No los dejes solos!</p>
+            <p>Gracias a esta fusión cilíndrica, la columna de la extrema <strong>Izquierda (00)</strong> es vecina inmediata de la columna de la extrema <strong>Derecha (10)</strong>.</p>
+            <p><strong>Pero hay más...</strong> ¡La fila de <strong>Arriba (00)</strong> también es vecina de la fila de <strong>Abajo (10)</strong>! Si curvas el cilindro hasta unir sus extremos, formas una Dona (Toroide).</p>
+            
+            <!-- AQUÍ ENTRA TU NUEVA IMAGEN DEL TOROIDE -->
+            <div class="svg-container" style="background-color: white; padding: 20px; border-radius: 8px; border: 1px solid #ce93d8; margin: 20px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+                <img src="img/mapa_k_toroide.png" alt="Mapa de Karnaugh de 4 variables con 1s en las cuatro esquinas, demostrando la adyacencia de los bordes opuestos" style="max-width:85%; height:auto;">
+                <p style="margin-top: 15px; color: #555; text-align: left; padding: 0 10px;"><small><em><strong>Fig. 4: El Efecto Toroide.</strong> Los 4 unos que ves en las esquinas extremas (0000, 0010, 1000, 1010) parecen estar a kilómetros de distancia en la pantalla 2D. Sin embargo, en la geometría de Karnaugh, ¡esas 4 celdas se tocan en un solo punto en el centro de la dona! Forman <strong>un solo grupo de 4</strong>.</em></small></p>
+            </div>
+            
+            <p><strong>Consecuencia Final:</strong> Puedes crear grupos gigantescos que "salgan" por las cuatro esquinas al mismo tiempo. ¡Nunca dejes un 1 de la esquina abandonado!</p>
+        </div>
+
+        <!-- === RINCÓN DEL DOCENTE 2: EL TUBO DE PAPEL === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: Destruyendo el "Mundo Plano"
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Explicar el efecto "Pac-Man" dibujando flechitas que salen por la derecha y entran por la izquierda en la pizarra genera muchísima confusión espacial. Los estudiantes de secundaria están acostumbrados a pensar en 2D (geometría plana). ¡Tienes que llevarlos a la 3D!</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">La Dinámica del "Tubo de Cartón"</h4>
+                <p style="margin-bottom: 15px;">No uses la imaginación, usa manualidades en el aula:</p>
+                
+                <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>Paso 1 (El Mapa):</strong> Lleva una hoja de papel con un Mapa de Karnaugh de 4x4 impreso. Escribe un '1' en el extremo izquierdo y otro '1' en el extremo derecho de la misma fila.</li>
+                    <li><strong>Paso 2 (La Falsa Distancia):</strong> Pon la hoja plana sobre la mesa. Pregúntales: <em>"¿Estos dos unos están juntos?"</em>. Todos dirán: <em>"¡No, están lejísimos!"</em>.</li>
+                    <li><strong>Paso 3 (La Magia Geométrica):</strong> Levanta la hoja de la mesa y dóblala formando un cilindro (como un tubo de papel higiénico), uniendo el borde izquierdo con el derecho. Muestra el cilindro a la clase.</li>
+                    <li><strong>Paso 4 (El ¡Aha! Moment):</strong> Grita: <em>"¿Y ahora, están juntos?"</em>. Los estudiantes verán que los dos unos se tocan perfectamente en la costura del cilindro. Diles: <em>"¡El Mapa de Karnaugh no es un cuadrado, es un cilindro!"</em> (Toroide, para ser matemáticamente exactos).</li>
+                </ul>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>La lección vital para el maestro:</strong> Cuando el estudiante "ve" que la hoja se enrolla físicamente, su cerebro acepta que la columna 00 y la 10 son vecinas contiguas. Jamás volverán a dejar un "1" de las esquinas abandonado.</p>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+                <strong>📝 Tip de Aula Extrema:</strong> Para los 4 unos en las 4 esquinas del mapa, toma tu "cilindro" de papel y dóblalo nuevamente uniendo la parte superior con la inferior, formando una Dona (Toroide). Mostrarles que las 4 esquinas se tocan en un solo punto en el centro de la dona es la demostración visual más alucinante de la ingeniería digital.
+            </div>
         </div>
 
         <h4>🎯 ¿Y qué pasa si... no importa la salida?</h4>
