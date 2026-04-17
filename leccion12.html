@@ -73,6 +73,28 @@
         <h3>¿Por qué preferimos Digital?</h3>
         <p>Convertimos el mundo a digital porque es <strong>inmune al ruido</strong>. Si una señal de 5V baja un poquito a 4.8V por interferencia, en un sistema analógico el sonido cambiaría (estática). En digital, sigue siendo interpretado como un "1". ¡Es más robusto!</p>
 
+        <!-- === RINCÓN DEL DOCENTE 1: EL PIANO Y EL VIOLÍN === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: Cómo explicar lo "Digital" sin electrónica
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Para un estudiante de secundaria, la palabra "digital" significa "pantallas y pantallas táctiles". Tu primer trabajo es romper ese mito y enseñarles que "digital" significa <strong>valores fijos y separados (discretos)</strong>.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">La Analogía Musical</h4>
+                <p style="margin-bottom: 15px;">No uses gráficas de voltaje el primer día. Usa instrumentos musicales:</p>
+                
+                <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>El Mundo Analógico (El Violín):</strong> <em>"En un violín, el músico desliza el dedo por la cuerda. Entre la nota Do y la nota Re, hay infinitos sonidos intermedios (desafinados, suaves, agudos). Es un flujo continuo de información."</em></li>
+                    <li><strong>El Mundo Digital (El Piano):</strong> <em>"En un piano, tocas la tecla Do o tocas la tecla Re. ¡No hay tecla en el medio! O suena una nota perfecta, o suena la otra. La información está separada en bloques exactos."</em></li>
+                    <li><strong>El Superpoder Digital (La inmunidad al ruido):</strong> <em>"Si alguien desafina un violín un milímetro, el público lo nota (ruido analógico). Pero si un pianista presiona la tecla Do con el dedo un poco chueco... ¡sigue sonando un Do perfecto! La máquina corrige el error humano. Por eso las computadoras son digitales."</em></li>
+                </ul>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>El anclaje pedagógico:</strong> Al usar el piano, el estudiante entiende que las computadoras no son "mejores" porque sí, sino porque al limitar las opciones a valores fijos (0 y 1), pueden ignorar las pequeñas imperfecciones (ruido) del mundo físico.</p>
+            </div>
+        </div>
+
         <h2>2. El "Bit": Definiendo los límites</h2>
         <p>Para lograr esa robustez, definimos reglas estrictas de voltaje. En nuestra tecnología (TTL):</p>
 
@@ -123,24 +145,31 @@
             <p>En la <strong>Lección 10</strong> vimos que un cable suelto (flotante) capta ruido. Ese ruido suele tener un voltaje de entre <strong>1V y 1.5V</strong>.</p>
             <p>Si miras la gráfica de arriba, verás que ese voltaje cae justo en la <strong>ZONA PROHIBIDA</strong> (Zona Gris). Por eso el chip se volvía loco: el voltaje no era ni 0 ni 1 suficientemente fuerte.</p>
             <p><strong>La solución:</strong> La resistencia Pull-Down obliga al voltaje a bajar a <strong>0V</strong> (Zona Segura), sacándolo del peligro.</p>
-        </div>        
+        </div>
 
-        <div class="destacado">
-            <h4>🧠 Entendiendo "Álgebra de Boole": Un Nuevo Juego con Reglas Nuevas</h4>
-            <p>Antes de empezar con AND, OR y NOT, es crucial entender qué significa "<em>Álgebra</em>". No es solo una palabra bonita.</p>
+        <!-- === RINCÓN DEL DOCENTE 2: EL NUEVO JUEGO MATEMÁTICO === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: Cómo vender la "Herejía" de Boole
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Antes de empezar con AND, OR y NOT, debes advertirles a tus alumnos que están a punto de entrar a un universo con física alienígena. Si no haces esta advertencia, cuando escribas \(1 + 1 = 1\) en la pizarra, perderás el respeto de la clase.</p>
 
-            <ol>
-                <li><strong>1. El "Terreno de Juego" (El Conjunto):</strong>
-                <p>En la escuela, trabajábamos con números reales: 1, 2, 50, -3.5, π... un universo infinito. La <em>Álgebra de Boole</em> cambia este terreno de juego. Aquí solo existen <strong>dos valores posibles</strong>: <strong>0</strong> y <strong>1</strong> (como Apagado/Encendido, Falso/Verdadero). Es como si jugáramos ajedrez, pero en un tablero de solo 2 casillas.</p>
-                </li>
-                <li><strong>2. Las "Reglas de Interacción" (Operaciones):</strong>
-                <p>Usamos símbolos familiares: <em>Suma (+)</em> y <em>Producto (·)</em>. Pero, como el tablero es diferente, <strong>sus reglas cambian</strong>. Por ejemplo, en álgebra normal <em>1 + 1 = 2</em>. En Boole, <em>1 + 1 = 1</em> (porque en el mundo del "todo o nada", si una condición es verdadera (1) y otra también es verdadera (1), el resultado de la operación "O" (OR) sigue siendo verdadero (1), no "más verdadero"). No es un error, es la regla de este nuevo juego.</p>
-                </li>
-                <li><strong>3. ¿Por qué "Boole"? (El Origen):</strong>
-                <p>Un matemático llamado George Boole tuvo una idea revolucionaria: ¿Y si se podían usar símbolos matemáticos para representar y calcular el razonamiento lógico (Verdadero/Falso), como si fueran números? Él creó las reglas para este "álgebra de la lógica". Por eso lleva su nombre. No es magia, es una herramienta matemática diseñada para el pensamiento binario.</p>
-                </li>
-            </ol>
-            <p><strong>En resumen:</strong> Estamos usando el lenguaje de las matemáticas (álgebra), pero en un universo simplificado (0 y 1) con reglas específicas (AND, OR, NOT) para representar y manipular la información binaria. ¡Estás jugando al álgebra, pero en el tablero de la lógica digital!</p>
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">El Contrato del Tablero de Juego</h4>
+                <p style="margin-bottom: 15px;">Diles a tus estudiantes: <em>"A partir de este momento, olviden todo lo que saben sobre cantidades. Hoy no vamos a contar manzanas ni calcular dinero. Hoy vamos a calcular ESTADOS."</em></p>
+                
+                <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>El Terreno de Juego:</strong> <em>"En la escuela primaria, su tablero de juego eran los números del 0 al infinito. En el Álgebra de Boole, nuestro tablero solo tiene dos casillas: 0 y 1 (Apagado y Encendido). ¡No existe el número 2!"</em></li>
+                    <li><strong>El Vaso de Agua (Por qué 1+1=1):</strong> <em>"Si tienes un vaso lleno de agua (1), y le viertes encima otro vaso lleno de agua (1)... ¿tienes un vaso 'doblemente lleno' (2)? ¡No! Simplemente tienes un vaso que sigue estando Lleno (1)."</em></li>
+                    <li><strong>El Nombre del Juego:</strong> <em>"George Boole inventó esta matemática para calcular si las ideas filosóficas eran verdaderas o falsas. No es magia, es un lenguaje diseñado exclusivamente para tomar decisiones de 'Sí' o 'No'."</em></li>
+                </ul>
+
+                <div style="background-color: #fff3cd; padding: 15px; border-radius: 6px; border-left: 4px solid #ffc107; margin-bottom: 0;">
+                    <p style="margin: 0; color: #856404; font-weight: bold; font-size: 1.05em; text-align: center;">La regla de oro para el maestro:</p>
+                    <p style="margin-top: 5px; margin-bottom: 0; color: #5d4037; line-height: 1.5; font-size: 0.95em;">Siempre recuérdales que en este curso, los números no representan cantidades, representan <strong>estados físicos de la materia</strong> (5 Voltios o 0 Voltios). El número 2 no existe en nuestro universo eléctrico.</p>
+                </div>
+            </div>
         </div>
 
         <h2>3. Las Operaciones Básicas (Traducción)</h2>

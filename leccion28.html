@@ -72,11 +72,15 @@
                 <li><strong>Mitad Izquierda (La Escalera de Unos):</strong> Se llama <em>Matriz Identidad</em> ($I_k$). Su único trabajo es <strong>copiar</strong> intactos los 4 bits de tus datos originales ($d_1, d_2, d_3, d_4$) para que viajen legibles en el mensaje. Como aprendiste en la lección pasada, a esto se le llama un "Código Sistemático".</li>
                 <li><strong>Mitad Derecha (El Caos Controlado):</strong> Se llama <em>Submatriz de Paridad</em> ($P$). Esta es la verdadera "receta". Te dice exactamente cómo mezclar los datos para crear los 3 bits del escudo protector ($p_1, p_2, p_3$).</li>
             </ul>
-            <!-- NUEVO: Interpretación geométrica (espacio de filas) -->
-            <div style="background-color: #fff9c4; padding: 12px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #fbc02d;">
-                <p style="margin: 0; font-size: 0.95em;"><strong>🧠 Interpretación geométrica:</strong> Las 4 filas de \(G\) son 4 palabras válidas (de 7 bits) que forman la <em>base</em> del código. Cualquier combinación lineal (XOR) de ellas genera otra palabra válida. ¡Por eso se llama Matriz <strong>Generadora</strong>!</p>
+            
+            <!-- EL NUEVO BLOQUE TRADUCIDO PARA EL ESTUDIANTE -->
+            <div style="background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #fbc02d;">
+                <h4 style="margin-top: 0; color: #f57f17;">🧠 El Secreto de la "Fábrica de Códigos"</h4>
+                <p style="margin-bottom: 10px; font-size: 0.95em; color: #444;">Si miras de cerca las 4 filas de la Matriz $G$, notarás que cada fila es una palabra de 7 bits. Esas 4 palabras no están ahí por casualidad; son los <strong>"ingredientes principales"</strong> de todo el sistema.</p>
+                <p style="margin-bottom: 10px; font-size: 0.95em; color: #444;">En matemáticas, a estos ingredientes se les llama la <strong>"Base"</strong> del código. Si tomas dos, tres o las cuatro filas y las sumas entre sí (usando la suma especial XOR que ya conoces), el resultado <strong>siempre será una nueva palabra válida</strong> que pertenece al diccionario de Hamming.</p>
+                <p style="margin-bottom: 0; font-size: 0.95em; color: #444; font-style: italic;">A esta mezcla de sumas se le llama <strong>"Combinación Lineal"</strong>. ¡Por eso la matriz se llama <strong>Generadora</strong>! Porque a partir de esas 4 filas solitarias, la máquina puede "generar" o fabricar matemáticamente todas las palabras seguras que tu computador necesita enviar.</p>
             </div>
-            <!-- NUEVO: Nota de seguridad (códigos no sistemáticos) -->
+            
             <div style="background-color: #ffebee; padding: 12px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #f44336;">
                 <p style="margin: 0; font-size: 0.95em;"><strong>⚠️ Nota de seguridad:</strong> En comunicaciones encriptadas, a veces se usan códigos <em>no sistemáticos</em> (sin matriz identidad) para ocultar los datos originales. Pero en la mayoría de sistemas prácticos (discos duros, memorias RAM), la simplicidad del código sistemático es preferible.</p>
             </div>
@@ -308,7 +312,7 @@
             </audio>
         </div>
         <p class="podcast-meta">
-            <span class="duracion">⏱️ 12:45 min</span>
+            <span class="duracion">⏱️ 20:16 min</span>
             <span class="formato">🔊 MP3</span>
         </p>
     </section>

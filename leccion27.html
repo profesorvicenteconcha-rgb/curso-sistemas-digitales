@@ -65,6 +65,15 @@
                 <li><strong>Código Final ($n$):</strong> Es la longitud total de la "palabra" (codeword) que se envía por el aire o el cable. (Ej: $4 + 3 = 7$ bits en total).</li>
             </ul>
             <p style="margin-top: 15px; margin-bottom: 0;"><strong>Nomenclatura:</strong> A este sistema se le conoce internacionalmente como un código <strong>($n, k$)</strong>. El famoso código que armaremos se llama <strong>Hamming (7, 4)</strong>, porque envía paquetes de 7 bits, donde 4 son de información útil.</p>
+
+            <!-- NUEVO BLOQUE ACLARATORIO: EL CONCEPTO DE "PALABRA" -->
+            <div style="background-color: #f1f8e9; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #4caf50;">
+                <h4 style="margin-top: 0; color: #2e7d32; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.1em;">🗣️</span> Aclaración de Vocabulario: ¿Qué es una "Palabra" en binario?
+                </h4>
+                <p style="margin-bottom: 10px; font-size: 0.95em; color: #333;">En tu vida diaria, una palabra puede ser corta como "sol" (3 letras) o larga como "esternocleidomastoideo" (22 letras). Pero a las computadoras no les gusta la flexibilidad; les gusta la <strong>longitud fija</strong> para no confundirse al leer la memoria.</p>
+                <p style="margin-bottom: 0; font-size: 0.95em; color: #333;">Por eso, en ingeniería digital, una <strong>"Palabra" (Word o Codeword)</strong> no es texto humano. Es simplemente un <strong>paquete de bits de un tamaño exacto y predeterminado</strong> que la máquina procesa como una sola unidad. En nuestro Código de Hamming, <em>todas</em> las "palabras" que viajan por el cable tendrán exactamente <strong>7 bits</strong>, ni uno más ni uno menos (ej: <code>1011010</code>). ¡Si llega una palabra de 6 o de 8 bits, el receptor sabe inmediatamente que hubo un fallo catastrófico!</p>
+            </div>
             
             <!-- NUEVO: Tasa de código y compromiso eficiencia vs robustez -->
             <div style="background-color: #fff9c4; padding: 12px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #fbc02d;">
@@ -201,10 +210,14 @@
             </div>
         </div>
 
-        <!-- NUEVO: Advertencia sobre falsa corrección -->
-        <div class="error-comun" style="background-color: #ffebee; border-left-color: #c62828; padding: 15px; border-radius: 8px; margin: 20px 0;">
-            <strong style="color: #c62828; display: block; margin-bottom: 5px;">⚠️ ¡Cuidado! La falsa corrección</strong>
-            <p style="margin-bottom: 0;">Si el ruido daña <strong>más bits de los que el código puede corregir</strong> (por ejemplo, 2 errores en Hamming 7,4), el receptor "corregirá" hacia una palabra válida equivocada. Esto se llama <strong>falsa corrección</strong>. Por eso los ingenieros miden el nivel de ruido esperado antes de elegir un código.</p>
+        <!-- ADVERTENCIA SOBRE FALSA CORRECCIÓN (SOLUCIÓN DEFINITIVA) -->
+        <div style="background-color: #ffebee; border-left: 4px solid #c62828; padding: 18px; border-radius: 8px; margin: 25px 0;">
+            <p style="margin-top: 0; margin-bottom: 10px; color: #c62828; font-weight: bold; font-size: 1.1em; display: flex; align-items: center; gap: 8px;">
+                <span>⚠️</span> ¡Cuidado! La falsa corrección
+            </p>
+            <p style="margin-bottom: 0; color: #444; line-height: 1.6;">
+                Si el ruido daña <span style="font-weight: bold; color: #c62828;">más bits de los que el código puede corregir</span> (por ejemplo, 2 errores en Hamming 7,4), el receptor "corregirá" hacia una palabra válida equivocada. Esto se llama <span style="font-weight: bold; color: #c62828;">falsa corrección</span>. Por eso los ingenieros miden el nivel de ruido esperado antes de elegir un código.
+            </p>
         </div>
 
         <!-- NUEVO: Adelanto del síndrome (GPS del error) -->
@@ -255,7 +268,7 @@
             </audio>
         </div>
         <p class="podcast-meta">
-            <span class="duracion">⏱️ 15:45 min</span>
+            <span class="duracion">⏱️ 22:44 min</span>
             <span class="formato">🔊 MP3</span>
         </p>
     </section>

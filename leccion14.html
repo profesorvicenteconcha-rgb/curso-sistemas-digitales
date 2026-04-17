@@ -89,7 +89,46 @@
         </div>
         <base>Estas leyes muestran cómo una operación compleja puede expresarse de otra manera equivalente. Por ejemplo, negar una operación AND (\(\overline{A \cdot B}\)), que es como decir "No es cierto que A sea verdadero Y B sea verdadero", es exactamente lo mismo que decir "A es falso O B es falso" (\(\overline{A} + \overline{B}\)). Lo mismo ocurre con la otra ley: negar una operación OR (\(\overline{A + B}\)) equivale a hacer una operación AND de las negaciones (\(\overline{A} \cdot \overline{B}\)).</p>
 
-    <p>Estas combinaciones de operaciones básicas (como "AND negada" o "OR negada") son tan útiles y comunes en electrónica digital que, como veremos en la Lección 18, tienen nombres y símbolos propios: NAND y NOR. Pero por ahora, lo importante es entender la equivalencia lógica que De Morgan nos muestra.</p>
+        <p>Estas combinaciones de operaciones básicas (como "AND negada" o "OR negada") son tan útiles y comunes en electrónica digital que, como veremos en la Lección 18, tienen nombres y símbolos propios: NAND y NOR. Pero por ahora, lo importante es entender la equivalencia lógica que De Morgan nos muestra.</p>
+
+        <!-- === RINCÓN DEL DOCENTE 1: DE MORGAN (EL JUEGO DE LA SOGA) === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: "La Soga y los Gemelos" (De Morgan)
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Las Leyes de De Morgan son las más temidas por los estudiantes porque parecen "magia negra". Tu misión es convertirlas en una <strong>competencia física</strong> que jamás olvidarán. Aquí tienes una dinámica de 5 minutos que no necesita materiales costosos.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">🤼 La Dinámica de los Dos Gemelos y la Soga</h4>
+                <p style="margin-bottom: 15px;"><strong>Preparación:</strong> Pide dos voluntarios (los "Gemelos") y una soga larga o un cable de extensión.</p>
+                
+                <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>Paso 1 – El Abrazo (AND = Los dos deben jalar):</strong> <em>"Para que la campana suene (Salida = 1), los dos gemelos deben jalar la soga al mismo tiempo. Si uno suelta, la campana NO suena."</em> Los dos jalan → suena la campana.</li>
+                    <li><strong>Paso 2 – La Negación (La barra gigante):</strong> <em>"Ahora, el profesor pone una mano encima de la campana y dice: '¡No va a sonar!' (Negación). ¿Qué significa que NO sea verdad que los dos jalen?"</em></li>
+                    <li><strong>Paso 3 – La Demostración de De Morgan (Rompiendo la barra):</strong> <em>"'No es verdad que los dos jalen' es exactamente lo mismo que decir: 'El gemelo 1 NO jala O el gemelo 2 NO jala'. ¡Si al menos uno suelta, la condición se cumple!"</em></li>
+                    <li><strong>Paso 4 – El Giro Mágico (La segunda ley):</strong> <em>"Ahora cambiemos la regla: la campana suena si AL MENOS UNO jala (OR). ¿Qué significa 'No es verdad que al menos uno jale'? Significa que los DOS deben soltar. ¡Eso es la segunda ley de De Morgan!"</em></li>
+                </ul>
+
+                <div style="background-color: #fff3cd; padding: 15px; border-radius: 6px; border-left: 4px solid #ffc107; margin: 15px 0;">
+                    <h5 style="margin: 0 0 8px 0; color: #e65100;">📝 La Traducción a la Pizarra (El momento Eureka)</h5>
+                    <p style="margin: 0; color: #5d4037;">Mientras los gemelos simulan, escribe en la pizarra:</p>
+                    <p style="margin: 10px 0; font-family: monospace; font-size: 1.1em; text-align: center; background: white; padding: 8px; border-radius: 4px;">
+                        ¬(A ∧ B) = ¬A ∨ ¬B  →  "No es verdad que los dos jalen" = "El primero NO jala O el segundo NO jala"
+                    </p>
+                    <p style="margin: 10px 0; font-family: monospace; font-size: 1.1em; text-align: center; background: white; padding: 8px; border-radius: 4px;">
+                        ¬(A ∨ B) = ¬A ∧ ¬B  →  "No es verdad que al menos uno jale" = "El primero NO jala Y el segundo NO jala"
+                    </p>
+                </div>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>La lección vital para el maestro:</strong> Cuando los estudiantes ven a sus compañeros jalando una soga y escuchan "¡No es verdad que ambos jalen!" mientras uno suelta, el concepto se graba en su memoria motora. ¡La física del cuerpo ancla la matemática abstracta para siempre!</p>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+                <strong>📝 Tip de Aula Extrema:</strong> Si tienes una campana de verdad (o un silbato), úsala. Cada vez que la condición se cumpla, hazla sonar. El ruido refuerza la asociación "regla verdadera → evento físico". ¡Los niños recordarán De Morgan porque "sonó la campana en la clase de los gemelos"!
+            </div>
+        </div>
+
 
         <div class="destacado">
         <h4>🧰 Caja de Herramientas: 11 Reglas Básicas</h4>
@@ -240,7 +279,34 @@
     <div class="formula">
         $$S = A$$
     </div>
+
     <p>¡Una compuerta AND completa desaparece! La expresión se reduce a una simple línea.</p>
+
+    <!-- === RINCÓN DEL DOCENTE 2: LA ABSORCIÓN === -->
+    <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+        <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: Vendiendo el "Borrador Mágico"
+        </h3>
+        
+        <p style="color: #444; line-height: 1.6; font-size: 1.05em;">La Ley de Absorción (\(A + A \cdot B = A\)) es la reina de la optimización, pero los estudiantes suelen subestimarla. Para que entiendan su verdadero valor, tienes que hablarles como si fueran <strong>Gerentes de Producción</strong>, no estudiantes de matemáticas.</p>
+
+        <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+            <h4 style="margin-top: 0; color: #e65100;">El Juego del Presupuesto</h4>
+            <p style="margin-bottom: 15px;">Escribe la ecuación sin simplificar en la pizarra: \(S = A + (A \cdot B)\). Luego, hazles estas preguntas financieras:</p>
+            
+            <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                <li><strong>El Costo del Hardware:</strong> <em>"Si construimos esto tal cual, necesitamos comprar un chip AND y un chip OR. Además, el circuito gastará el doble de batería de su celular y será más lento."</em></li>
+                <li><strong>El Truco de Magia:</strong> Muestra cómo la Absorción elimina todo y deja solo \(S = A\).</li>
+                <li><strong>El Impacto Real:</strong> Diles: <em>"Acabamos de despedir a las compuertas AND y OR. Ahora solo necesitamos un cable de cobre directo. Hemos reducido el costo del circuito de 1 dólar a cero centavos. Si Apple fabrica 100 millones de iPhones, ¡acabamos de ahorrarle a la empresa 100 millones de dólares con un solo movimiento del borrador!"</em></li>
+            </ul>
+
+            <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>La lección vital para el maestro:</strong> Cuando le pones un signo de dólar ($) a un teorema matemático, la atención de la clase se dispara al 100%. La Absorción no es álgebra; es economía pura aplicada al silicio.</p>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 15px; background-color: #fff3cd; color: #856404; border-radius: 6px; border: 1px solid #ffeeba; font-size: 0.95em;">
+            <strong>📝 Tip de Pizarra:</strong> En la próxima clase (Mapas de Karnaugh), diles que el mapa es simplemente una "máquina visual automática" que aplica la Ley de Absorción sin que ellos tengan que escribir la fórmula. ¡Amarán los Mapas K al instante!
+        </div>
+    </div>
 
     <!-- === PODCAST: Conversación entre Expertos === -->
     <section class="podcast-section">

@@ -34,66 +34,66 @@
     </div>
 
     <!-- === 🔌 SÍMBOLOS DE VOLTAJE Y TIERRA: Guía Visual Rápida === -->
-    <div class="simbolos-voltage">
-        <h3>🔌 Símbolos de Voltaje y Tierra: Guía Visual Rápida</h3>
+    <div class="simbolos-voltage" style="background: white; border-radius: 12px; padding: 25px; margin: 30px 0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); border-left: 4px solid #673ab7;">
+        <h3 style="color: #4527a0; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.4em;">🔌</span> Símbolos de Voltaje y Tierra: Guía Visual Rápida
+        </h3>
         
-        <p>Antes de adentrarnos en Pull-Up y Pull-Down, aclaremos una confusión muy común: <strong>¿qué significan los símbolos en los esquemas?</strong> Muchos estudiantes piensan que el triángulo representa Vcc, pero esto es un mito. Aquí está la verdad:</p>
+        <p style="color: #5e35b1; line-height: 1.7; margin-bottom: 20px;">Antes de adentrarnos en Pull-Up y Pull-Down, aclaremos una confusión muy común: <strong>¿qué significan los símbolos en los esquemas?</strong> Muchos estudiantes piensan que el triángulo siempre representa voltaje positivo, pero esto es un mito. Aquí está la verdad:</p>
         
-        <div class="tabla-simbolos">
-            <h4>📊 Tabla Comparativa de Símbolos Estándar</h4>
-            
-            <table>
+        <div class="tabla-simbolos" style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
                 <thead>
                     <tr>
-                        <th>Símbolo</th>
-                        <th>Nombre</th>
-                        <th>Representa</th>
-                        <th>Uso Común</th>
-                        <th>¡Cuidado!</th>
+                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left; font-weight: 600;">Símbolo</th>
+                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left; font-weight: 600;">Nombre</th>
+                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left; font-weight: 600;">Representa</th>
+                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left; font-weight: 600;">Uso Común</th>
+                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left; font-weight: 600;">¡Cuidado!</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><strong>Vcc</strong> o <strong>+5V</strong></td>
-                        <td>Voltaje Positivo</td>
-                        <td>Fuente de alimentación</td>
-                        <td>Arduino, circuitos digitales</td>
-                        <td>No tiene símbolo único; se identifica por su <strong>etiqueta</strong></td>
+                    <tr style="background: #f5f5f5;">
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;"><strong>Vcc</strong> o <strong>+5V</strong></td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Voltaje Positivo</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Fuente de alimentación</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Arduino, circuitos digitales</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">No tiene símbolo único; se identifica por su <strong>etiqueta</strong></td>
                     </tr>
-                    <tr>
-                        <td>⏚</td>
-                        <td>Tierra (GND)</td>
-                        <td>Referencia 0V</td>
-                        <td>Todos los circuitos</td>
-                        <td>Es donde "termina" la corriente, no donde "empieza"</td>
+                    <tr style="background: #f5f5f5;">
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0; font-size: 1.5em;">⏚</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Tierra (GND)</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Referencia 0V</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Todos los circuitos</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Es donde "termina" la corriente, no donde "empieza"</td>
                     </tr>
-                    <tr>
-                        <td>▼</td>
-                        <td>Tierra de Señal</td>
-                        <td>Conexión a GND</td>
-                        <td>Esquemas europeos</td>
-                        <td>¡Apunta abajo pero es 0V, no voltaje negativo!</td>
+                    <tr style="background: #f5f5f5;">
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0; font-size: 1.5em; color: #c62828;">▼</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Tierra de Señal</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Conexión a GND</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Esquemas europeos</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0; color: #c62828;"><strong>¡Apunta abajo pero es 0V (Tierra), no voltaje negativo!</strong></td>
                     </tr>
-                    <tr>
-                        <td>▲</td>
-                        <td>Tierra/Chasis (antiguo)</td>
-                        <td>Conexión a chasis</td>
-                        <td>Esquemas antiguos</td>
-                        <td><strong>NO es Vcc</strong> - Es una confusión histórica común</td>
+                    <tr style="background: #f5f5f5;">
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0; font-size: 1.2em;">▲</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Tierra/Chasis (antiguo)</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Conexión a chasis</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Esquemas antiguos</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;"><strong>NO es Vcc</strong> - Es una confusión histórica común</td>
                     </tr>
-                    <tr>
-                        <td>┬ o ↑</td>
-                        <td>Power Rail</td>
-                        <td>Conexión a Vcc</td>
-                        <td>Esquemas modernos</td>
-                        <td>Flecha hacia arriba = fuente de energía</td>
+                    <tr style="background: #f5f5f5;">
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0; font-size: 1.2em;">┬ o ↑</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Power Rail</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Conexión a Vcc</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Esquemas modernos</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Flecha hacia arriba = fuente de energía</td>
                     </tr>
-                    <tr>
-                        <td>┴ o ↓</td>
-                        <td>Ground Rail</td>
-                        <td>Conexión a GND</td>
-                        <td>Esquemas modernos</td>
-                        <td>Flecha hacia abajo = retorno a tierra</td>
+                    <tr style="background: #f5f5f5;">
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0; font-size: 1.2em;">┴ o ↓</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Ground Rail</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Conexión a GND</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Esquemas modernos</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Flecha hacia abajo = retorno a tierra</td>
                     </tr>
                 </tbody>
             </table>
@@ -224,6 +224,28 @@
             <p><strong>Comportamiento:</strong><br>
             • Botón abierto → Señal = 0 V (Pull-Down “jala” hacia abajo) → Lectura = 0<br>
             • Botón cerrado → Señal ≈ 5 V (V<sub>CC</sub> gana sobre la resistencia) → Lectura = 1</p>
+        </div>
+
+        <!-- === RINCÓN DEL DOCENTE: LA TRAMPA DE LA PROTOBOARD === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: La "Trampa de la Protoboard"
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Cuando los estudiantes ven el diagrama de Pull-Down (Fig. 3), el 80% conectará el cable de 5V y la resistencia de 10kΩ <strong>en la misma fila de la protoboard</strong>. Si hacen eso y aprietan el botón... ¡cortocircuito instantáneo! Los 5V se irán directo a GND ignorando el botón por completo.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">Cómo enseñar el Cableado del "Nodo"</h4>
+                <p style="margin-bottom: 15px;">Debes enseñarles que el corazón de este circuito es un <strong>"Punto de Encuentro" (Nodo T)</strong> en la protoboard. Dibuja esta regla de oro en la pizarra:</p>
+                
+                <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>Fila A (La Fuente):</strong> Aquí solo conectas 5V y una pata del botón.</li>
+                    <li><strong>Fila B (El Nodo Sagrado):</strong> Aquí debe ir la otra pata del botón, una pata de la resistencia de 10kΩ, <em>Y TAMBIÉN</em> el cable largo que va hacia el chip o el LED.</li>
+                    <li><strong>Fila C (El Desagüe):</strong> Aquí va la segunda pata de la resistencia y un cable directo a GND.</li>
+                </ul>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>El Beneficio Pedagógico:</strong> Al separar físicamente el circuito en tres filas (Fuente, Nodo, Desagüe), obligas al estudiante a ver que la corriente tiene que "decidir" qué camino tomar (hacia el chip o hacia tierra). Si conectan todo en la misma fila, la corriente no decide, simplemente se estrella.</p>
+            </div>
         </div>
 
        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
@@ -507,37 +529,21 @@
                 <p><strong>Explicación técnica:</strong> El Pull-Up/Pull-Down garantiza un <strong>estado definido y predecible</strong> en todo momento. Sin él, el botón responde de forma aleatoria (a veces sí, a veces no), destruyendo la confianza del usuario. Esto es equivalente a un teclado sin feedback auditivo/táctil: nunca sabrías si tu tecleo se registró, generando ansiedad y obligándote a teclear más fuerte o repetir acciones innecesariamente.</p>
                 
                 <p><strong>Conexión UX profunda:</strong></p>
-                <table>
-                    <tr>
-                        <th>Elemento</th>
-                        <th>Pull-Up/Pull-Down</th>
-                        <th>Teclado con "clic"</th>
-                        <th>Valor Humano</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Feedback</strong></td>
-                        <td>Estado lógico definido (0 o 1)</td>
-                        <td>Sonido/tacto al presionar</td>
-                        <td>Confirmación sin ambigüedad</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Previsibilidad</strong></td>
-                        <td>Respuesta consistente en cada pulsación</td>
-                        <td>Cada tecleo produce el mismo feedback</td>
-                        <td>Confianza en el sistema</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Ergonomía</strong></td>
-                        <td>Botón que responde al primer toque</td>
-                        <td>No necesitas mirar para confirmar</td>
-                        <td>Reducción de carga cognitiva</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Semiótica</strong></td>
-                        <td>1 = activado, 0 = inactivo (claro)</td>
-                        <td>"Clic" = acción completada (universal)</td>
-                        <td>Lenguaje no verbal compartido</td>
-                    </tr>
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Elemento</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Pull-Up/Pull-Down</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Teclado con "clic"</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Valor Humano</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="border: 1px solid #ddd; padding: 8px;"><strong>Feedback</strong></td><td style="border: 1px solid #ddd; padding: 8px;">Estado lógico definido (0 o 1)</td><td style="border: 1px solid #ddd; padding: 8px;">Sonido/tacto al presionar</td><td style="border: 1px solid #ddd; padding: 8px;">Confirmación sin ambigüedad</td></tr>
+                        <tr><td style="border: 1px solid #ddd; padding: 8px;"><strong>Previsibilidad</strong></td><td style="border: 1px solid #ddd; padding: 8px;">Respuesta consistente en cada pulsación</td><td style="border: 1px solid #ddd; padding: 8px;">Cada tecleo produce el mismo feedback</td><td style="border: 1px solid #ddd; padding: 8px;">Confianza en el sistema</td></tr>
+                        <tr><td style="border: 1px solid #ddd; padding: 8px;"><strong>Ergonomía</strong></td><td style="border: 1px solid #ddd; padding: 8px;">Botón que responde al primer toque</td><td style="border: 1px solid #ddd; padding: 8px;">No necesitas mirar para confirmar</td><td style="border: 1px solid #ddd; padding: 8px;">Reducción de carga cognitiva</td></tr>
+                        <tr><td style="border: 1px solid #ddd; padding: 8px;"><strong>Semiótica</strong></td><td style="border: 1px solid #ddd; padding: 8px;">1 = activado, 0 = inactivo (claro)</td><td style="border: 1px solid #ddd; padding: 8px;">"Clic" = acción completada (universal)</td><td style="border: 1px solid #ddd; padding: 8px;">Lenguaje no verbal compartido</td></tr>
+                    </tbody>
                 </table>
                 
                 <p><strong>Metáfora para niños:</strong> "Imagina que tu interruptor de luz a veces enciende y a veces no, aunque lo presiones igual. ¿Te sentirías seguro? ¡No! Necesitas saber que cada vez que tocas el interruptor, la luz responde. El Pull-Up es como el 'clic' del interruptor: te dice 'misión cumplida' sin que tengas que dudar."</p>
@@ -550,7 +556,7 @@
                     <li>Pregunta: <em>"¿Cuál circuito usarías para el botón de emergencia del ascensor de tu escuela?"</em></li>
                     <li>Guía la reflexión: <em>"La electrónica no sirve solo para hacer cosas funcionar. Sirve para hacer que las personas se sientan seguras y confiadas."</em></li>
                 </ol>
-                <p><strong>Lección pedagógica clave:</strong> El diseño de circuitos no es solo técnica; es <strong>ética</strong>. Un Pull-Up mal elegido no solo causa errores técnicos: destruye la confianza humana en la tecnología. Como futuros docentes, deben enseñar que cada resistor tiene una responsabilidad social: garantizar que la tecnología responda de forma predecible a quien la usa.</p></p>
+                <p><strong>Lección pedagógica clave:</strong> El diseño de circuitos no es solo técnica; es <strong>ética</strong>. Un Pull-Up mal elegido no solo causa errores técnicos: destruye la confianza humana en la tecnología. Como futuros docentes, deben enseñar que cada resistor tiene una responsabilidad social: garantizar que la tecnología responda de forma predecible a quien la usa.</p>
             </details>
             
             <details class="u1">
@@ -660,11 +666,11 @@
         <div style="text-align: center;">
             <a href="index.html" class="btn-navegacion" style="background-color: #6c757d; font-size: 0.9em;">🏠 Volver al Índice Principal</a>
         </div>
-        <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eaeaea; text-align: center; color: #666;">
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eaeaea; text-align: center; color: #666;">
             <p style="margin-bottom: 5px;"><strong>Fundamentos de Sistemas Digitales</strong></p>
             <p style="margin-bottom: 5px; font-size: 0.9em;">Diseñado para formar a la próxima generación de ingenieros y docentes en Colombia.</p>
             <p style="font-size: 0.8em; margin-bottom: 0;">Material Educativo Abierto (REA) - 2026</p>
-        </footer>
+        </div>
     </footer>
 </div>
 

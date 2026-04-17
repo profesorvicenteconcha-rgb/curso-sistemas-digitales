@@ -59,6 +59,32 @@
         <p>En la lección anterior aprendimos el idioma de las máquinas (0 y 1) y sus operaciones básicas. Pero las ecuaciones matemáticas a veces son difíciles de visualizar. Como ingenieros, necesitamos estar seguros de qué hará nuestro circuito en <strong>cada una</strong> de las situaciones posibles. Hoy aprenderemos a dibujar el mapa que elimina todas las dudas: la Tabla de Verdad.</p>
     </div>
 
+    <!-- === NUEVO BLOQUE: EL CONTRATO DEL INGENIERO === -->
+    <div class="destacado" style="background-color: #f0f7ff; border-left-color: #0d47a1; margin-bottom: 35px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+        <h3 style="color: #1565c0; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.2em;">📜</span> El Contrato del Ingeniero (Design Specification)
+        </h3>
+        
+        <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Antes de aprender a dibujar una tabla, debes entender <strong>por qué</strong> los profesionales las usan. En el mundo real, nadie te contrata para "conectar compuertas al azar". Te contratan para resolver un problema humano.</p>
+        
+        <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #bbdefb;">
+            <p style="margin-bottom: 15px;">Imagina que el gerente de un banco te dice: <em>"Quiero que la bóveda solo se abra si el gerente mete su llave (A), el cajero mete la suya (B), y NO es fin de semana (C)"</em>.</p>
+            
+            <p style="margin-bottom: 15px;">El lenguaje humano es ambiguo y peligroso para las máquinas. Tu primer trabajo como ingeniero de hardware es <strong>traducir los deseos del cliente a un mapa exhaustivo donde no haya lugar a dudas</strong>.</p>
+            
+            <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                <li>Ese mapa es la <strong>Tabla de Verdad</strong>. Enumera absolutamente todos los escenarios posibles que podrían ocurrir en el banco (desde que nadie meta la llave hasta que todos lo hagan en domingo).</li>
+                <li>Para cada escenario, tú defines fríamente si la bóveda se abre (1) o se queda cerrada (0).</li>
+            </ul>
+
+            <div style="background-color: #e8f4fd; padding: 15px; border-radius: 6px; border-left: 4px solid #007bff; margin-bottom: 0;">
+                <p style="margin: 0; color: #0d47a1; font-weight: bold; font-size: 1.05em; text-align: center;">La Tabla de Verdad es tu Contrato Inquebrantable.</p>
+                <p style="margin-top: 5px; margin-bottom: 0; color: #333; line-height: 1.5; font-size: 0.95em;">Una vez que la tabla está escrita y aprobada, el resto del trabajo (crear la ecuación matemática en la Lección 15 y soldar los chips en la Lección 17) es solo el proceso mecánico de hacer que la máquina cumpla ese contrato a la perfección.</p>
+            </div>
+        </div>
+    </div>
+    <!-- === /EL CONTRATO DEL INGENIERO === -->
+
     <section>
         <h2>1. ¿Cómo se construye una Tabla de Verdad?</h2>
         <p>Es una lista donde escribimos todas las combinaciones posibles de ceros y unos para las entradas.</p>
@@ -92,6 +118,37 @@
             </table>
             <p>¡Mantén siempre este orden y tus diseños futuros saldrán automáticos!</p>
         </div>
+
+        <!-- === RINCÓN DEL DOCENTE 1: EL LLENADO COMO UN RELOJ === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: El "Cuentakilómetros" Binario
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Cuando enseñes a llenar la tabla de verdad (0101, 0011, 00001111), tus estudiantes intentarán memorizar el patrón visualmente. ¡Es un error! Tu misión es enseñarles que <strong>están contando números</strong>.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">La Analogía del Odómetro de Carro</h4>
+                <p style="margin-bottom: 15px;">Diles a tus alumnos: <em>"Imagina el cuentakilómetros de un carro. La rueda de la derecha (unidades) gira muy rápido: 0, 1, 2, 3... 9. Cuando llega a 9, se reinicia a 0 y hace girar a su vecina de la izquierda (las decenas)"</em>.</p>
+                
+                <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>El Mundo Extraterrestre:</strong> <em>"Ahora imagina un carro extraterrestre que solo conoce los números 0 y 1. Su rueda de la derecha gira rápido: 0, 1... ¡Pum! Se acabó el espacio. Se reinicia a 0 y empuja a su vecina de la izquierda"</em>.</li>
+                    <li><strong>La Columna C (Derecha):</strong> Por eso la última columna siempre cambia rápido: 0, 1, 0, 1. Es la rueda de las unidades.</li>
+                    <li><strong>La Columna B (Centro):</strong> Cambia a la mitad de velocidad, porque espera a que la derecha se reinicie: 0, 0, 1, 1.</li>
+                    <li><strong>La Columna A (Izquierda):</strong> Es la rueda más lenta. Solo cambia cuando las otras dos han dado la vuelta completa: 0, 0, 0, 0, 1, 1, 1, 1.</li>
+                </ul>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>El Beneficio Pedagógico:</strong> Al usar la analogía de las ruedas que giran, el estudiante de 8° grado deja de memorizar "cuatro ceros y cuatro unos" y comprende, intuitivamente, el sistema posicional binario. ¡Es la base de la informática!</p>
+            </div>
+
+            <!-- CONEXIÓN CON EL FUTURO (MÓDULO 2) -->
+                <div style="background-color: #e8f4fd; padding: 18px; border-radius: 6px; border-left: 4px solid #007bff; margin-top: 20px;">
+                    <h5 style="margin: 0 0 8px 0; color: #0056b3; font-size: 1.1em;">🔮 Un vistazo al futuro: La Aritmética Modular</h5>
+                    <p style="margin: 0; color: #333; line-height: 1.5;">Ese momento en que el odómetro llega a 1 y "se reinicia a 0" es el corazón de la computación. En la <strong>Lección 26</strong>, descubrirás que este "reinicio" tiene un nombre matemático: <strong>Aritmética Módulo 2</strong>.</p>
+                    <p style="margin-top: 10px; margin-bottom: 0; color: #333; line-height: 1.5;">Les enseñarás a tus alumnos que así como un reloj de pared se reinicia al llegar a las 12 (Módulo 12), las computadoras usan "relojes" de solo 2 horas (0 y 1). ¡La forma en que hoy llenan la tabla de verdad es la misma matemática con la que el Wi-Fi protege sus mensajes de los hackers!</p>
+                </div>
+        </div>
+        <!-- === /RINCÓN DEL DOCENTE 1 === -->
 
         <h2>2. Las Tres Grandes: Símbolos y Tablas</h2>
         <p>Vamos a asociar nuestras operaciones con sus <strong>Símbolos Lógicos</strong> (los dibujos para los planos) y sus tablas.</p>
@@ -197,6 +254,31 @@
             <p>Si eres profesor, puedes usar las Tablas de Verdad para crear reglas de juego justas en el aula:</p>
             <p><em>"Ganarás el premio si: (Haces la tarea) <strong>AND</strong> (Ayudas a un compañero)."</em></p>
             <p>Enseñar a los niños a visualizar estas reglas en una tabla (1=Sí, 0=No) desarrolla su <strong>Pensamiento Computacional</strong> y les ayuda a entender que las consecuencias son resultados lógicos de sus acciones.</p>
+        </div>
+
+        <!-- === RINCÓN DEL DOCENTE 2: EL PORTERO Y LA FIESTA === -->
+        <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: El Juego del "Guardaespaldas"
+            </h3>
+            
+            <p style="color: #444; line-height: 1.6; font-size: 1.05em;">Llenar las salidas de AND y OR en la pizarra es aburrido. Para que la lógica de "todas las posibilidades" se quede grabada en la memoria de los estudiantes, usa una dinámica de <strong>Role-Play (Juego de Roles)</strong>.</p>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                <h4 style="margin-top: 0; color: #e65100;">🎭 Dinámica: El Portero del Club</h4>
+                <p style="margin-bottom: 15px;">Divide la pizarra en dos columnas: "Club AND" y "Club OR". Nombra a un alumno como el "Portero".</p>
+                
+                <ul style="margin-bottom: 15px; line-height: 1.6; color: #333;">
+                    <li><strong>El Club AND (El Estricto):</strong> Diles: <em>"Para entrar aquí necesitas dos cosas: Tener invitación (A) Y ser mayor de edad (B). El portero es implacable."</em>
+                        <br>Grita casos al azar: <em>"¡Llega alguien con invitación pero menor de edad (1 y 0)! ¿Entra?"</em>. La clase debe gritar: <em>"¡CERO!"</em>. Se darán cuenta de que la única forma de que la clase grite "UNO" es cuando dices "1 y 1".
+                    </li>
+                    <li><strong>El Club OR (El Relajado):</strong> Diles: <em>"Para entrar aquí basta con pagar la entrada (A) O conocer al DJ (B). El portero es buena onda."</em>
+                        <br>Grita casos: <em>"¡Llega alguien sin dinero pero es amigo del DJ (0 y 1)! ¿Entra?"</em>. La clase gritará: <em>"¡UNO!"</em>. Solo gritarán "CERO" cuando el visitante no tenga dinero ni conozca a nadie (0 y 0).
+                    </li>
+                </ul>
+
+                <p style="margin-bottom: 0; font-style: italic; color: #555;"><strong>La Reflexión del Maestro:</strong> Esta dinámica enseña la esencia de la "exhaustividad" (probar todos los casos). Los estudiantes construyen la tabla de verdad oralmente antes de ver los ceros y unos matemáticos. Luego, cuando les muestres la tabla real, ya la habrán comprendido instintivamente.</p>
+            </div>
         </div>
 
         <!-- Ejemplo de integración de IAG -->
@@ -305,7 +387,6 @@
     </h3>
     <p>¡Perfecto! Ya no tienes que adivinar; con la tabla sabes exactamente qué hace el circuito. Pero... ¿qué pasa si la tabla nos dice que necesitamos una ecuación gigante con muchos chips? ¿Es obligatorio armarla así? <strong>No.</strong> En la próxima lección, aprenderemos los <strong>Trucos de Magia Matemática</strong> (Propiedades y Leyes de De Morgan) para convertir circuitos monstruosos en soluciones elegantes y baratas.</p>
         
-
     <footer>
         <hr>
         <div style="display: flex; justify-content: space-between;">
