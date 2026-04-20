@@ -126,6 +126,31 @@
                 <img src="img/pulsador_de_4_patas.png" alt="Colección de diferentes tipos de interruptores y pulsadores" style="max-width: 90%; height: auto; border-radius: 8px;">
                 <p><small><em>Fig. 5: Conexión correcta de un pulsador de 4 patas en protoboard</em></small></p>
             </div>
+
+            <!-- === NOTA PEDAGÓGICA: AVANCE DE LA PROTOBOARD === -->
+            <div class="dato-extra" style="background-color: #e8f5e9; border-left-color: #4caf50; margin: 15px 0; padding: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                    <span style="font-size: 1.5em;">🔮</span>
+                    <div>
+                        <strong style="color: #2e7d32;">¿Ves esa placa llena de agujeros?</strong>
+                        <p style="margin: 5px 0 0 0; font-size: 0.95em; color: #555;">
+                            Se llama <strong>Protoboard</strong> (o <em>Breadboard</em>). Es la "mesa de trabajo" 
+                            de los ingenieros electrónicos. Por ahora solo obsérvala: notas que tiene un 
+                            <strong>canal central</strong> que separa las patas del pulsador.
+                        </p>
+                        <p style="margin: 8px 0 0 0; font-size: 0.95em; color: #555;">
+                            🧠 <strong>¿Por qué aparece aquí si aún no la hemos explicado?</strong> 
+                            Porque queremos que veas un circuito <em>real</em> antes de estudiar la herramienta. 
+                            Así, cuando llegues a la <strong>Lección 7</strong>, ya habrás visto una protoboard 
+                            en acción y te resultará más fácil entender cómo funciona por dentro.
+                        </p>
+                        <p style="margin: 8px 0 0 0; font-size: 0.95em; color: #2e7d32; font-style: italic;">
+                            📖 <strong>Próxima parada:</strong> En la Lección 7 aprenderás todo sobre la protoboard: 
+                            sus conexiones internas, cómo evitar cortocircuitos y cómo montar circuitos como un profesional.
+                        </p>
+                    </div>
+                </div>
+            </div>
             
             <p><strong>✅ Regla de Oro:</strong> Conecta siempre en diagonal (ej: pata superior izquierda con inferior derecha). Así garantizas que el circuito solo se cierre al presionar el botón.</p>
             
@@ -308,6 +333,60 @@
             </ul>
             <p><strong>Regla de oro en el aula:</strong> "Si no estás seguro, pregunta antes de conectar". La curiosidad es buena, pero la seguridad es mejor.</p>
         </div>
+
+        <!-- === NUEVA SECCIÓN: CONTROL DE CALIDAD === -->
+        <section>
+            <div class="destacado" style="background-color: #f1f8e9; border-left-color: #4caf50; padding: 25px; margin: 30px 0;">
+                <h3 style="color: #2e7d32; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.3em;">🛠️</span> Control de Calidad: El Arte de Pulsar
+                </h3>
+                <p>El pulsador parece simple, pero es el componente que más "trampas" le pone a los ingenieros principiantes. Sigue estas reglas para no fallar:</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+                    
+                    <!-- Regla 1 -->
+                    <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #c8e6c9;">
+                        <strong style="color: #2e7d32;">1. La Orientación del "Abrazo"</strong>
+                        <p style="font-size: 0.9em; color: #555;">Mira las patas de tu pulsador: tienen una pequeña curva. Para que funcione bien en la protoboard, las patas deben "abrazar" el canal central. Si lo pones girado, el LED se quedará prendido siempre.</p>
+                    </div>
+
+                    <!-- Regla 2 -->
+                    <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #c8e6c9;">
+                        <strong style="color: #2e7d32;">2. El Botón no es un Consumidor</strong>
+                        <p style="font-size: 0.9em; color: #555;">¡Nunca conectes un cable directo de VCC a una pata y de GND a la otra pata del mismo botón! Al presionarlo, harás un <strong>Cortocircuito</strong>. El botón solo debe dejar pasar la energía hacia un componente (como un LED o una resistencia).</p>
+                    </div>
+
+                    <!-- Regla 3 -->
+                    <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #c8e6c9;">
+                        <strong style="color: #2e7d32;">3. La Prueba del "Clic"</strong>
+                        <p style="font-size: 0.9em; color: #555;">Si al presionar el botón no sientes un "clic" mecánico claro, es posible que no esté bien insertado en la protoboard. Empújalo con firmeza hasta que sientas que las patas entraron totalmente.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- === RINCÓN DEL DOCENTE: LÓGICA DE SEGURIDAD === -->
+            <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0;">
+                <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: ¿Prender o Apagar?
+                </h3>
+                
+                <p style="color: #444; line-height: 1.6; font-size: 1.05em;">
+                    Para explicar la diferencia entre <strong>Normalmente Abierto (NO)</strong> y <strong>Normalmente Cerrado (NC)</strong>, no uses diagramas técnicos, usa ejemplos de seguridad que los niños conocen:
+                </p>
+
+                <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                    <ul style="margin-bottom: 0; line-height: 1.8; color: #333;">
+                        <li><strong>El Timbre (Lógica NO):</strong> En reposo, nadie toca. El circuito está <strong>Abierto</strong>. Solo hay sonido cuando "haces el esfuerzo" de presionar.</li>
+                        <li><strong>La Luz de la Nevera (Lógica NC):</strong> En reposo (puerta abierta), la luz está <strong>Cerrada/Encendida</strong>. Solo cuando "haces el esfuerzo" de cerrar la puerta, el botón se presiona y la luz se apaga.</li>
+                        <li><strong>El Botón de Emergencia (Lógica NC):</strong> Las máquinas peligrosas usan botones que siempre están dejando pasar corriente. Si alguien lo presiona (o si un cable se rompe), el circuito se <strong>Abre</strong> y la máquina se detiene por seguridad.</li>
+                    </ul>
+                </div>
+                <p style="margin-top: 15px; font-style: italic; color: #555;">
+                    <strong>Actividad rápida:</strong> Pide a los alumnos que busquen en el salón qué cosas funcionan como NO (el teclado del PC) y qué cosas como NC (el sensor de una alarma o la puerta de un microondas).
+                </p>
+            </div>
+        </section>
         
         <div class="pregunta-curiosidad">
             <h3>🧠 Reto de Lógica Mecánica</h3>

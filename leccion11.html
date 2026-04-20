@@ -201,6 +201,45 @@
             <p><em>💡 Regla de oro: Si el multímetro muestra un valor negativo, invierte las puntas (estás midiendo al revés).</em></p>
         </div>
 
+        <!-- === BLOQUE: EL MISTERIO DEL CERO (GND) === -->
+        <section>
+            <div class="destacado" style="background-color: #f8f9fa; border-left: 5px solid #333; padding: 30px; margin: 40px 0; border: 1px solid #ddd;">
+                <h2 style="color: #333; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.3em;">🌍</span> El Secreto de la Tierra (GND): ¿Es "Nada" o es "Algo"?
+                </h2>
+                <p style="font-size: 1.1em; line-height: 1.6; color: #444;">
+                    A lo largo de este curso, el cable negro (GND) ha parecido el actor secundario: el lugar donde los electrones "mueren" o desaparecen. <strong>¡Es un error peligroso!</strong>
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                    
+                    <!-- Analogía del Nivel del Mar -->
+                    <div style="background: white; padding: 20px; border-radius: 12px; border-bottom: 5px solid #1976d2;">
+                        <h4 style="margin-top: 0; color: #1976d2;">🌊 La Analogía del Nivel del Mar</h4>
+                        <p style="font-size: 0.9em; color: #555;">Imagina que quieres medir la altura de una montaña. Necesitas un punto de referencia: el nivel del mar (0 metros). </p>
+                        <ul style="font-size: 0.85em; color: #666;">
+                            <li>Si el nivel del mar sube o baja, tu medición de la montaña cambia, aunque la montaña no se haya movido.</li>
+                            <li><strong>En tu circuito:</strong> GND es el nivel del mar. Los 5V solo son "altos" porque GND es "cero".</li>
+                        </ul>
+                    </div>
+
+                    <!-- La Tierra Común -->
+                    <div style="background: white; padding: 20px; border-radius: 12px; border-bottom: 5px solid #c62828;">
+                        <h4 style="margin-top: 0; color: #c62828;">🤝 La Regla de la "Tierra Común"</h4>
+                        <p style="font-size: 0.9em; color: #555;">Si conectas tu computadora (Emisor) a un satélite (Receptor), pero sus cables negros no están unidos, <strong>no se entenderán.</strong></p>
+                        <p style="font-size: 0.85em; color: #666;">Para que una matriz de Hamming (lecciones 28 y 29) funcione, ambos deben estar parados en el mismo "suelo" de voltaje. Sin tierra común, el receptor verá un 1 donde hay un 0.</p>
+                    </div>
+
+                </div>
+
+                <div style="background-color: #fff3e0; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #ff9800; text-align: center;">
+                    <p style="margin: 0; font-weight: bold; color: #e65100;">
+                        "El Cero no es ausencia de electricidad; es el ancla que le da sentido a la información."
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <!-- === 5. Modo 4: Midiendo Corriente (A) === -->
         <h2>5. Modo 4: Midiendo Corriente (A)</h2>
         <p>Pon la perilla en el rango adecuado para la corriente que esperas medir (200mA o 10A). <strong>¡Importante!</strong> Para medir corriente, el multímetro debe estar <em>en SERIE</em> con el circuito, no en paralelo.</p>

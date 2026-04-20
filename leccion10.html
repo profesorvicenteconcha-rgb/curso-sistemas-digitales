@@ -33,85 +33,47 @@
         <p>Podrías pensar que enviabas un 0, pero en realidad dejabas el cable "al aire", desconectado de todo. En electrónica digital, <strong>un cable suelto no es un cero; es una incógnita</strong> (una antena). Hoy aprenderemos a usar una resistencia para "anclar" esa señal y eliminar la incertidumbre para siempre.</p>
     </div>
 
-    <!-- === 🔌 SÍMBOLOS DE VOLTAJE Y TIERRA: Guía Visual Rápida === -->
+        <!-- === 🔌 SÍMBOLOS DE VOLTAJE Y TIERRA: Guía Visual Rápida (Unificada) === -->
     <div class="simbolos-voltage" style="background: white; border-radius: 12px; padding: 25px; margin: 30px 0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); border-left: 4px solid #673ab7;">
+        
         <h3 style="color: #4527a0; margin-top: 0; display: flex; align-items: center; gap: 10px;">
             <span style="font-size: 1.4em;">🔌</span> Símbolos de Voltaje y Tierra: Guía Visual Rápida
         </h3>
         
-        <p style="color: #5e35b1; line-height: 1.7; margin-bottom: 20px;">Antes de adentrarnos en Pull-Up y Pull-Down, aclaremos una confusión muy común: <strong>¿qué significan los símbolos en los esquemas?</strong> Muchos estudiantes piensan que el triángulo siempre representa voltaje positivo, pero esto es un mito. Aquí está la verdad:</p>
+        <p style="color: #5e35b1; line-height: 1.7; margin-bottom: 20px;">Antes de adentrarnos en Pull-Up y Pull-Down, aclaremos una confusión muy común: <strong>¿qué significan los símbolos en los esquemas?</strong> Muchos estudiantes piensan que el triángulo siempre representa voltaje positivo, pero esto es un mito. <strong>Vamos a aclarar esta confusión de una vez por todas:</strong></p>
         
-        <div class="tabla-simbolos" style="overflow-x: auto;">
+        <!-- 1. TABLA DE SÍMBOLOS -->
+        <div class="tabla-simbolos" style="overflow-x: auto; margin-bottom: 25px;">
             <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
                 <thead>
                     <tr>
-                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left; font-weight: 600;">Símbolo</th>
-                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left; font-weight: 600;">Nombre</th>
-                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left; font-weight: 600;">Representa</th>
-                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left; font-weight: 600;">Uso Común</th>
-                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left; font-weight: 600;">¡Cuidado!</th>
+                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left;">Símbolo</th>
+                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left;">Nombre</th>
+                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left;">Representa</th>
+                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left;">Uso Común</th>
+                        <th style="background: #673ab7; color: white; padding: 12px; text-align: left;">¡Cuidado!</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="background: #f5f5f5;">
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;"><strong>Vcc</strong> o <strong>+5V</strong></td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Voltaje Positivo</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Fuente de alimentación</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Arduino, circuitos digitales</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">No tiene símbolo único; se identifica por su <strong>etiqueta</strong></td>
-                    </tr>
-                    <tr style="background: #f5f5f5;">
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0; font-size: 1.5em;">⏚</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Tierra (GND)</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Referencia 0V</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Todos los circuitos</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Es donde "termina" la corriente, no donde "empieza"</td>
-                    </tr>
-                    <tr style="background: #f5f5f5;">
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0; font-size: 1.5em; color: #c62828;">▼</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Tierra de Señal</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Conexión a GND</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Esquemas europeos</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0; color: #c62828;"><strong>¡Apunta abajo pero es 0V (Tierra), no voltaje negativo!</strong></td>
-                    </tr>
-                    <tr style="background: #f5f5f5;">
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0; font-size: 1.2em;">▲</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Tierra/Chasis (antiguo)</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Conexión a chasis</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Esquemas antiguos</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;"><strong>NO es Vcc</strong> - Es una confusión histórica común</td>
-                    </tr>
-                    <tr style="background: #f5f5f5;">
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0; font-size: 1.2em;">┬ o ↑</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Power Rail</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Conexión a Vcc</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Esquemas modernos</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Flecha hacia arriba = fuente de energía</td>
-                    </tr>
-                    <tr style="background: #f5f5f5;">
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0; font-size: 1.2em;">┴ o ↓</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Ground Rail</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Conexión a GND</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Esquemas modernos</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e0e0e0;">Flecha hacia abajo = retorno a tierra</td>
-                    </tr>
+                    <tr><td><strong>Vcc</strong> o <strong>+5V</strong></td><td>Voltaje Positivo</td><td>Fuente de alimentación</td><td>Arduino, circuitos digitales</td><td>No tiene símbolo único; se identifica por su <strong>etiqueta</strong></td></tr>
+                    <tr><td style="font-size: 1.5em;">⏚</td><td>Tierra (GND)</td><td>Referencia 0V</td><td>Todos los circuitos</td><td>Es donde "termina" la corriente, no donde "empieza"</td></tr>
+                    <tr><td style="font-size: 1.5em; color: #c62828;">▼</td><td>Tierra de Señal</td><td>Conexión a GND</td><td>Esquemas europeos</td><td><strong>¡Apunta abajo pero es 0V (Tierra), no voltaje negativo!</strong></td></tr>
+                    <tr><td style="font-size: 1.2em;">▲</td><td>Tierra/Chasis (antiguo)</td><td>Conexión a chasis</td><td>Esquemas antiguos</td><td><strong>NO es Vcc</strong> - Es una confusión histórica común</td></tr>
+                    <tr><td style="font-size: 1.2em;">┬ o ↑</td><td>Power Rail</td><td>Conexión a Vcc</td><td>Esquemas modernos</td><td>Flecha hacia arriba = fuente de energía</td></tr>
+                    <tr><td style="font-size: 1.2em;">┴ o ↓</td><td>Ground Rail</td><td>Conexión a GND</td><td>Esquemas modernos</td><td>Flecha hacia abajo = retorno a tierra</td></tr>
                 </tbody>
             </table>
         </div>
         
-        <div class="mito-verdad">
+        <!-- 2. MITO VS VERDAD -->
+        <div class="mito-verdad" style="margin-bottom: 25px;">
             <h4>❌ Mito vs ✅ Verdad</h4>
-            
-            <div class="mito">
-                <strong>❌ Mito:</strong> "El triángulo ▲ representa Vcc (voltaje positivo)"
-            </div>
-            
-            <div class="verdad">
-                <strong>✅ Verdad:</strong> "El triángulo ▼ representa TIERRA (0V). Vcc se identifica por su <strong>etiqueta</strong> ('Vcc', '+5V', 'Vdd'), no por un símbolo mágico."
-            </div>
+            <div class="mito"><strong>❌ Mito:</strong> "El triángulo ▲ representa Vcc (voltaje positivo)"</div>
+            <div class="verdad"><strong>✅ Verdad:</strong> "El triángulo ▼ representa TIERRA (0V). Vcc se identifica por su <strong>etiqueta</strong> ('Vcc', '+5V', 'Vdd'), no por un símbolo mágico."</div>
         </div>
         
-        <div class="analogia-agua">
+        <!-- 3. ANALOGÍA DEL AGUA -->
+        <div class="analogia-agua" style="margin-bottom: 25px;">
             <h4>💧 Analogía del Agua</h4>
             <p>Imagina el circuito como un sistema de agua:</p>
             <ul>
@@ -122,41 +84,36 @@
             </ul>
         </div>
         
-        <div class="consejo-docente">
+        <!-- 4. CONSEJO DOCENTE -->
+        <div class="consejo-docente" style="margin-bottom: 25px;">
             <strong>💡 Consejo para Futuros Docentes:</strong>
             <p>Cuando expliques estos símbolos, usa esta regla de oro:</p>
-            <blockquote>
-                <strong>"Si no ves la etiqueta 'Vcc', 'Vdd' o '+5V', no asumas que hay voltaje positivo. Si ves ⏚ o ▼, es TIERRA (0V), no voltaje alto."</strong>
-            </blockquote>
+            <blockquote><strong>"Si no ves la etiqueta 'Vcc', 'Vdd' o '+5V', no asumas que hay voltaje positivo. Si ves ⏚ o ▼, es TIERRA (0V), no voltaje alto."</strong></blockquote>
             <p>Y haz esta pregunta a tus estudiantes:</p>
             <p><em>"¿Por qué los símbolos de tierra apuntan hacia abajo? Porque la corriente 'cae' del voltaje alto al bajo, como el agua que cae de una montaña al mar."</em></p>
         </div>
         
+        <!-- 5. IMPORTANCIA PARA ESTA LECCIÓN -->
         <div class="importante-leccion10">
             <strong>🎯 Importante para esta lección:</strong>
             <p>En Pull-Up y Pull-Down, entenderás por qué necesitamos conectar entradas a Vcc <strong>o</strong> a GND para evitar el "fantasma del ruido eléctrico". Esta guía de símbolos te ayudará a leer los esquemas correctamente y no confundir las conexiones.</p>
         </div>
+        
+    </div>
+        
+    <div class="conexion-lecciones">
+        <strong>🔗 Conexión con Lección 8:</strong>
+        <p>Recuerda el "fantasma del ruido eléctrico" que mencionamos al final del Laboratorio 1. Ahora entiendes su causa física: <strong>cables sin anclar actúan como antenas</strong>. El Pull-Up/Pull-Down es la "ancla" que elimina ese fantasma.</p>
     </div>
 
-    <!-- === 🌊 ¿QUÉ ES UN "ESTADO FLOTANTE"? La entrada que no sabe qué ser === -->
-    <div class="estado-flotante">
-        <h3>🌊 ¿Qué es un "estado flotante"? La entrada que no sabe qué ser</h3>
+    <section>
+                <h2>1. El Problema: El Estado "Flotante"</h2>
+        <p>Cuando un interruptor está abierto, el cable de salida no está conectado a 5V, pero tampoco está conectado a Tierra (0V). Está <strong>"Flotando"</strong> al aire.</p>
         
-        <p>Imagina un interruptor de luz que no está ni conectado a la pared ni a ningún cable. ¿Está encendido o apagado? <strong>No es ninguna de las dos cosas</strong> — está en el limbo.</p>
+        <p>En ese estado, el cable no tiene ni 0V ni 5V. Técnicamente se dice que está en <strong>Alta Impedancia (Hi-Z)</strong>. Es como si el cable estuviera cortado: la resistencia es tan alta (aire) que no pasa corriente, pero sí capta ruido electromagnético como una antena.</p>
         
-        <div class="analogia-flotante">
-            <h4>🚤 Analogía del Bote en el Mar</h4>
-            <p>Una entrada digital SIN Pull-Up/Pull-Down es como un bote sin ancla en medio del océano:</p>
-            <ul>
-                <li><strong>Sin ancla (sin resistencia):</strong> Cualquier ola pequeña (ruido eléctrico) lo mueve de un lado a otro → el bote "flota" sin rumbo</li>
-                <li><strong>Con ancla a tierra (Pull-Down):</strong> El bote siempre regresa a puerto (0 lógico)</li>
-                <li><strong>Con ancla al muelle (Pull-Up):</strong> El bote siempre regresa al muelle (1 lógico)</li>
-            </ul>
-            <p><strong>El "flotar" no es 0 ni 1 — es indeterminado.</strong> Y en electrónica digital, "indeterminado" es peor que "equivocado".</p>
-        </div>
-        
-        <div class="fisica-flotante">
-            <h4>🔬 ¿Qué pasa físicamente en el pin?</h4>
+        <div class="fisica-flotante" style="background-color: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #1976d2;">
+            <h4 style="margin-top: 0; color: #0d47a1;">🔬 ¿Qué pasa físicamente en el pin?</h4>
             <p>Las entradas digitales modernas tienen <strong>impedancia muy alta</strong> (millones de ohmios). Esto significa:</p>
             <ul>
                 <li>Consumen <em>casi cero corriente</em> cuando leen una señal</li>
@@ -166,37 +123,7 @@
             </ul>
         </div>
         
-        <div class="error-comun">
-            <strong>⚠️ Error Clásico de Principiantes:</strong>
-            <p>"Si no conecto nada al pin, asumo que es 0 por defecto".</p>
-            <p><strong>¡Falso!</strong> Un pin desconectado NO es 0. Es <em>flotante</em>. Solo un Pull-Down (o conexión directa a GND) garantiza 0 lógico.</p>
-        </div>
-        
-        <div class="consejo-docente">
-            <strong>💡 Consejo para Futuros Docentes:</strong>
-            <p>Cuando un estudiante pregunte "¿por qué no puedo dejar el pin sin conectar?", usa esta demostración:</p>
-            <ol>
-                <li>Conecta un LED a una salida digital</li>
-                <li>Deja la entrada SIN Pull-Up/Pull-Down</li>
-                <li>Pasa tu mano cerca del cable (¡sin tocarlo!)</li>
-                <li>El LED parpadeará aleatoriamente por la capacitancia de tu cuerpo</li>
-            </ol>
-            <p>Esta experiencia sensorial hace tangible lo abstracto: <em>"¡Mi mano controla el LED sin tocarlo! ¿Cómo es posible?"</em> → Ahí nace la curiosidad genuina por entender el estado flotante.</p>
-        </div>
-        
-        <div class="conexion-lecciones">
-            <strong>🔗 Conexión con Lección 8:</strong>
-            <p>Recuerda el "fantasma del ruido eléctrico" que mencionamos al final del Laboratorio 1. Ahora entiendes su causa física: <strong>cables sin anclar actúan como antenas</strong>. El Pull-Up/Pull-Down es la "ancla" que elimina ese fantasma.</p>
-        </div>
-    </div>
-
-    <section>
-        <h2>1. El Problema: El Estado "Flotante"</h2>
-        <p>Cuando un interruptor está abierto, el cable de salida no está conectado a 5V, pero tampoco está conectado a Tierra (0V). Está <strong>"Flotando"</strong> al aire.</p>
-        
-        <p>En ese estado, el cable no tiene ni 0V ni 5V. Técnicamente se dice que está en <strong>Alta Impedancia (Hi-Z)</strong>. Es como si el cable estuviera cortado: la resistencia es tan alta (aire) que no pasa corriente, pero sí capta ruido electromagnético como una antena (capta ondas de radio, la estática de tu ropa o el ruido de la red eléctrica). ¡El chip se vuelve loco!</p>
         <div class="svg-container">
-            <!-- Imagen: Cable Flotante (img/estado_flotante.png) -->
             <img src="img/antena.png" alt="Ilustración de un cable desconectado captando ondas de ruido como una antena" style="max-width:30%; height:auto;">
             <p><small><em>Fig. 1: Un cable suelto es como una antena que capta ruido.</em></small></p>
         </div>

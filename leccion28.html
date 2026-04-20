@@ -132,9 +132,6 @@
 
         <!-- NUEVO: Formato sistemático del paquete final -->
         <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin-top: 20px;">
-
-        <!-- NUEVO: Formato sistemático del paquete final -->
-        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin-top: 20px;">
             <h3 style="color: #1b5e20; margin-top: 0;">📦 El paquete final que viaja por el canal</h3>
             <p>La <strong>palabra de código</strong> (codeword) se ensambla así:</p>
             <div class="formula" style="font-size: 1.2em; background: white;">
@@ -142,6 +139,82 @@
             </div>
             <p>Los primeros 4 bits son los datos originales (gracias a la matriz identidad), los últimos 3 son la redundancia calculada con la submatriz \(P\).</p>
         </div>
+
+        <!-- === BLOQUE: EL PUENTE HACIA LAS MATRICES (V2.0) === -->
+        <section>
+            <div class="destacado" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); border-left: 5px solid #9c27b0; padding: 30px; margin: 40px 0; box-shadow: 0 4px 15px rgba(156, 39, 176, 0.1);">
+                <h2 style="color: #4a148c; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.3em;">🗺️</span> Isomorfismo de Matrices: El Plano Maestro
+                </h2>
+                <p style="font-size: 1.1em; line-height: 1.6; color: #4a148c;">
+                    No dejes que la palabra "Matriz" te asuste. En este curso, una matriz no es una lista de números para un examen; es un <strong>plano de conexiones para tu protoboard.</strong>
+                </p>
+
+                <div style="background-color: white; padding: 20px; border-radius: 12px; margin: 20px 0; border: 1px solid #ce93d8;">
+                    <h4 style="margin-top: 0; color: #7b1fa2; text-align: center;">¿Cómo se lee un plano matricial?</h4>
+                    <p style="color: #444; font-size: 0.95em;">Imagina que la Matriz G es un <strong>conmutador</strong> donde los datos entran por la izquierda y las señales de paridad salen por la derecha:</p>
+                    
+                    <ul style="line-height: 1.8; color: #333; margin-top: 10px;">
+                        <li><strong>Las FILAS</strong> representan tus cables de datos de entrada (D1, D2, D3, D4).</li>
+                        <li><strong>Las COLUMNAS</strong> representan los resultados o "escudos" que quieres fabricar.</li>
+                        <li><strong>El número "1"</strong> significa: <span style="color: #2e7d32; font-weight: bold;">"¡SÍ hay conexión!"</span> (conecta este cable a la compuerta XOR).</li>
+                        <li><strong>El número "0"</strong> significa: <span style="color: #c62828; font-weight: bold;">"¡NO hay conexión!"</span> (ignora este cable).</li>
+                    </ul>
+                </div>
+
+                <!-- ANALOGÍA: LA MÁQUINA EXPENDEDORA DE BITS -->
+                <div style="background-color: #fff9c4; padding: 25px; border-radius: 12px; margin: 25px 0; border: 2px solid #fbc02d; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    <h4 style="margin-top: 0; color: #e65100; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.8em;">🥤</span> 
+                        La Máquina Expendedora de Bits
+                    </h4>
+                    
+                    <p style="color: #444; line-height: 1.6;">Para entender cómo se multiplica un mensaje por una matriz en el mundo digital, imagina que vas a comprar una gaseosa:</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #ffe0b2; text-align: center;">
+                            <div style="font-size: 2em;">🎟️</div>
+                            <strong style="color: #1565c0;">1. El Mensaje (Tu pedido)</strong>
+                            <p style="font-size: 0.85em; color: #555;">Tus 4 bits son como un ticket de compra horizontal: <code>[d₁, d₂, d₃, d₄]</code>.</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #ffe0b2; text-align: center;">
+                            <div style="font-size: 2em;">📋</div>
+                            <strong style="color: #1565c0;">2. La Máquina (La Matriz G)</strong>
+                            <p style="font-size: 0.85em; color: #555;">La matriz tiene 7 ranuras verticales. Cada una tiene agujeros (1s) y paredes (0s).</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #ffe0b2; text-align: center;">
+                            <div style="font-size: 2em;">⚙️</div>
+                            <strong style="color: #1565c0;">3. El Proceso (Filtrado)</strong>
+                            <p style="font-size: 0.85em; color: #555;">Tu ticket pasa por la ranura. Solo los bits que coinciden con un agujero logran entrar a la licuadora (XOR).</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #ffe0b2; text-align: center;">
+                            <div style="font-size: 2em;">🥤</div>
+                            <strong style="color: #1565c0;">4. El Resultado (La Gaseosa)</strong>
+                            <p style="font-size: 0.85em; color: #555;">La XOR suma los bits que pasaron. ¡Listo! Tienes un bit de protección perfecto.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background-color: #e8f5e9; padding: 15px; border-radius: 8px; border-left: 4px solid #4caf50;">
+                        <h5 style="margin-top: 0; color: #2e7d32;">🎯 Ejemplo en tiempo real:</h5>
+                        <p style="margin: 0; color: #333; font-size: 0.95em;">
+                            Mensaje: <code>[1, 0, 1, 1]</code>. Queremos el primer bit de paridad. <br>
+                            Ranura 1: <code>[1, 1, 0, 1]</code> → Entran al filtro: <strong>d₁</strong>(1), <strong>d₂</strong>(0) y <strong>d₄</strong>(1). <br>
+                            <strong>Suma Módulo 2:</strong> \(1 \oplus 0 \oplus 1 = 0\).
+                        </p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.5); border-radius: 8px;">
+                    <p style="margin: 0; font-weight: bold; color: #4a148c; font-style: italic;">
+                        "Multiplicar una matriz no es cálculo avanzado; <br>
+                        es filtrar cables a través de una plantilla de agujeros."
+                    </p>
+                </div>
+            </div>
+        </section>
 
         <h2>2. Traducción: De la Matriz al Cable 🔌</h2>
         <p>Leer la matriz para armar un circuito es increíblemente fácil si sabes el secreto del <strong>isomorfismo</strong> (recordando la Lección 21):</p>
