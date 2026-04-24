@@ -7,260 +7,132 @@
     <link rel="stylesheet" href="estilos.css">
     <!-- Icono de pestaña -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
-    
-    <style>
-        /* Estilos específicos para la Portada 2.0 */
-        .hero {
-            text-align: center;
-            padding: 30px 10px;
-            background: linear-gradient(135deg, #003d82 0%, #001f4d 100%);
-            color: white;
-            border-radius: 12px;
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,61,130,0.3);
-        }
-        
-        /* Círculo decorativo de fondo */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50px; right: -50px;
-            width: 200px; height: 200px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-        }
-
-        .hero-img {
-            width: 120px;
-            height: 120px;
-            background: white;
-            border-radius: 50%;
-            padding: 10px;
-            margin: 0 auto 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4em; /* Si no hay imagen, usamos emoji */
-        }
-
-        .hero h1 { color: white; margin: 0; font-size: 2.5em; letter-spacing: -1px; }
-        .hero h2 { color: #4dabf7; font-size: 1.1em; margin-top: 10px; font-weight: normal; text-transform: uppercase; letter-spacing: 2px; }
-        .hero p { font-size: 1.1em; opacity: 0.9; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto;}
-
-        /* Botón Principal Gigante */
-        .btn-start {
-            display: inline-block;
-            background-color: var(--color-secundario);
-            color: white;
-            font-size: 1.2em;
-            padding: 10px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(225, 140, 0, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .btn-start:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255, 140, 0, 0.6); }
-
-        /* Accesos Rápidos (Botones secundarios) */
-        .accesos-rapidos {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-        }
-        .btn-acceso {
-            background: white;
-            color: #555;
-            border: 1px solid #ddd;
-            padding: 10px 25px;
-            border-radius: 8px; /* Menos redondeado para diferenciar */
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-        .btn-acceso:hover { border-color: var(--color-primario); color: var(--color-primario); background: #f8f9fa;}
-
-        /* Mejoras en Acordeones */
-        details {
-            border: none; /* Quitamos borde simple */
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Sombra suave */
-            margin-bottom: 20px;
-        }
-        summary {
-            padding: 25px;
-            font-size: 1.15em;
-            border-radius: 8px;
-        }
-        /* Colores de fondo suaves para los encabezados de unidad */
-        .u1 summary { border-left: 5px solid #28a745; }
-        .u2 summary { border-left: 5px solid #007bff; }
-        .u3 summary { border-left: 5px solid #fd7e14; }
-        .u4 summary { border-left: 5px solid #6f42c1; }
-
-        .unidad-contenido { background-color: #fff; border-top: 1px solid #eee; }
-
-        /* Footer */
-        .main-footer {
-            margin-top: 60px;
-            padding: 40px 20px;
-            background-color: #f1f3f5;
-            text-align: center;
-            border-radius: 12px;
-            color: #666;
-        }
-    </style>
 </head>
 <body>
 
 <div class="contenedor">
     
-    <!-- Hero Section -->
-    <div class="hero">
-        <!-- Imagen de Marca (Si tienes la imagen de la chispa, úsala aquí. Si no, queda el emoji) -->
-        <div class="hero-img">
-            <img src="img/chispa_electronica.png" alt="Logo" style="width:100%; border-radius:50%;" onerror="this.style.display='none'; this.parentNode.innerText='⚡'">
-        </div>
-        
-        <h1>Fundamentos de Sistemas Digitales</h1>
-        <h2>Lógica, Circuitos y Teoría de la Información</h2>
-        <p>Un viaje interactivo desde la física del electrón hasta la matemática de la corrección de errores.</p>
-        
-        <a href="leccion1.html" class="btn-start">🚀 Comenzar Curso</a>
-    </div>
-
-    <!-- NUEVA SECCIÓN: MOTIVACIÓN PROFESIONAL -->
-    <section style="margin-bottom: 50px;">
-        <h2 style="text-align: center; color: #444; font-size: 1.5em; margin-bottom: 10px;">🌟 ¿Por qué este curso cambia tu futuro?</h2>
-        <p style="text-align: center; max-width: 700px; margin: 0 auto 30px auto; color: #666;">
-            Lo que aprenderás aquí no es solo para "conectar cables". Es una estructura mental que te dará ventaja en campos inesperados:
+    <!-- HERO SECTION 2.0 -->
+    <header class="hero" style="background: linear-gradient(135deg, #003d82 0%, #001f4d 100%); padding: 60px 20px; border-radius: 12px; text-align: center; color: white;">
+        <div style="font-size: 4em; margin-bottom: 10px;">⚡</div>
+        <h1 style="color: white; margin: 0; font-size: 2.8em;">Fundamentos de Sistemas Digitales</h1>
+        <p style="font-size: 1.2em; opacity: 0.9; max-width: 700px; margin: 20px auto;">
+            Un viaje sistémico desde la física del electrón hasta la matemática de la corrección de errores.
         </p>
+        <a href="leccion1.html" class="btn-navegacion" style="background-color: var(--color-secundario); padding: 15px 40px; font-size: 1.2em; margin-top: 20px;">🚀 Iniciar el Viaje</a>
+    </header>
 
-        <div class="perfiles-grid">
-            
-            <!-- Perfil: Medicina y Bio -->
-            <div class="perfil-card" style="border-top: 4px solid #28a745;">
-                <h3>🧬 Medicina y Biocomputación</h3>
-                <p>El cuerpo humano es un sistema eléctrico. Entender <strong>voltaje y ruido</strong> (U1) es clave para leer un electrocardiograma. Comprender la <strong>corrección de errores</strong> (U4) te ayudará a entender cómo el ADN se repara a sí mismo. La biología moderna es, en el fondo, procesamiento de información.</p>
-            </div>
-
-            <!-- Perfil: Docencia -->
-            <div class="perfil-card" style="border-top: 4px solid #ffc107;">
-                <h3>🍎 Docencia y Pedagogía</h3>
-                <p>El mundo necesita niños con <strong>Pensamiento Computacional</strong>. Al tomar este curso, pierdes el miedo a la tecnología. Podrás enseñar a tus alumnos que la magia no existe, existe la lógica. Podrás liderar proyectos de robótica escolar y enseñar la habilidad más valiosa: cómo solucionar problemas paso a paso.</p>
-            </div>
-
-            <!-- Perfil: Ingeniería/Tech -->
-            <div class="perfil-card" style="border-top: 4px solid #007bff;">
-                <h3>🚀 Ingeniería y Desarrollo</h3>
-                <p>Ya sea que programes software o diseñes máquinas o edificios, entender el <strong>Hardware</strong> te da una base sólida. Sabrás que la "nube" no es etérea: son servidores físicos con cables, lógica y consumo de energía. Te convertirás en un profesional que entiende la raíz de los sistemas.</p>
-            </div>
-
+    <!-- PROPUESTA DE VALOR (MÉTODO FEYNMAN) -->
+    <section style="margin: 50px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        <div class="destacado" style="margin: 0; border-left: 5px solid #ffc107;">
+            <h3 style="margin-top: 0;">🍎 El Método Feynman</h3>
+            <p>Aquí no memorizamos fórmulas. Usamos analogías de la vida real (mangueras, estadios, supermercados) para que entiendas la ingeniería con palabras simples.</p>
+        </div>
+        <div class="destacado" style="margin: 0; border-left: 5px solid #28a745;">
+            <h3 style="margin-top: 0;">🛠️ Enfoque Sistémico</h3>
+            <p>Cada lección es un engranaje. Lo que aprendes en la Lección 1 sostiene a la Lección 30. Construimos sistemas robustos, no solo cables que brillan.</p>
         </div>
     </section>
 
-    <!-- Accesos Rápidos -->
-    <div class="accesos-rapidos">
-        <a href="materiales.html" class="btn-acceso">🛍️ Lista de Materiales</a>
-        <a href="simbologia.html" class="btn-acceso">📐 Simbología</a>
-        <a href="herramientas.html" class="btn-acceso">🧰 Herramientas</a>
-    </div>
+    <!-- ACCESOS RÁPIDOS -->
+    <nav class="accesos-rapidos" style="margin-bottom: 50px;">
+        <a href="materiales.html" class="btn-acceso">🛍️ Lista de Materiales (Kit)</a>
+        <a href="simbologia.html" class="btn-acceso">📐 Diccionario de Símbolos</a>
+        <a href="herramientas.html" class="btn-acceso">🧰 Caja de Herramientas</a>
+    </nav>
 
-    <!-- Unidad 1 -->
-    <details class="u1" open>
-        <summary>
-            <span><strong>UNIDAD 1</strong> · Fundamentos Físicos</span>
-            <span>🟢</span>
-        </summary>
-        <div class="unidad-contenido" style="padding: 20px;">
-            <p style="color: #666; font-style: italic; margin-bottom: 20px;">"Dejaremos de ver la electricidad como magia. Entenderás el voltaje, dominarás la corriente y aprenderás a usar tu sexto sentido: el multímetro."</p>
-            <ul class="lista-lecciones">
-                <li><a href="leccion1.html">L1: ¿Qué es la corriente eléctrica?</a></li>
-                <li><a href="leccion2.html">L2: Voltaje, Resistencia y Ley de Ohm</a></li>
-                <li><a href="leccion3.html">L3: El Misterio del LED (Flujo de Energía)</a></li>
-                <li><a href="leccion4.html">L4: Código de Colores de Resistencias</a></li>
-                <li><a href="leccion5.html">L5: Circuitos Serie y Paralelo</a></li>
-                <li><a href="leccion6.html">L6: Interruptores y Control</a></li>
-                <li><a href="leccion7.html">L7: La Protoboard (Sin soldar)</a></li>
-                <li><a href="leccion8.html">L8: AC vs DC y Cargadores</a></li>
-                <li><a href="leccion9_laboratorio.html">L9: Laboratorio: Lógica con Interruptores <span class="tag-lab">LAB</span></a></li>
-                <li><a href="leccion10.html">L10: Resistencias Pull-Up y Pull-Down</a></li>
-                <li><a href="leccion11.html">L11: El Multímetro</a></li>
-            </ul>
-        </div>
-    </details>
+    <!-- MAPA DEL CURSO (ACORDEONES) -->
+    <section>
+        <h2 style="text-align: center; color: #444; margin-bottom: 30px;">Mapa del Entrenamiento</h2>
 
-    <!-- Unidad 2 -->
-    <details class="u2">
-        <summary>
-            <span><strong>UNIDAD 2</strong> · Lógica Digital</span>
-            <span>🔵</span>
-        </summary>
-        <div class="unidad-contenido" style="padding: 20px;">
-            <p style="color: #666; font-style: italic; margin-bottom: 20px;">"¿Cómo logramos que un pedazo de silicio tome decisiones? Entramos al mundo del 0 y el 1, las compuertas lógicas y los chips reales."</p>
-            <ul class="lista-lecciones">
-                <li><a href="leccion12.html">L12: Intro al Álgebra de Boole</a></li>
-                <li><a href="leccion13.html">L13: Tablas de Verdad</a></li>
-                <li><a href="leccion14.html">L14: Propiedades y Leyes de De Morgan</a></li>
-                <li><a href="leccion15.html">L15: Funciones (Suma de Productos)</a></li>
-                <li><a href="leccion16.html">L16: Mapas de Karnaugh (Tetris Lógico)</a></li>
-                <li><a href="leccion17.html">L17: Familia TTL 74xx (Hardware Real)</a></li>
-                <li><a href="leccion18.html">L18: NAND, NOR, XOR y XNOR (Fuerzas Especiales)</a></li>
-                <li><a href="leccion19.html">L19: Universalidad y Producto de Sumas (POS)</a></li>
-                <li><a href="leccion20_laboratorio.html">L20: Laboratorio 2: XOR y Semisumador<span class="tag-lab">LAB</span></a></li>
-            </ul>
-        </div>
-    </details>
+        <!-- Unidad 1 -->
+        <details class="u1" open>
+            <summary>
+                <span><strong>UNIDAD 1:</strong> Fundamentos Físicos</span>
+                <span>🟢</span>
+            </summary>
+            <div style="padding: 20px;">
+                <p style="font-style: italic; color: #666;">"Domaremos la energía bruta para convertirla en información estable."</p>
+                <ul class="lista-lecciones">
+                    <li><a href="leccion1.html">L1: ¿Qué es la corriente? (Señal vs Electrón)</a></li>
+                    <li><a href="leccion2.html">L2: Voltaje y Resistencia (Fricción y Calor)</a></li>
+                    <li><a href="leccion3.html">L3: El Misterio del LED (Anatomía interna)</a></li>
+                    <li><a href="leccion4.html">L4: Código de Colores (Hacks de lectura)</a></li>
+                    <li><a href="leccion5.html">L5: Serie y Paralelo (La paradoja de los caminos)</a></li>
+                    <li><a href="leccion6.html">L6: Interruptores (Lógica de seguridad NO/NC)</a></li>
+                    <li><a href="leccion7.html">L7: La Protoboard (El mapa de la ciudad)</a></li>
+                    <li><a href="leccion8.html">L8: Energía Estable (Triple Alianza: AC/DC/7805)</a></li>
+                    <li><a href="leccion9_laboratorio.html">L9: Laboratorio 1: Lógica con Interruptores <span class="tag-lab">LAB</span></a></li>
+                    <li><a href="leccion10.html">L10: Pull-Up y Pull-Down (El ancla del ruido)</a></li>
+                    <li><a href="leccion11.html">L11: El Multímetro y el Secreto del Cero (GND)</a></li>
+                </ul>
+            </div>
+        </details>
 
-    <!-- Unidad 3 -->
-    <details class="u3">
-        <summary>
-            <span><strong>UNIDAD 3</strong> · Fundamentos de Cómputo</span>
-            <span>🟠</span>
-        </summary>
-        <div class="unidad-contenido" style="padding: 20px;">
-            <p style="color: #666; font-style: italic; margin-bottom: 20px;">"La matemática de las máquinas. Uniremos lógica y filosofía para enseñarle al hardware a sumar, construyendo una calculadora desde cero."</p>
-            <ul class="lista-lecciones">
-                <li><a href="leccion21.html">L21: Isomorfismo (Lógica y Circuitos)</a></li>
-                <li><a href="leccion22.html">L22: Tautologías, Contradicciones e Implicación</a></li>
-                <li><a href="leccion23.html">L23: Cuantificadores y Buses de Datos</a></li>
-                <li><a href="leccion24.html">L24: Álgebra Formal</a></li>
-                <li><a href="leccion25_sumador_completo.html">L25: Sumador Completo (Full Adder)<span class="tag-lab">LAB</span></a></li>
-            </ul>
-        </div>
-    </details>
+        <!-- Unidad 2 -->
+        <details class="u2">
+            <summary>
+                <span><strong>UNIDAD 2:</strong> Lógica Digital</span>
+                <span>🔵</span>
+            </summary>
+            <div style="padding: 20px;">
+                <p style="font-style: italic; color: #666;">"Aprenderemos el lenguaje de los estados: donde 1 + 1 es 1."</p>
+                <ul class="lista-lecciones">
+                    <li><a href="leccion12.html">L12: Intro al Álgebra de Boole (Transición a 5V)</a></li>
+                    <li><a href="leccion13.html">L13: Tablas de Verdad (Tu contrato de diseño)</a></li>
+                    <li><a href="leccion14.html">L14: De Morgan (Trucos visuales de mutación)</a></li>
+                    <li><a href="leccion15.html">L15: Minterms (El candado perfecto)</a></li>
+                    <li><a href="leccion16.html">L16: Mapas de Karnaugh (El mundo redondo de Pac-Man)</a></li>
+                    <li><a href="leccion17.html">L17: Chips TTL 74xx (El ciempiés de silicio)</a></li>
+                    <li><a href="leccion18.html">L18: NAND, NOR, XOR y XNOR (Fuerzas especiales)</a></li>
+                    <li><a href="leccion19.html">L19: Universalidad (El ladrillo único de Lego)</a></li>
+                    <li><a href="leccion20_laboratorio.html">L20: Laboratorio 2: XOR con NAND <span class="tag-lab">LAB</span></a></li>
+                </ul>
+            </div>
+        </details>
 
-    <!-- Unidad 4 -->
-    <details class="u4">
-        <summary>
-            <span><strong>UNIDAD 4</strong> · Teoría de Códigos</span>
-            <span>🟣</span>
-        </summary>
-        <div class="unidad-contenido" style="padding: 20px;">
-            <p style="color: #666; font-style: italic; margin-bottom: 20px;">"Fiabilidad en un mundo ruidoso. Aprenderemos a proteger nuestros datos usando matrices y códigos para detectar y corregir errores invisibles."</p>
-            <ul class="lista-lecciones">
-                <li><a href="leccion26.html">L26: Ruido y Bit de Paridad</a></li>
-                <li><a href="leccion27.html">L27: Códigos de Bloque y Lineales</a></li>
-                <li><a href="leccion28.html">L28: Matriz Generadora (G)</a></li>
-                <li><a href="leccion29.html">L29: Matriz de Control (H) y Síndrome</a></li>
-                <li><a href="leccion30_proyecto_hamming.html">L30: Laboratorio Final: Proyecto Hamming <span class="tag-lab">FINAL</span></a></li>
-            </ul>
-        </div>
-    </details>
+        <!-- Unidad 3 -->
+        <details class="u3">
+            <summary>
+                <span><strong>UNIDAD 3:</strong> Fundamentos de Cómputo</span>
+                <span>🟠</span>
+            </summary>
+            <div style="padding: 20px;">
+                <p style="font-style: italic; color: #666;">"Enseñaremos a sumar a las máquinas: donde 1 + 1 es 10."</p>
+                <ul class="lista-lecciones">
+                    <li><a href="leccion21.html">L21: Isomorfismo y la Paradoja del 1+1</a></li>
+                    <li><a href="leccion22.html">L22: El Detector de Mentiras (Implicación)</a></li>
+                    <li><a href="leccion23.html">L23: Cuantificadores (Pensando en manada)</a></li>
+                    <li><a href="leccion24.html">L24: Álgebra Formal (Axiomas de Huntington)</a></li>
+                    <li><a href="leccion25_sumador_completo.html">L25: El Sumador Completo y el Eslabón de la Memoria</a></li>
+                </ul>
+            </div>
+        </details>
 
-    <footer class="main-footer">
+        <!-- Unidad 4 -->
+        <details class="u4">
+            <summary>
+                <span><strong>UNIDAD 4:</strong> Teoría de Códigos</span>
+                <span>🟣</span>
+            </summary>
+            <div style="padding: 20px;">
+                <p style="font-style: italic; color: #666;">"Blindaremos la información contra el caos del universo."</p>
+                <ul class="lista-lecciones">
+                    <li><a href="leccion26.html">L26: Ruido y Paridad (Aritmética Módulo 2)</a></li>
+                    <li><a href="leccion27.html">L27: Códigos de Bloque (La Ñapa de redundancia)</a></li>
+                    <li><a href="leccion28.html">L28: Matriz G (La máquina expendedora de bits)</a></li>
+                    <li><a href="leccion29.html">L29: Matriz H (El Síndrome y el Suelo Firme de GND)</a></li>
+                    <li><a href="leccion30_proyecto_hamming.html">L30: Proyecto Final: El Sistema Hamming <span class="tag-lab">FINAL</span></a></li>
+                </ul>
+            </div>
+        </details>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="margin-top: 80px; padding: 40px 0; border-top: 1px solid #eee; text-align: center; color: #777;">
         <p><strong>Fundamentos de Sistemas Digitales</strong></p>
-        <p><small>Diseñado para formar a la próxima generación de ingenieros en Colombia.</small></p>
-        <p><small>© 2026 - Material Educativo Abierto</small></p>
+        <p>Diseñado para formar a la próxima generación de ingenieros y docentes.</p>
+        <p style="font-size: 0.8em; margin-top: 10px;">Material Educativo Abierto (REA) - 2026</p>
     </footer>
 
 </div>

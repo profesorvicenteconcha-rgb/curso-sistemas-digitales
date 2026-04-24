@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección 4: Resistencias - Fundamentos de Sistemas Digitales</title>
+    <title>Lección 4: Código de Colores (Hacks de lectura)</title>
     <link rel="stylesheet" href="estilos.css">
     <!-- KaTeX Configurado -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
@@ -175,70 +175,6 @@
             </div>
         </section>
 
-        <!-- === NUEVA SECCIÓN: EL INTERIOR DEL MISTERIO === -->
-        <section>
-            <div class="destacado" style="background-color: #fff3e0; border-left-color: #ff9800; padding: 25px; margin: 30px 0;">
-                <h3 style="color: #e65100; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.3em;">🔍</span> Visión de Rayos X: Mira el interior
-                </h3>
-                <p>Si las patas son iguales y no ves el lado plano, ¡mira a través del plástico! Sostén tu LED frente a una luz y verás dos piezas de metal:</p>
-                
-                <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-top: 20px;">
-                    <div style="flex: 1; min-width: 250px; background: white; padding: 15px; border-radius: 8px; border: 1px solid #ffe0b2;">
-                        <strong style="color: #e65100;">🚩 El Yunque (Lado Ancho):</strong> Es la pieza más grande dentro del LED. Aunque parezca que por ser más grande es el positivo, ¡es al revés! El Yunque es el <strong>Cátodo (Negativo)</strong>.
-                    </div>
-                    <div style="flex: 1; min-width: 250px; background: white; padding: 15px; border-radius: 8px; border: 1px solid #ffe0b2;">
-                        <strong style="color: #e65100;">📍 El Poste (Lado Delgado):</strong> Es la pieza pequeña y recta. Este es el <strong>Ánodo (Positivo)</strong>.
-                    </div>
-                </div>
-
-                <h4 style="margin-top: 25px; color: #e65100;">🌈 El Semáforo de Voltajes</h4>
-                <p>No todos los colores tienen la misma "sed" de energía. Si usas una pila de 3V (como la CR2032):</p>
-                <table style="width: 100%; background: white; border-radius: 8px; overflow: hidden; font-size: 0.9em;">
-                    <tr style="background: #f8f9fa;">
-                        <th style="padding: 10px; border-bottom: 2px solid #eee;">Color</th>
-                        <th style="padding: 10px; border-bottom: 2px solid #eee;">Voltaje necesario</th>
-                        <th style="padding: 10px; border-bottom: 2px solid #eee;">¿Enciende con 3V?</th>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border-bottom: 1px solid #eee;">🔴 Rojo / 🟢 Verde estándar</td>
-                        <td style="padding: 8px; border-bottom: 1px solid #eee;">1.8V - 2.1V</td>
-                        <td style="padding: 8px; border-bottom: 1px solid #eee; color: #2e7d32;">✅ ¡Fácilmente!</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border-bottom: 1px solid #eee;">🔵 Azul / ⚪ Blanco / 🟣 Violeta</td>
-                        <td style="padding: 8px; border-bottom: 1px solid #eee;">3.0V - 3.4V</td>
-                        <td style="padding: 8px; border-bottom: 1px solid #eee; color: #d32f2f;">⚠️ Muy apenas o no enciende</td>
-                    </tr>
-                </table>
-            </div>
-
-            <!-- === RINCÓN DEL DOCENTE: LA VÁLVULA HUMANA === -->
-            <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 35px 0;">
-                <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: El Portero del Estadio
-                </h3>
-                
-                <p style="color: #444; line-height: 1.6; font-size: 1.05em;">
-                    Para que los niños entiendan qué es un <strong>Diodo</strong> (la 'D' de LED), usa la analogía de una puerta de seguridad:
-                </p>
-
-                <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
-                    <p style="margin: 0; color: #333;">
-                        Imagina un estadio con una <strong>puerta giratoria</strong> que solo gira en un sentido:
-                    </p>
-                    <ul style="margin-top: 10px; line-height: 1.8; color: #333;">
-                        <li><strong>Polaridad Directa (Bien puesto):</strong> Los fans (electrones) empujan la puerta en el sentido correcto, entran al estadio y celebran encendiendo sus linternas (Luz).</li>
-                        <li><strong>Polaridad Inversa (Al revés):</strong> Los fans intentan empujar la puerta hacia el otro lado, pero la puerta se bloquea. Nadie entra, nadie celebra, nada se enciende.</li>
-                        <li><strong>Sin Resistencia:</strong> ¡Vienen tantos fans corriendo tan rápido que rompen la puerta y el estadio se incendia!</li>
-                    </ul>
-                </div>
-                <p style="margin-top: 15px; font-style: italic; color: #555;">
-                    <strong>Reto docente:</strong> Si un LED no prende, antes de cambiarlo, pide al alumno que lo gire 180°. En el 50% de los casos, ese es el único "problema".
-                </p>
-            </div>
-        </section>
-
         <h3>Ejemplo Clásico: La Resistencia del LED</h3>
         <p>Busca en tu kit una que tenga los colores: <strong>Naranja - Naranja - Marrón - Dorado</strong>.</p>
         <ul>
@@ -332,30 +268,70 @@
         <p>Nada en el mundo físico es perfecto. La banda <strong>Dorada</strong> significa que el fabricante te garantiza que el valor real está en un rango del <strong>5%</strong> (hacia arriba o hacia abajo). ¡Es normal y tu circuito funcionará igual!</p>
     </div>
 
-    <!-- === PODCAST: Conversación entre Expertos === -->
-    <section class="podcast-section">
-        <div class="podcast-header">
-            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
-            </svg>
-            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+    <!-- === SECCIÓN PODCASTS DOBLES (LECCIÓN 4) === -->
+    <section class="podcasts-container" style="margin-top: 40px;">
+        
+        <!-- PODCAST 1: GRADO 7° (Nivel Básico - Color Diferenciado) -->
+        <div class="podcast-section" style="background: linear-gradient(135deg, #48c6ef 0%, #6f86d6 100%); margin-bottom: 20px; box-shadow: 0 4px 15px rgba(72, 198, 239, 0.2);">
+            <div class="podcast-header">
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                </svg>
+                <div style="display: flex; flex-direction: column;">
+                    <h3 style="color: white; margin: 0;">🎧 Podcast: Nivel Iniciación</h3>
+                    <p style="color: rgba(255,255,255,0.9); margin: 0; font-size: 0.85em; font-weight: bold;">Recomendado para Grado 7°</p>
+                </div>
+            </div>
+            
+            <p class="podcast-descripcion">
+                Descifra el "idioma de colores" de las resistencias. Ideal para aprender a identificar valores rápidamente como si fuera un código secreto.
+            </p>
+            
+            <div class="podcast-player">
+                <audio controls preload="metadata">
+                    <source src="audio/leccion4.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+            </div>
+            <p class="podcast-meta"><span class="duracion">⏱️ 12:50 min</span></p>
         </div>
-        
-        <p class="podcast-descripcion">
-            Dos docentes desentrañan el código secreto de las resistencias: desde la historia de por qué se eligieron colores hasta estrategias lúdicas para que niños memoricen la tabla. Comparten trucos de taller y desmienten mitos sobre la tolerancia.
-        </p>
-        
-        <div class="podcast-player">
-            <audio controls preload="metadata">
-                <source src="audio/leccion4.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
-            </audio>
+
+        <!-- PODCAST 2: GRADO 10° (Nivel Avanzado - Color Original) -->
+        <div class="podcast-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <div class="podcast-header">
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                </svg>
+                <div style="display: flex; flex-direction: column;">
+                    <h3 style="color: white; margin: 0;">🎧 Podcast: Profundización y Estrategia Docente</h3>
+                    <p style="color: rgba(255,255,255,0.9); margin: 0; font-size: 0.85em; font-weight: bold;">Recomendado para Grado 10°</p>
+                </div>
+            </div>
+            
+            <p class="podcast-descripcion">
+                Explica el código de colores y la tolerancia con rigor técnico. Introduce metodologías innovadoras para el aula, como el uso ético de la IA para potenciar el razonamiento docente.
+            </p>
+            
+            <div class="podcast-player">
+                <audio controls preload="metadata">
+                    <source src="audio/leccion4_10.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+            </div>
+            
+            <!-- Enlace a NotebookLM -->
+            <div style="text-align: center; margin-top: 10px;">
+                <a href="https://notebooklm.google.com/notebook/71de026e-12c8-4384-a238-35d2063e6120" target="_blank" style="color: #ffc107; font-size: 0.9em; text-decoration: none; font-weight: bold; border: 1px dashed #ffc107; padding: 5px 10px; border-radius: 4px;">
+                    ✨ Interactuar con esta lección en NotebookLM
+                </a>
+            </div>
+
+            <p style="font-size: 0.75em; color: rgba(255,255,255,0.7); margin-top: 10px; text-align: center;">
+                Nota: Se requiere cuenta de Google para acceder al asistente inteligente.
+            </p>
+
+            <p class="podcast-meta" style="margin-top: 15px;"><span class="duracion">⏱️ Duración: Superior a 15 min</span></p>
         </div>
-        
-        <p class="podcast-meta">
-            <span class="duracion">⏱️ 12:50 min</span>
-            <span class="formato">🔊 MP3</span>
-        </p>
     </section>
 
     <!-- Sección de Preguntas de Consolidación (NUEVA) -->

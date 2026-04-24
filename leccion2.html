@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección 2: Ley de Ohm - Fundamentos de Sistemas Digitales</title>
+    <title>Lección 2: Voltaje y Resistencia (Fricción y Calor)</title>
     <link rel="stylesheet" href="estilos.css">
     
     <!-- KaTeX Configurado (Soporte para $ y \ ) -->
@@ -54,7 +54,7 @@
         
         <div class="svg-container">
             <img src="img/simbolo-resistencias.png" alt="Símbolos de una resistencia: en forma de zigzag y como un rectángulo" style="max-width:60%; height:auto;";>
-            <p></small><em>Fig. 1: Símbolos de una resistencia: en forma de zigzag y como un rectángulo.</em></small></p>
+            <p><small><em>Fig. 1: Símbolos de una resistencia: en forma de zigzag y como un rectángulo.</em></small></p>
         </div>
 
         <p>
@@ -62,8 +62,7 @@
             Omega (<strong>\(\Omega\)</strong>) para abreviar esa unidad — igual que usamos <em>"m"</em> 
             para metros o <em>"kg"</em> para kilogramos. Por ejemplo: una resistencia de <em>220\(\Omega\)</em> significa 
             "220 ohmios de oposición al paso de la corriente".
-
-        
+        </p>
 
             <div class="dato-extra">
                 <h4>📖 Dato Curioso: Normativas Internacionales</h4>
@@ -304,16 +303,19 @@
                 <strong>dos líneas paralelas</strong>:
             </p>
             <div class="svg-container">
-                <img src="img/simbolo-pila.png" alt="Símbolo de una pila (5V), con dos barras paralelas." style="max-width:60%; height:auto;";>
-                <p></small><em>Fig. 3: Símbolo de una pila (5V), con dos barras paralelas.</em></small></p>
+                <img src="img/simbolo-pila.png" alt="Símbolo de una pila (5V), con dos barras paralelas." style="max-width:60%; height:auto;">
+                <p><small><em>Fig. 3: Símbolo de una pila (5V), con dos barras paralelas.</em></small></p>
             </div>
             <ul>
                 <li><strong>Línea larga (+):</strong> El polo positivo, donde sale la energía (5V en nuestro caso).</li>
                 <li><strong>Línea corta (–):</strong> El polo negativo, donde regresa la energía (también llamado <em>Tierra</em> o <em>GND</em>).</li>
             </ul>
+
+            <p><strong>📌 Diferencia clave entre pila y batería:</strong> Una <strong>pila</strong> es un solo elemento químico (un solo par de líneas en el símbolo). Una <strong>batería</strong> es la conexión de <em>varias pilas en serie</em> dentro del mismo encapsulado (múltiples pares de líneas en el símbolo). En la práctica cotidiana, solemos llamar "batería" a lo que técnicamente es una pila (como una AA), pero en los esquemáticos eléctricos esta diferencia es importante.</p>
+            
             <p>
-            El voltaje se indica siempre al lado del símbolo de la pila. En nuestro caso, 
-            usamos una fuente de <strong>5V</strong> (los cables rojo y negro de un viejo cargador telefónico) para alimentar el circuito.
+                El voltaje se indica siempre al lado del símbolo de la pila. En nuestro caso, 
+                usamos una fuente de <strong>5V</strong> (los cables rojo y negro de un viejo cargador telefónico) para alimentar el circuito.
             </p>
             
             <div class="destacado">
@@ -323,7 +325,7 @@
             
             <div class="imagen-simbolo" style="text-align: center; margin: 15px 0;">
                 <img src="img/simbolo-bateria.png" alt="Símbolo de batería en esquemas eléctricos" style="max-width: 150px; height: auto;">
-                <p></small><em>Fig. 4: Símbolo de batería en esquemas eléctricos</small></em></p>
+                <p><small><em>Fig. 4: Símbolo de batería en esquemas eléctricos</em></small></p>
             </div>
             
             <p>Este símbolo representa una <span style="font-weight: bold;">batería</span> (varias pilas conectadas), no una sola pila. ¿Por qué? Porque:</p>
@@ -352,8 +354,8 @@
             y se representa con un símbolo específico: <strong>tres líneas horizontales decrecientes</strong>.
             </p>
             <div class="svg-container">
-                <img src="img/simbolo-tierra.png" alt="Símbolo de tierra (gnd), tres líneas paralelas decrecientes." style="maxhorizontales  y decrecientes." style="max-width:60%; height:auto;";>
-                <p><small><em>Fig. 5: Símbolo de tierra (gnd), con tres líneas horizontales paralelas que van decreciendo.</small></p>
+                <img src="img/simbolo-tierra.png" alt="Símbolo de tierra (gnd), con tres líneas horizontales paralelas que van decreciendo." style="max-width:60%; height:auto;">
+                <p><small><em>Fig. 5: Símbolo de tierra (gnd), con tres líneas horizontales paralelas que van decreciendo.</em></small></p>
             </div>
 
             <p>
@@ -387,8 +389,8 @@
             </p>
 
             <div class="svg-container">
-            <img src="img/figura_circuito_completo.png" alt="Circuito completo con pila (5V), resistencia (220 Ω), LED y tierra (GND)" style="max-width:60%; height:auto;";>
-            <p></small><em>Fig. 6: Circuito completo con pila (5V), resistencia (220 Ω), LED y tierra (GND). 
+            <img src="img/figura_circuito_completo.png" alt="Circuito completo con pila (5V), resistencia (220 Ω), LED y tierra (GND)" style="max-width:60%; height:auto;">
+            <p><small><em>Fig. 6: Circuito completo con pila (5V), resistencia (220 Ω), LED y tierra (GND). 
             Arriba: Estilo americano de resistencia (zigzag). Abajo: Estilo europeo (rectángulo) - 
             <strong>Recomendado para este curso</strong>.</em></small></p>
             </div>
@@ -465,29 +467,70 @@
     </section>
 
     <!-- === PODCAST: Conversación entre Expertos === -->
-    <section class="podcast-section">
-        <div class="podcast-header">
-            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
-            </svg>
-            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+    <!-- === SECCIÓN PODCASTS DOBLES (LECCIÓN 2) === -->
+    <section class="podcasts-container" style="margin-top: 40px;">
+        
+        <!-- PODCAST 1: GRADO 7° (Nivel Básico - Color Diferenciado) -->
+        <div class="podcast-section" style="background: linear-gradient(135deg, #48c6ef 0%, #6f86d6 100%); margin-bottom: 20px; box-shadow: 0 4px 15px rgba(72, 198, 239, 0.2);">
+            <div class="podcast-header">
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                </svg>
+                <div style="display: flex; flex-direction: column;">
+                    <h3 style="color: white; margin: 0;">🎧 Podcast: Nivel Iniciación</h3>
+                    <p style="color: rgba(255,255,255,0.9); margin: 0; font-size: 0.85em; font-weight: bold;">Recomendado para Grado 7°</p>
+                </div>
+            </div>
+            
+            <p class="podcast-descripcion">
+                Una charla amena sobre cómo el voltaje empuja y la resistencia frena, usando la analogía del parque de diversiones y los toboganes.
+            </p>
+            
+            <div class="podcast-player">
+                <audio controls preload="metadata">
+                    <source src="audio/leccion2.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+            </div>
+            <p class="podcast-meta"><span class="duracion">⏱️ 14:26 min</span></p>
         </div>
-        
-        <p class="podcast-descripcion">
-            Dos personas analizan los conceptos de esta lección y comparten estrategias para enseñar la Ley de Ohm en el aula. ¡Perfecto para tu formación!
-        </p>
-        
-        <div class="podcast-player">
-            <audio controls preload="metadata">
-                <source src="audio/leccion2.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
-            </audio>
+
+        <!-- PODCAST 2: GRADO 10° (Nivel Avanzado - Color Original) -->
+        <div class="podcast-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <div class="podcast-header">
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                </svg>
+                <div style="display: flex; flex-direction: column;">
+                    <h3 style="color: white; margin: 0;">🎧 Podcast: Profundización Científica</h3>
+                    <p style="color: rgba(255,255,255,0.9); margin: 0; font-size: 0.85em; font-weight: bold;">Recomendado para Grado 10°</p>
+                </div>
+            </div>
+            
+            <p class="podcast-descripcion">
+                Esta lección técnica profundiza en el voltaje y la resistencia. Analiza la fricción atómica que genera calor, la Ley de Ohm como herramienta de protección y el legado de James Watt en la ingeniería moderna.
+            </p>
+            
+            <div class="podcast-player">
+                <audio controls preload="metadata">
+                    <source src="audio/leccion2_10.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+            </div>
+            
+            <!-- Enlace a NotebookLM -->
+            <div style="text-align: center; margin-top: 10px;">
+                <a href="https://notebooklm.google.com/notebook/dff85442-d667-4c0f-883c-9ff153d3d2fc" target="_blank" style="color: #ffc107; font-size: 0.9em; text-decoration: none; font-weight: bold; border: 1px dashed #ffc107; padding: 5px 10px; border-radius: 4px;">
+                    ✨ Interactuar con esta lección en NotebookLM
+                </a>
+            </div>
+
+            <p style="font-size: 0.75em; color: rgba(255,255,255,0.7); margin-top: 10px; text-align: center;">
+                Nota: Se requiere cuenta de Google para acceder al asistente inteligente.
+            </p>
+
+            <p class="podcast-meta" style="margin-top: 15px;"><span class="duracion">⏱️ Duración: Superior a 15 min</span></p>
         </div>
-        
-        <p class="podcast-meta">
-            <span class="duracion">⏱️ 14:26 min</span>
-            <span class="formato">🔊 MP3</span>
-        </p>
     </section>
 
     <!-- Sección de Preguntas de Consolidación -->

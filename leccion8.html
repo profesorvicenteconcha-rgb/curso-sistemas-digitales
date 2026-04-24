@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección 8: AC, DC y Condensadores - Fundamentos de Sistemas Digitales</title>
+    <title>Lección 8: Energía Estable (Triple Alianza: AC/DC/7805)</title>
     <link rel="stylesheet" href="estilos.css">
     <!-- KaTeX -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
@@ -150,7 +150,18 @@
 
                 </div>
 
-
+                <!-- === NUEVA FIGURA: ANATOMÍA DEL 7805 === -->
+                <div class="svg-container" style="background-color: white; padding: 20px; border-radius: 12px; border: 1px solid #e1bee7; margin-top: 20px;">
+                    <img src="img/regulador_7805_pinout.png" alt="Anatomía y Pines del Regulador 7805" style="max-width: 60%; height: auto;">
+                    <p style="margin-top: 15px; color: #444; line-height: 1.6;">
+                        <small><em>Fig. 3: El 7805 por fuera y por dentro. Observa que el orden de los pines es vital: 
+                        <strong>1. Entrada</strong> (voltaje sucio), <strong>2. Salida</strong> (5V puros) y 
+                        <strong>3. GND</strong> (el ancla común).</em></small>
+                    </p>
+                    <div style="background-color: #f3e5f5; padding: 10px; border-radius: 6px; font-size: 0.85em; color: #4a148c; border-left: 4px solid #9c27b0; text-align: left; display: inline-block;">
+                        <strong>⚠️ Nota de montaje:</strong> Mirando el componente de frente (donde están las letras), los pines se cuentan de izquierda a derecha como 1, 2 y 3.
+                    </div>
+                </div>
                 
                 <div class="svg-container" style="margin-top: 25px; background: white; padding: 15px; border-radius: 12px;">
                     <!-- Imagina una gráfica aquí que muestre: Onda AC -> Onda Jorobada -> Línea con Rizado -> Línea Recta 5V -->
@@ -917,15 +928,11 @@
             <div style="text-align: center; margin: 25px 0; padding: 20px; background: #f8f9fa; border-radius: 8px;">
                 <pre style="font-family: 'Courier New', monospace; font-size: 1.1em; line-height: 1.6; background: white; padding: 15px; border-radius: 6px; border: 1px solid var(--color-borde);">
 
-                    <img src="img/circuito-inversor-esquema-referencia.png" alt="LED apagado y pulsador cerrado" style="max-width: 75%; height: auto; border-radius: 8px; margin: 2px 0;">
+                    <img src="img/circuito-inversor-esquema-referencia.png" alt="LED apagado y pulsador cerrado. Esquema del circuito inversor con 5V, resistencias, pulsador, LED y capacitor" style="max-width: 75%; height: auto; border-radius: 8px; margin: 2px 0;">
                     <strong>Estado 1:</strong> Pulsador ABIERTO  → LED = <span style="color: #28a745; font-weight: bold;">ENCENDIDO</span> (1)
                     <strong>Estado 2:</strong> Pulsador CERRADO → LED = <span style="color: #dc3545; font-weight: bold;">APAGADO</span>  (0)
+                    
                 </pre>
-            </div>
-
-            <div style="text-align: center; background: #f8f9fa; border-radius: 8px; padding: 20px; margin: 25px 0;">
-                <h4 style="color: var(--color-primario); margin-top: 0;">Circuito Inversor - Esquema de Referencia</h4>
-                <img src="img/circuito-inversor-esquema-referencia.png" alt="Esquema del circuito inversor con 5V, resistencias, pulsador, LED y capacitor" style="max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0;">
                 <p class="leyenda" style="font-style: italic; color: #6c757d; margin-top: 8px; font-size: 0.9em;">El circuito que analizaste en la Lección 8: cuando el pulsador está abierto, el LED está encendido (1); cuando está presionado, el LED se apaga (0).</p>
             </div>
             

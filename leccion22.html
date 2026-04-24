@@ -91,6 +91,18 @@
             <p>Si cambias el interruptor de 1 a 0, durante esos minúsculos nanosegundos de desfase, la compuerta OR podría recibir dos ceros al mismo tiempo, provocando que la salida caiga a 0 por un instante antes de volver a 1. A esto se le llama un <strong>Riesgo Lógico (Logic Hazard) o Glitch</strong>. ¡El buen ingeniero sabe que las matemáticas son perfectas, pero los electrones toman tiempo en viajar!</p>
         </div>
 
+        <!-- === EL BUFFER COMO SOLUCIÓN TÉCNICA === -->
+        <div class="dato-extra" style="background-color: #f1f8e9; border-left: 5px solid #4caf50; margin: 30px 0;">
+            <h4 style="color: #2e7d32; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">⏱️</span> El Buffer: El "Reloj de Arena" del Ingeniero
+            </h4>
+            <p>Mencionamos que los <strong>Glitches</strong> ocurren porque una señal llega más tarde que otra. ¿Cómo lo arreglan los profesionales? Usando el chip <strong>7407 (Buffer)</strong>.</p>
+            <p>Si la señal A llega "muy rápido" a una compuerta y causa un error, el ingeniero inserta un Buffer en su camino. Como el Buffer no cambia la lógica (entra 1, sale 1), su única función real aquí es <strong>añadir un retraso intencional</strong> para que A espere a sus compañeras y todas lleguen a la meta al mismo tiempo.</p>
+            <p style="margin-bottom: 0; font-style: italic; color: #555;">
+                <strong>Dato de Laboratorio:</strong> En los planos verás el símbolo del triángulo (IEC) que estudiamos en la Lección 18. Es el componente que "hace tiempo" para salvar la estabilidad del sistema.
+            </p>
+        </div>
+
         <!-- CONTRADICCIONES (SIEMPRE 0) -->
         <div class="destacado" style="background-color: #ffebee; border-left-color: #c62828;">
             <h3 style="color: #b71c1c; margin-top: 0;">⭕ Siempre 0: Contradicciones</h3>

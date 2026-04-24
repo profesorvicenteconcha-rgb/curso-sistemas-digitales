@@ -6,176 +6,138 @@
     <title>Simbología y Convenciones - Fundamentos de Sistemas Digitales</title>
     <link rel="stylesheet" href="estilos.css">
     <style>
-        .tabla-simbolos {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
-        }
-        .tabla-simbolos th {
-            background-color: var(--color-primario);
-            color: white;
-            padding: 12px;
-            text-align: left;
-        }
-        .tabla-simbolos td {
-            border-bottom: 1px solid #eee;
-            padding: 15px;
-            vertical-align: middle;
-        }
-        .tabla-simbolos tr:hover {
-            background-color: #f1f3f5;
-        }
-        .simbolo-img {
-            max-width: 60px; /* Tamaño controlado */
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-        .col-simbolo { width: 15%; text-align: center; }
+        .tabla-simbolos { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; }
+        .tabla-simbolos th { background-color: var(--color-primario); color: white; padding: 12px; text-align: left; }
+        .tabla-simbolos td { border-bottom: 1px solid #eee; padding: 15px; vertical-align: middle; }
+        .simbolo-img { max-width: 60px; height: auto; display: block; margin: 0 auto; }
         .col-nombre { width: 25%; font-weight: bold; color: var(--color-primario); }
-        .col-desc { width: 60%; font-size: 0.95em; color: #444; }
-
-        /* Botón de impresión */
-        .btn-print {
-            background-color: #6c757d;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-        .btn-print:hover { background-color: #5a6268; }
-
-        /* Ocultar elementos al imprimir */
-        @media print {
-            .btn-navegacion, .btn-print, header p { display: none; }
-            .contenedor { box-shadow: none; border: none; width: 100%; margin: 0; padding: 0; }
-            body { background: white; }
-            a { text-decoration: none; color: black; }
-        }
+        .categoria-header { background-color: #f1f3f5; font-weight: bold; color: #495057; padding: 10px; border-left: 5px solid var(--color-secundario); margin-top: 30px; }
+        @media print { .btn-navegacion, .btn-print { display: none; } }
     </style>
 </head>
 <body>
 
 <div class="contenedor">
     <header>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <p><small>Recursos de Referencia</small></p>
-                <h1>📐 Simbología y Convenciones</h1>
-            </div>
-            <button onclick="window.print()" class="btn-print">🖨️ Imprimir Ficha</button>
-        </div>
+        <h1>📐 Diccionario de Símbolos</h1>
+        <p>Tu guía de referencia rápida para interpretar esquemas lógicos y electrónicos.</p>
     </header>
 
     <section>
-        <p>Guía definitiva de lectura de planos para Ingeniería Digital. Ten esta hoja a mano en tus laboratorios.</p>
-
-        <h2>1. Conexiones (La Regla del Punto)</h2>
-        <div class="svg-container" style="border: 1px solid #eee; padding: 10px; border-radius: 8px;">
-            <img src="img/convencion_nodos.png" alt="Cruce con punto = Conexión. Cruce sin punto = Salto." style="max-width:300px;">
-            <p><small><strong>Izquierda:</strong> Nodo (Conectado). <strong>Derecha:</strong> Salto (No conectado).</small></p>
-        </div>
-
-        <h2>2. Componentes Pasivos y Energía</h2>
+        <!-- CATEGORÍA 1: ENERGÍA Y PROTECCIÓN -->
+        <div class="categoria-header">1. Energía, Protección y Regulación</div>
         <table class="tabla-simbolos">
-            <thead>
-                <tr>
-                    <th class="col-simbolo">Símbolo</th>
-                    <th class="col-nombre">Nombre</th>
-                    <th class="col-desc">Función y Notas</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><img src="img/sim_resistencia.png" alt="Resistencia" class="simbolo-img"></td>
-                    <td class="col-nombre">Resistencia</td>
-                    <td class="col-desc">Se opone a la corriente. <strong>ANSI:</strong> Zigzag (el que usamos). <strong>IEC:</strong> Rectángulo.</td>
-                </tr>
-                <tr>
-                    <td><img src="img/sim_condensador.png" alt="Condensador" class="simbolo-img"></td> <!-- NUEVO -->
-                    <td class="col-nombre">Condensador</td>
-                    <td class="col-desc">Almacena energía. Dos líneas paralelas. Si una es curva o tiene un (+), es polarizado (Electrolítico).</td>
-                </tr>
-                <tr>
-                    <td><img src="img/sim_vcc.png" alt="VCC 5V" class="simbolo-img"></td> <!-- NUEVO -->
-                    <td class="col-nombre">VCC (+5V)</td>
-                    <td class="col-desc">Fuente de alimentación positiva. Generalmente una flecha hacia arriba o una barra.</td>
-                </tr>
-                <tr>
-                    <td><img src="img/sim_tierra.png" alt="Tierra GND" class="simbolo-img"></td>
-                    <td class="col-nombre">Tierra (GND)</td>
-                    <td class="col-desc">Referencia de 0 Voltios. El negativo común de todo el circuito.</td>
-                </tr>
-                <tr>
-                    <td><img src="img/sim_led.png" alt="LED" class="simbolo-img"></td>
-                    <td class="col-nombre">LED</td>
-                    <td class="col-desc">Diodo Emisor de Luz. El triángulo apunta al Cátodo (-) y la barra lo detiene.</td>
-                </tr>
-                <tr>
-                    <td><img src="img/sim_switch.png" alt="Pulsador" class="simbolo-img"></td>
-                    <td class="col-nombre">Pulsador (NO)</td>
-                    <td class="col-desc">Normalmente Abierto. Solo conecta mientras presionas. (Dibujado abierto).</td>
-                </tr>
-            </tbody>
+            <tr>
+                <td><img src="img/sim_vcc.png" alt="VCC" class="simbolo-img"></td>
+                <td class="col-nombre">Vcc / +5V</td>
+                <td>Alimentación positiva. Indica conexión a la fuente de poder (+5V).</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_tierra.png" alt="GND" class="simbolo-img"></td>
+                <td class="col-nombre">GND (Tierra)</td>
+                <td>Punto de retorno (0V). El ancla del circuito.</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_7805.png" alt="7805" class="simbolo-img"></td>
+                <td class="col-nombre">Regulador 7805</td>
+                <td>Mantiene el voltaje en 5V estables aunque la batería sea de 9V o 12V.</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_diodo.png" alt="Diodo" class="simbolo-img"></td>
+                <td class="col-nombre">Diodo 1N4007</td>
+                <td>Válvula de seguridad. Solo deja pasar corriente en un sentido. Protege contra polaridad invertida.</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_pila.png" alt="Pila" class="simbolo-img"></td>
+                <td class="col-nombre">Pila / Batería</td>
+                <td>Fuente de energía química. La línea larga es (+) y la corta es (-). </strong> Una <strong>pila</strong> es un solo elemento químico (un solo par de líneas en el símbolo). Una <strong>batería</strong> es la conexión de <em>varias pilas en serie</em> dentro del mismo encapsulado (múltiples pares de líneas en el símbolo).</td>
+            </tr>
         </table>
 
-        <h2>3. Lógica Digital (Familia 74xx)</h2>
+        <!-- CATEGORÍA 2: ENTRADAS Y SALIDAS -->
+        <div class="categoria-header">2. Componentes de Entrada y Salida</div>
         <table class="tabla-simbolos">
-            <thead>
-                <tr>
-                    <th class="col-simbolo">Símbolo</th>
-                    <th class="col-nombre">Compuerta</th>
-                    <th class="col-desc">Lógica</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><img src="img/sim_not.png" alt="NOT" class="simbolo-img"></td>
-                    <td class="col-nombre">NOT (7404)</td>
-                    <td class="col-desc"><strong>Inversor.</strong> Triángulo con burbuja. (1 &rarr; 0).</td>
-                </tr>
-                <tr>
-                    <td><img src="img/sim_and.png" alt="AND" class="simbolo-img"></td>
-                    <td class="col-nombre">AND (7408)</td>
-                    <td class="col-desc"><strong>Multiplicación.</strong> Forma de "D". Todo en 1 para salir 1.</td>
-                </tr>
-                <tr>
-                    <td><img src="img/sim_nand.png" alt="NAND" class="simbolo-img"></td> <!-- NUEVO -->
-                    <td class="col-nombre">NAND (7400)</td>
-                    <td class="col-desc"><strong>No-Y.</strong> Una AND con burbuja al final. Universal.</td>
-                </tr>
-                <tr>
-                    <td><img src="img/sim_or.png" alt="OR" class="simbolo-img"></td>
-                    <td class="col-nombre">OR (7432)</td>
-                    <td class="col-desc"><strong>Suma.</strong> Forma curva. Basta uno en 1 para salir 1.</td>
-                </tr>
-                <tr>
-                    <td><img src="img/sim_nor.png" alt="NOR" class="simbolo-img"></td> <!-- NUEVO -->
-                    <td class="col-nombre">NOR (7402)</td>
-                    <td class="col-desc"><strong>No-O.</strong> Una OR con burbuja al final. Universal.</td>
-                </tr>
-                <tr>
-                    <td><img src="img/sim_xor.png" alt="XOR" class="simbolo-img"></td>
-                    <td class="col-nombre">XOR (7486)</td>
-                    <td class="col-desc"><strong>Exclusiva.</strong> Doble línea curva. Salida 1 si son diferentes.</td>
-                </tr>
-            </tbody>
+            <tr>
+                <td><img src="img/sim_switch_no.png" alt="Pulsador NO" class="simbolo-img"></td>
+                <td class="col-nombre">Interruptor NO</td>
+                <td><strong>Normalmente Abierto.</strong> Solo conecta cuando se presiona (ej. Timbre).</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_switch_nc.png" alt="Pulsador NC" class="simbolo-img"></td>
+                <td class="col-nombre">Interruptor NC</td>
+                <td><strong>Normalmente Cerrado.</strong> Se desconecta al presionar (ej. Luz de nevera).</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_led.png" alt="LED" class="simbolo-img"></td>
+                <td class="col-nombre">LED</td>
+                <td>Diodo emisor de luz. Requiere polaridad correcta para encender.</td>
+            </tr>
         </table>
 
-        <div class="dato-extra">
-            <h3>⚠️ La Burbuja Mágica</h3>
-            <p>En los diagramas digitales, siempre que veas un pequeño círculo (o burbuja) en una pata, significa <strong>INVERSIÓN (NOT)</strong>. Si la burbuja está a la salida, la salida se niega. Si está a la entrada, la entrada se niega antes de entrar.</p>
-        </div>
+        <!-- CATEGORÍA 3: COMPONENTES PASIVOS -->
+        <div class="categoria-header">3. Componentes Pasivos</div>
+        <table class="tabla-simbolos">
+            <tr>
+                <td><img src="img/sim_resistencia.png" alt="Resistencia" class="simbolo-img"></td>
+                <td class="col-nombre">Resistencia</td>
+                <td>Limita la corriente. Se mide en Ohmios (Ω).</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_condensador_e.png" alt="Condensador Electrolítico" class="simbolo-img"></td>
+                <td class="col-nombre">Condensador (E)</td>
+                <td><strong>Polarizado.</strong> Almacena energía. Tiene lado negativo (-) marcado.</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_condensador_c.png" alt="Condensador Cerámico" class="simbolo-img"></td>
+                <td class="col-nombre">Condensador (C)</td>
+                <td><strong>No polarizado.</strong> Filtra ruidos rápidos. Se puede conectar en cualquier sentido.</td>
+            </tr>
+        </table>
 
-        <p style="text-align: center; margin-top: 30px;">
-            <a href="index.html" class="btn-navegacion">← Volver al Índice</a>
-        </p>
+        <!-- CATEGORÍA 4: COMPUERTAS LÓGICAS -->
+        <div class="categoria-header">4. Lógica Digital (Chips 74xx)</div>
+        <table class="tabla-simbolos">
+            <tr>
+                <td><img src="img/sim_not.png" alt="NOT" class="simbolo-img"></td>
+                <td class="col-nombre">NOT (7404)</td>
+                <td><p>Inversor. Convierte 1 en 0 y viceversa. </p>Símbolo ANSI/IEEE (Superior) el triángulo con una "burbuja" de inversión en la salida y Símbolo IEC 60617 (Inferior) el rectángulo con un "1" en su interior.</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_and.png" alt="AND" class="simbolo-img"></td>
+                <td class="col-nombre">AND (7408)</td>
+                <td>Solo da 1 si TODAS las entradas son 1.</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_or.png" alt="OR" class="simbolo-img"></td>
+                <td class="col-nombre">OR (7432)</td>
+                <td>Da 1 si AL MENOS UNA entrada es 1.</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_nand.png" alt="NAND" class="simbolo-img"></td>
+                <td class="col-nombre">NAND (7400)</td>
+                <td>Puerta universal. Es una AND con la salida invertida.</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_nor.png" alt="NOR" class="simbolo-img"></td>
+                <td class="col-nombre">NOR (7402)</td>
+                <td>Puerta universal. Es una OR con la salida invertida.</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_xor.png" alt="XOR" class="simbolo-img"></td>
+                <td class="col-nombre">XOR (7486)</td>
+                <td>Detecta diferencias. Da 1 si las entradas son distintas.</td>
+            </tr>
+            <tr>
+                <td><img src="img/sim_xnor.png" alt="XNOR" class="simbolo-img"></td>
+                <td class="col-nombre">XNOR (74266)</td>
+                <td>Detecta igualdad. Da 1 si las entradas son iguales.</td>
+            </tr>
+        </table>
     </section>
+
+    <footer>
+        <a href="index.html" class="btn-navegacion">🏠 Volver al Inicio</a>
+    </footer>
 </div>
 
 </body>
