@@ -314,31 +314,26 @@
             <p>Dibuja la tabla de verdad en tu cuaderno. ¿En cuántos casos logras abrir la caja? (Respuesta: Solo 1 de 4).</p>
         </div>
 
-        <!-- === PODCAST: Conversación entre Expertos === -->
-        <section class="podcast-section">
+        <!-- === PODCAST 1: EL CONTRATO DEL DISEÑO (GRADO 10°) === -->
+        <section class="podcast-section" style="border-left: 5px solid #0d47a1;">
             <div class="podcast-header">
-                <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="#0d47a1" style="width:30px;">
                     <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
                 </svg>
-                <h3>🎧 Podcast: Conversación entre Expertos</h3>
+                <h3 style="color: #0d47a1;">🎧 Podcast: El Mapa sin Puntos Ciegos (Rigor Técnico 10°)</h3>
             </div>
             
             <p class="podcast-descripcion">
-                Dos expertos analizan los conceptos de esta lección y comparten estrategias para enseñar las Tablas de Verdad y su importancia como herramienta visual para entender circuitos lógicos. Discuten cómo introducir la idea de "todas las posibilidades" de forma comprensible y cómo conectar este concepto con la toma de decisiones en la vida cotidiana y con la operación de las computadoras. Comparten analogías útiles y reflexiones sobre la integración de herramientas digitales, como simuladores o IA, para verificar tablas de verdad y explorar funciones complejas.
+                Enfocado en el rigor del diseño industrial. Analizamos por qué la Tabla de Verdad es un contrato inquebrantable, la técnica del "odómetro" para contar en binario sin errores y cómo evitar fallos catastróficos mediante el mapeo exhaustivo de variables.
             </p>
             
             <div class="podcast-player">
-                <audio controls preload="metadata">
-                    <!-- Asegúrate de reemplazar 'audio/leccion13_podcast.mp3' con la ruta correcta a tu archivo de audio cuando esté listo -->
+                <audio controls>
                     <source src="audio/leccion13.mp3" type="audio/mpeg">
-                    Tu navegador no soporta el elemento de audio.
+                    Tu navegador no soporta el audio.
                 </audio>
             </div>
-            
-            <p class="podcast-meta">
-                <span class="duracion">⏱️ 12:37 min</span>
-                <span class="formato">🔊 MP3</span>
-            </p>
+            <p style="font-size: 0.8em; opacity: 0.8; margin-top: 10px;">⏱️ 12:37 min | 🛠️ Enfoque: Diseño y Especificación</p>
         </section>
         <!-- === /PODCAST: Conversación entre Expertos === -->
 
@@ -388,30 +383,43 @@
     <p>¡Perfecto! Ya no tienes que adivinar; con la tabla sabes exactamente qué hace el circuito. Pero... ¿qué pasa si la tabla nos dice que necesitamos una ecuación gigante con muchos chips? ¿Es obligatorio armarla así? <strong>No.</strong> En la próxima lección, aprenderemos los <strong>Trucos de Magia Matemática</strong> (Propiedades y Leyes de De Morgan) para convertir circuitos monstruosos en soluciones elegantes y baratas.</p>
 
     <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
-    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-left: 8px solid #00dfd8;">
+    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white; border-radius: 15px; border-left: 8px solid #00dfd8;">
         <h3 style="color: #00dfd8; margin-top: 0; display: flex; align-items: center; gap: 10px;">
             <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: El Camino a la IA
         </h3>
-        
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+            <div>
                 <h4 style="color: #ffeb3b; margin-top: 0;">Para Grado 7°: La IA es una Tabla que Aprende</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">Imagina que tu tabla de verdad de la alarma (M y V) está en blanco. Una IA es como un bebé que empieza a recibir ejemplos: <em>"Hubo movimiento y nadie entró, no suenes"</em> o <em>"No hubo movimiento pero abrieron la ventana, ¡suena!"</em>. Después de ver mil ejemplos, la IA <strong>llena sola</strong> la columna de salida. ¡Eso es el Aprendizaje Automático!</p>
+                <p style="font-size: 0.9em;">Una IA es como un bebé que recibe ejemplos: <em>"Abrir ventana y hay movimiento, entonces suena"</em>. Tras ver mil ejemplos, la IA llena sola los resultados de su propia tabla. ¡Eso es Machine Learning!</p>
             </div>
-            
-            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #ffeb3b; margin-top: 0;">Para Grado 10°: El Perceptrón (La Neurona Lógica)</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">¿Sabías que una Red Neuronal está hecha de miles de "pequeñas tablas"? La unidad básica se llama <strong>Perceptrón</strong>. Un perceptrón puede ser entrenado para comportarse exactamente como una compuerta AND o una OR. La diferencia es que en IA, los "cables" tienen <strong>pesos</strong> que se ajustan hasta que la tabla de verdad de la neurona coincide con la realidad.</p>
+            <div>
+                <h4 style="color: #ffeb3b; margin-top: 0;">Para Grado 10°: El Perceptrón</h4>
+                <p style="font-size: 0.9em;">Las Redes Neuronales están hechas de unidades llamadas Perceptrones. Un perceptrón se entrena para imitar tablas de verdad ajustando "pesos" en sus entradas. ¡La lógica que diseñas hoy es el ADN de ChatGPT!</p>
             </div>
-        </div>
-
-        <div style="margin-top: 20px; padding: 15px; background: rgba(0,223,216,0.1); border-radius: 8px; border: 1px dashed #00dfd8;">
-            <p style="margin: 0; text-align: center; font-weight: bold;">
-                🚀 Conexión Futura: En la Lección 30, usaremos estas Tablas de Verdad para construir nuestra primera "Red Neuronal de Papel". ¡La lógica que aprendes hoy es el ADN de ChatGPT!
-            </p>
         </div>
     </div>
-    <!-- === FIN BLOQUE IA === -->
+
+    <!-- === PODCAST 2: LA LÓGICA QUE APRENDE (ENFOQUE IA) === -->
+    <section class="podcast-ia">
+        <h3>
+            <svg style="width:30px; height:30px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,12.5A1.5,1.5 0 0,0 10.5,14A1.5,1.5 0 0,0 12,15.5A1.5,1.5 0 0,0 13.5,14A1.5,1.5 0 0,0 12,12.5Z" />
+            </svg>
+            IA y Tablas: ¿De programar a entrenar?
+        </h3>
+        
+        <p class="podcast-descripcion">
+            ¿Puede una máquina crear su propia tabla de verdad? Exploramos el salto de la lógica estática (donde el ingeniero decide) a la lógica dinámica de la IA. Analizamos cómo el Machine Learning consiste en "llenar los unos y ceros" analizando datos, y cómo el Perceptrón es el puente entre una compuerta AND y una neurona artificial.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls>
+                <source src="audio/leccion13_ia.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
+        </div>
+        <p style="font-size: 0.8em; opacity: 0.7; margin-top: 10px;">⏱️ 13:56 min | 🌐 Recomendado: Futuros Arquitectos de IA</p>
+    </section>
         
     <footer>
         <hr>

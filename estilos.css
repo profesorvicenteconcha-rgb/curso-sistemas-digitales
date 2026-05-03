@@ -1240,3 +1240,33 @@ footer { margin-top: 50px; text-align: center; color: #777; font-size: 0.9em; pa
     font-weight: bold;
     color: #155724;
 }
+
+/* CLASE GLOBAL PARA EL PODCAST DE IA */
+.podcast-ia {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 15px;
+    padding: 25px;
+    color: white;
+    margin: 30px 0;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    border-left: 8px solid #e94560; /* Color distintivo del track de IA */
+}
+
+.podcast-ia h3 {
+    color: #e94560;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.4em;
+}
+
+.podcast-ia .podcast-descripcion {
+    color: #aeb9cc;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.podcast-ia .podcast-player {
+    margin-top: 15px;
+}

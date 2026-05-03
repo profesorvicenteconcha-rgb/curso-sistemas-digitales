@@ -308,30 +308,26 @@
         </div>
     </div>
 
-    <!-- === PODCAST: Conversación entre Expertos === -->
-    <section class="podcast-section">
-    <div class="podcast-header">
-        <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
-        </svg>
-        <h3>🎧 Podcast: Conversación entre Expertos</h3>
-    </div>
-
-    <p class="podcast-descripcion">
-        Dos docentes analizan las Leyes de De Morgan y su papel como "trucos del mago" para simplificar circuitos lógicos. Comparten estrategias para enseñar la idea de "romper la barra y cambiar el signo", cómo evitar errores comunes al aplicar las reglas, y reflexionan sobre la importancia de que los futuros docentes no memoricen, sino que deduzcan y verifiquen con tablas de verdad. También discuten cómo integrar herramientas digitales (como IA o simuladores) para reforzar este proceso.
-    </p>
-
-    <div class="podcast-player">
-        <audio controls preload="metadata">
-        <source src="audio/leccion14.mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
-        </audio>
-    </div>
-
-    <p class="podcast-meta">
-        <span class="duracion">⏱️ 15:08 min</span>
-        <span class="formato">🔊 MP3</span>
-    </p>
+    <!-- === PODCAST 1: EL RIGOR DEL HARDWARE (GRADO 10°) === -->
+    <section class="podcast-section" style="border-left: 5px solid #0d47a1;">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="#0d47a1" style="width:30px;">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3 style="color: #0d47a1;">🎧 Podcast: El Arte del Ahorro (Rigor Técnico 10°)</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            ¿Por qué un ingeniero prefiere las matemáticas antes que el soldador? En este episodio exploramos cómo las Leyes de De Morgan y la Absorción permiten ahorrar millones en la fabricación de microchips. Analizamos la analogía del "Pastel de De Morgan" y cómo simplificar circuitos evita el calor y el desperdicio de energía.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls>
+                <source src="audio/leccion14.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
+        </div>
+        <p style="font-size: 0.8em; opacity: 0.8; margin-top: 10px;">⏱️ 15:08 min | 🛠️ Enfoque: Eficiencia Industrial</p>
     </section>
     <!-- === /PODCAST: Conversación entre Expertos === -->
 
@@ -411,30 +407,44 @@
     </div>
 
     <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
-    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-left: 8px solid #ffeb3b;">
+    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); color: white; border-radius: 15px; border-left: 8px solid #ffeb3b;">
         <h3 style="color: #ffeb3b; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: De Morgan y la IA Eficiente
+            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: De Morgan y la IA Ligera
         </h3>
-        
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+            <div>
                 <h4 style="color: #fff; margin-top: 0;">Para Grado 7°: Limpiando el Ruido</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">Imagina que tu cerebro está lleno de pensamientos repetidos y ruidosos. La IA usa reglas muy parecidas a la <strong>Idempotencia</strong> ($A+A=A$) para borrar datos duplicados. Así como tú simplificas una ecuación para que sea fácil de leer, los ingenieros de IA simplifican los datos para que la computadora no trabaje de más.</p>
+                <p style="font-size: 0.9em;">Las IAs reciben miles de datos duplicados. Usan reglas de "limpieza" para ignorar lo repetido y concentrarse en lo importante, igual que tú usas la Idempotencia.</p>
             </div>
-            
-            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #fff; margin-top: 0;">Para Grado 10°: "Pruning" (La Poda Neuronal)</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">En las Redes Neuronales modernas existe un proceso llamado <strong>Pruning</strong> (Poda). Consiste en identificar neuronas o conexiones que no aportan nada al resultado final, ¡igual que la <strong>Ley de Absorción</strong>! Al eliminar estas conexiones "redundantes", la IA se vuelve más rápida y puede correr en dispositivos pequeños como un reloj inteligente o un dron.</p>
+            <div>
+                <h4 style="color: #fff; margin-top: 0;">Para Grado 10°: Poda Neuronal (Pruning)</h4>
+                <p style="font-size: 0.9em;">En IA, borrar conexiones que no aportan nada se llama "Pruning". Es la versión moderna de la Ley de Absorción. Menos conexiones = IA más rápida.</p>
             </div>
-        </div>
-
-        <div style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; border: 1px dashed #ffeb3b;">
-            <p style="margin: 0; text-align: center; font-weight: bold;">
-                🚀 Conexión IA: Las Leyes de De Morgan nos enseñan que hay muchas formas de decir lo mismo. En IA, esto se llama "Equivalencia Funcional". ¡Aprender a simplificar hoy te permitirá diseñar las IAs ultra-rápidas del mañana!
-            </p>
         </div>
     </div>
     <!-- === FIN BLOQUE IA === -->
+
+    <!-- === PODCAST 2: EL ADN DE LA INTELIGENCIA (ENFOQUE IA) === -->
+    <section class="podcast-ia">
+        <h3>
+            <svg style="width:30px; height:30px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" />
+            </svg>
+            IA y Optimización: ¿Es más inteligente quien más olvida?
+        </h3>
+        
+        <p class="podcast-descripcion">
+            ¿Puede el "olvido" ser una forma de inteligencia? Analizamos cómo el <i>Pruning</i> (poda neuronal) permite que modelos gigantes como Llama o GPT corran en dispositivos pequeños. Descubre la analogía del "Editor de Cine" y cómo la Ley de Absorción es el secreto para que tu celular no explote de calor al procesar Inteligencia Artificial.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls>
+                <source src="audio/leccion14_ia.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
+        </div>
+        <p style="font-size: 0.8em; opacity: 0.7; margin-top: 10px;">⏱️ 33:43 min | 🌐 Recomendado: Futuros Desarrolladores de Software</p>
+    </section>
 
     <footer>
         <hr>

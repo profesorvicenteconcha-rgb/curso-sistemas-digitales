@@ -307,30 +307,26 @@
             </p>
         </div>
 
-        <!-- === PODCAST: Conversación entre Expertos === -->
-        <section class="podcast-section">
+        <!-- === PODCAST 1: EL RIGOR DEL HARDWARE (GRADO 10°) === -->
+        <section class="podcast-section" style="border-left: 5px solid #0d47a1;">
             <div class="podcast-header">
-                <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="#0d47a1" style="width:30px;">
+                    <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
                 </svg>
-                <h3>🎧 Podcast: Conversación entre Expertos</h3>
+                <h3 style="color: #0d47a1;">🎧 Podcast: El Tetris del Silicio (Rigor Técnico 10°)</h3>
             </div>
-
+            
             <p class="podcast-descripcion">
-                Dos docentes analizan el uso del Mapa de Karnaugh como herramienta visual para la simplificación de circuitos lógicos. Comparten estrategias para enseñar el concepto de agrupamiento y cómo evitar errores comunes como agrupar cantidades no potencia de 2 o no aprovechar al máximo las condiciones "Don't Care". Discuten cómo integrar herramientas digitales y la importancia de que los futuros docentes comprendan que Karnaugh es un puente entre la teoría y la implementación práctica con chips TTL.
+                ¿Cómo jugar al Tetris con unos y ceros? En este episodio exploramos el Mapa de Karnaugh. Descubrimos por qué el mundo digital es en realidad una "Dona" (Toroide), qué es el Código Gray y cómo usar las condiciones "X" (Don't Care) como comodines para ahorrar miles de dólares en circuitos.
             </p>
-
+            
             <div class="podcast-player">
-                <audio controls preload="metadata">
-                <source src="audio/leccion16.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
+                <audio controls>
+                    <source src="audio/leccion16.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el audio.
                 </audio>
             </div>
-
-            <p class="podcast-meta">
-                <span class="duracion">⏱️ 23:37 min</span>
-                <span class="formato">🔊 MP3</span>
-            </p>
+            <p style="font-size: 0.8em; opacity: 0.8; margin-top: 10px;">⏱️ 16:51 min | 🧩 Enfoque: Geometría y Optimización</p>
         </section>
         <!-- === /PODCAST: Conversación entre Expertos === -->
 
@@ -453,30 +449,44 @@
     </div>
 
     <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
-    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #2c3e50, #000000); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-left: 8px solid #9b59b6;">
+    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #2c3e50, #000000); color: white; border-radius: 15px; border-left: 8px solid #9b59b6;">
         <h3 style="color: #9b59b6; margin-top: 0; display: flex; align-items: center; gap: 10px;">
             <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: Mapas K y la Visión de la IA
         </h3>
-        
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+            <div>
                 <h4 style="color: #ecf0f1; margin-top: 0;">Para Grado 7°: Compresión de Imágenes</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">¿Alguna vez has visto una foto que se ve "pixelada" o con bloques de colores? La IA hace algo muy parecido a los Mapas K: agrupa píxeles que son casi iguales en un solo "bloque" para ahorrar espacio. ¡Agrupar unos en el mapa es la forma más básica de comprimir información!</p>
+                <p style="font-size: 0.9em;">Las IAs agrupan píxeles que se parecen para ahorrar memoria. Hacer un "globo" de unos en tu mapa es la forma más básica de compresión que existe.</p>
             </div>
-            
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+            <div>
                 <h4 style="color: #ecf0f1; margin-top: 0;">Para Grado 10°: Reducción de Dimensionalidad</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">En IA, cuando tenemos miles de variables, usamos técnicas como <strong>PCA (Análisis de Componentes Principales)</strong>. Al igual que en un Mapa K eliminamos la variable que "cambia sin afectar el resultado", la IA elimina las dimensiones que no aportan información útil para la predicción. ¡Un Mapa K es un reductor de dimensiones manual!</p>
+                <p style="font-size: 0.9em;">En IA usamos PCA para eliminar variables que no afectan el resultado. Tu Mapa K es un reductor de dimensiones manual que elimina el "ruido" de la ecuación.</p>
             </div>
-        </div>
-
-        <div style="margin-top: 20px; padding: 15px; background: rgba(155,89,182,0.1); border-radius: 8px; border: 1px dashed #9b59b6;">
-            <p style="margin: 0; text-align: center; font-weight: bold;">
-                🚀 Conexión Futura: En las Redes Neuronales Profundas, las capas ocultas actúan como "agrupadores automáticos" de características. ¡Lo que tú haces hoy con círculos de colores, Google lo hace con algoritmos matemáticos en millones de dimensiones!
-            </p>
         </div>
     </div>
     <!-- === FIN BLOQUE IA === -->
+
+    <!-- === PODCAST 2: EL ADN DE LA INTELIGENCIA (ENFOQUE IA) === -->
+    <section class="podcast-ia">
+        <h3>
+            <svg style="width:30px; height:30px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" />
+            </svg>
+            IA y Geometría: ¿Cómo resume el mundo una máquina?
+        </h3>
+        
+        <p class="podcast-descripcion">
+            Analizamos la conexión profunda entre los Mapas de Karnaugh y la IA de visión artificial. Descubre cómo las redes neuronales "comprimen" la realidad eliminando dimensiones innecesarias y por qué aprender a ver patrones en un tablero es la habilidad número uno de un científico de datos moderno.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls>
+                <source src="audio/leccion16_ia.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
+        </div>
+        <p style="font-size: 0.8em; opacity: 0.7; margin-top: 10px;">⏱️ 25:18 min | 🌐 Recomendado: Futuros Científicos de Datos</p>
+    </section>
 
     <footer>
         <hr>
