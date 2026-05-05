@@ -552,27 +552,26 @@
         </div>
     </section>
 
-    <!-- === PODCAST: Conversación entre Expertos === -->
-    <section class="podcast-section">
-        <div class="podcast-header">
-            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+    <!-- === PODCAST: Conversación entre Expertos (Técnico) === -->
+    <section class="podcast-section" style="border-left: 5px solid #0d47a1;">
+        <div class="podcast-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="#0d47a1" style="width:30px;">
                 <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
             </svg>
-            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+            <h3 style="color: #0d47a1; margin: 0;">🎧 Podcast: El Puente de Shannon</h3>
         </div>
+        
         <p class="podcast-descripcion">
-            Dos docentes exploran la magia del isomorfismo, discutiendo cómo la genialidad de Claude Shannon conectó la filosofía de George Boole con los circuitos eléctricos. Analizan estrategias prácticas para que los estudiantes dejen de memorizar tablas y comiencen a "traducir" el mundo real usando los diagramas de Venn como puente cognitivo.
+            En este episodio, exploramos la tesis de maestría más importante de la historia. Analizamos cómo Claude Shannon en 1937 descubrió que los relés y los interruptores no solo movían corriente, sino que ejecutaban el Álgebra de Boole. Discutimos la implementación física de compuertas y por qué la propiedad distributiva es, en realidad, una herramienta de ahorro industrial.
         </p>
+        
         <div class="podcast-player">
-            <audio controls preload="metadata">
+            <audio controls>
                 <source src="audio/leccion21.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
+                Tu navegador no soporta el audio.
             </audio>
         </div>
-        <p class="podcast-meta">
-            <span class="duracion">⏱️ 18:56 min</span>
-            <span class="formato">🔊 MP3</span>
-        </p>
+        <p style="font-size: 0.8em; opacity: 0.8; margin-top: 10px;">⏱️ 18:56 min | 🏗️ Enfoque: Rigor Industrial y Hardware</p>
     </section>
 
     <!-- === TARJETA DE IDENTIDAD DEL PROMPT ÉTICO === -->
@@ -634,28 +633,50 @@
     <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
     <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #1d2671, #c33764); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border-left: 8px solid #ff00cc;">
         <h3 style="color: #ff00cc; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: El Isomorfismo en la IA
+            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: El Isomorfismo en la IA Moderna
         </h3>
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
                 <h4 style="color: #ffeb3b; margin-top: 0;">Para Grado 7°: Traduciendo el Mundo</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">¿Cómo sabe una IA que la palabra "perro" y la foto de un "Golden Retriever" son lo mismo? Usa el <strong>Isomorfismo</strong>. La IA convierte la palabra en un número y la foto en otro número. Si los números están "cerca" en su mapa matemático, la IA entiende que son lo mismo. ¡La IA vive en un mundo donde todo se traduce a matemáticas!</p>
+                <p style="font-size: 0.95em; line-height: 1.5;">¿Cómo sabe una IA que la palabra "perro" y el dibujo de un perro son lo mismo? Usa el <strong>Isomorfismo</strong>. La IA convierte ambos en una lista de números. Si los números son parecidos, la IA sabe que significan lo mismo, aunque uno sea texto y el otro sea imagen. ¡Todo se traduce al idioma de los números!</p>
             </div>
             
             <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #ffeb3b; margin-top: 0;">Para Grado 10°: Embeddings (Vectores de Pensamiento)</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">En IA, el isomorfismo se manifiesta en los <strong>Embeddings</strong>. Los conceptos abstractos (como "amor", "velocidad" o "código") se mapean a vectores en un espacio de alta dimensionalidad. Gracias a esto, la IA puede "operar" con ideas: si al vector de "Rey" le restas "Hombre" y le sumas "Mujer", el resultado matemático es el vector de "Reina". ¡Isomorfismo en estado puro!</p>
+                <h4 style="color: #ffeb3b; margin-top: 0;">Para Grado 10°: Embeddings (Matemática de Ideas)</h4>
+                <p style="font-size: 0.95em; line-height: 1.5;">En IA, el isomorfismo se llama <strong>Embeddings</strong>. Los conceptos se mapean a vectores (flechas en el espacio). Lo asombroso es que puedes hacer álgebra con ideas: si al vector de "Rey" le restas "Hombre" y le sumas "Mujer", el resultado matemático es el vector de "Reina". El isomorfismo permite que la IA "piense" usando puras coordenadas.</p>
             </div>
         </div>
 
         <div style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; border: 1px dashed #ff00cc;">
             <p style="margin: 0; text-align: center; font-weight: bold;">
-                🚀 Conexión Sistémica: Claude Shannon nos enseñó que la forma no importa, solo la lógica. Esa es la razón por la que hoy puedes entrenar una IA en una computadora de silicio y luego usarla en un robot de metal o en un asistente de voz. La lógica es universal.
+                🚀 Conexión Sistémica: Claude Shannon nos enseñó que la forma no importa, solo la lógica. Por eso una IA puede "vivir" en un chip de silicio, pero razonar sobre poemas o leyes humanas.
             </p>
         </div>
     </div>
     <!-- === FIN BLOQUE IA === -->
+
+    <!-- === PODCAST: ADN DE LA INTELIGENCIA (IA) === -->
+    <section class="podcast-ia">
+        <div class="podcast-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <svg style="width:30px; height:30px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" />
+            </svg>
+            <h3 style="margin: 0;">Vectores de Pensamiento: ¿Es la Conciencia un Isomorfismo?</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            ¿Puede un pedazo de silicio juzgar la verdad? Elevamos el concepto de isomorfismo hacia la Inteligencia Artificial. Analizamos los "Embeddings" y cómo las máquinas operan con ideas abstractas como si fueran coordenadas en un mapa matemático. Cerramos con una duda provocadora: ¿Es nuestra propia conciencia una red de impulsos químicos bajo un isomorfismo biológico?
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls>
+                <source src="audio/leccion21_ia.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
+        </div>
+        <p style="font-size: 0.8em; opacity: 0.7; margin-top: 10px;">⏱️ 21:30 min | 🌐 Recomendado: Futuros Arquitectos de Redes Neuronales</p>
+    </section>
 
     <footer>
         <hr>

@@ -387,6 +387,72 @@
             A=1, B=1 → X = 0</p>
         </details>
 
+        <!-- TRANSICIÓN DIDÁCTICA -->
+        <p style="margin-top: 30px;">
+            Ya viste que la XOR es una experta en encontrar diferencias. Parece una tarea sencilla, ¿verdad? Pues esa aparente sencillez esconde una <strong>trampa geométrica</strong> que engañó a los científicos más brillantes del siglo XX. 
+        </p>
+
+        <!-- ====================================================================== -->
+        <!-- BLOQUE ROMPE ESQUEMAS: EL DRAMA DE LA XOR (HISTORIA DE LA IA)        -->
+        <!-- ====================================================================== -->
+        <div class="dato-extra" style="border-left: 5px solid #d32f2f; background-color: #ffebee; margin: 35px 0; padding: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); border-radius: 0 15px 15px 0;">
+            
+            <div style="background-color: #b71c1c; color: white; padding: 8px 15px; border-radius: 30px; display: inline-block; margin-bottom: 20px; font-weight: bold; font-size: 0.8em; letter-spacing: 1px;">
+                ⚠️ ALERTA DE CRISIS HISTÓRICA 
+            </div>
+            
+            <h3 style="color: #b71c1c; margin-top: 0; display: flex; align-items: center; gap: 12px; font-size: 1.6em; border-bottom: none;">
+                <span style="font-size: 1.8em;">💥</span> 
+                La Compuerta que (Casi) Mata la IA
+            </h3>
+            
+            <p style="font-size: 1.1em; line-height: 1.6; color: #333;">
+                Las máquinas "aprenden" trazando fronteras. El AND y el OR son problemas <strong>lineales</strong>: puedes separar los éxitos (1) de los fracasos (0) usando una sola línea recta. <strong>Pero la XOR es un laberinto.</strong>
+            </p>
+            
+            <!-- Comparativa visual -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin: 25px 0; background: white; padding: 20px; border-radius: 12px; border: 1px solid #ffcdd2;">
+                <div style="text-align: center;">
+                    <strong style="color: #0284c7; font-size: 0.9em;">✅ AND (Lineal)</strong>
+                    <div style="font-family: monospace; font-size: 1.3em; margin: 10px 0; color: #999;">
+                        0&nbsp;&nbsp;0<br>
+                        0&nbsp;&nbsp;<span style="color: #2e7d32; font-weight: bold; background: #e8f5e9; padding: 2px 5px; border-radius: 4px;">1</span>
+                    </div>
+                    <small style="color: #666;">Fácil de separar</small>
+                </div>
+                <div style="text-align: center;">
+                    <strong style="color: #0284c7; font-size: 0.9em;">✅ OR (Lineal)</strong>
+                    <div style="font-family: monospace; font-size: 1.3em; margin: 10px 0; color: #999;">
+                        0&nbsp;&nbsp;<span style="color: #2e7d32; font-weight: bold; background: #e8f5e9;">1</span><br>
+                        <span style="color: #2e7d32; font-weight: bold; background: #e8f5e9;">1</span>&nbsp;&nbsp;<span style="color: #2e7d32; font-weight: bold; background: #e8f5e9;">1</span>
+                    </div>
+                    <small style="color: #666;">Fácil de separar</small>
+                </div>
+                <div style="text-align: center; border-left: 2px dashed #ffcdd2; padding-left: 10px;">
+                    <strong style="color: #d32f2f; font-size: 0.9em;">❌ XOR (No Lineal)</strong>
+                    <div style="font-family: monospace; font-size: 1.3em; margin: 10px 0; color: #999;">
+                        0&nbsp;&nbsp;<span style="color: #bf360c; font-weight: bold; background: #fff3e0;">1</span><br>
+                        <span style="color: #bf360c; font-weight: bold; background: #fff3e0;">1</span>&nbsp;&nbsp;0
+                    </div>
+                    <small style="color: #c62828;">¡Están cruzados!</small>
+                </div>
+            </div>
+
+            <div style="background-color: #fff3e0; padding: 20px; border-radius: 12px; border-left: 8px solid #d32f2f;">
+                <p style="margin: 0; line-height: 1.6;">
+                    <strong>El Invierno de la IA:</strong> En 1969, se demostró que una neurona artificial simple era <strong>incapaz</strong> de resolver la XOR. Al no poder trazar una línea recta que separara los unos de los ceros, la ciencia se estancó por 15 años. Nadie sabía cómo avanzar.
+                </p>
+            </div>
+
+            <div style="background-color: #e8f5e9; padding: 20px; border-radius: 12px; margin-top: 20px; border-left: 8px solid #2e7d32;">
+                <h4 style="color: #1b5e20; margin-top: 0;">🧠 El Renacimiento: Capas Profundas</h4>
+                <p style="margin: 0; line-height: 1.6;">
+                    La solución fue imitar al cerebro humano: <strong>usar capas</strong>. Una neurona sola es tonta, pero muchas neuronas en capas pueden "curvar" la realidad y resolver la XOR. Este descubrimiento dio origen al <strong>Deep Learning</strong>. Sin este pequeño chip XOR, hoy no existiría ChatGPT.
+                </p>
+            </div>
+        </div>
+        <!-- FIN DEL BLOQUE ROMPE ESQUEMAS -->
+
         <h2>3. Forma Dual: Producto de Sumas (POS)</h2>
         <p><strong>¿Por qué se llama "Forma Dual"?</strong> La SOP y la POS son dos maneras equivalentes de representar la misma función lógica, pero son como caras opuestas de la misma moneda. Mientras la SOP se enfoca en las combinaciones de entrada que <em>activan</em> la salida (salida = 1) usando productos (AND) y luego los une con una suma (OR), la POS se enfoca en las combinaciones que <em>desactivan</em> la salida (salida = 0), usando sumas (OR) y luego las une con un producto (AND). Además, las operaciones internas y externas se invierten: SOP usa (AND) internamente y (OR) externamente, mientras que POS usa (OR) internamente y (AND) externamente. Esta relación simétrica e inversa es lo que las convierte en "duales".</p>
 
@@ -860,30 +926,27 @@
         </div>
         
         <!-- === PODCAST: Conversación entre Expertos === -->
-        <section class="podcast-section">
+        <!-- === PODCAST 1: EL RIGOR DEL HARDWARE (GRADO 10°) === -->
+        <section class="podcast-section" style="border-left: 5px solid #0d47a1;">
             <div class="podcast-header">
-                <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="#0d47a1" style="width:30px;">
+                    <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
                 </svg>
-                <h3>🎧 Podcast: Conversación entre Expertos</h3>
+                <h3 style="color: #0d47a1;">🎧 Podcast: Las Fuerzas Especiales (Rigor Técnico 10°)</h3>
             </div>
-
+            
             <p class="podcast-descripcion">
-                Dos docentes analizan las compuertas universales (NAND, NOR) y las compuertas de comparación (XOR, XNOR), exploran su relación con las Leyes de De Morgan y discuten estrategias para enseñar estos conceptos a estudiantes de grado 10°. Además, presentan los problemas desde "la otra cara de la moneda" con el Producto de Sumas (POS). 
+                ¿Por qué la industria gasta millones en fabricar un solo tipo de pieza? En este episodio exploramos la magia de NAND y NOR, los "ladrillos universales" del silicio. Analizamos la asimetría del chip 7400 y cómo la estandarización masiva es lo que permite que tu smartphone sea potente y barato a la vez.
             </p>
-
+            
             <div class="podcast-player">
-                <audio controls preload="metadata">
-                <source src="audio/leccion18.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
+                <audio controls>
+                    <source src="audio/leccion18.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el audio.
                 </audio>
             </div>
-
-            <p class="podcast-meta">
-                <span class="duracion">⏱️ 17:48 min</span>
-                <span class="formato">🔊 MP3</span>
-            </p>
-    </section>
+            <p style="font-size: 0.8em; opacity: 0.8; margin-top: 10px;">⏱️ 17:48 min | 🚀 Enfoque: Universalidad y Manufactura</p>
+        </section>
         <!-- === /PODCAST: Conversación entre Expertos === -->
          
         <!-- === PREGUNTAS DE CONSOLIDACIÓN === -->
@@ -984,31 +1047,45 @@
 
         </div>
 
-        <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
-    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #000428, #004e92); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border-left: 8px solid #00d2ff;">
-        <h3 style="color: #00d2ff; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: La XOR y el Nacimiento de la IA Moderna
-        </h3>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #ffeb3b; margin-top: 0;">Para Grado 7°: El Juego de las Diferencias</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">Una IA que reconoce objetos usa millones de "mini-XORs". Por ejemplo, para saber si una foto es un perro o un gato, la IA compara los píxeles de la imagen con lo que ya conoce. Si hay muchas <strong>diferencias</strong> (XOR = 1), la IA sabe que no es el mismo objeto. ¡La XOR es el ojo crítico de la tecnología!</p>
-            </div>
-            
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #ffeb3b; margin-top: 0;">Para Grado 10°: El Problema que Paralizó la IA</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">En 1969, se demostró que una sola neurona artificial <strong>no podía resolver la lógica XOR</strong>. A diferencia de la AND u OR, la XOR no se puede dividir con una línea recta en un mapa. Este descubrimiento detuvo la investigación en IA por 15 años, hasta que aprendimos que necesitábamos "capas" de neuronas para entender la exclusividad. ¡Hoy estás aprendiendo el concepto que forzó la creación de las Redes Neuronales Profundas!</p>
+         <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
+        <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #000428, #004e92); color: white; border-radius: 15px; border-left: 8px solid #00d2ff;">
+            <h3 style="color: #00d2ff; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: La XOR y el "Invierno de la IA"
+            </h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h4 style="color: #ffeb3b; margin-top: 0;">Para Grado 7°: Detectives de Diferencias</h4>
+                    <p style="font-size: 0.9em;">Las IAs usan la XOR para comparar. Para saber si una foto es un perro o un gato, comparan miles de píxeles. Si hay muchas diferencias (XOR = 1), la IA sabe que es algo nuevo.</p>
+                </div>
+                <div>
+                    <h4 style="color: #ffeb3b; margin-top: 0;">Para Grado 10°: El Límite de la Neurona</h4>
+                    <p style="font-size: 0.9em;">En 1969 se demostró que una sola neurona artificial no podía resolver la XOR. Este descubrimiento obligó a crear las redes de "capas múltiples" que hoy permiten que ChatGPT funcione.</p>
+                </div>
             </div>
         </div>
+        <!-- === FIN BLOQUE IA === -->
 
-        <div style="margin-top: 20px; padding: 15px; background: rgba(0,210,255,0.1); border-radius: 8px; border: 1px dashed #00d2ff;">
-            <p style="margin: 0; text-align: center; font-weight: bold;">
-                🚀 Conexión Futura: En la Lección 26, usaremos la XOR para crear "bits de paridad". Es la forma en que la IA de un carro autónomo se asegura de que sus frenos no se activen por culpa de un simple ruido eléctrico.
+        <!-- === PODCAST 2: EL ADN DE LA INTELIGENCIA (ENFOQUE IA) === -->
+        <section class="podcast-ia">
+            <h3>
+                <svg style="width:30px; height:30px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" />
+                </svg>
+                IA y XOR: El dilema que casi destruye la IA
+            </h3>
+            
+            <p class="podcast-descripcion">
+                Descubre la historia del "invierno de la IA" y cómo una regla lógica tan simple como "Pastel o Helado" (XOR) cambió el curso de la tecnología. Analizamos por qué las neuronas necesitan capas para entender la exclusividad y cómo la paridad protege tus datos bancarios mediante el uso intensivo de estos "detectives de diferencias".
             </p>
-        </div>
-    </div>
-    <!-- === FIN BLOQUE IA === -->
+            
+            <div class="podcast-player">
+                <audio controls>
+                    <source src="audio/leccion18_ia.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el audio.
+                </audio>
+            </div>
+            <p style="font-size: 0.8em; opacity: 0.7; margin-top: 10px;">⏱️ 28:52 min | 🌐 Recomendado: Futuros Desarrolladores de IA</p>
+        </section>
         
         <footer>
             <hr>

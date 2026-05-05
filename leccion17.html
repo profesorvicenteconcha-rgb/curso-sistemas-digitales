@@ -460,30 +460,26 @@
         <p>Anota tu estrategia pedagógica en tu cuaderno. Recuerda: haz que ellos visualicen la conexión entre la matemática invisible y el componente físico que tienen en sus manos.</p>
         </div>
 
-        <!-- === PODCAST: Conversación entre Expertos === -->
-        <section class="podcast-section">
+        <!-- === PODCAST 1: EL RIGOR DEL HARDWARE (GRADO 10°) === -->
+        <section class="podcast-section" style="border-left: 5px solid #0d47a1;">
             <div class="podcast-header">
-                <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="#0d47a1" style="width:30px;">
+                    <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
                 </svg>
-                <h3>🎧 Podcast: Conversación entre Expertos</h3>
+                <h3 style="color: #0d47a1;">🎧 Podcast: El Cuerpo del Pensamiento (Rigor Técnico 10°)</h3>
             </div>
-
+            
             <p class="podcast-descripcion">
-                Dos docentes analizan la importancia de los chips TTL 74xx como el puente entre la teoría lógica y la implementación física. Comparten estrategias para enseñar el concepto de "pinout", la estandarización de los pines que permite la "magia modular" entre compuertas AND y OR, y la necesidad absoluta del pull-down para garantizar estados lógicos.
+                Dejamos el papel para tocar el silicio. En este episodio realizamos una "autopsia" a los chips TTL 74xx. Aprenderás la importancia vital de la muesca, por qué el chip tiene "boca y estómago" (Vcc y GND) y cómo el límite del Fan-out define qué tan lejos puede llegar una señal antes de desinflarse como una manguera sin presión.
             </p>
-
+            
             <div class="podcast-player">
-                <audio controls preload="metadata">
-                <source src="audio/leccion17.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
+                <audio controls>
+                    <source src="audio/leccion17.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el audio.
                 </audio>
             </div>
-
-            <p class="podcast-meta">
-                <span class="duracion">⏱️ 21:04 min</span>
-                <span class="formato">🔊 MP3</span>
-            </p>
+            <p style="font-size: 0.8em; opacity: 0.8; margin-top: 10px;">⏱️ 21:04 min | 👾 Enfoque: Componentes Físicos y Energía</p>
         </section>
         <!-- === /PODCAST: Conversación entre Expertos === -->
 
@@ -554,30 +550,44 @@
         </div>
 
         <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
-    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #232526, #414345); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-left: 8px solid #00ff87;">
-        <h3 style="color: #00ff87; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: De los Chips 74xx a las GPUs de IA
-        </h3>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #00ff87; margin-top: 0;">Para Grado 7°: El Tamaño de la Inteligencia</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">Un chip 7408 tiene <strong>4</strong> compuertas AND. El procesador de una IA moderna (como el de una tarjeta gráfica) tiene ¡más de <strong>10.000 millones</strong> de compuertas! La IA no es "más inteligente" porque use una lógica distinta, sino porque tiene muchísimas más manos (compuertas) trabajando al mismo tiempo.</p>
-            </div>
-            
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #00ff87; margin-top: 0;">Para Grado 10°: ASICs y Aceleradores de IA</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">Hoy aprendiste a conectar chips para resolver un problema específico (el jurado). En la industria de la IA, esto se llama <strong>ASIC</strong> (Circuito Integrado de Aplicación Específica). Las empresas como Google crean chips llamados <strong>TPUs</strong> que son básicamente millones de compuertas "soldadas" para hacer multiplicaciones matemáticas a toda velocidad. ¡Estás aprendiendo la base del diseño de hardware para IA!</p>
+        <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #232526, #414345); color: white; border-radius: 15px; border-left: 8px solid #00ff87;">
+            <h3 style="color: #00ff87; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: De los Chips 74xx a las GPUs
+            </h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h4 style="color: #00ff87; margin-top: 0;">Para Grado 7°: El Tamaño de la Mente</h4>
+                    <p style="font-size: 0.9em;">Un chip 7408 tiene 4 compuertas AND. Una tarjeta gráfica de IA tiene más de 10.000 millones. La IA no piensa distinto, solo tiene muchísimas más manos trabajando a la vez.</p>
+                </div>
+                <div>
+                    <h4 style="color: #00ff87; margin-top: 0;">Para Grado 10°: Aceleradores (ASICs)</h4>
+                    <p style="font-size: 0.9em;">Hoy conectas chips para un jurado. Google diseña chips llamados TPUs que son básicamente millones de compuertas "soldadas" para multiplicar matrices. ¡Es la base del hardware de IA!</p>
+                </div>
             </div>
         </div>
+        <!-- === FIN BLOQUE IA === -->
 
-        <div style="margin-top: 20px; padding: 15px; background: rgba(0,255,135,0.1); border-radius: 8px; border: 1px dashed #00ff87;">
-            <p style="margin: 0; text-align: center; font-weight: bold;">
-                🚀 Conexión Futura: En la Unidad 4 veremos que para que la IA no cometa errores al enviar datos, los chips deben usar "Aritmética Módulo 2". ¡Es la misma lógica de los chips 74xx llevada al límite de la velocidad!
+        <!-- === PODCAST 2: EL ADN DE LA INTELIGENCIA (ENFOQUE IA) === -->
+        <section class="podcast-ia">
+            <h3>
+                <svg style="width:30px; height:30px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" />
+                </svg>
+                IA y Hardware: ¿Qué tan grande es el cerebro de ChatGPT?
+            </h3>
+            
+            <p class="podcast-descripcion">
+                ¿Es la Inteligencia Artificial una ilusión producida por la velocidad del silicio? Exploramos cómo pasamos de 4 compuertas en un chip manual a billones de transistores en una GPU de última generación. Analizamos qué son los ASICs y por qué el futuro de la IA depende de ingenieros que sepan domar el calor y la energía de estas máquinas.
             </p>
-        </div>
-    </div>
-    <!-- === FIN BLOQUE IA === -->
+            
+            <div class="podcast-player">
+                <audio controls>
+                    <source src="audio/leccion17_ia.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el audio.
+                </audio>
+            </div>
+            <p style="font-size: 0.8em; opacity: 0.7; margin-top: 10px;">⏱️ 27:58 min | 🌐 Recomendado: Futuros Arquitectos de Supercomputadoras</p>
+        </section>
 
     <footer>
         <hr>

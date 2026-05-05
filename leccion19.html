@@ -817,21 +817,26 @@
         </div>
     </section>
 
-    <!-- === PODCAST, PREGUNTAS Y CUADERNO === -->
-    <section class="podcast-section" style="margin-top: 40px;">
+    <!-- === PODCAST 1: EL RIGOR DEL HARDWARE (GRADO 10°) === -->
+    <section class="podcast-section" style="border-left: 5px solid #0d47a1;">
         <div class="podcast-header">
-            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 30px; vertical-align: middle;">
-            <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="#0d47a1" style="width:30px;">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
             </svg>
-            <h3 style="display: inline;">🎧 Podcast: Conversación entre Expertos</h3>
+            <h3 style="color: #0d47a1;">🎧 Podcast: El Ladrillo Único de Lego (Rigor Técnico 10°)</h3>
         </div>
+        
         <p class="podcast-descripcion">
-            Dos docentes discuten por qué la "Universalidad" de NAND y NOR revolucionó la fabricación de microchips. Exploran cómo explicar el concepto de "puenteo" a estudiantes de grado 10° sin confundirlos, desglosan el rediseño del problema del jurado usando solo compuertas NOR, y analizan cómo usar De Morgan para saltar de la teoría (POS) a la implementación física.
+            ¿Te imaginas construir un rascacielos usando solo un tipo de bloque de Lego? En este episodio exploramos la Universalidad de las compuertas NAND y NOR. Analizamos el "Secreto de las Fábricas" de microchips y cómo el arte del puenteo de entradas permite que un solo modelo de chip construya el universo digital entero.
         </p>
+        
         <div class="podcast-player">
-            <audio controls preload="metadata" style="width: 100%;"><source src="audio/leccion19.mp3" type="audio/mpeg"></audio>
+            <audio controls>
+                <source src="audio/leccion19.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
         </div>
-        <p class="podcast-meta"><span class="duracion">⏱️ 18:40 min</span> | <span class="formato">🔊 MP3</span></p>
+        <p style="font-size: 0.8em; opacity: 0.8; margin-top: 10px;">⏱️ 17:48 min | 🏗️ Enfoque: Manufactura y Estandarización</p>
     </section>
 
     <h2>❓ Preguntas de Consolidación</h2>
@@ -895,30 +900,44 @@
     </div>
 
     <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
-    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-left: 8px solid #f39c12;">
+    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; border-radius: 15px; border-left: 8px solid #f39c12;">
         <h3 style="color: #f39c12; margin-top: 0; display: flex; align-items: center; gap: 10px;">
             <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: El Teorema de Universalidad
         </h3>
-        
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #f39c12; margin-top: 0;">Para Grado 7°: El Ladrillo de la Inteligencia</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">Hoy aprendiste que con una sola pieza de Lego (NAND) puedes construir cualquier circuito. En la Inteligencia Artificial pasa algo igual: todas las neuronas de ChatGPT son básicamente <strong>idénticas</strong>. Lo que las hace inteligentes no es que sean piezas diferentes, sino <strong>cómo están conectadas</strong>. ¡La magia no está en el ladrillo, está en el arquitecto!</p>
+            <div>
+                <h4 style="color: #f39c12; margin-top: 0;">Para Grado 7°: El Ladrillo de la Mente</h4>
+                <p style="font-size: 0.9em;">Hoy aprendiste que con una sola pieza (NAND) construyes cualquier circuito. En la IA pasa igual: todas las neuronas de ChatGPT son básicamente <strong>iguales</strong>. Lo que las hace inteligentes es cómo se conectan.</p>
             </div>
-            
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #f39c12; margin-top: 0;">Para Grado 10°: El Teorema de Aproximación Universal</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">En matemáticas existe el <strong>Teorema de Aproximación Universal</strong>. Este dice que una Red Neuronal con suficientes neuronas simples puede aprender <strong>cualquier función</strong> del universo. Es exactamente lo mismo que acabas de hacer: usar un componente "universal" (NAND/NOR) para construir cualquier lógica. La IA es simplemente "Lógica Universal" llevada al nivel de los datos.</p>
+            <div>
+                <h4 style="color: #f39c12; margin-top: 0;">Para Grado 10°: Aproximación Universal</h4>
+                <p style="font-size: 0.9em;">En IA, el <i>Teorema de Aproximación Universal</i> dice que una red de neuronas simples puede aprender <strong>cualquier función</strong>. Es el mismo principio que usas hoy al usar un solo componente universal.</p>
             </div>
-        </div>
-
-        <div style="margin-top: 20px; padding: 15px; background: rgba(243,156,18,0.1); border-radius: 8px; border: 1px dashed #f39c12;">
-            <p style="margin: 0; text-align: center; font-weight: bold;">
-                🚀 Conexión Futura: En el Laboratorio 2 verás que la XOR (la compuerta más difícil de la IA) se rinde ante el poder de 4 NANDs. ¡Esa es la misma estructura que permite a una IA reconocer tu voz!
-            </p>
         </div>
     </div>
     <!-- === FIN BLOQUE IA === -->
+
+    <!-- === PODCAST 2: EL ADN DE LA INTELIGENCIA (ENFOQUE IA) === -->
+    <section class="podcast-ia">
+        <h3>
+            <svg style="width:30px; height:30px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" />
+            </svg>
+            IA y Universalidad: La arquitectura es el mensaje
+        </h3>
+        
+        <p class="podcast-descripcion">
+            ¿Por qué las neuronas de una IA son todas idénticas? Analizamos el fascinante mundo del Teorema de Aproximación Universal y cómo la simplicidad de un componente repetido billones de veces crea el razonamiento de ChatGPT. Descubre por qué el futuro de la IA no está en inventar nuevas piezas, sino en saber cómo conectarlas mejor.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls>
+                <source src="audio/leccion19_ia.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
+        </div>
+        <p style="font-size: 0.8em; opacity: 0.7; margin-top: 10px;">⏱️ 22:17 min | 🌐 Recomendado: Futuros Arquitectos de Sistemas</p>
+    </section>
         
     <footer>
         <hr>

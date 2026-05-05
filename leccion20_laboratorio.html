@@ -405,14 +405,71 @@
             </table>
         </div>
 
-        <!-- NUEVO BLOQUE: EL SECRETO DEL TTL -->
-        <div class="dato-extra" style="background-color: #ffebee; border-left-color: #d32f2f; margin-top: 20px;">
-            <h4 style="color: #c62828; margin-top: 0; display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 1.2em;">👻</span> La Trampa del "1 por defecto" (Floating High)
-            </h4>
-            <p style="margin-bottom: 10px;">Fíjate en el tercer síntoma de la tabla. Por la forma física en que están construidos los transistores dentro de la familia <strong>TTL (74xx)</strong>, si dejas un pin de entrada desconectado (flotando al aire), el chip es "optimista" y <strong>lo lee internamente como un 1 lógico (ALTO)</strong>.</p>
-            <p style="margin-bottom: 0;">Esto es sumamente peligroso en un laboratorio. Si olvidas conectar el cable $B$ a una compuerta AND, el chip asumirá que $B=1$. Si luego pones $A=1$, el LED encenderá. ¡Creerás que tu circuito está perfecto, pero es un <em>falso positivo</em> porque el cable $B$ ni siquiera existe! Por eso la inspección visual (el Ruteo) es tan vital como la auditoría con el LED.</p>
+        <!-- NUEVO BLOQUE: EL SECRETO DEL CMOS -->
+        <div class="dato-extra" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <h3 id="dificultades-comunes">⚠️ Dificultades comunes y cómo resolverlas</h3>
+            <p>Durante el montaje de tu circuito, especialmente si estás simulando con Tinkercad o construyendo físicamente con chips CMOS como el 74HC00, debes tener en cuenta algunos problemas frecuentes.</p>
+
+            <h4 id="el-cable-olvidado">👻 El cable olvidado: El problema de las entradas flotantes</h4>
+            <p><strong>Síntoma:</strong> El circuito da '1' ('Encendido') en la salida aunque olvidé conectar un cable de entrada.</p>
+
+            <p><strong>¿Qué está pasando?</strong> Este es un problema común cuando una entrada de un chip no está conectada a nada, es decir, está "flotante". En el caso del chip <strong>74HC00</strong> (y otros CMOS), una entrada flotante <strong>no</strong> asume automáticamente un estado lógico fijo como '1' (como lo hacía la vieja tecnología TTL). En cambio, puede comportarse de manera <strong>inestable o impredecible</strong>, captando ruido eléctrico del ambiente o dentro del propio chip. Esto puede hacer que el chip se comporte como si la entrada fuera un '1', un '0', o incluso cambie rápidamente entre ambos estados.</p>
+
+            <p><strong>Consecuencia:</strong> Esto puede generar resultados erróneos o "falsos positivos". Por ejemplo, si olvidas conectar el cable <em>B</em> a una compuerta AND, y la entrada correspondiente queda flotante, podría parecer que <em>B=1</em> y hacer que el LED encienda incorrectamente si <em>A=1</em>. ¡Creerás que tu circuito está perfecto, pero es un error causado por el cable desconectado! Por eso la inspección visual (el Ruteo) es tan vital como la auditoría con el LED.</p>
+
+            <p><strong>Solución:</strong> Asegúrate de que <strong>todas</strong> las entradas de tus chips estén conectadas a una señal definida: o a un interruptor, a la alimentación (Vcc para un '1'), a tierra (GND para un '0'), o a la salida de otra compuerta. Nunca dejes una entrada "al aire".</p>
         </div>
+        <!--  -->
+
+        <!-- === SECCIÓN: HIGIENE ELÉCTRICA (PINES LIBRES) === -->
+        <section id="conexion-pines-libres" style="margin: 40px 0; padding: 25px; background-color: #fcfcfc; border: 1px solid #e0e0e0; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
+            <h3 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.2em;">🔌</span> Conectando Pines Libres (Entradas no utilizadas)
+            </h3>
+            <p style="font-size: 0.95em; color: #444; line-height: 1.6;">
+                Como aprendiste en la Lección 19, nunca dejes entradas de compuertas "flotantes". Actúan como antenas captando ruido electromagnético. Aquí tienes la guía definitiva para "dormir" las compuertas que te sobraron en los chips de hoy:
+            </p>
+
+            <!-- Contenedor con scroll para móviles -->
+            <div style="overflow-x: auto; margin: 20px 0; border-radius: 8px; border: 1px solid #ddd;">
+                <table style="width: 100%; border-collapse: collapse; min-width: 500px; font-size: 0.9em; text-align: left; background-color: white;">
+                    <thead>
+                        <tr style="background-color: #0d47a1; color: white;">
+                            <th style="padding: 12px; border: 1px solid #0d47a1;">Familia (Ejemplo)</th>
+                            <th style="padding: 12px; border: 1px solid #0d47a1;">Tipo</th>
+                            <th style="padding: 12px; border: 1px solid #0d47a1;">Conexión a Entrada</th>
+                            <th style="padding: 12px; border: 1px solid #0d47a1;">Estado de Salida</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;"><strong>OR / NOR</strong> (7432 / 7402)</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Suma</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; background-color: #e8f5e9; font-weight: bold;">GND (Tierra)</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; color: #666;">Fija y estable</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;"><strong>AND / NAND</strong> (7408 / 7400)</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Producto</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; background-color: #fff9c4; font-weight: bold;">Vcc (+5V)</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; color: #666;">Fija y estable</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;"><strong>XOR</strong> (7486)</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Exclusiva</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; background-color: #e8f5e9; font-weight: bold;">GND (Tierra)</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; color: #666;">Fija en 0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="background-color: #fff4e5; border-left: 5px solid #ff9800; padding: 15px; border-radius: 4px; margin-top: 15px;">
+                <p style="margin: 0; font-size: 0.9em; color: #663c00; line-height: 1.5;">
+                    <strong>⚠️ REGLA DE ORO:</strong> Esta tabla es <strong>solo para entradas</strong>. Jamás conectes una <strong>salida</strong> a GND o Vcc directamente; causarás un cortocircuito que quemará el chip al instante.
+                </p>
+            </div>
+        </section>
 
         <div class="destacado" style="background-color: #f1f8e9; border-left-color: #4caf50; margin-top: 20px;">
             <h3 style="color: #2e7d32; margin-top: 0;">🔍 Reflexión sobre los errores</h3>
@@ -423,16 +480,6 @@
             </ul>
             <p style="margin-bottom: 0; font-style: italic; color: #555; text-align: center;">“El mejor ingeniero no es el que nunca comete errores, sino el que sabe encontrarlos y corregirlos sistemáticamente.”</p>
         </div>
-
-        <div class="destacado" style="background-color: #f1f8e9; border-left-color: #4caf50;">
-            <h3>🔍 Reflexión sobre los errores</h3>
-            <ul>
-                <li><strong>Anota cada error que encontraste:</strong> ¿En qué paso ocurrió? ¿Cómo lo detectaste?</li>
-                <li><strong>¿Qué herramienta de prueba (multímetro, LED) te ayudó a identificar la falla?</strong></li>
-                <li><strong>¿Cambiarías algo en tu método de trabajo para evitar ese error en el futuro?</strong></li>
-            </ul>
-            <p><em>“El mejor ingeniero no es el que nunca comete errores, sino el que sabe encontrarlos y corregirlos rápidamente.”</em></p>
-        </div>
     </section>
 
     <!-- ================================================================== -->
@@ -440,309 +487,415 @@
     <!-- ================================================================== -->
     <section>
         <!-- ================================================================== -->
-<!-- PARTE 2: REFLEXIÓN - DE LA XOR AL SEMISUMADOR                     -->
-<!-- ================================================================== -->
-<section>
-    <h2>2. 🧠 Reflexión: Descubriendo el Semisumador (dos salidas)</h2>
-    
-    <div class="intro-leccion" style="margin-bottom: 25px;">
-        <p>Una vez que el circuito funciona y has verificado su tabla de verdad, llega el momento de dar el salto conceptual. Ahora dejarás de ver la XOR como una función lógica aislada y empezarás a entenderla como una pieza de un sistema más grande: el <strong>semisumador (half adder)</strong>.</p>
-        <p>En esta segunda parte no necesitarás el soldador ni el simulador. Trabajarás con lápiz, papel y tu capacidad de abstracción para descubrir que el mismo circuito que acabas de construir, junto con una compuerta AND, es capaz de sumar números binarios. Este es el primer ladrillo de la aritmética computacional y la puerta de entrada a la Unidad 3.</p>
-    </div>
-
-    <!-- A continuación va todo el contenido existente de la reflexión:
-         - El esquema Entrada-Proceso-Salida
-         - El diagrama del semisumador
-         - La tabla de verdad con dos salidas
-         - Los mapas de Karnaugh y la notación sigma
-         - Los destacados de XOR y AND
-         - Las preguntas y la bitácora -->
-    
+    <!-- PARTE 2: REFLEXIÓN - DE LA XOR AL SEMISUMADOR                     -->
+    <!-- ================================================================== -->
+    <section>
+        <h2>2. 🧠 Reflexión: Descubriendo el Semisumador (dos salidas)</h2>
+        
         <div class="intro-leccion" style="margin-bottom: 25px;">
-            <p>Acabas de construir y verificar un circuito que resuelve el problema de la escalera de la <strong>Lección 6</strong>: la luz se enciende cuando los interruptores están en posiciones distintas. Has comprobado que la XOR funciona. Pero ahora viene la pregunta que separa al técnico del ingeniero: <strong>¿qué más puede hacer este circuito?</strong></p>
-            <p>Observa la tabla de verdad que acabas de validar con tus LEDs. En lugar de pensar en "Verdadero" y "Falso", imagina que las señales representan <strong>números binarios</strong> (0 y 1). De repente, el mismo circuito que encendía una luz en una escalera... ¡está sumando! Bienvenido al mundo del isomorfismo, donde una misma estructura física puede tener dos significados distintos.</p>
+            <p>Una vez que el circuito funciona y has verificado su tabla de verdad, llega el momento de dar el salto conceptual. Ahora dejarás de ver la XOR como una función lógica aislada y empezarás a entenderla como una pieza de un sistema más grande: el <strong>semisumador (half adder)</strong>.</p>
+            <p>En esta segunda parte no necesitarás el soldador ni el simulador. Trabajarás con lápiz, papel y tu capacidad de abstracción para descubrir que el mismo circuito que acabas de construir, junto con una compuerta AND, es capaz de sumar números binarios. Este es el primer ladrillo de la aritmética computacional y la puerta de entrada a la Unidad 3.</p>
         </div>
 
-        <div class="destacado" style="background-color: #f0f7ff; border-left-color: var(--color-primario); margin: 30px 0;">
-            <h3 style="margin-top: 0;">🔁 El Modelo Universal: De la Lógica a la Aritmética</h3>
-            <p>Al inicio de esta unidad (Lección 12), presentamos el esquema fundamental de todo sistema digital:</p>
-            
-            <div style="display: flex; justify-content: space-around; align-items: center; margin: 20px 0; flex-wrap: wrap;">
-                <div style="text-align: center; padding: 10px; background-color: #ffe0b2; border-radius: 8px; min-width: 120px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <strong style="color: #e65100;">ENTRADA</strong><br>
-                    <small style="color: #666;">(Sensores)</small>
-                </div>
-                <div style="font-size: 2em; color: var(--color-primario);">→</div>
-                <div style="text-align: center; padding: 10px; background-color: #c8e6c9; border-radius: 8px; min-width: 120px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <strong style="color: #2e7d32;">PROCESO</strong><br>
-                    <small style="color: #666;">(Compuertas)</small>
-                </div>
-                <div style="font-size: 2em; color: var(--color-primario);">→</div>
-                <div style="text-align: center; padding: 10px; background-color: #ffcdd2; border-radius: 8px; min-width: 120px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <strong style="color: #c62828;">SALIDA</strong><br>
-                    <small style="color: #666;">(Actuadores)</small>
-                </div>
+        <!-- A continuación va todo el contenido existente de la reflexión:
+            - El esquema Entrada-Proceso-Salida
+            - El diagrama del semisumador
+            - La tabla de verdad con dos salidas
+            - Los mapas de Karnaugh y la notación sigma
+            - Los destacados de XOR y AND
+            - Las preguntas y la bitácora -->
+        
+            <div class="intro-leccion" style="margin-bottom: 25px;">
+                <p>Acabas de construir y verificar un circuito que resuelve el problema de la escalera de la <strong>Lección 6</strong>: la luz se enciende cuando los interruptores están en posiciones distintas. Has comprobado que la XOR funciona. Pero ahora viene la pregunta que separa al técnico del ingeniero: <strong>¿qué más puede hacer este circuito?</strong></p>
+                <p>Observa la tabla de verdad que acabas de validar con tus LEDs. En lugar de pensar en "Verdadero" y "Falso", imagina que las señales representan <strong>números binarios</strong> (0 y 1). De repente, el mismo circuito que encendía una luz en una escalera... ¡está sumando! Bienvenido al mundo del isomorfismo, donde una misma estructura física puede tener dos significados distintos.</p>
             </div>
-            
-            <p>Hoy has materializado ese esquema: tus interruptores (Entrada) alimentaron la malla de compuertas NAND (Proceso) y el LED Azul (Salida) mostró el resultado. Pero hay algo más: <strong>este mismo esquema, con una pequeña variación, se convierte en un bloque fundamental de la aritmética computacional</strong>.</p>
-        </div>
 
-        <h3>➕ El circuito como sumador: dos entradas, dos salidas</h3>
-        
-        <p>El circuito que has construido (la XOR con NAND) tiene dos entradas (A, B). Si le añadimos en paralelo una compuerta AND para detectar el caso en que ambas entradas son 1, obtenemos un sistema "paquete" con <strong>dos entradas y dos salidas</strong> que realiza matemáticamente la suma de dos bits:</p>
-
-        <div class="svg-container">
-            <img src="img/half_adder_bloques.png" alt="Diagrama de bloques del semisumador" style="max-width:350px; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <p><small><em>Fig. 7: El semisumador (half adder). Dos entradas (A, B), dos salidas: Suma (S = A⊕B) y Acarreo (C = A·B).</em></small></p>
-        </div>
-
-        <p>Observa la similitud con el esquema inicial de la unidad: sigue siendo <strong>Entrada → Proceso → Salida</strong>, pero ahora el "Proceso" contiene dos funciones simultáneas (XOR y AND) y la "Salida" son dos señales (S y C). Este bloque, llamado <strong>semisumador (half adder)</strong>, es la primera pieza de la aritmética computacional.</p>
-
-        <!-- ================================================================== -->
-        <!-- NUEVO: DIAGRAMA DEL CIRCUITO Y TABLA DE VERDAD DEL SEMISUMADOR    -->
-        <!-- ================================================================== -->
-        <h3>🔧 El circuito del semisumador (half adder)</h3>
-        
-        <p>El semisumador combina dos compuertas en paralelo: una <strong>XOR</strong> para el bit de suma (S) y una <strong>AND</strong> para el bit de acarreo (C). El diagrama siguiente muestra esta estructura:</p>
-
-        <div class="svg-container">
-            <!-- Imagen del circuito lógico del half adder -->
-            <img src="img/half_adder_circuito.png" alt="Circuito lógico del semisumador: entradas A y B, salidas S (XOR) y C (AND)" style="max-width:80%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <p><small><em>Fig. 8: Circuito del semisumador. La salida S = A ⊕ B (XOR) y la salida C = A · B (AND).</em></small></p>
-        </div>
-        
-        <h3>📊 Tabla de verdad del semisumador (half adder)</h3>
-
-        <p>El semisumador combina las funciones XOR y AND. La siguiente tabla muestra el valor de las salidas para cada combinación de entradas:</p>
-
-        <div style="overflow-x: auto; margin: 25px 0;">
-            <table class="tabla-auditoria">
-                <thead>
-                    <!-- Primera fila: títulos agrupados -->
-                    <tr>
-                        <th colspan="2" style="padding: 10px; border: 1px solid #ddd; background-color: var(--color-primario); color: white;">Entrada</th>
-                        <th colspan="2" style="padding: 10px; border: 1px solid #ddd; background-color: var(--color-primario); color: white;">Salida</th>
-                    </tr>
-                    <!-- Segunda fila: subtítulos -->
-                    <tr style="background-color: var(--color-primario); color: white;">
-                        <th style="padding: 10px; border: 1px solid #ddd;">B</th>
-                        <th style="padding: 10px; border: 1px solid #ddd;">A</th>
-                        <th style="padding: 10px; border: 1px solid #ddd;">C (acarreo) <br> <small>A · B</small></th>
-                        <th style="padding: 10px; border: 1px solid #ddd;">S (suma) <br> <small>A ⊕ B</small></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">1</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
-                        <td style="padding: 8px; border: 1px solid #ddd; background-color: #d4edda; font-weight: bold;">1</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #ddd;">1</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
-                        <td style="padding: 8px; border: 1px solid #ddd; background-color: #d4edda; font-weight: bold;">1</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #ddd;">1</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">1</td>
-                        <td style="padding: 8px; border: 1px solid #ddd; background-color: #d4edda; font-weight: bold;">1</td>
-                        <td style="padding: 8px; border: 1px solid #ddd;">0</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>   
-
-        <p>Observa que la columna de Suma (S) coincide exactamente con la tabla de la XOR que ya has verificado en este laboratorio, y la columna de Acarreo (C) es la tabla de la AND. Juntas, forman la operación de suma binaria: cuando A y B son 1, la suma es 0 con acarreo 1 (es decir, 1+1=10 en binario).</p>
-       
-        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
-            <h3>➕ La XOR es una suma (sin acarreo)</h3>
-            <p>Observa la tabla de la XOR que acabas de validar:</p>
-            <ul>
-                <li>0 + 0 = 0  → suma 0</li>
-                <li>0 + 1 = 1  → suma 1</li>
-                <li>1 + 0 = 1  → suma 1</li>
-                <li>1 + 1 = 0  → suma 0, pero en binario 1+1 es 2, que se escribe como "10" (acarreo 1, suma 0).</li>
-            </ul>
-            <p>¡La XOR nos da el bit de suma! El acarreo (el 1 que "se lleva" a la siguiente columna) lo genera la compuerta AND: \(A \cdot B\).</p>
-        </div>
-
-        <!-- Notación sigma para la XOR -->
-        <div class="dato-extra" style="border-left-color: #9c27b0; background-color: #f3e5f5; margin: 25px 0;">
-            <h3>📝 Notación sigma (Σ) para la XOR</h3>
-            <p>Como viste en la <strong>Lección 15</strong>, los ingenieros usan una forma compacta para representar funciones lógicas: la suma de minterms o <strong>notación Σ</strong>. Para nuestra XOR de dos variables, la tabla de verdad tiene salida 1 en las filas donde las entradas son diferentes:</p>
-            <ul>
-                <li>Fila 1: A=0, B=1  →  binario 01 = decimal <strong>1</strong></li>
-                <li>Fila 2: A=1, B=0  →  binario 10 = decimal <strong>2</strong></li>
-            </ul>
-            <p>Por lo tanto, la función XOR se puede expresar de manera elegante y concisa como:</p>
-            <div class="formula">
-                $$X(A,B) = \sum m(1,2)$$
+            <div class="destacado" style="background-color: #f0f7ff; border-left-color: var(--color-primario); margin: 30px 0;">
+                <h3 style="margin-top: 0;">🔁 El Modelo Universal: De la Lógica a la Aritmética</h3>
+                <p>Al inicio de esta unidad (Lección 12), presentamos el esquema fundamental de todo sistema digital:</p>
+                
+                <div style="display: flex; justify-content: space-around; align-items: center; margin: 20px 0; flex-wrap: wrap;">
+                    <div style="text-align: center; padding: 10px; background-color: #ffe0b2; border-radius: 8px; min-width: 120px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <strong style="color: #e65100;">ENTRADA</strong><br>
+                        <small style="color: #666;">(Sensores)</small>
+                    </div>
+                    <div style="font-size: 2em; color: var(--color-primario);">→</div>
+                    <div style="text-align: center; padding: 10px; background-color: #c8e6c9; border-radius: 8px; min-width: 120px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <strong style="color: #2e7d32;">PROCESO</strong><br>
+                        <small style="color: #666;">(Compuertas)</small>
+                    </div>
+                    <div style="font-size: 2em; color: var(--color-primario);">→</div>
+                    <div style="text-align: center; padding: 10px; background-color: #ffcdd2; border-radius: 8px; min-width: 120px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <strong style="color: #c62828;">SALIDA</strong><br>
+                        <small style="color: #666;">(Actuadores)</small>
+                    </div>
+                </div>
+                
+                <p>Hoy has materializado ese esquema: tus interruptores (Entrada) alimentaron la malla de compuertas NAND (Proceso) y el LED Azul (Salida) mostró el resultado. Pero hay algo más: <strong>este mismo esquema, con una pequeña variación, se convierte en un bloque fundamental de la aritmética computacional</strong>.</p>
             </div>
-            <p>Esta notación te será especialmente útil en la <strong>Unidad 3</strong>, cuando diseñemos sumadores y otros circuitos aritméticos. ¡Es el lenguaje universal de los diseñadores digitales!</p>
-        </div>
 
-        <!-- ================================================================== -->
-        <!-- MAPA DE KARNAUGH PARA LA XOR -->
-        <!-- ================================================================== -->
-        <div class="destacado" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
-            <h3>🗺️ Representación en el Mapa de Karnaugh</h3>
-            <p>La función XOR, \(X = A \oplus B\), también puede visualizarse mediante un <strong>Mapa de Karnaugh</strong> de dos variables. Las filas representan la variable \(A\) y las columnas la variable \(B\), siguiendo el orden <strong>00, 01, 11, 10</strong> (Código Gray).</p>
+            <h3>➕ El circuito como sumador: dos entradas, dos salidas</h3>
+            
+            <p>El circuito que has construido (la XOR con NAND) tiene dos entradas (A, B). Si le añadimos en paralelo una compuerta AND para detectar el caso en que ambas entradas son 1, obtenemos un sistema "paquete" con <strong>dos entradas y dos salidas</strong> que realiza matemáticamente la suma de dos bits:</p>
 
             <div class="svg-container">
-                <img src="img/mapa_k_xor.png" alt="Mapa de Karnaugh para la función XOR: celdas con 1 en (A=0,B=1) y (A=1,B=0)" style="max-width:100%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                <p><small><em>Fig. 9: Mapa de Karnaugh de la función XOR. Los unos están en posiciones diagonales, lo que impide la simplificación.</em></small></p>
+                <img src="img/half_adder_bloques.png" alt="Diagrama de bloques del semisumador" style="max-width:350px; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <p><small><em>Fig. 7: El semisumador (half adder). Dos entradas (A, B), dos salidas: Suma (S = A⊕B) y Acarreo (C = A·B).</em></small></p>
             </div>
 
-            <p>Observa que los unos (en verde) se encuentran en las celdas <strong>(A=0, B=1)</strong> y <strong>(A=1, B=0)</strong>. Estas celdas son <em>diagonales</em> entre sí, es decir, no comparten un lado común (adyacencia horizontal o vertical). Por esta razón, <strong>no es posible agruparlas</strong> en el mapa de Karnaugh, y la expresión mínima es precisamente la suma de los dos minterms:</p>
+            <p>Observa la similitud con el esquema inicial de la unidad: sigue siendo <strong>Entrada → Proceso → Salida</strong>, pero ahora el "Proceso" contiene dos funciones simultáneas (XOR y AND) y la "Salida" son dos señales (S y C). Este bloque, llamado <strong>semisumador (half adder)</strong>, es la primera pieza de la aritmética computacional.</p>
 
-            <div class="formula">
-                $$X = \overline{A}B + A\overline{B}$$
-            </div>
-
-            <p>Esta es la forma algebraica de la compuerta XOR. En notación sigma, corresponde a \(\sum m(1,2)\), como ya vimos. El mapa de Karnaugh confirma que no hay simplificación posible más allá de esta expresión.</p>
-
-            <p><small><em>Nota: El orden de las columnas (00, 01, 11, 10) sigue el Código Gray, que garantiza que celdas adyacentes difieran en un solo bit. En este caso, la diagonal no es adyacente, por lo que la función no se simplifica.</em></small></p>
-        </div>
-
-        <div class="destacado" style="background-color: #e3f2fd; border-left-color: #1565c0;">
-            <h3>⏫ La AND es el acarreo (carry)</h3>
-            <p>La compuerta AND solo da 1 cuando A=1 y B=1, justo el caso en que se genera un <strong>acarreo</strong> (coloquialmente, "llevamos uno") en la suma binaria:</p>
-            <p class="formula">$$Y(A,B) = A \cdot B = \sum m(3)$$</p>
-            <p>Mientras que la XOR (que acabas de construir) se representa como:</p>
-            <p class="formula">$$X(A,B) = A \oplus B = \sum m(1,2)$$</p>
-            <p>Juntas, forman el <strong>semisumador (half adder)</strong> que estudiarás en la Lección 25.</p>
-        </div>
-        
-        <!-- ================================================================== -->
-        <!-- MAPA DE KARNAUGH PARA EL ACARREO (AND) -->
-        <!-- ================================================================== -->
-        <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
-            <h3>🗺️ Mapa de Karnaugh para el acarreo (\(Y = A \cdot B\))</h3>
-            <p>La función de acarreo (AND) tiene su única salida 1 cuando ambas entradas son 1. En el mapa de Karnaugh de dos variables, esto se representa con un único 1 en la celda <strong>(A=1, B=1)</strong>:</p>
+            <!-- ================================================================== -->
+            <!-- NUEVO: DIAGRAMA DEL CIRCUITO Y TABLA DE VERDAD DEL SEMISUMADOR    -->
+            <!-- ================================================================== -->
+            <h3>🔧 El circuito del semisumador (half adder)</h3>
+            
+            <p>El semisumador combina dos compuertas en paralelo: una <strong>XOR</strong> para el bit de suma (S) y una <strong>AND</strong> para el bit de acarreo (C). El diagrama siguiente muestra esta estructura:</p>
 
             <div class="svg-container">
-                <img src="img/mapa_k_and.png" alt="Mapa de Karnaugh para la función AND: un 1 en la celda (A=1, B=1)" style="max-width:100%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                <p><small><em>Fig. 10: Mapa de Karnaugh de la función AND (acarreo). El 1 aparece únicamente cuando ambas entradas son 1.</em></small></p>
+                <!-- Imagen del circuito lógico del half adder -->
+                <img src="img/half_adder_circuito.png" alt="Circuito lógico del semisumador: entradas A y B, salidas S (XOR) y C (AND)" style="max-width:80%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <p><small><em>Fig. 8: Circuito del semisumador. La salida S = A ⊕ B (XOR) y la salida C = A · B (AND).</em></small></p>
             </div>
+            
+            <h3>📊 Tabla de verdad del semisumador (half adder)</h3>
 
-            <p>En notación sigma, esta función se expresa como:</p>
-            <div class="formula">
-                $$Y(A,B) = A \cdot B = \sum m(3)$$
-            </div>
-            <p>Observa que, a diferencia de la XOR, aquí el 1 está aislado y no puede agruparse con ninguna otra celda, por lo que la expresión \(A \cdot B\) ya es la forma mínima.</p>
-        </div>
+            <p>El semisumador combina las funciones XOR y AND. La siguiente tabla muestra el valor de las salidas para cada combinación de entradas:</p>
 
-        <p>Esto significa que el circuito que has montado (XOR) junto con una simple compuerta AND puede <strong>sumar dos bits</strong>. Este es el principio del <strong>semisumador (Half Adder)</strong>, el primer ladrillo de la aritmética computacional. En la <strong>Lección 25</strong> de la Unidad 3 lo construirás formalmente.</p>
-        <p>Pero antes, en la <strong>Lección 21: Isomorfismo</strong>, exploraremos la profunda conexión entre la lógica y la aritmética: veremos que un mismo circuito puede interpretarse como una función lógica (escalera) o como una operación aritmética (suma). ¡Prepárate para cambiar de perspectiva!</p>
-    </section>
+            <div style="overflow-x: auto; margin: 25px 0;">
+                <table class="tabla-auditoria">
+                    <thead>
+                        <!-- Primera fila: títulos agrupados -->
+                        <tr>
+                            <th colspan="2" style="padding: 10px; border: 1px solid #ddd; background-color: var(--color-primario); color: white;">Entrada</th>
+                            <th colspan="2" style="padding: 10px; border: 1px solid #ddd; background-color: var(--color-primario); color: white;">Salida</th>
+                        </tr>
+                        <!-- Segunda fila: subtítulos -->
+                        <tr style="background-color: var(--color-primario); color: white;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">B</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">A</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">C (acarreo) <br> <small>A · B</small></th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">S (suma) <br> <small>A ⊕ B</small></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">1</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; background-color: #d4edda; font-weight: bold;">1</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">1</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; background-color: #d4edda; font-weight: bold;">1</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">1</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">1</td>
+                            <td style="padding: 8px; border: 1px solid #ddd; background-color: #d4edda; font-weight: bold;">1</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>   
 
-    <p>💡 <strong>¿Sabías que...?</strong> Este mismo circuito que has montado es un ejemplo de <strong>isomorfismo</strong>, el tema central de la <strong>Lección 21</strong>. La estructura física (las conexiones de las NAND) es la misma, pero puede interpretarse de dos formas: como una función lógica (XOR) o como una operación aritmética (suma de bits). Esta dualidad es la base de todo computador.</p>
-
-    <!-- === PODCAST: Conversación entre Expertos === -->
-    <section class="podcast-section" style="margin-top: 40px;">
-        <div class="podcast-header">
-            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 30px; vertical-align: middle;">
-                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
-            </svg>
-            <h3 style="display: inline;">🎧 Podcast: Conversación entre Expertos</h3>
-        </div>
-        <p class="podcast-descripcion">
-            Dos docentes reflexionan sobre este laboratorio final: la importancia de la universalidad de la NAND, la conexión con el problema de la escalera, y cómo este circuito es la puerta de entrada a la aritmética binaria. Discuten estrategias para que los estudiantes no solo armen el circuito, sino que comprendan el salto conceptual hacia el isomorfismo y el half adder.
-        </p>
-        <div class="podcast-player">
-            <audio controls preload="metadata" style="width: 100%;"><source src="audio/leccion20.mp3" type="audio/mpeg"></audio>
-        </div>
-        <p class="podcast-meta"><span class="duracion">⏱️ 23:27 min</span> | <span class="formato">🔊 MP3</span></p>
-    </section>
-
-    <h2>❓ Preguntas de Consolidación</h2>
-    <details>
-        <summary>1. ¿Por qué la compuerta NAND es considerada "universal"?</summary>
-        <p>Porque con ella se puede implementar cualquier función lógica, incluyendo NOT, AND, OR, NOR, XNOR y XOR, como hemos demostrado en este laboratorio. Esto se debe a que la NAND es funcionalmente completa gracias a las Leyes de De Morgan.</p>
-    </details>
-    <details>
-        <summary>2. En el circuito, ¿qué relación observas entre la salida de la primera NAND (P) y las entradas A y B? ¿Por qué es importante esa señal?</summary>
-        <p>P es el NAND de A y B (P = \(\overline{A \cdot B}\)). Es importante porque se realimenta a las compuertas 2 y 3, permitiendo generar las señales intermedias Q y R que luego se combinan para producir la XOR. Sin esta realimentación, no se puede obtener el comportamiento exclusivo.</p>
-    </details>
-    <details>
-        <summary>3. Si quisieras construir un semisumador (half adder) que sume dos bits y genere un bit de suma y un bit de acarreo, ¿qué compuertas añadirías a este circuito y por qué?</summary>
-        <p>El circuito XOR ya genera el bit de suma. Para obtener el bit de acarreo, bastaría con añadir una compuerta AND adicional (otra de las cuatro NAND del chip, configurada como AND, o un chip 7408 externo) que tome las mismas entradas A y B. La AND da 1 solo cuando A y B son 1, que es exactamente el caso en que se genera acarreo en la suma binaria (1+1=10).</p>
-    </details>    
-    <details>
-        <summary>4. En tus propias palabras, explica qué significa que el circuito que acabas de construir (la XOR con NAND) sea un "isomorfismo" entre la lógica de la escalera y la aritmética binaria.</summary>
-        <p><strong>Respuesta orientativa:</strong> Significa que la misma estructura física (las conexiones de las cuatro compuertas NAND) puede interpretarse de dos maneras distintas: como una función lógica (la luz de la escalera se enciende cuando los interruptores son diferentes) y como una operación aritmética (el bit de suma de dos números binarios). La forma (el circuito) es la misma; lo que cambia es el significado que le asignamos a las señales. Esta dualidad es la base de todo computador.</p>
-    </details>    
-    <details>
-        <summary>5. Si el semisumador (half adder) suma dos bits y genera acarreo, ¿qué crees que necesitaríamos para sumar números de más de un bit, por ejemplo, dos números de 2 bits (A₁A₀ + B₁B₀)?</summary>
-        <p><strong>Respuesta orientativa:</strong> Necesitaríamos varios semisumadores conectados en cascada, de forma que el acarreo de una etapa (la suma de los bits menos significativos) se convierta en una entrada más para la siguiente etapa. Ese circuito se llama <strong>sumador completo (full adder)</strong> y lo construirás en la Lección 26. Aquí ya estamos vislumbrando cómo se construye un procesador: repitiendo bloques básicos una y otra vez.</p>
-    </details>
-
-    <!-- === MI CUADERNO: Bitácora de Innovación === -->
-    <section class="cuaderno-section">
-        <div class="cuaderno-header">
-            <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-            </svg>
-            <h3>📋 Bitácora de Innovación (Mi Cuaderno)</h3>
-        </div>
-        <p>Responde en tu cuaderno físico las siguientes preguntas de reflexión docente:</p>
-        <ol>
-            <li><strong>Errores comunes:</strong> Durante el montaje, ¿qué error crees que sería más frecuente en un estudiante? ¿Cómo lo detectaría y solucionaría?</li>
-            <li><strong>Conexión pedagógica:</strong> ¿Cómo explicarías a un estudiante de grado 10° que el mismo circuito que enciende una luz en la escalera puede usarse para sumar números binarios?</li>
-            <li><strong>Isomorfismo:</strong> Investiga el concepto de isomorfismo (o busca en tu IA favorita). Escribe una definición con tus palabras y pon un ejemplo diferente al de la XOR/suma.</li>
-            <li><strong>El salto conceptual:</strong> Hoy has pasado de "conectar cables para que un LED se encienda" a "construir un bloque que suma números binarios". Describe con tus palabras ese momento en que entendiste que la electricidad se convertía en matemáticas. ¿Fue un momento "eureka"? ¿Qué crees que falta para que un estudiante de secundaria pueda tener esa misma revelación?</li>
-        </ol>
-        </ol>
-        <textarea rows="6" placeholder="Escribe aquí tus reflexiones..." style="width: 100%; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; padding: 8px;"></textarea>
+            <p>Observa que la columna de Suma (S) coincide exactamente con la tabla de la XOR que ya has verificado en este laboratorio, y la columna de Acarreo (C) es la tabla de la AND. Juntas, forman la operación de suma binaria: cuando A y B son 1, la suma es 0 con acarreo 1 (es decir, 1+1=10 en binario).</p>
         
-    </section>
+            <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+                <h3>➕ La XOR es una suma (sin acarreo)</h3>
+                <p>Observa la tabla de la XOR que acabas de validar:</p>
+                <ul>
+                    <li>0 + 0 = 0  → suma 0</li>
+                    <li>0 + 1 = 1  → suma 1</li>
+                    <li>1 + 0 = 1  → suma 1</li>
+                    <li>1 + 1 = 0  → suma 0, pero en binario 1+1 es 2, que se escribe como "10" (acarreo 1, suma 0).</li>
+                </ul>
+                <p>¡La XOR nos da el bit de suma! El acarreo (el 1 que "se lleva" a la siguiente columna) lo genera la compuerta AND: \(A \cdot B\).</p>
+            </div>
 
-    <!-- NARRATIVA: TRAILER A LA UNIDAD 3 -->
-    <div class="avance-leccion" style="background-color: #f0f4f8; padding: 20px; border-radius: 8px; margin-top: 30px; border-left: 5px solid #3498db;">
-      
-        <h3 style="color: #d35400; display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 1.2em;">🚀</span> Próximamente: Unidad 3 – Fundamentos de Cómputo
-        </h3>
-        <p>Has construido con tus propias manos el circuito que enciende una luz en una escalera y, de paso, has descubierto que ese mismo circuito es capaz de sumar bits. Este es el momento justo para dar el salto a la tercera unidad.</p>
-        <p>En la <strong>Lección 21: Isomorfismo</strong>, exploraremos la relación profunda entre la lógica y la aritmética. Veremos cómo las leyes del pensamiento (Boole) se convierten en las reglas del cálculo (suma binaria). ¡Te esperamos!</p>
-        <p style="text-align: center; margin-top: 20px;">
-            <a href="leccion21.html" class="btn-navegacion" style="background-color: #fd7e14; transform: scale(1.1); padding: 15px 30px; box-shadow: 0 4px 15px rgba(253, 126, 20, 0.4); color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Comenzar Unidad 3 🚀</a>
+            <!-- Notación sigma para la XOR -->
+            <div class="dato-extra" style="border-left-color: #9c27b0; background-color: #f3e5f5; margin: 25px 0;">
+                <h3>📝 Notación sigma (Σ) para la XOR</h3>
+                <p>Como viste en la <strong>Lección 15</strong>, los ingenieros usan una forma compacta para representar funciones lógicas: la suma de minterms o <strong>notación Σ</strong>. Para nuestra XOR de dos variables, la tabla de verdad tiene salida 1 en las filas donde las entradas son diferentes:</p>
+                <ul>
+                    <li>Fila 1: A=0, B=1  →  binario 01 = decimal <strong>1</strong></li>
+                    <li>Fila 2: A=1, B=0  →  binario 10 = decimal <strong>2</strong></li>
+                </ul>
+                <p>Por lo tanto, la función XOR se puede expresar de manera elegante y concisa como:</p>
+                <div class="formula">
+                    $$X(A,B) = \sum m(1,2)$$
+                </div>
+                <p>Esta notación te será especialmente útil en la <strong>Unidad 3</strong>, cuando diseñemos sumadores y otros circuitos aritméticos. ¡Es el lenguaje universal de los diseñadores digitales!</p>
+            </div>
+
+            <!-- ================================================================== -->
+            <!-- MAPA DE KARNAUGH PARA LA XOR -->
+            <!-- ================================================================== -->
+            <div class="destacado" style="background-color: #f3e5f5; border-left-color: #9c27b0;">
+                <h3>🗺️ Representación en el Mapa de Karnaugh</h3>
+                <p>La función XOR, \(X = A \oplus B\), también puede visualizarse mediante un <strong>Mapa de Karnaugh</strong> de dos variables. Las filas representan la variable \(A\) y las columnas la variable \(B\), siguiendo el orden <strong>00, 01, 11, 10</strong> (Código Gray).</p>
+
+                <div class="svg-container">
+                    <img src="img/mapa_k_xor.png" alt="Mapa de Karnaugh para la función XOR: celdas con 1 en (A=0,B=1) y (A=1,B=0)" style="max-width:100%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    <p><small><em>Fig. 9: Mapa de Karnaugh de la función XOR. Los unos están en posiciones diagonales, lo que impide la simplificación.</em></small></p>
+                </div>
+
+                <p>Observa que los unos (en verde) se encuentran en las celdas <strong>(A=0, B=1)</strong> y <strong>(A=1, B=0)</strong>. Estas celdas son <em>diagonales</em> entre sí, es decir, no comparten un lado común (adyacencia horizontal o vertical). Por esta razón, <strong>no es posible agruparlas</strong> en el mapa de Karnaugh, y la expresión mínima es precisamente la suma de los dos minterms:</p>
+
+                <div class="formula">
+                    $$X = \overline{A}B + A\overline{B}$$
+                </div>
+
+                <p>Esta es la forma algebraica de la compuerta XOR. En notación sigma, corresponde a \(\sum m(1,2)\), como ya vimos. El mapa de Karnaugh confirma que no hay simplificación posible más allá de esta expresión.</p>
+
+                <p><small><em>Nota: El orden de las columnas (00, 01, 11, 10) sigue el Código Gray, que garantiza que celdas adyacentes difieran en un solo bit. En este caso, la diagonal no es adyacente, por lo que la función no se simplifica.</em></small></p>
+            </div>
+
+            <div class="destacado" style="background-color: #e3f2fd; border-left-color: #1565c0;">
+                <h3>⏫ La AND es el acarreo (carry)</h3>
+                <p>La compuerta AND solo da 1 cuando A=1 y B=1, justo el caso en que se genera un <strong>acarreo</strong> (coloquialmente, "llevamos uno") en la suma binaria:</p>
+                <p class="formula">$$Y(A,B) = A \cdot B = \sum m(3)$$</p>
+                <p>Mientras que la XOR (que acabas de construir) se representa como:</p>
+                <p class="formula">$$X(A,B) = A \oplus B = \sum m(1,2)$$</p>
+                <p>Juntas, forman el <strong>semisumador (half adder)</strong> que estudiarás en la Lección 25.</p>
+            </div>
+            
+            <!-- ================================================================== -->
+            <!-- MAPA DE KARNAUGH PARA EL ACARREO (AND) -->
+            <!-- ================================================================== -->
+            <div class="destacado" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+                <h3>🗺️ Mapa de Karnaugh para el acarreo (\(Y = A \cdot B\))</h3>
+                <p>La función de acarreo (AND) tiene su única salida 1 cuando ambas entradas son 1. En el mapa de Karnaugh de dos variables, esto se representa con un único 1 en la celda <strong>(A=1, B=1)</strong>:</p>
+
+                <div class="svg-container">
+                    <img src="img/mapa_k_and.png" alt="Mapa de Karnaugh para la función AND: un 1 en la celda (A=1, B=1)" style="max-width:100%; height:auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    <p><small><em>Fig. 10: Mapa de Karnaugh de la función AND (acarreo). El 1 aparece únicamente cuando ambas entradas son 1.</em></small></p>
+                </div>
+
+                <p>En notación sigma, esta función se expresa como:</p>
+                <div class="formula">
+                    $$Y(A,B) = A \cdot B = \sum m(3)$$
+                </div>
+                <p>Observa que, a diferencia de la XOR, aquí el 1 está aislado y no puede agruparse con ninguna otra celda, por lo que la expresión \(A \cdot B\) ya es la forma mínima.</p>
+            </div>
+
+            <p>Esto significa que el circuito que has montado (XOR) junto con una simple compuerta AND puede <strong>sumar dos bits</strong>. Este es el principio del <strong>semisumador (Half Adder)</strong>, el primer ladrillo de la aritmética computacional. En la <strong>Lección 25</strong> de la Unidad 3 lo construirás formalmente.</p>
+            <p>Pero antes, en la <strong>Lección 21: Isomorfismo</strong>, exploraremos la profunda conexión entre la lógica y la aritmética: veremos que un mismo circuito puede interpretarse como una función lógica (escalera) o como una operación aritmética (suma). ¡Prepárate para cambiar de perspectiva!</p>
+        </section>
+
+        <p>💡 <strong>¿Sabías que...?</strong> Este mismo circuito que has montado es un ejemplo de <strong>isomorfismo</strong>, el tema central de la <strong>Lección 21</strong>. La estructura física (las conexiones de las NAND) es la misma, pero puede interpretarse de dos formas: como una función lógica (XOR) o como una operación aritmética (suma de bits). Esta dualidad es la base de todo computador.</p>
+
+        <!-- === PODCAST: Conversación entre Expertos === -->
+        <section class="podcast-section" style="border-left: 5px solid #0d47a1;">
+            <div class="podcast-header">
+                <svg class="podcast-icon" viewBox="0 0 24 24" fill="#0d47a1" style="width:30px;">
+                    <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                </svg>
+                <h3 style="color: #0d47a1;">🎧 Podcast: El Ladrillo Único de Lego. Laboratorio 2: El Desafío de la XOR y la Magia del chip CMOS <strong>74HC00</strong></h3>
+            </div>
+            
+            <p class="podcast-descripcion">
+                En este episodio, nos ponemos la bata de laboratorio para auditar el circuito XOR con NAND. Discutimos por qué el chip 74HC00 puede quemarse si no respetas la polaridad, el misterio del "Fantasma TTL" (pins flotantes que asumen un 1 lógico) y cómo usar la "Punta Lógica" (el cable rosa) para hacer una auditoría inversa de señales. Es la guía definitiva para pasar del montaje de cables al pensamiento de ingeniería.
+            </p>
+            
+            <div class="podcast-player">
+                <audio controls>
+                    <source src="audio/leccion20.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el audio.
+                </audio>
+            </div>
+            <p style="font-size: 0.8em; opacity: 0.8; margin-top: 10px;">⏱️ 23:27 min | 🏗️ Enfoque: Manufactura y Estandarización</p>
+        </section>
+        <!-- === PODCAST 1 (GRADO 10°) === -->
+
+        <h2>❓ Preguntas de Consolidación</h2>
+        <details>
+            <summary>1. ¿Por qué la compuerta NAND es considerada "universal"?</summary>
+            <p>Porque con ella se puede implementar cualquier función lógica, incluyendo NOT, AND, OR, NOR, XNOR y XOR, como hemos demostrado en este laboratorio. Esto se debe a que la NAND es funcionalmente completa gracias a las Leyes de De Morgan.</p>
+        </details>
+        <details>
+            <summary>2. En el circuito, ¿qué relación observas entre la salida de la primera NAND (P) y las entradas A y B? ¿Por qué es importante esa señal?</summary>
+            <p>P es el NAND de A y B (P = \(\overline{A \cdot B}\)). Es importante porque se realimenta a las compuertas 2 y 3, permitiendo generar las señales intermedias Q y R que luego se combinan para producir la XOR. Sin esta realimentación, no se puede obtener el comportamiento exclusivo.</p>
+        </details>
+        <details>
+            <summary>3. Si quisieras construir un semisumador (half adder) que sume dos bits y genere un bit de suma y un bit de acarreo, ¿qué compuertas añadirías a este circuito y por qué?</summary>
+            <p>El circuito XOR ya genera el bit de suma. Para obtener el bit de acarreo, bastaría con añadir una compuerta AND adicional (otra de las cuatro NAND del chip, configurada como AND, o un chip 7408 externo) que tome las mismas entradas A y B. La AND da 1 solo cuando A y B son 1, que es exactamente el caso en que se genera acarreo en la suma binaria (1+1=10).</p>
+        </details>    
+        <details>
+            <summary>4. En tus propias palabras, explica qué significa que el circuito que acabas de construir (la XOR con NAND) sea un "isomorfismo" entre la lógica de la escalera y la aritmética binaria.</summary>
+            <p><strong>Respuesta orientativa:</strong> Significa que la misma estructura física (las conexiones de las cuatro compuertas NAND) puede interpretarse de dos maneras distintas: como una función lógica (la luz de la escalera se enciende cuando los interruptores son diferentes) y como una operación aritmética (el bit de suma de dos números binarios). La forma (el circuito) es la misma; lo que cambia es el significado que le asignamos a las señales. Esta dualidad es la base de todo computador.</p>
+        </details>    
+        <details>
+            <summary>5. Si el semisumador (half adder) suma dos bits y genera acarreo, ¿qué crees que necesitaríamos para sumar números de más de un bit, por ejemplo, dos números de 2 bits (A₁A₀ + B₁B₀)?</summary>
+            <p><strong>Respuesta orientativa:</strong> Necesitaríamos varios semisumadores conectados en cascada, de forma que el acarreo de una etapa (la suma de los bits menos significativos) se convierta en una entrada más para la siguiente etapa. Ese circuito se llama <strong>sumador completo (full adder)</strong> y lo construirás en la Lección 26. Aquí ya estamos vislumbrando cómo se construye un procesador: repitiendo bloques básicos una y otra vez.</p>
+        </details>
+
+        <!-- === MI CUADERNO: Bitácora de Innovación === -->
+        <section class="cuaderno-section">
+            <div class="cuaderno-header">
+                <svg class="cuaderno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <h3>📋 Bitácora de Innovación (Mi Cuaderno)</h3>
+            </div>
+            <p>Responde en tu cuaderno físico las siguientes preguntas de reflexión docente:</p>
+            <ol>
+                <li><strong>Errores comunes:</strong> Durante el montaje, ¿qué error crees que sería más frecuente en un estudiante? ¿Cómo lo detectaría y solucionaría?</li>
+                <li><strong>Conexión pedagógica:</strong> ¿Cómo explicarías a un estudiante de grado 10° que el mismo circuito que enciende una luz en la escalera puede usarse para sumar números binarios?</li>
+                <li><strong>Isomorfismo:</strong> Investiga el concepto de isomorfismo (o busca en tu IA favorita). Escribe una definición con tus palabras y pon un ejemplo diferente al de la XOR/suma.</li>
+                <li><strong>El salto conceptual:</strong> Hoy has pasado de "conectar cables para que un LED se encienda" a "construir un bloque que suma números binarios". Describe con tus palabras ese momento en que entendiste que la electricidad se convertía en matemáticas. ¿Fue un momento "eureka"? ¿Qué crees que falta para que un estudiante de secundaria pueda tener esa misma revelación?</li>
+            </ol>
+            </ol>
+            <textarea rows="6" placeholder="Escribe aquí tus reflexiones..." style="width: 100%; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; padding: 8px;"></textarea>
+            
+        </section>
+
+        <!-- NARRATIVA: TRAILER A LA UNIDAD 3 -->
+        <div class="avance-leccion" style="background-color: #f0f4f8; padding: 20px; border-radius: 8px; margin-top: 30px; border-left: 5px solid #3498db;">
+        
+            <h3 style="color: #d35400; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2em;">🚀</span> Próximamente: Unidad 3 – Fundamentos de Cómputo
+            </h3>
+            <p>Has construido con tus propias manos el circuito que enciende una luz en una escalera y, de paso, has descubierto que ese mismo circuito es capaz de sumar bits. Este es el momento justo para dar el salto a la tercera unidad.</p>
+            <p>En la <strong>Lección 21: Isomorfismo</strong>, exploraremos la relación profunda entre la lógica y la aritmética. Veremos cómo las leyes del pensamiento (Boole) se convierten en las reglas del cálculo (suma binaria). ¡Te esperamos!</p>
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="leccion21.html" class="btn-navegacion" style="background-color: #fd7e14; transform: scale(1.1); padding: 15px 30px; box-shadow: 0 4px 15px rgba(253, 126, 20, 0.4); color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Comenzar Unidad 3 🚀</a>
+            </p>
+        </div>
+
+        <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
+        
+    <!-- === TRANSICIÓN HACIA LA IA === -->
+    <div style="text-align: center; margin: 50px 0 20px 0;">
+        <p style="font-size: 1.2em; color: #444; font-style: italic;">
+            "Mira tu protoboard por un momento. El LED azul brilla. Has vencido a los cables y has domado la lógica de la escalera. <br>
+            <strong>Pero lo que no sabes es que acabas de construir físicamente la llave que sacó a la Inteligencia Artificial de su crisis más oscura."</strong>
         </p>
+        <div style="font-size: 2em;">⬇️</div>
     </div>
 
-    <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
-    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #141e30, #243b55); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-left: 8px solid #00c6ff;">
-        <h3 style="color: #00c6ff; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: El Laboratorio que salvó a la IA
-        </h3>
+    <!-- ====================================================================== -->
+    <!-- BLOQUE DE CONEXIÓN IA: LA SOLUCIÓN (CONTINUACIÓN DEL DRAMA DE L18)     -->
+    <!-- ====================================================================== -->
+    <div class="conexion-ia" style="margin: 20px 0 60px 0; padding: 35px; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border-left: 8px solid #00d2ff;">
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #00c6ff; margin-top: 0;">Para Grado 7°: IA de Varias Capas</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">¿Viste que para hacer la XOR necesitaste 4 compuertas NAND en "malla"? En la Inteligencia Artificial pasa lo mismo. Una sola neurona no puede aprender la lógica XOR. Para resolverla, la IA necesita <strong>varias capas de neuronas</strong> trabajando juntas, igual que tú conectaste varias compuertas en tu protoboard. ¡Sin capas, no hay inteligencia!</p>
+        <!-- CABECERA DE CONEXIÓN -->
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap;">
+            <div style="background-color: #d32f2f; color: white; padding: 5px 15px; border-radius: 30px; font-size: 0.8em; font-weight: bold; font-family: monospace; letter-spacing: 1px;">
+                📍 CONTINUACIÓN DE LA LECCIÓN 18
             </div>
-            
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #00c6ff; margin-top: 0;">Para Grado 10°: El Problema de la Separabilidad Lineal</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">En 1969, la IA entró en un "invierno" porque se demostró que los Perceptrones (neuronas simples) no podían resolver la función XOR. ¿La razón? En un Mapa de Karnaugh, los "1" de la XOR están en diagonal y no se pueden separar con una línea recta. Esto obligó a crear las <strong>Redes Neuronales Profundas</strong>. Al construir este circuito hoy, has resuelto físicamente el problema que dio origen al Deep Learning.</p>
+            <div style="background-color: #00d2ff; color: #0f2027; padding: 5px 15px; border-radius: 30px; font-size: 0.8em; font-weight: bold; font-family: monospace; letter-spacing: 1px;">
+                🔧 MISIÓN CUMPLIDA
             </div>
         </div>
 
-        <div style="margin-top: 20px; padding: 15px; background: rgba(0,198,255,0.1); border-radius: 8px; border: 1px dashed #00c6ff;">
-            <p style="margin: 0; text-align: center; font-weight: bold;">
-                🚀 Conexión a la Unidad 3: En la próxima lección veremos que sumar bits no es solo matemáticas, es "Isomorfismo". ¡La misma XOR que montaste hoy será el motor de tu primera calculadora digital!
+        <h3 style="color: #00d2ff; margin-top: 0; display: flex; align-items: center; gap: 10px; font-size: 1.8em;">
+            <span style="font-size: 1.3em;">🧠</span> Cerebro de Silicio: Cómo tu Protoboard revivió la IA
+        </h3>
+        
+        <p style="font-size: 1.1em; line-height: 1.6; color: #e0e0e0; margin-bottom: 25px;">
+            En la <strong>Lección 18</strong> aprendimos que en 1969, la ciencia se detuvo porque una sola neurona era incapaz de resolver la lógica XOR (no podía trazar una línea recta entre sus resultados). <strong>Hoy, tú has resuelto ese dilema usando el poder de las CAPAS.</strong>
+        </p>
+
+        <!-- EXPLICACIÓN TÉCNICA Y VISUAL -->
+        <div style="background: rgba(255,255,255,0.08); padding: 25px; border-radius: 12px; margin-bottom: 25px; border: 1px solid rgba(0,210,255,0.3);">
+            <h4 style="color: #00d2ff; margin-top: 0; display: flex; align-items: center; gap: 8px; font-size: 1.2em;">
+                <span style="font-size: 1.2em;">🔑</span> La Arquitectura del Perceptrón Multicapa
+            </h4>
+            
+            <p style="font-size: 1em; line-height: 1.6;">
+                Para que la XOR funcione, la señal no puede ir directo de la entrada a la salida. Necesita una <strong>Capa Oculta</strong> que transforme la información. Mira la estructura de lo que acabas de cablear:
+            </p>
+
+            <!-- Comparativa directa: Circuito NAND vs Red Neuronal -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0;">
+                <div style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 10px; text-align: center; border: 1px solid #ffeb3b;">
+                    <strong style="color: #ffeb3b; font-size: 1.1em;">🔌 TU MONTAJE (74HC00)</strong>
+                    <hr style="border-color: rgba(255,235,59,0.3); margin: 12px 0;">
+                    <p style="font-size: 0.95em; line-height: 1.8; margin: 0;">
+                        <strong>Paso 1:</strong> NAND₁ y NAND₂ (Entrada)<br>
+                        <span style="color: #00d2ff;">⬇</span><br>
+                        <strong>Paso 2:</strong> NAND₃ (Capa Oculta)<br>
+                        <span style="color: #00d2ff;">⬇</span><br>
+                        <strong>Paso 3:</strong> NAND₄ (Salida)<br>
+                        <strong style="color: #22c55e;">→ ¡Lógica XOR Activa!</strong>
+                    </p>
+                </div>
+                <div style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 10px; text-align: center; border: 1px solid #00d2ff;">
+                    <strong style="color: #00d2ff; font-size: 1.1em;">🧠 RED NEURONAL MODERNA</strong>
+                    <hr style="border-color: rgba(0,210,255,0.3); margin: 12px 0;">
+                    <p style="font-size: 0.95em; line-height: 1.8; margin: 0;">
+                        <strong>Capa 1:</strong> Neuronas de Entrada<br>
+                        <span style="color: #ffeb3b;">⬇</span><br>
+                        <strong>Capa 2:</strong> Neuronas Ocultas<br>
+                        <span style="color: #ffeb3b;">⬇</span><br>
+                        <strong>Capa 3:</strong> Neurona de Salida<br>
+                        <strong style="color: #22c55e;">→ ¡IA Inteligente!</strong>
+                    </p>
+                </div>
+            </div>
+
+            <p style="font-size: 1em; line-height: 1.6; margin-bottom: 0;">
+                Este diseño en "cascada" o capas es lo que permite que una IA aprenda patrones complejos. Al conectar esos 4 bloques NAND, has replicado la estructura básica de un <strong>Perceptrón Multicapa</strong>, el invento que terminó con el Invierno de la IA y dio paso al mundo de hoy.
+            </p>
+        </div>
+
+        <!-- DIFERENCIACIÓN PEDAGÓGICA -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border-top: 4px solid #ffeb3b;">
+                <h4 style="color: #ffeb3b; margin-top: 0;">🔬 Para Grado 7°: El Secreto del Equipo</h4>
+                <p style="font-size: 0.95em; line-height: 1.5; margin: 0; color: #ddd;">
+                    Una sola compuerta (o una sola neurona) no puede resolver problemas de exclusividad. Pero cuando las pones a trabajar en equipo (capas), se vuelven inteligentes. ¡Acabas de construir un equipo de neuronas de silicio!
+                </p>
+            </div>
+            
+            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border-top: 4px solid #ffeb3b;">
+                <h4 style="color: #ffeb3b; margin-top: 0;">⚡ Para Grado 10°: Espacios no Lineales</h4>
+                <p style="font-size: 0.95em; line-height: 1.5; margin: 0; color: #ddd;">
+                    Matemáticamente, la "NAND de en medio" realiza una transformación del espacio de entrada. Esto permite que el sistema trace una frontera curva para separar los datos. Es el principio de <strong>Retropropagación</strong> que permite existir a ChatGPT.
+                </p>
+            </div>
+        </div>
+
+        <!-- CIERRE MOTIVACIONAL -->
+        <div style="margin-top: 30px; padding: 20px; background: rgba(0,210,255,0.1); border-radius: 10px; border: 1px dashed #00d2ff; text-align: center;">
+            <p style="margin: 0; font-weight: bold; font-size: 1.1em; color: #00d2ff;">
+                🚀 Tu protoboard es, literalmente, el motor del futuro. ¡Has pasado de encender luces a construir arquitectura de Inteligencia Artificial!
             </p>
         </div>
     </div>
     <!-- === FIN BLOQUE IA === -->
+        <!-- === FIN BLOQUE IA === -->
+        
+        <!-- === PODCAST 2: EL ADN DE LA INTELIGENCIA (ENFOQUE IA) === -->
+        <section class="podcast-ia">
+            <h3>
+                <svg style="width:30px; height:30px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" />
+                </svg>
+                XOR: La Compuerta que casi destruye la Inteligencia Artificial
+            </h3>
+            
+            <p class="podcast-descripcion">
+                ¿Puede un simple circuito de escalera explicar por qué la IA dejó de avanzar durante una década? Exploramos el concepto de Isomorfismo y el problema de la Separabilidad Lineal. Descubre cómo el diseño de este laboratorio de 10º grado es, en realidad, la base del Deep Learning moderno. Sin la capacidad de resolver la lógica XOR mediante capas, hoy no tendríamos redes neuronales ni asistentes inteligentes.
+            </p>
+            
+            <div class="podcast-player">
+                <audio controls>
+                    <source src="audio/leccion20_ia.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el audio.
+                </audio>
+            </div>
+            <p style="font-size: 0.8em; opacity: 0.7; margin-top: 10px;">⏱️ 19:07 min | 🌐 Recomendado: Futuros Arquitectos de Sistemas</p>
+        </section>
 
     <!-- Footer de Cierre de Unidad -->
     <footer>
