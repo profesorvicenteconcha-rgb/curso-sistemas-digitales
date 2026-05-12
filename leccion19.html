@@ -145,6 +145,8 @@
         </div>
     </div>
 
+    <p>Dominar el arte del puenteo es como descubrir un código secreto en una cerradura: te otorga la flexibilidad necesaria para resolver imprevistos en la protoboard de forma ágil. Sin embargo, en la ingeniería de gran escala, esta técnica no es solo un recurso de emergencia, sino la llave maestra para la estandarización total. Si podemos obligar a una sola compuerta a cambiar su identidad, podemos transformar un chip entero en una fábrica de cualquier función imaginable. Pasemos de la optimización táctica a la construcción estratégica: usemos el chip 7400 como nuestro único 'ladrillo universal' para reconstruir, paso a paso, cada una de las herramientas de nuestro arsenal lógico.</p>
+
     <!-- ========================================================= -->
     <!-- FAMILIA NAND -->
     <!-- ========================================================= -->
@@ -327,6 +329,8 @@
             <p>Para encender un LED, un retraso de 30 nanosegundos es invisible al ojo humano. Pero en el procesador de tu computadora (que hace miles de millones de operaciones por segundo), ese retraso es la diferencia entre un equipo ultra rápido y uno que se congela. <strong>¡El buen ingeniero sabe cuándo ahorrar chips y cuándo priorizar velocidad!</strong></p>
         </div>
     </section>
+
+    <p>Haber conquistado la universalidad de la NAND es como haber aprendido a escribir cualquier poema usando un solo tipo de letra; es un triunfo absoluto del ingenio sobre la escasez. Sin embargo, el universo digital posee una simetría asombrosa y nos ofrece un segundo 'ladrillo maestro' con la misma potencia constructiva, pero con reglas físicas distintas que pondrán a prueba tu rigor en el laboratorio. Pasemos a explorar el reflejo perfecto de la NAND: la familia NOR, un componente donde el poder es idéntico, pero el camino hacia la verdad exige una atención meticulosa a cada conexión.</p>
 
     <!-- ========================================================= -->
     <!-- FAMILIA NOR -->
@@ -519,6 +523,8 @@
         </div>
     </div>
 
+    <p>Haber dominado los bloques atómicos con la compuerta NOR es un hito técnico fundamental, pero el verdadero reto de un arquitecto de hardware es la integración sistémica. No basta con saber cómo crear una compuerta aislada; la maestría se demuestra cuando somos capaces de orquestar un mar de componentes idénticos para resolver un problema complejo de la vida real. Pasemos de los ejercicios individuales a la ejecución de un diseño profesional: vamos a reconstruir el sistema de votación del Jurado utilizando exclusivamente la familia NOR, demostrando que la elegancia de la forma POS y la potencia de la universalidad pueden conquistar cualquier desafío industrial.</p>
+
     <!-- ========================================================= -->
     <!-- DISEÑO DEL SISTEMA REAL (EL JURADO CON NOR) -->
     <!-- ========================================================= -->
@@ -630,40 +636,7 @@
 
         <p style="text-align: center; color: #555; font-size: 0.85em; margin-top: 5px;"><em>¡El Jurado funciona! \(P = 1\) únicamente cuando hay mayoría de jueces (dos o más en 1).</em></p>
         
-        <!-- ================================================================== -->
-        <!-- PRECAUCIÓN: MANEJO DE ENTRADAS NO CONECTADAS                      -->
-        <!-- ================================================================== -->
-        <div class="destacado" style="background-color: #fff3e0; border-left-color: #e65100; margin: 30px 0;">
-            <h3 style="color: #e65100; margin-top: 0; display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 1.2em;">⚠️</span> Precaución: ¿Qué hacer con las patas que sobran?
-            </h3>
-            <p>En el montaje físico del circuito del jurado estás utilizando dos chips 7402, cada uno con cuatro compuertas NOR. Nuestro diseño requiere seis compuertas, por lo que <strong>quedarán dos compuertas totalmente sin usar</strong> (una en cada chip).</p>
-            
-            <p>Si dejas las entradas de esas compuertas <strong>al aire (flotantes)</strong>, se comportarán como pequeñas antenas captando ruido electromagnético del ambiente (la red eléctrica, móviles, incluso la estática de tu mano). Ese ruido hace que el chip consuma corriente extra, se caliente y, lo peor, <strong>puede interferir con las compuertas vecinas dentro del mismo chip</strong> provocando fallos aleatorios.</p>
-
-            <div style="background-color: white; border: 1px solid #ffcc80; border-radius: 8px; padding: 15px; margin: 15px 0;">
-                <h4 style="color: #d35400; margin-top: 0; margin-bottom: 10px;">✅ La Regla de Oro del Ingeniero:</h4>
-                <p style="margin-bottom: 10px;"><strong>Nunca dejes entradas lógicas sin conectar.</strong> Deben fijarse a un nivel estable (0V o 5V).</p>
-                <p style="margin-bottom: 5px;">Para compuertas <strong>NOR (como el 7402)</strong> o <strong>NAND (7400)</strong>, la práctica más rápida y segura es:</p>
-                <ul style="margin-bottom: 0;">
-                    <li>Conectar <strong>ambas entradas a GND (tierra)</strong>.</li>
-                    <li><em>¡ADVERTENCIA CRÍTICA!</em> <strong>Jamás</strong> conectes los pines de SALIDA a GND o Vcc. Si la salida intenta dar 5V y está conectada a GND, crearás un cortocircuito interno y quemarás el chip.</li>
-                </ul>
-            </div>
-
-            <h4 style="color: #e65100; margin-bottom: 10px;">🔌 En tu montaje del Jurado:</h4>
-            <ul style="margin-bottom: 15px;">
-                <li>Revisa tu cableado: Ocupaste las compuertas 1, 2 y 3 de ambos chips.</li>
-                <li>La que sobra es la <strong>Compuerta 4</strong> en cada chip.</li>
-                <li>Conecta sus dos entradas (<strong>pines 11 y 12</strong> de U1, y <strong>pines 11 y 12</strong> de U2) directamente a la línea de Tierra (Riel azul).</li>
-                <li>Deja los pines de salida (pin 13 en ambos chips) sin conectar a nada.</li>
-            </ul>
-
-            <div style="background-color: #fff8e1; border-left: 4px solid #ffb300; padding: 10px 15px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #555;">
-                <p style="margin: 0;"><strong>💡 Nota sobre Simuladores:</strong> En programas como Tinkercad este problema rara vez aparece, porque el software modela las entradas flotantes como ceros perfectos para evitar errores de simulación. Pero en un circuito de silicio real... ¡los fantasmas eléctricos existen! Adquiere el hábito de "aterrizar" las patas sueltas y te ahorrarás horas de frustración en el laboratorio.</p>
-            </div>
-        </div>
-
+        <p>Lograr que el veredicto del jurado funcione perfectamente en tu auditoría es un éxito rotundo de ruteo y lógica; es la prueba de que has asimilado la potencia de la universalidad. Sin embargo, en la ingeniería industrial, un circuito que simplemente 'funciona' no es suficiente; debe ser <strong>estable</strong>. Al utilizar dos chips para esta tarea, habrás notado que existen secciones del silicio que han quedado 'en silencio', sin cables que las dirijan. Ignorar estas piezas sueltas es invitar al caos y a la interferencia al interior de tu diseño. Pasemos a una regla de oro de la higiene electrónica para asegurar que tu máquina sea robusta y profesional.</p>
         <!-- ================================================================== -->
         <!-- PRECAUCIÓN: MANEJO DE ENTRADAS NO CONECTADAS                      -->
         <!-- ================================================================== -->
@@ -677,7 +650,7 @@
 
             <div style="background-color: white; border: 1px solid #ffcc80; border-radius: 8px; padding: 15px; margin: 15px 0;">
                 <h4 style="color: #d35400; margin-top: 0; margin-bottom: 10px;">✅ La Regla de Oro del Ingeniero:</h4>
-                <p style="margin-bottom: 10px;"><strong>Nunca dejes entradas lógicas sin conectar.</strong> Deben fijarse a un nivel estable (GND o Vcc).</p>
+                <p style="margin-bottom: 10px;"><strong>Nunca dejes entradas lógicas sin conectar.</strong> Deben fijarse a un nivel <estable (GND o Vcc).</p>
                 <p style="margin-bottom: 5px;"><em>¡ADVERTENCIA CRÍTICA!</em> <strong>Jamás</strong> conectes los pines de SALIDA a GND o Vcc. Si la salida intenta dar 5V y está conectada a GND, crearás un cortocircuito interno y quemarás el chip al instante.</p>
             </div>
 
@@ -721,18 +694,20 @@
                     </div>
                 </div>
             </div>
+        </div>        
 
-            <!-- CONCLUSIÓN FINAL DEL BLOQUE -->
-            <div style="background-color: #fff8e1; border-left: 4px solid #ffb300; padding: 15px; border-radius: 0 8px 8px 0; margin-top: 20px;">
-                <h4 style="color: #f57f17; margin-top: 0; margin-bottom: 8px;">🎯 Conclusión de Laboratorio</h4>
-                <p style="margin: 0; font-size: 0.95em; color: #5d4037; line-height: 1.6;">
-                    En cualquier circuito digital, las entradas flotantes son enemigas de la estabilidad. Dedica un momento al final de cada montaje para revisar qué pines de los chips quedan sin conectar y llévalos a un nivel lógico fijo (generalmente tierra para NOR/OR/XOR, y alimentación para AND/NAND). Esta pequeña práctica evitará fallos intermitentes y te ahorrará horas de depuración (troubleshooting).
-                </p>
-                <p style="margin: 10px 0 0 0; font-size: 0.85em; color: #795548; font-style: italic;">
-                    <strong>💡 Nota sobre Simuladores:</strong> En programas como Tinkercad este problema no aparece, porque el software "asume" que las entradas flotantes son ceros para no colapsar. Pero en un circuito de silicio real... ¡los fantasmas eléctricos existen!
-                </p>
-            </div>
+        <!-- CONCLUSIÓN FINAL DEL BLOQUE -->
+        <div style="background-color: #fff8e1; border-left: 4px solid #ffb300; padding: 15px; border-radius: 0 8px 8px 0; margin-top: 20px;">
+            <h4 style="color: #f57f17; margin-top: 0; margin-bottom: 8px;">🎯 Conclusión de Laboratorio</h4>
+            <p style="margin: 0; font-size: 0.95em; color: #5d4037; line-height: 1.6;">
+                En cualquier circuito digital, las entradas flotantes son enemigas de la estabilidad. Dedica un momento al final de cada montaje para revisar qué pines de los chips quedan sin conectar y llévalos a un nivel lógico fijo (generalmente tierra para NOR/OR/XOR, y alimentación para AND/NAND). Esta pequeña práctica evitará fallos intermitentes y te ahorrará horas de depuración (troubleshooting).
+            </p>
+            <p style="margin: 10px 0 0 0; font-size: 0.85em; color: #795548; font-style: italic;">
+                <strong>💡 Nota sobre Simuladores:</strong> En programas como Tinkercad este problema no aparece, porque el software "asume" que las entradas flotantes son ceros para no colapsar. Pero en un circuito de silicio real... ¡los fantasmas eléctricos existen!
+            </p>
         </div>
+
+        <p>Ahora que hemos domado los 'fantasmas eléctricos' y garantizado un montaje profesional y estable, es el momento de elevar nuestra mirada desde los cables hasta la estrategia: pongamos sobre la balanza de la ingeniería las dos grandes filosofías de diseño que hemos explorado para emitir nuestro juicio definitivo.</p>
         
         <!-- ========================================================= -->
         <!-- TRANSICIÓN Y COMPARATIVA FINAL -->
@@ -749,58 +724,61 @@
             <p style="color: #4a148c; margin-bottom: 20px;">
                 En la Lección 17 resolviste este mismo problema usando el método SOP directo. Ahora compáralo con la versión POS Universal de hoy. ¿Qué ganamos y qué perdimos al rediseñar el circuito?
             </p>
-        <!-- Contenedor overflow para proteger pantallas muy estrechas -->
+            <!-- Contenedor overflow para proteger pantallas muy estrechas -->
 
-        <div style="overflow-x: auto; margin-top: 15px; border-radius: 8px; box-shadow: 0 3px 8px rgba(0,0,0,0.08);">
-            
-            <!-- 👇 AQUÍ ESTÁ EL FIX: Agregamos display: table; 👇 -->
-            <table style="width: 100%; display: table; min-width: 320px; border-collapse: collapse; text-align: center; background: white; font-size: 0.9em; line-height: 1.4;">
+            <div style="overflow-x: auto; margin-top: 15px; border-radius: 8px; box-shadow: 0 3px 8px rgba(0,0,0,0.08);">
                 
-                <thead>
-                    <tr style="background-color: #1565c0; color: white;">
-                        <th style="padding: 10px 4px; border: 1px solid #ddd;">Diseño</th>
-                        <th style="padding: 10px 4px; border: 1px solid #ddd;">Compuertas<br>Usadas</th>
-                        <th style="padding: 10px 4px; border: 1px solid #ddd;">Chips<br>Requeridos</th>
-                        <th style="padding: 10px 4px; border: 1px solid #ddd;">Modelos en<br>Inventario</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="padding: 12px 4px; border: 1px solid #ddd;">
-                            <strong>SOP (AND/OR)</strong><br><small style="color: #666;">Lección 17</small>
-                        </td>
-                        <td style="padding: 12px 4px; border: 1px solid #ddd; font-size: 1.2em; font-weight: bold; color: #444;">
-                            5
-                        </td>
-                        <td style="padding: 12px 4px; border: 1px solid #ddd;">
-                            2 chips<br><small style="color: #666;">(un 7408 y un 7432)</small>
-                        </td>
-                        <td style="padding: 12px 4px; border: 1px solid #ddd; color: #c62828;">
-                            <strong>2 modelos<br>distintos</strong>
-                        </td>
-                    </tr>
-                    <tr style="background-color: #faf5fc;">
-                        <td style="padding: 12px 4px; border: 1px solid #ddd;">
-                            <strong>POS (NOR)</strong><br><small style="color: #666;">Lección 19</small>
-                        </td>
-                        <td style="padding: 12px 4px; border: 1px solid #ddd; font-size: 1.2em; font-weight: bold; color: #444;">
-                            6
-                        </td>
-                        <td style="padding: 12px 4px; border: 1px solid #ddd;">
-                            2 chips<br><small style="color: #666;">(dos 7402)</small>
-                        </td>
-                        <td style="padding: 12px 4px; border: 1px solid #ddd; color: #2e7d32;">
-                            <strong>1 solo<br>modelo</strong>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                <!-- 👇 AQUÍ ESTÁ EL FIX: Agregamos display: table; 👇 -->
+                <table style="width: 100%; display: table; min-width: 320px; border-collapse: collapse; text-align: center; background: white; font-size: 0.9em; line-height: 1.4;">
+                    
+                    <thead>
+                        <tr style="background-color: #1565c0; color: white;">
+                            <th style="padding: 10px 4px; border: 1px solid #ddd;">Diseño</th>
+                            <th style="padding: 10px 4px; border: 1px solid #ddd;">Compuertas<br>Usadas</th>
+                            <th style="padding: 10px 4px; border: 1px solid #ddd;">Chips<br>Requeridos</th>
+                            <th style="padding: 10px 4px; border: 1px solid #ddd;">Modelos en<br>Inventario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px 4px; border: 1px solid #ddd;">
+                                <strong>SOP (AND/OR)</strong><br><small style="color: #666;">Lección 17</small>
+                            </td>
+                            <td style="padding: 12px 4px; border: 1px solid #ddd; font-size: 1.2em; font-weight: bold; color: #444;">
+                                5
+                            </td>
+                            <td style="padding: 12px 4px; border: 1px solid #ddd;">
+                                2 chips<br><small style="color: #666;">(un 7408 y un 7432)</small>
+                            </td>
+                            <td style="padding: 12px 4px; border: 1px solid #ddd; color: #c62828;">
+                                <strong>2 modelos<br>distintos</strong>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #faf5fc;">
+                            <td style="padding: 12px 4px; border: 1px solid #ddd;">
+                                <strong>POS (NOR)</strong><br><small style="color: #666;">Lección 19</small>
+                            </td>
+                            <td style="padding: 12px 4px; border: 1px solid #ddd; font-size: 1.2em; font-weight: bold; color: #444;">
+                                6
+                            </td>
+                            <td style="padding: 12px 4px; border: 1px solid #ddd;">
+                                2 chips<br><small style="color: #666;">(dos 7402)</small>
+                            </td>
+                            <td style="padding: 12px 4px; border: 1px solid #ddd; color: #2e7d32;">
+                                <strong>1 solo<br>modelo</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="dato-extra" style="background-color: #f3e5f5; border-left: 5px solid #9c27b0; padding: 10px 20px; margin-top: 20px;">
+                <h3>🏆 Conclusión: ¿Por qué es importante esto?</h3>
+                <p>Acabas de demostrar que un sistema de votación complejo puede ser construido con un solo modelo de chip (el 7402). Esto es exactamente lo que hace la industria: en lugar de fabricar procesadores mezclando miles de compuertas diferentes, los ingenieros diseñan "mares de compuertas NAND o NOR" idénticas a nivel microscópico, y simplemente las interconectan. <strong>¡Esa es la base de los microchips y procesadores modernos!</strong></p>
+            </div>
         </div>
 
-        <div class="dato-extra" style="background-color: #f3e5f5; border-left: 5px solid #9c27b0; padding: 10px 20px; margin-top: 20px;">
-            <h3>🏆 Conclusión: ¿Por qué es importante esto?</h3>
-            <p>Acabas de demostrar que un sistema de votación complejo puede ser construido con un solo modelo de chip (el 7402). Esto es exactamente lo que hace la industria: en lugar de fabricar procesadores mezclando miles de compuertas diferentes, los ingenieros diseñan "mares de compuertas NAND o NOR" idénticas a nivel microscópico, y simplemente las interconectan. <strong>¡Esa es la base de los microchips y procesadores modernos!</strong></p>
-        </div>
+        <p>Haber demostrado que tanto la NAND como la NOR poseen el mismo superpoder universal nos revela una simetría perfecta en las matemáticas de Boole. Sin embargo, al salir del laboratorio y entrar en las fábricas donde se construyen los componentes de tu smartphone, esta igualdad teórica se enfrenta a un juicio implacable de tamaño, costo y densidad. Si ambas pueden construir el universo entero, ¿por qué la industria coronó a una de ellas como el motor de todo el almacenamiento digital moderno? Pasemos de la lógica pura a la geometría del silicio para descubrir por qué tu celular le debe su existencia a la supremacía absoluta de la NAND.</p>        
 
         <!-- === CONEXIÓN CON EL MUNDO REAL: MEMORIAS NAND VS NOR === -->
         <div class="estado-flotante" style="margin: 30px 0;">
@@ -816,6 +794,47 @@
             <p><em>En el mundo real, la geometría del silicio importa tanto como la matemática de Boole.</em></p>
         </div>
     </section>
+
+    <p>Esta capacidad de simplificar el inventario físico a un solo tipo de componente no es solo un truco de ahorro para las fábricas; es la demostración de que la complejidad del universo digital no reside en la variedad de sus piezas, sino en la arquitectura de sus conexiones. Este mismo principio de 'unidad mínima universal' es el que permitió el nacimiento de la Inteligencia Artificial moderna: si puedes construir cualquier lógica con una NAND, puedes construir cualquier nivel de inteligencia usando billones de neuronas artificiales que son, en esencia, idénticas entre sí.</p>
+
+    <!-- ====================================================================== -->
+    <!-- CONEXIÓN: UNIVERSALIDAD Y EL CEREBRO ARTIFICIAL (RETROFIT)             -->
+    <!-- ====================================================================== -->
+    <div class="dato-extra" style="background-color: #f3e5f5; border-left: 5px solid #6a1b9a; padding: 25px; margin: 35px 0; border-radius: 0 15px 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <h4 style="color: #4a148c; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3em;">🧠</span> Universalidad: El Ladrillo Único de la Inteligencia
+        </h4>
+        
+        <p style="color: #2d3436; font-size: 1.05em; line-height: 1.6;">
+            En la lección demostramos que con un chip 7400 (NAND) puedes construir sumadores, comparadores y memorias. En IA, este concepto se conoce como el <strong>Teorema de Aproximación Universal</strong>.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+            
+            <!-- Nivel Iniciación (7°) -->
+            <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #d1c4e9;">
+                <strong style="color: #6a1b9a; display: block; margin-bottom: 8px;">💡 Analogía para 7° (Las neuronas de ChatGPT):</strong>
+                <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                    Imagina que las neuronas del cerebro de ChatGPT son todas como piezas de Lego idénticas. Una neurona sola no sabe nada, pero cuando conectas billones de ellas siguiendo un plano inteligente, la máquina "aprende" a hablar. Al igual que tú usas NAND para todo, la IA usa una sola unidad básica para razonar sobre todo el conocimiento humano.
+                </p>
+            </div>
+
+            <!-- Nivel Profundización (10°) -->
+            <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #d1c4e9;">
+                <strong style="color: #6a1b9a; display: block; margin-bottom: 8px;">🏗️ Rigor para 10° (Arquitecturas Homogéneas):</strong>
+                <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                    Las redes neuronales modernas (como los <i>Transformers</i>) son arquitecturas <strong>homogéneas</strong>. En lugar de diseñar algoritmos diferentes para ver fotos o traducir textos, usamos la misma unidad matemática básica (el Perceptrón multicapa) y dejamos que la red se auto-configure. Al igual que el "mar de compuertas" NAND en un chip, la IA es un mar de funciones matemáticas universales que pueden aproximar <strong>cualquier función lógica o continua</strong> si la red es lo suficientemente profunda.
+                </p>
+            </div>
+        </div>
+
+        <div style="background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #fbc02d;">
+            <p style="margin: 0; font-size: 0.95em; color: #5d4037; font-weight: bold;">
+                🎯 La Conexión Maestra: Entender la universalidad de la NAND es entender la economía del universo digital. La naturaleza y la tecnología prefieren la simplicidad repetida billones de veces (ADN, Transistores, Neuronas) que la complejidad de mil piezas distintas. ¡Has dominado el secreto de la escalabilidad!
+            </p>
+        </div>
+    </div>
+    <!-- ====================================================================== -->
 
     <!-- === PODCAST 1: EL RIGOR DEL HARDWARE (GRADO 10°) === -->
     <section class="podcast-section" style="border-left: 5px solid #0d47a1;">
@@ -883,9 +902,7 @@
                 <textarea rows="3" placeholder="Redacta tu justificación técnica/económica..." style="width: 100%; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; padding: 8px;"></textarea>
             </li>
         </ol>
-    </section>
-    </div>
-    
+    </section>    
 
     <!-- NARRATIVA: TRAILER ACTUALIZADO -->
     <div class="avance-leccion">

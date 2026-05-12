@@ -48,6 +48,8 @@
     <section>
         <p>Las resistencias son tan pequeñas que es imposible imprimirles números encima. Por eso, los ingenieros inventaron un sistema de bandas de colores.</p>
 
+        <p>Tener la resistencia correcta en la mano es la diferencia entre un LED brillante y un suspiro de humo negro. Sin embargo, antes de conectar, debemos resolver un enigma visual: ¿por qué los ingenieros eligieron usar colores en lugar de números? Pasemos de la observación curiosa al método sistemático para aprender a leer estas 'cintas de información' con la precisión de un experto.</p>
+
         <h2>1. Cómo leer una resistencia de 4 bandas</h2>
         <p>Primero, toma la resistencia y busca la banda <strong>Dorada o Plateada</strong>. Esa es la tolerancia (margen de error) y siempre va a la <strong>DERECHA</strong>. Empezamos a leer desde la izquierda.</p>
 
@@ -115,6 +117,8 @@
             
             <p><strong>🔗 Conexión con el código de colores:</strong> Las bandas de colores que acabas de aprender representan <em>exactamente estos valores estándar</em>. Cuando ves una resistencia café-negro-naranja (10kΩ), estás viendo el valor E12 más usado en Pull-Up/Pull-Down. ¡El código de colores es el lenguaje universal de estas series estándar!</p>
         </div>
+
+        <p>Incluso con la tabla en la mano, el mundo real puede ser engañoso. La luz de tu lámpara, el desgaste de los componentes o el tipo de fabricación pueden confundir tu juicio. Para que nunca dudes en la mesa de trabajo, vamos a compartir los secretos que los ingenieros veteranos usan para no caer en las trampas de la vista. Pasemos a los Hacks de Lectura, tus herramientas de supervivencia para el laboratorio.</p>
 
         <!-- === NUEVA SECCIÓN: HACKS DE LECTURA === -->
         <section>
@@ -195,6 +199,45 @@
             </p>
         </div>
 
+        <!-- ====================================================================== -->
+        <!-- RETROFIT: EL ETIQUETADO DE DATOS (EL ALMA DE LA VISIÓN POR IA)         -->
+        <!-- ====================================================================== -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left: 5px solid #6a1b9a; padding: 25px; margin: 35px 0; border-radius: 0 15px 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h4 style="color: #4a148c; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🧠</span> De las Bandas de Color al Data Labeling
+            </h4>
+            
+            <p style="color: #2d3436; font-size: 1.05em; line-height: 1.6;">
+                En la lección aprendiste que un color equivale a un número. En Inteligencia Artificial, este proceso se llama <strong>Data Labeling</strong> (Etiquetado de Datos). Es la forma en que enseñamos a las máquinas a "ver".
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+                
+                <!-- Nivel Iniciación (7°) -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #d1c4e9;">
+                    <strong style="color: #6a1b9a; display: block; margin-bottom: 8px;">💡 Analogía para 7° (El Supermercado de la IA):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        Imagina que le muestras a una IA miles de fotos de resistencias. Ella no sabe qué son hasta que tú le pones una "etiqueta" digital: "Rojo-Rojo-Marrón = 220Ω". Al entrenar tu ojo hoy para leer colores, estás haciendo el mismo trabajo que miles de personas que ayudan a las IAs a reconocer semáforos, señales de tránsito o frutas en el supermercado. ¡Estás categorizando la realidad!
+                    </p>
+                </div>
+
+                <!-- Nivel Profundización (10°) -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #d1c4e9;">
+                    <strong style="color: #6a1b9a; display: block; margin-bottom: 8px;">🏗️ Rigor para 10° (Feature Extraction cromática):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        Las IAs de visión artificial descomponen las imágenes en valores numéricos de color (RGB). Al igual que tú extraes el valor de la resistencia analizando bandas específicas, la IA realiza una <strong>Extracción de Características</strong> para identificar patrones. El código de colores es un estándar de "Metadatos Físicos": información digital incrustada en un objeto analógico. Dominar este estándar te prepara para entender cómo las máquinas organizan billones de datos usando etiquetas estandarizadas para evitar errores de interpretación.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #fbc02d;">
+                <p style="margin: 0; font-size: 0.95em; color: #5d4037; font-weight: bold;">
+                    🎯 La Conexión de Campo: La "Tolerancia" (banda dorada) que aprendiste hoy es el equivalente al <strong>"Confidence Score"</strong> (Nivel de Confianza) en la IA. Así como aceptas que una resistencia no es perfecta y tiene un margen de error, la IA te dirá: "Estoy 95% segura de que esto es una resistencia de 330Ω". La ingeniería y la IA nunca buscan la perfección absoluta, sino el margen de error controlado.
+                </p>
+            </div>
+        </div>
+        <!-- ====================================================================== -->
+
         <h2>2. Tabla de Referencia Rápida</h2>
         <p>Usa esta tabla mientras memorizas los valores:</p>
         
@@ -247,6 +290,8 @@
             </a>
         </p>
     </div>
+
+    <p>Entender la relación visual entre el pigmento y el ohmio es solo el inicio de tu maestría técnica. Como futuro formador, tu reto no es simplemente entregar tablas para que sean memorizadas, sino diseñar entornos donde el conocimiento sea el resultado natural de una investigación emocionante. Pasemos de la frialdad de los datos a la adrenalina del descubrimiento para ver cómo transformar una lección de física en una operación táctica de alto nivel.</p>
 
     <!-- RINCÓN DOCENTE: LECCIÓN 4 -->
     <div class="dato-extra" style="border-left: 4px solid #ffc107; background-color: #fff9db; margin-top: 30px;">

@@ -33,11 +33,13 @@
 
     <section>
         <!-- NARRATIVA: INTRODUCCIÓN L23 -->
-    <div class="intro-leccion" style="margin-bottom: 30px;">
-        <p>Hasta ahora, hemos sido los jueces minuciosos de pequeños problemas: un sensor $A$, un botón $B$, una promesa rota. Evaluábamos el mundo un cable a la vez.</p>
-        <p>Pero el mundo real no funciona así. El procesador de tu computadora no mastica un bit a la vez; procesa <strong>64 bits al mismo tiempo</strong>. Un servidor en la nube no evalúa un disco duro, evalúa cientos. Hoy daremos el salto a la <strong>Lógica Masiva</strong>.</p>
-        <p style="margin-bottom: 0;">Aprenderemos a transportar información en "manadas" usando <strong>Buses de Datos</strong> y a tomar decisiones globales instantáneas utilizando el poder absoluto de los Cuantificadores Matemáticos (Universal y Existencial). ¡Es hora de pensar en grande!</p>
-    </div>
+        <div class="intro-leccion" style="margin-bottom: 30px;">
+            <p>Hasta ahora, hemos sido los jueces minuciosos de pequeños problemas: un sensor $A$, un botón $B$, una promesa rota. Evaluábamos el mundo un cable a la vez.</p>
+            <p>Pero el mundo real no funciona así. El procesador de tu computadora no mastica un bit a la vez; procesa <strong>64 bits al mismo tiempo</strong>. Un servidor en la nube no evalúa un disco duro, evalúa cientos. Hoy daremos el salto a la <strong>Lógica Masiva</strong>.</p>
+            <p style="margin-bottom: 0;">Aprenderemos a transportar información en "manadas" usando <strong>Buses de Datos</strong> y a tomar decisiones globales instantáneas utilizando el poder absoluto de los Cuantificadores Matemáticos (Universal y Existencial). ¡Es hora de pensar en grande!</p>
+        </div>
+
+        <p>Haber dominado el análisis de un solo cable nos ha otorgado la precisión necesaria para juzgar la verdad bit a bit. Sin embargo, en la era de la información masiva, el ingeniero debe dejar de ser un artesano de hilos sueltos para convertirse en un urbanista de señales. Para mover torrentes de datos sin que el sistema colapse en el caos, necesitamos una infraestructura que agrupe y dé sentido al flujo colectivo. Pasemos de la línea individual a la autopista del silicio: el Bus de Datos, la estructura que permite que las máquinas piensen en grande.</p>
 
         <h2>1. El Bus de Datos: La Autopista de la Información</h2>
         <p>Cuando necesitas conectar 8 sensores a un procesador, no dibujas 8 líneas desordenadas en tu plano. Agrupas esos 8 cables paralelos en una sola ruta principal. A esto se le llama <strong>Bus de Datos</strong>.</p>
@@ -51,6 +53,8 @@
         </div>
 
         <p>El problema del Bus es que las compuertas básicas (7408, 7432) que usaste en laboratorios anteriores solo tienen 2 entradas. ¿Cómo le hacemos una pregunta a 8 cables al mismo tiempo sin construir una pirámide gigante de chips? Necesitamos <strong>Lógica de Predicados</strong>.</p>
+
+        <p>Tener los datos agrupados en un Bus es un triunfo de la organización, pero nos plantea un dilema técnico inmediato: nuestras compuertas básicas solo saben escuchar a dos cables a la vez. En un procesador moderno, no podemos darnos el lujo de construir pirámides interminables de chips para responder una pregunta simple sobre un grupo entero de señales. Para interrogar a la multitud de forma elegante y veloz, debemos invocar el lenguaje de la <strong>Lógica de Predicados</strong>. Pasemos a conocer a los Cuantificadores, las herramientas maestras que nos permiten tomar el pulso a todo el sistema de un solo golpe.</p>
 
         <h2>2. Los Cuantificadores: Preguntándole a la Multitud</h2>
         <p>En matemáticas, cuando quieres evaluar un conjunto grande de variables, usas símbolos llamados <strong>Cuantificadores</strong>. En hardware, estos símbolos se convierten en compuertas gigantes.</p>
@@ -118,6 +122,8 @@
             </div>
         </div>
 
+        <p>Dominar la lógica del 'Para Todo' y del 'Existe' nos otorga el poder de un juez supremo sobre el Bus. Sin embargo, en la ferretería electrónica, la perfección matemática a menudo choca con la eficiencia de fabricación. Construir una compuerta AND pura de 8 entradas es un reto físico que genera calor y lentitud. Por ello, la industria recurre a un ingenioso truco de mutación basado en lo que aprendiste en la Unidad 2. Pasemos de la pizarra al silicio industrial para conocer al <strong>Chip 74LS30</strong>, el componente donde los Cuantificadores y las Leyes de De Morgan se funden en una sola pieza de ingeniería.</p>
+
         <h2>3. De Morgan a Escala Industrial (El Chip 7430)</h2>
         
         <p>¿Qué pasa cuando la lógica matemática de los Cuantificadores choca con la ingeniería del mundo real? <strong>Fabricar compuertas AND gigantes de 8 entradas es costoso e ineficiente en silicio.</strong> La industria prefiere fabricar compuertas NAND.</p>
@@ -178,6 +184,84 @@
             <p style="margin-top: 5px;">¿Qué pasaría si en lugar de conectar los sensores directamente, los conectaras a través de inversores (NOT)? ¿Qué tipo de cuantificador estarías implementando?</p>
         </div>
 
+        <p>Esta capacidad de procesar 8 señales de un solo golpe es impresionante, pero la verdadera magia ocurre cuando escalamos esta idea a millones de datos. ¿Sabías que esta 'lógica de manada' es el secreto detrás de cómo tu celular reconoce tu rostro?</p>
+
+        <!-- ====================================================================== -->
+        <!-- BLOQUE IA: REDES CONVOLUCIONALES Y MAX-POOLING (CONEXIÓN L23)          -->
+        <!-- ====================================================================== -->
+        <div class="dato-extra" style="background-color: #e8eaf6; border-left: 5px solid #3f51b5; margin: 40px 0; padding: 25px; border-radius: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.1);">
+            
+            <h3 style="color: #1a237e; margin-top: 0; display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 1.5em;">👁️</span> 
+                ¿Cómo una computadora "ve" el mundo?
+            </h3>
+            
+            <p style="font-size: 1.05em; line-height: 1.6; color: #333;">
+                Cuando una Inteligencia Artificial mira una foto, no ve caras o paisajes. Lo que realmente "ve" es un <strong>Bus de Datos masivo</strong>: una matriz de millones de números (píxeles). Procesar esto bit a bit es imposible; por eso la IA usa la <strong>Lógica de Manada</strong>.
+            </p>
+
+            <!-- LAS CNNs -->
+            <div style="background: white; padding: 18px; border-radius: 12px; margin: 20px 0; border: 1px solid #c5cae9;">
+                <h4 style="color: #3f51b5; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                    <span style="filter: grayscale(1);">🧩</span> Red Neuronal Convolucional (CNN)
+                </h4>
+                <p style="margin-bottom: 0; font-size: 0.95em;">
+                    Es la arquitectura que permite a los Tesla o a FaceID funcionar. Usa "lupas matemáticas" que recorren la foto buscando patrones. Pero buscar no es suficiente; hay que <strong>resumir</strong>.
+                </p>
+            </div>
+
+            <!-- EL MAX-POOLING (NÚCLEO DE LA LECCIÓN) -->
+            <div style="background: white; padding: 18px; border-radius: 12px; margin: 20px 0; border: 1px solid #c5cae9;">
+                <h4 style="color: #3f51b5; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                    <span style="filter: grayscale(1);">📊</span> Max-Pooling: El Cuantificador Existencial en acción
+                </h4>
+                <p style="font-size: 0.95em;">
+                    Para reducir el tamaño de la imagen, la IA usa <strong>Max-Pooling</strong>. Es exactamente lo mismo que tu cuantificador existencial (\(\exists\)) o tu compuerta OR gigante:
+                </p>
+                
+                <!-- COMPARACIÓN VISUAL MEJORADA -->
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0; align-items: center; justify-content: center;">
+                    <div style="flex: 1; min-width: 220px; background: #f1f8e9; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #c8e6c9;">
+                        <strong style="color: #2e7d32;">🔌 HARDWARE (OR / NAND8)</strong>
+                        <div style="font-size: 0.85em; margin-top: 8px;">
+                            ¿Hay algún sensor activo en el Bus \(D_0 \dots D_7\)?<br>
+                            <strong style="color: #1b5e20;">Si ∃ al menos un 1 → SALIDA 1</strong>
+                        </div>
+                    </div>
+                    <div style="font-size: 1.5em; color: #3f51b5;">⚡</div>
+                    <div style="flex: 1; min-width: 220px; background: #e3f2fd; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #bbdefb;">
+                        <strong style="color: #0d47a1;">🧠 IA (MAX-POOLING)</strong>
+                        <div style="font-size: 0.85em; margin-top: 8px;">
+                            ¿Hay algún rasgo importante en este cuadro de la foto?<br>
+                            <strong style="color: #0a3d91;">Si ∃ un patrón fuerte → CONSERVA EL VALOR</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="margin-bottom: 0; font-size: 0.95em; line-height: 1.5;">
+                    <strong>🔑 La clave:</strong> Si la IA encuentra <strong>al menos un borde</strong>, el Max-Pooling descarta el resto de los datos aburridos y se queda solo con el éxito. Esto reduce la carga de datos a la mitad, permitiendo que la IA "piense" en tiempo real.
+                </p>
+            </div>
+
+            <!-- VERSION TÉCNICA (GRADO 10) -->
+            <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 10px; border: 1px dashed #3f51b5; margin-top: 20px;">
+                <h5 style="margin-top: 0; color: #1a237e; font-weight: bold;">📐 Profundización para Grado 10°:</h5>
+                <p style="font-size: 0.9em; line-height: 1.5; margin-bottom: 0; color: #283593;">
+                    Matemáticamente, el Max-Pooling otorga <strong>invarianza a la traslación</strong>. Al aplicar un cuantificador existencial sobre una región, a la red no le importa la posición exacta del rasgo dentro de la ventana, solo que <em>exista</em>. Esto es lo que permite que tu celular te reconozca aunque tengas la cara un poco inclinada.
+                </p>
+            </div>
+
+            <!-- RELACIÓN FINAL -->
+            <div style="background: #fff8e1; padding: 15px; border-radius: 10px; border-left: 5px solid #ffc107; margin-top: 20px;">
+                <p style="margin: 0; font-size: 0.95em; color: #5d4037;">
+                    <strong>🚀 El gran panorama:</strong> 
+                    Una GPU moderna contiene <strong>millones de compuertas</strong> trabajando en paralelo para aplicar estos cuantificadores. Lo que hoy haces con un chip 74LS30, una IA lo hace billones de veces por segundo para poder "ver".
+                </p>
+            </div>
+        </div>
+
+        <p>Contar con el poder del chip 7430 es como tener un telescopio capaz de ver a miles de kilómetros: nos permite procesar buses enteros en un suspiro. Pero un arquitecto de computadores sabe que la fuerza bruta es el último recurso del diseñador descuidado. Antes de entregarle el Bus a la máquina, es nuestro deber auditar la autopista en busca de redundancias que solo restan velocidad y espacio. Pasemos a rescatar las leyes fundamentales de Boole para realizar una <strong>Optimización de Buses</strong>, donde los axiomas actúan como las tijeras de precisión que limpian el camino de la información.</p>
+
         <!-- EL REGRESO DE LOS AXIOMAS (OPTIMIZACIÓN DE BUSES) -->
         <h2>4. Optimizando el Bus: El Regreso de los Axiomas Perdidos</h2>
         <p>Imagina que estás diseñando la placa base de un servidor. Tienes un Bus de Datos con muchas señales y vas a enviarlas a un chip 7430 para evaluarlas. Pero, ¡espera! Un buen ingeniero nunca conecta cables a ciegas. Antes de procesar el Bus, revisa si hay <strong>cables redundantes</strong> aplicando dos teoremas del Álgebra de Boole que teníamos guardados bajo la manga.</p>
@@ -235,28 +319,27 @@
 
     </section>
 
-    <!-- PODCAST -->
-    <section class="podcast-section">
-        <div class="podcast-header">
-            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+    <!-- === PODCAST TÉCNICO: EL RIGOR DEL HARDWARE === -->
+    <section class="podcast-section" style="border-left: 5px solid #0d47a1;">
+        <div class="podcast-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="#0d47a1" style="width:30px;">
                 <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
             </svg>
-            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+            <h3 style="color: #0d47a1; margin: 0;">🎧 Podcast: Lógica de Manada y el Chip 7430</h3>
         </div>
+        
         <p class="podcast-descripcion">
-            Dos docentes exploran cómo los Cuantificadores Matemáticos ($\forall$ y $\exists$) se transforman en compuertas gigantes de hardware. Analizan la genialidad industrial del chip 7430 (NAND de 8 entradas) aplicando De Morgan a nivel masivo, y comparten anécdotas de laboratorio sobre cómo los estudiantes pueden usar las Leyes de Idempotencia y Absorción para "recortar cables" y optimizar Buses de Datos reales.
+            En este episodio analizamos cómo la industria de microchips aplica las Leyes de De Morgan a escala masiva. Exploramos la anatomía del chip 74LS30 (NAND de 8 entradas), el fenómeno del "Fan-in" y cómo los axiomas de Idempotencia y Absorción actúan como tijeras matemáticas para limpiar buses de datos redundantes antes de que lleguen al procesador.
         </p>
         <div class="podcast-player">
-            <audio controls preload="metadata" style="width: 100%;">
+            <audio controls>
                 <source src="audio/leccion23.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
+                Tu navegador no soporta el audio.
             </audio>
         </div>
-        <p class="podcast-meta">
-            <span class="duracion">⏱️ 12:22 min</span>
-            <span class="formato">🔊 MP3</span>
-        </p>
+        <p style="font-size: 0.8em; opacity: 0.8; margin-top: 10px;">⏱️ 12:22 min | 🏗️ Enfoque: Arquitectura de Buses y Eficiencia Térmica</p>
     </section>
+    <!-- PODCAST -->
 
     <!-- TARJETA DE PROMPT ÉTICO -->
     <section class="prompt-section">
@@ -324,23 +407,45 @@
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #00f2fe; margin-top: 0;">Para Grado 7°: ¿Cómo resume una imagen la IA?</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">Una foto tiene millones de píxeles (bits). Para que una IA no explote procesando tanta info, usa el cuantificador <strong>Existencial</strong> ($\exists$). Divide la foto en cuadritos y pregunta: <em>"¿Existe algún borde brillante aquí?"</em>. Si la respuesta es SÍ (1), resume todo ese cuadro en un solo bit. ¡La IA 'limpia' la imagen igual que tú limpias los buses con los axiomas!</p>
+                <h4 style="color: #00f2fe; margin-top: 0;">Para Grado 7°: Resumiendo el mundo</h4>
+                <p style="font-size: 0.95em; line-height: 1.5;">Una foto tiene millones de píxeles. Para que la IA no se bloquee con tanta info, usa el cuantificador <strong>Existencial</strong> ($\exists$). Divide la foto en cuadritos y pregunta: <em>"¿Existe algún borde brillante aquí?"</em>. Si la respuesta es SÍ, resume todo ese cuadro en un solo bit. ¡La IA 'limpia' la realidad para ver solo lo importante!</p>
             </div>
             
             <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #00f2fe; margin-top: 0;">Para Grado 10°: Capas de "Agrupación Máxima"</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">En las Redes Neuronales Convolucionales (CNN), existe una operación llamada <strong>Agrupación máxima</strong> o Max-Pooling. Es exactamente una compuerta OR gigante (Cuantificador Existencial). Toma un "Bus" de datos espaciales y deja pasar solo el valor más fuerte. Esto permite que la IA reconozca una cara aunque esté movida o rotada, porque solo le importa que la característica <strong>exista</strong> en la zona.</p>
+                <h4 style="color: #00f2fe; margin-top: 0;">Para Grado 10°: Max-Pooling y CNNs</h4>
+                <p style="font-size: 0.95em; line-height: 1.5;">En las Redes Neuronales Convolucionales, la operación <strong>Max-Pooling</strong> es idéntica a una compuerta OR gigante (Cuantificador Existencial). Al tomar un bus de datos espaciales y dejar pasar solo el valor máximo, la IA logra reconocer un objeto aunque esté movido o rotado. Es lógica de manada aplicada a la visión artificial.</p>
             </div>
         </div>
 
         <div style="margin-top: 20px; padding: 15px; background: rgba(0,242,254,0.1); border-radius: 8px; border: 1px dashed #00f2fe;">
             <p style="margin: 0; text-align: center; font-weight: bold;">
-                🚀 Conexión Futura: En la Unidad 4 veremos que los Cuantificadores son la base para detectar errores en internet. Si "Existe al menos un bit cambiado", la IA rechaza el paquete de datos. ¡La seguridad digital nace de la lógica de manada!
+                🚀 Dato de Futuro: Sin los cuantificadores lógicos, internet colapsaría. Si la IA detecta que "Existe al menos un error" en un bus de datos, rechaza el paquete entero para proteger tu información.
             </p>
         </div>
     </div>
     <!-- === FIN BLOQUE IA === -->
+
+    <!-- === PODCAST IA: ADN DE LA INTELIGENCIA === -->
+    <section class="podcast-ia">
+        <div class="podcast-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <svg style="width:30px; height:30px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" />
+            </svg>
+            <h3 style="margin: 0;">Lógica de Manada: ¿Cómo piensa un Estadio?</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            Elevamos la arquitectura de buses hacia el comportamiento de las masas. Analizamos la "Ola" en un estadio como un cuantificador universal y el inicio de un disturbio como uno existencial. Descubrimos por qué la IA prefiere usar "mares de NANDs" para comprimir fotos satelitales y cómo la elegancia matemática ahorra billones de dólares en silicio.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls>
+                <source src="audio/leccion23_ia.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
+        </div>
+        <p style="font-size: 0.8em; opacity: 0.7; margin-top: 10px;">⏱️ 18:52 min | 🌐 Recomendado: Futuros Desarrolladores de IA de Visión</p>
+    </section>
 
     <footer>
         <hr>

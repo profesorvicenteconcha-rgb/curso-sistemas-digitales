@@ -76,6 +76,8 @@
         </div>
         </div>
 
+        <p>Comprender la diferencia entre el vaivén salvaje de la Corriente Alterna y la calma lineal de la Continua es el primer paso para proteger tu hardware. Sin embargo, en el mundo real, no podemos simplemente elegir la energía que nos rodea; la red eléctrica de nuestras ciudades habla exclusivamente el idioma de la AC. Para que nuestros chips sobrevivan, necesitamos una herramienta que actúe como un traductor de fuerza. Pasemos de la teoría de las ondas al dispositivo que hace posible la vida digital: el <strong>Adaptador de Corriente</strong>.</p>
+
         <h2>2. El Puente Mágico: Tu Adaptador (Fuente de Poder)</h2>
         <p>Aquí hay un secreto técnico: Lo que llamamos "Cargador" en realidad <strong>NO es un cargador</strong>.</p>
         
@@ -90,6 +92,8 @@
         </div>
 
         <p>Sin embargo, a veces la conversión de AC a DC no es 100% perfecta y queda un pequeño "temblor" o ruido en la línea.</p>
+
+        <p>El adaptador realiza la proeza de bajar el voltaje de la pared a niveles seguros, pero esa transformación mecánica no es perfecta. Tras la conversión, la energía suele quedar con un ligero 'temblor' o rizado que podría confundir a un procesador delicado. Para que el flujo sea verdaderamente profesional y constante, necesitamos un componente que actúe como un amortiguador de paz. Pasemos a conocer al tanque de reserva de la electrónica: el <strong>Condensador</strong>.</p>
         
         <h2>3. El Condensador: El Tanque de Reserva 🛢️</h2>
         <p>¿Cómo quitamos ese temblor para que la lógica no falle? Usamos un <strong>Condensador (Capacitor)</strong>.</p>
@@ -268,6 +272,8 @@
             </div>
         </section>
 
+        <p>Entender al condensador como un balde que suaviza el flujo de agua nos da la intuición necesaria para el trabajo de mesa. Pero como arquitectos de hardware, debemos ser capaces de identificar estos reservorios en cualquier plano de ingeniería del mundo. No todos los baldes se dibujan igual, porque no todos funcionan bajo las mismas reglas de dirección. Pasemos de la analogía física al lenguaje universal de los planos: los <strong>Símbolos del Condensador</strong>.</p>
+
         <h2 id="simbolo-condensador">4. El Símbolo del Condensador en los Esquemáticos</h2>
 
         <div class="destacado" style="background-color: #f0f7ff; border-left-color: #2196f3;">
@@ -403,32 +409,33 @@
                 <p>¿Te interesa la medicina? El corazón humano funciona con pulsos eléctricos (DC) muy pequeños (milivoltios). Cuando un médico usa un Electrocardiógrafo (ECG), está midiendo voltaje.</p>
                 <p>El problema es que la red eléctrica de la pared (AC) genera tanto ruido que puede tapar la señal del corazón. Por eso, los equipos médicos usan <strong>filtros y condensadores</strong> avanzados para limpiar la señal, tal como estamos aprendiendo a limpiar la energía de nuestros chips.</p>
             </div>
-            <!-- FIN DEL BLOQUE -->
+        <!-- FIN DEL BLOQUE -->
 
-        <Div>
-            
-        <h2 id="reparto-corriente">⚡ Reparto de Corriente en Paralelo</h2>
+        <p>Dominar el filtrado de la señal es blindar la mente del circuito, pero para orquestar un sistema completo debemos entender primero cómo se distribuye la fuerza vital por sus diferentes ramas. Al igual que un río que se ramifica para alimentar distintos valles, la corriente en paralelo sigue una lógica de libertad y resistencia que es vital para el diseño de sistemas multisensores. Pasemos de la estabilidad del 'balde' de reserva a la dinámica de los caminos: el <strong>Reparto de Corriente en Paralelo</strong>.</p>
 
-        <p>En un circuito en <strong>paralelo</strong>, el voltaje es igual en todas las ramas, pero la corriente se reparte. ¡Es como un río que se divide: el cauce más ancho (menos resistencia) recibe más agua!</p>
+        <div>            
+            <h2 id="reparto-corriente">5. Reparto de Corriente en Paralelo</h2>
 
-        <div class="svg-container">
-        <img src="img/circuito-paralelo-corriente.png" alt="Circuito en paralelo con R₁=1kΩ y R₂=330Ω" style="max-width: 55%; height: auto; border-radius: 8px; margin: 20px 0;">
+            <p>En un circuito en <strong>paralelo</strong>, el voltaje es igual en todas las ramas, pero la corriente se reparte. ¡Es como un río que se divide: el cauce más ancho (menos resistencia) recibe más agua!</p>
+
+            <div class="svg-container">
+            <img src="img/circuito-paralelo-corriente.png" alt="Circuito en paralelo con R₁=1kΩ y R₂=330Ω" style="max-width: 55%; height: auto; border-radius: 8px; margin: 20px 0;">
         </div>
 
-        <div class="destacado">
-        <p><strong>¿Por qué el voltaje es igual en ambas ramas?</strong></p>
-        <p>Porque <strong>ambas resistencias están conectadas directamente a los mismos dos puntos</strong>: el positivo de la fuente (5V) y el negativo/GND (0V).</p>
-        <p>Imagina dos escaleras que bajan del mismo piso 5 al mismo sótano:</p>
-        <ul>
-            <li>Escalera A (R₁): 20 peldaños (más resistencia)</li>
-            <li>Escalera B (R₂): 7 peldaños (menos resistencia)</li>
-        </ul>
-        <p>¿Cuál es la diferencia de altura entre el piso 5 y el sótano?</p>
-        <p>¡<strong>Exactamente la misma para ambas escaleras!</strong> Lo único que cambia es cuánto te cuesta bajar (la corriente).</p>
-        </div>
+            <div class="destacado">
+            <p><strong>¿Por qué el voltaje es igual en ambas ramas?</strong></p>
+            <p>Porque <strong>ambas resistencias están conectadas directamente a los mismos dos puntos</strong>: el positivo de la fuente (5V) y el negativo/GND (0V).</p>
+            <p>Imagina dos escaleras que bajan del mismo piso 5 al mismo sótano:</p>
+            <ul>
+                <li>Escalera A (R₁): 20 peldaños (más resistencia)</li>
+                <li>Escalera B (R₂): 7 peldaños (menos resistencia)</li>
+            </ul>
+            <p>¿Cuál es la diferencia de altura entre el piso 5 y el sótano?</p>
+            <p>¡<strong>Exactamente la misma para ambas escaleras!</strong> Lo único que cambia es cuánto te cuesta bajar (la corriente).</p>
+            </div>
 
-        <div class="formula">
-        $$I = \frac{V}{R} \quad ; \quad I_{total} = I_1 + I_2$$
+            <div class="formula">
+            $$I = \frac{V}{R} \quad ; \quad I_{total} = I_1 + I_2$$
         </div>
 
         <div class="destacado">
@@ -487,7 +494,9 @@
         ¡Memoriza esta regla y nunca te confundirás!</p>
         </div>
 
-        <h2>5. Reglas de Supervivencia en DC</h2>
+        <p>Tener el mapa y conocer los símbolos es el requisito previo para el éxito del montaje. Pero en el universo de la Corriente Continua, la libertad de conexión tiene límites físicos infranqueables. Un solo error de orientación o un 'suelo' mal definido pueden llevar al colapso instantáneo de todo el sistema. Pasemos a establecer el código de conducta innegociable de la energía estable: las <strong> Reglas de Supervivencia en DC</strong>.</p>
+
+        <h2>6. Reglas de Supervivencia en DC</h2>
         <p>Para que tus futuros circuitos (Unidades 2, 3 y 4) funcionen, debes respetar estas leyes sagradas:</p>
 
         <h3>A. La Tiranía de la Polaridad</h3>
@@ -552,8 +561,10 @@
             <p><strong>Conclusión:</strong> Mientras sea de <strong>5V</strong>, sirve cualquier cargador de 0.5A, 1A, 2A o más. Entre más amperios tenga, más "sobrado" y frío trabajará.</p>
             <p>En este curso, alimentaremos todo con 5 Voltios DC (USB). Es un voltaje seguro.</p>
         </div>
+
+        <p>Con las leyes de seguridad asimiladas y el inventario de componentes dominado, estamos finalmente listos para orquestar nuestra primera sinfonía eléctrica. No se trata solo de encender una luz, sino de observar cómo el filtrado, la regulación y el control trabajan en equipo para crear un sistema predecible y robusto. Pasemos a la práctica final de esta unidad: el análisis de tu <strong>Primer Circuito Completo</strong>, donde cada cálculo es un seguro de vida para tus futuros diseños.</p>
         
-        <h2 id="ejercicio-integrador">🔍 Tu primer circuito completo: ¿Por qué calculamos antes de conectar?</h2>
+        <h2 id="ejercicio-integrador">7. Tu primer circuito completo: ¿Por qué calculamos antes de conectar?</h2>
         
         <p>Veamos un circuito completo que combina todo lo aprendido.</p>
         
@@ -959,6 +970,45 @@
             </div>
         </section>
 
+        <p>Dominar la estabilidad de la energía y el filtrado del ruido es lo que separa a un experimentador de un ingeniero profesional. Esta capacidad de garantizar la pureza de la señal no es solo un detalle técnico para tus LEDs; es, en realidad, el cimiento sobre el cual se apoya la cordura de las máquinas más inteligentes del planeta. Pasemos de la regulación del voltaje a la arquitectura de la confianza para descubrir cómo el silencio eléctrico es el secreto detrás de la lucidez de la Inteligencia Artificial.</p>
+
+        <!-- ====================================================================== -->
+        <!-- RETROFIT: EL SILENCIO ELÉCTRICO COMO EL ANCLA DE LA IA                -->
+        <!-- ====================================================================== -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left: 5px solid #6a1b9a; padding: 25px; margin: 35px 0; border-radius: 0 15px 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h4 style="color: #4a148c; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🧠</span> ¿Por qué la IA necesita Energía Estable?
+            </h4>
+            
+            <p style="color: #2d3436; font-size: 1.05em; line-height: 1.6;">
+                En la lección aprendiste que el condensador "plancha" las arrugas de la corriente. En Inteligencia Artificial, este "planchado" es lo que permite que la máquina distinga un dato real de un simple error eléctrico.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+                <!-- Nivel 7° -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #d1c4e9;">
+                    <strong style="color: #6a1b9a; display: block; margin-bottom: 8px;">💡 Analogía para 7° (El Dibujante en el Bus):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        Imagina que intentas dibujar un círculo perfecto mientras viajas en un bus por una carretera llena de baches. El círculo saldrá deformado. El regulador y el condensador son como una carretera de asfalto liso: permiten que la IA "dibuje" sus pensamientos y reconozca patrones sin que los baches del voltaje la hagan cometer errores.
+                    </p>
+                </div>
+
+                <!-- Nivel 10° -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #d1c4e9;">
+                    <strong style="color: #6a1b9a; display: block; margin-bottom: 8px;">🏗️ Rigor para 10° (SNR y Alucinaciones de Hardware):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        Las Redes Neuronales operan bajo el principio de <strong>Relación Señal/Ruido - SNR (Signal-to-Noise Ratio)</strong>. Si el rizado de la fuente es alto, el procesador puede interpretar un pico de ruido como un "1" lógico, provocando un <i>Bit Flip</i> en la memoria. Esto causa que la IA dé respuestas erróneas o "alucine". La Triple Alianza (7805 + Condensadores) es la que garantiza la <strong>Integridad de los Datos</strong> a nivel atómico.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #fbc02d;">
+                <p style="margin: 0; font-size: 0.95em; color: #5d4037; font-weight: bold;">
+                    🎯 La Conexión de Campo: El "Suelo Común" (GND) que aprendiste a cuidar hoy es el mismo que permite que un coche autónomo no confunda una sombra con un obstáculo. Si el voltaje no es estable, la percepción de la IA se rompe.
+                </p>
+            </div>
+        </div>
+
         <!-- === SECCIÓN PODCASTS DOBLES (LECCIÓN 8) === -->
         <section class="podcasts-container" style="margin-top: 40px;">
             
@@ -1243,23 +1293,48 @@
             </p>
         </div>
 
-        <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
+        <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO (VERSIÓN MEJORADA) === -->
         <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #ffd700, #b8860b); color: #333; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-left: 8px solid #333;">
             <h3 style="color: #333; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: Sin Alimento no hay Inteligencia
+                <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: El Hambre Energética de la IA Moderna
             </h3>
+            
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div style="background: rgba(255,255,255,0.4); padding: 15px; border-radius: 10px;">
-                    <h4 style="margin-top: 0;">Grado 7°: El Desayuno de los Robots</h4>
-                    <p style="font-size: 0.9em; line-height: 1.5;">Si tú no desayunas bien, no puedes estudiar. Si la IA recibe un voltaje que sube y baja, se vuelve "loca" y empieza a cometer errores. El regulador de voltaje es el que asegura que la IA siempre tenga la energía exacta para pensar bien.</p>
+                
+                <!-- NIVEL INICIACIÓN (7°) - Concepto nuevo: la escala del consumo -->
+                <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #333; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 1.2em;">⚡</span> Grado 7°: ¿Cuánta energía "come" una IA?
+                    </h4>
+                    <p style="font-size: 0.95em; line-height: 1.5;">
+                        Tu pequeño circuito de hoy consume menos energía que una luciérnaga. Pero imagina que necesitas alimentar <strong>millones de chips</strong> trabajando al mismo tiempo para que ChatGPT responda tus preguntas.
+                        <br><br>
+                        <strong>Dato alucinante:</strong> Entrenar una IA grande consume tanta electricidad como <strong>cientos de casas en un año</strong>. Por eso los centros de datos de Google y Amazon tienen sus propios lagos de refrigeración y están cerca de presas hidroeléctricas. ¡La IA tiene mucha hambre de energía!
+                    </p>
                 </div>
-                <div style="background: rgba(255,255,255,0.4); padding: 15px; border-radius: 10px;">
-                    <h4 style="margin-top: 0;">Grado 10°: Estabilidad y Alucinaciones</h4>
-                    <p style="font-size: 0.9em; line-height: 1.5;">En electrónica avanzada, las fluctuaciones de voltaje generan <strong>Ruido Térmico</strong>. Si ese ruido entra en los sensores de una IA (como en un carro autónomo), la máquina podría ver obstáculos donde no hay nada. Aprender a regular el voltaje es aprender a proteger la <strong>Integridad de los Datos</strong>.</p>
+
+                <!-- NIVEL PROFUNDIZACIÓN (10°) - Concepto nuevo: eficiencia energética como frontera -->
+                <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #333; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 1.2em;">🌍</span> Grado 10°: El Límite Energético de la IA
+                    </h4>
+                    <p style="font-size: 0.95em; line-height: 1.5;">
+                        Hoy en día, el <strong>mayor freno</strong> para crear IAs más inteligentes no es el software, sino la <strong>energía</strong>. Un chip de IA puede consumir cientos de vatios. Multiplica eso por 100,000 chips en un centro de datos...
+                        <br><br>
+                        Los ingenieros están diseñando <strong>chips especializados (ASICs, TPUs)</strong> que hacen el mismo trabajo de tus circuitos, pero consumiendo mucha menos energía. Aprender a calcular resistencias y a optimizar circuitos hoy te entrena para el desafío más importante del futuro: <strong>hacer más inteligencia con menos energía</strong>.
+                    </p>
                 </div>
             </div>
-        </div>
 
+            <!-- CIERRE ÚNICO -->
+            <div style="margin-top: 20px; padding: 12px; background: rgba(51, 51, 51, 0.15); border-radius: 8px; text-align: center;">
+                <p style="margin: 0; font-size: 0.9em; color: #333; font-weight: bold;">
+                    🔗 Conclusión: La energía estable que hoy aprendiste a conseguir con el regulador 7805 es el mismo principio que permite que los centros de datos de IA no colapsen. Sin energía confiable, no hay inteligencia confiable.
+                </p>
+            </div>
+        </div>
+        <!-- === FIN BLOQUE IA === -->
+        
         <!-- === BLOQUE: CIERRE MAESTRO - RELACIÓN CON LA IA === -->
         <div class="cierre-maestro" style="margin: 20px 0; padding: 25px; background-color: #f8f9fa; border-radius: 15px; border: 1px solid #e0e0e0;">
             <div style="display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px;">

@@ -61,6 +61,8 @@
         <p style="margin-bottom: 0;">Vamos a implementar físicamente el "Doctor del Sistema": la <strong>Matriz de Control ($H$)</strong> que estudiamos en la lección pasada. ¡Preparen sus cables y compuertas XOR!</p>
     </div>
 
+    <p>Hemos recorrido un camino inmenso: desde el salto de un solo electrón hasta la danza coordinada de las matrices. Hoy, todo ese conocimiento deja de ser teoría en un papel para convertirse en un organismo vivo en tu protoboard. No estamos construyendo un juguete; estamos ensamblando un Sistema de Auditoría Digital. Este circuito será capaz de mirar el desorden del universo (el ruido) y encontrar la verdad oculta entre 7 interruptores. Prepárate para ver cómo el álgebra lineal cobra vida a través de tus LEDs.</p>
+
     <section>
         <h2>1. El Reto: "Adivina qué interruptor cambié"</h2>
         <p>Construiremos el <strong>Decodificador de Síndrome</strong>. Este circuito leerá 7 interruptores (simulando el paquete de datos $r$ de 7 bits que acaba de llegar por el aire) y nos mostrará en 3 LEDs la posición exacta (en binario) de cualquier error que introduzcas a propósito simulando ruido.</p>
@@ -93,6 +95,8 @@
                 </table>
             </div>
         </div>
+
+        <p>Un arquitecto es tan bueno como la gestión de sus recursos. Antes de empezar el ruteo, debemos organizar nuestro arsenal. En este nivel final, la limpieza en el cableado no es por estética; es por supervivencia técnica. Con tres chips trabajando en paralelo, un solo cable mal puesto creará un nido de confusión que ningún síndrome podrá explicar. Vamos a inventariar nuestras herramientas y a preparar la estrategia de ruteo para este 'jefe final' del hardware.</p>
 
         <h2>2. Materiales y Estrategia de Ruteo</h2>
         
@@ -177,6 +181,46 @@
             </div>
             <p style="font-size: 0.95em; color: #555;">En la práctica, para calcular \(s_1 = D_1 \oplus D_3 \oplus D_5 \oplus D_7\), conectamos dos XOR en paralelo: (D₁⊕D₃) y (D₅⊕D₇), y luego sus salidas a una tercera XOR. Así todas las señales recorren exactamente 2 compuertas.</p>
         </div>
+
+        <!-- ====================================================================== -->
+        <!-- RETROFIT: PARALELISMO Y FAN-IN (CONEXIÓN IA)                          -->
+        <!-- ====================================================================== -->
+        <div class="dato-extra" style="background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 25px; margin: 35px 0; border-radius: 0 15px 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h4 style="color: #1b5e20; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🧠</span> El Árbol XOR: El Secreto de la Velocidad en IA
+            </h4>
+            
+            <p style="color: #2d3436; font-size: 1.05em; line-height: 1.6;">
+                En este laboratorio usaste un <strong>Árbol Equilibrado</strong> para acelerar el cálculo del Síndrome. En computación de alto rendimiento, este concepto separa a los procesadores mediocres de las supercomputadoras.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+                
+                <!-- Nivel Iniciación (7°) -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #c8e6c9;">
+                    <strong style="color: #2e7d32; display: block; margin-bottom: 8px;">💡 Analogía para 7° (La Carrera de Relevos):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        Imagina que 4 amigos deben sumar sus puntos. En una <strong>Cadena</strong>, el amigo 1 le pasa al 2, el 2 al 3... ¡el 4 tiene que esperar a todos! En un <strong>Árbol</strong>, los amigos 1 y 2 suman por un lado, el 3 y 4 por otro al mismo tiempo, y luego solo hacen una suma final. ¡Es mucho más rápido porque trabajan en equipo y no en fila!
+                    </p>
+                </div>
+
+                <!-- Nivel Profundización (10°) -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #c8e6c9;">
+                    <strong style="color: #2e7d32; display: block; margin-bottom: 8px;">🏗️ Rigor para 10° (Propagación Logarítmica):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        Al usar árboles, reducimos el retardo de $O(n)$ a $O(\log n)$. En sistemas de IA que procesan millones de datos, el <strong>Fan-In</strong> (número de entradas por compuerta) es limitado físicamente. Los árboles XOR optimizan el <strong>Slack de Tiempo</strong>, garantizando que el Síndrome esté listo antes del siguiente pulso de reloj. Sin esta optimización, las unidades de procesamiento de tensores (TPUs) se sobrecalentarían esperando resultados.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #fbc02d;">
+                <p style="margin: 0; font-size: 0.95em; color: #5d4037; font-weight: bold;">
+                    🎯 La Conexión de Campo: Las redes neuronales profundas (Deep Learning) son, en esencia, árboles gigantes de operaciones matemáticas. Tu circuito de hoy es la unidad mínima de procesamiento paralelo que permite que una IA reconozca un patrón en milisegundos en lugar de horas.
+                </p>
+            </div>
+        </div>
+
+        <p>Si conectáramos nuestras compuertas en una fila india, estaríamos creando un cuello de botella. En la ingeniería de alto rendimiento, el tiempo es el enemigo. Vamos a aplicar la arquitectura de Árbol Equilibrado, una técnica de paralelismo masivo que permite que el diagnóstico ocurra casi instantáneamente. Al final de este montaje, no solo tendrás un detector de errores, sino que habrás construido el procesador más veloz que tus manos han tocado hasta hoy.</p>
         
         <h2>3. Pasos para el Montaje Físico (El Ruteo)</h2>
         <p>Construir este circuito es una prueba de orden, paciencia y limpieza espacial (arquitectura). Sigue estos pasos para no enredarte en un "nido de pájaros":</p>
@@ -213,6 +257,24 @@
                 </li>
             </ol>
             <p style="margin-top: 15px; margin-bottom: 0; font-weight: bold; color: #0097a6; text-align: center;">¡Tip de Ingeniero! Usa cables de colores distintos para cada Árbol. Así, si el LED 2 falla, sabrás exactamente qué cables revisar.</p>
+        </div>
+
+        <div class="dato-extra" style="background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 25px; margin: 30px 0; border-radius: 0 12px 12px 0;">
+            <h4 style="color: #1b5e20; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.2em;">🔌</span> Alta Impedancia y la "Nada" Eléctrica
+            </h4>
+            <p style="color: #333;">Un error común en este laboratorio es dejar los pines sobrantes de los chips 7486 desconectados. En el mundo digital, el vacío no es cero; es <strong>Alta Impedancia</strong>.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 15px;">
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 8px; border: 1px solid #c8e6c9;">
+                    <strong style="color: #2e7d32;">💡 Analogía para 7° (La Antena):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">Un pin suelto es como un cable de radio. Capta la estática de las luces del techo o de tu propia ropa. El chip se confunde y empieza a "adivinar" si hay un 0 o un 1, haciendo que los LEDs del síndrome parpadeen sin sentido. ¡Conéctalos a GND para silenciarlos!</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 8px; border: 1px solid #c8e6c9;">
+                    <strong style="color: #2e7d32;">🏗️ Rigor para 10° (Conmutación Parásita):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">Los pines flotantes en tecnología CMOS/TTL entran en una oscilación de alta frecuencia que drena corriente y calienta el silicio innecesariamente. Forzar las entradas sobrantes a <strong>GND ($0 \oplus 0 = 0$)</strong> estabiliza el consumo de potencia y garantiza un Síndrome puro.</p>
+                </div>
+            </div>
         </div>
 
         <!-- NUEVO BLOQUE: EL TEST DE ACEPTACIÓN -->
@@ -293,38 +355,9 @@
             <p style="padding: 10px; background:#f9f9f9; margin: 0;"><small><em>💡 Puedes dibujar tu propio circuito en Falstad usando el menú 'Circuitos Integrados Digitales' → 'Añadir compuerta XOR' y construyendo los tres árboles manualmente. ¡Así validas tu diseño antes de cablear!</em></small></p>
         </div>
 
-        <!-- ========================================================= -->
-        <!-- REFLEXIÓN FINAL: EL IMPACTO EN EL MUNDO REAL Y LA HISTORIA-->
-        <!-- ========================================================= -->
-        <h2>5. La Filosofía del Ingeniero</h2>
-
-        <div class="destacado" style="border-left: 4px solid #6f42c1; background-color: #f3e5f5; margin-bottom: 30px;">
-            <h3 style="color: #7b1fa2; margin-top: 0; display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 1.3em;">🧬</span> El ADN: El Código Original
-            </h3>
-            <p>Lo que hizo el matemático Richard Hamming en los laboratorios Bell en los años 50, la naturaleza lo inventó hace millones de años.</p>
-            <p>Cuando tus células se dividen, copian miles de millones de letras de ADN (A, C, T, G). A veces ocurren errores (mutaciones causadas por radiación UV o simple azar). Sin embargo, tus células tienen enzimas especializadas que actúan como una <strong>Matriz de Control Biológica</strong>: recorren la cadena, detectan el error estructural (el síndrome), cortan el pedazo malo y lo reparan automáticamente.</p>
-            <p style="margin-bottom: 0; font-weight: bold; color: #4a148c;">Al entender el Código Hamming, estás entendiendo la lógica universal que mantiene viva y estable a la información frente al caos y la entropía del universo, ya sea en el silicio o en el carbono.</p>
-        </div>
-
-        <div class="dato-extra" style="background-color: #e8f5e9; border-left-color: #2e7d32; margin-bottom: 40px;">
-            <h3 style="color: #1b5e20; margin-top: 0; display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 1.3em;">⚖️</span> La Responsabilidad del Ingeniero
-            </h3>
-            <p>Hoy has construido un sistema que corrige errores. Puede parecer un simple juego de luces en una protoboard, pero la filosofía detrás de este circuito salva vidas humanas todos los días.</p>
-            
-            <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #c8e6c9; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-                <h4 style="margin-top: 0; color: #c62828;">🌑 Caso Histórico: El Transbordador Challenger (1986)</h4>
-                <p>El transbordador espacial explotó 73 segundos después del despegue, cobrando la vida de 7 astronautas. La causa no fue una bomba ni un meteorito. Fue una simple <strong>junta tórica de goma (O-ring)</strong> que se congeló y falló.</p>
-                <p style="margin-bottom: 0;">Un componente diminuto falló, y no había un sistema redundante lo suficientemente robusto para compensarlo. Todo el sistema colapsó. Fue la lección más dolorosa de la NASA sobre la fragilidad de la tecnología compleja.</p>
-            </div>
-
-            <p style="font-size: 1.1em; color: #333;"><strong>Tu Misión como Profesional:</strong></p>
-            <p>La Teoría de Códigos nos enseña a agregar <strong>Redundancia</strong> (bits extra). No lo hacemos por capricho ni para desperdiciar recursos; lo hacemos para que, cuando ese "pequeño bit" falle inevitablemente por la radiación o el desgaste, el sistema sea capaz de notarlo, aislarlo, corregirlo automáticamente y seguir funcionando.</p>
-            <p style="font-weight: bold; color: #2e7d32; font-size: 1.1em; text-align: center; padding: 15px; background-color: #c8e6c9; border-radius: 6px; margin-bottom: 0;">
-                Tu trabajo como ingeniero no es solo diseñar cosas que funcionen cuando todo va bien.<br>Es diseñar sistemas que sobrevivan cuando todo sale mal.
-            </p>
-        </div>
+        <p style="text-align: center; margin: 40px 0; font-weight: bold; color: #4a148c;">
+            Si has llegado hasta aquí y tus LEDs han respondido al ruido de tus dedos, has cruzado la frontera de la computación pasiva. Pero la ingeniería no termina en los cables. Lo que acabas de construir en una pequeña protoboard es el principio atómico de la Inteligencia Artificial moderna. Pasemos del laboratorio físico a la frontera del conocimiento para entender por qué tu proyecto Hamming es el ADN de sistemas como ChatGPT.
+        </p>
 
         <!-- NUEVO: Checklist del Ingeniero Graduado -->
         <div class="destacado" style="background-color: #e0f2fe; border-left-color: #0288d1; margin: 40px 0;">
@@ -351,10 +384,10 @@
             <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
             </svg>
-            <h3>🎧 Podcast: El Viaje del Ingeniero (Episodio Final)</h3>
+            <h3>🎧 Podcast: El Árbol del Conocimiento: Paralelismo y Resiliencia en el Silicio</h3>
         </div>
         <p class="podcast-descripcion">
-            En este episodio de cierre, reflexionamos sobre el largo camino desde la Ley de Ohm hasta los Códigos de Corrección de Errores. Discutimos la ética de la ingeniería, la importancia de enseñar a los estudiantes a amar el "troubleshooting", y cómo la redundancia no es un desperdicio, sino la máxima expresión del diseño responsable.
+            En este episodio técnico, analizamos la optimización de latencia mediante árboles XOR equilibrados. Discutimos la "Pedagogía de las manos atrás" y cómo el troubleshooting real es el que forja el carácter analítico del ingeniero.
         </p>
         <div class="podcast-player">
             <audio controls preload="metadata" style="width: 100%;">
@@ -363,8 +396,7 @@
             </audio>
         </div>
         <p class="podcast-meta">
-            <span class="duracion">⏱️ 18:55 min</span>
-            <span class="formato">🔊 MP3</span>
+            <span class="duracion">⏱️ 18:55 min | 🏗️ Enfoque: Arquitectura de Alto Rendimiento y Depuración.</span>
         </p>
     </section>
 
@@ -386,6 +418,95 @@
             <div class="paso"><strong>3️⃣ "Explícame como si fuera a enseñárselo a..."</strong> (Colegas docentes el día de tu graduación).</div>
             <div class="paso"><strong>4️⃣ "Incluye un error común que debo evitar..."</strong> (Ej: Pensar que la tecnología avanzada no falla).</div>
         </div>
+    </section>
+
+        <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
+        <!-- ====================================================================== -->
+        <!-- BLOQUE CEREBRO DE SILICIO: EL PUENTE FINAL HACIA LA IA MODERNA         -->
+        <!-- ====================================================================== -->
+        <div class="conexion-ia" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 35px; border-radius: 20px; margin: 40px 0; box-shadow: 0 15px 35px rgba(0,0,0,0.4); border-left: 10px solid #ff8c00;">
+            
+            <h3 style="color: #ff8c00; margin-top: 0; display: flex; align-items: center; gap: 12px; font-size: 1.8em;">
+                <span style="font-size: 1.3em;">🧠</span> El Destino Final: De los Bits a las Neuronas
+            </h3>
+            
+            <p style="font-size: 1.1em; line-height: 1.6; color: #f3e5f5; margin-bottom: 30px;">
+                Acabas de construir un sistema que sana bits individuales. Pero, <strong>¿cómo aplica esto ChatGPT para entender el mundo?</strong> La IA es, en esencia, un proyecto Hamming a una escala monumental.
+            </p>
+
+            <!-- Grilla de Conceptos IA -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
+                
+                <!-- Tarjeta 1: Redundancia (AJUSTADA para no confundir con el árbol) -->
+                <div style="background: white; color: #333; padding: 20px; border-radius: 12px; border-top: 5px solid #4caf50;">
+                    <strong style="color: #2e7d32; display: flex; align-items: center; gap: 8px;">
+                        <span>🔄</span> Redundancia Neuronal (No es un árbol, es un equipo)
+                    </strong>
+                    <p style="font-size: 0.9em; margin-top: 10px;">
+                        Tu árbol equilibrado acelera el cálculo. Pero en IA hay otro tipo de "redundancia": la <strong>tolerancia a fallos</strong>. Durante el entrenamiento, usamos <strong>Dropout</strong>: apagamos neuronas al azar para que las demás aprendan a trabajar con "daños" simulados. Si una neurona falla, el sistema sobrevive. ¡Es como tener miles de circuitos Hamming trabajando en paralelo, pero con un propósito diferente: la resiliencia, no la velocidad!
+                    </p>
+                </div>
+
+                <!-- Tarjeta 2: Atención -->
+                <div style="background: white; color: #333; padding: 20px; border-radius: 12px; border-top: 5px solid #2196f3;">
+                    <strong style="color: #0d47a1; display: flex; align-items: center; gap: 8px;">
+                        <span>👁️</span> El "Síndrome" de Atención
+                    </strong>
+                    <p style="font-size: 0.9em; margin-top: 10px;">
+                        Los Transformers (el corazón de ChatGPT) usan un <strong>Mapa de Atención</strong>. Funciona como tu Síndrome: detecta qué palabra no encaja en el contexto y la "corrige" usando la relación con las demás. Si tu bit 5 está mal, el Síndrome lo delata; si tu palabra está mal, la Atención la sana.
+                    </p>
+                </div>
+
+                <!-- Tarjeta 3: Alucinaciones -->
+                <div style="background: white; color: #333; padding: 20px; border-radius: 12px; border-top: 5px solid #ff9800;">
+                    <strong style="color: #e65100; display: flex; align-items: center; gap: 8px;">
+                        <span>🌀</span> El Límite del Error
+                    </strong>
+                    <p style="font-size: 0.9em; margin-top: 10px;">
+                        Hamming (7,4) falla con 2 errores (falsa corrección). En IA, cuando el ruido o la ambigüedad superan la "distancia mínima" del modelo, ocurre la <strong>Alucinación</strong>: la IA inventa una verdad coherente pero falsa. Todo sistema de autocuración tiene un límite infranqueable.
+                    </p>
+                </div>
+
+                <!-- Tarjeta 4: Ética Fail-Safe -->
+                <div style="background: white; color: #333; padding: 20px; border-radius: 12px; border-top: 5px solid #c62828;">
+                    <strong style="color: #c62828; display: flex; align-items: center; gap: 8px;">
+                        <span>🛡️</span> Ingeniería de Responsabilidad
+                    </strong>
+                    <p style="font-size: 0.9em; margin-top: 10px;">
+                        Como en el desastre del <strong>Challenger</strong>, un fallo sin redundancia es fatal. Diseñar IAs para coches autónomos o medicina exige el rigor de hoy: redundancia crítica y <strong>Memorias ECC</strong> para que un rayo cósmico en un servidor no cobre una vida humana.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Cierre de Graduación -->
+            <div style="margin-top: 35px; padding: 25px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 2px dashed #ff8c00; text-align: center;">
+                <p style="margin: 0; font-size: 1.1em; font-style: italic; color: #e1bee7;">
+                    🎓 <strong>Veredicto del Arquitecto:</strong> Hoy dejas de ser un usuario pasivo para ser un <strong>Arquitecto de la Certeza</strong>. Has aprendido a agregar "ñapa" matemática al universo para que la información sobreviva al caos. Desde la Voyager hasta ChatGPT, todo comenzó aquí. <strong>¡Bienvenido al club!</strong>
+                </p>
+            </div>
+        </div>
+        <!-- === FIN BLOQUE IA === -->
+
+        <section class="podcast-ia" style="height: 100%; border-left: 8px solid #e94560; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 25px; border-radius: 15px; color: white; margin: 30px 0; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);">
+        <div class="podcast-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <svg style="width:30px; height:30px" viewBox="0 0 24 24">
+                <path fill="#e94560" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" />
+            </svg>
+            <h3 style="margin: 0; color: #e94560;">IA y el ADN Digital: ¿Máquinas con Instinto de Supervivencia?</h3>
+        </div>
+        <p class="podcast-descripcion" style="font-size: 1em; color: #aeb9cc; line-height: 1.6;">
+            Exploramos la conexión entre la corrección de errores de Hamming y el mantenimiento de la cordura algorítmica. Reflexionamos sobre la responsabilidad ética del ingeniero ante tragedias tecnológicas y planteamos el reto del futuro: ¿Cómo implementaremos la autosanación en la computación cuántica, donde observar un dato lo altera?
+        </p>
+        <div class="podcast-player" style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 8px; margin-top: 15px;">
+            <audio controls style="width: 100%;">
+                <source src="audio/leccion30_ia.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
+        </div>
+        <p style="font-size: 0.85em; color: #e94560; opacity: 0.9; margin-top: 15px; font-weight: bold;">
+            ⏱️ 16:26 min | 🌐 Recomendado: Ingenieros en Liderazgo y Ética Digital
+        </p>
     </section>
 
     <!-- ========================================================= -->
@@ -469,32 +590,6 @@
                 🏠 Volver al Inicio del Curso
             </a>
         </div>
-
-        <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
-        <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #000000, #434343); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-left: 8px solid #ff8c00;">
-            <h3 style="color: #ff8c00; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: El Destino Final es la IA
-            </h3>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                    <h4 style="color: #ff8c00; margin-top: 0;">Para Grado 7°: ¿Por qué la IA no se rinde?</h4>
-                    <p style="font-size: 0.95em; line-height: 1.5;">Lo que acabas de construir es una IA de nivel 1: una máquina que sabe que se equivocó y sabe cómo arreglarlo. Cuando juegas contra una IA y ella aprende de sus errores, está usando versiones gigantes de tu "Matriz H". Ella compara lo que hizo mal con lo que debería ser correcto y ajusta sus "cables internos" para ganar la próxima vez. ¡Hoy construiste el primer instinto de aprendizaje!</p>
-                </div>
-                
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                    <h4 style="color: #ff8c00; margin-top: 0;">Para Grado 10°: De Hamming a los Transformers</h4>
-                    <p style="font-size: 0.95em; line-height: 1.5;">Las IAs modernas como ChatGPT usan una arquitectura llamada <strong>Transformer</strong>. En su corazón, tienen un mecanismo de "Atención" que es como un síndrome de Hamming masivo: el algoritmo mira todas las palabras de una frase y "calcula la paridad" entre ellas para saber cuál es la más importante. Sin la capacidad de corregir errores y encontrar patrones en el ruido que aprendiste hoy, la IA alucinaría sin control.</p>
-                </div>
-            </div>
-
-            <div style="margin-top: 25px; padding: 20px; background: rgba(255,140,0,0.1); border-radius: 8px; border: 1px dashed #ff8c00;">
-                <p style="margin: 0; text-align: center; font-weight: bold; font-size: 1.1em;">
-                    🚀 Conclusión del Curso: Has terminado el hardware. Ahora estás listo para el software. La IA no es magia; es trillones de estas compuertas XOR y matrices trabajando juntas. ¡El futuro es tuyo para programarlo!
-                </p>
-            </div>
-        </div>
-        <!-- === FIN BLOQUE IA === -->
         
         <!-- FOOTER ACADÉMICO UNIFICADO -->
         <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eaeaea; text-align: center; color: #666;">

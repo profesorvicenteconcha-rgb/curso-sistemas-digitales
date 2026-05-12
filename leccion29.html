@@ -54,6 +54,8 @@
         </div>
     </div>
 
+    <p>En la lección pasada, nos pusimos el casco de constructores para forjar la armadura del mensaje con la Matriz $G$. Pero un mensaje blindado no sirve de nada si el destinatario no sabe cómo abrirlo o, peor aún, si no puede detectar si la armadura fue golpeada en el camino. Ahora, cruzamos el cable y nos situamos en la silla del Receptor. No somos constructores; somos inspectores de calidad. La Matriz $H$ es nuestro escáner, el filtro que separa la verdad del ruido. Vamos a descubrir cómo una simple multiplicación puede delatar la ubicación exacta de una mentira electrónica.</p>
+
     <section>
         <h2>1. El Chequeo Médico: La Matriz $H$</h2>
         
@@ -111,6 +113,8 @@
             <p><strong>En resumen:</strong> Esta fórmula es la <strong>Prueba de Oro</strong>. Si el receptor recibe un mensaje \(r\) y al pasarle el escáner de la matriz (\(r \cdot H^T\)) el resultado es \(0\), el estudiante puede estar seguro de que el mensaje no sufrió accidentes en el viaje. Si da cualquier otro número, ¡la alarma de error se enciende!</p>
             <p style="margin-top: 10px; font-style: italic; color: #555;"><strong>Tip para tu cuaderno:</strong> Piensa en esta relación como una balanza perfecta. Si pones el peso exacto de \(G\) y lo comparas con la medida de \(H\), la aguja siempre debe marcar \(0\). ¡Es la simetría de la informática!</p>
         </div>
+
+        <p>Podrías pensar que diseñar un inspector (Matriz $H$) es tan difícil como diseñar al constructor (Matriz $G$), pero la belleza de la ingeniería digital reside en la simetría. No tenemos que inventar reglas nuevas; simplemente vamos a reciclar las piezas del constructor, dándoles un giro estratégico. Este 'reacomodo' de bits es lo que garantiza que el emisor y el receptor hablen exactamente el mismo idioma de seguridad. Es un baile donde, si ambos están coordinados, el resultado final siempre será el silencio absoluto del cero.</p>
 
         <!-- NUEVO: Construcción de H a partir de G -->
         <div class="dato-extra" style="background-color: #fff9c4; border-left-color: #fbc02d; margin-bottom: 20px;">
@@ -191,6 +195,46 @@
                 </p>
             </div>
         </section>
+
+        <!-- ====================================================================== -->
+        <!-- RETROFIT: INTEGRIDAD DE SEÑAL Y EL SECTOR DE GUARDA (CONEXIÓN IA)      -->
+        <!-- ====================================================================== -->
+        <div class="dato-extra" style="background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 25px; margin: 35px 0; border-radius: 0 15px 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h4 style="color: #1b5e20; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🧠</span> Integridad de Señal: El GND como Filtro de Realidad
+            </h4>
+            
+            <p style="color: #2d3436; font-size: 1.05em; line-height: 1.6;">
+                En esta lección aprendiste que el Síndrome depende de una Tierra común. En alta frecuencia, esto se llama <strong>Integridad de Señal</strong>: asegurar que el receptor vea exactamente lo que el emisor envió.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+                
+                <!-- Nivel Iniciación (7°) -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #c8e6c9;">
+                    <strong style="color: #2e7d32; display: block; margin-bottom: 8px;">💡 Analogía para 7° (El Nivel del Mar):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        Imagina que dos personas en ciudades diferentes quieren medir qué tan alto es un edificio. Si uno mide desde el nivel del mar y el otro desde una montaña, sus números no coincidirán aunque el edificio sea el mismo. El <strong>GND</strong> es el "Nivel del Mar" de la electrónica. Si ambos circuitos no están al mismo nivel, el receptor creerá que hay errores (Síndromes) donde no los hay.
+                    </p>
+                </div>
+
+                <!-- Nivel Profundización (10°) -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #c8e6c9;">
+                    <strong style="color: #2e7d32; display: block; margin-bottom: 8px;">🏗️ Rigor para 10° (Common-Mode Noise y Crosstalk):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        En buses de datos modernos (como DDR5), el ruido de <strong>Modo Común</strong> puede alterar el Síndrome. Usamos planos de tierra (Ground Planes) para minimizar la inductancia y evitar que el ruido de un cable salte al otro (<strong>Crosstalk</strong>). Si el Síndrome de Hamming da un error aleatorio que cambia constantemente, el problema no es el código; es un diseño físico pobre que no respeta el retorno de corriente.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #fbc02d;">
+                <p style="margin: 0; font-size: 0.95em; color: #5d4037; font-weight: bold;">
+                    🎯 La Conexión de Campo: Las IAs que procesan audio en tiempo real (como canceladores de ruido) dependen de esta integridad. Si el GND "flota", la IA intentará cancelar un ruido que es meramente un error eléctrico del hardware. Medir el GND es el primer paso para una IA confiable.
+                </p>
+            </div>
+        </div>
+
+        <p>Hasta ahora, todo parece funcionar en el mundo ideal del papel y los números. Pero recuerda: un bit no es un concepto flotante, es un nivel de voltaje. Para que el inspector (Matriz $H$) pueda dar un veredicto real, necesita un punto de comparación sólido. Aquí es donde la matemática se da la mano con la electricidad. Antes de aprender a leer los síntomas del error, debemos asegurarnos de que nuestra 'brújula de voltajes' esté bien calibrada, porque sin un suelo firme, hasta la matemática más perfecta puede alucinar.</p>
 
         <h2>2. El Síndrome ($S$): Leyendo los Síntomas</h2>
         <p>Al unir los tres resultados de las pruebas ($s_3, s_2, s_1$), formamos un número binario de 3 bits llamado <strong>Vector Síndrome ($S$)</strong>.</p>
@@ -307,6 +351,8 @@
             </p>
             <p style="text-align: center; font-size: 0.85em; color: #666; margin-bottom: 0;"><em>(Nota: El enlace de arriba está configurado actualmente para la Matriz G de la Lección 28. Puedes editar la estructura de corchetes en Wolfram para que coincida exactamente con las 3 filas de la Matriz H de esta lección).</em></p>
         </div>
+
+        <p>El Síndrome nos da un número decimal, una dirección exacta del bit enfermo. Es eficiente, pero a veces el cerebro humano necesita ver para creer. Vamos a rescatar una herramienta de la Unidad 3, los conjuntos, para transformar este número en un mapa visual. Los diagramas de Venn no son solo para clasificar elementos; en la Teoría de Códigos, son el GPS que ilumina la intersección exacta donde el ruido intentó sabotear nuestra comunicación.</p>
 
         <h3>Visualizando el Síndrome: Los Diagramas de Venn Mágicos</h3>
         <p>¿Recuerdas los conjuntos de la Unidad 3? El Código Hamming se puede dibujar geométricamente como 3 círculos entrelazados.</p>
@@ -435,6 +481,77 @@
             <p><small><em>Fig. 3: El Hardware del Diagnóstico: Tres árboles de compuertas XOR evaluando los 7 bits que llegaron. Sus tres salidas formarán el número binario del error. ¡Este será tu proyecto final de grado!</em></small></p>
         </div>
 
+        <!-- ====================================================================== -->
+        <!-- BLOQUE: EL ISOMORFISMO DEL DIAGNÓSTICO (OPTIMIZADO)                   -->
+        <!-- ====================================================================== -->
+        <div class="dato-extra" style="background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 25px; margin: 30px 0; border-radius: 0 12px 12px 0;">
+            <h4 style="color: #1b5e20; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.2em;">🔬</span> El Isomorfismo del Diagnóstico: La Danza de la Verdad
+            </h4>
+            
+            <p style="color: #333; font-size: 1.05em;">
+                La relación entre la Matriz Generadora ($G$) y la de Control ($H$) es una <strong>coreografía matemática</strong>. Su propiedad fundamental es la anulación total:
+            </p>
+            
+            <div class="formula" style="font-size: 1.4em; background: white; padding: 15px; margin: 15px auto; border: 1px solid #c8e6c9; width: fit-content;">
+                $$G \cdot H^T = 0$$
+            </div>
+            
+            <p style="color: #333; margin-bottom: 20px;">
+                Esto significa que son <strong>ortogonales</strong>: están diseñadas para encajar en silencio. Aquí tienes tres formas de entender esta "magia del cero":
+            </p>
+
+            <!-- Grilla de Analogías -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                
+                <!-- Caracterización 1 -->
+                <div style="background: white; padding: 15px; border-radius: 10px; border-top: 4px solid #4caf50; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <strong style="color: #2e7d32; display: block; margin-bottom: 8px;">🗝️ La Llave y la Cerradura</strong>
+                    <p style="font-size: 0.9em; color: #555; margin: 0;">
+                        $G$ es la <strong>llave maestra</strong> que fabrica el mensaje. $H$ es la <strong>cerradura</strong>. Si el mensaje es válido, la llave gira sin esfuerzo y el resultado es <strong>cero (silencio)</strong>. Si hay ruido, la llave se dobla y la cerradura se traba.
+                    </p>
+                </div>
+
+                <!-- Caracterización 2 -->
+                <div style="background: white; padding: 15px; border-radius: 10px; border-top: 4px solid #ff9800; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <strong style="color: #e65100; display: block; margin-bottom: 8px;">⚖️ El Abogado y el Juez</strong>
+                    <p style="font-size: 0.9em; color: #555; margin: 0;">
+                        $G$ construye el <strong>argumento</strong>. $H$ audita la <strong>coherencia</strong>. El "cero" no es vacío; es el veredicto de que el argumento es consistente con la ley. Si el juez detecta una mentira, el resultado es el <strong>Síndrome</strong>.
+                    </p>
+                </div>
+
+                <!-- Caracterización 3 -->
+                <div style="background: white; padding: 15px; border-radius: 10px; border-top: 4px solid #3f51b5; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <strong style="color: #1a237e; display: block; margin-bottom: 8px;">🤝 El Secreto Compartido</strong>
+                    <p style="font-size: 0.9em; color: #555; margin: 0;">
+                        Es un idioma de señas donde emisor y receptor acuerdan que solo ciertas señas son reales. El sistema garantiza que las órdenes vengan del emisor legítimo y no de una <strong>interferencia alienígena</strong> o ruido de motor.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Comparativa de Niveles -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 25px; background: rgba(255,255,255,0.4); padding: 15px; border-radius: 12px;">
+                <div style="flex: 1;">
+                    <strong style="color: #2e7d32;">💡 Iniciación (7°): El Teléfono Roto</strong>
+                    <p style="font-size: 0.95em; color: #444; margin-top: 5px;">
+                        Imagina un teléfono roto donde el receptor tiene un <strong>detector de mentiras</strong>. Sabe quién cambió la palabra y la corrige antes de decirla. El "0" significa que el teléfono no se rompió.
+                    </p>
+                </div>
+                <div style="flex: 1;">
+                    <strong style="color: #2e7d32;">🏗️ Profundización (10°): El Vínculo GND</strong>
+                    <p style="font-size: 0.95em; color: #444; margin-top: 5px;">
+                        Calculamos $S = r \cdot H^T$ con <strong>XOR (7486)</strong>. Sin <strong>GND común</strong> (voltaje de referencia), el sistema genera "Síndromes Fantasma". En IA, el GND son los <strong>hechos verificados</strong> para evitar alucinaciones.
+                    </p>
+                </div>
+            </div>
+            
+            <p style="margin: 20px 0 0 0; font-size: 0.95em; color: #856404; font-weight: bold; text-align: center;">
+                🧩 <strong>Reto:</strong> Si la Matriz $H$ pudiera hablar, ¿qué le diría a la Matriz $G$? ¿"Te vigilo" o "Te complemento"?
+            </p>
+        </div>
+
+        <p>Comprender la coreografía entre $G$ y $H$ es dominar el 'por qué' de la autocuración digital. Sin embargo, en la ingeniería de campo, donde los datos fluyen a la velocidad de la luz, el diagnóstico no puede depender únicamente del lápiz y el papel. Para asegurar que tu análisis manual del Síndrome es tan infalible como el silicio, es vital contar con instrumental de alta precisión. Así como un médico consulta una tomografía para confirmar una sospecha, tú utilizarás la siguiente plataforma para obtener una validación instantánea de la salud de tus bits.</p>
+
         <!-- HERRAMIENTA EXTERNA MEJORADA -->
         <div class="dato-extra" style="background-color: #f3e5f5; border-left-color: #9c27b0; margin-top: 30px;">
             <h3 style="color: #7b1fa2; margin-top: 0; display: flex; align-items: center; gap: 8px;">
@@ -462,28 +579,28 @@
         </div>
     </section>
 
-    <!-- PODCAST -->
-    <section class="podcast-section">
-        <div class="podcast-header">
-            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+    <!-- === PODCAST TÉCNICO: EL RIGOR DEL HARDWARE === -->
+    <section class="podcast-section" style="border-left: 5px solid #0d47a1;">
+        <div class="podcast-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="#0d47a1" style="width:30px;">
                 <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
             </svg>
-            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+            <h3 style="color: #0d47a1; margin: 0;">🎧 Podcast: El Diagnóstico del Síndrome</h3>
         </div>
-        <p class="podcast-descripcion">
-            Dos docentes exploran el "Aha! Moment" de la Matriz $H$. Discuten cómo el Síndrome transforma un problema matemático abstracto en un número decimal que te señala directamente al culpable, como un GPS del error. Además, comparten estrategias para usar los Diagramas de Venn en el aula y ayudar a los estudiantes a "ver" el error sin tener que hacer multiplicaciones de matrices.
+        
+        <p class="podcast-descripcion" style="font-size: 0.9em;">
+            Analizamos la "hermana ortogonal" de la matriz generadora: la Matriz H. Discutimos cómo el hardware realiza una colisión matemática para generar el Síndrome y cómo este valor actúa como un GPS estructural que localiza errores en nanosegundos. Exploramos por qué el diseño sistemático es la clave para que tu procesador no pierda tiempo descifrando datos sanos.
         </p>
+        
         <div class="podcast-player">
-            <audio controls preload="metadata" style="width: 100%;">
-                <source src="audio/leccion29.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
+            <audio controls style="width: 100%;">
+                <source src="audio/leccion28.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
             </audio>
         </div>
-        <p class="podcast-meta">
-            <span class="duracion">⏱️ 15:26 min</span>
-            <span class="formato">🔊 MP3</span>
-        </p>
+        <p style="font-size: 0.75em; opacity: 0.8; margin-top: 10px;">⏱️ 20:16 min | 🏗️ Enfoque: Álgebra Matricial y Diagnóstico de Errores</p>
     </section>
+    <!-- Final del PODCAST 1-->
 
     <!-- TARJETA DE PROMPT ÉTICO -->
     <section class="prompt-section">
@@ -544,31 +661,70 @@
         <p style="font-size: 1.05em; color: #444; line-height: 1.6; font-weight: bold;">En la próxima y última lección de este curso (<strong>Laboratorio Final: Proyecto Hamming</strong>), tomarás 3 chips 7486, un puñado de LEDs y 7 interruptores para construir físicamente este Detector de Síndrome. Te retarás a ti mismo introduciendo "ruido" con tus dedos y verás cómo tu circuito diagnostica la falla en tiempo real. ¡Prepárate para la graduación!</p>
     </div>
 
-    <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
-    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-left: 8px solid #e94560;">
-        <h3 style="color: #e94560; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: El Síndrome y la IA Autocurativa
-        </h3>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #e94560; margin-top: 0;">Para Grado 7°: ¿Cómo me entiende la IA si escribo mal?</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">Cuando escribes "Hola, ¿cómo estsa?", la IA calcula un "Síndrome de Texto". Nota que la palabra "estsa" no existe en su diccionario, pero está a una <strong>Distancia de Hamming</strong> muy pequeña de "estás". Al igual que tu circuito corregirá un bit, la IA corrige tu ortografía usando el contexto. ¡Es el mismo principio de autocuración!</p>
-            </div>
+        <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO (VERSIÓN MEJORADA) === -->
+        <div class="conexion-ia" style="background: linear-gradient(135deg, #1a237e 0%, #4a148c 100%); color: white; padding: 30px; border-radius: 15px; margin: 40px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-left: 10px solid #ba68c8;">
             
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #e94560; margin-top: 0;">Para Grado 10°: Robustez y Redundancia Neuronal</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">En las Redes Neuronales masivas, algunas neuronas pueden fallar o dar resultados "ruidosos". Los ingenieros usan técnicas de <strong>Redundancia</strong> similares a las de Hamming para que la IA siga funcionando correctamente aunque una parte de su "cerebro" esté dañada. Estudiar la Matriz H es entender cómo se diseñan sistemas que no colapsan ante el primer error.</p>
+            <h3 style="color: #e1bee7; margin-top: 0; display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 1.3em;">🧠</span> Cerebro de Silicio: El Síndrome como Tu Primer Diagnóstico de IA
+            </h3>
+            
+            <p style="font-size: 1.1em; line-height: 1.6; color: #f3e5f5;">
+                Hoy aprendiste a calcular el <strong>Síndrome</strong>: un número que le dice al receptor exactamente qué bit está dañado. En la Inteligencia Artificial, este principio se usa para algo aún más crítico.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                
+                <!-- NIVEL INICIACIÓN (7°) -->
+                <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #fab1a0;">
+                    <h4 style="color: #fab1a0; margin-top: 0;">Grado 7°: ¿Cómo sabe la IA que tecleaste mal?</h4>
+                    <p style="font-size: 0.95em; line-height: 1.5; color: #ddd;">
+                        Cuando escribes "Hila" y la IA lo cambia a "Hola", está haciendo exactamente lo mismo que tu Matriz H: <strong>calcula la distancia entre lo que llegó y lo que es posible</strong>.
+                        <br><br>
+                        En la Lección 30 (el Laboratorio Final), construirás un circuito que enciende LEDs para decirte qué interruptor cambiaste. Esa máquina que diagnosticará tu error... ¡es la versión en miniatura de cómo ChatGPT corrige tu ortografía!
+                    </p>
+                </div>
+
+                <!-- NIVEL PROFUNDIZACIÓN (10°) -->
+                <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #4ade80;">
+                    <h4 style="color: #4ade80; margin-top: 0;">Grado 10°: El Gran Momento de la Verdad (L30)</h4>
+                    <p style="font-size: 0.95em; line-height: 1.5; color: #ddd;">
+                        En la próxima lección, <strong>construirás físicamente</strong> el circuito que calcula este Síndrome. Verás con tus propios ojos cómo una señal de 7 bits entra, cómo el ruido la altera, y cómo <strong>tres simples LEDs te dirán exactamente qué interruptor cambiaste</strong>.
+                        <br><br>
+                        <strong>¿El desafío final?</strong> Introducirás errores a propósito (simulando el ruido cósmico) y tu circuito te dirá: "El error está en el interruptor 5". ¡Pasarás de la teoría matemática al hardware que se cura a sí mismo!
+                    </p>
+                </div>
+            </div>
+
+            <!-- PUENTE HACIA EL LABORATORIO FINAL -->
+            <div style="margin-top: 25px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px; border: 1px dashed #ba68c8; text-align: center;">
+                <p style="margin: 0; font-size: 0.95em; font-style: italic; color: #e1bee7;">
+                    🎓 <strong>Lo que viene:</strong> En L30, tu protoboard dejará de ser una simple calculadora. Se convertirá en un <strong>detector de mentiras eléctricas</strong> que encuentra errores en nanosegundos. ¡Te espera la graduación!
+                </p>
             </div>
         </div>
+        <!-- === FIN BLOQUE IA === -->
 
-        <div style="margin-top: 25px; padding: 20px; background: rgba(233,69,96,0.1); border-radius: 8px; border: 1px dashed #e94560;">
-            <p style="margin: 0; text-align: center; font-weight: bold;">
-                🚀 Conexión Final: En el Laboratorio Final (L30), construirás físicamente el "Cerebro" que calcula este Síndrome. ¡Pasarás de la teoría matricial al hardware que se cura a sí mismo!
+        <!-- Track 2: Podcast de IA (Siguiendo el modelo de colores L26) -->
+        <section class="podcast-ia" style="height: 100%; border-left: 8px solid #e94560; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 25px; border-radius: 15px; color: white; margin: 30px 0; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);">
+            <div class="podcast-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                <svg style="width:30px; height:30px" viewBox="0 0 24 24">
+                    <path fill="#e94560" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" />
+                </svg>
+                <h3 style="margin: 0; color: #e94560;">IA y el Suelo Firme: ¿Quién vigila a los vigilantes?</h3>
+            </div>
+            <p class="podcast-descripcion" style="font-size: 1em; color: #aeb9cc; line-height: 1.6;">
+                ¿Qué sucede cuando la propia Matriz $H$ se corrompe? Discutimos la vulnerabilidad física de la IA y el concepto de <strong>"GND Humano"</strong>: la necesidad de una tierra común de hechos básicos para que la comunicación no caiga en un bucle de alucinaciones. Una inmersión en la robustez neuronal y el futuro de las máquinas que se auto-reparan.
             </p>
-        </div>
-    </div>
-    <!-- === FIN BLOQUE IA === -->
+            <div class="podcast-player" style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 8px; margin-top: 15px;">
+                <audio controls style="width: 100%;">
+                    <source src="audio/leccion29_ia.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el audio.
+                </audio>
+            </div>
+            <p style="font-size: 0.85em; color: #e94560; opacity: 0.9; margin-top: 15px; font-weight: bold;">
+                ⏱️ 17:28 min | 🌐 Recomendado: Futuros Arquitectos de Sistemas Autogestionados
+            </p>
+        </section>
 
     <footer>
         <hr>

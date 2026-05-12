@@ -38,6 +38,8 @@
         <p style="margin-bottom: 0;">Hoy descubriremos un <strong>isomorfismo deslumbrante</strong> (recordando la Unidad 3): cómo una tabla llena de ceros y unos en un papel se transforma mágicamente en un diagrama de cables y compuertas lógicas físicas. Así como el álgebra de Boole era isomorfa a los circuitos, aquí la multiplicación de matrices es isomorfa al cableado de XORs.</p>
     </div>
 
+    <p>En la lección anterior aprendimos que necesitamos una 'ñapa' para proteger nuestros datos, pero la gran pregunta es: ¿cómo elegimos esa ñapa sin que sea un caos? No podemos simplemente tirar dados. Necesitamos una receta, un plano que nos garantice que cada bit de protección está vigilando exactamente lo que debe. La Matriz Generadora $(G)$ es ese libro de cocina. Es la que toma los ingredientes básicos (tus datos) y te dice exactamente cómo mezclarlos para que el resultado sea un paquete blindado contra el ruido del universo.</p>
+
     <section>
         <h2>1. ¿Qué es la Matriz $G$?</h2>
         <p>No te dejes intimidar por la palabra "matriz". Piensa en ella simplemente como un <strong>tablero de conexiones telefónicas</strong> o un mapa de ruteo. Aquí está la matriz $G$ del famoso <strong>Código Hamming (7,4)</strong>:</p>
@@ -214,7 +216,47 @@
                     </p>
                 </div>
             </div>
-        </section>
+        </section>        
+
+        <!-- ====================================================================== -->
+        <!-- RETROFIT: PROCESAMIENTO EN PARALELO Y THROUGHPUT (CONEXIÓN IA)         -->
+        <!-- ====================================================================== -->
+        <div class="dato-extra" style="background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 25px; margin: 35px 0; border-radius: 0 15px 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h4 style="color: #1b5e20; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🧠</span> La Matriz como Motor de Velocidad
+            </h4>
+            
+            <p style="color: #2d3436; font-size: 1.05em; line-height: 1.6;">
+                En esta lección aprendiste que la Matriz $G$ dicta el cableado. En la industria, el uso de matrices permite el <strong>Procesamiento en Paralelo</strong>: calcular todos los bits de paridad al mismo tiempo.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+                
+                <!-- Nivel Iniciación (7°) -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #c8e6c9;">
+                    <strong style="color: #2e7d32; display: block; margin-bottom: 8px;">💡 Analogía para 7° (El Sello de Caucho):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        Imagina que tienes que escribir un mensaje de seguridad en 1000 cartas. Podrías escribirlo a mano una por una (lento), o podrías mandar a hacer un <strong>sello de caucho</strong> con la forma de la Matriz G. Con un solo golpe, proteges el mensaje. La matriz es ese sello: permite que la computadora proteja los datos de un solo golpe, sin perder tiempo bit por bit.
+                    </p>
+                </div>
+
+                <!-- Nivel Profundización (10°) -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #c8e6c9;">
+                    <strong style="color: #2e7d32; display: block; margin-bottom: 8px;">🏗️ Rigor para 10° (Ancho de Banda y Latencia):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        En telecomunicaciones, buscamos maximizar el <strong>Throughput</strong>. Al usar una estructura matricial, el hardware puede implementar el codificador usando lógica combinacional pura. Esto reduce la <strong>Latencia</strong> al mínimo físico de las compuertas XOR. En sistemas de misión crítica (como el bus de datos de un satélite), la Matriz G se implementa en FPGAs para que la protección no retrase el flujo de datos.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #fbc02d;">
+                <p style="margin: 0; font-size: 0.95em; color: #5d4037; font-weight: bold;">
+                    🎯 La Conexión de Campo: Las GPUs que entrenan IAs no son más que "máquinas de triturar matrices". Utilizan el mismo principio de multiplicación que viste hoy, pero a una escala de billones de operaciones por segundo. Sin la eficiencia del álgebra matricial, la IA simplemente no existiría.
+                </p>
+            </div>
+        </div>
+
+        <p>Ver una matriz en un papel puede parecer un ejercicio de matemáticas abstractas, pero para un ingeniero, una matriz es un diagrama de cableado disfrazado. Cada '1' en esa tabla no es un número; es una conexión física que debes soldar o cablear en tu protoboard. Aquí es donde ocurre el isomorfismo más potente de esta unidad: vamos a aprender a leer la matriz no con los ojos de un matemático, sino con los ojos de un arquitecto de hardware, traduciendo filas y columnas en compuertas XOR reales.</p>
 
         <h2>2. Traducción: De la Matriz al Cable 🔌</h2>
         <p>Leer la matriz para armar un circuito es increíblemente fácil si sabes el secreto del <strong>isomorfismo</strong> (recordando la Lección 21):</p>
@@ -324,6 +366,8 @@
             </div>
         </div>
 
+        <p>Aunque nosotros armaremos este codificador cable por cable, en el mundo de la alta tecnología no hay tiempo para soldar cada conexión. Los procesadores modernos, desde el que mueve tu celular hasta los que entrenan a la IA más avanzada, procesan estas matrices de forma masiva y paralela. Vamos a subir un peldaño en la escalera de la abstracción para ver cómo las computadoras 'ven' estas matrices y cómo podemos usar herramientas de alto nivel para verificar que nuestro escudo sea, matemáticamente, impenetrable.</p>
+
         <h2>3. Simulando Matemáticas de Alto Nivel</h2>
         
         <!-- NUEVO: Ejemplo numérico de multiplicación matricial paso a paso -->
@@ -367,28 +411,48 @@
         </div>
     </section>
 
-    <!-- PODCAST -->
-    <section class="podcast-section">
-        <div class="podcast-header">
-            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
-            </svg>
-            <h3>🎧 Podcast: Conversación entre Expertos</h3>
-        </div>
-        <p class="podcast-descripcion">
-            Dos docentes analizan cómo romper el miedo de los estudiantes frente a las matrices de álgebra lineal. Discuten cómo la analogía del "Tablero de Conexiones" permite enseñar la Matriz $G$ del Código Hamming como si fuera un simple plano de cableado para compuertas XOR, dándole un sentido físico inmediato a las matemáticas. Además, comparten experiencias sobre el uso de Wolfram Alpha en clase como herramienta de validación rápida.
+    <!-- ====================================================================== -->
+    <!-- ¿POR QUÉ LA MATRIZ H ES EL "DETECTIVE" DEL SILICIO? (PUENTE L28)       -->
+    <!-- ====================================================================== -->
+    <div class="dato-extra" style="background-color: #e1f5fe; border-left: 5px solid #0288d1; margin: 30px 0; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+        
+        <h3 style="color: #01579b; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.5em;">🔍</span> 
+            El Oráculo Estructural: ¿Cómo sabe el receptor dónde duele?
+        </h3>
+        
+        <p style="font-size: 1.05em; line-height: 1.6; color: #333;">
+            Acabas de ver cómo multiplicamos un paquete de datos por la <strong>Matriz H</strong> para obtener el <strong>Síndrome</strong>. En el papel son solo números, pero en tu protoboard, esta operación es un <strong>Isomorfismo de Auditoría</strong>.
         </p>
-        <div class="podcast-player">
-            <audio controls preload="metadata" style="width: 100%;">
-                <source src="audio/leccion28.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
-            </audio>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0;">
+            <!-- ANALOGÍA PARA 7mo -->
+            <div style="background: white; padding: 15px; border-radius: 10px; border-top: 4px solid #0288d1;">
+                <strong style="color: #0288d1;">🎨 La Analogía del Colador:</strong>
+                <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+                    Imagina que los datos sanos son granos de arena fina y los errores son piedras pequeñas. La Matriz H es un colador diseñado con agujeros exactos. 
+                    <br><br>
+                    Si los datos están sanos, pasan libremente y el resultado es <strong>000 (vacío)</strong>. Pero si hay una "piedra" (un bit volteado), esta se traba en el colador y hace ruido. Ese ruido es el <strong>Síndrome</strong>, y su valor te dice en qué agujero se trabó la piedra.
+                </p>
+            </div>
+
+            <!-- RIGOR PARA 10mo -->
+            <div style="background: white; padding: 15px; border-radius: 10px; border-top: 4px solid #01579b;">
+                <strong style="color: #01579b;">⚙️ El Veredicto del Hardware:</strong>
+                <p style="font-size: 0.9em; color: #555; margin-top: 8px;">
+                    Físicamente, la Matriz H se traduce en un <strong>circuito de compuertas XOR</strong>. Cuando el paquete de 7 bits atraviesa este laberinto, el Síndrome ($S$) se genera instantáneamente. 
+                    <br><br>
+                    Si $S=0$, el hardware da "luz verde". Si $S \neq 0$, el valor decimal del síndrome apunta directamente a la columna de la matriz que falló. Es <strong>Ingeniería Inversa</strong> aplicada al flujo de electrones para garantizar la verdad.
+                </p>
+            </div>
         </div>
-        <p class="podcast-meta">
-            <span class="duracion">⏱️ 20:16 min</span>
-            <span class="formato">🔊 MP3</span>
-        </p>
-    </section>
+
+        <div style="background: #fff9c4; padding: 15px; border-radius: 8px; border-left: 5px solid #fbc02d;">
+            <p style="margin: 0; font-size: 0.95em; color: #5d4037;">
+                <strong>🎯 La gran revelación:</strong> La Matriz H es la "hermana ortogonal" de la G. Están diseñadas para que su choque sea siempre cero a menos que el universo (el ruido) intervenga. Al dominar la Matriz H, has pasado de ser un programador que "espera que funcione" a un ingeniero que "garantiza que sea correcto".
+            </p>
+        </div>
+    </div>
 
     <!-- NUEVO: Conexión con Inteligencia Artificial (movida al final, antes de la tarjeta de prompt) -->
     <div class="destacado" style="background-color: #fcf3cf; border-left-color: #fbc02d; margin-top: 35px; margin-bottom: 35px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
@@ -409,6 +473,29 @@
             <p style="margin: 5px 0 0 0; color: #555;">La IA necesita códigos clásicos como Hamming para funcionar de manera fiable en el mundo físico. Y a su vez, los ingenieros de telecomunicaciones usan la IA para diseñar los códigos de corrección del futuro. ¡Una relación de doble vía que empuja los límites del mundo digital!</p>
         </div>
     </div>
+
+    <!-- === PODCAST TÉCNICO: EL RIGOR DEL HARDWARE === -->
+    <section class="podcast-section" style="border-left: 5px solid #0d47a1;">
+        <div class="podcast-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="#0d47a1" style="width:30px;">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <h3 style="color: #0d47a1; margin: 0;">🎧 Podcast: El Diagnóstico del Síndrome</h3>
+        </div>
+        
+        <p class="podcast-descripcion" style="font-size: 0.9em;">
+            Analizamos la "hermana ortogonal" de la matriz generadora: la Matriz H. Discutimos cómo el hardware realiza una colisión matemática para generar el Síndrome y cómo este valor actúa como un GPS estructural que localiza errores en nanosegundos. Exploramos por qué el diseño sistemático es la clave para que tu procesador no pierda tiempo descifrando datos sanos.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls style="width: 100%;">
+                <source src="audio/leccion28.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
+        </div>
+        <p style="font-size: 0.75em; opacity: 0.8; margin-top: 10px;">⏱️ 20:16 min | 🏗️ Enfoque: Álgebra Matricial y Diagnóstico de Errores</p>
+    </section>
+    <!-- Final del PODCAST 1-->
 
     <!-- TARJETA DE PROMPT ÉTICO -->
     <section class="prompt-section">
@@ -469,31 +556,70 @@
         <p style="font-size: 1.05em; color: #444; line-height: 1.6; font-weight: bold;">En la próxima lección (Lección 29), conoceremos al "Doctor del Sistema": la poderosa <strong>Matriz de Control de Paridad ($H$)</strong>. Aprenderemos a diagnosticar la salud de la información leyendo los síntomas a través de algo llamado "El Síndrome". ¡La magia matemática de la autocuración digital te espera!</p>
     </div>
 
-    <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
-    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #2c3e50, #000000); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-left: 8px solid #f1c40f;">
-        <h3 style="color: #f1c40f; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: La Matriz G y el Pensamiento de la IA
+    <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO (VERSIÓN MEJORADA) === -->
+    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #1a237e, #6a11cb); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border-left: 10px solid #e1bee7;">
+        <h3 style="color: #e1bee7; margin-top: 0; display: flex; align-items: center; gap: 12px; font-size: 1.8em;">
+            <span style="font-size: 1.3em;">🧠</span> Cerebro de Silicio: De la Matriz G a la Matriz de Pesos
         </h3>
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #f1c40f; margin-top: 0;">Para Grado 7°: El Filtro de Ideas</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">Cuando le pides a una IA que reconozca un perro, ella usa una "Matriz G" gigante. Los píxeles de la foto son los datos y la matriz es un <strong>Filtro de Características</strong>. Si los bits pasan por los agujeros correctos (los 1s de la matriz), la IA dice: <em>"¡Veo orejas de perro!"</em>. Multiplicar matrices es la forma en que la IA simplifica el mundo para entenderlo.</p>
-            </div>
+        <p style="font-size: 1.1em; line-height: 1.6; color: #f3e5f5; margin-bottom: 25px;">
+            Hoy aprendiste que la Matriz Generadora ($G$) es un <strong>plano de cableado</strong> que convierte tus datos en paquetes blindados. En la Inteligencia Artificial, este mismo concepto se eleva a algo aún más poderoso.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
             
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #f1c40f; margin-top: 0;">Para Grado 10°: Pesos, Sesgos y Tensores</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">En Inteligencia Artificial, las matrices no se llaman "generadoras", se llaman <strong>Matrices de Pesos (Weights)</strong>. Cuando usas ChatGPT, tus palabras se convierten en vectores que se multiplican por matrices de billones de parámetros. El proceso es idéntico al que hiciste hoy: un <strong>Producto Punto</strong> en aritmética modular. La única diferencia es que la IA usa números decimales y tú usaste puros 0s y 1s.</p>
+            <!-- NIVEL INICIACIÓN (7°) -->
+            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border-top: 4px solid #fab1a0;">
+                <h4 style="color: #fab1a0; margin-top: 0;">Grado 7°: ¿Por qué las IAs necesitan "cableado mágico"?</h4>
+                <p style="font-size: 0.95em; line-height: 1.6;">
+                    La Matriz G que viste hoy <strong>está fija</strong>: sus números no cambian nunca. Pero las IAs modernas no usan matrices fijas; usan matrices que <strong>aprenden solas</strong>.
+                    <br><br>
+                    Cuando entrenas una IA, lo que haces es <strong>ajustar los números dentro de sus matrices</strong> (sus "pesos") hasta que el resultado sea correcto. Tu matriz G es el abuelo de las matrices que usan ChatGPT y Tesla para pensar. ¡La única diferencia es que la tuya no cambia, y la de la IA sí!
+                </p>
             </div>
+
+            <!-- NIVEL PROFUNDIZACIÓN (10°) -->
+            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border-top: 4px solid #e1bee7;">
+                <h4 style="color: #e1bee7; margin-top: 0;">Grado 10°: ¿Qué son los "pesos" de una red neuronal?</h4>
+                <p style="font-size: 0.95em; line-height: 1.6;">
+                    Una neurona artificial hace: <strong>Salida = (entrada₁ × peso₁) + (entrada₂ × peso₂) + ...</strong>. Esa suma es idéntica a lo que hace tu Matriz G, ¡pero con decimales en lugar de bits!
+                    <br><br>
+                    <strong>La diferencia clave:</strong> En Hamming, la Matriz G la diseña un ingeniero. En una red neuronal, la <strong>Matriz de Pesos</strong> se define sola durante el entrenamiento, mirando millones de ejemplos. Hamming es la versión estática; la IA es la versión que aprende.
+                </p>
+            </div>
+
         </div>
 
-        <div style="margin-top: 25px; padding: 20px; background: rgba(241,196,15,0.1); border-radius: 8px; border: 1px dashed #f1c40f;">
-            <p style="margin: 0; text-align: center; font-weight: bold;">
-                🚀 Conexión Sistémica: Acabas de aprender la operación matemática más importante del siglo XXI. Sin la multiplicación de matrices, no existirían ni los códigos de corrección de errores ni la Inteligencia Artificial.
+        <!-- PUENTE HACIA LA SIGUIENTE LECCIÓN -->
+        <div style="margin-top: 25px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; border-left: 5px solid #4ade80;">
+            <p style="margin: 0; font-size: 0.95em; color: #fff;">
+                <strong>🔮 En la Lección 29:</strong> Descubrirás la <strong>Matriz H</strong>, la "hermana gemela" de la Matriz G. Así como G construye el escudo, H lo verifica. ¡Juntas forman el sistema de seguridad más elegante de la electrónica digital!
             </p>
         </div>
     </div>
     <!-- === FIN BLOQUE IA === -->
+
+    <!-- === PODCAST IA: ADN DE LA INTELIGENCIA === -->
+    <section class="podcast-ia">
+        <div class="podcast-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <svg style="width:30px; height:30px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" />
+            </svg>
+            <h3 style="margin: 0;">IA y el Código del Mañana: ¿Máquinas que se auto-reparan?</h3>
+        </div>
+        
+        <p class="podcast-descripcion" style="font-size: 0.9em;">
+            ¿Es la inteligencia solo un filtrado masivo de ruido? Discutimos la simbiosis entre la corrección de errores clásica y el aprendizaje profundo. Exploramos cómo la IA utiliza el Síndrome matemático para mantener su cordura en entornos radiactivos y planteamos el reto final: ¿Puede una IA inventar un lenguaje tan robusto que sea capaz de cruzar el vacío entre las estrellas sin perder un solo bit de información?
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls style="width: 100%;">
+                <source src="audio/leccion28_ia.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
+        </div>
+        <p style="font-size: 0.75em; opacity: 0.7; margin-top: 10px;">⏱️ 20:29 min | 🌐 Recomendado: Futuros Arquitectos de Sistemas Autogestionados</p>
+    </section>
 
     <footer>
         <hr>

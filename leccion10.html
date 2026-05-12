@@ -128,6 +128,8 @@
             <p><small><em>Fig. 1: Un cable suelto es como una antena que capta ruido.</em></small></p>
         </div>
 
+        <p>Comprender que un cable suelto es, en realidad, una antena captando el ruido del universo nos obliga a buscar un ancla. No podemos permitir que nuestras máquinas tomen decisiones basadas en el azar. Para domar este caos, el ingeniero utiliza una de las herramientas más sencillas pero poderosas de la electrónica: el uso estratégico de la resistencia para forzar un estado de reposo. Pasemos a conocer nuestra primera ancla: la configuración <strong>Pull-Down</strong>, el camino más intuitivo hacia la certeza.</p>
+
         <h2>2. La Solución: Resistencia Pull-Down (Jalar a Tierra)</h2>
         <p>Es la configuración que usaremos en casi todo el curso. Conectamos una resistencia de <strong>10k&Omega;</strong> entre la entrada y el Negativo (GND).</p>
 
@@ -201,6 +203,8 @@
             
             <p><strong>Conclusión:</strong> 10kΩ es el equilibrio perfecto. Es suficientemente bajo para anclar la señal a 0V, pero suficientemente alto para no gastar batería cuando presionas el botón.</p>
         </div>
+
+        <p>Anclar la señal al suelo (GND) es la forma más clara de diseñar 'Lógica Positiva', donde la acción física se traduce directamente en un '1' lógico. Sin embargo, en la industria profesional, a menudo es más eficiente o seguro hacer lo contrario: mantener el sistema 'colgado' del techo de voltaje por defecto. Pasemos a explorar el reflejo perfecto de lo que acabas de aprender: la configuración Pull-Up, el estándar industrial de la lógica negativa.</p>
 
         <h2>3. La Otra Cara: Resistencia Pull-Up (Jalar a Techo)</h2>
         
@@ -317,7 +321,49 @@
                 <p>En el Laboratorio 1 aprendiste a organizar botones en "zona de control" y LEDs en "zona de visualización". Eso es UX básica. Ahora entiendes su fundamento físico: <strong>sin Pull-Up/Pull-Down, ni el mejor diseño visual salvaría una interfaz impredecible</strong>. La UX nace en el esquema eléctrico, no solo en la disposición física.</p>
             </div>
         </div>
+
+        <p>Lograr que un botón responda con la misma consistencia que un teclado profesional es una victoria de la ingeniería centrada en el usuario. Pero la importancia de anclar estas señales trasciende la comodidad humana. Cuando escalamos este concepto de un solo botón a billones de datos procesados simultáneamente, el 'ancla' deja de ser un detalle de diseño para convertirse en el único muro que protege a la Inteligencia Artificial del colapso lógico. Pasemos de la experiencia de usuario a la integridad de la mente artificial para descubrir cómo el Pull-Up y el Pull-Down evitan que la IA alucine.</p>
         
+        <!-- ====================================================================== -->
+        <!-- RETROFIT: HIGIENE DE DATOS Y LA IA SIN ALUCINACIONES (CONEXIÓN)        -->
+        <!-- ====================================================================== -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left: 5px solid #6a1b9a; padding: 25px; margin: 35px 0; border-radius: 0 15px 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h4 style="color: #4a148c; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🧠</span> Retrofit: El Escudo Físico contra la Alucinación Artificial
+            </h4>
+            
+            <p style="color: #2d3436; font-size: 1.05em; line-height: 1.6;">
+                En la lección aprendiste que un cable suelto capta ruido como una antena. En Inteligencia Artificial, este fenómeno se conoce como <strong>GIGO (Garbage In, Garbage Out)</strong>: si alimentas a la máquina con datos 'flotantes', obtendrás decisiones erróneas.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+                
+                <!-- Nivel Iniciación (7°) -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #d1c4e9;">
+                    <strong style="color: #6a1b9a; display: block; margin-bottom: 8px;">💡 Analogía para 7° (El Detector de Fantasmas):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        Imagina que una IA intenta escucharte en medio de una fiesta con música a todo volumen. Escuchará palabras que tú nunca dijiste (fantasmas). Las resistencias de anclaje que pusiste hoy son como unos audífonos con cancelación de ruido: obligan a la IA a ignorar el alboroto del ambiente y a escuchar solo cuando hay una señal real. Sin anclaje, la IA es una máquina de inventar mentiras.
+                    </p>
+                </div>
+
+                <!-- Nivel Profundización (10°) -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #d1c4e9;">
+                    <strong style="color: #6a1b9a; display: block; margin-bottom: 8px;">🏗️ Rigor para 10° (Denoising e Integridad de Señal):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        Las Redes Neuronales son extremadamente sensibles a la <strong>SNR (Signal-to-Noise Ratio)</strong>. Si un sensor de un coche autónomo entra en estado de <i>Alta Impedancia</i>, la IA recibirá voltajes erráticos que interpretará como obstáculos inexistentes. El Pull-Up/Down es la capa más básica de <strong>Pre-procesamiento de Datos</strong>: un filtro físico (Denoising) que garantiza que el sistema nunca trabaje con estados indeterminados. La inteligencia nace de la estabilidad del ohmio.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #fbc02d;">
+                <p style="margin: 0; font-size: 0.95em; color: #5d4037; font-weight: bold;">
+                    🎯 La Conexión de Campo: Al final de la Unidad 4, estudiaremos la Teoría de Códigos para corregir errores. Pero recuerda: es mucho más eficiente evitar el error con una resistencia de 10kΩ hoy, que intentar arreglar una alucinación catastrófica de la IA mañana.
+                </p>
+            </div>
+        </div>
+
+        <p>Habiendo observado el impacto masivo que un solo resistor tiene en la cordura de una máquina, es momento de consolidar estas configuraciones en nuestra memoria técnica. Para que nunca dudes sobre cuál arquitectura elegir en tus futuros proyectos, vamos a sintetizar las reglas de juego en una guía rápida de consulta. Pasemos al Resumen Definitivo, el mapa que anclará tu conocimiento antes de nuestra prueba final con el osciloscopio.</p>
+
         <h3>Resumen Definitivo (Guárdalo)</h3>
         <table style="text-align: center;">
             <thead>
@@ -627,19 +673,46 @@
     <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
     <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #000000, #434343); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-left: 8px solid #00ff87;">
         <h3 style="color: #00ff87; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: "Garbage In, Garbage Out"
+            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: ¿Qué pasa si la IA "ve" lo que no existe?
         </h3>
+        
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            
+            <!-- NIVEL INICIACIÓN (7°) - Concepto nuevo: la IA puede "ver" fantasmas -->
             <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #00ff87; margin-top: 0;">Grado 7°: Evitando Fantasmas</h4>
-                <p style="font-size: 0.9em; line-height: 1.5;">Sin una resistencia de anclaje, tu circuito escucha "fantasmas" (estática en el aire). La IA necesita que le digas la verdad absoluta: ¿Es un 0 o es un 1? Estas resistencias obligan a la electricidad a decir la verdad.</p>
+                <h4 style="color: #00ff87; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.2em;">👻</span> Grado 7°: ¿Puede una IA tener miedo?
+                </h4>
+                <p style="font-size: 0.95em; line-height: 1.5;">
+                    Hace unos años, un coche autónomo "vio" un obstáculo en medio de la carretera y frenó de golpe... pero no había nada. El ruido eléctrico de un poste de luz había engañado a su sensor.
+                    <br><br>
+                    <strong>¿Qué pasó?</strong> Así como tu circuito sin Pull-Up leía "fantasmas" eléctricos, la IA del coche recibió datos falsos. La resistencia que usaste hoy es como las <strong>gafas de seguridad de una IA</strong>: le impiden confundir el ruido con la realidad. Sin este "ancla", cualquier máquina puede empezar a ver cosas que no existen.
+                </p>
             </div>
+
+            <!-- NIVEL PROFUNDIZACIÓN (10°) - Concepto nuevo: sistemas tolerantes a fallos -->
             <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #00ff87; margin-top: 0;">Grado 10°: Denoising y Calidad de Datos</h4>
-                <p style="font-size: 0.9em; line-height: 1.5;">En Inteligencia Artificial, si los datos de entrada tienen ruido, el modelo fallará (<strong>GIGO</strong>). Las resistencias Pull-Down son tu primera línea de defensa: actúan como un filtro de limpieza de datos físico. Sin ellas, no hay IA confiable, solo decisiones al azar.</p>
+                <h4 style="color: #00ff87; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.2em;">🛡️</span> Grado 10°: Diseñando sistemas que sobreviven a sus propios fallos
+                </h4>
+                <p style="font-size: 0.95em; line-height: 1.5;">
+                    Los ingenieros de IA tienen una regla de oro: <strong>"Nunca confíes en que el mundo será perfecto"</strong>.
+                    <br><br>
+                    Por eso diseñan sistemas <strong>tolerantes a fallos</strong>. Así como tu Pull-Up de 10kΩ garantiza un estado seguro aunque el botón se rompa, las IAs de los aviones tienen <strong>tres computadoras</strong> que votan entre ellas. Si una falla, las otras dos la corrigen.
+                    <br><br>
+                    <strong>Tu resistencia de hoy es el mismo principio en miniatura:</strong> un componente simple que protege a todo el sistema de colapsar ante un error. ¡La robustez empieza con un solo resistor bien elegido!
+                </p>
             </div>
         </div>
+
+        <!-- CIERRE ÚNICO -->
+        <div style="margin-top: 20px; padding: 12px; background: rgba(0, 255, 135, 0.15); border-radius: 8px; text-align: center;">
+            <p style="margin: 0; font-size: 0.9em; color: #00ff87; font-weight: bold;">
+                🔗 Conclusión: La próxima vez que uses un ascensor, un coche o un avión, recuerda: miles de pequeñas resistencias como la que usaste hoy están trabajando para que las máquinas no "vean" peligros inexistentes. La confianza en la IA comienza con un ancla eléctrica firme.
+            </p>
+        </div>
     </div>
+    <!-- === FIN BLOQUE IA === -->
 
     <!-- === BLOQUE: CIERRE MAESTRO - RELACIÓN CON LA IA === -->
     <div class="cierre-maestro" style="margin: 20px 0; padding: 25px; background-color: #f8f9fa; border-radius: 15px; border: 1px solid #e0e0e0;">

@@ -32,6 +32,8 @@
         <p>En la lección anterior aprendiste a leer los colores de las resistencias. Ahora tienes el LED y su protección listos. Pero, imagina que quieres conectar <strong>dos LEDs</strong>. Tienes dos opciones: ponerlos en fila india o ponerlos uno al lado del otro. Esta decisión cambia cómo fluye la energía y es la base de todo diseño electrónico.</p>
     </div>
 
+    <p>Tener los componentes correctos es solo el inicio. Como arquitecto de hardware, tu primera gran decisión de diseño es elegir cómo se van a relacionar tus piezas. ¿Deben trabajar como un equipo donde todos dependen de todos, o como individuos independientes? Pasemos a explorar la primera configuración: la Serie, el camino donde la energía se comparte y el destino de uno es el destino de todos.</p>
+
     <section>
         <h2>1. Circuitos en Serie (La fila india)</h2>
         <p>La corriente solo tiene <strong>un camino único</strong>. Sale de la pila, pasa por el primer componente, luego por el segundo y regresa.</p>
@@ -69,6 +71,8 @@
             </p>
             <p><em>👀 <strong>Ojo al dato:</strong> ¡No te acostumbres! Cuando pasemos a <strong>Paralelo</strong> en la siguiente sección, verás que esta regla de "una sola resistencia" se vuelve peligrosa.</em></p>
         </div>
+
+        <p>Saber que la corriente es la misma en toda la fila india nos da seguridad, pero también nos impone una regla de reparto. Como la energía total de la pila no aumenta, cada componente debe 'cobrar su parte' del pastel. Pasemos a conocer la regla matemática que gobierna este reparto: el Divisor de Voltaje, la herramienta que te permite predecir cuánta fuerza le queda a la señal en cada tramo del camino.</p>
 
         <h2 id="divisor-voltaje">⚡ El Divisor de Voltaje: Tu "Regla de Reparto" en Serie</h2>
         <p>En paises como México, Colombia, Chile, Centroamérica se le conoce como <em>divisor de voltaje</em>, mientras que en España, Argentina, Uruguay, Perú se suele decirle <em>divisor de tensión</em>. 
@@ -156,6 +160,8 @@
         </ul>
         </div>
 
+        <p>La conexión en serie es elegante y ahorra cables, pero es frágil: un solo LED roto apaga todo el sistema. Para construir máquinas más robustas y potentes, los ingenieros recurren a una arquitectura diferente donde la energía no tiene que esperar su turno. Pasemos de la fila india a la autopista de la información: los Circuitos en Paralelo, donde cada componente es dueño de su propio camino.</p>
+
         <h2>2. Circuitos en Paralelo (La autopista)</h2>
         <p>La corriente se divide en <strong>múltiples caminos</strong>. Cada LED tiene su propio cable directo a la pila.</p>
 
@@ -202,7 +208,9 @@
 
         <!-- FIN DEL BLOQUE NUEVO -->
 
-        <h3>3. Comparación Definitiva</h3>
+        <p>Haber explorado la 'fila india' y la 'autopista' te otorga el criterio necesario para empezar a dibujar tus propios mapas lógicos. Sin embargo, en la ingeniería no existe un camino 'mejor' que otro, sino el camino adecuado para cada objetivo. Mientras que la serie nos regala control y ahorro, el paralelo nos ofrece fuerza e independencia. Para que nunca dudes al elegir la arquitectura de tu próximo invento, pongamos ambas filosofías frente a frente en este balance final de fuerzas: la <strong>Comparación Definitiva</strong>.</p>
+
+        <h2>3. Comparación Definitiva</h2>
         <p>Aquí tienes el resumen maestro para que nunca dudes cuál elegir:</p>
 
         <table class="tabla-centrada">
@@ -302,6 +310,8 @@
             </p>
         </div>
     </section>
+
+    <p>Dominar la teoría es solo el comienzo; el verdadero ingenio se forja analizando los límites de lo que parece posible. Existe un diseño que a menudo tienta a los principiantes por su aparente sencillez y ahorro de componentes: usar un único 'guardaespaldas' para proteger a todo un equipo de LEDs. Pero, como verás a continuación, lo que en el papel parece una solución inteligente, en la protoboard puede esconder una trampa de calor y destrucción. Entremos en nuestra sala de auditoría para realizar un Análisis de Caso sobre los peligros de ignorar la potencia.</p>
         
     <!-- NUEVA SECCIÓN TÉCNICA PROFUNDA -->
     <section>
@@ -367,6 +377,9 @@
             </tr>
         </table>
     </section>
+
+    <p>Identificar los riesgos matemáticos y físicos de una arquitectura inestable es lo que te otorga el criterio del experto. Sin embargo, al asumir tu rol como formador de nuevas mentes, esa responsabilidad técnica se transforma en un compromiso ético. En el salón de clases, un error de diseño no es solo una pérdida de material; es una oportunidad perdida para enseñar el rigor. Pasemos de la auditoría del hardware a la ética de la enseñanza para asegurar que el aprendizaje en tu aula sea siempre un camino seguro hacia el éxito</p>
+
     <div class="dato-extra">
         <h4>⚠️ Advertencia Crítica para Futuros Docentes</h4>
         <p>El diseño de "una sola resistencia para varios LEDs en paralelo" es <strong>extremadamente peligroso</strong> en contextos educativos. Si un estudiante lo implementa:</p>
@@ -419,6 +432,8 @@
         </div>
     </div>
 
+        <p>Haber experimentado con tu propio cuerpo la diferencia entre depender de una cadena o correr por un carril propio es la mejor forma de anclar el conocimiento. Pero este principio no solo se aplica a los componentes que consumen energía; también es la regla maestra para quienes la proveen. Al igual que los LEDs, las fuentes de poder pueden unir sus fuerzas para ganar potencia o para ganar resistencia en el tiempo. Pasemos de la dinámica del aula a la estrategia de suministro: el secreto para combinar baterías como un verdadero experto.</p>
+
         <div class="dato-extra">
             <h3>🔋 Tip de Ingeniero: ¿Baterías en Serie o Paralelo?</h3>
             <p style="margin-bottom: 20px;">Analicemos el ejemplo de 3 baterías de <strong>12V</strong> y <strong>250Ah</strong> cada una:</p>
@@ -463,6 +478,47 @@
             </div>
         </div>
     </section>
+
+    <p>Dominar la diferencia entre una fila india y una autopista es lo que te permite diseñar desde una linterna hasta la red eléctrica de una ciudad. Pero esta lógica de 'caminos múltiples' es también la razón por la que hoy podemos hablar con las máquinas y obtener respuestas instantáneas. Pasemos del cableado de tu mesa a los centros de datos masivos para descubrir cómo el paralelismo es el secreto detrás de la velocidad de la Inteligencia Artificial.</p>
+
+    <!-- ====================================================================== -->
+    <!-- RETROFIT: EL PODER DEL PARALELISMO (EL MOTOR DE LA IA MODERNA)         -->
+    <!-- ====================================================================== -->
+    <div class="dato-extra" style="background-color: #f3e5f5; border-left: 5px solid #6a1b9a; padding: 25px; margin: 35px 0; border-radius: 0 15px 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <h4 style="color: #4a148c; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3em;">🧠</span> De la Autopista al Procesamiento en Paralelo
+        </h4>
+        
+        <p style="color: #2d3436; font-size: 1.05em; line-height: 1.6;">
+            En la lección aprendiste que en paralelo cada LED tiene su propio carril. En Inteligencia Artificial, este concepto es la diferencia entre una máquina que tarda un año en pensar y una que responde en un segundo.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+            
+            <!-- Nivel Iniciación (7°) -->
+            <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #d1c4e9;">
+                <strong style="color: #6a1b9a; display: block; margin-bottom: 8px;">💡 Analogía para 7° (El Gran Rompecabezas):</strong>
+                <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                    Imagina que tienes que armar un rompecabezas de un millón de piezas. Si lo haces solo (Circuito en Serie), tardarás meses. Pero si invitas a mil amigos y cada uno arma un pedacito al mismo tiempo (Circuito en Paralelo), ¡lo terminarán en horas! Una IA como ChatGPT es como un equipo de millones de amigos trabajando en paralelo para procesar tu pregunta al instante.
+                </p>
+            </div>
+
+            <!-- Nivel Profundización (10°) -->
+            <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #d1c4e9;">
+                <strong style="color: #6a1b9a; display: block; margin-bottom: 8px;">🏗️ Rigor para 10° (GPUs y Tolerancia a Fallos):</strong>
+                <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                    Las IAs no corren en procesadores comunes (CPUs), sino en <strong>GPUs</strong>, que tienen miles de núcleos pequeños trabajando en paralelo. Además, en sistemas críticos como un <strong>Coche Autónomo</strong>, los sensores se conectan en paralelo para lograr <i>Redundancia</i>. Si un sensor falla, la IA no se apaga (como en serie), sino que sigue viendo el camino a través de los otros carriles. Estás aprendiendo la base de la <strong>Arquitectura Distribuida</strong>.
+                </p>
+            </div>
+        </div>
+
+        <div style="background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #fbc02d;">
+            <p style="margin: 0; font-size: 0.95em; color: #5d4037; font-weight: bold;">
+                🎯 La Conexión de Campo: El "Efecto Dominó" que viste en los LEDs en paralelo es el mismo riesgo que enfrentan los ingenieros de la nube. Si una sección del servidor falla, el resto debe ser capaz de absorber la carga sin quemarse. Diseñar en paralelo es diseñar para la supervivencia del sistema.
+            </p>
+        </div>
+    </div>
+    <!-- ====================================================================== -->
 
     <!-- === SECCIÓN PODCASTS DOBLES (LECCIÓN 5) === -->
     <section class="podcasts-container" style="margin-top: 40px;">

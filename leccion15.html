@@ -116,6 +116,8 @@
             </div>
         </div>
 
+        <p>Esta receta de tres pasos es la brújula que nos permite navegar desde la intención pura de un diseño hasta su estructura lógica definitiva. Sin embargo, para que esta técnica se grabe en tu intuición de ingeniero, debemos ponerla a prueba en un escenario de diseño real donde la precisión es vital. Pasemos de la receta abstracta a la construcción de un sistema de toma de decisiones para un jurado de votación, donde cada bit representa el peso de un veredicto humano traducido a silicio.</p>
+
         <h2>2. Ejemplo Real: El Jurado de Votación ⚖️</h2>
 
         <div class="destacado">
@@ -183,8 +185,10 @@
             </div>
         </div>
 
+        <p>Lograr que el jurado tome una decisión perfecta es un triunfo de la lógica, pero como habrás notado, escribir ecuaciones tan extensas puede volverse una tarea tediosa y propensa a errores, especialmente si el sistema creciera a decenas de sensores. En la ingeniería de alto nivel, la elegancia no solo está en el circuito, sino en la capacidad de sintetizar la complejidad para comunicarla con rapidez. Pasemos de la escritura exhaustiva al lenguaje de síntesis profesional: la Notación Sigma \((\Sigma)\), el 'código postal' matemático que nos permite mapear universos lógicos enteros en una sola línea</p>
+
         <!-- NUEVA SECCIÓN: NOTACIÓN SIGMA -->
-        <h2>3. El Atajo de los Ingenieros: Notación Sigma (\(\Sigma\))</h2>
+        <h2>3. El Atajo de los Ingenieros: Notación Sigma \((\Sigma)\)S</h2>
         <p>Escribir letras es tedioso. Los ingenieros preferimos usar los <strong>números de fila</strong>.</p>
         <p>Si conviertes el código binario de las entradas a decimal, sabes qué número de fila es:</p>
         
@@ -234,6 +238,47 @@
                 En la <strong>Lección 14</strong> aprendiste las <em>Leyes de De Morgan</em>; en la <strong>siguiente (Lección 16)</strong>, verás cómo aplicarlas —junto con los <em>Mapas de Karnaugh</em>— para reducirla a una forma mucho más simple, como \(P = AB + AC + BC\). ¡No te detengas en la SOP, sigue hacia la simplificación!
             </p>
         </div>
+        
+        <p>Esta capacidad de resumir combinaciones lógicas únicas en un simple índice numérico es lo que permite a los ingenieros manejar sistemas masivos sin perderse en un mar de unos y ceros. Sin embargo, este principio de 'un estado específico para una respuesta única' ha trascendido el hardware de los chips tradicionales para convertirse en la brújula fundamental con la que la Inteligencia Artificial organiza y categoriza la complejidad del mundo real.</p>
+
+        <!-- ====================================================================== -->
+        <!-- CONEXIÓN: DEL MINTERM AL ONE-HOT ENCODING (PUENTE HACIA LA IA)         -->
+        <!-- ====================================================================== -->
+        <div class="dato-extra" style="background-color: #f3e5f5; border-left: 5px solid #6a1b9a; padding: 25px; margin: 35px 0; border-radius: 0 15px 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h4 style="color: #4a148c; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.3em;">🧠</span> Minterms y el Secreto de la Clasificación Digital
+            </h4>
+            
+            <p style="color: #2d3436; font-size: 1.05em; line-height: 1.6;">
+                Un <strong>Minterm</strong> es una "llave" que activa una salida ante una combinación única de entradas. En Inteligencia Artificial, este concepto es la base de una técnica esencial llamada <strong>One-Hot Encoding</strong>, la herramienta que permite a las máquinas etiquetar el universo.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+                
+                <!-- Nivel Iniciación (7°) -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #d1c4e9;">
+                    <strong style="color: #6a1b9a; display: block; margin-bottom: 8px;">💡 Analogía para 7° (El Archivador Categórico):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        Imagina que una IA debe reconocer animales. Para ella, "Gato" es la fila <strong>1</strong> de una tabla; "Perro" es la fila <strong>2</strong>. Al igual que el Minterm solo da un "1" cuando la combinación de entrada es exacta, la IA enciende solo la etiqueta correcta y apaga todas las demás. Es el "detector de identidad" que evita que la máquina se confunda entre una cosa y otra.
+                    </p>
+                </div>
+
+                <!-- Nivel Profundización (10°) -->
+                <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #d1c4e9;">
+                    <strong style="color: #6a1b9a; display: block; margin-bottom: 8px;">🏗️ Rigor para 10° (Vectores y Decisión Categórica):</strong>
+                    <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                        En los modelos de lenguaje (LLMs), cada palabra se mapea inicialmente en un vector <i>One-Hot</i>. Si el vocabulario tiene 50,000 palabras, se genera una estructura lógica donde solo un <strong>Minterm semántico</strong> está activo ($1$) mientras los otros 49,999 están en $0$. Esta "limpieza" de estados es lo que permite que la lógica probabilística de la IA se convierta en una decisión categórica firme.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #fbc02d;">
+                <p style="margin: 0; font-size: 0.95em; color: #5d4037; font-weight: bold;">
+                    🎯 La Conexión de Campo: Sin la base lógica de los Minterms, la IA no podría separar conceptos. Estaría atrapada en un mar de probabilidades borrosas. El Minterm es el que otorga a la máquina la precisión necesaria para decir: "Esto es EXACTAMENTE lo que estoy analizando".
+                </p>
+            </div>
+        </div>
+<!-- ====================================================================== -->
 
         <h2>4. Mi reflexión docente</h2>
         <p>Imagina que estás preparando una clase para estudiantes de <strong>grado 10°</strong> que ya conocen tablas de verdad y operaciones lógicas básicas (AND, OR, NOT).</p>

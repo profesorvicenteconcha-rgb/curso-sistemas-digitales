@@ -39,6 +39,8 @@
         <p style="margin-bottom: 0;">Pasaremos del humilde Semisumador al <strong>Sumador Completo (Full Adder)</strong>, y encadenaremos su poder para construir una calculadora real de 4 bits en nuestro laboratorio final. ¡Estás a punto de armar la pieza central del procesador de cualquier computadora del planeta!</p>
     </div>
 
+    <p>Para llegar aquí, primero tuvimos que entender cómo se comporta la electricidad y cómo domar su caos mediante compuertas lógicas. Pero una compuerta sola es como una letra suelta; solo cuando las combinamos empezamos a escribir palabras. En el mundo digital, la primera 'palabra' que una máquina aprende a decir es una suma. Vamos a desglosar cómo algo tan abstracto como el Álgebra de Boole se convierte en algo tan tangible como una cuenta matemática, empezando por el corazón del sistema: la exclusividad.</p>
+
     <section>
         <h2>1. El Semisumador (Half Adder) y la Magia de la XOR</h2>
         <p>Recordemos la aritmética básica en binario. Solo tenemos dos números: 0 y 1. Si sumamos, las reglas son:</p>
@@ -98,6 +100,8 @@
             <p style="margin-top: 15px; color: #00838f;"><strong>El Ojo del Ingeniero:</strong> ¡Acabas de demostrar matemáticamente que puedes construir una XOR perfecta conectando una OR y una NAND hacia una AND! No hay que adivinar, los axiomas garantizan que funcionará.</p>
         </div>
 
+        <p>La elegancia de la XOR y la AND trabajando juntas en el Semisumador es casi perfecta. Es como tener un engranaje que encaja a la perfección. Sin embargo, en la ingeniería, la perfección individual no sirve de nada si no sabe trabajar en equipo. El Semisumador es brillante, pero es 'egoísta': sabe resolver su propia columna, pero ignora por completo lo que ocurrió en la columna de al lado. Para construir una verdadera arquitectura de cómputo, necesitamos que nuestras piezas tengan la capacidad de escuchar el pasado.</p>
+
         <h2>2. El Límite del Semisumador (¿Por qué "Half"?)</h2>
         <p>Juntando una XOR y una AND obtenemos el <strong>Semisumador (Half Adder)</strong>. Suma dos bits perfectamente. Pero tiene un defecto fatal que le impide sumar números grandes.</p>
         
@@ -111,6 +115,8 @@
             <p>Cuando sumabas números grandes en la escuela (ej. 27 + 35), sumabas $7+5=12$, escribías el $2$ y <strong>"llevabas $1$" a la siguiente columna</strong>.</p>
             <p>El Semisumador genera un "Llevo 1" (Carry Out), pero... <strong>¡No tiene por dónde recibir el "1" de la columna anterior!</strong> Solo tiene 2 entradas. Para sumar números grandes en cascada, necesitamos una máquina de 3 entradas: $A$, $B$, y el <strong>Acarreo de Entrada ($C_{in}$)</strong>.</p>
         </div>
+
+        <p>Aquí es donde el diseño se vuelve verdaderamente humano. Para resolver el problema de la 'columna anterior', no vamos a desechar lo que ya construimos; vamos a evolucionarlo. El Sumador Completo es, en esencia, un Semisumador que ha aprendido a escuchar. Al añadir una tercera entrada para el acarreo previo, estamos creando el primer 'eslabón de comunicación' en la historia de nuestra máquina. Observa cómo la tabla de verdad crece, no para hacerse más difícil, sino para cubrir todas las posibilidades de un diálogo entre bits.</p>
 
         <h2>3. El Sumador Completo (Full Adder)</h2>
         <p>El <strong>Full Adder</strong> es el bloque maestro. A diferencia del Semisumador, este acepta los dos bits que quieres sumar ($A$ y $B$) <strong>más el acarreo</strong> que viene de la suma anterior ($C_{in}$). Es la máquina perfecta para sumar cualquier columna de una operación aritmética grande.</p>
@@ -222,6 +228,9 @@
                 
             </div>
         </div>
+
+        <p>Si miras esas ecuaciones gigantes de la Suma y el Acarreo, podrías sentir que el hardware se está volviendo demasiado pesado. Un exceso de compuertas significa más calor, más cables y más lentitud. Pero recuerda: somos arquitectos, no solo ensambladores. El Álgebra de Boole no es una tortura matemática, es nuestra herramienta de poda. Vamos a usar los axiomas que aprendiste en la Lección 24 para 'limpiar' este circuito, dejando solo lo estrictamente necesario para que la magia ocurra.</p>
+
         <!-- ================================================================== -->
         <!-- NUEVO BLOQUE: SIMPLIFICACIÓN ALGEBRAICA DEL ACARREO                -->
         <!-- ================================================================== -->
@@ -325,6 +334,87 @@
             </div>
         </div>
 
+        <p>Entender el Sumador Completo es entender cómo una máquina puede 'llevar la cuenta' del pasado. Pero este humilde bloque de silicio tiene una ambición mucho más grande: es la pieza base con la que se fabrican los cerebros artificiales.</p>
+
+        <!-- ====================================================================== -->
+        <!-- BLOQUE IA: EL SUMADOR COMO ÁTOMO DEL PENSAMIENTO ARTIFICIAL (CONEXIÓN L25) -->
+        <!-- ====================================================================== -->
+        <div class="dato-extra" style="background-color: #e8eaf6; border-left: 5px solid #3f51b5; margin: 40px 0; padding: 25px; border-radius: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+            
+            <h3 style="color: #1a237e; margin-top: 0; display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 1.5em;">🧠</span> 
+                ¿Cómo pasa una IA de "sumar números" a "reconocer tu cara"?
+            </h3>
+            
+            <p style="font-size: 1.05em; line-height: 1.6; color: #333;">
+                Acabas de construir una calculadora que suma 4 bits. Es impresionante, pero... 
+                <strong>¿Cómo es que esta misma tecnología termina manejando un Tesla o traduciendo idiomas?</strong>
+                La respuesta es el <strong>isomorfismo masivo</strong>.
+            </p>
+
+            <!-- 1. EL ATOMO DE LA IA -->
+            <div style="background: white; padding: 20px; border-radius: 12px; margin: 20px 0; border: 1px solid #c5cae9;">
+                <h4 style="color: #3f51b5; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                    <span style="filter: grayscale(1);">🧱</span> 1. El Sumador como "Átomo" de la IA
+                </h4>
+                <p style="font-size: 0.95em; color: #444;">
+                    Así como el agua está hecha de moléculas, <strong>una Red Neuronal Artificial está hecha de miles de millones de sumadores</strong> trabajando en equipo.
+                </p>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0; align-items: center; justify-content: center;">
+                    <div style="flex: 1; min-width: 220px; background: #f9fbe7; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #cddc39;">
+                        <strong style="color: #827717;">🔢 TU SUMADOR (74LS283)</strong>
+                        <div style="font-size: 0.85em; margin-top: 8px; color: #555;">
+                            Suma 4 bits + 4 bits<br>
+                            <strong style="color: #33691e;">= Procesa magnitudes</strong>
+                        </div>
+                    </div>
+                    <div style="font-size: 1.5em; color: #3f51b5;">➡</div>
+                    <div style="flex: 1; min-width: 220px; background: #fff3e0; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #ffb74d;">
+                        <strong style="color: #e65100;">🧠 NEURONA ARTIFICIAL</strong>
+                        <div style="font-size: 0.85em; margin-top: 8px; color: #555;">
+                            Multiplica señales × pesos y las SUMA<br>
+                            <strong style="color: #bf360c;">= Reconoce patrones</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="margin-bottom: 0; font-size: 0.95em; line-height: 1.5;">
+                    <strong>🔑 La clave:</strong> Una neurona artificial es básicamente una suma gigante. En ingeniería, multiplicar es solo "sumar muchas veces". Por lo tanto, el <strong>Full Adder</strong> que hoy tienes en tu protoboard es el bloque de construcción fundamental de cualquier red neuronal.
+                </p>
+            </div>
+
+            <!-- 2. ¿CÓMO APRENDE UNA IA? (UNIFICADO 7° y 10°) -->
+            <div style="background: white; padding: 20px; border-radius: 12px; margin: 20px 0; border: 1px solid #c5cae9;">
+                <h4 style="color: #3f51b5; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                    <span style="filter: grayscale(1);">📉</span> 2. ¿Cómo aprende una IA? (El secreto del Backpropagation)
+                </h4>
+                
+                <!-- PARTE PARA 7mo -->
+                <p style="font-size: 0.95em; color: #444; border-left: 3px solid #fab1a0; padding-left: 15px;">
+                    <strong>🚲 Para Grado 7°:</strong> ¿Recuerdas cuando aprendiste a andar en bicicleta? Al principio te caías, pero con cada intento tu cerebro ajustaba los músculos para no caer otra vez. <strong>¡La IA aprende igual!</strong> Si se equivoca, usa <strong>tu sumador</strong> para calcular "qué tan mal" estuvo su respuesta (una resta) y ajusta sus números internos hasta que acierta.
+                </p>
+
+                <!-- PARTE PARA 10mo -->
+                <div style="margin-top: 15px; font-size: 0.9em; color: #333; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px dashed #3f51b5;">
+                    <strong style="color: #1a237e;">📐 Para Grado 10°: La ALU y el Backpropagation</strong>
+                    <p style="margin-top: 5px; line-height: 1.5;">
+                        El entrenamiento se basa en la <strong>Retropropagación</strong>. El sistema calcula la diferencia entre la predicción y la realidad (error) y lo "riega" hacia atrás por todas las capas de neuronas. Este ajuste requiere billones de operaciones en la <strong>ALU (Unidad Aritmético Lógica)</strong>, que no es más que una granja masiva de sumadores como el tuyo trabajando a la velocidad de la luz.
+                    </p>
+                </div>
+            </div>
+
+            <!-- RELACIÓN FINAL CON EL LABORATORIO -->
+            <div style="background: #fff8e1; padding: 15px; border-radius: 10px; border-left: 5px solid #ffc107; margin-top: 20px;">
+                <p style="margin: 0; font-size: 0.95em; color: #5d4037; line-height: 1.5;">
+                    <strong>🚀 El gran panorama:</strong> 
+                    Tu chip <strong>74LS283</strong> es el prototipo en miniatura del cerebro de ChatGPT. Al sumar \(5 + 6 = 11\) en tu protoboard, estás realizando físicamente el mismo proceso que hace una IA para desbloquear tu celular con reconocimiento facial. ¡Has construido el átomo de la inteligencia!
+                </p>
+            </div>
+        </div>
+
+        <p>Ahora que tenemos una 'célula' perfecta (el Full Adder), el siguiente paso es crear un organismo. En la escuela, sumamos de derecha a izquierda, moviendo el lápiz de columna en columna. En el silicio, haremos que la electricidad haga ese mismo recorrido. Pero cuidado: al encadenar estos bloques, estamos creando una línea de suministros donde cada bloque depende del anterior. Este es el nacimiento de la arquitectura en cascada, una danza de sincronización donde el tiempo empieza a ser nuestro recurso más valioso.</p>
+
         <!-- === SECCIÓN 4: EL SUMADOR EN CASCADA === -->
         <h2>4. El Efecto Dominó (Ripple Carry Adder)</h2>
         
@@ -386,6 +476,35 @@
             <p style="margin: 10px 0 0 0; font-size: 0.95em; color: #555;">¡Exacto! Por eso es imposible armar un <em>Carry Look-Ahead</em> de 64 bits en una protoboard. En el mundo real (dentro de los procesadores Intel o AMD de silicio microscópico), los ingenieros hacen "trampa": fabrican bloques predictores pequeños de 4 bits, y luego conectan esos bloques a <em>otro</em> predictor superior. Es una jerarquía. <br><strong>Ganan velocidad, pero sacrifican millones de transistores extra y consumen mucha más batería.</strong> ¡Ese es el arte del diseño de microprocesadores!</p>
         </div>
     </div>
+
+    <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
+    <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #2d3436, #000000); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-left: 8px solid #00cec9;">
+        <h3 style="color: #00cec9; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: La Neurona como Sumadora Universal
+        </h3>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                <h4 style="color: #00cec9; margin-top: 0;">IA y la Suma de Pesos</h4>
+                <p style="font-size: 0.95em; line-height: 1.5;">Cuando ChatGPT predice la siguiente palabra, realiza una operación llamada <strong>Suma Ponderada</strong>. Multiplica miles de señales por su "importancia" y las suma todas. Tu chip 74283 es el átomo de ese proceso. Sin sumadores, no hay neuronas; sin neuronas, no hay lenguaje.</p>
+            </div>
+            
+            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                <h4 style="color: #00cec9; margin-top: 0;">De Bits a Probabilidades</h4>
+                <p style="font-size: 0.95em; line-height: 1.5;">En 10°, entenderás que las IAs usan sumadores de <strong>Punto Flotante</strong> para manejar decimales. Pero en el fondo, siguen siendo millones de sumadores completos como el tuyo, trabajando en equipo para transformar voltajes en probabilidades de respuesta.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 25px; padding: 20px; background: rgba(0,206,201,0.1); border-radius: 8px; border: 1px dashed #00cec9;">
+            <p style="margin: 0; text-align: center; font-weight: bold;">
+                🚀 Dato Maestro: Una GPU de última generación tiene más de 10,000 núcleos de cómputo. Cada uno es una orquesta de sumadores ultrarrápidos. Al dominar el Full Adder, has entendido el ADN de la supercomputación.
+            </p>
+        </div>
+    </div>
+
+    <p>Ahora que has visto cómo la física impone límites a la velocidad del pensamiento digital, entiendes por qué la arquitectura de computadores es un arte de equilibrio. No basta con que la lógica sea correcta; debe ser físicamente posible y eficiente. Con esta mentalidad de ingeniero industrial, estás listo para entrar al laboratorio. No vas a conectar cables al azar; vas a ensamblar los cimientos de una Unidad Aritmético Lógica, el motor que permite que cualquier Inteligencia Artificial del mundo procese la realidad.</p>
+
+    <p>Hemos navegado por esquemas ideales y mapas lógicos donde todo funciona perfectamente. Pero el silicio real tiene mal genio: se calienta, se quema si te equivocas de pin y a veces se niega a cooperar por un milímetro de cable mal puesto. Es momento de bajar de la nube de la teoría y enfrentarnos a la protoboard. En esta fase, dejarás de ser un teórico para convertirte en un artesano del hardware, transformando chips de plástico en una calculadora que respira electricidad.</p>
 
     <!-- ================================================================== -->
     <!-- LABORATORIO: LA CALCULADORA BINARIA                                -->
@@ -724,128 +843,134 @@
                 <p style="margin-bottom: 10px;">El resultado matemático es 17. Verás que los 4 LEDs de Suma ($S$) marcarán <code>0001</code> (1), y <strong>¡el LED de \(C_{out}\) se encenderá!</strong> Ese quinto bit a la izquierda representa exactamente el valor <strong>16</strong>. $\rightarrow$ $16 + 1 = 17$.</p>
             </div>
 
+            <p>Tu calculadora ya sabe sumar, pero tiene un defecto filosófico: vive atrapada en un presente eterno. No tiene recuerdos. Al terminar este laboratorio, habrás dominado la lógica combinacional, pero te darás cuenta de que para crear una inteligencia real, necesitamos algo más que solo 'reaccionar' a los interruptores. Necesitamos retener la información. Antes de cerrar esta unidad, miremos hacia el abismo que separa a una calculadora de un cerebro: la capacidad de recordar.</p>
+
             <!-- ================================================================== -->
-        <!-- NUEVA SECCIÓN: PROBLEMAS DEL MUNDO REAL E HISTORIA                 -->
-        <!-- ================================================================== -->
-        <section>
-            <h2>6. 🌍 Problemas del Mundo Real</h2>
+            <!-- NUEVA SECCIÓN: PROBLEMAS DEL MUNDO REAL E HISTORIA                 -->
+            <!-- ================================================================== -->
+            <section>
+                <h2>6. 🌍 Problemas del Mundo Real</h2>
 
-            <div class="dato-extra" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-bottom: 30px;">
-                <h4 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 1.2em;">🧠</span> Neuronas vs. Transistores
-                </h4>
-                <p style="margin-bottom: 0;">Lo que acabas de construir (sumar señales para sacar un resultado) es muy parecido a cómo funciona tu cerebro. Una <strong>neurona biológica</strong> recibe señales de muchas vecinas. Si la "suma" de esos estímulos supera un umbral, la neurona se "enciende" y dispara un pulso. ¡Estás replicando la vida con silicio!</p>
-            </div>
-
-            <h3 style="color: #f57f17; border-bottom: 2px solid #f57f17; padding-bottom: 5px;">A. El Efecto Dominó (Retardo) 🐢</h3>
-            <p>Como mencionamos antes, si conectamos 64 de estos sumadores en fila, el último tiene que esperar a que el primero termine de calcular el acarreo. Esto toma tiempo (nanosegundos). Por eso los procesadores y computadoras tienen una <strong>velocidad máxima</strong> (frecuencia de reloj o GHz); no pueden pedir resultados más rápido de lo que la electricidad tarda en cruzar los chips.</p>
-
-            <h3 style="color: #f57f17; border-bottom: 2px solid #f57f17; padding-bottom: 5px; margin-top: 30px;">B. Desbordamiento (Overflow) y el Efecto 2000 🌊</h3>
-            <p>Imagina el odómetro de un carro viejo que llega a 99,999 km. Si avanzas un kilómetro más, no muestra 100,000, sino que <strong>se reinicia a 00,000</strong> porque no hay un sexto rodillo físico para mostrar el "1". En electrónica, a esto le llamamos <strong>Overflow</strong> o Desbordamiento.</p>
-            <p>Si a tu calculadora de 4 bits (cuyo límite en los 4 LEDs principales es 15) le intentas sumar 15 + 1, el resultado real es 16. Si no tuvieras el LED de acarreo extra ($C_{out}$), tu sistema diría que el resultado es 0. <strong>¡El "1" se caería por el borde de la máquina!</strong></p>
-
-            <!-- EL PÁNICO DEL Y2K -->
-            <div class="destacado" style="background-color: #fff9c4; border-left: 4px solid #fbc02d; border-radius: 8px; padding: 20px; margin-top: 25px;">
-                <h4 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 1.2em;">🦖</span> Historia: El Pánico del Y2K
-                </h4>
-                <p>En los años 60, la memoria (los transistores) costaba una fortuna. Para ahorrar espacio, los ingenieros decidieron guardar los años en las bases de datos usando solo <strong>2 dígitos</strong> (ej: guardaban "98" en vez de 1998).</p>
-                
-                <p>El sistema funcionó bien hasta que el reloj mundial pasó del 31 de diciembre de 1999 al 1 de enero de 2000. El contador pasó de <strong>99 a 00</strong>. Las computadoras interpretaron el "00" no como el año 2000, sino como <strong>1900</strong>. ¡Los sistemas de bancos y aerolíneas colapsaron lógicamente, empezando a calcular intereses negativos y fechas de nacimiento erróneas!</p>
-                
-                <div style="background-color: #fff3e0; border-left: 3px solid #ff9800; padding: 10px; border-radius: 0 4px 4px 0; margin-top: 15px;">
-                    <p style="margin: 0; font-style: italic; color: #e65100;"><strong>(Alerta de Futuro:</strong> El próximo gran desbordamiento ocurrirá el <strong>19 de enero de 2038</strong> en los sistemas Unix de 32 bits. Sus relojes internos llegarán al límite binario y se reiniciarán a 1901. ¡Ustedes serán los ingenieros encargados de salvar el mundo esa vez!)</p>
+                <div class="dato-extra" style="background-color: #e3f2fd; border-left-color: #1976d2; margin-bottom: 30px;">
+                    <h4 style="color: #0d47a1; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 1.2em;">🧠</span> Neuronas vs. Transistores
+                    </h4>
+                    <p style="margin-bottom: 0;">Lo que acabas de construir (sumar señales para sacar un resultado) es muy parecido a cómo funciona tu cerebro. Una <strong>neurona biológica</strong> recibe señales de muchas vecinas. Si la "suma" de esos estímulos supera un umbral, la neurona se "enciende" y dispara un pulso. ¡Estás replicando la vida con silicio!</p>
                 </div>
-            </div>
-        </section>
-        
-        <!-- === SECCIÓN: EL ESLABÓN PERDIDO - LA MEMORIA === -->
-        <section>
-            <div class="destacado" style="background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%); border-left: 5px solid #673ab7; padding: 30px; margin: 40px 0; box-shadow: 0 4px 15px rgba(103, 58, 183, 0.1);">
-                <h2 style="color: #4527a0; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.3em;">🧠</span> El Punto Oscuro: ¿Por qué la calculadora no "recuerda"?
-                </h2>
-                <p style="font-size: 1.1em; line-height: 1.6; color: #311b92;">
-                    Acabas de construir un sumador de 4 bits. Es asombroso, pero tiene un defecto fatal: <strong>tiene la memoria de un pez cirujano.</strong> En cuanto apagas los interruptores, el resultado de la suma desaparece para siempre. 
-                </p>
-                
-                <p style="margin-bottom: 20px; color: #311b92;">Para que una calculadora se convierta en una <strong>Computadora</strong>, necesita el "Eslabón Perdido": la capacidad de guardar un dato y usarlo después. Mira la diferencia fundamental:</p>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <h3 style="color: #f57f17; border-bottom: 2px solid #f57f17; padding-bottom: 5px;">A. El Efecto Dominó (Retardo) 🐢</h3>
+                <p>Como mencionamos antes, si conectamos 64 de estos sumadores en fila, el último tiene que esperar a que el primero termine de calcular el acarreo. Esto toma tiempo (nanosegundos). Por eso los procesadores y computadoras tienen una <strong>velocidad máxima</strong> (frecuencia de reloj o GHz); no pueden pedir resultados más rápido de lo que la electricidad tarda en cruzar los chips.</p>
+
+                <h3 style="color: #f57f17; border-bottom: 2px solid #f57f17; padding-bottom: 5px; margin-top: 30px;">B. Desbordamiento (Overflow) y el Efecto 2000 🌊</h3>
+                <p>Imagina el odómetro de un carro viejo que llega a 99,999 km. Si avanzas un kilómetro más, no muestra 100,000, sino que <strong>se reinicia a 00,000</strong> porque no hay un sexto rodillo físico para mostrar el "1". En electrónica, a esto le llamamos <strong>Overflow</strong> o Desbordamiento.</p>
+                <p>Si a tu calculadora de 4 bits (cuyo límite en los 4 LEDs principales es 15) le intentas sumar 15 + 1, el resultado real es 16. Si no tuvieras el LED de acarreo extra ($C_{out}$), tu sistema diría que el resultado es 0. <strong>¡El "1" se caería por el borde de la máquina!</strong></p>
+
+                <!-- EL PÁNICO DEL Y2K -->
+                <div class="destacado" style="background-color: #fff9c4; border-left: 4px solid #fbc02d; border-radius: 8px; padding: 20px; margin-top: 25px;">
+                    <h4 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 1.2em;">🦖</span> Historia: El Pánico del Y2K
+                    </h4>
+                    <p>En los años 60, la memoria (los transistores) costaba una fortuna. Para ahorrar espacio, los ingenieros decidieron guardar los años en las bases de datos usando solo <strong>2 dígitos</strong> (ej: guardaban "98" en vez de 1998).</p>
                     
-                    <!-- Lógica Combinacional -->
-                    <div style="background: white; padding: 20px; border-radius: 12px; border-top: 5px solid #ff9800; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <h4 style="margin-top: 0; color: #e65100;">Lógica Combinacional (Lo que has visto)</h4>
-                        <p style="font-size: 0.95em; color: #444;">Es como un <strong>Espejo</strong>. Solo muestra lo que tiene enfrente en este preciso instante. Si quitas el objeto, la imagen desaparece. No tiene pasado.</p>
-                        <div style="background: #fff3e0; padding: 10px; border-radius: 6px; text-align: center; margin: 15px 0; font-weight: bold; color: #e65100;">
-                            Entrada → Salida inmediata
-                        </div>
-                    </div>
-
-                    <!-- Lógica Secuencial -->
-                    <div style="background: white; padding: 20px; border-radius: 12px; border-top: 5px solid #673ab7; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <h4 style="margin-top: 0; color: #4527a0;">Lógica Secuencial (La Memoria)</h4>
-                        <p style="font-size: 0.95em; color: #444;">Es como una <strong>Cámara de Fotos</strong>. Captura el presente y lo guarda. El circuito ahora puede decir: <em>"Mi salida actual depende de lo que pasó hace un minuto"</em>.</p>
-                        <div style="background: #f3e5f5; padding: 10px; border-radius: 6px; text-align: center; margin: 15px 0; font-weight: bold; color: #4527a0;">
-                            Entrada + Estado Anterior → Nueva Salida
-                        </div>
+                    <p>El sistema funcionó bien hasta que el reloj mundial pasó del 31 de diciembre de 1999 al 1 de enero de 2000. El contador pasó de <strong>99 a 00</strong>. Las computadoras interpretaron el "00" no como el año 2000, sino como <strong>1900</strong>. ¡Los sistemas de bancos y aerolíneas colapsaron lógicamente, empezando a calcular intereses negativos y fechas de nacimiento erróneas!</p>
+                    
+                    <div style="background-color: #fff3e0; border-left: 3px solid #ff9800; padding: 10px; border-radius: 0 4px 4px 0; margin-top: 15px;">
+                        <p style="margin: 0; font-style: italic; color: #e65100;"><strong>(Alerta de Futuro:</strong> El próximo gran desbordamiento ocurrirá el <strong>19 de enero de 2038</strong> en los sistemas Unix de 32 bits. Sus relojes internos llegarán al límite binario y se reiniciarán a 1901. ¡Ustedes serán los ingenieros encargados de salvar el mundo esa vez!)</p>
                     </div>
                 </div>
+            </section>
 
-                <div style="margin-top: 25px; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 8px; border: 1px dashed #673ab7;">
-                    <h4 style="margin-top: 0; color: #4527a0;">¿Cómo se fabrica la memoria? El truco de la serpiente</h4>
-                    <p style="font-size: 0.95em; color: #311b92;">Aunque no lo veremos a fondo en este curso, el secreto es la <strong>Retroalimentación</strong>: conectar la salida de una compuerta de vuelta a su propia entrada. Es como una serpiente que se muerde la cola. Al hacer esto, la señal se queda dando vueltas en un ciclo infinito, "atrapada" en el tiempo. ¡Eso es un Bit de memoria!</p>
-                </div>
-            </div>
-
-            <!-- === RINCÓN DEL DOCENTE: EL JUEGO DE LA MEMORIA === -->
-            <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 40px 0;">
-                <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: El Juego del Susurro
-                </h3>
-                
-                <p style="color: #444; line-height: 1.6; font-size: 1.05em;">
-                    Para que tus estudiantes entiendan que la memoria es solo "información dando vueltas", haz esta dinámica rápida:
-                </p>
-
-                <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
-                    <ol style="line-height: 1.8; color: #333;">
-                        <li><strong>El Circuito Sin Memoria:</strong> Grita un número al salón (ej. "¡5!"). Pídeles que lo olviden inmediatamente. Pregunta: "¿Qué número dije?". Nadie sabe. Eso es un cable común.</li>
-                        <li><strong>El Circuito Con Memoria:</strong> Dile a un estudiante un número al oído y dile: <em>"Tu única misión es repetirlo en voz baja para ti mismo sin parar"</em>.</li>
-                        <li><strong>La Prueba:</strong> Sal del salón, vuelve a entrar 2 minutos después y pregúntale al estudiante cuál era el número. Él lo dirá correctamente.</li>
-                    </ol>
-                    <p style="margin-top: 10px; color: #333; font-style: italic;">
-                        <strong>Explicación:</strong> El estudiante es una compuerta con "retroalimentación". El dato no se perdió porque se mantuvo fluyendo en un ciclo. Así es como los procesadores guardan tus fotos y chats mientras la energía esté encendida.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <p>Has logrado lo que hace un siglo parecía magia: has obligado a la materia inerte a realizar procesos matemáticos en nanosegundos. Sin embargo, observa tu protoboard con ojo crítico. En el instante en que bajas un interruptor o desconectas la batería, el resultado de tu suma se desvanece como un suspiro en el aire. Tu circuito es un genio matemático, pero es un genio sin pasado; es increíblemente rápido, pero carece de biografía. Para que esta máquina deje de ser una simple calculadora y comience su camino hacia la verdadera computación e Inteligencia Artificial, necesitamos descubrir cómo 'congelar' la electricidad. Es hora de enfrentarnos al mayor desafío del diseño digital: el silencio de la memoria.</p>
             
-        <p style="margin-top: 20px; font-weight: bold; color: #1b5e20; text-align: center; font-size: 1.1em;">¡Felicidades! Acabas de construir una Unidad Aritmético Lógica (ALU) básica y has dominado el concepto de Desbordamiento (Overflow).</p>
-    </section>
+            <!-- === SECCIÓN: EL ESLABÓN PERDIDO - LA MEMORIA === -->
+            <section>
+                <div class="destacado" style="background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%); border-left: 5px solid #673ab7; padding: 30px; margin: 40px 0; box-shadow: 0 4px 15px rgba(103, 58, 183, 0.1);">
+                    <h2 style="color: #4527a0; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.3em;">🧠</span> El Punto Oscuro: ¿Por qué la calculadora no "recuerda"?
+                    </h2>
+                    <p style="font-size: 1.1em; line-height: 1.6; color: #311b92;">
+                        Acabas de construir un sumador de 4 bits. Es asombroso, pero tiene un defecto fatal: <strong>tiene la memoria de un pez cirujano.</strong> En cuanto apagas los interruptores, el resultado de la suma desaparece para siempre. 
+                    </p>
+                    
+                    <p style="margin-bottom: 20px; color: #311b92;">Para que una calculadora se convierta en una <strong>Computadora</strong>, necesita el "Eslabón Perdido": la capacidad de guardar un dato y usarlo después. Mira la diferencia fundamental:</p>
 
-    <!-- PODCAST -->
-    <section class="podcast-section">
-        <div class="podcast-header">
-            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        
+                        <!-- Lógica Combinacional -->
+                        <div style="background: white; padding: 20px; border-radius: 12px; border-top: 5px solid #ff9800; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                            <h4 style="margin-top: 0; color: #e65100;">Lógica Combinacional (Lo que has visto)</h4>
+                            <p style="font-size: 0.95em; color: #444;">Es como un <strong>Espejo</strong>. Solo muestra lo que tiene enfrente en este preciso instante. Si quitas el objeto, la imagen desaparece. No tiene pasado.</p>
+                            <div style="background: #fff3e0; padding: 10px; border-radius: 6px; text-align: center; margin: 15px 0; font-weight: bold; color: #e65100;">
+                                Entrada → Salida inmediata
+                            </div>
+                        </div>
+
+                        <!-- Lógica Secuencial -->
+                        <div style="background: white; padding: 20px; border-radius: 12px; border-top: 5px solid #673ab7; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                            <h4 style="margin-top: 0; color: #4527a0;">Lógica Secuencial (La Memoria)</h4>
+                            <p style="font-size: 0.95em; color: #444;">Es como una <strong>Cámara de Fotos</strong>. Captura el presente y lo guarda. El circuito ahora puede decir: <em>"Mi salida actual depende de lo que pasó hace un minuto"</em>.</p>
+                            <div style="background: #f3e5f5; padding: 10px; border-radius: 6px; text-align: center; margin: 15px 0; font-weight: bold; color: #4527a0;">
+                                Entrada + Estado Anterior → Nueva Salida
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 8px; border: 1px dashed #673ab7;">
+                        <h4 style="margin-top: 0; color: #4527a0;">¿Cómo se fabrica la memoria? El truco de la serpiente</h4>
+                        <p style="font-size: 0.95em; color: #311b92;">Aunque no lo veremos a fondo en este curso, el secreto es la <strong>Retroalimentación</strong>: conectar la salida de una compuerta de vuelta a su propia entrada. Es como una serpiente que se muerde la cola. Al hacer esto, la señal se queda dando vueltas en un ciclo infinito, "atrapada" en el tiempo. ¡Eso es un Bit de memoria!</p>
+                    </div>
+                </div>
+
+                <p>Este pequeño truco de conectar una salida con su propia entrada transforma el silicio de un simple calculista en un centinela del tiempo. En ingeniería, a esto lo llamamos Retroalimentación (Feedback), y es lo que permite que un circuito tenga 'Estado'. Sin estos bucles, la tecnología sería una sucesión de chispas aisladas; con ellos, construimos Registros, Memorias RAM y Cachés. Al entender que un bit puede 'quedarse a vivir' en una compuerta, has cruzado la frontera hacia la computación avanzada. Es esta persistencia la que permite que un procesador de IA no solo sume números, sino que mantenga el contexto de una instrucción completa, permitiendo que las máquinas, por primera vez, tengan la capacidad de aprender de lo que acaba de suceder.</p>
+
+                <!-- === RINCÓN DEL DOCENTE: EL JUEGO DE LA MEMORIA === -->
+                <div class="dato-extra" style="border-left: 5px solid #ffb300; background-color: #fffde7; margin: 40px 0;">
+                    <h3 style="color: #f57f17; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.3em;">🍎</span> Rincón del Docente: El Juego del Susurro
+                    </h3>
+                    
+                    <p style="color: #444; line-height: 1.6; font-size: 1.05em;">
+                        Para que tus estudiantes entiendan que la memoria es solo "información dando vueltas", haz esta dinámica rápida:
+                    </p>
+
+                    <div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0b2;">
+                        <ol style="line-height: 1.8; color: #333;">
+                            <li><strong>El Circuito Sin Memoria:</strong> Grita un número al salón (ej. "¡5!"). Pídeles que lo olviden inmediatamente. Pregunta: "¿Qué número dije?". Nadie sabe. Eso es un cable común.</li>
+                            <li><strong>El Circuito Con Memoria:</strong> Dile a un estudiante un número al oído y dile: <em>"Tu única misión es repetirlo en voz baja para ti mismo sin parar"</em>.</li>
+                            <li><strong>La Prueba:</strong> Sal del salón, vuelve a entrar 2 minutos después y pregúntale al estudiante cuál era el número. Él lo dirá correctamente.</li>
+                        </ol>
+                        <p style="margin-top: 10px; color: #333; font-style: italic;">
+                            <strong>Explicación:</strong> El estudiante es una compuerta con "retroalimentación". El dato no se perdió porque se mantuvo fluyendo en un ciclo. Así es como los procesadores guardan tus fotos y chats mientras la energía esté encendida.
+                        </p>
+                    </div>
+                </div>
+            </section>
+                
+            <p style="margin-top: 20px; font-weight: bold; color: #1b5e20; text-align: center; font-size: 1.1em;">¡Felicidades! Acabas de construir una Unidad Aritmético Lógica (ALU) básica y has dominado el concepto de Desbordamiento (Overflow).</p>
+        </section>
+
+    <!-- === PODCAST TÉCNICO: EL RIGOR DEL HARDWARE === -->
+    <section class="podcast-section" style="border-left: 5px solid #0d47a1;">
+        <div class="podcast-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="#0d47a1" style="width:30px;">
                 <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
             </svg>
-            <h3>🎧 Podcast: Conversación entre Expertos</h3>
+            <h3 style="color: #0d47a1; margin: 0;">🎧 Podcast: La Arquitectura de la Suma</h3>
         </div>
+        
         <p class="podcast-descripcion">
-            Dos docentes discuten el "Momento Eureka" de enseñar a sumar a una máquina en el laboratorio. Analizan el salto psicológico que dan los estudiantes al ver 5 LEDs resolviendo un problema matemático, y comparten anécdotas sobre cómo enseñar la Abstracción de Hardware usando el chip 7483 para evitar el "nido de pájaros" de cables en la protoboard.
+            En este episodio analizamos la transición crítica del Half Adder al Full Adder. Discutimos el fenómeno del "Ripple Carry" (efecto dominó) y cómo la industria de microprocesadores utiliza el álgebra de Boole para "predecir" el futuro mediante el Acarreo Anticipado. Además, revelamos la trampa de alimentación del chip 7483 que ha cobrado la vida de miles de integrados en los laboratorios.
         </p>
+        
         <div class="podcast-player">
-            <audio controls preload="metadata" style="width: 100%;">
+            <audio controls>
                 <source src="audio/leccion25.mp3" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
+                Tu navegador no soporta el audio.
             </audio>
         </div>
-        <p class="podcast-meta">
-            <span class="duracion">⏱️ 24:01 min</span>
-            <span class="formato">🔊 MP3</span>
-        </p>
+        <p style="font-size: 0.8em; opacity: 0.8; margin-top: 10px;">⏱️ 24:01 min | 🏗️ Enfoque: Arquitectura de Procesadores y Abstracción</p>
     </section>
+    <!-- Final del PODCAST -->
 
     <!-- TARJETA DE PROMPT ÉTICO -->
     <section class="prompt-section">
@@ -908,28 +1033,50 @@
     <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
     <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #2d3436, #000000); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-left: 8px solid #00cec9;">
         <h3 style="color: #00cec9; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: El Sumador en el Corazón de la IA
+            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: El Sumador como Átomo de la IA
         </h3>
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
                 <h4 style="color: #00cec9; margin-top: 0;">Para Grado 7°: ¿Cómo cuenta una IA?</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">Cuando le pides a una IA que reconozca un perro, ella tiene que hacer <strong>trillones de sumas</strong> al mismo tiempo. Usa bloques idénticos al Full Adder que acabas de ver. La diferencia es que ella tiene miles de millones de estos sumadores trabajando en equipo para encontrar la respuesta en segundos. ¡Acabas de construir un átomo de su cerebro!</p>
+                <p style="font-size: 0.95em; line-height: 1.5;">Cuando una IA identifica tu cara, tiene que hacer <strong>trillones de sumas</strong> en un segundo. Utiliza bloques idénticos al Full Adder que acabas de ver, pero repetidos miles de millones de veces. La IA no "ve" una foto, suma las intensidades de luz hasta que el resultado matemático le dice: "¡Es un humano!". ¡Acabas de construir un ladrillo de su inteligencia!</p>
             </div>
             
             <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #00cec9; margin-top: 0;">Para Grado 10°: La ALU y la Retropropagación</h4>
-                <p style="font-size: 0.95em; line-height: 1.5;">En Inteligencia Artificial, el entrenamiento (aprender de los errores) se basa en una técnica llamada <strong>Retropropagación</strong> o Backpropagation. Esta técnica requiere que los chips realicen sumas y multiplicaciones masivas a través de la <strong>ALU (Unidad Aritmético Lógica)</strong>. El Sumador de 4 bits que usaste hoy es la base de esa ALU. Sin sumadores rápidos como el <em>Carry Look-Ahead</em>, entrenar a ChatGPT tardaría mil años.</p>
+                <h4 style="color: #00cec9; margin-top: 0;">Para Grado 10°: La ALU y el Backpropagation</h4>
+                <p style="font-size: 0.95em; line-height: 1.5;">El entrenamiento de una IA se basa en la <strong>Retropropagación</strong> (aprender del error). Este proceso matemático ocurre dentro de la ALU (Unidad Aritmético Lógica), cuyo corazón es el sumador de 4 bits que usaste hoy. Sin sumadores rápidos de alta precisión, una IA tardaría siglos en aprender a saludar. Las matemáticas de Boole son la CPU del pensamiento artificial.</p>
             </div>
         </div>
 
         <div style="margin-top: 25px; padding: 20px; background: rgba(0,206,201,0.1); border-radius: 8px; border: 1px dashed #00cec9;">
             <p style="margin: 0; text-align: center; font-weight: bold;">
-                🚀 Conexión de Memoria: ¿Por qué ChatGPT recuerda lo que dijiste antes? Porque usa "Lógica Secuencial" (Retroalimentación). Esos ciclos de datos permiten que la IA tenga un "pasado", convirtiéndola de una simple calculadora en una entidad que conversa.
+                🚀 Conexión de Memoria: ¿Por qué la IA recuerda el hilo de la conversación? Porque usa "Lógica Secuencial". Esos bucles de energía permiten que el resultado de una suma se guarde y se use en la siguiente, creando un "pasado" digital.
             </p>
         </div>
     </div>
     <!-- === FIN BLOQUE IA === -->
+
+    <!-- === PODCAST IA: ADN DE LA INTELIGENCIA === -->
+    <section class="podcast-ia">
+        <div class="podcast-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <svg style="width:30px; height:30px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z" />
+            </svg>
+            <h3 style="margin: 0;">IA y el Eslabón Perdido: De la Calculadora a la Memoria</h3>
+        </div>
+        
+        <p class="podcast-descripcion">
+            ¿Puede una máquina sentir o solo sumar? Discutimos el límite de la lógica combinacional y el nacimiento de la memoria a través de la retroalimentación. Exploramos cómo el pánico del Y2K fue un error de "desbordamiento" masivo y por qué el futuro de la IA depende de nuestra capacidad de redefinir cómo sumamos información en el límite de la física cuántica.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls>
+                <source src="audio/leccion25_ia.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
+        </div>
+        <p style="font-size: 0.8em; opacity: 0.7; margin-top: 10px;">⏱️ 18:37 min | 🌐 Recomendado: Futuros Arquitectos de Computadores e IA</p>
+    </section>
 
     <footer>
         <hr>

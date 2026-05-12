@@ -31,6 +31,8 @@
         <p>En la lección anterior aprendiste a limpiar el ruido con resistencias. Ahora tus señales son estables. Pero... <strong>¿Cómo estás seguro?</strong> Los electrones son invisibles. ¿Cómo sabes si tu pila tiene 3V o si está muerta? ¿Cómo sabes si esa resistencia es de 10k o de 1k si se le borraron los colores? Hoy te daremos un superpoder: la visión eléctrica usando el <strong>Multímetro</strong>.</p>
     </div>
 
+    <p>Para dominar el hardware, no basta con seguir un diagrama; hay que saber interrogar al silicio. El multímetro no es un accesorio, es una extensión de tus sentidos que traduce el lenguaje silencioso de los electrones en números que puedes entender. Pasemos de la intuición a la instrumentación: conozcamos la anatomía de tu nueva herramienta de poder.</p>
+
     <section>
         <h2>1. Conociendo a tu nuevo mejor amigo</h2>
         <p>El Multímetro (o Tester) combina tres herramientas en una: Voltímetro, Ohmiómetro y Probador de Continuidad.</p>
@@ -48,6 +50,8 @@
                 <li><strong>10A (Rojo):</strong> ¡PELIGRO! ⛔ Solo para corrientes gigantes. Si pones la punta aquí y mides una pila en paralelo... ¡Haces un corto directo! Evítalo por ahora.</li>
             </ul>
         </div>
+
+        <p>Saber dónde conectar las puntas es el primer paso para no dañar tu equipo, pero entender lo que dice la pantalla es lo que te otorga autoridad técnica. Antes de realizar nuestra primera medición, debemos aprender el alfabeto visual que rige la ingeniería global. Pasemos a descifrar los símbolos que te permitirán leer cualquier multímetro, en cualquier laboratorio del mundo.</p>
         
         <!-- ============================================= -->
         <!-- NUEVO BLOQUE: Símbolos del Multímetro         -->
@@ -122,6 +126,8 @@
         <!-- FIN DEL NUEVO BLOQUE                          -->
         <!-- ============================================= -->
 
+        <p>Con el alfabeto dominado, es hora de poner a prueba la integridad de nuestras conexiones. A menudo, los problemas más complejos de un circuito no nacen de un error matemático, sino de un puente roto que el ojo humano no puede ver. Pasemos a nuestra primera prueba forense: el modo de Continuidad, donde el sonido nos confirmará si el camino de la verdad está realmente abierto.</p>
+
         <h2>2. Modo 1: Continuidad (El Pito Mágico) 🔊</h2>
         <p>Pon la perilla en el símbolo de onda/sonido. Toca las puntas entre sí. ¿Suena un <em>piiiiii</em>? ¡Bien!</p>
         <p><strong>Uso:</strong> Toca los dos extremos de un cable. Si suena, el cable está bueno. Si no suena, está roto por dentro.</p>
@@ -155,6 +161,8 @@
             </div>
         </div>
 
+        <p>Confirmar que el camino existe es vital, pero un arquitecto de hardware también debe saber qué tanto 'pesa' ese camino. Si el cable está sano, el siguiente misterio es verificar si los componentes mantienen su valor de diseño o si el calor ha empezado a degradarlos. Pasemos de escuchar el 'pito' a medir la oposición: la cuantificación exacta de los Ohmios.</p>
+
         <!-- === 3. Modo 2: Midiendo Resistencia (Ω) === -->
         <h2>3. Modo 2: Midiendo Resistencia (Ω)</h2>
         <p>Pon la perilla en 20k (o el rango de tu resistencia). Toca cada pata con una punta. <strong>¡Importante!</strong> Para medir resistencia, el componente debe estar <em>desconectado del circuito</em> (sin energía) para evitar mediciones erróneas o dañar el multímetro.</p>
@@ -185,6 +193,8 @@
 
         <p><strong>¿Por qué la resistencia debe estar suelta?</strong> Porque el multímetro mide la resistencia inyectando una pequeña corriente propia. Si el circuito está encendido, la corriente del circuito interferirá con la medición, dando resultados incorrectos. En el peor de los casos, podría dañar el multímetro.</p>
 
+        <p>Medir en reposo nos da seguridad, pero la verdadera magia ocurre cuando el circuito cobra vida. Ahora que hemos verificado la salud de las piezas por separado, es momento de observar la presión que las impulsa a trabajar. Pasemos de los componentes inertes a la energía en movimiento: el arte de medir el Voltaje sin interrumpir el flujo del sistema.</p>
+
         <h2>4. Modo 3: Midiendo Voltaje DC (V⎓)</h2>
         <p>Pon la perilla en <strong>20V DC</strong>. Toca rojo con positivo y negro con negativo.</p>
         <div class="svg-container">
@@ -200,6 +210,8 @@
             <p><strong>Puntas:</strong> Roja al positivo (+), Negra al negativo (-) del componente.</p>
             <p><em>💡 Regla de oro: Si el multímetro muestra un valor negativo, invierte las puntas (estás midiendo al revés).</em></p>
         </div>
+
+        <p>Registrar voltajes nos da una cifra, pero un número no significa nada si no sabemos desde dónde estamos contando. En la ingeniería, como en la vida, la altura depende de dónde pongas los pies. Para que tus mediciones tengan sentido y tus futuros sistemas de IA no pierdan el rumbo, debemos revelar el secreto mejor guardado de la electrónica: la naturaleza real del Cero.</p>
 
         <!-- === BLOQUE: EL MISTERIO DEL CERO (GND) === -->
         <section>
@@ -240,6 +252,8 @@
             </div>
         </section>
 
+        <p>Habiendo asegurado un suelo firme para nuestras mediciones, ya podemos ver la presión del sistema. Sin embargo, nos falta observar el volumen real de electrones que aceptan el reto de cruzar el circuito. Esta medición exige un cambio de mentalidad: ya no miraremos desde la barrera, sino que nos convertiremos en parte del camino. Pasemos de la presión al flujo: la medida de la Intensidad.</p>
+
         <!-- === 5. Modo 4: Midiendo Corriente (A) === -->
         <h2>5. Modo 4: Midiendo Corriente (A)</h2>
         <p>Pon la perilla en el rango adecuado para la corriente que esperas medir (200mA o 10A). <strong>¡Importante!</strong> Para medir corriente, el multímetro debe estar <em>en SERIE</em> con el circuito, no en paralelo.</p>
@@ -269,6 +283,8 @@
         <p><strong>¿Por qué es diferente de medir voltaje?</strong> Al medir voltaje, el multímetro se conecta en paralelo (sin interrumpir el circuito). Al medir corriente, <em>debes interrumpir el circuito</em> para que toda la corriente pase a través del multímetro. ¡No hay forma de medir corriente sin abrir el circuito!</p>
 
         <p><strong>Cómo se hace:</strong> Debes abrir el circuito e insertar el multímetro en el camino (SERIE), para que los electrones pasen <em>a través</em> de él.</p>
+
+        <p>Esta transición de medir en paralelo a medir en serie es el punto donde la mayoría de los aprendices cometen errores fatales para su equipo. No es una simple elección de cables; es una comprensión profunda de la física interna de cada instrumento. Pasemos a analizar el porqué de esta diferencia crucial para blindar tu práctica profesional contra cortocircuitos accidentales.</p>
          
         <!-- === 6. La Medición Avanzada: Voltaje (voltios) vs Corriente (Amperios) === -->
         <h2>6. La Medición Avanzada: Voltaje (voltios) vs Corriente (Amperios)</h2>
@@ -341,6 +357,8 @@
         <!-- FIN DEL RINCÓN DEL DOCENTE 2                    -->
         <!-- ============================================= -->  
 
+        <p>Dominar los cables y las fuentes te convierte en un técnico competente, pero ahora aplicaremos esa visión biónica a un componente con 'carácter'. El LED no se deja medir como una simple resistencia; exige un trato especial que nos revele su umbral de luz. Pasemos a nuestro primer taller de diagnóstico de semiconductores: el Modo Diodo.</p>
+
         <!-- NUEVA SECCIÓN: TALLER PRÁCTICO DE DIODOS -->
         <h2>7. Taller Práctico: Midiendo tu primer LED ($\rightarrow|$)</h2>
         <p>Vamos a usar el multímetro para averiguar los secretos de un LED. <strong>Importante:</strong> Haz esto con el LED suelto, desconectado de cualquier batería.</p>
@@ -368,6 +386,8 @@
                 <li><strong>Si sale "OL" en AMBOS sentidos:</strong> Malas noticias. El LED está quemado por dentro (abierto). Tíralo a la basura.</li>
             </ul>
         </div>
+
+        <p>Haber medido tu primer semiconductor cierra el ciclo de las funciones básicas del multímetro. Tienes los ojos listos, pero la mesa de trabajo siempre guarda sorpresas que no aparecen en los manuales estándar. Para que te desenvuelvas como un veterano desde el primer día, vamos a compartir las lecciones aprendidas en el fragor del laboratorio. Pasemos a los Secretos de Oficio.</p>
 
         <h2>8. Secretos de Oficio (Lo que nadie te dice) 🤫</h2>
         <h3>A. ¿Qué significa "OL" o "1 ."?</h3>
@@ -537,6 +557,86 @@
             </p>
         </div>
     </div>    
+
+    <p>Haber dominado los 'secretos de oficio' y aprender a leer los síntomas del silicio te otorga la autoridad del experto en la mesa de trabajo. Pero el multímetro es mucho más que un verificador de voltajes; es tu primera herramienta de Observabilidad. En la frontera de la Inteligencia Artificial, donde procesamos billones de señales por segundo, la capacidad de 'ver lo invisible' y garantizar que el suelo (GND) sea firme es lo que separa a un sistema inteligente de una alucinación eléctrica. Pasemos de la medición manual a la infraestructura de la verdad para descubrir cómo el multímetro es el ancestro de la auditoría de datos en la IA.</p>
+
+    <!-- ====================================================================== -->
+    <!-- RETROFIT: EL MULTÍMETRO Y LA AUDITORÍA DE DATOS (CONEXIÓN IA)          -->
+    <!-- ====================================================================== -->
+    <div class="dato-extra" style="background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 25px; margin: 35px 0; border-radius: 0 15px 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <h4 style="color: #1b5e20; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3em;">🧠</span> El Multímetro como Auditor de la Verdad
+        </h4>
+        
+        <p style="color: #2d3436; font-size: 1.05em; line-height: 1.6;">
+            En la lección aprendiste que el multímetro es tu "ojo biónico". En Inteligencia Artificial, este proceso se llama <strong>Validación de Ground Truth</strong>: verificar que lo que la máquina "lee" es lo que realmente está pasando en el mundo físico.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+            
+            <!-- Nivel Iniciación (7°) -->
+            <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #c8e6c9;">
+                <strong style="color: #2e7d32; display: block; margin-bottom: 8px;">💡 Analogía para 7° (Las Gafas de la Verdad):</strong>
+                <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                    Imagina que una IA dice que hay una persona frente a ella, pero el sensor está roto y solo ve estática. El multímetro son las "gafas" que tú te pones para revisar el sensor. Si el multímetro marca 0V cuando debería haber señal, tú sabes que la IA está alucinando por culpa de un cable. Aprender a medir es aprender a no dejar que la IA te mienta.
+                </p>
+            </div>
+
+            <!-- Nivel Profundización (10°) -->
+            <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #c8e6c9;">
+                <strong style="color: #2e7d32; display: block; margin-bottom: 8px;">🏗️ Rigor para 10° (Normalización y Sesgo de Referencia):</strong>
+                <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                    En Machine Learning, los datos deben estar <strong>Normalizados</strong> (todos en la misma escala). El concepto de <strong>GND (Tierra)</strong> es el isomorfismo físico de la normalización: es el "Cero Absoluto" que permite comparar señales. Si el GND de tu circuito flota, el multímetro da errores y la IA recibe datos sesgados. Dominar el multímetro es tu entrenamiento inicial para realizar <strong>Auditoría de Integridad</strong>, asegurando que el hardware no introduzca sesgos eléctricos en el aprendizaje del modelo.
+                </p>
+            </div>
+        </div>
+
+        <div style="background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #fbc02d;">
+            <p style="margin: 0; font-size: 0.95em; color: #5d4037; font-weight: bold;">
+                🎯 La Conexión de Campo: El "Secreto del Cero" es el ancla de la realidad. Sin una Tierra común, dos sistemas no pueden compartir información de forma fiable. Esta es la misma razón por la que las IAs necesitan datos verificados: sin un suelo firme de verdad, la inteligencia se convierte en ruido.
+            </p>
+        </div>
+    </div>
+    <!-- ====================================================================== -->
+
+    <p>Haber dominado los 'secretos de oficio' y aprender a leer los síntomas del silicio te otorga la autoridad del experto en la mesa de trabajo. Pero el multímetro es mucho más que un verificador de voltajes; es tu primera herramienta de Observabilidad. En la frontera de la Inteligencia Artificial, donde procesamos billones de señales por segundo, la capacidad de 'ver lo invisible' y garantizar que el suelo (GND) sea firme es lo que separa a un sistema inteligente de una alucinación eléctrica. Pasemos de la medición manual a la infraestructura de la verdad para descubrir cómo el multímetro es el ancestro de la auditoría de datos en la IA.</p>
+
+    <!-- ====================================================================== -->
+    <!-- RETROFIT: EL MULTÍMETRO Y LA AUDITORÍA DE DATOS (CONEXIÓN IA)          -->
+    <!-- ====================================================================== -->
+    <div class="dato-extra" style="background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 25px; margin: 35px 0; border-radius: 0 15px 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <h4 style="color: #1b5e20; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3em;">🧠</span> El Multímetro como Auditor de la Verdad
+        </h4>
+        
+        <p style="color: #2d3436; font-size: 1.05em; line-height: 1.6;">
+            En la lección aprendiste que el multímetro es tu "ojo biónico". En Inteligencia Artificial, este proceso se llama <strong>Validación de Ground Truth</strong>: verificar que lo que la máquina "lee" es lo que realmente está pasando en el mundo físico.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+            
+            <!-- Nivel Iniciación (7°) -->
+            <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #c8e6c9;">
+                <strong style="color: #2e7d32; display: block; margin-bottom: 8px;">💡 Analogía para 7° (Las Gafas de la Verdad):</strong>
+                <p style="margin-bottom: 0; font-size: 0.95em; color: #444;">
+                    Imagina que una IA dice que hay una persona frente a ella, pero el sensor está roto y solo ve estática. El multímetro son las "gafas" que tú te pones para revisar el sensor. Si el multímetro marca 0V cuando debería haber señal, tú sabes que la IA está alucinando por culpa de un cable. Aprender a medir es aprender a no dejar que la IA te mienta.
+                </p>
+            </div>
+
+            <!-- Nivel Profundización (10°) -->
+            <div style="background: rgba(255,255,255,0.7); padding: 15px; border-radius: 10px; border: 1px solid #c8e6c9;">
+                <strong style="color: #2e7d32; display: block; margin-bottom: 8px;">🏗️ Rigor para 10° (Normalización y Sesgo de Referencia):</strong>
+                <p>En Machine Learning, los datos deben estar <strong>Normalizados</strong>. El concepto de <strong>GND (Tierra)</strong> es la referencia física necesaria para esa normalización: es el "Cero Absoluto" que permite comparar señales. Dominar el multímetro es tu entrenamiento inicial para realizar <strong>Auditoría de Integridad</strong>, asegurando que el hardware no introduzca errores eléctricos en el aprendizaje del modelo.</p>
+            </div>
+        </div>
+
+        <div style="background-color: #fff9c4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #fbc02d;">
+            <p style="margin: 0; font-size: 0.95em; color: #5d4037; font-weight: bold;">
+                🎯 La Conexión de Campo: El "Secreto del Cero" es el ancla de la realidad. Sin una Tierra común, dos sistemas no pueden compartir información de forma fiable. Esta es la misma razón por la que las IAs necesitan datos verificados: sin un suelo firme de verdad, la inteligencia se convierte en ruido.
+            </p>
+        </div>
+    </div>
+    <!-- ====================================================================== -->
 
         <!-- LABORATORIO STEAM INTEGRADO -->
         <div class="destacado" style="background-color: #fcf4e4; border-left-color: #ffb300; margin-top: 30px;">
@@ -813,22 +913,53 @@
         <p>Pero... un bombillo que prende y apaga no es "inteligente". ¿Cómo hacemos que un circuito tome decisiones? En la siguiente unidad, entraremos a la <strong>Matrix</strong>: El mundo de la Lógica Digital.</p>
     </div>
 
-    <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO === -->
+    <!-- === BLOQUE DE CONEXIÓN IA: EL CEREBRO DE SILICIO (VERSIÓN MEJORADA) === -->
     <div class="conexion-ia" style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #0d3b66, #00509d); color: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-left: 8px solid #f4d35e;">
         <h3 style="color: #f4d35e; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: El Suelo Común de los Datos
+            <span style="font-size: 1.5em;">🧠</span> Cerebro de Silicio: ¿Qué pasa si la IA "mide desde un suelo falso"?
         </h3>
+        
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            
+            <!-- NIVEL INICIACIÓN (7°) - Concepto nuevo: el sesgo invisible -->
             <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #f4d35e; margin-top: 0;">Grado 7°: ¿Desde dónde mides?</h4>
-                <p style="font-size: 0.9em; line-height: 1.5;">Si quieres saber quién es más alto, ambos deben estar parados en el mismo suelo. La GND es el suelo de la IA. Si dos partes de un robot no comparten la misma Tierra, no podrán entenderse nunca.</p>
+                <h4 style="color: #f4d35e; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.2em;">⚖️</span> Grado 7°: ¿Puede una IA ser "injusta" sin quererlo?
+                </h4>
+                <p style="font-size: 0.95em; line-height: 1.5;">
+                    Imagina que un termómetro está mal calibrado: siempre marca 2 grados más de lo que realmente hace frío. Un día la IA del clima dice "¡25 grados!" pero en realidad hace 23. No es que la IA mienta; es que su "sensor" (el termómetro) partió de un suelo falso.
+                    <br><br>
+                    <strong>Lo mismo pasa con GND:</strong> Si el "suelo" de referencia de una IA está flotando (no es un 0V real), toda su percepción del mundo será un poquito falsa. A eso los ingenieros lo llaman <strong>sesgo</strong>. Tu multímetro hoy te enseñó a detectar ese error invisible que puede hacer que una IA sea injusta sin darse cuenta.
+                </p>
             </div>
+
+            <!-- NIVEL PROFUNDIZACIÓN (10°) - Concepto nuevo: el cierre de la Unidad 1 -->
             <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                <h4 style="color: #f4d35e; margin-top: 0;">Grado 10°: Normalización de Datos</h4>
-                <p style="font-size: 0.9em; line-height: 1.5;">En Machine Learning, los datos deben estar <strong>Normalizados</strong> (todos en la misma escala). GND es la referencia física que permite normalizar los voltajes. Sin una Tierra firme, el multímetro da lecturas erróneas y la IA pierde su punto de comparación, volviendo inservible cualquier entrenamiento.</p>
+                <h4 style="color: #f4d35e; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.2em;">🏁</span> Grado 10°: Lo que has aprendido (y por qué importa)
+                </h4>
+                <p style="font-size: 0.95em; line-height: 1.5;">
+                    Has terminado la Unidad 1. Ahora puedes:
+                </p>
+                <ul style="margin: 5px 0; padding-left: 20px; font-size: 0.9em;">
+                    <li>✅ Medir voltajes, resistencias y continuidad como un técnico</li>
+                    <li>✅ Detectar un "suelo falso" (GND flotante) antes de que arruine tu circuito</li>
+                    <li>✅ Usar el multímetro para diagnosticar dónde está el error</li>
+                </ul>
+                <p style="font-size: 0.95em; line-height: 1.5; margin-top: 10px;">
+                    En la Unidad 2, construiremos circuitos que <strong>piensan</strong> (compuertas lógicas). Pero para que piensen bien, primero debes asegurarte de que su "suelo" sea firme. ¡Eso ya lo sabes hacer!
+                </p>
             </div>
         </div>
+
+        <!-- CIERRE ÚNICO (cierre emocional de la unidad) -->
+        <div style="margin-top: 20px; padding: 12px; background: rgba(244, 211, 94, 0.15); border-radius: 8px; text-align: center;">
+            <p style="margin: 0; font-size: 0.9em; color: #f4d35e; font-weight: bold;">
+                🎓 ¡Felicidades! Has completado la Unidad 1. Ahora sabes que la inteligencia de una máquina empieza con un cable negro bien conectado. En la Unidad 2, le enseñaremos a esa máquina a tomar decisiones.
+            </p>
+        </div>
     </div>
+    <!-- === FIN BLOQUE IA === -->
 
     <!-- === BLOQUE: CIERRE MAESTRO - RELACIÓN CON LA IA === -->
     <div class="cierre-maestro" style="margin: 20px 0; padding: 25px; background-color: #f8f9fa; border-radius: 15px; border: 1px solid #e0e0e0;">
