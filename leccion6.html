@@ -402,6 +402,7 @@
         
         <div class="pregunta-curiosidad">
             <h3>🧠 Reto de Lógica Mecánica</h3>
+            <p>Hasta ahora hemos visto interruptores que actúan como porteros solitarios: o dejan pasar la energía o la bloquean. Pero la electricidad también puede usarse para resolver acertijos de coordinación. Imagina el desafío de una escalera: necesitas encender la luz al empezar a subir y tener el poder de apagarla al llegar al segundo piso, sin tener que bajar de nuevo. Para lograrlo, los interruptores deben "comunicarse" a través de un cableado especial. Este sistema, donde el estado de la bombilla depende de la combinación de dos personas en lugares distintos, es nuestro primer encuentro con la <strong>lógica de decisiones</strong>.</p>
             <p>Imagina que vives en una casa de dos pisos. Quieres que la luz de la escalera se pueda:</p>
             <ul>
                 <li>Prender desde el primer piso al subir.</li>
@@ -410,8 +411,22 @@
                 <li>Apagar desde el primer piso al llegar abajo.</li>
                 </ul>
                 <p><strong>El desafío:</strong> Con un interruptor SPST común (el básico de encender/apagar), esto es imposible. Necesitas un interruptor especial que pueda <em>cambiar el camino de la corriente</em> entre dos opciones diferentes.</p>
-                <p><strong>¿Cuál es la solución?</strong> Dos interruptores SPDT (de tres terminales) conectados de una forma ingeniosa. Cada vez que cambias <em>cualquier</em> de los dos interruptores, el estado de la luz se invierte (enciende si estaba apagada, apaga si estaba encendida).</p>
-                <p><strong>Para tu futura aula:</strong> Este es un excelente ejemplo para mostrar que la ingeniería resuelve problemas cotidianos. ¡La próxima vez que uses un interruptor de escalera en tu casa, sabrás el ingenio que hay detrás!</p>
+                <p><strong>¿Cuál es la solución?</strong> Dos interruptores SPDT (de tres terminales) conectados de una forma ingeniosa. Cada vez que cambias (accionas) <em>cualquier</em> de los dos interruptores, el estado de la luz se invierte (enciende si estaba apagada, apaga si estaba encendida).</p>
+                
+                <!-- ILUSTRACIÓN: CIRCUITO DE CONMUTACIÓN (ESCALERA) -->
+                <div class="svg-container" style="margin: 35px 0; background-color: white; padding: 25px; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                    <img src="img/staircase_wiring.png" alt="Diagrama de cableado de una bombilla controlado por dos conmutadores en una escalera" style="max-width: 85%; height: auto; border-radius: 8px;">
+                    
+                        <p style="margin-top: 15px; color: #555; line-height: 1.5;">
+                            <small><em><strong>Fig. 7: Circuito de Conmutación.</strong> Observa los dos cables azules; en electricidad se les conoce como "viajeros". La bombilla solo se enciende cuando ambos interruptores eligen el mismo camino (el mismo cable azul). Aquí la corriente tiene dos caminos posibles (cables azules). Al mover cualquier interruptor, 'conmutas' el camino, cambiando el estado de la luz. En ingeniería, este comportamiento se conoce como <strong>lógica de exclusión</strong>, y es el secreto físico que permite a los computadores realizar sumas matemáticas.</em></small>
+                        </p>
+                        
+                        <!-- NOTA TÉCNICA PARA EL DOCENTE/ESTUDIANTE 10° -->
+                        <div style="margin-top: 10px; padding: 10px; background-color: #f8f9fa; border-left: 3px solid #0056b3; font-size: 0.85em; color: #444;">
+                            <strong>🔍 Ojo del Ingeniero:</strong> Aunque algunos electricistas cruzan los cables azules en forma de "X", el resultado lógico es el mismo. La única diferencia es si la luz se enciende cuando los interruptores están en la misma posición o en posiciones opuestas. Lo importante aquí es entender que hemos creado un <strong>sistema coordinado</strong>: un cambio en cualquier punto afecta al resultado final.
+                        </div>
+                    </div>
+    <p><strong>Para tu futura aula:</strong> Este es un excelente ejemplo para mostrar que la ingeniería resuelve problemas cotidianos. ¡La próxima vez que uses un interruptor de escalera en tu casa, sabrás el ingenio que hay detrás!</p>
         </div>
     </section>
 
