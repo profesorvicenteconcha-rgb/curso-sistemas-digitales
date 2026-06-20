@@ -157,6 +157,32 @@
                 <p style="font-size: 13px; color: #555;">Es un edificio de varias capas. Mientras que una neurona sola (Perceptrón Simple) solo ve líneas rectas, el MLP puede "curvar" su pensamiento para resolver acertijos como el XOR.</p>
             </div>
         </div>
+
+        <!-- SECCIÓN: EL CICLO DEL APRENDIZAJE (DINÁMICA) -->
+        <div style="margin-top: 25px; padding-top: 15px; border-top: 1px dashed #e1bee7;">
+            <strong style="color: var(--accent); display: block; margin-bottom: 15px;">🔄 El Ciclo del Pensamiento: ¿Cómo se mueve la información?</strong>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                
+                <!-- Paso 1 -->
+                <div style="background: #f3e5f5; padding: 12px; border-radius: 8px; border-left: 4px solid #9b59b6;">
+                    <strong style="color: #4a148c;">1. Forward (Propagación):</strong>
+                    <p style="font-size: 13px; color: #555; margin-top: 5px;">La señal viaja de la entrada a la salida. La IA lanza una "apuesta" o predicción basada en lo que sabe en ese momento.</p>
+                </div>
+
+                <!-- Paso 2: NUEVA FUNCIÓN DE PÉRDIDA -->
+                <div style="background: #fff3e0; padding: 12px; border-radius: 8px; border-left: 4px solid #ff9800;">
+                    <strong style="color: #e65100;">2. Loss (Función de Pérdida):</strong>
+                    <p style="font-size: 13px; color: #555; margin-top: 5px;">Es el <strong>Termómetro del Error</strong>. Calcula la distancia matemática entre la apuesta de la IA y la Verdad Real. Si la pérdida es alta, la IA está muy confundida.</p>
+                </div>
+
+                <!-- Paso 3 -->
+                <div style="background: #e8f5e9; padding: 12px; border-radius: 8px; border-left: 4px solid #2e7d32;">
+                    <strong style="color: #1b5e20;">3. Backpropagation:</strong>
+                    <p style="font-size: 13px; color: #555; margin-top: 5px;">La IA usa el valor de la pérdida para viajar hacia atrás y ajustar los <strong>Parámetros</strong> (perillas), asegurándose de fallar menos en el siguiente intento.</p>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <div class="workspace">
@@ -302,7 +328,7 @@
         </div>
         
         <p class="podcast-descripcion">
-            ¿Cómo pasamos de una compuerta XOR física a una red neuronal profunda? En este episodio, analizamos el isomorfismo entre el hardware y el aprendizaje automático, explorando por qué el "Invierno de la IA" fue derrotado por el trabajo en equipo de las capas ocultas.
+            ¿Cómo pasamos de una compuerta XOR física a una red neuronal profunda? En este episodio, analizamos el ciclo vital de la IA: desde la "apuesta" inicial (<strong>Forward</strong>), pasando por el termómetro de la <strong>Función de Pérdida</strong>, hasta el ajuste maestro del <strong>Backpropagation</strong>. Descubre por qué el "Invierno de la IA" fue derrotado por el trabajo en equipo de las capas ocultas.
         </p>
         
         <div class="podcast-player">
@@ -640,73 +666,181 @@
             <strong>Conclusión para el futuro docente:</strong> Este experimento demuestra que en la IA, al igual que en un aula escolar, los problemas complejos no se resuelven aumentando la fuerza de un solo individuo, sino organizando un tejido de colaboración donde cada participante aporta a una solución común. ¡Felicidades, has aprendido la base del Deep Learning (Aprendizaje Profundo)!
         </p>
 
-        <div style="background: #fef9e7; border: 1.5px solid #f9e79f; padding: 22px; border-radius: 12px; margin-top: 25px; box-shadow: 0 4px 15px rgba(241, 196, 15, 0.08);">
+        <!-- ============================================================== -->
+        <!-- NUEVA DINÁMICA: EL CEREBRO HUMANO QUE APRENDE                   -->
+        <!-- ============================================================== -->
+        <div style="background: #fef9e7; border: 2px solid #f9e79f; padding: 25px; border-radius: 16px; margin-top: 30px; box-shadow: 0 8px 25px rgba(241, 196, 15, 0.15);">
             
-            <h3 style="font-size: 16px; color: #d35400; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                👩‍🏫 El Rincón del Maestro: ¿Cómo enseñar esto en Primaria sin Computadoras?
+            <h3 style="font-size: 17px; color: #d35400; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                🏃‍♂️ Dinámica: "El Cerebro Humano que Aprende" (IA Desenchufada)
             </h3>
             
-            <p style="font-size: 13.5px; color: #2c3e50; text-align: justify; line-height: 1.6; margin-bottom: 15px;">
-                ¡Felicidades por completar el laboratorio! Como futuro docente o profesor, tu verdadero superpoder no es solo entender la Inteligencia Artificial, sino saber cómo explicarla de forma divertida. Aquí tienes una propuesta didáctica corporal llamada <strong>"IA Desenchufada" (Unplugged)</strong> para jugar con tus niños en el aula utilizando solo sus cuerpos y una cuerda.
+            <p style="font-size: 13.5px; color: #2c3e50; text-align: justify; line-height: 1.6; margin-bottom: 20px;">
+                <strong>Ideal para:</strong> 8 a 14 años | <strong>Tiempo:</strong> 25-30 minutos | <strong>Materiales:</strong> 6 cuerdas largas, tarjetas con números, 1 silbato, espacio amplio.
             </p>
 
-            <h4 style="font-size: 13px; color: #ba4a00; margin-bottom: 6px;">🏃‍♂️ Dinámica: El Juego de la Neurona Humana</h4>
-            <p style="font-size: 13px; color: #555; text-align: justify; margin-bottom: 12px;">
-                Selecciona a 4 estudiantes frente al pizarrón para que representen los componentes lógicos que manipulaste en el simulador:
-            </p>
-
-            <ul style="padding-left: 20px; font-size: 13px; color: #4d5656; line-height: 1.6; margin-bottom: 15px;">
-                <li><strong>Los Estímulos (X₁ y X₂):</strong> Dos niños sostienen tarjetas que dicen "SÍ" (1) o "NO" (0). Representan las preguntas de la vida cotidiana.</li>
-                <li><strong>Los Pesos / Importancia (w₁ y w₂):</strong> La Neurona sostiene dos cuerdas conectadas a los Estímulos. Si la Neurona jala mucho una cuerda, le explica a la clase que esa pregunta es la más importante para ella.</li>
-                <li><strong>El Sesgo / Guardián (Bias):</strong> Un niño actúa como el "aduanero" o la "pereza" de la neurona y sostiene un escudo con un número exigente (por ejemplo, el número 5).</li>
-                <li><strong>La Salida (Bombilla):</strong> Si la fuerza total generada por los estímulos multiplicada por la atención de las cuerdas logra superar el escudo del Guardián, ¡toda la clase grita al unísono: <strong>"¡FUEGO, NEURONA ACTIVADA!"</strong> y se enciende una linterna.</li>
-            </ul>
-
-            <div style="text-align: center; margin: 18px 0;">
-                <span style="font-size: 11px; font-weight: bold; color: #95a5a6; display: block; margin-bottom: 6px;">REPRESENTACIÓN DE LA DINÁMICA EN EL AULA</span>
-                <svg width="100%" height="auto" viewBox="0 0 500 160" style="background: white; border: 1px dashed #f4d03f; border-radius: 8px; max-width: 500px;">
-                    <line x1="20" y1="130" x2="480" y2="130" stroke="#bdc3c7" stroke-width="1"/>
-                    
-                    <circle cx="60" cy="80" r="12" fill="#3498db"/>
-                    <line x1="60" y1="92" x2="60" y2="120" stroke="#3498db" stroke-width="2"/>
-                    <line x1="50" y1="100" x2="70" y2="100" stroke="#3498db" stroke-width="2"/>
-                    <line x1="60" y1="120" x2="50" y2="130" stroke="#3498db" stroke-width="2"/>
-                    <line x1="60" y1="120" x2="70" y2="130" stroke="#3498db" stroke-width="2"/>
-                    <text x="60" y="62" text-anchor="middle" font-size="10" fill="#2c3e50" font-weight="bold">Niño X₁ (Estímulo)</text>
-
-                    <line x1="72" y1="95" x2="188" y2="95" stroke="#e67e22" stroke-width="2" stroke-dasharray="3,3"/>
-                    <text x="130" y="90" font-size="9" fill="#d35400" font-weight="bold">Cuerda (Peso)</text>
-
-                    <circle cx="200" cy="80" r="14" fill="#9b59b6"/>
-                    <line x1="200" y1="94" x2="200" y2="120" stroke="#9b59b6" stroke-width="2"/>
-                    <line x1="185" y1="95" x2="215" y2="95" stroke="#9b59b6" stroke-width="2"/>
-                    <line x1="200" y1="120" x2="190" y2="130" stroke="#9b59b6" stroke-width="2"/>
-                    <line x1="200" y1="120" x2="210" y2="130" stroke="#9b59b6" stroke-width="2"/>
-                    <text x="200" y="62" text-anchor="middle" font-size="10" fill="#2c3e50" font-weight="bold">Niño Neurona (Suma)</text>
-
-                    <line x1="215" y1="105" x2="325" y2="105" stroke="#7f8c8d" stroke-width="1.5" marker-end="url(#arrow)"/>
-                    
-                    <path d="M 325 80 L 345 80 L 345 110 L 335 120 L 325 110 Z" fill="#e74c3c" opacity="0.8"/>
-                    <text x="335" y="100" font-size="10" fill="white" font-weight="bold" text-anchor="middle">&gt; 5</text>
-                    <circle cx="355" cy="85" r="10" fill="#e74c3c"/>
-                    <line x1="355" y1="95" x2="355" y2="120" stroke="#e74c3c" stroke-width="2"/>
-                    <line x1="355" y1="120" x2="348" y2="130" stroke="#e74c3c" stroke-width="2"/>
-                    <line x1="355" y1="120" x2="362" y2="130" stroke="#e74c3c" stroke-width="2"/>
-                    <text x="355" y="62" text-anchor="middle" font-size="10" fill="#2c3e50" font-weight="bold">Niño Guardián (Sesgo)</text>
-
-                    <circle cx="440" cy="80" r="15" fill="#f1c40f"/>
-                    <path d="M 435 95 L 445 95 L 442 102 L 438 102 Z" fill="#7f8c8d"/>
-                    <line x1="440" y1="60" x2="440" y2="50" stroke="#f1c40f" stroke-width="2"/>
-                    <line x1="420" y1="75" x2="410" y2="72" stroke="#f1c40f" stroke-width="2"/>
-                    <line x1="460" y1="75" x2="470" y2="72" stroke="#f1c40f" stroke-width="2"/>
-                    <text x="440" y="120" text-anchor="middle" font-size="10" fill="#27ae60" font-weight="bold">¡ACTIVADA! (1)</text>
-                </svg>
+            <!-- DESCRIPCIÓN TEATRAL -->
+            <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #f5cba7; margin-bottom: 20px;">
+                <h4 style="color: #a04000; margin-top: 0; font-size: 14px;">🎭 El Escenario: La Fábrica de Decisiones</h4>
+                <p style="font-size: 13px; color: #555; text-align: justify; line-height: 1.5; margin-bottom: 0;">
+                    Imaginemos que el salón de clases es el <strong>cerebro de un robot</strong> que debe decidir si <strong>abre su paraguas</strong> (Salida = 1) o <strong>no lo abre</strong> (Salida = 0). Para decidir, el robot recibe dos pistas o <strong>estímulos</strong> (X₁ y X₂):
+                </p>
+                <ul style="font-size: 13px; color: #555; line-height: 1.6; margin-top: 10px; margin-bottom: 0;">
+                    <li><strong>X₁:</strong> ¿Está lloviendo ahora? (SÍ / NO)</li>
+                    <li><strong>X₂:</strong> ¿El cielo está gris? (SÍ / NO)</li>
+                </ul>
+                <p style="font-size: 13px; color: #555; text-align: justify; line-height: 1.5; margin-top: 10px; margin-bottom: 0;">
+                    El robot no nace sabiendo; debe <strong>aprender</strong> a decidir mediante <strong>ensayo, error y corrección</strong>.
+                </p>
             </div>
 
-            <p style="font-size: 13px; color: #7f8c8d; text-align: justify; line-height: 1.5; font-style: italic; margin-bottom: 0;">
-                <strong>Conclusión Pedagógica:</strong> Con este juego físico, los niños de primaria asimilan el concepto abstracto de un algoritmo adaptativo sin frustraciones técnicas. Aprenden que las decisiones de las máquinas inteligentes son el resultado cuantificable de pesos, esfuerzos y condiciones mínimas trabajando en equipo. ¡Has convertido la ciencia de datos en juego significativo!
-            </p>
+            <!-- PASO 1: LOS ROLES -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                
+                <div style="background: #ebf5fb; border-radius: 10px; padding: 15px; border-left: 5px solid #2980b9;">
+                    <strong style="color: #1a5276; font-size: 14px; display: block; margin-bottom: 5px;">👥 LOS ESTÍMULOS (X₁ y X₂)</strong>
+                    <p style="font-size: 12.5px; color: #2c3e50; margin: 0; line-height: 1.4;">
+                        Dos niños con tarjetas que dicen "SÍ" (1) o "NO" (0). Son los <strong>ojos</strong> y <strong>oídos</strong> del robot.
+                    </p>
+                </div>
+
+                <div style="background: #f4ecf7; border-radius: 10px; padding: 15px; border-left: 5px solid #8e44ad;">
+                    <strong style="color: #4a235a; font-size: 14px; display: block; margin-bottom: 5px;">🧠 LA NEURONA (El cerebro principal)</strong>
+                    <p style="font-size: 12.5px; color: #2c3e50; margin: 0; line-height: 1.4;">
+                        Un niño sostiene dos cuerdas que vienen de los Estímulos. Su trabajo es <strong>sumar</strong> la información que recibe.
+                    </p>
+                </div>
+
+                <div style="background: #fef9e7; border-radius: 10px; padding: 15px; border-left: 5px solid #f1c40f;">
+                    <strong style="color: #7d6608; font-size: 14px; display: block; margin-bottom: 5px;">⚖️ EL GUARDIÁN (El Sesgo / Bias)</strong>
+                    <p style="font-size: 12.5px; color: #2c3e50; margin: 0; line-height: 1.4;">
+                        Un niño con un escudo de cartón con un número (ej: "5"). Es la <strong>exigencia mínima</strong> que debe superar la neurona para activarse.
+                    </p>
+                </div>
+
+                <div style="background: #e8f8f5; border-radius: 10px; padding: 15px; border-left: 5px solid #27ae60;">
+                    <strong style="color: #145a32; font-size: 14px; display: block; margin-bottom: 5px;">💡 LA SALIDA (El Actuador)</strong>
+                    <p style="font-size: 12.5px; color: #2c3e50; margin: 0; line-height: 1.4;">
+                        Un niño con una linterna o un paraguas. Se activa (enciende la luz / abre el paraguas) cuando la neurona lo decide.
+                    </p>
+                </div>
+
+                <div style="background: #fdedec; border-radius: 10px; padding: 15px; border-left: 5px solid #e74c3c; grid-column: span 1;">
+                    <strong style="color: #641e16; font-size: 14px; display: block; margin-bottom: 5px;">📏 EL JUEZ (La Función de Error)</strong>
+                    <p style="font-size: 12.5px; color: #2c3e50; margin: 0; line-height: 1.4;">
+                        El maestro o un niño con una tabla de "Respuestas Correctas". Compara lo que hizo el robot con lo que <strong>debía</strong> hacer y anuncia el <strong>error</strong> en voz alta.
+                    </p>
+                </div>
+
+                <div style="background: #f5eef8; border-radius: 10px; padding: 15px; border-left: 5px solid #9b59b6; grid-column: span 1;">
+                    <strong style="color: #4a235a; font-size: 14px; display: block; margin-bottom: 5px;">🔄 LOS AJUSTADORES (Los Pesos)</strong>
+                    <p style="font-size: 12.5px; color: #2c3e50; margin: 0; line-height: 1.4;">
+                        Dos niños (W₁ y W₂) sostienen las <strong>cuerdas</strong> entre los Estímulos y la Neurona. Su trabajo es <strong>tensionar o aflojar</strong> la cuerda según las instrucciones del Juez.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PASO 2: EL CICLO DE APRENDIZAJE (LA MECÁNICA DEL JUEGO) -->
+            <div style="background: white; padding: 20px; border-radius: 12px; border: 2px solid #d4ac0d; margin-bottom: 20px;">
+                <h4 style="color: #7d6608; margin-top: 0; font-size: 15px;">🔄 El Ciclo de Aprendizaje en 4 Pasos</h4>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    
+                    <!-- Paso 1: Forward -->
+                    <div style="background: #eaf2f8; padding: 15px; border-radius: 10px; border-bottom: 5px solid #2980b9;">
+                        <span style="background: #2980b9; color: white; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; display: inline-block; margin-bottom: 8px;">PASO 1</span>
+                        <strong style="color: #1a5276; display: block; font-size: 14px;">🚀 Forward (La Apuesta)</strong>
+                        <p style="font-size: 12.5px; color: #2c3e50; margin: 8px 0 0 0; line-height: 1.4;">
+                            Los Estímulos (X₁ y X₂) levantan sus tarjetas. La Neurona <strong>multiplica</strong> cada tarjeta por la <strong>fuerza de la cuerda</strong> (tensión = Peso), <strong>suma</strong> los resultados y le resta el número del Guardián. Si el resultado es <strong>positivo</strong>, la Neurona grita <strong>"¡ACTIVAR!"</strong> y la Salida hace su acción (enciende linterna / abre paraguas). Si es negativo, no hace nada.
+                        </p>
+                        <div style="background: #d4e6f1; padding: 8px; border-radius: 6px; margin-top: 8px; font-family: monospace; font-size: 11px; text-align: center; color: #1a5276;">
+                            📐 Fórmula: (X₁ × Tensión₁) + (X₂ × Tensión₂) − Escudo del Guardián = ¿Positivo?
+                        </div>
+                    </div>
+
+                    <!-- Paso 2: Error -->
+                    <div style="background: #fdedec; padding: 15px; border-radius: 10px; border-bottom: 5px solid #e74c3c;">
+                        <span style="background: #e74c3c; color: white; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; display: inline-block; margin-bottom: 8px;">PASO 2</span>
+                        <strong style="color: #641e16; display: block; font-size: 14px;">📏 Error (La Diferencia)</strong>
+                        <p style="font-size: 12.5px; color: #2c3e50; margin: 8px 0 0 0; line-height: 1.4;">
+                            El Juez consulta su tabla de "Verdad" y anuncia en voz alta: <em>"La respuesta correcta era [1 o 0], pero el robot dijo [1 o 0]. ¡El error es [diferencia]!"</em> Los niños escuchan y se preparan para corregir.
+                        </p>
+                        <div style="background: #fadbd8; padding: 8px; border-radius: 6px; margin-top: 8px; font-family: monospace; font-size: 11px; text-align: center; color: #641e16;">
+                            📊 Error = Respuesta Correcta − Respuesta del Robot
+                        </div>
+                    </div>
+
+                    <!-- Paso 3: Backpropagation (Ajuste) -->
+                    <div style="background: #f4ecf7; padding: 15px; border-radius: 10px; border-bottom: 5px solid #8e44ad; grid-column: span 2;">
+                        <span style="background: #8e44ad; color: white; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; display: inline-block; margin-bottom: 8px;">PASO 3</span>
+                        <strong style="color: #4a235a; display: block; font-size: 14px;">🔄 Backpropagation (La Corrección Corporal)</strong>
+                        <p style="font-size: 12.5px; color: #2c3e50; margin: 8px 0 8px 0; line-height: 1.4;">
+                            El maestro (o el Juez) da <strong>órdenes de ajuste</strong> a los Ajustadores de cuerdas:
+                        </p>
+                        <ul style="font-size: 12.5px; color: #2c3e50; line-height: 1.6; margin: 0; padding-left: 20px;">
+                            <li><strong>Si el error fue positivo</strong> (el robot dijo 0 pero debía decir 1): <em>"¡Aflojen la cuerda para que la señal pase más fácil!"</em></li>
+                            <li><strong>Si el error fue negativo</strong> (el robot dijo 1 pero debía decir 0): <em>"¡Tensen la cuerda para que la señal se frene!"</em></li>
+                            <li><strong>Si el error fue cero</strong> (acertó): <em>"¡Dejen todo igual, lo hicieron bien!"</em></li>
+                        </ul>
+                        <div style="background: #e8daef; padding: 8px; border-radius: 6px; margin-top: 8px; font-size: 11px; text-align: center; color: #4a235a;">
+                            ⚙️ Los Ajustadores <strong>mueven sus manos</strong> (suben o bajan la tensión) una pequeña cantidad. ¡Así es como la máquina <strong>aprende</strong>!
+                        </div>
+                    </div>
+
+                    <!-- Paso 4: Repetir -->
+                    <div style="background: #e8f8f5; padding: 15px; border-radius: 10px; border-bottom: 5px solid #27ae60; grid-column: span 2;">
+                        <span style="background: #27ae60; color: white; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; display: inline-block; margin-bottom: 8px;">PASO 4</span>
+                        <strong style="color: #145a32; display: block; font-size: 14px;">🔁 Repetir (La Época)</strong>
+                        <p style="font-size: 12.5px; color: #2c3e50; margin: 8px 0 0 0; line-height: 1.4;">
+                            El maestro cambia las tarjetas de los Estímulos a una <strong>nueva combinación</strong> (00, 01, 10, 11) y el ciclo comienza de nuevo. Los Ajustadores <strong>recuerdan</strong> la tensión que tenían y la <strong>modifican un poco más</strong> según el nuevo error. Poco a poco, las cuerdas encuentran la <strong>tensión perfecta</strong> para que el robot acierte siempre.
+                        </p>
+                        <div style="background: #d5f5e3; padding: 8px; border-radius: 6px; margin-top: 8px; font-size: 11px; text-align: center; color: #145a32;">
+                            🎯 Después de varias rondas, las cuerdas se ajustan solas y el robot <strong>aprende la regla</strong> sin que nadie le diga cuál es.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PASO 3: EL MOMENTO EUREKA (La culminación) -->
+            <div style="background: #fef9e7; border: 2px dashed #f1c40f; padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
+                <h4 style="color: #7d6608; margin-top: 0; font-size: 15px;">🌟 El Momento "Eureka": Cuando el Robot Aprende</h4>
+                <p style="font-size: 13px; color: #2c3e50; line-height: 1.6; margin-bottom: 10px;">
+                    Después de varias rondas (normalmente 8-12), los Ajustadores encuentran la tensión perfecta para <strong>TODAS</strong> las combinaciones. La Salida siempre coincide con la tabla de verdad. 
+                </p>
+                <div style="background: #d5f5e3; padding: 15px; border-radius: 10px; display: inline-block; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);">
+                    <span style="font-size: 22px;">🎉</span>
+                    <span style="font-size: 18px; font-weight: bold; color: #145a32;">¡EL ROBOT HA APRENDIDO SIN QUE NADIE LE DIERA LA FÓRMULA!</span>
+                    <span style="font-size: 22px;">🎉</span>
+                </div>
+                <p style="font-size: 12.5px; color: #7f8c8d; margin-top: 12px; font-style: italic;">
+                    Los niños comprenden que la IA no es magia: es <strong>ensayo, error y corrección repetidos</strong> hasta dar con la solución.
+                </p>
+            </div>
+
+            <!-- CONSEJOS PARA EL DOCENTE -->
+            <div style="background: #fdf2e9; border-radius: 12px; padding: 18px; border-left: 5px solid #e67e22;">
+                <h4 style="color: #a04000; margin-top: 0; font-size: 14px;">👩‍🏫 Consejos para el Docente</h4>
+                <ul style="font-size: 12.5px; color: #555; line-height: 1.6; padding-left: 20px; margin-bottom: 0;">
+                    <li><strong>Empieza fácil:</strong> Usa primero la regla AND (solo SÍ cuando ambos son SÍ). Es la más intuitiva.</li>
+                    <li><strong>El error audible:</strong> Haz que el Juez grite el error bien fuerte. El sonido ayuda a fijar el concepto.</li>
+                    <li><strong>Los ajustes manuales:</strong> En las primeras rondas, guía a los Ajustadores para que muevan las cuerdas <em>un poco</em>. Con el tiempo, ellos solos sabrán cuánto.</li>
+                    <li><strong>El "salto" a XOR:</strong> Cuando dominen AND y OR, lánzales el <strong>XOR</strong> (solo SÍ si son diferentes). Verás cómo se frustran y luego celebran al descubrir que <strong>dos neuronas</strong> (dos niños como cerebro) trabajando en equipo resuelven el problema. ¡Ahí tienes el concepto de <strong>Capa Oculta</strong>!</li>
+                    <li><strong>Registro visual:</strong> Pide a un niño que dibuje en el pizarrón cómo cambian las tensiones de las cuerdas ronda tras ronda. Es un mapa de <strong>descenso de gradiente</strong> hecho con tiza.</li>
+                </ul>
+            </div>
+
+            <!-- CIERRE CON PREGUNTA REFLEXIVA -->
+            <div style="background: #eaf2f8; border-radius: 12px; padding: 15px; text-align: center; margin-top: 20px;">
+                <p style="font-size: 13px; color: #1a5276; margin: 0; font-style: italic;">
+                    💬 <strong>Pregunta para el cierre:</strong> <em>"Si un robot puede aprender moviendo cuerdas, ¿qué crees que está moviendo tu cerebro cuando tú aprendes?"</em>
+                </p>
+            </div>
+
         </div>
+        <!-- ============================================================== -->
+        <!-- FIN DE LA NUEVA DINÁMICA                                        -->
+        <!-- ============================================================== -->
     </div>
 
 </div>
