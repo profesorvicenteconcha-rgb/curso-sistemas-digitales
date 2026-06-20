@@ -78,6 +78,46 @@
         <p>En esta lección interactiva, verás cómo los conceptos de peso, sesgo y error (que mencionamos en los bloques de IA) se convierten en una danza matemática. Vas a entrenar a una neurona para que aprenda la misma lógica XOR que acabas de cablear físicamente en el Laboratorio 2. ¡Es hora de pasar del hardware estático a la inteligencia adaptativa!</p>
     </div>
 
+    <!-- === SECCIÓN: GUÍA DE ALISTAMIENTO TÉCNICO === -->
+    <div class="card" style="border-top: 6px solid var(--primary); background-color: #f8fafc;">
+        <div class="card-title" style="color: var(--primary);">📋 Guía de Alistamiento: Tu Estación de Trabajo Virtual</div>
+        <p style="font-size: 14px; margin-bottom: 20px;">Antes de encender el motor de aprendizaje, identifica tus herramientas y los protocolos de seguridad lógica:</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            
+            <!-- Bloque 1: El Kit -->
+            <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                <strong style="color: var(--primary);">🧰 Tu Kit de Componentes Digitales</strong>
+                <ul style="font-size: 13px; color: #555; margin-top: 10px; line-height: 1.6;">
+                    <li><strong>Sensores (X₁, X₂):</strong> Tus interruptores DIP. Son la fuente de datos.</li>
+                    <li><strong>Potenciómetros (w<sub>i</sub>):</strong> Los <em>sliders</em> azules. Controlan la "fuerza" de la conexión.</li>
+                    <li><strong>Regulador de Umbral (Bias):</strong> El <em>slider</em> naranja. Es la barrera de energía de la neurona.</li>
+                    <li><strong>Monitor de Verdad:</strong> La tabla de la derecha. Es tu osciloscopio de resultados.</li>
+                </ul>
+            </div>
+
+            <!-- Bloque 2: Integridad del Dato (GIGO) -->
+            <div style="background: #fff9c4; padding: 15px; border-radius: 8px; border: 1px solid #fbc02d;">
+                <strong style="color: #856404;">🛡️ Regla de Oro: Integridad y GIGO</strong>
+                <p style="font-size: 13px; color: #5d4037; margin-top: 10px; line-height: 1.5;">
+                    ¿Recuerdas el <strong>Diodo 1N4007</strong> de la Lección 7? Él cobraba un peaje de <strong>0.7V</strong> para limpiar la polaridad y salvar tus chips. 
+                    <br><br>
+                    En IA existe una ley similar: <strong>GIGO (Garbage In, Garbage Out)</strong>. Si alimentas a la neurona con "datos basura" (estímulos ruidosos o mal conectados), la matemática te devolverá "decisiones basura". Aprender a calibrar los pesos es aprender a limpiar el camino de la verdad.
+                </p>
+            </div>
+
+            <!-- Bloque 3: Protocolo de Operación -->
+            <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                <strong style="color: var(--primary);">🚦 Protocolo de Navegación</strong>
+                <ol style="font-size: 13px; color: #555; margin-top: 10px; line-height: 1.6; padding-left: 20px;">
+                    <li><strong>Explora:</strong> Usa las pestañas superiores (OR, AND) para ver configuraciones que ya funcionan.</li>
+                    <li><strong>Interroga:</strong> Mueve los interruptores <em>X</em> y mira cómo se iluminan los cables.</li>
+                    <li><strong>Construye:</strong> Ve al <strong>Laboratorio Libre</strong>. Intenta calibrar los parámetros a mano antes de usar el botón de auto-entrenamiento.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
     <div class="sim-container">
 
 <div class="container">
@@ -93,6 +133,30 @@
         <button class="tab-btn" data-tab="NOR" onclick="switchTab('NOR')">Neurona NOR</button>
         <button class="tab-btn" data-tab="XOR" onclick="switchTab('XOR')">Red Multicapa (XOR/XNOR)</button>
         <button class="tab-btn" data-tab="FREE" onclick="switchTab('FREE')" style="border: 1px dashed var(--accent);">Laboratorio Libre</button>
+    </div>
+
+    <!-- NUEVA SECCIÓN: ANATOMÍA DE LA INTELIGENCIA -->
+    <div class="card" style="border-top: 6px solid var(--accent); background-color: #fcfaff;">
+        <div class="card-title" style="color: var(--accent);">🏗️ Anatomía de la Inteligencia: ¿Quién es quién?</div>
+        <p style="font-size: 14px; margin-bottom: 15px;">Antes de empezar a mover las perillas, identifiquemos las piezas de este motor cerebral:</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e1bee7;">
+                <strong style="color: var(--accent);">📍 El Parámetro (El Conocimiento):</strong>
+                <p style="font-size: 13px; color: #555;">Son los <strong>Pesos (w)</strong> y el <strong>Sesgo (b)</strong>. Son las variables que la IA ajusta para aprender. <br>
+                <em>Nota vital:</em> Las entradas (x₁, x₂) <strong>no son parámetros</strong>; son señales externas que fluyen a través de la red, pero la IA no puede cambiarlas.</p>
+            </div>
+            
+            <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e1bee7;">
+                <strong style="color: var(--accent);">🧱 La Capa (Layer):</strong>
+                <p style="font-size: 13px; color: #555;">Es un conjunto de neuronas que trabajan en equipo. Verás la <strong>Capa Oculta</strong>, que es donde ocurre el "razonamiento" intermedio antes de dar una respuesta final.</p>
+            </div>
+
+            <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e1bee7;">
+                <strong style="color: var(--accent);">🧠 Perceptrón Multicapa (MLP):</strong>
+                <p style="font-size: 13px; color: #555;">Es un edificio de varias capas. Mientras que una neurona sola (Perceptrón Simple) solo ve líneas rectas, el MLP puede "curvar" su pensamiento para resolver acertijos como el XOR.</p>
+            </div>
+        </div>
     </div>
 
     <div class="workspace">
@@ -123,6 +187,9 @@
                         <option value="complex">Red Multicapa Compleja (9 Parámetros)</option>
                     </select>
                 </div>
+                <p style="font-size: 11px; color: #7f8c8d; margin-top: 5px; font-style: italic;">
+                    💡 <strong>Dato de Diseño:</strong> Al pasar de Perceptrón Simple a Red Multicapa, el número de <strong>Parámetros</strong> sube de 3 a 9. Esta "explosión de variables" es lo que permite a la red aprender patrones no lineales.
+                </p>
 
                 <div id="lab-simple-controls">
                     <div class="slider-box"><label>Peso Sináptico W₁: <span id="v-w1">1.0</span></label><input type="range" id="slider-w1" min="-2" max="2" step="0.1" value="1" oninput="updateParam('w1', this.value)"></div>
@@ -222,9 +289,57 @@
 
     </div>
 
+    <!-- === SECCIÓN PODCAST - INTELIGENCIA ARTIFICIAL === -->
+    <section class="podcast-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 40px 0;">
+        <div class="podcast-header">
+            <svg class="podcast-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+            </svg>
+            <div style="display: flex; flex-direction: column;">
+                <h3 style="color: white; margin: 0;">🎧 Podcast: La Neurona de Silicio</h3>
+                <p style="color: rgba(255,255,255,0.9); margin: 0; font-size: 0.85em; font-weight: bold;">Bonus Track: Cuando los cables aprenden</p>
+            </div>
+        </div>
+        
+        <p class="podcast-descripcion">
+            ¿Cómo pasamos de una compuerta XOR física a una red neuronal profunda? En este episodio, analizamos el isomorfismo entre el hardware y el aprendizaje automático, explorando por qué el "Invierno de la IA" fue derrotado por el trabajo en equipo de las capas ocultas.
+        </p>
+        
+        <div class="podcast-player">
+            <audio controls preload="metadata">
+                <!-- Recuerda nombrar el archivo de NotebookLM como leccion_ia.mp3 o ajustar la ruta aquí -->
+                <source src="audio/leccion_ia.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        
+        <!-- Enlace para interactuar con la fuente en NotebookLM -->
+        <div style="text-align: center; margin-top: 10px;">
+            <a href="#" target="_blank" style="color: #ffc107; font-size: 0.9em; text-decoration: none; font-weight: bold; border: 1px dashed #ffc107; padding: 5px 10px; border-radius: 4px;">
+                ✨ Interactuar con esta lección en NotebookLM
+            </a>
+        </div>
+
+        <p class="podcast-meta" style="margin-top: 15px;">
+            <span class="duracion">⏱️ Duración: Sugerida 15-20 min</span>
+        </p>
+    </section>
+
     <h2 style="text-align: center; margin-bottom: 20px; font-size: 18px; color: #2c3e50; border-bottom: 4px solid var(--primary); display: inline-block; width: 100%; padding-bottom: 8px;">Fundamentos Teóricos del Simulador</h2>
     
     <div class="theory-section">
+        <div class="theory-card" style="border-top-color: #9b59b6;">
+            <h3>🔄 Inferencia vs. Entrenamiento</h3>
+            <p>Es vital distinguir los dos estados de vida de una IA:</p>
+            <div class="theory-inner-box">
+                <ul>
+                    <li><strong>Entrenamiento:</strong> El motor ajusta los <strong>Parámetros</strong> buscando la <strong>Convergencia</strong> (el punto donde el error es mínimo).</li>
+                    <li><strong>Inferencia:</strong> Los parámetros están fijos. La red simplemente recibe entradas y produce una salida. Es cuando la IA "ya sabe" y la usamos para trabajar.</li>
+                </ul>
+            </div>
+            <p style="font-size: 13px;">En este simulador, la <strong>Convergencia</strong> ocurre cuando los 4 ejemplos de la tabla de verdad son correctos y el motor de auto-entrenamiento se detiene.</p>
+        </div>
+
         <div class="theory-card">
             <h3>🧠 Perceptrón Simple vs. Red Multicapa</h3>
             <p>El simulador te permite experimentar de forma directa con dos fronteras de complejidad computacional y de abstracción lógica:</p>
@@ -430,6 +545,7 @@
         <h4 style="font-size: 13px; color: #34495e; margin-bottom: 6px;">🤝 Paso 3: La solución es el trabajo en equipo</h4>
         <p style="font-size: 13px; color: #555; text-align: justify; line-height: 1.5; margin-bottom: 12px;">
             ¿Cómo se resolvió el dilema? Los científicos descubrieron que si ponían una primera fila de neuronas (llamada <strong>Capa Oculta</strong>) para que "masticaran" y reordenaran los datos del tablero, la neurona final recibiría el espacio transformado y podría trazar su línea recta con total facilidad.
+            Esto es, descubrieron el Perceptrón Multicapa. Al añadir una Capa Oculta intermedia, esta funciona como una 'lente' que deforma y reordena los datos, permitiendo que la neurona final tome una decisión clara sobre un problema que antes era imposible.
         </p>
 
         <ol style="padding-left: 20px; font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 15px;">
