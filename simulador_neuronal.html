@@ -347,7 +347,7 @@
         </div>
 
         <p class="podcast-meta" style="margin-top: 15px;">
-            <span class="duracion">⏱️ Duración: Sugerida 15-20 min</span>
+            <span class="duracion">⏱️ Duración: 23:22 min</span>
         </p>
     </section>
 
@@ -395,6 +395,26 @@
                     <li><strong>Sigmoide (Sigmoid):</strong> Curva logística continua que comprime el resultado entre 0 y 1. Es ideal para interpretar la salida como una probabilidad y suavizar la transición del gradiente. Su derivada está definida como: <code>out × (1.0 - out)</code>.</li>
                     <li><strong>ReLU:</strong> Rectificación lineal uniforme. Devuelve cero si la suma neta es negativa, y el valor idéntico original si es positivo. Bloquea el ruido y su gradiente local es 1 si <code>net > 0</code>, y 0 en caso contrario.</li>
                 </ul>
+            </div>
+        </div>
+
+        <div class="theory-card" style="border-top-color: #e74c3c;">
+            <h3>⛰️ El Descenso del Gradiente: Buscando el Valle</h3>
+            <p>¿Cómo sabe la IA hacia dónde mover los pesos si no tiene ojos? Usa el <strong>Descenso del Gradiente</strong>.</p>
+            
+            <div class="theory-inner-box" style="background: #fdf2f2;">
+                <h4>🏃‍♂️ La Analogía del Montañista Ciego</h4>
+                <p style="font-size: 13px; line-height: 1.5;">
+                    Imagina que estás en la cima de una montaña en medio de una niebla espesa (Cero conocimiento). Tu meta es llegar al <strong>Valle del Éxito</strong> (el punto donde el Error o <strong>Loss</strong> es cero).
+                </p>
+                <ul style="font-size: 12.5px; margin-top: 10px;">
+                    <li><strong>El Gradiente:</strong> Es la inclinación que sientes en tus pies. Si el suelo sube, vas por mal camino. Si baja, vas bien.</li>
+                    <li><strong>El Paso (Learning Rate):</strong> Es el tamaño de tu zancada. Si saltas mucho, puedes pasarte el valle. Si caminas como hormiga, tardarás mil años.</li>
+                    <li><strong>La Optimización:</strong> Es el proceso de dar pasos hacia abajo hasta que el suelo se vuelva plano. ¡Ahí has aprendido!</li>
+                </ul>
+            </div>
+            <div class="formula" style="background: #fff; border: 1px dashed #e74c3c;">
+                Optimizar = Mover perillas hacia donde el error baja más rápido.
             </div>
         </div>
 
@@ -775,7 +795,7 @@
                         <span style="background: #8e44ad; color: white; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; display: inline-block; margin-bottom: 8px;">PASO 3</span>
                         <strong style="color: #4a235a; display: block; font-size: 14px;">🔄 Backpropagation (La Corrección Corporal)</strong>
                         <p style="font-size: 12.5px; color: #2c3e50; margin: 8px 0 8px 0; line-height: 1.4;">
-                            El maestro (o el Juez) da <strong>órdenes de ajuste</strong> a los Ajustadores de cuerdas:
+                            El maestro (o el Juez) da <strong>órdenes de ajuste</strong> a los Ajustadores de cuerdas. Este acto de sentir si hay que 'apretar' o 'aflojar' para bajar el error es lo que los matemáticos llaman <strong>Descenso del Gradiente</strong>: moverte paso a paso hacia el lugar donde no hay fallos:
                         </p>
                         <ul style="font-size: 12.5px; color: #2c3e50; line-height: 1.6; margin: 0; padding-left: 20px;">
                             <li><strong>Si el error fue positivo</strong> (el robot dijo 0 pero debía decir 1): <em>"¡Aflojen la cuerda para que la señal pase más fácil!"</em></li>
